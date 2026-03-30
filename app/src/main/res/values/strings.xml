@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">messapp</string>
+    <string name="splash_logo_content_description">App Logo</string>
+    <string name="mess_id_label">Mess ID: %s</string>
+    <string name="location_label">Location: %s</string>
+    <string name="contact_label">Contact: %s</string>
+    <string name="description_label">Description: %s</string>
+    <string name="total_students_label">Total Students: %s</string>
+    <string name="offer_discount_format">Discount: %.0f%% OFF</string>
+    <string name="offer_expiry_format">Expires: %s</string>
+    <string name="offer_expiry_not_available">Expires: N/A</string>
+</resources>

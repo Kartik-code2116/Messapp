@@ -1,0 +1,74 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Messapp" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Brand Colors -->
+        <item name="colorPrimary">@color/brand_primary</item>
+        <item name="colorOnPrimary">@color/text_on_brand</item>
+        <item name="colorPrimaryContainer">@color/brand_primary_light</item>
+        <item name="colorOnPrimaryContainer">@color/brand_primary_dark</item>
+        
+        <item name="colorSecondary">@color/brand_secondary</item>
+        <item name="colorOnSecondary">@color/text_on_brand</item>
+        <item name="colorSecondaryContainer">@color/neutral_200</item>
+        <item name="colorOnSecondaryContainer">@color/text_heading</item>
+
+        <item name="android:windowBackground">@color/background_page</item>
+        <item name="android:textColorPrimary">@color/text_heading</item>
+        <item name="android:textColorSecondary">@color/text_body</item>
+        <item name="colorSurface">@color/surface_card</item>
+        <item name="android:statusBarColor">@color/background_page</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        
+        <!-- Typography -->
+        <item name="android:fontFamily">@font/inter</item>
+    </style>
+
+    <style name="Theme.Messapp" parent="Base.Theme.Messapp" />
+
+    <style name="Theme.Messapp.NoActionBar" parent="Base.Theme.Messapp">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <!-- PROFOUND COMPONENT STYLES -->
+
+    <!-- Glass Card Style -->
+    <style name="Profound.Card" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardCornerRadius">16dp</item>
+        <item name="cardElevation">4dp</item>
+        <item name="cardBackgroundColor">@color/surface_card</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="strokeColor">@color/neutral_200</item>
+    </style>
+    
+    <!-- Primary Button -->
+    <style name="Profound.Button" parent="Widget.Material3.Button">
+        <item name="android:backgroundTint">@color/brand_primary</item>
+        <item name="android:textColor">@color/text_on_brand</item>
+        <item name="cornerRadius">12dp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:paddingVertical">12dp</item>
+    </style>
+    
+    <!-- Outline/Secondary Button -->
+    <style name="Profound.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:textColor">@color/brand_primary</item>
+        <item name="strokeColor">@color/brand_primary</item>
+        <item name="cornerRadius">12dp</item>
+    </style>
+
+    <!-- Input Fields -->
+    <style name="Profound.InputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">12dp</item>
+        <item name="boxCornerRadiusTopEnd">12dp</item>
+        <item name="boxCornerRadiusBottomStart">12dp</item>
+        <item name="boxCornerRadiusBottomEnd">12dp</item>
+        <item name="boxStrokeColor">@color/brand_primary</item>
+        <item name="hintTextColor">@color/text_caption</item>
+    </style>
+
+    <style name="CircleImageStyle">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+</resources>

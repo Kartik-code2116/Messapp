@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="background_light">#FAFAFA</color>
+    <color name="black">#000000</color>
+    <color name="blue_600">#1976D2</color>
+    <color name="blue_accent">#4285F4</color>
+    <color name="colorAccent">#FFC107</color>
+    <color name="colorPrimary">#FD7E14</color>
+    <color name="cyan_accent">#00BCD4</color>
+    <color name="divider">#E0E0E0</color>
+    <color name="glass_border">#33FFFFFF</color>
+    <color name="gray_300">#E0E0E0</color>
+    <color name="gray_500">#9E9E9E</color>
+    <color name="gray_600">#757575</color>
+    <color name="green_500">#4CAF50</color>
+    <color name="green_success">#4CAF50</color>
+    <color name="grey_400">#BDBDBD</color>
+    <color name="grey_700">#616161</color>
+    <color name="on_background">#000000</color>
+    <color name="on_primary">#FFFFFF</color>
+    <color name="on_secondary">#000000</color>
+    <color name="on_surface">#000000</color>
+    <color name="primary_color">#FD7E14</color>
+    <color name="primary_dark">#E65100</color>
+    <color name="primary_light">#FFB74D</color>
+    <color name="primary_variant">#E65100</color>
+    <color name="red_500">#F44336</color>
+    <color name="red_error">#F44336</color>
+    <color name="secondary">#FFC107</color>
+    <color name="secondary_dark">#FFA000</color>
+    <color name="secondary_light">#FFECB3</color>
+    <color name="selected_tab">#FD7E14</color>
+    <color name="status_in">#4CAF50</color>
+    <color name="status_none">#9E9E9E</color>
+    <color name="status_out">#F44336</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="surface_card">#FFFFFF</color>
+    <color name="text_muted">#9E9E9E</color>
+    <color name="text_on_primary">#FFFFFF</color>
+    <color name="text_on_primary_muted">#CCFFFFFF</color>
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#757575</color>
+    <color name="unselected_tab">#757575</color>
+    <color name="white">#FFFFFF</color>
+    <item name="recycler_view_reviews" type="id"/>
+    <string name="app_name">messapp</string>
+    <string name="contact_label">Contact: %s</string>
+    <string name="default_web_client_id" translatable="false">355370937322-q0146f9culvl5d04d2k0eopcbal7sim0.apps.googleusercontent.com</string>
+    <string name="description_label">Description: %s</string>
+    <string name="gcm_defaultSenderId" translatable="false">355370937322</string>
+    <string name="google_api_key" translatable="false">AIzaSyAAQ96SdaecXVZodNQGjng6J76gfLgYLOU</string>
+    <string name="google_app_id" translatable="false">1:355370937322:android:fad92585ce1e858d5ba093</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAAQ96SdaecXVZodNQGjng6J76gfLgYLOU</string>
+    <string name="google_storage_bucket" translatable="false">messapp-5275d.firebasestorage.app</string>
+    <string name="location_label">Location: %s</string>
+    <string name="mess_id_label">Mess ID: %s</string>
+    <string name="offer_discount_format">Discount: %.0f%% OFF</string>
+    <string name="offer_expiry_format">Expires: %s</string>
+    <string name="offer_expiry_not_available">Expires: N/A</string>
+    <string name="project_id" translatable="false">messapp-5275d</string>
+    <string name="splash_logo_content_description">App Logo</string>
+    <string name="total_students_label">Total Students: %s</string>
+    <style name="Base.Theme.Messapp" parent="Theme.Material3.DayNight.NoActionBar">
+        
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorOnPrimary">@color/on_primary</item>
+        <item name="colorPrimaryContainer">@color/primary_light</item>
+        <item name="colorOnPrimaryContainer">@color/primary_dark</item>
+        
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorOnSecondary">@color/on_secondary</item>
+        <item name="colorSecondaryContainer">@color/secondary_light</item>
+        <item name="colorOnSecondaryContainer">@color/secondary_dark</item>
+
+        <item name="android:statusBarColor">@color/primary_dark</item>
+    </style>
+    <style name="CircleImageStyle">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+    <style name="CircularImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/grey_400</item>
+        <item name="colorControlActivated">@color/green_500</item>
+    </style>
+    <style name="Theme.Messapp" parent="Base.Theme.Messapp"/>
+    <style name="Theme.Messapp.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+</resources>

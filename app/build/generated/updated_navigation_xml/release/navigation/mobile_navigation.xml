@@ -1,0 +1,45 @@
+<navigation
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/mobile_navigation"
+app:startDestination="@id/navigation_user_home" >
+<fragment
+    android:id="@+id/navigation_user_home"
+    android:name="com.example.messapp.ui.user.home.UserHomeFragment"
+    android:label="Home"
+    tools:layout="@layout/fragment_user_home" />
+<fragment
+    android:id="@+id/navigation_user_menu"
+    android:name="com.example.messapp.ui.user.menu.UserMenuFragment"
+    android:label="Menu"
+    tools:layout="@layout/fragment_user_menu" />
+<fragment
+    android:id="@+id/navigation_user_history"
+    android:name="com.example.messapp.ui.user.history.UserHistoryFragment"
+    android:label="History"
+    tools:layout="@layout/fragment_user_history" />
+<fragment
+    android:id="@+id/navigation_user_profile"
+    android:name="com.example.messapp.ui.user.profile.UserProfileFragment"
+    android:label="Profile"
+    tools:layout="@layout/fragment_user_profile" />
+<fragment
+    android:id="@+id/messDetailFragment"
+    android:name="com.example.messapp.ui.user.MessDetailFragment"
+    android:label="Mess Details"
+    tools:layout="@layout/fragment_mess_detail" >
+
+    <argument
+        android:name="messId"
+        app:argType="string" />
+
+</fragment>
+<action
+    android:id="@+id/action_userHomeFragment_to_messDetailFragment"
+    app:destination="@id/messDetailFragment"
+    app:enterAnim="@anim/slide_in_right"
+    app:exitAnim="@anim/slide_out_left"
+    app:popEnterAnim="@anim/slide_in_left"
+    app:popExitAnim="@anim/slide_out_right" />
+</navigation>

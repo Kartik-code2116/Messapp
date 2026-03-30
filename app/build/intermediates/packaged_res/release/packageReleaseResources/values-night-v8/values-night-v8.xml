@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="background">#121212</color>
+    <color name="black">#000000</color>
+    <color name="blue_600">#42A5F5</color>
+    <color name="colorPrimary">#534BAE</color>
+    <color name="error">#CF6679</color>
+    <color name="gray_300">#424242</color>
+    <color name="gray_500">#9E9E9E</color>
+    <color name="gray_600">#E0E0E0</color>
+    <color name="green_500">#66BB6A</color>
+    <color name="grey_400">#757575</color>
+    <color name="grey_700">#BDBDBD</color>
+    <color name="on_background">#FFFFFF</color>
+    <color name="on_primary">#000000</color>
+    <color name="on_secondary">#000000</color>
+    <color name="on_surface">#FFFFFF</color>
+    <color name="primary_color">#534BAE</color>
+    <color name="primary_dark">#000051</color>
+    <color name="primary_light">#8F7DFF</color>
+    <color name="primary_variant">#000051</color>
+    <color name="red_500">#EF5350</color>
+    <color name="secondary">#FFDD4B</color>
+    <color name="secondary_dark">#C67C00</color>
+    <color name="secondary_light">#FFFF7E</color>
+    <color name="selected_tab">#8F7DFF</color>
+    <color name="status_in">#66BB6A</color>
+    <color name="status_none">#BDBDBD</color>
+    <color name="status_out">#EF5350</color>
+    <color name="success">#66BB6A</color>
+    <color name="surface">#1E1E1E</color>
+    <color name="surface_variant">#2C2C2C</color>
+    <color name="text_primary">#FFFFFF</color>
+    <color name="unselected_tab">#BDBDBD</color>
+    <color name="warning">#FFB74D</color>
+    <color name="white">#FFFFFF</color>
+    <style name="Base.Theme.Messapp" parent="Theme.Material3.DayNight.NoActionBar">
+        
+        
+    </style>
+    <style name="Theme.Messapp.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+</resources>

@@ -1,0 +1,1756 @@
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\managers\DiscoveryManager.java:55: Warning: Implicitly using the default locale is a common source of bugs: Use toLowerCase(Locale) instead. For strings meant to be internal use Locale.ROOT, otherwise Locale.getDefault(). [DefaultLocale]
+                    String lowerQuery = searchQuery.toLowerCase();
+                                                    ~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\managers\DiscoveryManager.java:60: Warning: Implicitly using the default locale is a common source of bugs: Use toLowerCase(Locale) instead. For strings meant to be internal use Locale.ROOT, otherwise Locale.getDefault(). [DefaultLocale]
+                                mess.getName().toLowerCase().contains(lowerQuery) ||
+                                               ~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\managers\DiscoveryManager.java:61: Warning: Implicitly using the default locale is a common source of bugs: Use toLowerCase(Locale) instead. For strings meant to be internal use Locale.ROOT, otherwise Locale.getDefault(). [DefaultLocale]
+                                mess.getLocation().toLowerCase().contains(lowerQuery) ||
+                                                   ~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\managers\DiscoveryManager.java:62: Warning: Implicitly using the default locale is a common source of bugs: Use toLowerCase(Locale) instead. For strings meant to be internal use Locale.ROOT, otherwise Locale.getDefault(). [DefaultLocale]
+                                mess.getDescription().toLowerCase().contains(lowerQuery)
+                                                      ~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\managers\DiscoveryManager.java:80: Warning: Implicitly using the default locale is a common source of bugs: Use toLowerCase(Locale) instead. For strings meant to be internal use Locale.ROOT, otherwise Locale.getDefault(). [DefaultLocale]
+                    String lowerLocation = location.toLowerCase();
+                                                    ~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\managers\DiscoveryManager.java:84: Warning: Implicitly using the default locale is a common source of bugs: Use toLowerCase(Locale) instead. For strings meant to be internal use Locale.ROOT, otherwise Locale.getDefault(). [DefaultLocale]
+                        if (mess != null && mess.getLocation().toLowerCase().contains(lowerLocation)) {
+                                                               ~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\managers\DiscoveryManager.java:204: Warning: Implicitly using the default locale is a common source of bugs: Use toLowerCase(Locale) instead. For strings meant to be internal use Locale.ROOT, otherwise Locale.getDefault(). [DefaultLocale]
+                String lowerQuery = searchQuery != null ? searchQuery.toLowerCase() : "";
+                                                                      ~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\managers\DiscoveryManager.java:208: Warning: Implicitly using the default locale is a common source of bugs: Use toLowerCase(Locale) instead. For strings meant to be internal use Locale.ROOT, otherwise Locale.getDefault(). [DefaultLocale]
+                            mess.getName().toLowerCase().contains(lowerQuery) ||
+                                           ~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\managers\DiscoveryManager.java:209: Warning: Implicitly using the default locale is a common source of bugs: Use toLowerCase(Locale) instead. For strings meant to be internal use Locale.ROOT, otherwise Locale.getDefault(). [DefaultLocale]
+                            mess.getLocation().toLowerCase().contains(lowerQuery);
+                                               ~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\managers\DiscoveryManager.java:212: Warning: Implicitly using the default locale is a common source of bugs: Use toLowerCase(Locale) instead. For strings meant to be internal use Locale.ROOT, otherwise Locale.getDefault(). [DefaultLocale]
+                            mess.getLocation().toLowerCase().contains(location.toLowerCase());
+                                               ~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\managers\DiscoveryManager.java:212: Warning: Implicitly using the default locale is a common source of bugs: Use toLowerCase(Locale) instead. For strings meant to be internal use Locale.ROOT, otherwise Locale.getDefault(). [DefaultLocale]
+                            mess.getLocation().toLowerCase().contains(location.toLowerCase());
+                                                                               ~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\LoginActivity.java:344: Warning: Implicitly using the default locale is a common source of bugs: Use toUpperCase(Locale) instead. For strings meant to be internal use Locale.ROOT, otherwise Locale.getDefault(). [DefaultLocale]
+            String messId = "MESS" + UUID.randomUUID().toString().substring(0, 6).toUpperCase();
+                                                                                  ~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\MessDetailFragment.java:122: Warning: Implicitly using the default locale is a common source of bugs: Use String.format(Locale, ...) instead [DefaultLocale]
+                        binding.textAvgRating.setText(String.format("%.1f (%d Reviews)", avgRating, reviewList.size()));
+                                                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\fragments\MessMenuFragment.java:81: Warning: Implicitly using the default locale is a common source of bugs: Use toLowerCase(Locale) instead. For strings meant to be internal use Locale.ROOT, otherwise Locale.getDefault(). [DefaultLocale]
+        data.put(type.toLowerCase(), content);
+                      ~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\mess\revenue\MessRevenueFragment.java:85: Warning: Implicitly using the default locale is a common source of bugs: Use toLowerCase(Locale) instead. For strings meant to be internal use Locale.ROOT, otherwise Locale.getDefault(). [DefaultLocale]
+                currentSearchQuery = s.toString().toLowerCase().trim();
+                                                  ~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\mess\revenue\MessRevenueFragment.java:139: Warning: Implicitly using the default locale is a common source of bugs: Use toLowerCase(Locale) instead. For strings meant to be internal use Locale.ROOT, otherwise Locale.getDefault(). [DefaultLocale]
+                String name = (student != null && student.getName() != null) ? student.getName().toLowerCase() : "";
+                                                                                                 ~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\mess\revenue\MessRevenueFragment.java:140: Warning: Implicitly using the default locale is a common source of bugs: Use toLowerCase(Locale) instead. For strings meant to be internal use Locale.ROOT, otherwise Locale.getDefault(). [DefaultLocale]
+                String email = (student != null && student.getEmail() != null) ? student.getEmail().toLowerCase() : "";
+                                                                                                    ~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\mess\students\MessStudentsFragment.java:76: Warning: Implicitly using the default locale is a common source of bugs: Use toLowerCase(Locale) instead. For strings meant to be internal use Locale.ROOT, otherwise Locale.getDefault(). [DefaultLocale]
+                currentSearchQuery = s.toString().toLowerCase().trim();
+                                                  ~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\mess\students\MessStudentsFragment.java:235: Warning: Implicitly using the default locale is a common source of bugs: Use toLowerCase(Locale) instead. For strings meant to be internal use Locale.ROOT, otherwise Locale.getDefault(). [DefaultLocale]
+            String name = (student.getName() != null) ? student.getName().toLowerCase() : "";
+                                                                          ~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\mess\students\MessStudentsFragment.java:236: Warning: Implicitly using the default locale is a common source of bugs: Use toLowerCase(Locale) instead. For strings meant to be internal use Locale.ROOT, otherwise Locale.getDefault(). [DefaultLocale]
+            String email = (student.getEmail() != null) ? student.getEmail().toLowerCase() : "";
+                                                                             ~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\mess\students\StudentsAdapter.java:93: Warning: Implicitly using the default locale is a common source of bugs: Use toUpperCase(Locale) instead. For strings meant to be internal use Locale.ROOT, otherwise Locale.getDefault(). [DefaultLocale]
+            String status = student.getTodayStatus() != null ? student.getTodayStatus().toUpperCase() : "NOT SELECTED";
+                                                                                        ~~~~~~~~~~~
+
+   Explanation for issues of type "DefaultLocale":
+   Calling String#toLowerCase() or #toUpperCase() without specifying an
+   explicit locale is a common source of bugs. The reason for that is that
+   those methods will use the current locale on the user's device, and even
+   though the code appears to work correctly when you are developing the app,
+   it will fail in some locales. For example, in the Turkish locale, the
+   uppercase replacement for i is not I.
+
+   If you want the methods to just perform ASCII replacement, for example to
+   convert an enum name, call String#toUpperCase(Locale.ROOT) instead. If you
+   really want to use the current locale, call
+   String#toUpperCase(Locale.getDefault()) instead.
+
+   https://developer.android.com/reference/java/util/Locale.html#default_locale
+
+D:\7)android projects\messapp\app\src\main\res\values-night\colors.xml:17: Error: The color "background" in values-night has no declaration in the base values folder; this can lead to crashes when the resource is queried in a configuration that does not match this qualifier [MissingDefaultResource]
+    <color name="background">#121212</color>
+           ~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\values-night\colors.xml:19: Error: The color "surface_variant" in values-night has no declaration in the base values folder; this can lead to crashes when the resource is queried in a configuration that does not match this qualifier [MissingDefaultResource]
+    <color name="surface_variant">#2C2C2C</color>
+           ~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\values-night\colors.xml:33: Error: The color "error" in values-night has no declaration in the base values folder; this can lead to crashes when the resource is queried in a configuration that does not match this qualifier [MissingDefaultResource]
+    <color name="error">#CF6679</color>
+           ~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\values-night\colors.xml:34: Error: The color "success" in values-night has no declaration in the base values folder; this can lead to crashes when the resource is queried in a configuration that does not match this qualifier [MissingDefaultResource]
+    <color name="success">#66BB6A</color> 
+           ~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\values-night\colors.xml:35: Error: The color "warning" in values-night has no declaration in the base values folder; this can lead to crashes when the resource is queried in a configuration that does not match this qualifier [MissingDefaultResource]
+    <color name="warning">#FFB74D</color>
+           ~~~~~~~~~~~~~~
+
+   Explanation for issues of type "MissingDefaultResource":
+   If a resource is only defined in folders with qualifiers like -land or -en,
+   and there is no default declaration in the base folder (layout or values
+   etc), then the app will crash if that resource is accessed on a device
+   where the device is in a configuration missing the given qualifier.
+
+   As a special case, drawables do not have to be specified in the base
+   folder; if there is a match in a density folder (such as drawable-mdpi)
+   that image will be used and scaled. Note however that if you  only specify
+   a drawable in a folder like drawable-en-hdpi, the app will crash in
+   non-English locales.
+
+   There may be scenarios where you have a resource, such as a -fr drawable,
+   which is only referenced from some other resource with the same qualifiers
+   (such as a -fr style), which itself has safe fallbacks. However, this still
+   makes it possible for somebody to accidentally reference the drawable and
+   crash, so it is safer to create a default fallback in the base folder.
+   Alternatively, you can suppress the issue by adding
+   tools:ignore="MissingDefaultResource" on the element.
+
+   (This scenario frequently happens with string translations, where you might
+   delete code and the corresponding resources, but forget to delete a
+   translation. There is a dedicated issue id for that scenario, with the id
+   ExtraTranslation.)
+
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_menu.xml:23: Warning: Attribute outlineAmbientShadowColor is only used in API level 28 and higher (current min is 24) [UnusedAttribute]
+            android:outlineAmbientShadowColor="@color/primary_color">
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\font\poppins_bold.xml:6: Warning: Attribute font is only used in API level 26 and higher (current min is 24) [UnusedAttribute]
+        android:font="@font/poppins_bold"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\font\poppins_bold.xml:7: Warning: Attribute fontStyle is only used in API level 26 and higher (current min is 24) [UnusedAttribute]
+        android:fontStyle="normal"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\font\poppins_bold.xml:8: Warning: Attribute fontWeight is only used in API level 26 and higher (current min is 24) [UnusedAttribute]
+        android:fontWeight="700"
+        ~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\font\poppins_medium.xml:6: Warning: Attribute font is only used in API level 26 and higher (current min is 24) [UnusedAttribute]
+        android:font="@font/poppins_medium"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\font\poppins_medium.xml:7: Warning: Attribute fontStyle is only used in API level 26 and higher (current min is 24) [UnusedAttribute]
+        android:fontStyle="normal"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\font\poppins_medium.xml:8: Warning: Attribute fontWeight is only used in API level 26 and higher (current min is 24) [UnusedAttribute]
+        android:fontWeight="500"
+        ~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\font\poppins_regular.xml:6: Warning: Attribute font is only used in API level 26 and higher (current min is 24) [UnusedAttribute]
+        android:font="@font/poppins_regular"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\font\poppins_regular.xml:7: Warning: Attribute fontStyle is only used in API level 26 and higher (current min is 24) [UnusedAttribute]
+        android:fontStyle="normal"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\font\poppins_regular.xml:8: Warning: Attribute fontWeight is only used in API level 26 and higher (current min is 24) [UnusedAttribute]
+        android:fontWeight="400"
+        ~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\font\poppins_semibold.xml:6: Warning: Attribute font is only used in API level 26 and higher (current min is 24) [UnusedAttribute]
+        android:font="@font/poppins_semibold"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\font\poppins_semibold.xml:7: Warning: Attribute fontStyle is only used in API level 26 and higher (current min is 24) [UnusedAttribute]
+        android:fontStyle="normal"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\font\poppins_semibold.xml:8: Warning: Attribute fontWeight is only used in API level 26 and higher (current min is 24) [UnusedAttribute]
+        android:fontWeight="600"
+        ~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "UnusedAttribute":
+   This check finds attributes set in XML files that were introduced in a
+   version newer than the oldest version targeted by your application (with
+   the minSdkVersion attribute).
+
+   This is not an error; the application will simply ignore the attribute.
+   However, if the attribute is important to the appearance or functionality
+   of your application, you should consider finding an alternative way to
+   achieve the same result with only available attributes, and then you can
+   optionally create a copy of the layout in a layout-vNN folder which will be
+   used on API NN or higher where you can take advantage of the newer
+   attribute.
+
+   Note: This check does not only apply to attributes. For example, some tags
+   can be unused too, such as the new <tag> element in layouts introduced in
+   API 21.
+
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\LoginActivity.java:251: Warning: Call to CredentialManager.getCredential without use of NoCredentialException [CredentialManagerMisuse]
+        credentialManager.getCredentialAsync(this, request, null, ContextCompat.getMainExecutor(this),
+        ^
+
+   Explanation for issues of type "CredentialManagerMisuse":
+   When calling CredentialManager.getCredential or
+   CredentialManager.getCredentialAsync, you should handle
+   NoCredentialException somewhere in your project.
+
+   https://developer.android.com/identity/sign-in/credential-manager#handle-exceptions
+
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\LoginActivity.java:239: Warning: Use of :googleid classes without use of GoogleIdTokenCredential.createFrom [CredentialManagerSignInWithGoogle]
+        GetGoogleIdOption googleIdOption = new GetGoogleIdOption.Builder()
+                                               ~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "CredentialManagerSignInWithGoogle":
+   When using :googleid classes like GetGoogleIdOption and
+   GetSignInWithGoogleOption, you must handle the response using
+   GoogleIdTokenCredential.createFrom.
+
+   This check reports all uses of these :googleid classes if there are no
+   references to GoogleIdTokenCredential[.Companion].createFrom.
+
+   https://developer.android.com/identity/sign-in/credential-manager-siwg#create-sign
+
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\SplashActivity.java:13: Warning: The application should not provide its own launch screen [CustomSplashScreen]
+public class SplashActivity extends AppCompatActivity {
+             ~~~~~~~~~~~~~~
+
+   Explanation for issues of type "CustomSplashScreen":
+   Starting in Android 12 (API 31+), the application's Launch Screen is
+   provided by the system and the application should not create its own,
+   otherwise the user will see two splashscreens. Please check the
+   SplashScreen class to check how the Splash Screen can be controlled and
+   customized.
+
+   https://developer.android.com/guide/topics/ui/splash-screen
+
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\mess\requests\MessRequestsFragment.java:64: Error: @layout/fragment_mess_requests does not contain a declaration with id progressBar [MissingInflatedId]
+        progressBar = view.findViewById(R.id.progressBar);
+                                        ~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "MissingInflatedId":
+   Checks calls to layout inflation and makes sure that the referenced ids are
+   found in the corresponding layout (or at least one of them, if the layout
+   has multiple configurations.)
+
+D:\7)android projects\messapp\gradle\libs.versions.toml:8: Warning: A newer version of androidx.activity:activity than 1.12.1 is available: 1.12.2 [GradleDependency]
+activity = "1.12.1"
+           ~~~~~~~~
+D:\7)android projects\messapp\gradle\libs.versions.toml:12: Warning: A newer version of com.google.firebase:firebase-messaging than 24.0.0 is available: 25.0.1 [GradleDependency]
+firebaseMessaging = "24.0.0"
+                    ~~~~~~~~
+D:\7)android projects\messapp\gradle\libs.versions.toml:27: Warning: A newer version of com.google.firebase:firebase-bom than 33.7.0 is available: 34.7.0 [GradleDependency]
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version = "33.7.0" }
+                                                                                 ~~~~~~~~
+D:\7)android projects\messapp\gradle\libs.versions.toml:30: Warning: A newer version of androidx.navigation:navigation-fragment than 2.8.5 is available: 2.9.6 [GradleDependency]
+navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment", version = "2.8.5" }
+                                                                                               ~~~~~~~
+D:\7)android projects\messapp\gradle\libs.versions.toml:31: Warning: A newer version of androidx.navigation:navigation-ui than 2.8.5 is available: 2.9.6 [GradleDependency]
+navigation-ui = { group = "androidx.navigation", name = "navigation-ui", version = "2.8.5" }
+                                                                                   ~~~~~~~
+
+   Explanation for issues of type "GradleDependency":
+   This detector looks for usages of libraries where the version you are using
+   is not the current stable release. Using older versions is fine, and there
+   are cases where you deliberately want to stick with an older version.
+   However, you may simply not be aware that a more recent version is
+   available, and that is what this lint check helps find.
+
+D:\7)android projects\messapp\gradle\libs.versions.toml:16: Warning: A newer version of com.github.bumptech.glide:compiler than 4.16.0 is available: 5.0.5 [NewerVersionAvailable]
+glide = "4.16.0"
+        ~~~~~~~~
+D:\7)android projects\messapp\gradle\libs.versions.toml:16: Warning: A newer version of com.github.bumptech.glide:glide than 4.16.0 is available: 5.0.5 [NewerVersionAvailable]
+glide = "4.16.0"
+        ~~~~~~~~
+
+   Explanation for issues of type "NewerVersionAvailable":
+   This detector checks with a central repository to see if there are newer
+   versions available for the dependencies used by this project. This is
+   similar to the GradleDependency check, which checks for newer versions
+   available in the Android SDK tools and libraries, but this works with any
+   MavenCentral dependency, and connects to the library every time, which
+   makes it more flexible but also much slower.
+
+D:\7)android projects\messapp\app\src\main\res\layout\activity_login.xml:31: Error: Must use app:tint instead of android:tint [UseAppTint from androidx.appcompat]
+                android:tint="@color/white"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "UseAppTint":
+   ImageView or ImageButton uses android:tint instead of app:tint
+
+   Vendor: Android Open Source Project
+   Identifier: androidx.appcompat
+   Feedback: https://issuetracker.google.com/issues/new?component=460343
+
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_profile.xml:218: Warning: Use app:drawableEndCompat instead of android:drawableEnd [UseCompatTextViewDrawableXml from androidx.appcompat]
+                            android:drawableEnd="@drawable/ic_arrow_right"
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_profile.xml:232: Warning: Use app:drawableEndCompat instead of android:drawableEnd [UseCompatTextViewDrawableXml from androidx.appcompat]
+                            android:drawableEnd="@drawable/ic_arrow_right"
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_profile.xml:246: Warning: Use app:drawableEndCompat instead of android:drawableEnd [UseCompatTextViewDrawableXml from androidx.appcompat]
+                            android:drawableEnd="@drawable/ic_arrow_right"
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_profile.xml:261: Warning: Use app:drawableEndCompat instead of android:drawableEnd [UseCompatTextViewDrawableXml from androidx.appcompat]
+                            android:drawableEnd="@drawable/ic_arrow_right"
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "UseCompatTextViewDrawableXml":
+   TextView uses android: compound drawable attributes instead of app: ones
+
+   Vendor: Android Open Source Project
+   Identifier: androidx.appcompat
+   Feedback: https://issuetracker.google.com/issues/new?component=460343
+
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\history\HistoryAdapter.java:26: Warning: It will always be more efficient to use more specific change events if you can. Rely on notifyDataSetChanged as a last resort. [NotifyDataSetChanged]
+        notifyDataSetChanged();
+        ~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\home\MessAdapter.java:35: Warning: It will always be more efficient to use more specific change events if you can. Rely on notifyDataSetChanged as a last resort. [NotifyDataSetChanged]
+        notifyDataSetChanged();
+        ~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\MessDetailFragment.java:117: Warning: It will always be more efficient to use more specific change events if you can. Rely on notifyDataSetChanged as a last resort. [NotifyDataSetChanged]
+                    reviewAdapter.notifyDataSetChanged();
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\mess\offers\MessOffersFragment.java:87: Warning: It will always be more efficient to use more specific change events if you can. Rely on notifyDataSetChanged as a last resort. [NotifyDataSetChanged]
+                    offerAdapter.notifyDataSetChanged();
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\MessReviewsActivity.java:102: Warning: It will always be more efficient to use more specific change events if you can. Rely on notifyDataSetChanged as a last resort. [NotifyDataSetChanged]
+                    adapter.notifyDataSetChanged();
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\OfferAdapter.java:33: Warning: It will always be more efficient to use more specific change events if you can. Rely on notifyDataSetChanged as a last resort. [NotifyDataSetChanged]
+        notifyDataSetChanged();
+        ~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\adapters\RequestAdapter.java:27: Warning: It will always be more efficient to use more specific change events if you can. Rely on notifyDataSetChanged as a last resort. [NotifyDataSetChanged]
+        notifyDataSetChanged();
+        ~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\ReviewAdapter.java:29: Warning: It will always be more efficient to use more specific change events if you can. Rely on notifyDataSetChanged as a last resort. [NotifyDataSetChanged]
+        notifyDataSetChanged();
+        ~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\mess\students\StudentsAdapter.java:30: Warning: It will always be more efficient to use more specific change events if you can. Rely on notifyDataSetChanged as a last resort. [NotifyDataSetChanged]
+        notifyDataSetChanged();
+        ~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\adapters\SubscriptionRequestAdapter.java:36: Warning: It will always be more efficient to use more specific change events if you can. Rely on notifyDataSetChanged as a last resort. [NotifyDataSetChanged]
+        notifyDataSetChanged();
+        ~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\mess\revenue\TransactionsAdapter.java:35: Warning: It will always be more efficient to use more specific change events if you can. Rely on notifyDataSetChanged as a last resort. [NotifyDataSetChanged]
+        notifyDataSetChanged();
+        ~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\mess\revenue\TransactionsAdapter.java:40: Warning: It will always be more efficient to use more specific change events if you can. Rely on notifyDataSetChanged as a last resort. [NotifyDataSetChanged]
+        notifyDataSetChanged();
+        ~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\fragments\UserHistoryFragment.java:92: Warning: It will always be more efficient to use more specific change events if you can. Rely on notifyDataSetChanged as a last resort. [NotifyDataSetChanged]
+            notifyDataSetChanged();
+            ~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\home\UserHomeFragment.java:88: Warning: It will always be more efficient to use more specific change events if you can. Rely on notifyDataSetChanged as a last resort. [NotifyDataSetChanged]
+                    messAdapter.notifyDataSetChanged();
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\home\UserHomeFragment.java:411: Warning: It will always be more efficient to use more specific change events if you can. Rely on notifyDataSetChanged as a last resort. [NotifyDataSetChanged]
+                    offerAdapter.notifyDataSetChanged();
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "NotifyDataSetChanged":
+   The RecyclerView adapter's onNotifyDataSetChanged method does not specify
+   what about the data set has changed, forcing any observers to assume that
+   all existing items and structure may no longer be valid. `LayoutManager`s
+   will be forced to fully rebind and relayout all visible views.
+
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_dashboard.xml:150: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_dashboard.xml:233: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+                <LinearLayout
+                 ~~~~~~~~~~~~
+
+   Explanation for issues of type "DisableBaselineAlignment":
+   When a LinearLayout is used to distribute the space proportionally between
+   nested layouts, the baseline alignment property should be turned off to
+   make the layout computation faster.
+
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_requests.xml:64: Warning: Use a layout_height of 0dp instead of 234dp for better performance [InefficientWeight]
+        android:layout_height="234dp"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "InefficientWeight":
+   When only a single widget in a LinearLayout defines a weight, it is more
+   efficient to assign a width/height of 0dp to it since it will absorb all
+   the remaining space anyway. With a declared width/height of 0dp it does not
+   have to measure its own size first.
+
+D:\7)android projects\messapp\app\src\main\res\layout\activity_login.xml:8: Warning: Possible overdraw: Root element paints background @color/background_light with a theme that also paints a background (inferred theme is @style/Theme.Messapp) [Overdraw]
+    android:background="@color/background_light"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_mess_reviews.xml:6: Warning: Possible overdraw: Root element paints background @color/background with a theme that also paints a background (inferred theme is @style/Theme.Messapp) [Overdraw]
+    android:background="@color/background">
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_role_selection.xml:7: Warning: Possible overdraw: Root element paints background @color/background_light with a theme that also paints a background (inferred theme is @style/Theme.Messapp) [Overdraw]
+    android:background="@color/background_light">
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_profile.xml:6: Warning: Possible overdraw: Root element paints background @android:color/white with a theme that also paints a background (inferred theme is @style/Theme.Messapp) [Overdraw]
+    android:background="@android:color/white">
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "Overdraw":
+   If you set a background drawable on a root view, then you should use a
+   custom theme where the theme background is null. Otherwise, the theme
+   background will be painted first, only to have your custom background
+   completely cover it; this is called "overdraw".
+
+   NOTE: This detector relies on figuring out which layouts are associated
+   with which activities based on scanning the Java code, and it's currently
+   doing that using an inexact pattern matching algorithm. Therefore, it can
+   incorrectly conclude which activity the layout is associated with and then
+   wrongly complain that a background-theme is hidden.
+
+   If you want your custom background on multiple pages, then you should
+   consider making a custom theme with your custom background and just using
+   that theme instead of a root element background.
+
+   Of course it's possible that your custom drawable is translucent and you
+   want it to be mixed with the background. However, you will get better
+   performance if you pre-mix the background with your drawable and use that
+   resulting image or color as a custom theme background instead.
+
+D:\7)android projects\messapp\app\src\main\res\drawable\_c3d318d7_6015_4c92_9b56_8d2c50388d41_.png: Warning: The resource R.drawable._c3d318d7_6015_4c92_9b56_8d2c50388d41_ appears to be unused [UnusedResources]
+D:\7)android projects\messapp\app\src\main\res\layout\activity_main.xml:2: Warning: The resource R.layout.activity_main appears to be unused [UnusedResources]
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+^
+D:\7)android projects\messapp\app\src\main\res\layout\activity_my_reviews.xml:2: Warning: The resource R.layout.activity_my_reviews appears to be unused [UnusedResources]
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+^
+D:\7)android projects\messapp\app\src\main\res\drawable\bg_button_gradient.xml:2: Warning: The resource R.drawable.bg_button_gradient appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+^
+D:\7)android projects\messapp\app\src\main\res\drawable\bg_gradient.xml:2: Warning: The resource R.drawable.bg_gradient appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+^
+D:\7)android projects\messapp\app\src\main\res\drawable\bg_input_field.xml:2: Warning: The resource R.drawable.bg_input_field appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+^
+D:\7)android projects\messapp\app\src\main\res\drawable\bg_rounded_primary.xml:2: Warning: The resource R.drawable.bg_rounded_primary appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+^
+D:\7)android projects\messapp\app\src\main\res\drawable\bg_rounded_secondary.xml:2: Warning: The resource R.drawable.bg_rounded_secondary appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+^
+D:\7)android projects\messapp\app\src\main\res\values\colors.xml:17: Warning: The resource R.color.cyan_accent appears to be unused [UnusedResources]
+    <color name="cyan_accent">#00BCD4</color>
+           ~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\values\colors.xml:18: Warning: The resource R.color.green_success appears to be unused [UnusedResources]
+    <color name="green_success">#4CAF50</color>
+           ~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\values\colors.xml:19: Warning: The resource R.color.red_error appears to be unused [UnusedResources]
+    <color name="red_error">#F44336</color>
+           ~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\values-night\colors.xml:19: Warning: The resource R.color.surface_variant appears to be unused [UnusedResources]
+    <color name="surface_variant">#2C2C2C</color>
+           ~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\values\colors.xml:26: Warning: The resource R.color.text_on_primary appears to be unused [UnusedResources]
+    <color name="text_on_primary">#FFFFFF</color>
+           ~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\values-night\colors.xml:33: Warning: The resource R.color.error appears to be unused [UnusedResources]
+    <color name="error">#CF6679</color>
+           ~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\values\colors.xml:35: Warning: The resource R.color.surface_card appears to be unused [UnusedResources]
+    <color name="surface_card">#FFFFFF</color>
+           ~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\values-night\colors.xml:35: Warning: The resource R.color.warning appears to be unused [UnusedResources]
+    <color name="warning">#FFB74D</color>
+           ~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\values\colors.xml:39: Warning: The resource R.color.colorAccent appears to be unused [UnusedResources]
+    <color name="colorAccent">#FFC107</color>
+           ~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\values\colors.xml:41: Warning: The resource R.color.gray_500 appears to be unused [UnusedResources]
+    <color name="gray_500">#9E9E9E</color>
+           ~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\values\colors.xml:42: Warning: The resource R.color.gray_600 appears to be unused [UnusedResources]
+    <color name="gray_600">#757575</color>
+           ~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\values\colors.xml:51: Warning: The resource R.color.primary_variant appears to be unused [UnusedResources]
+    <color name="primary_variant">#E65100</color>
+           ~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\values\colors.xml:54: Warning: The resource R.color.on_background appears to be unused [UnusedResources]
+    <color name="on_background">#000000</color>
+           ~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\values\colors.xml:55: Warning: The resource R.color.on_surface appears to be unused [UnusedResources]
+    <color name="on_surface">#000000</color>
+           ~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\values\colors.xml:56: Warning: The resource R.color.selected_tab appears to be unused [UnusedResources]
+    <color name="selected_tab">#FD7E14</color>
+           ~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\values\colors.xml:57: Warning: The resource R.color.unselected_tab appears to be unused [UnusedResources]
+    <color name="unselected_tab">#757575</color>
+           ~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\values\colors.xml:60: Warning: The resource R.color.blue_600 appears to be unused [UnusedResources]
+    <color name="blue_600">#1976D2</color>
+           ~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\values\colors.xml:63: Warning: The resource R.color.glass_border appears to be unused [UnusedResources]
+    <color name="glass_border">#33FFFFFF</color>
+           ~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\drawable\gradient_background.xml:2: Warning: The resource R.drawable.gradient_background appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+^
+D:\7)android projects\messapp\app\src\main\res\drawable\ic_account_circle.xml:1: Warning: The resource R.drawable.ic_account_circle appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+D:\7)android projects\messapp\app\src\main\res\drawable\ic_business.xml:1: Warning: The resource R.drawable.ic_business appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+D:\7)android projects\messapp\app\src\main\res\drawable\ic_chevron_right.xml:1: Warning: The resource R.drawable.ic_chevron_right appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+D:\7)android projects\messapp\app\src\main\res\drawable\ic_email.xml:1: Warning: The resource R.drawable.ic_email appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+D:\7)android projects\messapp\app\src\main\res\drawable\ic_facebook.xml:1: Warning: The resource R.drawable.ic_facebook appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+D:\7)android projects\messapp\app\src\main\res\drawable\ic_offers_black_24dp.xml:1: Warning: The resource R.drawable.ic_offers_black_24dp appears to be unused [UnusedResources]
+<vector android:height="24dp" android:tint="#000000" android:viewportHeight="24"
+^
+D:\7)android projects\messapp\app\src\main\res\menu\mess_bottom_nav.xml:2: Warning: The resource R.menu.mess_bottom_nav appears to be unused [UnusedResources]
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+^
+D:\7)android projects\messapp\app\src\main\res\font\poppins_bold.xml:2: Warning: The resource R.font.poppins_bold appears to be unused [UnusedResources]
+<font-family xmlns:tools="http://schemas.android.com/tools"
+^
+D:\7)android projects\messapp\app\src\main\res\font\poppins_medium.xml:2: Warning: The resource R.font.poppins_medium appears to be unused [UnusedResources]
+<font-family xmlns:tools="http://schemas.android.com/tools"
+^
+D:\7)android projects\messapp\app\src\main\res\font\poppins_regular.xml:2: Warning: The resource R.font.poppins_regular appears to be unused [UnusedResources]
+<font-family xmlns:tools="http://schemas.android.com/tools"
+^
+D:\7)android projects\messapp\app\src\main\res\font\poppins_semibold.xml:2: Warning: The resource R.font.poppins_semibold appears to be unused [UnusedResources]
+<font-family xmlns:tools="http://schemas.android.com/tools"
+^
+D:\7)android projects\messapp\app\src\main\res\drawable\ripple_effect.xml:2: Warning: The resource R.drawable.ripple_effect appears to be unused [UnusedResources]
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+^
+D:\7)android projects\messapp\app\src\main\res\values\styles.xml:3: Warning: The resource R.style.CircularImageView appears to be unused [UnusedResources]
+    <style name="CircularImageView">
+           ~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\menu\user_bottom_nav.xml:2: Warning: The resource R.menu.user_bottom_nav appears to be unused [UnusedResources]
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+^
+
+   Explanation for issues of type "UnusedResources":
+   Unused resources make applications larger and slow down builds.
+
+
+   The unused resource check can ignore tests. If you want to include
+   resources that are only referenced from tests, consider packaging them in a
+   test source set instead.
+
+   You can include test sources in the unused resource check by setting the
+   system property lint.unused-resources.include-tests =true, and to exclude
+   them (usually for performance reasons), use
+   lint.unused-resources.exclude-tests =true.
+   ,
+
+   Available options:
+
+   **skip-libraries** (default is true):
+   Whether the unused resource check should skip reporting unused resources in libraries.
+
+   Many libraries will declare resources that are part of the library surface; other modules depending on the library will also reference the resources. To avoid reporting all these resources as unused (in the context of a library), the unused resource check normally skips reporting unused resources in libraries. Instead, run the unused resource check on the consuming app module (along with `checkDependencies=true`).
+
+   However, there are cases where you want to check that all the resources declared in a library are used; in that case, you can disable the skip option.
+
+   To configure this option, use a `lint.xml` file with an <option> like this:
+
+   ```xml
+   <lint>
+       <issue id="UnusedResources">
+           <option name="skip-libraries" value="true" />
+       </issue>
+   </lint>
+   ```
+
+D:\7)android projects\messapp\app\src\main\res\drawable\_c3d318d7_6015_4c92_9b56_8d2c50388d41_.png: Warning: Found bitmap drawable res/drawable/_c3d318d7_6015_4c92_9b56_8d2c50388d41_.png in densityless folder [IconLocation]
+
+   Explanation for issues of type "IconLocation":
+   The res/drawable folder is intended for density-independent graphics such
+   as shapes defined in XML. For bitmaps, move it to drawable-mdpi and
+   consider providing higher and lower resolution versions in drawable-ldpi,
+   drawable-hdpi and drawable-xhdpi. If the icon really is density independent
+   (for example a solid color) you can place it in drawable-nodpi.
+
+   https://developer.android.com/guide/practices/screens_support.html
+
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_requests.xml:35: Warning: Buttons in button bars should be borderless; use style="?android:attr/buttonBarButtonStyle" (and ?android:attr/buttonBarStyle on the parent) [ButtonStyle]
+        <Button
+         ~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_requests.xml:43: Warning: Buttons in button bars should be borderless; use style="?android:attr/buttonBarButtonStyle" (and ?android:attr/buttonBarStyle on the parent) [ButtonStyle]
+        <Button
+         ~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_requests.xml:51: Warning: Buttons in button bars should be borderless; use style="?android:attr/buttonBarButtonStyle" (and ?android:attr/buttonBarStyle on the parent) [ButtonStyle]
+        <Button
+         ~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_students.xml:103: Warning: Buttons in button bars should be borderless; use style="?android:attr/buttonBarButtonStyle" (and ?android:attr/buttonBarStyle on the parent) [ButtonStyle]
+                <Button
+                 ~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_students.xml:111: Warning: Buttons in button bars should be borderless; use style="?android:attr/buttonBarButtonStyle" (and ?android:attr/buttonBarStyle on the parent) [ButtonStyle]
+                <Button
+                 ~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_students.xml:119: Warning: Buttons in button bars should be borderless; use style="?android:attr/buttonBarButtonStyle" (and ?android:attr/buttonBarStyle on the parent) [ButtonStyle]
+                <Button
+                 ~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_students.xml:138: Warning: Buttons in button bars should be borderless; use style="?android:attr/buttonBarButtonStyle" (and ?android:attr/buttonBarStyle on the parent) [ButtonStyle]
+                <Button
+                 ~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_students.xml:146: Warning: Buttons in button bars should be borderless; use style="?android:attr/buttonBarButtonStyle" (and ?android:attr/buttonBarStyle on the parent) [ButtonStyle]
+                <Button
+                 ~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_home.xml:90: Warning: Buttons in button bars should be borderless; use style="?android:attr/buttonBarButtonStyle" (and ?android:attr/buttonBarStyle on the parent) [ButtonStyle]
+                    <Button
+                     ~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_home.xml:98: Warning: Buttons in button bars should be borderless; use style="?android:attr/buttonBarButtonStyle" (and ?android:attr/buttonBarStyle on the parent) [ButtonStyle]
+                    <Button
+                     ~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_home.xml:168: Warning: Buttons in button bars should be borderless; use style="?android:attr/buttonBarButtonStyle" (and ?android:attr/buttonBarStyle on the parent) [ButtonStyle]
+                    <Button
+                     ~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_home.xml:176: Warning: Buttons in button bars should be borderless; use style="?android:attr/buttonBarButtonStyle" (and ?android:attr/buttonBarStyle on the parent) [ButtonStyle]
+                    <Button
+                     ~~~~~~
+
+   Explanation for issues of type "ButtonStyle":
+   Button bars typically use a borderless style for the buttons. Set the
+   style="?android:attr/buttonBarButtonStyle" attribute on each of the
+   buttons, and set style="?android:attr/buttonBarStyle" on the parent layout
+
+   https://d.android.com/r/studio-ui/designer/material/dialogs
+
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_revenue.xml:192: Warning: Missing autofillHints attribute [Autofill]
+                <EditText
+                 ~~~~~~~~
+
+   Explanation for issues of type "Autofill":
+   Specify an autofillHints attribute when targeting SDK version 26 or higher
+   or explicitly specify that the view is not important for autofill. Your app
+   can help an autofill service classify the data correctly by providing the
+   meaning of each view that could be autofillable, such as views representing
+   usernames, passwords, credit card fields, email addresses, etc.
+
+   The hints can have any value, but it is recommended to use predefined
+   values like 'username' for a username or 'creditCardNumber' for a credit
+   card number. For a list of all predefined autofill hint constants, see the
+   AUTOFILL_HINT_ constants in the View reference at
+   https://developer.android.com/reference/android/view/View.html.
+
+   You can mark a view unimportant for autofill by specifying an
+   importantForAutofill attribute on that view or a parent view. See
+   https://developer.android.com/reference/android/view/View.html#setImportant
+   ForAutofill(int).
+
+   https://developer.android.com/guide/topics/text/autofill.html
+
+D:\7)android projects\messapp\app\src\main\res\layout\activity_login.xml:27: Warning: Missing contentDescription attribute on image [ContentDescription]
+            <ImageView
+             ~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\item_offer.xml:30: Warning: Missing contentDescription attribute on image [ContentDescription]
+            <ImageView
+             ~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\item_transaction.xml:18: Warning: Missing contentDescription attribute on image [ContentDescription]
+        <ImageView
+         ~~~~~~~~~
+
+   Explanation for issues of type "ContentDescription":
+   Non-textual widgets like ImageViews and ImageButtons should use the
+   contentDescription attribute to specify a textual description of the widget
+   such that screen readers and other accessibility tools can adequately
+   describe the user interface.
+
+   Note that elements in application screens that are purely decorative and do
+   not provide any content or enable a user action should not have
+   accessibility content descriptions. In this case, set their descriptions to
+   @null. If your app's minSdkVersion is 16 or higher, you can instead set
+   these graphical elements' android:importantForAccessibility attributes to
+   no.
+
+   Note that for text fields, you should not set both the hint and the
+   contentDescription attributes since the hint will never be shown. Just set
+   the hint.
+
+   https://developer.android.com/guide/topics/ui/accessibility/apps#special-cases
+
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\mess\offers\AddOfferFragment.java:76: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+        binding.textExpiryDate.setText("Expiry Date: " + sdf.format(selectedExpiryDateCalendar.getTime()));
+                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\mess\offers\AddOfferFragment.java:76: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+        binding.textExpiryDate.setText("Expiry Date: " + sdf.format(selectedExpiryDateCalendar.getTime()));
+                                       ~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\history\HistoryAdapter.java:60: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+            textHistoryDate.setText("Date: " + mealSelection.getDate());
+                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\history\HistoryAdapter.java:60: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+            textHistoryDate.setText("Date: " + mealSelection.getDate());
+                                    ~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\history\HistoryAdapter.java:61: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+            textLunchStatus.setText("Lunch: " + mealSelection.getLunchStatus());
+                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\history\HistoryAdapter.java:61: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+            textLunchStatus.setText("Lunch: " + mealSelection.getLunchStatus());
+                                    ~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\history\HistoryAdapter.java:62: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+            textDinnerStatus.setText("Dinner: " + mealSelection.getDinnerStatus());
+                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\history\HistoryAdapter.java:62: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+            textDinnerStatus.setText("Dinner: " + mealSelection.getDinnerStatus());
+                                     ~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\LoginActivity.java:115: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                    binding.btnMainAction.setText("Login");
+                                                  ~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\LoginActivity.java:118: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                    binding.btnSwitchMode.setText("Don't have an account? Sign Up");
+                                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\LoginActivity.java:128: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                    binding.textTitle.setText("Create Account");
+                                              ~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\LoginActivity.java:131: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                    binding.btnMainAction.setText("Sign Up");
+                                                  ~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\LoginActivity.java:134: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                    binding.btnSwitchMode.setText("Already have an account? Login");
+                                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\home\MessAdapter.java:49: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+        holder.messLocation.setText("Location: " + mess.getLocation());
+                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\home\MessAdapter.java:49: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+        holder.messLocation.setText("Location: " + mess.getLocation());
+                                    ~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\home\MessAdapter.java:50: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+        holder.messStudents.setText("Total Students: " + mess.getStudentCount());
+                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\home\MessAdapter.java:50: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+        holder.messStudents.setText("Total Students: " + mess.getStudentCount());
+                                    ~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\MessDetailFragment.java:81: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+                            binding.textMessDetailLocation.setText("Location: " + mess.getLocation());
+                                                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\MessDetailFragment.java:81: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                            binding.textMessDetailLocation.setText("Location: " + mess.getLocation());
+                                                                   ~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\MessDetailFragment.java:98: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                        binding.textMessDetailLunchMenu.setText("Not available");
+                                                                ~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\MessDetailFragment.java:99: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                        binding.textMessDetailDinnerMenu.setText("Not available");
+                                                                 ~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\MessDetailFragment.java:125: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                        binding.textAvgRating.setText("No Reviews");
+                                                      ~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\mess\menu\MessMenuFragment.java:78: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+        binding.textSelectedDate.setText("Selected Date: " + sdf.format(selectedDateCalendar.getTime()));
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\mess\menu\MessMenuFragment.java:78: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+        binding.textSelectedDate.setText("Selected Date: " + sdf.format(selectedDateCalendar.getTime()));
+                                         ~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\mess\revenue\MessRevenueFragment.java:119: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+                    binding.textActiveFilter.setText("Date: " + dateStr + " ✕");
+                                                     ~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\mess\revenue\MessRevenueFragment.java:119: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                    binding.textActiveFilter.setText("Date: " + dateStr + " ✕");
+                                                     ~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\mess\students\MessStudentsFragment.java:276: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+        textCurrentExpiry.setText("Current Expiry: " + expiryText);
+                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\mess\students\MessStudentsFragment.java:276: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+        textCurrentExpiry.setText("Current Expiry: " + expiryText);
+                                  ~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\adapters\RequestAdapter.java:41: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+        holder.binding.textStudentName.setText("User: " + request.getUserId());
+                                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\adapters\RequestAdapter.java:41: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+        holder.binding.textStudentName.setText("User: " + request.getUserId());
+                                               ~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\adapters\RequestAdapter.java:42: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+        holder.binding.textStudentEmail.setText("Type: " + request.getMealType());
+                                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\adapters\RequestAdapter.java:42: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+        holder.binding.textStudentEmail.setText("Type: " + request.getMealType());
+                                                ~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\adapters\RequestAdapter.java:43: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+        holder.binding.btnGrantSubscription.setText("Confirm");
+                                                    ~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\mess\students\StudentsAdapter.java:121: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+                textSubscriptionExpiry.setText("Subscription Expires: " + expiryDate);
+                                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\mess\students\StudentsAdapter.java:121: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                textSubscriptionExpiry.setText("Subscription Expires: " + expiryDate);
+                                               ~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\mess\students\StudentsAdapter.java:123: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                textSubscriptionExpiry.setText("Subscription Expires: N/A");
+                                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\adapters\SubscriptionRequestAdapter.java:52: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+        holder.binding.textStudentStatus.setText("Status: " + request.getStatus());
+                                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\adapters\SubscriptionRequestAdapter.java:52: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+        holder.binding.textStudentStatus.setText("Status: " + request.getStatus());
+                                                 ~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\adapters\SubscriptionRequestAdapter.java:53: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+        holder.binding.textSubscriptionExpiry.setText("Requested Renewal");
+                                                      ~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\adapters\SubscriptionRequestAdapter.java:55: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+        holder.binding.btnGrantSubscription.setText("Confirm");
+                                                    ~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\mess\revenue\TransactionsAdapter.java:59: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+            holder.textStudentName.setText("Unknown Student");
+                                           ~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\mess\revenue\TransactionsAdapter.java:60: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+            holder.textStudentEmail.setText("ID: " + transaction.getUserId());
+                                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\mess\revenue\TransactionsAdapter.java:60: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+            holder.textStudentEmail.setText("ID: " + transaction.getUserId());
+                                            ~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\mess\revenue\TransactionsAdapter.java:64: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+        holder.textAmount.setText("+ ₹" + String.format(Locale.getDefault(), "%.2f", transaction.getAmount()));
+                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\mess\revenue\TransactionsAdapter.java:65: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+        holder.textDays.setText(transaction.getDaysGranted() + " Days");
+                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\mess\revenue\TransactionsAdapter.java:65: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+        holder.textDays.setText(transaction.getDaysGranted() + " Days");
+                                                               ~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\fragments\UserHistoryFragment.java:107: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+            holder.textLunch.setText("Lunch: " + (item.lunchStatus != null ? item.lunchStatus : "-"));
+                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\fragments\UserHistoryFragment.java:107: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+            holder.textLunch.setText("Lunch: " + (item.lunchStatus != null ? item.lunchStatus : "-"));
+                                     ~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\fragments\UserHistoryFragment.java:108: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+            holder.textDinner.setText("Dinner: " + (item.dinnerStatus != null ? item.dinnerStatus : "-"));
+                                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\fragments\UserHistoryFragment.java:108: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+            holder.textDinner.setText("Dinner: " + (item.dinnerStatus != null ? item.dinnerStatus : "-"));
+                                      ~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\history\UserHistoryFragment.java:183: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+        binding.textTotalLunch.setText("Total Lunch Taken: " + totalLunch);
+                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\history\UserHistoryFragment.java:183: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+        binding.textTotalLunch.setText("Total Lunch Taken: " + totalLunch);
+                                       ~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\history\UserHistoryFragment.java:184: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+        binding.textTotalDinner.setText("Total Dinner Taken: " + totalDinner);
+                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\history\UserHistoryFragment.java:184: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+        binding.textTotalDinner.setText("Total Dinner Taken: " + totalDinner);
+                                        ~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\history\UserHistoryFragment.java:185: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+        binding.textDaysIn.setText("Days IN: " + daysIn);
+                                   ~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\history\UserHistoryFragment.java:185: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+        binding.textDaysIn.setText("Days IN: " + daysIn);
+                                   ~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\history\UserHistoryFragment.java:186: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+        binding.textDaysOut.setText("Days OUT: " + daysOut);
+                                    ~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\history\UserHistoryFragment.java:186: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+        binding.textDaysOut.setText("Days OUT: " + daysOut);
+                                    ~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\fragments\UserHomeFragment.java:73: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+            binding.textTodayDate.setText(binding.textTodayDate.getText() + " (SUBSCRIPTION EXPIRED)");
+                                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\fragments\UserHomeFragment.java:73: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+            binding.textTodayDate.setText(binding.textTodayDate.getText() + " (SUBSCRIPTION EXPIRED)");
+                                                                            ~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\fragments\UserHomeFragment.java:175: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                    binding.textLunchStatus.setText("⌛ Awaiting Approval");
+                                                    ~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\fragments\UserHomeFragment.java:178: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                    binding.textLunchStatus.setText("✓ Boss Confirmed");
+                                                    ~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\fragments\UserHomeFragment.java:186: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                binding.textLunchStatus.setText("Marked OUT");
+                                                ~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\fragments\UserHomeFragment.java:195: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                    binding.textDinnerStatus.setText("⌛ Awaiting Approval");
+                                                     ~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\fragments\UserHomeFragment.java:198: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                    binding.textDinnerStatus.setText("✓ Boss Confirmed");
+                                                     ~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\fragments\UserHomeFragment.java:204: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                binding.textDinnerStatus.setText("Marked OUT");
+                                                 ~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\home\UserHomeFragment.java:217: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                            binding.textLunchMenu.setText("No lunch menu available.");
+                                                          ~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\home\UserHomeFragment.java:220: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                        binding.textLunchMenu.setText("No menu set for today.");
+                                                      ~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\home\UserHomeFragment.java:227: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                    binding.textLunchMenu.setText("Error loading menu.");
+                                                  ~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\home\UserHomeFragment.java:253: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                            binding.textDinnerMenu.setText("No dinner menu available.");
+                                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\home\UserHomeFragment.java:256: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                        binding.textDinnerMenu.setText("No menu set for today.");
+                                                       ~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\home\UserHomeFragment.java:263: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                    binding.textDinnerMenu.setText("Error loading dinner menu.");
+                                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\home\UserHomeFragment.java:285: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+                            binding.textLunchStatus.setText("Status: " + lunchStatus);
+                                                            ~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\home\UserHomeFragment.java:285: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                            binding.textLunchStatus.setText("Status: " + lunchStatus);
+                                                            ~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\home\UserHomeFragment.java:309: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+                            binding.textDinnerStatus.setText("Status: " + dinnerStatus);
+                                                             ~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\home\UserHomeFragment.java:309: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                            binding.textDinnerStatus.setText("Status: " + dinnerStatus);
+                                                             ~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\home\UserHomeFragment.java:361: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+                        binding.textLunchStatus.setText("Status: " + status);
+                                                        ~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\home\UserHomeFragment.java:361: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                        binding.textLunchStatus.setText("Status: " + status);
+                                                        ~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\home\UserHomeFragment.java:365: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+                        binding.textDinnerStatus.setText("Status: " + status);
+                                                         ~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\home\UserHomeFragment.java:365: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                        binding.textDinnerStatus.setText("Status: " + status);
+                                                         ~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\menu\UserMenuFragment.java:137: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                        binding.textLunchMenuDisplay.setText("No menu set for this day.");
+                                                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\menu\UserMenuFragment.java:138: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                        binding.textDinnerMenuDisplay.setText("No menu set for this day.");
+                                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\menu\UserMenuFragment.java:143: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                    binding.textLunchMenuDisplay.setText("Error loading menu.");
+                                                         ~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\menu\UserMenuFragment.java:144: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                    binding.textDinnerMenuDisplay.setText("Error loading menu.");
+                                                          ~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\fragments\UserProfileFragment.java:75: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                        binding.textProfileName.setText("Student");
+                                                        ~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\profile\UserProfileFragment.java:100: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+            binding.textProfileEmail.setText("Email: " + currentUser.getEmail());
+                                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\profile\UserProfileFragment.java:100: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+            binding.textProfileEmail.setText("Email: " + currentUser.getEmail());
+                                             ~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\profile\UserProfileFragment.java:109: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+                                binding.textProfileName.setText("Name: " + name);
+                                                                ~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\profile\UserProfileFragment.java:109: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                                binding.textProfileName.setText("Name: " + name);
+                                                                ~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\profile\UserProfileFragment.java:111: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                                binding.textProfileName.setText("Name: Not Set");
+                                                                ~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\profile\UserProfileFragment.java:115: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+                                binding.textProfileMessId.setText("Mess ID: " + messId);
+                                                                  ~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\profile\UserProfileFragment.java:115: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                                binding.textProfileMessId.setText("Mess ID: " + messId);
+                                                                  ~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\profile\UserProfileFragment.java:119: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                                binding.textProfileMessName.setText("Not Joined");
+                                                                    ~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\profile\UserProfileFragment.java:128: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                                    binding.textSubscriptionExpiry.setText("Expired");
+                                                                           ~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\profile\UserProfileFragment.java:131: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+                                    binding.textSubscriptionExpiry.setText("Active (" + daysLeft + " Days Left)");
+                                                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\profile\UserProfileFragment.java:131: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                                    binding.textSubscriptionExpiry.setText("Active (" + daysLeft + " Days Left)");
+                                                                           ~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\profile\UserProfileFragment.java:131: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                                    binding.textSubscriptionExpiry.setText("Active (" + daysLeft + " Days Left)");
+                                                                                                   ~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\profile\UserProfileFragment.java:136: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                                binding.textSubscriptionExpiry.setText("No Subscription");
+                                                                       ~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\profile\UserProfileFragment.java:167: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+                            binding.textProfileMessName.setText("Mess Name: " + messName);
+                                                                ~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\profile\UserProfileFragment.java:167: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                            binding.textProfileMessName.setText("Mess Name: " + messName);
+                                                                ~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\profile\UserProfileFragment.java:169: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                            binding.textProfileMessName.setText("Mess Name: Not Set");
+                                                                ~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\java\com\example\messapp\ui\user\profile\UserProfileFragment.java:172: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                        binding.textProfileMessName.setText("Mess Name: Not Found");
+                                                            ~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "SetTextI18n":
+   When calling TextView#setText
+   * Never call Number#toString() to format numbers; it will not handle
+   fraction separators and locale-specific digits properly. Consider using
+   String#format with proper format specifications (%d or %f) instead.
+   * Do not pass a string literal (e.g. "Hello") to display text. Hardcoded
+   text can not be properly translated to other languages. Consider using
+   Android resource strings instead.
+   * Do not build messages by concatenating text chunks. Such messages can not
+   be properly translated.
+
+   https://developer.android.com/guide/topics/resources/localization.html
+
+D:\7)android projects\messapp\app\src\main\res\layout\activity_edit_mess_profile.xml:14: Warning: Hardcoded string "Edit Mess Profile", should use @string resource [HardcodedText]
+        android:text="Edit Mess Profile"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_edit_mess_profile.xml:36: Warning: Hardcoded string "Mess Name", should use @string resource [HardcodedText]
+            android:hint="Mess Name"
+            ~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_edit_mess_profile.xml:56: Warning: Hardcoded string "Location", should use @string resource [HardcodedText]
+            android:hint="Location"
+            ~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_edit_mess_profile.xml:76: Warning: Hardcoded string "Contact Number", should use @string resource [HardcodedText]
+            android:hint="Contact Number"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_edit_mess_profile.xml:96: Warning: Hardcoded string "Description", should use @string resource [HardcodedText]
+            android:hint="Description"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_edit_mess_profile.xml:118: Warning: Hardcoded string "Monthly Price (e.g., 2500.00)", should use @string resource [HardcodedText]
+            android:hint="Monthly Price (e.g., 2500.00)"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_edit_mess_profile.xml:126: Warning: Hardcoded string "Save Profile", should use @string resource [HardcodedText]
+        android:text="Save Profile"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_edit_user_profile.xml:68: Warning: Hardcoded string "Full Name", should use @string resource [HardcodedText]
+                android:hint="Full Name"
+                ~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_edit_user_profile.xml:83: Warning: Hardcoded string "Phone Number", should use @string resource [HardcodedText]
+                android:hint="Phone Number"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_edit_user_profile.xml:97: Warning: Hardcoded string "Gender", should use @string resource [HardcodedText]
+                android:text="Gender"
+                ~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_edit_user_profile.xml:113: Warning: Hardcoded string "Male", should use @string resource [HardcodedText]
+                    android:text="Male" />
+                    ~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_edit_user_profile.xml:120: Warning: Hardcoded string "Female", should use @string resource [HardcodedText]
+                    android:text="Female" />
+                    ~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_edit_user_profile.xml:127: Warning: Hardcoded string "Other", should use @string resource [HardcodedText]
+                    android:text="Other" />
+                    ~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_edit_user_profile.xml:134: Warning: Hardcoded string "Dietary Preference", should use @string resource [HardcodedText]
+                android:text="Dietary Preference"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_edit_user_profile.xml:150: Warning: Hardcoded string "Veg", should use @string resource [HardcodedText]
+                    android:text="Veg" />
+                    ~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_edit_user_profile.xml:157: Warning: Hardcoded string "Non-Veg", should use @string resource [HardcodedText]
+                    android:text="Non-Veg" />
+                    ~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_edit_user_profile.xml:164: Warning: Hardcoded string "Both", should use @string resource [HardcodedText]
+                    android:text="Both" />
+                    ~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_edit_user_profile.xml:171: Warning: Hardcoded string "Save Changes", should use @string resource [HardcodedText]
+                android:text="Save Changes"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_login.xml:38: Warning: Hardcoded string "Welcome to MessApp", should use @string resource [HardcodedText]
+                android:text="Welcome to MessApp"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_login.xml:48: Warning: Hardcoded string "Sign in to your account", should use @string resource [HardcodedText]
+                android:text="Sign in to your account"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_login.xml:76: Warning: Hardcoded string "Mess ID", should use @string resource [HardcodedText]
+                    android:hint="Mess ID"
+                    ~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_login.xml:93: Warning: Hardcoded string "Mess Name", should use @string resource [HardcodedText]
+                    android:hint="Mess Name"
+                    ~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_login.xml:108: Warning: Hardcoded string "Email Address", should use @string resource [HardcodedText]
+                    android:hint="Email Address"
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_login.xml:124: Warning: Hardcoded string "Password", should use @string resource [HardcodedText]
+                    android:hint="Password"
+                    ~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_login.xml:144: Warning: Hardcoded string "Forgot Password?", should use @string resource [HardcodedText]
+                    android:text="Forgot Password?"
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_login.xml:157: Warning: Hardcoded string "Sign In", should use @string resource [HardcodedText]
+                    android:text="Sign In"
+                    ~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_login.xml:172: Warning: Hardcoded string "Or continue with", should use @string resource [HardcodedText]
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Or continue with" android:layout_marginHorizontal="12dp" android:textColor="@color/text_muted" android:textSize="12sp"/>
+                                                                                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_login.xml:183: Warning: Hardcoded string "Sign in with Google", should use @string resource [HardcodedText]
+                    android:text="Sign in with Google"
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_login.xml:197: Warning: Hardcoded string "New user? Create Account", should use @string resource [HardcodedText]
+                    android:text="New user? Create Account"
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_mess_reviews.xml:33: Warning: Hardcoded string "No reviews yet. Be the first to review!", should use @string resource [HardcodedText]
+        android:text="No reviews yet. Be the first to review!"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_mess_reviews.xml:48: Warning: Hardcoded string "Add Review", should use @string resource [HardcodedText]
+        android:contentDescription="Add Review" />
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_role_selection.xml:19: Warning: Hardcoded string "Choose Your Role", should use @string resource [HardcodedText]
+            android:text="Choose Your Role"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_role_selection.xml:29: Warning: Hardcoded string "Select how you want to use MessApp", should use @string resource [HardcodedText]
+            android:text="Select how you want to use MessApp"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_role_selection.xml:66: Warning: Hardcoded string "User Role Icon", should use @string resource [HardcodedText]
+                        android:contentDescription="User Role Icon"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_role_selection.xml:74: Warning: Hardcoded string "I'm a User", should use @string resource [HardcodedText]
+                        android:text="I'm a User"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_role_selection.xml:83: Warning: Hardcoded string "Discover nearby messes, view menus, and subscribe to your favorite meals.", should use @string resource [HardcodedText]
+                        android:text="Discover nearby messes, view menus, and subscribe to your favorite meals."
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_role_selection.xml:93: Warning: Hardcoded string "Continue as User", should use @string resource [HardcodedText]
+                        android:text="Continue as User"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_role_selection.xml:133: Warning: Hardcoded string "Mess Owner Role Icon", should use @string resource [HardcodedText]
+                        android:contentDescription="Mess Owner Role Icon"/>
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_role_selection.xml:138: Warning: Hardcoded string "I'm a Mess Owner", should use @string resource [HardcodedText]
+                        android:text="I'm a Mess Owner"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_role_selection.xml:147: Warning: Hardcoded string "Manage your mess, update menus, and track your subscribers & revenue.", should use @string resource [HardcodedText]
+                        android:text="Manage your mess, update menus, and track your subscribers &amp; revenue."
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_role_selection.xml:157: Warning: Hardcoded string "Continue as Owner", should use @string resource [HardcodedText]
+                        android:text="Continue as Owner"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_splash_screen.xml:54: Warning: Hardcoded string "Your Daily Meals, Simplified", should use @string resource [HardcodedText]
+            android:text="Your Daily Meals, Simplified"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\activity_splash_screen.xml:81: Warning: Hardcoded string "Connecting you to great food", should use @string resource [HardcodedText]
+        android:text="Connecting you to great food"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\menu\bottom_nav_menu.xml:7: Warning: Hardcoded string "Home", should use @string resource [HardcodedText]
+        android:title="Home" />
+        ~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\menu\bottom_nav_menu.xml:12: Warning: Hardcoded string "Menu", should use @string resource [HardcodedText]
+        android:title="Menu" />
+        ~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\menu\bottom_nav_menu.xml:17: Warning: Hardcoded string "History", should use @string resource [HardcodedText]
+        android:title="History" />
+        ~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\menu\bottom_nav_menu.xml:22: Warning: Hardcoded string "Profile", should use @string resource [HardcodedText]
+        android:title="Profile" />
+        ~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\menu\bottom_nav_menu_mess.xml:7: Warning: Hardcoded string "Dashboard", should use @string resource [HardcodedText]
+        android:title="Dashboard" />
+        ~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\menu\bottom_nav_menu_mess.xml:12: Warning: Hardcoded string "Menu", should use @string resource [HardcodedText]
+        android:title="Menu" />
+        ~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\menu\bottom_nav_menu_mess.xml:17: Warning: Hardcoded string "Students", should use @string resource [HardcodedText]
+        android:title="Students" />
+        ~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\menu\bottom_nav_menu_mess.xml:22: Warning: Hardcoded string "Requests", should use @string resource [HardcodedText]
+        android:title="Requests" />
+        ~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\menu\bottom_nav_menu_mess.xml:27: Warning: Hardcoded string "Profile", should use @string resource [HardcodedText]
+        android:title="Profile" />
+        ~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\dialog_add_review.xml:11: Warning: Hardcoded string "Rate your Mess", should use @string resource [HardcodedText]
+        android:text="Rate your Mess"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\dialog_add_review.xml:30: Warning: Hardcoded string "Share your experience...", should use @string resource [HardcodedText]
+        android:hint="Share your experience..."
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\dialog_add_review.xml:54: Warning: Hardcoded string "Cancel", should use @string resource [HardcodedText]
+            android:text="Cancel"/>
+            ~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\dialog_add_review.xml:60: Warning: Hardcoded string "Submit", should use @string resource [HardcodedText]
+            android:text="Submit"
+            ~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\dialog_freeze_delete.xml:15: Warning: Hardcoded string "Account Actions", should use @string resource [HardcodedText]
+            android:text="Account Actions"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\dialog_freeze_delete.xml:25: Warning: Hardcoded string "Option 1: Freeze Account", should use @string resource [HardcodedText]
+            android:text="Option 1: Freeze Account"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\dialog_freeze_delete.xml:33: Warning: Hardcoded string "Temporarily disable access for a few days.", should use @string resource [HardcodedText]
+            android:text="Temporarily disable access for a few days."
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\dialog_freeze_delete.xml:41: Warning: Hardcoded string "Freeze Duration (Days)", should use @string resource [HardcodedText]
+            android:hint="Freeze Duration (Days)"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\dialog_freeze_delete.xml:56: Warning: Hardcoded string "Freeze Account", should use @string resource [HardcodedText]
+            android:text="Freeze Account"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\dialog_freeze_delete.xml:69: Warning: Hardcoded string "Option 2: Delete Account", should use @string resource [HardcodedText]
+            android:text="Option 2: Delete Account"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\dialog_freeze_delete.xml:77: Warning: Hardcoded string "Permanently remove this student from the database. This cannot be undone.", should use @string resource [HardcodedText]
+            android:text="Permanently remove this student from the database. This cannot be undone."
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\dialog_freeze_delete.xml:86: Warning: Hardcoded string "Permanently Delete", should use @string resource [HardcodedText]
+            android:text="Permanently Delete"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\dialog_grant_subscription.xml:12: Warning: Hardcoded string "Grant Subscription", should use @string resource [HardcodedText]
+        android:text="Grant Subscription"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\dialog_grant_subscription.xml:21: Warning: Hardcoded string "Enter the payment details received from the student.", should use @string resource [HardcodedText]
+        android:text="Enter the payment details received from the student."
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\dialog_grant_subscription.xml:28: Warning: Hardcoded string "Amount Received (₹)", should use @string resource [HardcodedText]
+        android:hint="Amount Received (₹)">
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\dialog_grant_subscription.xml:41: Warning: Hardcoded string "Days to Grant", should use @string resource [HardcodedText]
+        android:hint="Days to Grant">
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\dialog_grant_subscription.xml:48: Warning: Hardcoded string "30", should use @string resource [HardcodedText]
+            android:text="30"/>
+            ~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\dialog_manage_subscription.xml:15: Warning: Hardcoded string "Manage Subscription", should use @string resource [HardcodedText]
+            android:text="Manage Subscription"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\dialog_manage_subscription.xml:25: Warning: Hardcoded string "Current Expiry: Loading...", should use @string resource [HardcodedText]
+            android:text="Current Expiry: Loading..."
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\dialog_manage_subscription.xml:40: Warning: Hardcoded string "Extend", should use @string resource [HardcodedText]
+                android:text="Extend"
+                ~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\dialog_manage_subscription.xml:48: Warning: Hardcoded string "Reduce / Cut", should use @string resource [HardcodedText]
+                android:text="Reduce / Cut"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\dialog_manage_subscription.xml:55: Warning: Hardcoded string "Days", should use @string resource [HardcodedText]
+            android:hint="Days"
+            ~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\dialog_manage_subscription.xml:69: Warning: Hardcoded string "Amount Paid (₹)", should use @string resource [HardcodedText]
+            android:hint="Amount Paid (₹)"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\dialog_manage_subscription.xml:83: Warning: Hardcoded string "Note: For reducing subscription, amount can be 0 or negative (refund).", should use @string resource [HardcodedText]
+             android:text="Note: For reducing subscription, amount can be 0 or negative (refund)."
+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_add_offer.xml:14: Warning: Hardcoded string "Create New Offer", should use @string resource [HardcodedText]
+        android:text="Create New Offer"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_add_offer.xml:36: Warning: Hardcoded string "Offer Title (e.g., Weekend Special)", should use @string resource [HardcodedText]
+            android:hint="Offer Title (e.g., Weekend Special)"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_add_offer.xml:56: Warning: Hardcoded string "Description (e.g., 10% off for new subscribers this month)", should use @string resource [HardcodedText]
+            android:hint="Description (e.g., 10% off for new subscribers this month)"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_add_offer.xml:78: Warning: Hardcoded string "Discount Percentage (e.g., 10 for 10%)", should use @string resource [HardcodedText]
+            android:hint="Discount Percentage (e.g., 10 for 10%)"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_add_offer.xml:94: Warning: Hardcoded string "Expiry Date: Select Date", should use @string resource [HardcodedText]
+            android:text="Expiry Date: Select Date"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_add_offer.xml:102: Warning: Hardcoded string "Select Date", should use @string resource [HardcodedText]
+            android:text="Select Date"/>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_add_offer.xml:110: Warning: Hardcoded string "Save Offer", should use @string resource [HardcodedText]
+        android:text="Save Offer"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_dashboard.xml:33: Warning: Hardcoded string "Mess Name Placeholder", should use @string resource [HardcodedText]
+                android:text="Mess Name Placeholder"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_dashboard.xml:42: Warning: Hardcoded string "Date Placeholder", should use @string resource [HardcodedText]
+                android:text="Date Placeholder"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_dashboard.xml:74: Warning: Hardcoded string "Total Students", should use @string resource [HardcodedText]
+                        android:text="Total Students"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_dashboard.xml:82: Warning: Hardcoded string "0", should use @string resource [HardcodedText]
+                        android:text="0"
+                        ~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_dashboard.xml:109: Warning: Hardcoded string "Today's Date", should use @string resource [HardcodedText]
+                        android:text="Today's Date"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_dashboard.xml:117: Warning: Hardcoded string "DD Mon YYYY", should use @string resource [HardcodedText]
+                        android:text="DD Mon YYYY"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_dashboard.xml:145: Warning: Hardcoded string "Lunch Status Today", should use @string resource [HardcodedText]
+                    android:text="Lunch Status Today"
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_dashboard.xml:167: Warning: Hardcoded string "IN", should use @string resource [HardcodedText]
+                            android:text="IN"
+                            ~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_dashboard.xml:175: Warning: Hardcoded string "0", should use @string resource [HardcodedText]
+                            android:text="0"
+                            ~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_dashboard.xml:193: Warning: Hardcoded string "OUT", should use @string resource [HardcodedText]
+                            android:text="OUT"
+                            ~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_dashboard.xml:201: Warning: Hardcoded string "0", should use @string resource [HardcodedText]
+                            android:text="0"
+                            ~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_dashboard.xml:228: Warning: Hardcoded string "Dinner Status Today", should use @string resource [HardcodedText]
+                    android:text="Dinner Status Today"
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_dashboard.xml:250: Warning: Hardcoded string "IN", should use @string resource [HardcodedText]
+                            android:text="IN"
+                            ~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_dashboard.xml:258: Warning: Hardcoded string "0", should use @string resource [HardcodedText]
+                            android:text="0"
+                            ~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_dashboard.xml:276: Warning: Hardcoded string "OUT", should use @string resource [HardcodedText]
+                            android:text="OUT"
+                            ~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_dashboard.xml:284: Warning: Hardcoded string "0", should use @string resource [HardcodedText]
+                            android:text="0"
+                            ~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_dashboard.xml:299: Warning: Hardcoded string "Subscription Requests", should use @string resource [HardcodedText]
+            android:text="Subscription Requests"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_detail.xml:21: Warning: Hardcoded string "Mess Name", should use @string resource [HardcodedText]
+            android:text="Mess Name"
+            ~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_detail.xml:30: Warning: Hardcoded string "Location: Loading...", should use @string resource [HardcodedText]
+            android:text="Location: Loading..."
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_detail.xml:38: Warning: Hardcoded string "Contact: Loading...", should use @string resource [HardcodedText]
+            android:text="Contact: Loading..."
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_detail.xml:46: Warning: Hardcoded string "Description: Loading...", should use @string resource [HardcodedText]
+            android:text="Description: Loading..."
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_detail.xml:54: Warning: Hardcoded string "Daily Menu", should use @string resource [HardcodedText]
+            android:text="Daily Menu"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_detail.xml:76: Warning: Hardcoded string "Lunch", should use @string resource [HardcodedText]
+                    android:text="Lunch"
+                    ~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_detail.xml:85: Warning: Hardcoded string "Loading Lunch Menu...", should use @string resource [HardcodedText]
+                    android:text="Loading Lunch Menu..."
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_detail.xml:109: Warning: Hardcoded string "Dinner", should use @string resource [HardcodedText]
+                    android:text="Dinner"
+                    ~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_detail.xml:118: Warning: Hardcoded string "Loading Dinner Menu...", should use @string resource [HardcodedText]
+                    android:text="Loading Dinner Menu..."
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_detail.xml:129: Warning: Hardcoded string "Subscribe to this Mess", should use @string resource [HardcodedText]
+            android:text="Subscribe to this Mess"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_detail.xml:136: Warning: Hardcoded string "Reviews", should use @string resource [HardcodedText]
+            android:text="Reviews"
+            ~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_detail.xml:163: Warning: Hardcoded string "4.5 (10 Reviews)", should use @string resource [HardcodedText]
+                android:text="4.5 (10 Reviews)"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_detail.xml:180: Warning: Hardcoded string "Add Your Review", should use @string resource [HardcodedText]
+            android:text="Add Your Review"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_detail.xml:205: Warning: Hardcoded string "Your review comment...", should use @string resource [HardcodedText]
+                android:hint="Your review comment..."
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_detail.xml:215: Warning: Hardcoded string "Submit Review", should use @string resource [HardcodedText]
+            android:text="Submit Review"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_menu.xml:20: Warning: Hardcoded string "Manage Daily Menu", should use @string resource [HardcodedText]
+            android:text="Manage Daily Menu"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_menu.xml:38: Warning: Hardcoded string "Today: DD MMMM YYYY", should use @string resource [HardcodedText]
+                android:text="Today: DD MMMM YYYY"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_menu.xml:46: Warning: Hardcoded string "Select Date", should use @string resource [HardcodedText]
+                android:text="Select Date"/>
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_menu.xml:56: Warning: Hardcoded string "Lunch Menu", should use @string resource [HardcodedText]
+            android:hint="Lunch Menu"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_menu.xml:72: Warning: Hardcoded string "Save Lunch Menu", should use @string resource [HardcodedText]
+            android:text="Save Lunch Menu"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_menu.xml:81: Warning: Hardcoded string "Dinner Menu", should use @string resource [HardcodedText]
+            android:hint="Dinner Menu"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_menu.xml:97: Warning: Hardcoded string "Save Dinner Menu", should use @string resource [HardcodedText]
+            android:text="Save Dinner Menu"/>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_offers.xml:18: Warning: Hardcoded string "Manage Offers", should use @string resource [HardcodedText]
+            android:text="Manage Offers"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_offers.xml:40: Warning: Hardcoded string "Add New Offer", should use @string resource [HardcodedText]
+        android:contentDescription="Add New Offer"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_profile.xml:18: Warning: Hardcoded string "Mess Profile", should use @string resource [HardcodedText]
+            android:text="Mess Profile"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_profile.xml:40: Warning: Hardcoded string "Mess Profile Picture", should use @string resource [HardcodedText]
+                    android:contentDescription="Mess Profile Picture"/>
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_profile.xml:81: Warning: Hardcoded string "Mess Details", should use @string resource [HardcodedText]
+                    android:text="Mess Details"
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_profile.xml:89: Warning: Hardcoded string "Mess ID: Loading...", should use @string resource [HardcodedText]
+                    android:text="Mess ID: Loading..."
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_profile.xml:96: Warning: Hardcoded string "Location: Not Set", should use @string resource [HardcodedText]
+                    android:text="Location: Not Set"
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_profile.xml:103: Warning: Hardcoded string "Contact: Not Set", should use @string resource [HardcodedText]
+                    android:text="Contact: Not Set"
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_profile.xml:110: Warning: Hardcoded string "Description: Not Set", should use @string resource [HardcodedText]
+                    android:text="Description: Not Set"
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_profile.xml:117: Warning: Hardcoded string "Total Students: 0", should use @string resource [HardcodedText]
+                    android:text="Total Students: 0"
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_profile.xml:124: Warning: Hardcoded string "Edit Profile", should use @string resource [HardcodedText]
+                    android:text="Edit Profile"
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_profile.xml:132: Warning: Hardcoded string "Copy Mess ID", should use @string resource [HardcodedText]
+                    android:text="Copy Mess ID"/>
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_profile.xml:151: Warning: Hardcoded string "Revenue", should use @string resource [HardcodedText]
+                    android:text="Revenue"
+                    ~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_profile.xml:160: Warning: Hardcoded string "View Revenue Details", should use @string resource [HardcodedText]
+                    android:text="View Revenue Details" />
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_profile.xml:178: Warning: Hardcoded string "Offers", should use @string resource [HardcodedText]
+                    android:text="Offers"
+                    ~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_profile.xml:187: Warning: Hardcoded string "View and Create Offers", should use @string resource [HardcodedText]
+                    android:text="View and Create Offers" />
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_profile.xml:203: Warning: Hardcoded string "Account Settings", should use @string resource [HardcodedText]
+                    android:text="Account Settings"
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_profile.xml:212: Warning: Hardcoded string "Subscription Info", should use @string resource [HardcodedText]
+                    android:text="Subscription Info"/>
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_profile.xml:219: Warning: Hardcoded string "Rate Us", should use @string resource [HardcodedText]
+                    android:text="Rate Us"/>
+                    ~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_profile.xml:225: Warning: Hardcoded string "Logout", should use @string resource [HardcodedText]
+                    android:text="Logout"
+                    ~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_requests.xml:13: Warning: Hardcoded string "Pending Meal Requests", should use @string resource [HardcodedText]
+        android:text="Pending Meal Requests"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_requests.xml:40: Warning: Hardcoded string "All", should use @string resource [HardcodedText]
+            android:text="All"
+            ~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_requests.xml:48: Warning: Hardcoded string "Active Today", should use @string resource [HardcodedText]
+            android:text="Active Today"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_requests.xml:56: Warning: Hardcoded string "Expired Today", should use @string resource [HardcodedText]
+            android:text="Expired Today" />
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_revenue.xml:28: Warning: Hardcoded string "Revenue Statistics", should use @string resource [HardcodedText]
+                android:text="Revenue Statistics"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_revenue.xml:51: Warning: Hardcoded string "Monthly Revenue (Expected)", should use @string resource [HardcodedText]
+                        android:text="Monthly Revenue (Expected)"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_revenue.xml:59: Warning: Hardcoded string "₹0.00", should use @string resource [HardcodedText]
+                        android:text="₹0.00"
+                        ~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_revenue.xml:74: Warning: Hardcoded string "Monthly Revenue (Actual)", should use @string resource [HardcodedText]
+                        android:text="Monthly Revenue (Actual)"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_revenue.xml:82: Warning: Hardcoded string "₹0.00", should use @string resource [HardcodedText]
+                        android:text="₹0.00"
+                        ~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_revenue.xml:109: Warning: Hardcoded string "Total Revenue (All Time)", should use @string resource [HardcodedText]
+                        android:text="Total Revenue (All Time)"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_revenue.xml:117: Warning: Hardcoded string "₹0.00", should use @string resource [HardcodedText]
+                        android:text="₹0.00"
+                        ~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_revenue.xml:143: Warning: Hardcoded string "Calculation Basis", should use @string resource [HardcodedText]
+                        android:text="Calculation Basis"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_revenue.xml:152: Warning: Hardcoded string "Based on 0 active subscriptions.", should use @string resource [HardcodedText]
+                        android:text="Based on 0 active subscriptions."
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_revenue.xml:167: Warning: Hardcoded string "Monthly Mess Price: ₹0.00", should use @string resource [HardcodedText]
+                            android:text="Monthly Mess Price: ₹0.00"
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_revenue.xml:178: Warning: Hardcoded string "Edit Price", should use @string resource [HardcodedText]
+                            android:contentDescription="Edit Price" />
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_revenue.xml:197: Warning: Hardcoded string "Search student or email...", should use @string resource [HardcodedText]
+                    android:hint="Search student or email..."
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_revenue.xml:213: Warning: Hardcoded string "Filter by Date", should use @string resource [HardcodedText]
+                    android:contentDescription="Filter by Date"
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_revenue.xml:225: Warning: Hardcoded string "Date: Oct 24, 2023 ✕", should use @string resource [HardcodedText]
+                android:text="Date: Oct 24, 2023 ✕"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_revenue.xml:235: Warning: Hardcoded string "Recent Transactions", should use @string resource [HardcodedText]
+                android:text="Recent Transactions"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_students.xml:28: Warning: Hardcoded string "Manage Students", should use @string resource [HardcodedText]
+                android:text="Manage Students"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_students.xml:39: Warning: Hardcoded string "Search Students (Name or Email)", should use @string resource [HardcodedText]
+                android:hint="Search Students (Name or Email)"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_students.xml:68: Warning: Hardcoded string "Total Registered Students", should use @string resource [HardcodedText]
+                        android:text="Total Registered Students"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_students.xml:77: Warning: Hardcoded string "0", should use @string resource [HardcodedText]
+                        android:text="0"
+                        ~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_students.xml:108: Warning: Hardcoded string "All", should use @string resource [HardcodedText]
+                    android:text="All"
+                    ~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_students.xml:116: Warning: Hardcoded string "Active Today", should use @string resource [HardcodedText]
+                    android:text="Active Today"
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_students.xml:124: Warning: Hardcoded string "Expired Today", should use @string resource [HardcodedText]
+                    android:text="Expired Today"
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_students.xml:143: Warning: Hardcoded string "IN Today", should use @string resource [HardcodedText]
+                    android:text="IN Today"
+                    ~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_mess_students.xml:151: Warning: Hardcoded string "OUT Today", should use @string resource [HardcodedText]
+                    android:text="OUT Today"
+                    ~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_history.xml:32: Warning: Hardcoded string "Change Month", should use @string resource [HardcodedText]
+            android:text="Change Month"/>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_history.xml:60: Warning: Hardcoded string "Summary", should use @string resource [HardcodedText]
+                android:text="Summary"
+                ~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_history.xml:69: Warning: Hardcoded string "Total Lunch Taken: 0", should use @string resource [HardcodedText]
+                android:text="Total Lunch Taken: 0"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_history.xml:76: Warning: Hardcoded string "Total Dinner Taken: 0", should use @string resource [HardcodedText]
+                android:text="Total Dinner Taken: 0"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_history.xml:83: Warning: Hardcoded string "Days IN: 0", should use @string resource [HardcodedText]
+                android:text="Days IN: 0"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_history.xml:90: Warning: Hardcoded string "Days OUT: 0", should use @string resource [HardcodedText]
+                android:text="Days OUT: 0"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_home.xml:28: Warning: Hardcoded string "Mess Name Placeholder", should use @string resource [HardcodedText]
+                android:text="Mess Name Placeholder"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_home.xml:37: Warning: Hardcoded string "Date Placeholder", should use @string resource [HardcodedText]
+                android:text="Date Placeholder"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_home.xml:62: Warning: Hardcoded string "Lunch", should use @string resource [HardcodedText]
+                    android:text="Lunch"
+                    ~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_home.xml:71: Warning: Hardcoded string "Loading Lunch Menu...", should use @string resource [HardcodedText]
+                    android:text="Loading Lunch Menu..."
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_home.xml:79: Warning: Hardcoded string "Status: Not Selected", should use @string resource [HardcodedText]
+                    android:text="Status: Not Selected"
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_home.xml:95: Warning: Hardcoded string "✅ IN", should use @string resource [HardcodedText]
+                        android:text="✅ IN"
+                        ~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_home.xml:103: Warning: Hardcoded string "❌ OUT", should use @string resource [HardcodedText]
+                        android:text="❌ OUT"
+                        ~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_home.xml:112: Warning: Hardcoded string "Subscription Expired. Please Renew.", should use @string resource [HardcodedText]
+                    android:text="Subscription Expired. Please Renew."
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_home.xml:140: Warning: Hardcoded string "Dinner", should use @string resource [HardcodedText]
+                    android:text="Dinner"
+                    ~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_home.xml:149: Warning: Hardcoded string "Loading Dinner Menu...", should use @string resource [HardcodedText]
+                    android:text="Loading Dinner Menu..."
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_home.xml:157: Warning: Hardcoded string "Status: Not Selected", should use @string resource [HardcodedText]
+                    android:text="Status: Not Selected"
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_home.xml:173: Warning: Hardcoded string "✅ IN", should use @string resource [HardcodedText]
+                        android:text="✅ IN"
+                        ~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_home.xml:181: Warning: Hardcoded string "❌ OUT", should use @string resource [HardcodedText]
+                        android:text="❌ OUT"
+                        ~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_home.xml:190: Warning: Hardcoded string "Subscription Expired. Please Renew.", should use @string resource [HardcodedText]
+                    android:text="Subscription Expired. Please Renew."
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_home.xml:204: Warning: Hardcoded string "Nearby Messes", should use @string resource [HardcodedText]
+            android:text="Nearby Messes"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_home.xml:226: Warning: Hardcoded string "Available Offers", should use @string resource [HardcodedText]
+            android:text="Available Offers"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_menu.xml:45: Warning: Hardcoded string "Lunch Menu", should use @string resource [HardcodedText]
+                android:text="Lunch Menu"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_menu.xml:54: Warning: Hardcoded string "Loading Lunch Menu...", should use @string resource [HardcodedText]
+                android:text="Loading Lunch Menu..."
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_menu.xml:75: Warning: Hardcoded string "Dinner Menu", should use @string resource [HardcodedText]
+                android:text="Dinner Menu"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_menu.xml:84: Warning: Hardcoded string "Loading Dinner Menu...", should use @string resource [HardcodedText]
+                android:text="Loading Dinner Menu..."
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_profile.xml:66: Warning: Hardcoded string "Edit Profile", should use @string resource [HardcodedText]
+                    android:text="Edit Profile"
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_profile.xml:112: Warning: Hardcoded string "Subscription Details", should use @string resource [HardcodedText]
+                            android:text="Subscription Details"
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_profile.xml:132: Warning: Hardcoded string "Mess Name", should use @string resource [HardcodedText]
+                                    android:text="Mess Name"
+                                    ~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_profile.xml:153: Warning: Hardcoded string "Status", should use @string resource [HardcodedText]
+                                    android:text="Status"
+                                    ~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_profile.xml:178: Warning: Hardcoded string "Renew Subscription", should use @string resource [HardcodedText]
+                            android:text="Renew Subscription"
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_profile.xml:205: Warning: Hardcoded string "Settings", should use @string resource [HardcodedText]
+                            android:text="Settings"
+                            ~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_profile.xml:215: Warning: Hardcoded string "Mess Reviews", should use @string resource [HardcodedText]
+                            android:text="Mess Reviews"
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_profile.xml:229: Warning: Hardcoded string "Change Password", should use @string resource [HardcodedText]
+                            android:text="Change Password"
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_profile.xml:243: Warning: Hardcoded string "Help / Support", should use @string resource [HardcodedText]
+                            android:text="Help / Support"
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\fragment_user_profile.xml:257: Warning: Hardcoded string "Logout", should use @string resource [HardcodedText]
+                            android:text="Logout"
+                            ~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\item_history.xml:14: Warning: Hardcoded string "Date: 2023-11-20", should use @string resource [HardcodedText]
+        android:text="Date: 2023-11-20"/>
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\item_history.xml:21: Warning: Hardcoded string "Lunch: IN", should use @string resource [HardcodedText]
+        android:text="Lunch: IN"/>
+        ~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\item_history.xml:28: Warning: Hardcoded string "Dinner: OUT", should use @string resource [HardcodedText]
+        android:text="Dinner: OUT"/>
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\item_mess_card.xml:24: Warning: Hardcoded string "Mess Name", should use @string resource [HardcodedText]
+            android:text="Mess Name"
+            ~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\item_mess_card.xml:34: Warning: Hardcoded string "Location: Not available", should use @string resource [HardcodedText]
+            android:text="Location: Not available"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\item_mess_card.xml:43: Warning: Hardcoded string "Total Students: 0", should use @string resource [HardcodedText]
+            android:text="Total Students: 0"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\item_mess_card.xml:55: Warning: Hardcoded string "View Details", should use @string resource [HardcodedText]
+            android:text="View Details"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\item_offer.xml:24: Warning: Hardcoded string "Offer Title", should use @string resource [HardcodedText]
+            android:text="Offer Title"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\item_offer.xml:43: Warning: Hardcoded string "Offer Description goes here, explaining the details of the discount or promotion.", should use @string resource [HardcodedText]
+            android:text="Offer Description goes here, explaining the details of the discount or promotion."
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\item_offer.xml:51: Warning: Hardcoded string "Discount: 10% OFF", should use @string resource [HardcodedText]
+            android:text="Discount: 10% OFF"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\item_offer.xml:61: Warning: Hardcoded string "Expires: Dec 31, 2025", should use @string resource [HardcodedText]
+            android:text="Expires: Dec 31, 2025"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\item_review.xml:28: Warning: Hardcoded string "Reviewer Name", should use @string resource [HardcodedText]
+                android:text="Reviewer Name"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\item_review.xml:49: Warning: Hardcoded string "This is a sample review comment about the mess food and service.", should use @string resource [HardcodedText]
+            android:text="This is a sample review comment about the mess food and service."
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\item_review.xml:57: Warning: Hardcoded string "Dec 25, 2025", should use @string resource [HardcodedText]
+            android:text="Dec 25, 2025"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\item_student.xml:45: Warning: Hardcoded string "Student Name", should use @string resource [HardcodedText]
+                android:text="Student Name"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\item_student.xml:58: Warning: Hardcoded string "NOT SELECTED", should use @string resource [HardcodedText]
+                android:text="NOT SELECTED"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\item_student.xml:88: Warning: Hardcoded string "Email", should use @string resource [HardcodedText]
+                    android:text="Email"
+                    ~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\item_student.xml:95: Warning: Hardcoded string "email@example.com", should use @string resource [HardcodedText]
+                    android:text="email@example.com"
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\item_student.xml:112: Warning: Hardcoded string "Phone", should use @string resource [HardcodedText]
+                    android:text="Phone"
+                    ~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\item_student.xml:119: Warning: Hardcoded string "Not Provided", should use @string resource [HardcodedText]
+                    android:text="Not Provided"
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\item_student.xml:134: Warning: Hardcoded string "Gender", should use @string resource [HardcodedText]
+                    android:text="Gender"
+                    ~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\item_student.xml:141: Warning: Hardcoded string "Not Set", should use @string resource [HardcodedText]
+                    android:text="Not Set"
+                    ~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\item_student.xml:158: Warning: Hardcoded string "Diet Type", should use @string resource [HardcodedText]
+                    android:text="Diet Type"
+                    ~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\item_student.xml:165: Warning: Hardcoded string "Not Set", should use @string resource [HardcodedText]
+                    android:text="Not Set"
+                    ~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\item_student.xml:190: Warning: Hardcoded string "Subscription Expires: N/A", should use @string resource [HardcodedText]
+                android:text="Subscription Expires: N/A"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\item_student.xml:199: Warning: Hardcoded string "RENEW", should use @string resource [HardcodedText]
+                android:text="RENEW"
+                ~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\item_student.xml:208: Warning: Hardcoded string "DELETE", should use @string resource [HardcodedText]
+                android:text="DELETE"
+                ~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\item_student_request.xml:20: Warning: Hardcoded string "Student Name", should use @string resource [HardcodedText]
+            android:text="Student Name"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\item_student_request.xml:28: Warning: Hardcoded string "student@example.com", should use @string resource [HardcodedText]
+            android:text="student@example.com" />
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\item_student_request.xml:35: Warning: Hardcoded string "Approve", should use @string resource [HardcodedText]
+            android:text="Approve" />
+            ~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\item_transaction.xml:37: Warning: Hardcoded string "Student Name", should use @string resource [HardcodedText]
+                android:text="Student Name"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\item_transaction.xml:46: Warning: Hardcoded string "student@email.com", should use @string resource [HardcodedText]
+                android:text="student@email.com"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\item_transaction.xml:54: Warning: Hardcoded string "Oct 24, 2023", should use @string resource [HardcodedText]
+                android:text="Oct 24, 2023"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\item_transaction.xml:70: Warning: Hardcoded string "+ ₹0.00", should use @string resource [HardcodedText]
+                android:text="+ ₹0.00"
+                ~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\layout\item_transaction.xml:79: Warning: Hardcoded string "30 Days", should use @string resource [HardcodedText]
+                android:text="30 Days"
+                ~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\menu\menu_mess_top_bar.xml:6: Warning: Hardcoded string "Settings", should use @string resource [HardcodedText]
+        android:title="Settings"
+        ~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\menu\menu_mess_top_bar.xml:10: Warning: Hardcoded string "Logout", should use @string resource [HardcodedText]
+        android:title="Logout"
+        ~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\menu\mess_bottom_nav.xml:6: Warning: Hardcoded string "Dashboard", should use @string resource [HardcodedText]
+        android:title="Dashboard" />
+        ~~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\menu\mess_bottom_nav.xml:10: Warning: Hardcoded string "Menu", should use @string resource [HardcodedText]
+        android:title="Menu" />
+        ~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\menu\mess_bottom_nav.xml:14: Warning: Hardcoded string "Students", should use @string resource [HardcodedText]
+        android:title="Students" />
+        ~~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\menu\mess_bottom_nav.xml:18: Warning: Hardcoded string "Profile", should use @string resource [HardcodedText]
+        android:title="Profile" />
+        ~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\menu\mess_bottom_nav.xml:22: Warning: Hardcoded string "Offers", should use @string resource [HardcodedText]
+        android:title="Offers" />
+        ~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\menu\user_bottom_nav.xml:6: Warning: Hardcoded string "Home", should use @string resource [HardcodedText]
+        android:title="Home" />
+        ~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\menu\user_bottom_nav.xml:10: Warning: Hardcoded string "Menu", should use @string resource [HardcodedText]
+        android:title="Menu" />
+        ~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\menu\user_bottom_nav.xml:14: Warning: Hardcoded string "History", should use @string resource [HardcodedText]
+        android:title="History" />
+        ~~~~~~~~~~~~~~~~~~~~~~~
+D:\7)android projects\messapp\app\src\main\res\menu\user_bottom_nav.xml:18: Warning: Hardcoded string "Profile", should use @string resource [HardcodedText]
+        android:title="Profile" />
+        ~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "HardcodedText":
+   Hardcoding text attributes directly in layout files is bad for several
+   reasons:
+
+   * When creating configuration variations (for example for landscape or
+   portrait) you have to repeat the actual text (and keep it up to date when
+   making changes)
+
+   * The application cannot be translated to other languages by just adding
+   new translations for existing string resources.
+
+   There are quickfixes to automatically extract this hardcoded string into a
+   resource lookup.
+
+7 errors, 482 warnings

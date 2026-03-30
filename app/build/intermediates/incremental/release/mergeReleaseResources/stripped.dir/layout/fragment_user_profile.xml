@@ -1,0 +1,280 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        tools:context=".ui.user.profile.UserProfileFragment">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="24dp">
+
+            <!-- Profile Header Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:paddingTop="32dp"
+                android:paddingBottom="32dp"
+                android:background="?attr/colorPrimary"
+                tools:ignore="ExtraText">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/profile_image"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/ic_person_black_24dp"
+                    android:padding="2dp"
+                    android:background="@drawable/circle_border_white"
+                    app:shapeAppearanceOverlay="@style/CircleImageStyle"/>
+                    tools:ignore="MissingClass" />
+
+                <TextView
+                    android:id="@+id/text_profile_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    tools:text="John Doe"
+                    android:textColor="@android:color/white"
+                    android:textSize="22sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/text_profile_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    tools:text="john.doe@example.com"
+                    android:textColor="@color/white"
+                    android:alpha="0.8"
+                    android:textSize="14sp"/>
+                
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_edit_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Edit Profile"
+                    android:textSize="12sp"
+                    android:backgroundTint="@android:color/white"
+                    android:textColor="?attr/colorPrimary"
+                    app:cornerRadius="20dp"
+                    app:icon="@drawable/ic_edit"
+                    app:iconTint="?attr/colorPrimary"/>
+
+            </LinearLayout>
+
+            <!-- Content Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:layout_marginTop="-24dp"
+                android:background="@drawable/bg_rounded_top_sheet"
+                android:elevation="4dp">
+                <!-- Using a drawable explicitly or just standard background for simplicity if corner radius xml not checked.
+                     Assuming user might not have bg_rounded_top_sheet, using white card instead. -->
+            </LinearLayout>
+             <!-- Correcting structure to be standard LinearLayout -->
+             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Subscription Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp"
+                    android:layout_marginBottom="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Subscription Details"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_primary"
+                            android:layout_marginBottom="12dp"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:baselineAligned="false">
+                            
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Mess Name"
+                                    android:textSize="12sp"
+                                    android:textColor="@color/grey_700"/>
+                                <TextView
+                                    android:id="@+id/text_profile_mess_name"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    tools:text="Sunshine Mess"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/text_primary"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Status"
+                                    android:textSize="12sp"
+                                    android:textColor="@color/grey_700"/>
+                                <TextView
+                                    android:id="@+id/text_subscription_expiry"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    tools:text="Active (12 Days)"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold"
+                                    android:textColor="@android:color/holo_green_dark"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                        
+                         <TextView
+                             android:id="@+id/text_profile_mess_id"
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:visibility="gone"/>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_renew_subscription"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="Renew Subscription"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Personal Info Card -->
+                 <!-- Assuming binding will need text_profile_phone etc if we display here, 
+                      but original layout didn't have phone textviews bound in fragment explicitly visible 
+                      outside of Edit Profile possibly. We will stick to Settings for now matching previous scope. -->
+
+                <!-- Account Settings Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Settings"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_primary"
+                            android:layout_margin="8dp"/>
+
+                        <TextView
+                            android:id="@+id/btn_my_reviews"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Mess Reviews"
+                            android:padding="12dp"
+                            android:background="?attr/selectableItemBackground"
+                            android:drawableEnd="@drawable/ic_arrow_right"
+                            android:gravity="center_vertical"
+                            android:clickable="true"
+                            android:focusable="true"/>
+
+                        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/gray_300" android:layout_marginStart="12dp" android:layout_marginEnd="12dp"/>
+
+                        <TextView
+                            android:id="@+id/btn_change_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Change Password"
+                            android:padding="12dp"
+                            android:background="?attr/selectableItemBackground"
+                            android:drawableEnd="@drawable/ic_arrow_right"
+                            android:gravity="center_vertical"
+                            android:clickable="true"
+                            android:focusable="true"/>
+
+                        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/gray_300" android:layout_marginStart="12dp" android:layout_marginEnd="12dp"/>
+
+                        <TextView
+                            android:id="@+id/btn_help_support"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Help / Support"
+                            android:padding="12dp"
+                            android:background="?attr/selectableItemBackground"
+                            android:drawableEnd="@drawable/ic_arrow_right"
+                            android:gravity="center_vertical"
+                            android:clickable="true"
+                            android:focusable="true"/>
+
+                         <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/gray_300" android:layout_marginStart="12dp" android:layout_marginEnd="12dp"/>
+
+                        <TextView
+                            android:id="@+id/btn_logout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Logout"
+                            android:padding="12dp"
+                            android:textColor="@android:color/holo_red_dark"
+                            android:background="?attr/selectableItemBackground"
+                            android:drawableEnd="@drawable/ic_arrow_right"
+                            android:gravity="center_vertical"
+                            android:clickable="true"
+                            android:focusable="true"/>
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+</FrameLayout>

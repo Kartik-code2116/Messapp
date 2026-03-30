@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_mess_dashboard"
+        android:icon="@android:drawable/ic_menu_my_calendar"
+        android:title="Dashboard" />
+    <item
+        android:id="@+id/nav_mess_menu"
+        android:icon="@android:drawable/ic_menu_agenda"
+        android:title="Menu" />
+    <item
+        android:id="@+id/nav_mess_students"
+        android:icon="@android:drawable/ic_menu_myplaces"
+        android:title="Students" />
+    <item
+        android:id="@+id/nav_mess_profile"
+        android:icon="@android:drawable/ic_menu_manage"
+        android:title="Profile" />
+    <item
+        android:id="@+id/navigation_mess_offers"
+        android:icon="@drawable/ic_offers_black_24dp"
+        android:title="Offers" />
+</menu>

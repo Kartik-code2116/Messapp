@@ -1,0 +1,1 @@
+D:\7)android projects\messapp\app\build\intermediates\compiled_navigation_res\debug\compileDebugNavigationResources\navigation_mess_navigation.xml.flat D:\7)android projects\messapp\app\build\intermediates\compiled_navigation_res\debug\compileDebugNavigationResources\navigation_mobile_navigation.xml.flat 

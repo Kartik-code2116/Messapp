@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "616183704407",
+    "project_id": "alert2-bf736",
+    "storage_bucket": "alert2-bf736.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:616183704407:android:d2509313015dcc1444ac12",
+        "android_client_info": {
+          "package_name": "com.example.messapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "616183704407-o8f6hki3fgj88sbaosv12154pecs50fb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAay4DbgGVVaR5svpBETisx8I1pCOqN6Dc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "616183704407-o8f6hki3fgj88sbaosv12154pecs50fb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

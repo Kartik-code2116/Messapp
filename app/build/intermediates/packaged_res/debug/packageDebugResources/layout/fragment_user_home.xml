@@ -1,0 +1,780 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_page">
+
+    <!-- Scrollable Content -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="100dp">
+
+            <!-- Top Header -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/top_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="20dp">
+
+                <!-- Profile Picture -->
+                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/profile_container"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    app:cardCornerRadius="28dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="2dp"
+                    app:strokeColor="@color/brand_primary"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent">
+                    
+                    <ImageView
+                        android:id="@+id/img_profile"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_student_profile"
+                        android:scaleType="centerCrop"
+                        tools:src="@tools:sample/avatars"/>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Greeting & Date -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintStart_toEndOf="@id/profile_container"
+                    app:layout_constraintEnd_toStartOf="@id/btn_notification"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent">
+
+                    <TextView
+                        android:id="@+id/text_greeting"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hello, Alex!"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/inter"
+                        android:textColor="@color/text_body"/>
+
+                    <TextView
+                        android:id="@+id/text_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Monday, Oct 23rd"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/poppins"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_heading"/>
+                </LinearLayout>
+
+                <!-- Notification Button -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/btn_notification"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/neutral_200"
+                    app:cardBackgroundColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_notification"
+                        app:tint="@color/text_heading"/>
+                </com.google.android.material.card.MaterialCardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+             <!-- Deadline Section -->
+            <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="vertical"
+                 android:paddingHorizontal="16dp"
+                 android:layout_marginTop="8dp">
+
+                 <com.google.android.material.card.MaterialCardView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     app:cardCornerRadius="20dp"
+                     app:cardElevation="0dp"
+                     app:strokeWidth="0dp"
+                     app:cardBackgroundColor="@color/brand_primary_light">
+
+                     <LinearLayout
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:orientation="vertical"
+                         android:padding="20dp">
+
+                         <TextView
+                             android:id="@+id/text_deadline_label"
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:text="UPCOMING DEADLINE: LUNCH"
+                             android:textColor="@color/brand_primary_dark"
+                             android:textSize="12sp"
+                             android:fontFamily="@font/inter"
+                             android:textStyle="bold"
+                             android:gravity="center"
+                             android:letterSpacing="0.05"/>
+
+                         <!-- Timer -->
+                         <LinearLayout
+                             android:id="@+id/timer_container"
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:orientation="horizontal"
+                             android:gravity="center"
+                             android:layout_marginTop="16dp">
+
+                             <!-- TIMER ITEM: HOURS -->
+                             <LinearLayout
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:orientation="vertical"
+                                 android:gravity="center"
+                                 android:layout_marginEnd="16dp">
+                                 <TextView
+                                     android:id="@+id/text_timer_hours"
+                                     android:layout_width="60dp"
+                                     android:layout_height="50dp"
+                                     android:background="@drawable/bg_rounded_card_surface"
+                                     android:backgroundTint="@color/white"
+                                     android:text="00"
+                                     android:textSize="22sp"
+                                     android:fontFamily="@font/poppins"
+                                     android:textStyle="bold"
+                                     android:textColor="@color/brand_primary"
+                                     android:gravity="center"/>
+                                 <TextView
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:text="HOURS"
+                                     android:textSize="10sp"
+                                     android:textColor="@color/brand_primary"
+                                     android:textStyle="bold"
+                                     android:layout_marginTop="6dp"/>
+                             </LinearLayout>
+
+                             <!-- TIMER ITEM: MINS -->
+                             <LinearLayout
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:orientation="vertical"
+                                 android:gravity="center"
+                                 android:layout_marginEnd="16dp">
+                                 <TextView
+                                     android:id="@+id/text_timer_mins"
+                                     android:layout_width="60dp"
+                                     android:layout_height="50dp"
+                                     android:background="@drawable/bg_rounded_card_surface"
+                                     android:backgroundTint="@color/brand_primary"
+                                     android:text="00"
+                                     android:textSize="22sp"
+                                     android:fontFamily="@font/poppins"
+                                     android:textStyle="bold"
+                                     android:textColor="@color/white"
+                                     android:gravity="center"/>
+                                 <TextView
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:text="MINS"
+                                     android:textSize="10sp"
+                                     android:textColor="@color/brand_primary"
+                                     android:textStyle="bold"
+                                     android:layout_marginTop="6dp"/>
+                             </LinearLayout>
+
+                             <!-- TIMER ITEM: SECS -->
+                             <LinearLayout
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:orientation="vertical"
+                                 android:gravity="center">
+                                 <TextView
+                                     android:id="@+id/text_timer_secs"
+                                     android:layout_width="60dp"
+                                     android:layout_height="50dp"
+                                     android:background="@drawable/bg_rounded_card_surface"
+                                     android:backgroundTint="@color/white"
+                                     android:text="00"
+                                     android:textSize="22sp"
+                                     android:fontFamily="@font/poppins"
+                                     android:textStyle="bold"
+                                     android:textColor="@color/brand_primary"
+                                     android:gravity="center"/>
+                                 <TextView
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:text="SECS"
+                                     android:textSize="10sp"
+                                     android:textColor="@color/brand_primary"
+                                     android:textStyle="bold"
+                                     android:layout_marginTop="6dp"/>
+                             </LinearLayout>
+                         </LinearLayout>
+
+                         <TextView
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:text="Remaining to RSVP for today's Lunch"
+                             android:textSize="14sp"
+                             android:fontFamily="@font/inter"
+                             android:textColor="@color/brand_primary_dark"
+                             android:gravity="center"
+                             android:layout_marginTop="16dp"/>
+                     </LinearLayout>
+                 </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+            <!-- Mess Condition Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_mess_condition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:visibility="gone"
+                style="@style/Profound.Card">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="20dp"
+                    android:gravity="center_vertical">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Mess Status"
+                            android:textSize="12sp"
+                            android:textColor="@color/text_caption"
+                            android:textStyle="bold"
+                            android:letterSpacing="0.05" />
+
+                        <TextView
+                            android:id="@+id/text_mess_condition"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Loading..."
+                            android:textSize="18sp"
+                            android:fontFamily="@font/poppins"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_heading"
+                            android:layout_marginTop="4dp" />
+                    </LinearLayout>
+
+                    <View
+                        android:id="@+id/indicator_mess_condition"
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:background="@drawable/bg_circle_surface"
+                        android:backgroundTint="@color/neutral_400" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Section Header -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="20dp"
+                android:paddingTop="32dp"
+                android:paddingBottom="12dp"
+                android:gravity="center_vertical">
+                
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Today's Meals"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/poppins"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_heading"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="View Week"
+                    android:textColor="@color/brand_primary"
+                    android:fontFamily="@font/inter"
+                    android:textStyle="bold"
+                    android:textSize="14sp"/>
+            </LinearLayout>
+
+            <!-- Meal Cards Container (Keeping IDs consistent) -->
+            <LinearLayout
+                android:id="@+id/meals_container_new"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="16dp"
+                android:clipToPadding="false">
+
+                <!-- Breakfast Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_breakfast"
+                    style="@style/Profound.Card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:alpha="0.8">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="20dp">
+
+                             <!-- Icon -->
+                            <FrameLayout
+                                android:layout_width="56dp"
+                                android:layout_height="56dp"
+                                android:background="@drawable/bg_rounded_card_surface"
+                                android:backgroundTint="@color/neutral_100">
+                                <ImageView
+                                    android:layout_width="28dp"
+                                    android:layout_height="28dp"
+                                    android:src="@drawable/ic_breakfast_dining"
+                                    android:layout_gravity="center"
+                                    app:tint="@color/text_sub"/>
+                            </FrameLayout>
+
+                            <!-- Content -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_marginStart="16dp"
+                                android:layout_gravity="center_vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:gravity="center_vertical">
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_weight="1"
+                                        android:layout_height="wrap_content"
+                                        android:text="Breakfast"
+                                        android:textSize="18sp"
+                                        android:fontFamily="@font/poppins"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/text_heading"/>
+                                    
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="ENDED"
+                                        android:textSize="11sp"
+                                        android:fontFamily="@font/inter"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/text_caption"
+                                        android:background="@drawable/bg_rounded_card_surface"
+                                        android:backgroundTint="@color/neutral_200"
+                                        android:paddingHorizontal="8dp"
+                                        android:paddingVertical="4dp"/>
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Scrambled eggs, toast, seasonal fruit"
+                                    android:textSize="14sp"
+                                    android:fontFamily="@font/inter"
+                                    android:textColor="@color/text_body"
+                                    android:layout_marginTop="4dp"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                        
+                        <!-- Status Bar -->
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/neutral_100"
+                            android:text="Status: IN"
+                            android:textColor="@color/text_sub"
+                            android:textStyle="bold"
+                            android:textSize="13sp"
+                            android:gravity="center"
+                            android:padding="12dp"/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Lunch Card (Active) -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_lunch"
+                    style="@style/Profound.Card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp">
+                    
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        
+                         <!-- Card Content -->
+                         <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingHorizontal="20dp"
+                            android:paddingTop="20dp"
+                            android:paddingBottom="12dp">
+
+                            <!-- Icon -->
+                            <FrameLayout
+                                android:layout_width="56dp"
+                                android:layout_height="56dp"
+                                android:background="@drawable/bg_rounded_card_surface"
+                                android:backgroundTint="@color/brand_primary_light">
+                                <ImageView
+                                    android:layout_width="28dp"
+                                    android:layout_height="28dp"
+                                    android:src="@drawable/ic_lunch_dining"
+                                    android:layout_gravity="center"
+                                    app:tint="@color/brand_primary"/>
+                            </FrameLayout>
+
+                            <!-- Content -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_marginStart="16dp"
+                                android:layout_gravity="center_vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:gravity="center_vertical">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Lunch"
+                                        android:textSize="18sp"
+                                        android:fontFamily="@font/poppins"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/text_heading"/>
+
+                                    <TextView
+                                        android:id="@+id/text_lunch_preference"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="8dp"
+                                        android:text="VEG"
+                                        android:textSize="11sp"
+                                        android:fontFamily="@font/inter"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/semantic_success"
+                                        android:background="@drawable/bg_rounded_card_surface"
+                                        android:backgroundTint="@color/semantic_success_bg"
+                                        android:paddingHorizontal="8dp"
+                                        android:paddingVertical="4dp"
+                                        android:visibility="gone"
+                                        tools:visibility="visible"/>
+
+                                    <TextView
+                                        android:id="@+id/text_lunch_card_timer"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="8dp"
+                                        android:text="--:--"
+                                        android:textSize="11sp"
+                                        android:fontFamily="@font/inter"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/semantic_error"
+                                        android:background="@drawable/bg_rounded_card_surface"
+                                        android:backgroundTint="@color/semantic_error_bg"
+                                        android:paddingHorizontal="8dp"
+                                        android:paddingVertical="4dp"
+                                        android:visibility="gone"
+                                        tools:visibility="visible"/>
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/text_lunch_menu_new"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Grilled chicken breast, quinoa pilaf, fresh garden salad"
+                                    android:textSize="14sp"
+                                    android:fontFamily="@font/inter"
+                                    android:textColor="@color/text_sub"
+                                    android:layout_marginTop="4dp"/>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <!-- Buttons -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="20dp"
+                            android:paddingBottom="20dp"
+                            android:orientation="vertical">
+                            
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:orientation="horizontal">
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btn_lunch_in_new"
+                                    style="@style/Profound.Button"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="wrap_content"
+                                    android:text="IN"
+                                    android:textStyle="bold"
+                                    app:icon="@drawable/ic_check_circle"
+                                    android:layout_marginEnd="8dp"/>
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btn_lunch_out_new"
+                                    style="@style/Profound.Button.Outlined"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="wrap_content"
+                                    android:text="OUT"
+                                    android:textStyle="bold"
+                                    app:strokeColor="@color/neutral_300"
+                                    android:textColor="@color/text_sub"
+                                    android:layout_marginStart="8dp"/>
+                            </LinearLayout>
+
+                             <!-- Status Text -->
+                            <TextView
+                                android:id="@+id/text_lunch_status"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:paddingTop="8dp"
+                                android:text=""
+                                android:textSize="12sp"
+                                android:fontFamily="@font/inter"
+                                android:textStyle="bold"/>
+                        </LinearLayout>
+
+                        <!-- Permanent Status Bar -->
+                        <TextView
+                            android:id="@+id/text_lunch_status_bar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/neutral_100"
+                            android:text="Status: Not Marked"
+                            android:textColor="@color/text_heading"
+                            android:textStyle="bold"
+                            android:textSize="13sp"
+                            android:gravity="center"
+                            android:padding="12dp"/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Dinner Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_dinner"
+                    style="@style/Profound.Card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp">
+
+                     <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="20dp">
+
+                            <!-- Icon -->
+                            <FrameLayout
+                                android:layout_width="56dp"
+                                android:layout_height="56dp"
+                                android:background="@drawable/bg_rounded_card_surface"
+                                android:backgroundTint="@color/brand_secondary_light">
+                                <ImageView
+                                    android:layout_width="28dp"
+                                    android:layout_height="28dp"
+                                    android:src="@drawable/ic_dinner_dining"
+                                    android:layout_gravity="center"
+                                    app:tint="@color/brand_secondary"/>
+                            </FrameLayout>
+
+                            <!-- Content -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_marginStart="16dp"
+                                android:layout_gravity="center_vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:gravity="center_vertical">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Dinner"
+                                        android:textSize="18sp"
+                                        android:fontFamily="@font/poppins"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/text_heading"/>
+
+                                    <TextView
+                                        android:id="@+id/text_dinner_preference"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="8dp"
+                                        android:text="VEG"
+                                        android:textSize="11sp"
+                                        android:fontFamily="@font/inter"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/semantic_success"
+                                        android:background="@drawable/bg_rounded_card_surface"
+                                        android:backgroundTint="@color/semantic_success_bg"
+                                        android:paddingHorizontal="8dp"
+                                        android:paddingVertical="4dp"
+                                        android:visibility="gone"
+                                        tools:visibility="visible"/>
+
+                                    <TextView
+                                        android:id="@+id/text_dinner_card_timer"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="8dp"
+                                        android:text="--:--"
+                                        android:textSize="11sp"
+                                        android:fontFamily="@font/inter"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/semantic_error"
+                                        android:background="@drawable/bg_rounded_card_surface"
+                                        android:backgroundTint="@color/semantic_error_bg"
+                                        android:paddingHorizontal="8dp"
+                                        android:paddingVertical="4dp"
+                                        android:visibility="gone"
+                                        tools:visibility="visible"/>
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/text_dinner_menu_new"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Vegetable pasta alfredo, garlic bread, roasted broccoli"
+                                    android:textSize="14sp"
+                                    android:fontFamily="@font/inter"
+                                    android:textColor="@color/text_sub"
+                                    android:layout_marginTop="4dp"/>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <!-- Buttons -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="20dp"
+                            android:paddingBottom="20dp"
+                            android:orientation="vertical">
+                            
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:orientation="horizontal">
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btn_dinner_in_new"
+                                    style="@style/Profound.Button"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="wrap_content"
+                                    android:text="IN"
+                                    android:textStyle="bold"
+                                    app:icon="@drawable/ic_check_circle"
+                                    android:layout_marginEnd="8dp"/>
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btn_dinner_out_new"
+                                    style="@style/Profound.Button.Outlined"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="wrap_content"
+                                    android:text="OUT"
+                                    android:textStyle="bold"
+                                    app:strokeColor="@color/neutral_300"
+                                    android:textColor="@color/text_sub"
+                                    android:layout_marginStart="8dp"/>
+                            </LinearLayout>
+
+                             <!-- Status Text -->
+                            <TextView
+                                android:id="@+id/text_dinner_status"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:paddingTop="8dp"
+                                android:text=""
+                                android:textSize="12sp"
+                                android:fontFamily="@font/inter"
+                                android:textStyle="bold"/>
+                        </LinearLayout>
+
+                        <!-- Permanent Status Bar -->
+                        <TextView
+                            android:id="@+id/text_dinner_status_bar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/neutral_100"
+                            android:text="Status: Not Marked"
+                            android:textColor="@color/text_heading"
+                            android:textStyle="bold"
+                            android:textSize="13sp"
+                            android:gravity="center"
+                            android:padding="12dp"/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

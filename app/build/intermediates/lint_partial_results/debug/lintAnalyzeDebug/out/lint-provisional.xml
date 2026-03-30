@@ -1,0 +1,725 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<incidents format="6" by="lint 8.13.2" type="conditional_incidents">
+
+    <incident
+        id="NotificationPermission"
+        severity="error"
+        message="When targeting Android 13 or higher, posting a permission requires holding the `POST_NOTIFICATIONS` permission">
+        <fix-data missing="android.permission.POST_NOTIFICATIONS"/>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/messapp/managers/FirebaseNotificationManager.java"
+            line="127"
+            column="13"
+            startOffset="4957"
+            endLine="127"
+            endColumn="90"
+            endOffset="5034"/>
+    </incident>
+
+    <incident
+        id="NotificationPermission"
+        severity="error"
+        message="When targeting Android 13 or higher, posting a permission requires holding the `POST_NOTIFICATIONS` permission">
+        <fix-data missing="android.permission.POST_NOTIFICATIONS"/>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/messapp/MyFirebaseMessagingService.java"
+            line="90"
+            column="9"
+            startOffset="3566"
+            endLine="90"
+            endColumn="92"
+            endOffset="3649"/>
+    </incident>
+
+    <incident
+        id="UnusedAttribute"
+        severity="warning"
+        message="">
+        <fix-data minSdk="24-∞" requiresApi="28-∞"/>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/fragment_user_menu.xml"
+            line="23"
+            column="13"
+            startOffset="886"
+            endLine="23"
+            endColumn="69"
+            endOffset="942"/>
+        <map>
+            <entry
+                name="message"
+                string="Attribute `outlineAmbientShadowColor` is only used in API level 28 and higher (current min is %1$s)"/>
+            <api-levels id="minSdk"
+                value="24-∞"/>
+            <api-levels id="requiresApi"
+                value="28-∞"/>
+        </map>
+    </incident>
+
+    <incident
+        id="UnusedAttribute"
+        severity="warning"
+        message="">
+        <fix-data minSdk="24-∞" requiresApi="26-∞"/>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/font/poppins_bold.xml"
+            line="6"
+            column="9"
+            startOffset="242"
+            endLine="6"
+            endColumn="42"
+            endOffset="275"/>
+        <map>
+            <entry
+                name="message"
+                string="Attribute `font` is only used in API level 26 and higher (current min is %1$s)"/>
+            <api-levels id="minSdk"
+                value="24-∞"/>
+            <api-levels id="requiresApi"
+                value="26-∞"/>
+        </map>
+    </incident>
+
+    <incident
+        id="UnusedAttribute"
+        severity="warning"
+        message="">
+        <fix-data minSdk="24-∞" requiresApi="26-∞"/>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/font/poppins_bold.xml"
+            line="7"
+            column="9"
+            startOffset="285"
+            endLine="7"
+            endColumn="35"
+            endOffset="311"/>
+        <map>
+            <entry
+                name="message"
+                string="Attribute `fontStyle` is only used in API level 26 and higher (current min is %1$s)"/>
+            <api-levels id="minSdk"
+                value="24-∞"/>
+            <api-levels id="requiresApi"
+                value="26-∞"/>
+        </map>
+    </incident>
+
+    <incident
+        id="UnusedAttribute"
+        severity="warning"
+        message="">
+        <fix-data minSdk="24-∞" requiresApi="26-∞"/>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/font/poppins_bold.xml"
+            line="8"
+            column="9"
+            startOffset="321"
+            endLine="8"
+            endColumn="33"
+            endOffset="345"/>
+        <map>
+            <entry
+                name="message"
+                string="Attribute `fontWeight` is only used in API level 26 and higher (current min is %1$s)"/>
+            <api-levels id="minSdk"
+                value="24-∞"/>
+            <api-levels id="requiresApi"
+                value="26-∞"/>
+        </map>
+    </incident>
+
+    <incident
+        id="UnusedAttribute"
+        severity="warning"
+        message="">
+        <fix-data minSdk="24-∞" requiresApi="26-∞"/>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/font/poppins_medium.xml"
+            line="6"
+            column="9"
+            startOffset="242"
+            endLine="6"
+            endColumn="44"
+            endOffset="277"/>
+        <map>
+            <entry
+                name="message"
+                string="Attribute `font` is only used in API level 26 and higher (current min is %1$s)"/>
+            <api-levels id="minSdk"
+                value="24-∞"/>
+            <api-levels id="requiresApi"
+                value="26-∞"/>
+        </map>
+    </incident>
+
+    <incident
+        id="UnusedAttribute"
+        severity="warning"
+        message="">
+        <fix-data minSdk="24-∞" requiresApi="26-∞"/>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/font/poppins_medium.xml"
+            line="7"
+            column="9"
+            startOffset="287"
+            endLine="7"
+            endColumn="35"
+            endOffset="313"/>
+        <map>
+            <entry
+                name="message"
+                string="Attribute `fontStyle` is only used in API level 26 and higher (current min is %1$s)"/>
+            <api-levels id="minSdk"
+                value="24-∞"/>
+            <api-levels id="requiresApi"
+                value="26-∞"/>
+        </map>
+    </incident>
+
+    <incident
+        id="UnusedAttribute"
+        severity="warning"
+        message="">
+        <fix-data minSdk="24-∞" requiresApi="26-∞"/>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/font/poppins_medium.xml"
+            line="8"
+            column="9"
+            startOffset="323"
+            endLine="8"
+            endColumn="33"
+            endOffset="347"/>
+        <map>
+            <entry
+                name="message"
+                string="Attribute `fontWeight` is only used in API level 26 and higher (current min is %1$s)"/>
+            <api-levels id="minSdk"
+                value="24-∞"/>
+            <api-levels id="requiresApi"
+                value="26-∞"/>
+        </map>
+    </incident>
+
+    <incident
+        id="UnusedAttribute"
+        severity="warning"
+        message="">
+        <fix-data minSdk="24-∞" requiresApi="26-∞"/>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/font/poppins_regular.xml"
+            line="6"
+            column="9"
+            startOffset="242"
+            endLine="6"
+            endColumn="45"
+            endOffset="278"/>
+        <map>
+            <entry
+                name="message"
+                string="Attribute `font` is only used in API level 26 and higher (current min is %1$s)"/>
+            <api-levels id="minSdk"
+                value="24-∞"/>
+            <api-levels id="requiresApi"
+                value="26-∞"/>
+        </map>
+    </incident>
+
+    <incident
+        id="UnusedAttribute"
+        severity="warning"
+        message="">
+        <fix-data minSdk="24-∞" requiresApi="26-∞"/>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/font/poppins_regular.xml"
+            line="7"
+            column="9"
+            startOffset="288"
+            endLine="7"
+            endColumn="35"
+            endOffset="314"/>
+        <map>
+            <entry
+                name="message"
+                string="Attribute `fontStyle` is only used in API level 26 and higher (current min is %1$s)"/>
+            <api-levels id="minSdk"
+                value="24-∞"/>
+            <api-levels id="requiresApi"
+                value="26-∞"/>
+        </map>
+    </incident>
+
+    <incident
+        id="UnusedAttribute"
+        severity="warning"
+        message="">
+        <fix-data minSdk="24-∞" requiresApi="26-∞"/>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/font/poppins_regular.xml"
+            line="8"
+            column="9"
+            startOffset="324"
+            endLine="8"
+            endColumn="33"
+            endOffset="348"/>
+        <map>
+            <entry
+                name="message"
+                string="Attribute `fontWeight` is only used in API level 26 and higher (current min is %1$s)"/>
+            <api-levels id="minSdk"
+                value="24-∞"/>
+            <api-levels id="requiresApi"
+                value="26-∞"/>
+        </map>
+    </incident>
+
+    <incident
+        id="UnusedAttribute"
+        severity="warning"
+        message="">
+        <fix-data minSdk="24-∞" requiresApi="26-∞"/>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/font/poppins_semibold.xml"
+            line="6"
+            column="9"
+            startOffset="242"
+            endLine="6"
+            endColumn="46"
+            endOffset="279"/>
+        <map>
+            <entry
+                name="message"
+                string="Attribute `font` is only used in API level 26 and higher (current min is %1$s)"/>
+            <api-levels id="minSdk"
+                value="24-∞"/>
+            <api-levels id="requiresApi"
+                value="26-∞"/>
+        </map>
+    </incident>
+
+    <incident
+        id="UnusedAttribute"
+        severity="warning"
+        message="">
+        <fix-data minSdk="24-∞" requiresApi="26-∞"/>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/font/poppins_semibold.xml"
+            line="7"
+            column="9"
+            startOffset="289"
+            endLine="7"
+            endColumn="35"
+            endOffset="315"/>
+        <map>
+            <entry
+                name="message"
+                string="Attribute `fontStyle` is only used in API level 26 and higher (current min is %1$s)"/>
+            <api-levels id="minSdk"
+                value="24-∞"/>
+            <api-levels id="requiresApi"
+                value="26-∞"/>
+        </map>
+    </incident>
+
+    <incident
+        id="UnusedAttribute"
+        severity="warning"
+        message="">
+        <fix-data minSdk="24-∞" requiresApi="26-∞"/>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/font/poppins_semibold.xml"
+            line="8"
+            column="9"
+            startOffset="325"
+            endLine="8"
+            endColumn="33"
+            endOffset="349"/>
+        <map>
+            <entry
+                name="message"
+                string="Attribute `fontWeight` is only used in API level 26 and higher (current min is %1$s)"/>
+            <api-levels id="minSdk"
+                value="24-∞"/>
+            <api-levels id="requiresApi"
+                value="26-∞"/>
+        </map>
+    </incident>
+
+    <incident
+        id="CustomSplashScreen"
+        severity="warning"
+        message="The application should not provide its own launch screen">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/messapp/SplashActivity.java"
+            line="13"
+            column="14"
+            startOffset="327"
+            endLine="13"
+            endColumn="28"
+            endOffset="341"/>
+        <map>
+            <condition targetGE="31"/>
+        </map>
+    </incident>
+
+    <incident
+        id="VectorRaster"
+        severity="warning"
+        message="">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/drawable/ic_add_black_24dp.xml"
+            line="3"
+            column="30"
+            startOffset="224"
+            endLine="3"
+            endColumn="50"
+            endOffset="244"/>
+        <map>
+            <entry
+                name="containsFillType"
+                boolean="false"/>
+            <entry
+                name="containsGradient"
+                boolean="false"/>
+            <entry
+                name="folderVersion"
+                int="-1"/>
+            <entry
+                name="message"
+                string="Resource references will not work correctly in images generated for this vector icon for API &lt; %1$d; check generated icon to make sure it looks acceptable"/>
+        </map>
+    </incident>
+
+    <incident
+        id="VectorRaster"
+        severity="warning"
+        message="">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/drawable/ic_camera_alt.xml"
+            line="6"
+            column="19"
+            startOffset="204"
+            endLine="6"
+            endColumn="43"
+            endOffset="228"/>
+        <map>
+            <entry
+                name="containsFillType"
+                boolean="false"/>
+            <entry
+                name="containsGradient"
+                boolean="false"/>
+            <entry
+                name="folderVersion"
+                int="-1"/>
+            <entry
+                name="message"
+                string="Resource references will not work correctly in images generated for this vector icon for API &lt; %1$d; check generated icon to make sure it looks acceptable"/>
+        </map>
+    </incident>
+
+    <incident
+        id="VectorRaster"
+        severity="warning"
+        message="">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/drawable/ic_camera_alt.xml"
+            line="8"
+            column="26"
+            startOffset="266"
+            endLine="8"
+            endColumn="46"
+            endOffset="286"/>
+        <map>
+            <entry
+                name="containsFillType"
+                boolean="false"/>
+            <entry
+                name="containsGradient"
+                boolean="false"/>
+            <entry
+                name="folderVersion"
+                int="-1"/>
+            <entry
+                name="message"
+                string="Resource references will not work correctly in images generated for this vector icon for API &lt; %1$d; check generated icon to make sure it looks acceptable"/>
+        </map>
+    </incident>
+
+    <incident
+        id="VectorRaster"
+        severity="warning"
+        message="">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/drawable/ic_dashboard_black_24dp.xml"
+            line="8"
+            column="26"
+            startOffset="251"
+            endLine="8"
+            endColumn="46"
+            endOffset="271"/>
+        <map>
+            <entry
+                name="containsFillType"
+                boolean="false"/>
+            <entry
+                name="containsGradient"
+                boolean="false"/>
+            <entry
+                name="folderVersion"
+                int="-1"/>
+            <entry
+                name="message"
+                string="Resource references will not work correctly in images generated for this vector icon for API &lt; %1$d; check generated icon to make sure it looks acceptable"/>
+        </map>
+    </incident>
+
+    <incident
+        id="VectorRaster"
+        severity="warning"
+        message="">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/drawable/ic_history_black_24dp.xml"
+            line="8"
+            column="26"
+            startOffset="251"
+            endLine="8"
+            endColumn="46"
+            endOffset="271"/>
+        <map>
+            <entry
+                name="containsFillType"
+                boolean="false"/>
+            <entry
+                name="containsGradient"
+                boolean="false"/>
+            <entry
+                name="folderVersion"
+                int="-1"/>
+            <entry
+                name="message"
+                string="Resource references will not work correctly in images generated for this vector icon for API &lt; %1$d; check generated icon to make sure it looks acceptable"/>
+        </map>
+    </incident>
+
+    <incident
+        id="VectorRaster"
+        severity="warning"
+        message="">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/drawable/ic_home_black_24dp.xml"
+            line="8"
+            column="26"
+            startOffset="251"
+            endLine="8"
+            endColumn="46"
+            endOffset="271"/>
+        <map>
+            <entry
+                name="containsFillType"
+                boolean="false"/>
+            <entry
+                name="containsGradient"
+                boolean="false"/>
+            <entry
+                name="folderVersion"
+                int="-1"/>
+            <entry
+                name="message"
+                string="Resource references will not work correctly in images generated for this vector icon for API &lt; %1$d; check generated icon to make sure it looks acceptable"/>
+        </map>
+    </incident>
+
+    <incident
+        id="VectorRaster"
+        severity="warning"
+        message="">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/drawable/ic_menu_book_black_24dp.xml"
+            line="8"
+            column="26"
+            startOffset="251"
+            endLine="8"
+            endColumn="46"
+            endOffset="271"/>
+        <map>
+            <entry
+                name="containsFillType"
+                boolean="false"/>
+            <entry
+                name="containsGradient"
+                boolean="false"/>
+            <entry
+                name="folderVersion"
+                int="-1"/>
+            <entry
+                name="message"
+                string="Resource references will not work correctly in images generated for this vector icon for API &lt; %1$d; check generated icon to make sure it looks acceptable"/>
+        </map>
+    </incident>
+
+    <incident
+        id="VectorRaster"
+        severity="warning"
+        message="">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/drawable/ic_notifications_black_24dp.xml"
+            line="8"
+            column="26"
+            startOffset="251"
+            endLine="8"
+            endColumn="46"
+            endOffset="271"/>
+        <map>
+            <entry
+                name="containsFillType"
+                boolean="false"/>
+            <entry
+                name="containsGradient"
+                boolean="false"/>
+            <entry
+                name="folderVersion"
+                int="-1"/>
+            <entry
+                name="message"
+                string="Resource references will not work correctly in images generated for this vector icon for API &lt; %1$d; check generated icon to make sure it looks acceptable"/>
+        </map>
+    </incident>
+
+    <incident
+        id="VectorRaster"
+        severity="warning"
+        message="">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/drawable/ic_offers_black_24dp.xml"
+            line="3"
+            column="30"
+            startOffset="224"
+            endLine="3"
+            endColumn="50"
+            endOffset="244"/>
+        <map>
+            <entry
+                name="containsFillType"
+                boolean="false"/>
+            <entry
+                name="containsGradient"
+                boolean="false"/>
+            <entry
+                name="folderVersion"
+                int="-1"/>
+            <entry
+                name="message"
+                string="Resource references will not work correctly in images generated for this vector icon for API &lt; %1$d; check generated icon to make sure it looks acceptable"/>
+        </map>
+    </incident>
+
+    <incident
+        id="VectorRaster"
+        severity="warning"
+        message="">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/drawable/ic_people_black_24dp.xml"
+            line="8"
+            column="26"
+            startOffset="251"
+            endLine="8"
+            endColumn="46"
+            endOffset="271"/>
+        <map>
+            <entry
+                name="containsFillType"
+                boolean="false"/>
+            <entry
+                name="containsGradient"
+                boolean="false"/>
+            <entry
+                name="folderVersion"
+                int="-1"/>
+            <entry
+                name="message"
+                string="Resource references will not work correctly in images generated for this vector icon for API &lt; %1$d; check generated icon to make sure it looks acceptable"/>
+        </map>
+    </incident>
+
+    <incident
+        id="VectorRaster"
+        severity="warning"
+        message="">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/drawable/ic_person_black_24dp.xml"
+            line="8"
+            column="26"
+            startOffset="251"
+            endLine="8"
+            endColumn="46"
+            endOffset="271"/>
+        <map>
+            <entry
+                name="containsFillType"
+                boolean="false"/>
+            <entry
+                name="containsGradient"
+                boolean="false"/>
+            <entry
+                name="folderVersion"
+                int="-1"/>
+            <entry
+                name="message"
+                string="Resource references will not work correctly in images generated for this vector icon for API &lt; %1$d; check generated icon to make sure it looks acceptable"/>
+        </map>
+    </incident>
+
+    <incident
+        id="VectorRaster"
+        severity="warning"
+        message="">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/drawable/ic_settings_black_24dp.xml"
+            line="8"
+            column="26"
+            startOffset="251"
+            endLine="8"
+            endColumn="46"
+            endOffset="271"/>
+        <map>
+            <entry
+                name="containsFillType"
+                boolean="false"/>
+            <entry
+                name="containsGradient"
+                boolean="false"/>
+            <entry
+                name="folderVersion"
+                int="-1"/>
+            <entry
+                name="message"
+                string="Resource references will not work correctly in images generated for this vector icon for API &lt; %1$d; check generated icon to make sure it looks acceptable"/>
+        </map>
+    </incident>
+
+    <incident
+        id="ObsoleteSdkInt"
+        severity="warning"
+        message="Unnecessary; `SDK_INT` is always >= 31">
+        <fix-replace
+            description="Delete tools:targetApi"
+            replacement=""
+            priority="0">
+            <range
+                file="${:app*debug*MAIN*sourceProvider*0*manifest*0}"
+                startOffset="721"
+                endOffset="741"/>
+        </fix-replace>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*manifest*0}"
+            line="17"
+            column="9"
+            startOffset="721"
+            endLine="17"
+            endColumn="29"
+            endOffset="741"/>
+        <map>
+            <condition minGE="31-∞"/>
+        </map>
+    </incident>
+
+</incidents>

@@ -1,0 +1,418 @@
+[
+    {
+        "merged": "com.example.messapp-release-60:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.messapp-main-61:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/xml_backup_rules.xml.flat",
+        "source": "com.example.messapp-main-61:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable_ic_facebook.xml.flat",
+        "source": "com.example.messapp-main-61:/drawable/ic_facebook.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/layout_fragment_mess_offers.xml.flat",
+        "source": "com.example.messapp-main-61:/layout/fragment_mess_offers.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable_status_background_in.xml.flat",
+        "source": "com.example.messapp-main-61:/drawable/status_background_in.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable_bg_circle_light_green.xml.flat",
+        "source": "com.example.messapp-main-61:/drawable/bg_circle_light_green.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/layout_activity_role_selection.xml.flat",
+        "source": "com.example.messapp-main-61:/layout/activity_role_selection.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/font_poppins_bold.xml.flat",
+        "source": "com.example.messapp-main-61:/font/poppins_bold.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable_ic_history_black_24dp.xml.flat",
+        "source": "com.example.messapp-main-61:/drawable/ic_history_black_24dp.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/font_poppins_medium.xml.flat",
+        "source": "com.example.messapp-main-61:/font/poppins_medium.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable_ic_chevron_right.xml.flat",
+        "source": "com.example.messapp-main-61:/drawable/ic_chevron_right.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/layout_activity_main.xml.flat",
+        "source": "com.example.messapp-main-61:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/layout_fragment_user_menu.xml.flat",
+        "source": "com.example.messapp-main-61:/layout/fragment_user_menu.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.example.messapp-main-61:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/layout_activity_edit_user_profile.xml.flat",
+        "source": "com.example.messapp-main-61:/layout/activity_edit_user_profile.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/layout_item_offer.xml.flat",
+        "source": "com.example.messapp-main-61:/layout/item_offer.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/layout_activity_user_dashboard.xml.flat",
+        "source": "com.example.messapp-main-61:/layout/activity_user_dashboard.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable_bg_capsule_accent.xml.flat",
+        "source": "com.example.messapp-main-61:/drawable/bg_capsule_accent.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable_ripple_effect.xml.flat",
+        "source": "com.example.messapp-main-61:/drawable/ripple_effect.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/layout_item_review.xml.flat",
+        "source": "com.example.messapp-main-61:/layout/item_review.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable_ic_account_circle.xml.flat",
+        "source": "com.example.messapp-main-61:/drawable/ic_account_circle.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.example.messapp-main-61:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable_gradient_background.xml.flat",
+        "source": "com.example.messapp-main-61:/drawable/gradient_background.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable_ic_offers_black_24dp.xml.flat",
+        "source": "com.example.messapp-main-61:/drawable/ic_offers_black_24dp.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable_ic_edit.xml.flat",
+        "source": "com.example.messapp-main-61:/drawable/ic_edit.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/anim_slide_out_left.xml.flat",
+        "source": "com.example.messapp-main-61:/anim/slide_out_left.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/layout_activity_login.xml.flat",
+        "source": "com.example.messapp-main-61:/layout/activity_login.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/font_poppins_semibold.xml.flat",
+        "source": "com.example.messapp-main-61:/font/poppins_semibold.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/menu_bottom_nav_menu_mess.xml.flat",
+        "source": "com.example.messapp-main-61:/menu/bottom_nav_menu_mess.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/layout_item_transaction.xml.flat",
+        "source": "com.example.messapp-main-61:/layout/item_transaction.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/layout_fragment_add_offer.xml.flat",
+        "source": "com.example.messapp-main-61:/layout/fragment_add_offer.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/anim_slide_in_left.xml.flat",
+        "source": "com.example.messapp-main-61:/anim/slide_in_left.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.messapp-main-61:/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable_ic_email.xml.flat",
+        "source": "com.example.messapp-main-61:/drawable/ic_email.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/layout_fragment_mess_menu.xml.flat",
+        "source": "com.example.messapp-main-61:/layout/fragment_mess_menu.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/layout_fragment_mess_detail.xml.flat",
+        "source": "com.example.messapp-main-61:/layout/fragment_mess_detail.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/layout_fragment_mess_students.xml.flat",
+        "source": "com.example.messapp-main-61:/layout/fragment_mess_students.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable_ic_lock.xml.flat",
+        "source": "com.example.messapp-main-61:/drawable/ic_lock.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/menu_mess_bottom_nav.xml.flat",
+        "source": "com.example.messapp-main-61:/menu/mess_bottom_nav.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/layout_dialog_freeze_delete.xml.flat",
+        "source": "com.example.messapp-main-61:/layout/dialog_freeze_delete.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/layout_dialog_add_review.xml.flat",
+        "source": "com.example.messapp-main-61:/layout/dialog_add_review.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.messapp-main-61:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/anim_slide_in_right.xml.flat",
+        "source": "com.example.messapp-main-61:/anim/slide_in_right.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable__c3d318d7_6015_4c92_9b56_8d2c50388d41_.png.flat",
+        "source": "com.example.messapp-main-61:/drawable/_c3d318d7_6015_4c92_9b56_8d2c50388d41_.png"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/layout_activity_mess_reviews.xml.flat",
+        "source": "com.example.messapp-main-61:/layout/activity_mess_reviews.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable_ic_person.xml.flat",
+        "source": "com.example.messapp-main-61:/drawable/ic_person.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/layout_activity_edit_mess_profile.xml.flat",
+        "source": "com.example.messapp-main-61:/layout/activity_edit_mess_profile.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable_ic_add_black_24dp.xml.flat",
+        "source": "com.example.messapp-main-61:/drawable/ic_add_black_24dp.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/layout_item_student_request.xml.flat",
+        "source": "com.example.messapp-main-61:/layout/item_student_request.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/layout_fragment_mess_dashboard.xml.flat",
+        "source": "com.example.messapp-main-61:/layout/fragment_mess_dashboard.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable_status_background_out.xml.flat",
+        "source": "com.example.messapp-main-61:/drawable/status_background_out.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable_ic_arrow_right.xml.flat",
+        "source": "com.example.messapp-main-61:/drawable/ic_arrow_right.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable_bg_rounded_top_sheet.xml.flat",
+        "source": "com.example.messapp-main-61:/drawable/bg_rounded_top_sheet.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/layout_activity_mess_dashboard.xml.flat",
+        "source": "com.example.messapp-main-61:/layout/activity_mess_dashboard.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable_bg_rounded_secondary.xml.flat",
+        "source": "com.example.messapp-main-61:/drawable/bg_rounded_secondary.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable_bg_gradient_primary.xml.flat",
+        "source": "com.example.messapp-main-61:/drawable/bg_gradient_primary.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable_bg_rounded_primary.xml.flat",
+        "source": "com.example.messapp-main-61:/drawable/bg_rounded_primary.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/layout_fragment_user_profile.xml.flat",
+        "source": "com.example.messapp-main-61:/layout/fragment_user_profile.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/menu_menu_mess_top_bar.xml.flat",
+        "source": "com.example.messapp-main-61:/menu/menu_mess_top_bar.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/layout_activity_splash_screen.xml.flat",
+        "source": "com.example.messapp-main-61:/layout/activity_splash_screen.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.example.messapp-main-61:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable_circle_border_white.xml.flat",
+        "source": "com.example.messapp-main-61:/drawable/circle_border_white.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/layout_fragment_mess_revenue.xml.flat",
+        "source": "com.example.messapp-main-61:/layout/fragment_mess_revenue.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "com.example.messapp-main-61:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/layout_item_student.xml.flat",
+        "source": "com.example.messapp-main-61:/layout/item_student.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable_ic_notifications_black_24dp.xml.flat",
+        "source": "com.example.messapp-main-61:/drawable/ic_notifications_black_24dp.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable_ic_menu_book_black_24dp.xml.flat",
+        "source": "com.example.messapp-main-61:/drawable/ic_menu_book_black_24dp.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/menu_user_bottom_nav.xml.flat",
+        "source": "com.example.messapp-main-61:/menu/user_bottom_nav.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable_status_background_none.xml.flat",
+        "source": "com.example.messapp-main-61:/drawable/status_background_none.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/layout_fragment_mess_profile.xml.flat",
+        "source": "com.example.messapp-main-61:/layout/fragment_mess_profile.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable_ic_home_black_24dp.xml.flat",
+        "source": "com.example.messapp-main-61:/drawable/ic_home_black_24dp.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable_bg_gradient.xml.flat",
+        "source": "com.example.messapp-main-61:/drawable/bg_gradient.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.messapp-main-61:/mipmap-xxxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/layout_fragment_user_history.xml.flat",
+        "source": "com.example.messapp-main-61:/layout/fragment_user_history.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/layout_dialog_grant_subscription.xml.flat",
+        "source": "com.example.messapp-main-61:/layout/dialog_grant_subscription.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable_ic_restaurant.xml.flat",
+        "source": "com.example.messapp-main-61:/drawable/ic_restaurant.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable_bg_input_field.xml.flat",
+        "source": "com.example.messapp-main-61:/drawable/bg_input_field.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/layout_activity_my_reviews.xml.flat",
+        "source": "com.example.messapp-main-61:/layout/activity_my_reviews.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.messapp-main-61:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/layout_item_mess_card.xml.flat",
+        "source": "com.example.messapp-main-61:/layout/item_mess_card.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable_ic_camera_alt.xml.flat",
+        "source": "com.example.messapp-main-61:/drawable/ic_camera_alt.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/layout_fragment_user_home.xml.flat",
+        "source": "com.example.messapp-main-61:/layout/fragment_user_home.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable_bg_rounded_white.xml.flat",
+        "source": "com.example.messapp-main-61:/drawable/bg_rounded_white.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable_bg_rounded_input.xml.flat",
+        "source": "com.example.messapp-main-61:/drawable/bg_rounded_input.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/layout_item_history.xml.flat",
+        "source": "com.example.messapp-main-61:/layout/item_history.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/layout_dialog_manage_subscription.xml.flat",
+        "source": "com.example.messapp-main-61:/layout/dialog_manage_subscription.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable_ic_settings_black_24dp.xml.flat",
+        "source": "com.example.messapp-main-61:/drawable/ic_settings_black_24dp.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable_ic_dashboard_black_24dp.xml.flat",
+        "source": "com.example.messapp-main-61:/drawable/ic_dashboard_black_24dp.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable_bg_button_gradient.xml.flat",
+        "source": "com.example.messapp-main-61:/drawable/bg_button_gradient.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/menu_bottom_nav_menu.xml.flat",
+        "source": "com.example.messapp-main-61:/menu/bottom_nav_menu.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable_ic_group.xml.flat",
+        "source": "com.example.messapp-main-61:/drawable/ic_group.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/font_poppins_regular.xml.flat",
+        "source": "com.example.messapp-main-61:/font/poppins_regular.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.example.messapp-main-61:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "com.example.messapp-main-61:/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable_ic_business.xml.flat",
+        "source": "com.example.messapp-main-61:/drawable/ic_business.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/layout_fragment_mess_requests.xml.flat",
+        "source": "com.example.messapp-main-61:/layout/fragment_mess_requests.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable_ic_person_black_24dp.xml.flat",
+        "source": "com.example.messapp-main-61:/drawable/ic_person_black_24dp.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.messapp-main-61:/mipmap-xhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.messapp-main-61:/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable_ic_people_black_24dp.xml.flat",
+        "source": "com.example.messapp-main-61:/drawable/ic_people_black_24dp.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/anim_slide_out_right.xml.flat",
+        "source": "com.example.messapp-main-61:/anim/slide_out_right.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/drawable_ic_google.xml.flat",
+        "source": "com.example.messapp-main-61:/drawable/ic_google.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/xml_data_extraction_rules.xml.flat",
+        "source": "com.example.messapp-main-61:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "com.example.messapp-release-60:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "com.example.messapp-main-61:/mipmap-hdpi/ic_launcher.webp"
+    }
+]

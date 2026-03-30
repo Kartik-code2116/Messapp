@@ -1,0 +1,81 @@
+<navigation
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/mess_navigation"
+app:startDestination="@id/navigation_mess_dashboard" >
+<fragment
+    android:id="@+id/navigation_mess_dashboard"
+    android:name="com.example.messapp.ui.mess.dashboard.MessDashboardFragment"
+    android:label="Dashboard"
+    tools:layout="@layout/fragment_mess_dashboard" />
+<fragment
+    android:id="@+id/navigation_mess_menu"
+    android:name="com.example.messapp.ui.mess.menu.MessMenuFragment"
+    android:label="Menu"
+    tools:layout="@layout/fragment_mess_menu" />
+<fragment
+    android:id="@+id/navigation_mess_students"
+    android:name="com.example.messapp.ui.mess.students.MessStudentsFragment"
+    android:label="Students"
+    tools:layout="@layout/fragment_mess_students" />
+<fragment
+    android:id="@+id/navigation_mess_profile"
+    android:name="com.example.messapp.ui.mess.profile.MessProfileFragment"
+    android:label="Profile"
+    tools:layout="@layout/fragment_mess_profile" >
+
+    <action
+        android:id="@+id/action_messProfileFragment_to_messOffersFragment"
+        app:destination="@id/navigation_mess_offers"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+    <action
+        android:id="@+id/action_messProfileFragment_to_messRevenueFragment"
+        app:destination="@id/navigation_mess_revenue"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+    <action
+        android:id="@+id/action_messProfileFragment_to_navigation_mess_students"
+        app:destination="@id/navigation_mess_students"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+
+</fragment>
+<fragment
+    android:id="@+id/navigation_mess_revenue"
+    android:name="com.example.messapp.ui.mess.revenue.MessRevenueFragment"
+    android:label="Revenue"
+    tools:layout="@layout/fragment_mess_revenue" />
+<fragment
+    android:id="@+id/navigation_mess_offers"
+    android:name="com.example.messapp.ui.mess.offers.MessOffersFragment"
+    android:label="Offers"
+    tools:layout="@layout/fragment_mess_offers" >
+
+    <action
+        android:id="@+id/action_messOffersFragment_to_addOfferFragment"
+        app:destination="@id/addOfferFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+
+</fragment>
+<fragment
+    android:id="@+id/addOfferFragment"
+    android:name="com.example.messapp.ui.mess.offers.AddOfferFragment"
+    android:label="Add Offer"
+    tools:layout="@layout/fragment_add_offer" />
+<fragment
+    android:id="@+id/navigation_mess_requests"
+    android:name="com.example.messapp.ui.mess.requests.MessRequestsFragment"
+    android:label="Requests"
+    tools:layout="@layout/fragment_mess_requests" />
+</navigation>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- PROFOUND DESIGN SYSTEM PALETTE -->
+    
+    <!-- BRAND: Indigo & Slate -->
+    <color name="brand_primary">#6366F1</color>      <!-- Indigo 500 -->
+    <color name="brand_primary_dark">#4F46E5</color> <!-- Indigo 600 -->
+    <color name="brand_primary_light">#818CF8</color><!-- Indigo 400 -->
+    <color name="brand_secondary">#0F172A</color>    <!-- Slate 900 -->
+    <color name="brand_accent">#F43F5E</color>       <!-- Rose 500 -->
+
+    <!-- NEUTRALS: Slate Scale -->
+    <color name="neutral_50">#F8FAFC</color>
+    <color name="neutral_100">#F1F5F9</color>
+    <color name="neutral_200">#E2E8F0</color>
+    <color name="neutral_300">#CBD5E1</color>
+    <color name="neutral_400">#94A3B8</color>
+    <color name="neutral_500">#64748B</color>
+    <color name="neutral_600">#475569</color>
+    <color name="neutral_700">#334155</color>
+    <color name="neutral_800">#1E293B</color>
+    <color name="neutral_900">#0F172A</color>
+
+    <color name="grey_700">#616161</color>
+
+    <!-- SEMANTIC: Surface & Background -->
+    <color name="background_page">#F8FAFC</color>   <!-- Slate 50 (Light Mode Bg) -->
+    <color name="surface_card">#FFFFFF</color>
+    <color name="surface_glass">#CCFFFFFF</color>   <!-- 80% White -->
+    <color name="surface_modal">#FFFFFF</color>
+    
+    <!-- SEMANTIC: Text -->
+    <color name="text_heading">#0F172A</color>      <!-- Slate 900 -->
+    <color name="text_body">#334155</color>         <!-- Slate 700 -->
+    <color name="text_caption">#64748B</color>      <!-- Slate 500 -->
+    <color name="text_on_brand">#FFFFFF</color>
+    <color name="text_on_primary_muted">#B3FFFFFF</color> <!-- 70% White -->
+    <color name="text_disabled">#94A3B8</color>
+
+    <!-- SEMANTIC: State -->
+    <color name="state_success">#10B981</color>     <!-- Emerald 500 -->
+    <color name="state_error">#EF4444</color>       <!-- Red 500 -->
+    <color name="state_warning">#F59E0B</color>     <!-- Amber 500 -->
+    <color name="state_info">#3B82F6</color>        <!-- Blue 500 -->
+    
+    <!-- Aliases for Compatibility -->
+    <color name="semantic_success">@color/state_success</color>
+    <color name="semantic_error">@color/state_error</color>
+    <color name="semantic_warning">@color/state_warning</color>
+    <color name="text_sub">@color/text_caption</color>
+
+    <color name="semantic_success_bg">#ECFDF5</color> <!-- Emerald 50 -->
+    <color name="semantic_error_bg">#FEF2F2</color>   <!-- Red 50 -->
+    <color name="brand_secondary_light">@color/neutral_100</color>
+    
+    <!-- Legacy Role Selection Colors -->
+    <color name="text_primary">@color/text_heading</color>
+    <color name="text_secondary">@color/text_body</color>
+    <color name="blue_accent">@color/state_info</color>
+
+    <!-- LEGACY MAPPINGS (for backward compatibility) -->
+    <color name="colorPrimary">@color/brand_primary</color>
+    <color name="colorPrimaryDark">@color/brand_primary_dark</color>
+    <color name="colorAccent">@color/brand_accent</color>
+    
+    <color name="primary_color">@color/brand_primary</color>
+    <color name="primary_dark">@color/brand_primary_dark</color>
+    <color name="primary_light">@color/brand_primary_light</color>
+    <color name="secondary">@color/brand_accent</color>
+    <color name="secondary_dark">@color/brand_secondary</color>
+    <color name="secondary_light">@color/neutral_200</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="background">@color/background_page</color>
+    <color name="background_light">@color/neutral_50</color>
+    <color name="surface">@color/surface_card</color>
+    <color name="divider">@color/neutral_200</color>
+
+    <!-- Gradient Tokens -->
+    <color name="gradient_start">#6366F1</color>
+    <color name="gradient_end">#8B5CF6</color>
+    <color name="gradient_overlay">#990F172A</color>
+
+    <!-- Specific UI Colors Remapped -->
+    <color name="login_red_btn">@color/state_error</color>
+    <color name="login_facebook_btn">#1877F2</color>
+
+    <!-- Admin & Dashboard Remapped to New System -->
+    <color name="admin_primary">@color/brand_primary</color>
+    <color name="admin_background">@color/background_page</color>
+    <color name="admin_surface">@color/surface_card</color>
+    <color name="dash_primary">@color/state_success</color>
+    <color name="dash_text_primary">@color/text_heading</color>
+
+    <color name="ios_primary">@color/state_info</color>
+    <color name="ios_background">@color/background_page</color>
+    <color name="ios_surface">@color/surface_card</color>
+
+    <!-- Missing Resources Fixed -->
+    <color name="accent_primary">@color/brand_primary</color>
+    <color name="accent_secondary">@color/brand_accent</color>
+    <color name="page_background">@color/background_page</color>
+    <color name="text_main">@color/text_heading</color>
+    <color name="card_surface">@color/surface_card</color>
+    
+    <color name="grey_400">#BDBDBD</color>
+    <color name="green_500">#4CAF50</color>
+
+    <!-- Batch 2 Missing Resources -->
+    <color name="admin_divider">@color/neutral_200</color>
+    <color name="admin_card_bg">@color/surface_card</color>
+    <color name="admin_accent_orange_faded">#33F59E0B</color> <!-- 20% Alpha Amber -->
+    <color name="admin_primary_faded">#336366F1</color>       <!-- 20% Alpha Indigo -->
+    
+    <color name="success">@color/state_success</color>
+    <color name="dash_primary_10">#1A10B981</color>           <!-- 10% Alpha Emerald -->
+    <color name="dash_primary_20">#3310B981</color>           <!-- 20% Alpha Emerald -->
+    
+    <color name="ios_danger">@color/state_error</color>
+    <color name="ios_success">@color/state_success</color>
+    
+    <color name="primary_variant">@color/brand_primary_dark</color>
+    
+    <color name="status_in">@color/state_success</color>
+    <color name="status_none">@color/neutral_400</color>
+    <color name="status_out">@color/state_error</color>
+    
+    <color name="gray_300">@color/neutral_300</color>
+    <color name="dash_background_light">@color/background_page</color>
+    <color name="dash_text_green">@color/state_success</color>
+
+    <!-- Batch 3 Missing Resources -->
+    <color name="border_color">@color/neutral_200</color>
+    <color name="text_placeholder">@color/neutral_400</color>
+    
+    <color name="ios_grey_400">@color/neutral_400</color>
+    
+    <color name="ios_primary_light">#3338BDF8</color>        <!-- 20% Alpha Sky Blue (ios_primary) -->
+    <color name="ios_success_light">@color/semantic_success_bg</color>
+    <color name="ios_danger_light">@color/semantic_error_bg</color>
+
+</resources>
