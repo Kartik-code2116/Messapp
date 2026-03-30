@@ -349,24 +349,30 @@ public class LoginActivity extends AppCompatActivity {
         userData.put("email", user.getEmail());
         userData.put("role", role);
 
+        final String[] messIdHolder = new String[1];
         if ("MESS_OWNER".equals(role)) {
             // Generate a unique Mess ID for the new owner
-            String messId = "MESS" + UUID.randomUUID().toString().substring(0, 6).toUpperCase();
-            userData.put("messId", messId);
+            messIdHolder[0] = "MESS" + UUID.randomUUID().toString().substring(0, 6).toUpperCase();
+            userData.put("messId", messIdHolder[0]);
             userData.put("messName", extraData);
         } else {
             // User is joining an existing mess
             userData.put("messId", extraData);
         }
 
+        // First save user document
         db.collection("users").document(user.getUid())
                 .set(userData)
                 .addOnSuccessListener(aVoid -> {
-                    // If owner, we already started the 'messes' write. We'll assume success or
-                    // handle it there.
-                    binding.progressBar.setVisibility(View.GONE);
-                    Toast.makeText(LoginActivity.this, "Signup Successful", Toast.LENGTH_SHORT).show();
-                    navigateToDashboard(role);
+                    // If owner, create mess document after user doc succeeds
+                    if ("MESS_OWNER".equals(role) && messIdHolder[0] != null) {
+                        createMessDocument(user.getUid(), messIdHolder[0], extraData, role);
+                    } else {
+                        // Not an owner, proceed to dashboard
+                        binding.progressBar.setVisibility(View.GONE);
+                        Toast.makeText(LoginActivity.this, "Signup Successful", Toast.LENGTH_SHORT).show();
+                        navigateToDashboard(role);
+                    }
                 })
                 .addOnFailureListener(e -> {
                     binding.progressBar.setVisibility(View.GONE);
@@ -374,22 +380,29 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Error saving user data: " + e.getMessage(), Toast.LENGTH_LONG)
                             .show();
                 });
+    }
 
-        if ("MESS_OWNER".equals(role)) {
-            // Re-fetch messId and messData for the messes collection write failure listener
-            String messId = (String) userData.get("messId");
-            Map<String, Object> messData = new HashMap<>();
-            messData.put("ownerId", user.getUid());
-            messData.put("name", extraData);
-            messData.put("studentCount", 0);
+    private void createMessDocument(String ownerId, String messId, String messName, String role) {
+        Map<String, Object> messData = new HashMap<>();
+        messData.put("ownerId", ownerId);
+        messData.put("name", messName);
+        messData.put("studentCount", 0);
+        messData.put("createdAt", new java.util.Date());
 
-            db.collection("messes").document(messId).set(messData)
-                    .addOnFailureListener(e -> {
-                        Log.e("Login", "Firestore mess save failed", e);
-                        Toast.makeText(LoginActivity.this, "Error creating mess doc: " + e.getMessage(),
-                                Toast.LENGTH_LONG).show();
-                    });
-        }
+        db.collection("messes").document(messId).set(messData)
+                .addOnSuccessListener(aVoid -> {
+                    binding.progressBar.setVisibility(View.GONE);
+                    Toast.makeText(LoginActivity.this, "Signup Successful", Toast.LENGTH_SHORT).show();
+                    navigateToDashboard(role);
+                })
+                .addOnFailureListener(e -> {
+                    binding.progressBar.setVisibility(View.GONE);
+                    Log.e("Login", "Firestore mess save failed", e);
+                    Toast.makeText(LoginActivity.this, "Error creating mess: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    // Still navigate to dashboard even if mess creation fails
+                    // The user can retry later or contact support
+                    navigateToDashboard(role);
+                });
     }
 
     private void fetchUserRole(FirebaseUser user) {
@@ -400,8 +413,13 @@ public class LoginActivity extends AppCompatActivity {
                         String role = documentSnapshot.getString("role");
                         navigateToDashboard(role); // In a real app, verify role matches intent
                     } else {
-                        Toast.makeText(LoginActivity.this, "User data error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "User data not found", Toast.LENGTH_SHORT).show();
                     }
+                })
+                .addOnFailureListener(e -> {
+                    binding.progressBar.setVisibility(View.GONE);
+                    Log.e("Login", "Error fetching user role", e);
+                    Toast.makeText(LoginActivity.this, "Error loading user data: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 });
     }
 
