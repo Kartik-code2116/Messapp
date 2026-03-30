@@ -59,14 +59,15 @@ public class MessDashboardActivity extends AppCompatActivity {
 
     private void showGuestBanner() {
         Snackbar.make(binding.getRoot(),
-            "Guest Mode: Sign up to access all features",
-            Snackbar.LENGTH_INDEFINITE)
+            "Guest Mode - Sign up for full access",
+            Snackbar.LENGTH_LONG)
             .setAction("SIGN UP", v -> {
                 Intent intent = new Intent(this, RoleSelectionActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 finish();
             })
+            .setActionTextColor(getResources().getColor(android.R.color.holo_blue_light, getTheme()))
             .show();
     }
 
