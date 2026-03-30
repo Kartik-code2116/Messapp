@@ -114,19 +114,19 @@
     <item name="recycler_view_reviews" type="id"/>
     <string name="app_name">messapp</string>
     <string name="contact_label">Contact: %s</string>
-    <string name="default_web_client_id" translatable="false">355370937322-q0146f9culvl5d04d2k0eopcbal7sim0.apps.googleusercontent.com</string>
+    <string name="default_web_client_id" translatable="false">723848034358-qsovvavmkdp00fekeh5km8sovgerbl6p.apps.googleusercontent.com</string>
     <string name="description_label">Description: %s</string>
-    <string name="gcm_defaultSenderId" translatable="false">355370937322</string>
-    <string name="google_api_key" translatable="false">AIzaSyAAQ96SdaecXVZodNQGjng6J76gfLgYLOU</string>
-    <string name="google_app_id" translatable="false">1:355370937322:android:119f779d1eaed7b55ba093</string>
-    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAAQ96SdaecXVZodNQGjng6J76gfLgYLOU</string>
-    <string name="google_storage_bucket" translatable="false">messapp-5275d.firebasestorage.app</string>
+    <string name="gcm_defaultSenderId" translatable="false">723848034358</string>
+    <string name="google_api_key" translatable="false">AIzaSyCGoAgqNvdj-vekD5JYHAdhyMh3Lbw1O2g</string>
+    <string name="google_app_id" translatable="false">1:723848034358:android:c5ccd1883d47bc70ff4097</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCGoAgqNvdj-vekD5JYHAdhyMh3Lbw1O2g</string>
+    <string name="google_storage_bucket" translatable="false">messapp-30ca2.firebasestorage.app</string>
     <string name="location_label">Location: %s</string>
     <string name="mess_id_label">Mess ID: %s</string>
     <string name="offer_discount_format">Discount: %.0f%% OFF</string>
     <string name="offer_expiry_format">Expires: %s</string>
     <string name="offer_expiry_not_available">Expires: N/A</string>
-    <string name="project_id" translatable="false">messapp-5275d</string>
+    <string name="project_id" translatable="false">messapp-30ca2</string>
     <string name="splash_logo_content_description">App Logo</string>
     <string name="total_students_label">Total Students: %s</string>
     <style name="Base.Theme.Messapp" parent="Theme.Material3.DayNight.NoActionBar">

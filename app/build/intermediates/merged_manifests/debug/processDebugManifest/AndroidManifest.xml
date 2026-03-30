@@ -34,7 +34,6 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_restaurant"
         android:supportsRtl="true"
-        android:testOnly="true"
         android:theme="@style/Theme.Messapp" >
         <activity
             android:name="com.example.messapp.SplashActivity"

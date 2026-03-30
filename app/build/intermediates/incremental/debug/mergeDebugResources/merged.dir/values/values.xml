@@ -2652,7 +2652,7 @@
     <string name="contact_label">Contact: %s</string>
     <string name="copy_toast_msg">Link copied to clipboard</string>
     <string name="default_error_msg">Unknown error</string>
-    <string name="default_web_client_id" translatable="false">355370937322-q0146f9culvl5d04d2k0eopcbal7sim0.apps.googleusercontent.com</string>
+    <string name="default_web_client_id" translatable="false">723848034358-qsovvavmkdp00fekeh5km8sovgerbl6p.apps.googleusercontent.com</string>
     <string name="description_label">Description: %s</string>
     <string name="dest_title">destination title</string>
     <string description="Screen reader announcement for when a checkbox is on error. [CHAR LIMIT=NONE]" name="error_a11y_label">
@@ -2673,14 +2673,14 @@
     <string name="fingerprint_error_no_fingerprints">No fingerprints enrolled.</string>
     <string name="fingerprint_error_user_canceled">Fingerprint operation canceled by user.</string>
     <string name="fingerprint_not_recognized">Not recognized</string>
-    <string name="gcm_defaultSenderId" translatable="false">355370937322</string>
+    <string name="gcm_defaultSenderId" translatable="false">723848034358</string>
     <string name="generic_error_no_device_credential">No PIN, pattern, or password set.</string>
     <string name="generic_error_no_keyguard">This device does not support PIN, pattern, or password.</string>
     <string name="generic_error_user_canceled">Authentication canceled by user.</string>
-    <string name="google_api_key" translatable="false">AIzaSyAAQ96SdaecXVZodNQGjng6J76gfLgYLOU</string>
-    <string name="google_app_id" translatable="false">1:355370937322:android:119f779d1eaed7b55ba093</string>
-    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAAQ96SdaecXVZodNQGjng6J76gfLgYLOU</string>
-    <string name="google_storage_bucket" translatable="false">messapp-5275d.firebasestorage.app</string>
+    <string name="google_api_key" translatable="false">AIzaSyCGoAgqNvdj-vekD5JYHAdhyMh3Lbw1O2g</string>
+    <string name="google_app_id" translatable="false">1:723848034358:android:c5ccd1883d47bc70ff4097</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCGoAgqNvdj-vekD5JYHAdhyMh3Lbw1O2g</string>
+    <string name="google_storage_bucket" translatable="false">messapp-30ca2.firebasestorage.app</string>
     <string name="hide_bottom_view_on_scroll_behavior" translatable="false">com.google.android.material.behavior.HideBottomViewOnScrollBehavior</string>
     <string description="Content description for an icon that appears in the title area of a dialog" name="icon_content_description">Dialog Icon</string>
     <string name="item_view_role_description">Tab</string>
@@ -2815,7 +2815,7 @@
     <string name="path_password_eye_mask_strike_through" translatable="false">M2,4.27 L19.73,22 L22.27,19.46 L4.54,1.73 L4.54,1 L23,1 L23,23 L1,23 L1,4.27 Z</string>
     <string name="path_password_eye_mask_visible" translatable="false">M2,4.27 L2,4.27 L4.54,1.73 L4.54,1.73 L4.54,1 L23,1 L23,23 L1,23 L1,4.27 Z</string>
     <string name="path_password_strike_through" translatable="false">M3.27,4.27 L19.74,20.74</string>
-    <string name="project_id" translatable="false">messapp-5275d</string>
+    <string name="project_id" translatable="false">messapp-30ca2</string>
     <string name="search_menu_title">Search</string>
     <string name="searchbar_scrolling_view_behavior" translatable="false">
     com.google.android.material.search.SearchBar$ScrollingViewBehavior

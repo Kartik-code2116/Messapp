@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "355370937322",
-    "project_id": "messapp-5275d",
-    "storage_bucket": "messapp-5275d.firebasestorage.app"
+    "project_number": "723848034358",
+    "project_id": "messapp-30ca2",
+    "storage_bucket": "messapp-30ca2.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:355370937322:android:119f779d1eaed7b55ba093",
+        "mobilesdk_app_id": "1:723848034358:android:c5ccd1883d47bc70ff4097",
         "android_client_info": {
           "package_name": "com.example.messapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "355370937322-q0146f9culvl5d04d2k0eopcbal7sim0.apps.googleusercontent.com",
+          "client_id": "723848034358-qsovvavmkdp00fekeh5km8sovgerbl6p.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAAQ96SdaecXVZodNQGjng6J76gfLgYLOU"
+          "current_key": "AIzaSyCGoAgqNvdj-vekD5JYHAdhyMh3Lbw1O2g"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "355370937322-q0146f9culvl5d04d2k0eopcbal7sim0.apps.googleusercontent.com",
+              "client_id": "723848034358-qsovvavmkdp00fekeh5km8sovgerbl6p.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
