@@ -406,20 +406,28 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void fetchUserRole(FirebaseUser user) {
+        Log.d("Login", "Fetching user role for UID: " + user.getUid());
         db.collection("users").document(user.getUid()).get()
                 .addOnSuccessListener(documentSnapshot -> {
                     binding.progressBar.setVisibility(View.GONE);
                     if (documentSnapshot.exists()) {
                         String role = documentSnapshot.getString("role");
-                        navigateToDashboard(role); // In a real app, verify role matches intent
+                        Log.d("Login", "User role found: " + role);
+                        navigateToDashboard(role);
                     } else {
-                        Toast.makeText(LoginActivity.this, "User data not found", Toast.LENGTH_SHORT).show();
+                        Log.w("Login", "User document does not exist for UID: " + user.getUid());
+                        Toast.makeText(LoginActivity.this, "User data not found. Please sign up first.", Toast.LENGTH_LONG).show();
                     }
                 })
                 .addOnFailureListener(e -> {
                     binding.progressBar.setVisibility(View.GONE);
-                    Log.e("Login", "Error fetching user role", e);
-                    Toast.makeText(LoginActivity.this, "Error loading user data: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    Log.e("Login", "Firestore permission error for users/" + user.getUid(), e);
+                    String errorMsg = e.getMessage();
+                    if (errorMsg != null && errorMsg.contains("permission")) {
+                        Toast.makeText(LoginActivity.this, "Firebase permission denied. Please check Firestore rules.", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(LoginActivity.this, "Error: " + errorMsg, Toast.LENGTH_LONG).show();
+                    }
                 });
     }
 
