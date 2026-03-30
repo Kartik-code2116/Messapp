@@ -1,2 +1,0 @@
-# messapp
-mess for student
