@@ -56,12 +56,12 @@
 31        android:extractNativeLibs="false"
 32        android:fullBackupContent="@xml/backup_rules"
 32-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:11:9-54
-33        android:icon="@drawable/ic_restaurant"
-33-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:12:9-47
+33        android:icon="@mipmap/ic_launcher"
+33-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:12:9-43
 34        android:label="@string/app_name"
 34-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:13:9-41
-35        android:roundIcon="@drawable/ic_restaurant"
-35-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:14:9-52
+35        android:roundIcon="@mipmap/ic_launcher_round"
+35-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:14:9-54
 36        android:supportsRtl="true"
 36-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:15:9-35
 37        android:testOnly="true"
