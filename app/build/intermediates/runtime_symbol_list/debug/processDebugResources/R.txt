@@ -4118,7 +4118,10 @@ int id btn_my_reviews 0x7f0a00a3
 int id btn_nav_edit_profile 0x7f0a00a4
 int id btn_nav_offers 0x7f0a00a5
 int id btn_nav_revenue 0x7f0a00a6
+int id btn_nav_weekly_menu 0x7f0a0352
+int id btn_next_week 0x7f0a0353
 int id btn_notification 0x7f0a00a7
+int id btn_prev_week 0x7f0a0354
 int id btn_refresh 0x7f0a00a8
 int id btn_renew_subscription 0x7f0a00a9
 int id btn_reset_all_attendance 0x7f0a00aa
@@ -4128,6 +4131,7 @@ int id btn_save_lunch 0x7f0a00ad
 int id btn_save_offer 0x7f0a00ae
 int id btn_save_profile 0x7f0a00af
 int id btn_save_settings 0x7f0a00b0
+int id btn_save_weekly_menu 0x7f0a0355
 int id btn_select_date 0x7f0a00b1
 int id btn_select_expiry_date 0x7f0a00b2
 int id btn_submit_review 0x7f0a00b3
@@ -4195,6 +4199,7 @@ int id date_picker_actions 0x7f0a00f0
 int id day_selector_container 0x7f0a00f1
 int id day_selector_expandable_container 0x7f0a034e
 int id day_selector_header 0x7f0a034f
+int id days_container 0x7f0a0356
 int id decelerate 0x7f0a00f2
 int id decelerateAndComplete 0x7f0a00f3
 int id decor_content_parent 0x7f0a00f4
@@ -4250,9 +4255,23 @@ int id et_amount 0x7f0a0125
 int id et_comment 0x7f0a0126
 int id et_days 0x7f0a0127
 int id et_freeze_days 0x7f0a0128
+int id et_friday_dinner 0x7f0a0357
+int id et_friday_lunch 0x7f0a0358
+int id et_monday_dinner 0x7f0a0359
+int id et_monday_lunch 0x7f0a035a
 int id et_name 0x7f0a0129
 int id et_phone 0x7f0a012a
+int id et_saturday_dinner 0x7f0a035b
+int id et_saturday_lunch 0x7f0a035c
 int id et_search 0x7f0a012b
+int id et_sunday_dinner 0x7f0a035d
+int id et_sunday_lunch 0x7f0a035e
+int id et_thursday_dinner 0x7f0a035f
+int id et_thursday_lunch 0x7f0a0360
+int id et_tuesday_dinner 0x7f0a0361
+int id et_tuesday_lunch 0x7f0a0362
+int id et_wednesday_dinner 0x7f0a0363
+int id et_wednesday_lunch 0x7f0a0364
 int id exitUntilCollapsed 0x7f0a012c
 int id expand_activities_button 0x7f0a012d
 int id expanded_menu 0x7f0a012e
@@ -4745,6 +4764,7 @@ int id text_trans_student_email 0x7f0a0312
 int id text_trans_student_name 0x7f0a0313
 int id text_trans_type_badge 0x7f0a0314
 int id text_transaction_count 0x7f0a0315
+int id text_week_range 0x7f0a0365
 int id textinput_counter 0x7f0a0316
 int id textinput_error 0x7f0a0317
 int id textinput_helper_text 0x7f0a0318
@@ -4931,6 +4951,7 @@ int layout activity_my_reviews 0x7f0d0023
 int layout activity_role_selection 0x7f0d0024
 int layout activity_splash_screen 0x7f0d0025
 int layout activity_user_dashboard 0x7f0d0026
+int layout activity_weekly_menu 0x7f0d0093
 int layout browser_actions_context_menu_page 0x7f0d0027
 int layout browser_actions_context_menu_row 0x7f0d0028
 int layout custom_dialog 0x7f0d0029

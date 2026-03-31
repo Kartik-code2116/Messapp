@@ -254,7 +254,10 @@ id btn_my_reviews
 id btn_nav_edit_profile
 id btn_nav_offers
 id btn_nav_revenue
+id btn_nav_weekly_menu
+id btn_next_week
 id btn_notification
+id btn_prev_week
 id btn_refresh
 id btn_renew_subscription
 id btn_reset_all_attendance
@@ -264,6 +267,7 @@ id btn_save_lunch
 id btn_save_offer
 id btn_save_profile
 id btn_save_settings
+id btn_save_weekly_menu
 id btn_select_date
 id btn_select_expiry_date
 id btn_submit_review
@@ -291,6 +295,7 @@ id container_mess_id
 id day_selector_container
 id day_selector_expandable_container
 id day_selector_header
+id days_container
 id dinner_edit_text
 id dinner_hour_picker
 id dinner_input_layout
@@ -303,9 +308,23 @@ id et_amount
 id et_comment
 id et_days
 id et_freeze_days
+id et_friday_dinner
+id et_friday_lunch
+id et_monday_dinner
+id et_monday_lunch
 id et_name
 id et_phone
+id et_saturday_dinner
+id et_saturday_lunch
 id et_search
+id et_sunday_dinner
+id et_sunday_lunch
+id et_thursday_dinner
+id et_thursday_lunch
+id et_tuesday_dinner
+id et_tuesday_lunch
+id et_wednesday_dinner
+id et_wednesday_lunch
 id fab_add_offer
 id fab_add_review
 id fab_day_selector
@@ -501,6 +520,7 @@ id text_trans_student_email
 id text_trans_student_name
 id text_trans_type_badge
 id text_transaction_count
+id text_week_range
 id timer_container
 id toolbar
 id top_header
@@ -515,6 +535,7 @@ layout activity_my_reviews
 layout activity_role_selection
 layout activity_splash_screen
 layout activity_user_dashboard
+layout activity_weekly_menu
 layout dialog_add_review
 layout dialog_freeze_delete
 layout dialog_grant_subscription

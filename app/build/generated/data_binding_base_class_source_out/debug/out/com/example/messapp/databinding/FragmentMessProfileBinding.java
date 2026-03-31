@@ -47,6 +47,9 @@ public final class FragmentMessProfileBinding implements ViewBinding {
   public final LinearLayout btnNavRevenue;
 
   @NonNull
+  public final LinearLayout btnNavWeeklyMenu;
+
+  @NonNull
   public final MaterialButton btnViewStudents;
 
   @NonNull
@@ -89,13 +92,13 @@ public final class FragmentMessProfileBinding implements ViewBinding {
       @NonNull FloatingActionButton btnEditProfileImage, @NonNull ImageView btnLogoutTop,
       @NonNull MaterialButton btnMessLogout, @NonNull LinearLayout btnNavEditProfile,
       @NonNull LinearLayout btnNavOffers, @NonNull LinearLayout btnNavRevenue,
-      @NonNull MaterialButton btnViewStudents, @NonNull LinearLayout containerMessId,
-      @NonNull TextView labelActiveStudents, @NonNull TextView labelMessDetails,
-      @NonNull ShapeableImageView messProfileImage, @NonNull MaterialSwitch switchDarkMode,
-      @NonNull TextView textActiveStudentsCount, @NonNull TextView textMessProfileContact,
-      @NonNull TextView textMessProfileDescription, @NonNull TextView textMessProfileId,
-      @NonNull TextView textMessProfileLocation, @NonNull TextView textMessProfileName,
-      @NonNull TextView textOwnerEmail) {
+      @NonNull LinearLayout btnNavWeeklyMenu, @NonNull MaterialButton btnViewStudents,
+      @NonNull LinearLayout containerMessId, @NonNull TextView labelActiveStudents,
+      @NonNull TextView labelMessDetails, @NonNull ShapeableImageView messProfileImage,
+      @NonNull MaterialSwitch switchDarkMode, @NonNull TextView textActiveStudentsCount,
+      @NonNull TextView textMessProfileContact, @NonNull TextView textMessProfileDescription,
+      @NonNull TextView textMessProfileId, @NonNull TextView textMessProfileLocation,
+      @NonNull TextView textMessProfileName, @NonNull TextView textOwnerEmail) {
     this.rootView = rootView;
     this.btnCopyMessId = btnCopyMessId;
     this.btnEditProfileImage = btnEditProfileImage;
@@ -104,6 +107,7 @@ public final class FragmentMessProfileBinding implements ViewBinding {
     this.btnNavEditProfile = btnNavEditProfile;
     this.btnNavOffers = btnNavOffers;
     this.btnNavRevenue = btnNavRevenue;
+    this.btnNavWeeklyMenu = btnNavWeeklyMenu;
     this.btnViewStudents = btnViewStudents;
     this.containerMessId = containerMessId;
     this.labelActiveStudents = labelActiveStudents;
@@ -188,6 +192,12 @@ public final class FragmentMessProfileBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.btn_nav_weekly_menu;
+      LinearLayout btnNavWeeklyMenu = ViewBindings.findChildViewById(rootView, id);
+      if (btnNavWeeklyMenu == null) {
+        break missingId;
+      }
+
       id = R.id.btn_view_students;
       MaterialButton btnViewStudents = ViewBindings.findChildViewById(rootView, id);
       if (btnViewStudents == null) {
@@ -268,10 +278,10 @@ public final class FragmentMessProfileBinding implements ViewBinding {
 
       return new FragmentMessProfileBinding((ScrollView) rootView, btnCopyMessId,
           btnEditProfileImage, btnLogoutTop, btnMessLogout, btnNavEditProfile, btnNavOffers,
-          btnNavRevenue, btnViewStudents, containerMessId, labelActiveStudents, labelMessDetails,
-          messProfileImage, switchDarkMode, textActiveStudentsCount, textMessProfileContact,
-          textMessProfileDescription, textMessProfileId, textMessProfileLocation,
-          textMessProfileName, textOwnerEmail);
+          btnNavRevenue, btnNavWeeklyMenu, btnViewStudents, containerMessId, labelActiveStudents,
+          labelMessDetails, messProfileImage, switchDarkMode, textActiveStudentsCount,
+          textMessProfileContact, textMessProfileDescription, textMessProfileId,
+          textMessProfileLocation, textMessProfileName, textOwnerEmail);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

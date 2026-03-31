@@ -22,6 +22,7 @@ import com.example.messapp.R;
 import com.example.messapp.databinding.FragmentMessProfileBinding;
 import com.example.messapp.models.Mess;
 import com.example.messapp.ui.mess.settings.MessSettingsActivity;
+import com.example.messapp.ui.mess.weeklymenu.WeeklyMenuActivity;
 import com.example.messapp.utils.ThemeManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -50,6 +51,7 @@ public class MessProfileFragment extends Fragment {
         binding.btnEditProfileImage.setOnClickListener(v -> handleEditProfile());
         binding.btnNavOffers.setOnClickListener(v -> handleOffers());
         binding.btnNavRevenue.setOnClickListener(v -> handleRevenue());
+        binding.btnNavWeeklyMenu.setOnClickListener(v -> handleWeeklyMenu());
         binding.btnMessLogout.setOnClickListener(v -> handleLogout());
 
         binding.btnViewStudents.setOnClickListener(v -> handleViewStudents());
@@ -192,6 +194,11 @@ public class MessProfileFragment extends Fragment {
 
     private void handleViewStudents() {
         NavHostFragment.findNavController(this).navigate(R.id.action_messProfileFragment_to_navigation_mess_students);
+    }
+
+    private void handleWeeklyMenu() {
+        Intent intent = new Intent(requireActivity(), WeeklyMenuActivity.class);
+        startActivity(intent);
     }
 
     private void handleSettings() {

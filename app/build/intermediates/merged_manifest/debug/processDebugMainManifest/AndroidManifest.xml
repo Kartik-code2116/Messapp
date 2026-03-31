@@ -68,6 +68,9 @@
             android:name="com.example.messapp.ui.mess.settings.MessSettingsActivity"
             android:exported="false" />
         <activity
+            android:name="com.example.messapp.ui.mess.weeklymenu.WeeklyMenuActivity"
+            android:exported="false" />
+        <activity
             android:name="com.example.messapp.MessReviewsActivity"
             android:exported="false" />
 

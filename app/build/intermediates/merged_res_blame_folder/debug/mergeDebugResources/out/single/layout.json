@@ -48,12 +48,16 @@
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-62:\\layout\\fragment_mess_profile.xml"
     },
     {
-        "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-mergeDebugResources-59:\\layout\\item_history.xml",
-        "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-62:\\layout\\item_history.xml"
+        "merged": "com.example.messapp-mergeDebugResources-59:/layout/activity_weekly_menu.xml",
+        "source": "com.example.messapp-main-62:/layout/activity_weekly_menu.xml"
     },
     {
-        "merged": "com.example.messapp-mergeDebugResources-59:/layout/fragment_user_menu.xml",
-        "source": "com.example.messapp-main-62:/layout/fragment_user_menu.xml"
+        "merged": "com.example.messapp-mergeDebugResources-59:/layout/fragment_mess_profile.xml",
+        "source": "com.example.messapp-main-62:/layout/fragment_mess_profile.xml"
+    },
+    {
+        "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-mergeDebugResources-59:\\layout\\item_history.xml",
+        "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-62:\\layout\\item_history.xml"
     },
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-mergeDebugResources-59:\\layout\\activity_my_reviews.xml",
