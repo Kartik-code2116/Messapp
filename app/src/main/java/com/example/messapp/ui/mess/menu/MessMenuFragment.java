@@ -55,6 +55,10 @@ public class MessMenuFragment extends Fragment {
     }
 
     private void fetchMessIdAndSetup() {
+        if (mAuth.getCurrentUser() == null) {
+            Toast.makeText(getContext(), "Sign in to manage menu", Toast.LENGTH_SHORT).show();
+            return;
+        }
         String userId = mAuth.getCurrentUser().getUid();
         db.collection("users").document(userId).get()
                 .addOnSuccessListener(documentSnapshot -> {

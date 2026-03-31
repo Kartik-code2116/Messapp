@@ -54,6 +54,10 @@ public class MessOffersFragment extends Fragment {
     }
 
     private void fetchMessIdAndLoadOffers() {
+        if (mAuth.getCurrentUser() == null) {
+            Toast.makeText(getContext(), "Sign in to view offers", Toast.LENGTH_SHORT).show();
+            return;
+        }
         String userId = mAuth.getCurrentUser().getUid();
         db.collection("users").document(userId).get()
                 .addOnSuccessListener(documentSnapshot -> {

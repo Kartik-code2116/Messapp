@@ -526,6 +526,10 @@ public class MessStudentsFragment extends Fragment {
     // Keeping for safety if used elsewhere, but setupRecyclerView uses the new one.
 
     private void fetchMessOwnerData() {
+        if (mAuth.getCurrentUser() == null) {
+            Toast.makeText(getContext(), "Sign in to view students", Toast.LENGTH_SHORT).show();
+            return;
+        }
         String userId = mAuth.getCurrentUser().getUid();
         // Since we don't know the collection name for mess owners, we'll check the
         // 'users' collection with role ADMIN or OWNER if it exists.
