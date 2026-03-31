@@ -52,16 +52,12 @@
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-62:\\layout\\item_history.xml"
     },
     {
+        "merged": "com.example.messapp-mergeDebugResources-59:/layout/fragment_user_menu.xml",
+        "source": "com.example.messapp-main-62:/layout/fragment_user_menu.xml"
+    },
+    {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-mergeDebugResources-59:\\layout\\activity_my_reviews.xml",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-62:\\layout\\activity_my_reviews.xml"
-    },
-    {
-        "merged": "com.example.messapp-mergeDebugResources-59:/layout/activity_splash_screen.xml",
-        "source": "com.example.messapp-main-62:/layout/activity_splash_screen.xml"
-    },
-    {
-        "merged": "com.example.messapp-mergeDebugResources-59:/layout/activity_login.xml",
-        "source": "com.example.messapp-main-62:/layout/activity_login.xml"
     },
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-mergeDebugResources-59:\\layout\\fragment_mess_detail.xml",

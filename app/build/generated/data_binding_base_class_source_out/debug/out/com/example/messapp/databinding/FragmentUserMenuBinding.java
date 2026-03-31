@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.messapp.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
@@ -24,18 +25,36 @@ public final class FragmentUserMenuBinding implements ViewBinding {
   public final LinearLayout daySelectorContainer;
 
   @NonNull
+  public final LinearLayout daySelectorExpandableContainer;
+
+  @NonNull
+  public final LinearLayout daySelectorHeader;
+
+  @NonNull
+  public final FloatingActionButton fabDaySelector;
+
+  @NonNull
   public final TextView textDinnerMenuDisplay;
 
   @NonNull
   public final TextView textLunchMenuDisplay;
 
+  @NonNull
+  public final TextView textSelectedDay;
+
   private FragmentUserMenuBinding(@NonNull FrameLayout rootView,
-      @NonNull LinearLayout daySelectorContainer, @NonNull TextView textDinnerMenuDisplay,
-      @NonNull TextView textLunchMenuDisplay) {
+      @NonNull LinearLayout daySelectorContainer,
+      @NonNull LinearLayout daySelectorExpandableContainer, @NonNull LinearLayout daySelectorHeader,
+      @NonNull FloatingActionButton fabDaySelector, @NonNull TextView textDinnerMenuDisplay,
+      @NonNull TextView textLunchMenuDisplay, @NonNull TextView textSelectedDay) {
     this.rootView = rootView;
     this.daySelectorContainer = daySelectorContainer;
+    this.daySelectorExpandableContainer = daySelectorExpandableContainer;
+    this.daySelectorHeader = daySelectorHeader;
+    this.fabDaySelector = fabDaySelector;
     this.textDinnerMenuDisplay = textDinnerMenuDisplay;
     this.textLunchMenuDisplay = textLunchMenuDisplay;
+    this.textSelectedDay = textSelectedDay;
   }
 
   @Override
@@ -71,6 +90,24 @@ public final class FragmentUserMenuBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.day_selector_expandable_container;
+      LinearLayout daySelectorExpandableContainer = ViewBindings.findChildViewById(rootView, id);
+      if (daySelectorExpandableContainer == null) {
+        break missingId;
+      }
+
+      id = R.id.day_selector_header;
+      LinearLayout daySelectorHeader = ViewBindings.findChildViewById(rootView, id);
+      if (daySelectorHeader == null) {
+        break missingId;
+      }
+
+      id = R.id.fab_day_selector;
+      FloatingActionButton fabDaySelector = ViewBindings.findChildViewById(rootView, id);
+      if (fabDaySelector == null) {
+        break missingId;
+      }
+
       id = R.id.text_dinner_menu_display;
       TextView textDinnerMenuDisplay = ViewBindings.findChildViewById(rootView, id);
       if (textDinnerMenuDisplay == null) {
@@ -83,8 +120,15 @@ public final class FragmentUserMenuBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.text_selected_day;
+      TextView textSelectedDay = ViewBindings.findChildViewById(rootView, id);
+      if (textSelectedDay == null) {
+        break missingId;
+      }
+
       return new FragmentUserMenuBinding((FrameLayout) rootView, daySelectorContainer,
-          textDinnerMenuDisplay, textLunchMenuDisplay);
+          daySelectorExpandableContainer, daySelectorHeader, fabDaySelector, textDinnerMenuDisplay,
+          textLunchMenuDisplay, textSelectedDay);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

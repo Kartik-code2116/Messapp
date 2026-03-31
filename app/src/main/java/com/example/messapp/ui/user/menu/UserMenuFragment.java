@@ -1,10 +1,16 @@
 package com.example.messapp.ui.user.menu;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -28,6 +34,11 @@ public class UserMenuFragment extends Fragment {
     private FirebaseFirestore db;
     private String currentMessId;
     private Calendar currentCalendar;
+    private boolean isDaySelectorExpanded = false;
+    private SimpleDateFormat dayFormat;
+    private SimpleDateFormat dateFormat;
+    private String[] dayNames = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
+    private int selectedDayIndex = -1;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -39,7 +50,16 @@ public class UserMenuFragment extends Fragment {
 
         currentCalendar = Calendar.getInstance();
 
+        dayFormat = new SimpleDateFormat("EEE", Locale.getDefault());
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+
+        // Set default day to today
+        selectedDayIndex = getDayOfWeekIndex(currentCalendar);
+
         fetchUserMessId();
+
+        // Setup FAB click listener for expand/collapse animation
+        binding.fabDaySelector.setOnClickListener(v -> toggleDaySelector());
 
         return root;
     }
@@ -68,56 +88,151 @@ public class UserMenuFragment extends Fragment {
                 });
     }
 
+    private int getDayOfWeekIndex(Calendar calendar) {
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+        // Convert to 0-based index where Monday = 0
+        return (dayOfWeek + 5) % 7;
+    }
+
+    private void toggleDaySelector() {
+        isDaySelectorExpanded = !isDaySelectorExpanded;
+
+        // Rotate FAB icon 180 degrees
+        RotateAnimation rotate = new RotateAnimation(
+                isDaySelectorExpanded ? 0 : 180,
+                isDaySelectorExpanded ? 180 : 360,
+                Animation.RELATIVE_TO_SELF, 0.5f,
+                Animation.RELATIVE_TO_SELF, 0.5f);
+        rotate.setDuration(300);
+        rotate.setFillAfter(true);
+        binding.fabDaySelector.startAnimation(rotate);
+
+        // Animate day selector container visibility
+        if (isDaySelectorExpanded) {
+            expandDaySelector();
+        } else {
+            collapseDaySelector();
+        }
+    }
+
+    private void expandDaySelector() {
+        binding.daySelectorExpandableContainer.setVisibility(View.VISIBLE);
+        binding.daySelectorExpandableContainer.setAlpha(0f);
+        binding.daySelectorExpandableContainer.setTranslationY(-50f);
+
+        ObjectAnimator alphaAnim = ObjectAnimator.ofFloat(binding.daySelectorExpandableContainer, "alpha", 0f, 1f);
+        ObjectAnimator translateAnim = ObjectAnimator.ofFloat(binding.daySelectorExpandableContainer, "translationY", -50f, 0f);
+
+        alphaAnim.setDuration(300);
+        translateAnim.setDuration(300);
+
+        alphaAnim.start();
+        translateAnim.start();
+    }
+
+    private void collapseDaySelector() {
+        ObjectAnimator alphaAnim = ObjectAnimator.ofFloat(binding.daySelectorExpandableContainer, "alpha", 1f, 0f);
+        ObjectAnimator translateAnim = ObjectAnimator.ofFloat(binding.daySelectorExpandableContainer, "translationY", 0f, -50f);
+
+        alphaAnim.setDuration(300);
+        translateAnim.setDuration(300);
+
+        alphaAnim.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                binding.daySelectorExpandableContainer.setVisibility(View.GONE);
+            }
+        });
+
+        alphaAnim.start();
+        translateAnim.start();
+    }
+
     private void setupDaySelector() {
         LinearLayout daySelectorContainer = binding.daySelectorContainer;
-        daySelectorContainer.removeAllViews(); // Clear existing views
+        daySelectorContainer.removeAllViews();
 
-        Calendar calendar = (Calendar) currentCalendar.clone();
-        calendar.set(Calendar.DAY_OF_WEEK, calendar.getFirstDayOfWeek()); // Start from Monday
-
-        SimpleDateFormat dayFormat = new SimpleDateFormat("EEE", Locale.getDefault());
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY); // Start from Monday
 
         for (int i = 0; i < 7; i++) {
-            Button dayButton = new Button(getContext());
-            dayButton.setLayoutParams(new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT));
-            dayButton.setText(dayFormat.format(calendar.getTime()));
-            dayButton.setTag(dateFormat.format(calendar.getTime())); // Store date as tag
-            dayButton.setOnClickListener(this::onDaySelected);
-            dayButton.setBackgroundColor(Color.TRANSPARENT);
-            dayButton.setTextColor(getResources().getColor(R.color.black));
-            dayButton.setPadding(16, 8, 16, 8);
-
+            Button dayButton = createCircularDayButton(i, calendar);
             daySelectorContainer.addView(dayButton);
             calendar.add(Calendar.DAY_OF_YEAR, 1);
         }
+
+        // Highlight today
+        updateDayButtonStyles();
     }
 
-    private void onDaySelected(View view) {
-        String selectedDate = (String) view.getTag();
-        // Update currentCalendar to the selected date
-        try {
-            currentCalendar.setTime(new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(selectedDate));
-        } catch (java.text.ParseException e) {
-            e.printStackTrace();
-        }
+    private Button createCircularDayButton(int index, Calendar calendar) {
+        Button button = new Button(getContext());
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f);
+        params.setMargins(4, 4, 4, 4);
+        button.setLayoutParams(params);
+
+        String dayName = dayNames[index];
+        int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+        button.setText(dayName + "\n" + dayOfMonth);
+        button.setTextSize(10f);
+        button.setTag(index);
+
+        // Create circular background
+        GradientDrawable drawable = new GradientDrawable();
+        drawable.setShape(GradientDrawable.OVAL);
+        drawable.setColor(Color.TRANSPARENT);
+        button.setBackground(drawable);
+        button.setTextColor(getResources().getColor(R.color.text_body));
+
+        button.setOnClickListener(v -> onCircularDaySelected(index, calendar));
+
+        return button;
+    }
+
+    private void onCircularDaySelected(int index, Calendar baseCalendar) {
+        selectedDayIndex = index;
+
+        // Calculate the actual date based on index
+        Calendar selectedCal = (Calendar) baseCalendar.clone();
+        selectedCal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+        selectedCal.add(Calendar.DAY_OF_YEAR, index);
+
+        currentCalendar = selectedCal;
         loadMenuForDate(currentCalendar);
-        highlightSelectedDay(selectedDate);
+        updateDayButtonStyles();
+
+        // Auto collapse after selection with delay
+        binding.daySelectorExpandableContainer.postDelayed(() -> {
+            if (isDaySelectorExpanded) {
+                toggleDaySelector();
+            }
+        }, 500);
     }
 
-    private void highlightSelectedDay(String selectedDate) {
+    private void updateDayButtonStyles() {
         LinearLayout daySelectorContainer = binding.daySelectorContainer;
         for (int i = 0; i < daySelectorContainer.getChildCount(); i++) {
-            Button dayButton = (Button) daySelectorContainer.getChildAt(i);
-            if (selectedDate.equals(dayButton.getTag())) {
-                dayButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                dayButton.setTextColor(getResources().getColor(R.color.white));
+            Button button = (Button) daySelectorContainer.getChildAt(i);
+            int index = (int) button.getTag();
+
+            GradientDrawable drawable = new GradientDrawable();
+            drawable.setShape(GradientDrawable.OVAL);
+
+            if (index == selectedDayIndex) {
+                drawable.setColor(getResources().getColor(R.color.brand_primary));
+                button.setTextColor(Color.WHITE);
+                // Add scale animation for selected
+                button.animate().scaleX(1.1f).scaleY(1.1f).setDuration(200).start();
             } else {
-                dayButton.setBackgroundColor(Color.TRANSPARENT);
-                dayButton.setTextColor(getResources().getColor(R.color.black));
+                drawable.setColor(getResources().getColor(R.color.neutral_100));
+                button.setTextColor(getResources().getColor(R.color.text_body));
+                button.setScaleX(1f);
+                button.setScaleY(1f);
             }
+
+            button.setBackground(drawable);
         }
     }
 

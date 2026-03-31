@@ -3800,6 +3800,7 @@ int drawable ic_attach_money 0x7f0800c6
 int drawable ic_bar_chart 0x7f0800c7
 int drawable ic_breakfast_dining 0x7f0800c8
 int drawable ic_business 0x7f0800c9
+int drawable ic_calendar 0x7f08015a
 int drawable ic_call 0x7f0800ca
 int drawable ic_call_answer 0x7f0800cb
 int drawable ic_call_answer_low 0x7f0800cc
@@ -4192,6 +4193,8 @@ int id cut 0x7f0a00ee
 int id dark 0x7f0a00ef
 int id date_picker_actions 0x7f0a00f0
 int id day_selector_container 0x7f0a00f1
+int id day_selector_expandable_container 0x7f0a034e
+int id day_selector_header 0x7f0a034f
 int id decelerate 0x7f0a00f2
 int id decelerateAndComplete 0x7f0a00f3
 int id decor_content_parent 0x7f0a00f4
@@ -4255,6 +4258,7 @@ int id expand_activities_button 0x7f0a012d
 int id expanded_menu 0x7f0a012e
 int id fab_add_offer 0x7f0a012f
 int id fab_add_review 0x7f0a0130
+int id fab_day_selector 0x7f0a0350
 int id fade 0x7f0a0131
 int id fill 0x7f0a0132
 int id fill_horizontal 0x7f0a0133
@@ -4719,6 +4723,7 @@ int id text_review_comment 0x7f0a02fd
 int id text_review_date 0x7f0a02fe
 int id text_reviewer_name 0x7f0a02ff
 int id text_selected_date 0x7f0a0300
+int id text_selected_day 0x7f0a0351
 int id text_student_email 0x7f0a0301
 int id text_student_gender 0x7f0a0302
 int id text_student_name 0x7f0a0303

@@ -149,6 +149,7 @@ drawable ic_attach_money
 drawable ic_bar_chart
 drawable ic_breakfast_dining
 drawable ic_business
+drawable ic_calendar
 drawable ic_call
 drawable ic_camera_alt
 drawable ic_cancel
@@ -288,6 +289,8 @@ id container_dinner
 id container_lunch
 id container_mess_id
 id day_selector_container
+id day_selector_expandable_container
+id day_selector_header
 id dinner_edit_text
 id dinner_hour_picker
 id dinner_input_layout
@@ -305,6 +308,7 @@ id et_phone
 id et_search
 id fab_add_offer
 id fab_add_review
+id fab_day_selector
 id headerBackground
 id header_mess_dashboard
 id icon_search
@@ -475,6 +479,7 @@ id text_review_comment
 id text_review_date
 id text_reviewer_name
 id text_selected_date
+id text_selected_day
 id text_student_email
 id text_student_gender
 id text_student_name

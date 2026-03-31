@@ -35,22 +35,75 @@
                     android:textStyle="bold" />
             </RelativeLayout>
 
-            <!-- Day Selector -->
-            <HorizontalScrollView
+            <!-- Circular Animated Day Selector Button -->
+            <LinearLayout
+                android:id="@+id/day_selector_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scrollbars="none"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:paddingTop="16dp"
+                android:paddingBottom="8dp">
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/fab_day_selector"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:src="@drawable/ic_calendar"
+                        app:fabCustomSize="56dp"
+                        app:maxImageSize="28dp"
+                        app:backgroundTint="@color/brand_primary"
+                        app:tint="@color/white"
+                        app:elevation="4dp" />
+
+                    <TextView
+                        android:id="@+id/text_selected_day"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Today"
+                        android:textColor="@color/white"
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+                </FrameLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Tap to select day"
+                    android:textSize="12sp"
+                    android:textColor="@color/text_caption" />
+            </LinearLayout>
+
+            <!-- Expandable Day Selector Container -->
+            <LinearLayout
+                android:id="@+id/day_selector_expandable_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="8dp"
-                android:paddingHorizontal="16dp">
+                android:background="@drawable/bg_rounded_card_surface"
+                android:elevation="2dp"
+                android:padding="12dp">
 
                 <LinearLayout
                     android:id="@+id/day_selector_container"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:weightSum="7">
                     <!-- Day buttons will be added programmatically here -->
                 </LinearLayout>
-            </HorizontalScrollView>
+            </LinearLayout>
 
             <!-- Menu Display -->
             <com.google.android.material.card.MaterialCardView
