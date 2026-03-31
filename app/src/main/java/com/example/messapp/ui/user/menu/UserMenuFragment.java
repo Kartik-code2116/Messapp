@@ -45,6 +45,11 @@ public class UserMenuFragment extends Fragment {
     }
 
     private void fetchUserMessId() {
+        if (mAuth.getCurrentUser() == null) {
+            binding.textLunchMenuDisplay.setText("Sign in to view menu");
+            binding.textDinnerMenuDisplay.setText("Sign in to view menu");
+            return;
+        }
         String userId = mAuth.getCurrentUser().getUid();
         db.collection("users").document(userId).get()
                 .addOnSuccessListener(documentSnapshot -> {

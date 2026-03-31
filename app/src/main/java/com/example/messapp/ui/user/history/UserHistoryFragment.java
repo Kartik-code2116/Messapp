@@ -89,11 +89,13 @@ public class UserHistoryFragment extends Fragment {
     }
 
     private void loadMealHistory(String selectedMonthYear) {
-        String userId = mAuth.getCurrentUser().getUid();
-        if (userId == null) {
-            Toast.makeText(getContext(), "User not logged in.", Toast.LENGTH_SHORT).show();
+        if (mAuth.getCurrentUser() == null) {
+            Toast.makeText(getContext(), "Sign in to view history", Toast.LENGTH_SHORT).show();
+            mealHistoryList.clear();
+            historyAdapter.submitList(mealHistoryList);
             return;
         }
+        String userId = mAuth.getCurrentUser().getUid();
 
         // Parse selectedMonthYear to get start and end date for the month
         Calendar startCal = Calendar.getInstance();
