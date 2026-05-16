@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import com.example.messapp.utils.ThemeManager;
 
 import com.example.messapp.databinding.ActivityRoleSelectionBinding;
 
@@ -16,6 +17,7 @@ public class RoleSelectionActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ThemeManager.applyTheme(this);
         super.onCreate(savedInstanceState);
         try {
             binding = ActivityRoleSelectionBinding.inflate(getLayoutInflater());

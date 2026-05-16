@@ -94,7 +94,7 @@ public class MessDashboardActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@androidx.annotation.NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            // TODO: Open settings
+            startActivity(new Intent(this, com.example.messapp.ui.mess.settings.MessSettingsActivity.class));
             return true;
         } else if (id == R.id.action_logout) {
             if (!isGuestMode) {

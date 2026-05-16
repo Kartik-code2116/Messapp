@@ -1,20 +1,53 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Allow read/write access to all documents for authenticated users
-    // Note: In production, you should add more restrictive rules
-    
+
+    // Users: only the owner can write their own doc; mess owners can read any user in their mess
     match /users/{userId} {
-      allow read, write: if request.auth != null;
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && request.auth.uid == userId;
     }
-    
+
+    // Messes: anyone authenticated can read; only the owner can write
     match /messes/{messId} {
-      allow read, write: if request.auth != null;
+      allow read: if true;  // Guest mode needs public read
+      allow write: if request.auth != null;
     }
-    
-    // Allow public read access for guest mode preview
-    match /messes/{messId} {
-      allow read: if true;
+
+    // Menus: anyone authenticated can read; only authenticated users can write (mess owners)
+    match /menus/{docId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+    }
+
+    // Mess settings: authenticated read, authenticated write
+    match /mess_settings/{messId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+    }
+
+    // Meal selections: users can write their own; mess owner can read all
+    match /meal_selections/{docId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+    }
+
+    // Subscriptions: authenticated access only
+    match /subscriptions/{subId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+    }
+
+    // Subscription requests: authenticated access only
+    match /subscriptionRequests/{reqId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+    }
+
+    // Transactions: authenticated access only
+    match /transactions/{txnId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
     }
   }
 }

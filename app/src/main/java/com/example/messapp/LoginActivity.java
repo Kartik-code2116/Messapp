@@ -432,7 +432,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void navigateToDashboard(String role) {
-        saveFCMToken(); // Save FCM token after successful login/signup
+        // Cache role in shared prefs so FCM service can route notifications correctly
+        getSharedPreferences("user_prefs", MODE_PRIVATE).edit().putString("role", role).apply();
+        saveFCMToken();
         if ("MESS_OWNER".equals(role)) {
             startActivity(new Intent(LoginActivity.this, MessDashboardActivity.class));
         } else {

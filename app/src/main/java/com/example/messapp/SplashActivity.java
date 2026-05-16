@@ -4,6 +4,7 @@ import com.example.messapp.utils.ThemeManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -52,7 +53,7 @@ public class SplashActivity extends AppCompatActivity {
                 .setInterpolator(new android.view.animation.DecelerateInterpolator())
                 .start();
 
-        new Handler().postDelayed(() -> {
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
             FirebaseUser currentUser = mAuth.getCurrentUser();
             if (currentUser != null) {
                 // User is logged in, fetch role and navigate to dashboard

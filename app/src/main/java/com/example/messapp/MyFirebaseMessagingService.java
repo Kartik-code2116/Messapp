@@ -62,7 +62,17 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     }
 
     private void sendNotification(String title, String messageBody) {
-        Intent intent = new Intent(this, UserDashboardActivity.class); // Or MessDashboardActivity based on user type
+        // Route to the correct dashboard based on user role
+        Class<?> targetActivity = UserDashboardActivity.class;
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            // We read from shared prefs as a lightweight role cache
+            android.content.SharedPreferences prefs = getSharedPreferences("user_prefs", MODE_PRIVATE);
+            String role = prefs.getString("role", "USER");
+            if ("MESS_OWNER".equals(role)) {
+                targetActivity = MessDashboardActivity.class;
+            }
+        }
+        Intent intent = new Intent(this, targetActivity);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_IMMUTABLE);
