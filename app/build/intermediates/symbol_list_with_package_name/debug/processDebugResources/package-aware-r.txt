@@ -3871,6 +3871,7 @@ drawable ic_launcher_foreground
 drawable ic_local_offer
 drawable ic_location_on
 drawable ic_lock
+drawable ic_logout
 drawable ic_lunch_dining
 drawable ic_m3_chip_check
 drawable ic_m3_chip_checked_circle
@@ -3883,6 +3884,7 @@ drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
 drawable ic_notification
 drawable ic_notifications_black_24dp
+drawable ic_notifications_outline
 drawable ic_offers_black_24dp
 drawable ic_other_sign_in
 drawable ic_passkey
@@ -3890,6 +3892,7 @@ drawable ic_password
 drawable ic_people_black_24dp
 drawable ic_person
 drawable ic_person_black_24dp
+drawable ic_person_outline
 drawable ic_refresh
 drawable ic_restaurant
 drawable ic_restore
@@ -3897,6 +3900,8 @@ drawable ic_schedule
 drawable ic_search_black_24
 drawable ic_send
 drawable ic_settings_black_24dp
+drawable ic_settings_outline
+drawable ic_star
 drawable ic_star_rate
 drawable ic_steam_subtle
 drawable ic_student_profile
@@ -4275,6 +4280,7 @@ id dragRight
 id dragStart
 id dragUp
 id drawer_admin_logout
+id drawer_admin_notifications
 id drawer_admin_profile
 id drawer_admin_settings
 id drawer_user_history
@@ -4692,6 +4698,7 @@ id startVertical
 id start_center
 id staticLayout
 id staticPostLayout
+id stats_container
 id stop
 id stretch
 id submenuarrow
@@ -4748,7 +4755,10 @@ id text_dinner_status_bar
 id text_drawer_email
 id text_drawer_members
 id text_drawer_mess
+id text_drawer_mess_name
 id text_drawer_name
+id text_drawer_rating
+id text_drawer_revenue
 id text_drawer_subscription
 id text_empty_history
 id text_expiry_date

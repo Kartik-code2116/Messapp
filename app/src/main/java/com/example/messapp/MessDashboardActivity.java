@@ -182,6 +182,8 @@ public class MessDashboardActivity extends AppCompatActivity {
                 binding.navView.setSelectedItemId(R.id.navigation_mess_profile);
             } else if (id == R.id.drawer_admin_settings) {
                 startActivity(new Intent(this, com.example.messapp.ui.mess.settings.MessSettingsActivity.class));
+            } else if (id == R.id.drawer_admin_notifications) {
+                Toast.makeText(this, "Notification Settings - Coming soon", Toast.LENGTH_SHORT).show();
             } else if (id == R.id.drawer_admin_logout) {
                 if (!isGuestMode) {
                     FirebaseAuth.getInstance().signOut();
@@ -201,13 +203,19 @@ public class MessDashboardActivity extends AppCompatActivity {
         TextView nameView = header.findViewById(R.id.text_drawer_name);
         TextView emailView = header.findViewById(R.id.text_drawer_email);
         TextView membersView = header.findViewById(R.id.text_drawer_members);
+        TextView ratingView = header.findViewById(R.id.text_drawer_rating);
+        TextView revenueView = header.findViewById(R.id.text_drawer_revenue);
+        TextView messNameView = header.findViewById(R.id.text_drawer_mess_name);
         ImageView profileImage = header.findViewById(R.id.img_drawer_profile);
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser == null) {
             nameView.setText(isGuestMode ? "Guest Admin" : "Mess Owner");
             emailView.setText("Not signed in");
-            if (membersView != null) membersView.setText("Members: 0");
+            if (membersView != null) membersView.setText("0");
+            if (ratingView != null) ratingView.setText("0.0");
+            if (revenueView != null) revenueView.setText("₹0");
+            if (messNameView != null) messNameView.setText("My Mess");
             profileImage.setImageResource(R.drawable.ic_student_profile);
             return;
         }
@@ -221,6 +229,11 @@ public class MessDashboardActivity extends AppCompatActivity {
                     String email = doc.getString("email");
                     emailView.setText(email != null && !email.isEmpty() ? email : currentUser.getEmail());
 
+                    String messId = doc.getString("messId");
+                    if (messId != null && !messId.isEmpty()) {
+                        loadMessDetails(messId, membersView, ratingView, revenueView, messNameView);
+                    }
+
                     String profileImageUrl = doc.getString("profileImageUrl");
                     if (profileImageUrl != null && !profileImageUrl.isEmpty()) {
                         Glide.with(this)
@@ -228,6 +241,28 @@ public class MessDashboardActivity extends AppCompatActivity {
                                 .placeholder(R.drawable.ic_student_profile)
                                 .circleCrop()
                                 .into(profileImage);
+                    }
+                });
+    }
+
+    private void loadMessDetails(String messId, TextView membersView, TextView ratingView, TextView revenueView, TextView messNameView) {
+        FirebaseFirestore.getInstance().collection("messes").document(messId).get()
+                .addOnSuccessListener(doc -> {
+                    if (membersView != null) {
+                        Long memberCount = doc.getLong("studentCount");
+                        membersView.setText(String.valueOf(memberCount != null ? memberCount : 0));
+                    }
+                    if (ratingView != null) {
+                        Double rating = doc.getDouble("avgRating");
+                        ratingView.setText(String.format("%.1f", rating != null ? rating : 0.0));
+                    }
+                    if (revenueView != null) {
+                        Double revenue = doc.getDouble("totalRevenue");
+                        revenueView.setText("₹" + String.valueOf(revenue != null ? revenue.intValue() : 0));
+                    }
+                    if (messNameView != null) {
+                        String messName = doc.getString("name");
+                        messNameView.setText(messName != null && !messName.isEmpty() ? messName : "My Mess");
                     }
                 });
     }

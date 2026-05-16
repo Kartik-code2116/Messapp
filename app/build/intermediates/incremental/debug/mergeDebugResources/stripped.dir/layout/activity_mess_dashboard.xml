@@ -62,14 +62,17 @@
         android:layout_height="match_parent"
         android:layout_gravity="end"
         android:background="@color/surface_card"
+        android:fitsSystemWindows="false"
         app:headerLayout="@layout/header_admin_profile_drawer"
-        app:itemIconPadding="20dp"
-        app:itemIconSize="24dp"
-        app:itemHorizontalPadding="24dp"
-        app:itemVerticalPadding="14dp"
-        app:itemIconTint="@color/brand_primary"
-        app:itemTextColor="@color/text_heading"
+        app:itemIconPadding="16dp"
+        app:itemIconSize="22dp"
+        app:itemHorizontalPadding="20dp"
+        app:itemVerticalPadding="12dp"
+        app:itemIconTint="@color/text_secondary"
+        app:itemTextColor="@color/text_primary"
         app:itemShapeFillColor="@color/brand_primary_light"
+        app:itemRippleColor="@color/brand_primary_light"
+        app:subheaderTextAppearance="@style/TextAppearance.Material3.LabelMedium"
         app:menu="@menu/menu_admin_profile_drawer" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

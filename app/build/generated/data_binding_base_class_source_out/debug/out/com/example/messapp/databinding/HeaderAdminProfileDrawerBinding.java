@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,25 +32,43 @@ public final class HeaderAdminProfileDrawerBinding implements ViewBinding {
   public final ImageView imgDrawerProfile;
 
   @NonNull
+  public final LinearLayout statsContainer;
+
+  @NonNull
   public final TextView textDrawerEmail;
 
   @NonNull
   public final TextView textDrawerMembers;
 
   @NonNull
+  public final TextView textDrawerMessName;
+
+  @NonNull
   public final TextView textDrawerName;
+
+  @NonNull
+  public final TextView textDrawerRating;
+
+  @NonNull
+  public final TextView textDrawerRevenue;
 
   private HeaderAdminProfileDrawerBinding(@NonNull ConstraintLayout rootView,
       @NonNull MaterialCardView cardDrawerProfile, @NonNull View dividerDrawer,
-      @NonNull ImageView imgDrawerProfile, @NonNull TextView textDrawerEmail,
-      @NonNull TextView textDrawerMembers, @NonNull TextView textDrawerName) {
+      @NonNull ImageView imgDrawerProfile, @NonNull LinearLayout statsContainer,
+      @NonNull TextView textDrawerEmail, @NonNull TextView textDrawerMembers,
+      @NonNull TextView textDrawerMessName, @NonNull TextView textDrawerName,
+      @NonNull TextView textDrawerRating, @NonNull TextView textDrawerRevenue) {
     this.rootView = rootView;
     this.cardDrawerProfile = cardDrawerProfile;
     this.dividerDrawer = dividerDrawer;
     this.imgDrawerProfile = imgDrawerProfile;
+    this.statsContainer = statsContainer;
     this.textDrawerEmail = textDrawerEmail;
     this.textDrawerMembers = textDrawerMembers;
+    this.textDrawerMessName = textDrawerMessName;
     this.textDrawerName = textDrawerName;
+    this.textDrawerRating = textDrawerRating;
+    this.textDrawerRevenue = textDrawerRevenue;
   }
 
   @Override
@@ -97,6 +116,12 @@ public final class HeaderAdminProfileDrawerBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.stats_container;
+      LinearLayout statsContainer = ViewBindings.findChildViewById(rootView, id);
+      if (statsContainer == null) {
+        break missingId;
+      }
+
       id = R.id.text_drawer_email;
       TextView textDrawerEmail = ViewBindings.findChildViewById(rootView, id);
       if (textDrawerEmail == null) {
@@ -109,14 +134,33 @@ public final class HeaderAdminProfileDrawerBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.text_drawer_mess_name;
+      TextView textDrawerMessName = ViewBindings.findChildViewById(rootView, id);
+      if (textDrawerMessName == null) {
+        break missingId;
+      }
+
       id = R.id.text_drawer_name;
       TextView textDrawerName = ViewBindings.findChildViewById(rootView, id);
       if (textDrawerName == null) {
         break missingId;
       }
 
+      id = R.id.text_drawer_rating;
+      TextView textDrawerRating = ViewBindings.findChildViewById(rootView, id);
+      if (textDrawerRating == null) {
+        break missingId;
+      }
+
+      id = R.id.text_drawer_revenue;
+      TextView textDrawerRevenue = ViewBindings.findChildViewById(rootView, id);
+      if (textDrawerRevenue == null) {
+        break missingId;
+      }
+
       return new HeaderAdminProfileDrawerBinding((ConstraintLayout) rootView, cardDrawerProfile,
-          dividerDrawer, imgDrawerProfile, textDrawerEmail, textDrawerMembers, textDrawerName);
+          dividerDrawer, imgDrawerProfile, statsContainer, textDrawerEmail, textDrawerMembers,
+          textDrawerMessName, textDrawerName, textDrawerRating, textDrawerRevenue);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
