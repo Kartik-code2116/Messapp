@@ -17,7 +17,9 @@
         <item name="android:textColorSecondary">@color/text_body</item>
         <item name="colorSurface">@color/surface_card</item>
         <item name="android:statusBarColor">@color/background_page</item>
+        <item name="android:navigationBarColor">@color/background_page</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
         
         <!-- Typography -->
         <item name="android:fontFamily">@font/inter</item>
@@ -34,7 +36,7 @@
 
     <!-- Glass Card Style -->
     <style name="Profound.Card" parent="Widget.Material3.CardView.Elevated">
-        <item name="cardCornerRadius">16dp</item>
+        <item name="cardCornerRadius">20dp</item>
         <item name="cardElevation">4dp</item>
         <item name="cardBackgroundColor">@color/surface_card</item>
         <item name="strokeWidth">1dp</item>
@@ -45,8 +47,8 @@
     <style name="Profound.Button" parent="Widget.Material3.Button">
         <item name="android:backgroundTint">@color/brand_primary</item>
         <item name="android:textColor">@color/text_on_brand</item>
-        <item name="cornerRadius">12dp</item>
-        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="cornerRadius">16dp</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
         <item name="android:paddingVertical">12dp</item>
     </style>
     
@@ -54,7 +56,8 @@
     <style name="Profound.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
         <item name="android:textColor">@color/brand_primary</item>
         <item name="strokeColor">@color/brand_primary</item>
-        <item name="cornerRadius">12dp</item>
+        <item name="cornerRadius">16dp</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
     </style>
 
     <!-- Input Fields -->
@@ -70,5 +73,41 @@
     <style name="CircleImageStyle">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="ProfileSectionTitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/inter</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0.08</item>
+        <item name="android:textColor">@color/text_caption</item>
+        <item name="android:paddingBottom">8dp</item>
+    </style>
+
+    <style name="ProfileCard" parent="Profound.Card">
+        <item name="cardCornerRadius">20dp</item>
+        <item name="cardElevation">0dp</item>
+    </style>
+
+    <style name="UserPageTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/text_heading</item>
+    </style>
+
+    <style name="UserSectionTitle" parent="ProfileSectionTitle" />
+
+    <style name="UserStatValue">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/text_heading</item>
     </style>
 </resources>

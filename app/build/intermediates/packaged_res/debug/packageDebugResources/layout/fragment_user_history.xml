@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipe_refresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/ios_background"
+    android:background="@color/background_page"
     tools:context=".ui.user.history.UserHistoryFragment">
 
     <androidx.core.widget.NestedScrollView
@@ -15,242 +17,292 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="80dp">
+            android:orientation="vertical">
 
-            <!-- Header -->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="16dp"
-                android:paddingTop="24dp"
-                android:paddingBottom="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Meal History"
-                    android:textColor="#121617"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
-
-            <!-- Monthly Selector -->
+            <!-- Fixed header (does not scroll with list) -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="20dp">
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="2dp"
-                    app:strokeWidth="0dp">
-
-                    <Spinner
-                        android:id="@+id/spinner_month_year"
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:background="@android:color/transparent"
-                        android:spinnerMode="dropdown"
-                        android:paddingHorizontal="16dp" />
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_change_month"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:text="Apply"
-                    android:textColor="@color/ios_primary"
-                    app:strokeColor="@color/ios_primary"
-                    app:cornerRadius="12dp"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginBottom="12dp"
-                android:text="HISTORY RECORDS"
-                android:textColor="#9CA3AF"
-                android:textSize="11sp"
-                android:textStyle="bold"
-                android:letterSpacing="0.1" />
-
-            <!-- Daily List -->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view_history"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:nestedScrollingEnabled="false"
-                tools:listitem="@layout/item_history"/>
-
-            <!-- Summary Card -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="2dp"
-                app:strokeWidth="0dp">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="20dp"
-                    android:background="@color/ios_surface">
+                    android:paddingHorizontal="@dimen/user_page_padding_h"
+                    android:paddingTop="8dp">
+
+                    <TextView
+                        style="@style/UserPageTitle"
+                        android:text="Meal History" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/inter"
+                        android:text="Track your monthly attendance"
+                        android:textColor="@color/text_caption"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/user_page_padding_h"
+                    android:layout_marginTop="16dp"
+                    style="@style/Profound.Card">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:gravity="center_vertical"
-                        android:layout_marginBottom="16dp">
+                        android:orientation="horizontal"
+                        android:padding="12dp">
 
-                        <View
-                            android:layout_width="4dp"
-                            android:layout_height="40dp"
-                            android:background="@color/ios_primary" />
+                        <ImageView
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:layout_marginStart="4dp"
+                            android:contentDescription="@null"
+                            android:src="@drawable/ic_calendar"
+                            app:tint="@color/brand_primary" />
 
-                        <TextView
+                        <Spinner
+                            android:id="@+id/spinner_month_year"
+                            android:layout_width="0dp"
+                            android:layout_height="48dp"
+                            android:layout_weight="1"
+                            android:background="@android:color/transparent"
+                            android:paddingHorizontal="8dp"
+                            android:spinnerMode="dropdown" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_change_month"
+                            style="@style/Profound.Button.Outlined"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:text="SUMMARY"
-                            android:textSize="11sp"
-                            android:textStyle="bold"
-                            android:textColor="#6B7280"
-                            android:letterSpacing="0.1" />
+                            android:minHeight="40dp"
+                            android:text="Apply"
+                            android:visibility="gone"
+                            app:strokeColor="@color/brand_primary" />
                     </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                <TextView
+                    style="@style/UserSectionTitle"
+                    android:layout_marginStart="@dimen/user_page_padding_h"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="@dimen/user_page_padding_h"
+                    android:text="MONTHLY SUMMARY" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/user_page_padding_h"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginBottom="12dp">
+                        android:layout_marginEnd="6dp"
+                        android:layout_weight="1"
+                        style="@style/Profound.Card">
 
                         <LinearLayout
-                            android:layout_width="0dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:padding="14dp">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Lunch Taken"
-                                android:textSize="12sp"
-                                android:textColor="#6B7280" />
+                                android:fontFamily="@font/inter"
+                                android:text="Lunch IN"
+                                android:textColor="@color/text_caption"
+                                android:textSize="11sp" />
 
                             <TextView
                                 android:id="@+id/text_total_lunch"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                style="@style/UserStatValue"
+                                android:layout_marginTop="4dp"
                                 android:text="0"
                                 android:textSize="24sp"
-                                android:textStyle="bold"
-                                android:textColor="#111827"
-                                android:layout_marginTop="4dp"/>
+                                tools:text="18" />
                         </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:layout_weight="1"
+                        style="@style/Profound.Card">
 
                         <LinearLayout
-                            android:layout_width="0dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:padding="14dp">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Dinner Taken"
-                                android:textSize="12sp"
-                                android:textColor="#6B7280" />
+                                android:fontFamily="@font/inter"
+                                android:text="Dinner IN"
+                                android:textColor="@color/text_caption"
+                                android:textSize="11sp" />
 
                             <TextView
                                 android:id="@+id/text_total_dinner"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                style="@style/UserStatValue"
+                                android:layout_marginTop="4dp"
                                 android:text="0"
                                 android:textSize="24sp"
-                                android:textStyle="bold"
-                                android:textColor="#111827"
-                                android:layout_marginTop="4dp"/>
+                                tools:text="16" />
                         </LinearLayout>
-                    </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="#E5E7EB"
-                        android:layout_marginVertical="12dp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/user_page_padding_h"
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_marginEnd="6dp"
+                        android:layout_weight="1"
+                        style="@style/Profound.Card">
 
                         <LinearLayout
-                            android:layout_width="0dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:padding="14dp">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter"
                                 android:text="Days IN"
-                                android:textSize="12sp"
-                                android:textColor="#6B7280" />
+                                android:textColor="@color/text_caption"
+                                android:textSize="11sp" />
 
                             <TextView
                                 android:id="@+id/text_days_in"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                style="@style/UserStatValue"
+                                android:layout_marginTop="4dp"
                                 android:text="0"
+                                android:textColor="@color/state_success"
                                 android:textSize="24sp"
-                                android:textStyle="bold"
-                                android:textColor="#4CAF50"
-                                android:layout_marginTop="4dp"/>
+                                tools:text="22" />
                         </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:layout_weight="1"
+                        style="@style/Profound.Card">
 
                         <LinearLayout
-                            android:layout_width="0dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:padding="14dp">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter"
                                 android:text="Days OUT"
-                                android:textSize="12sp"
-                                android:textColor="#6B7280" />
+                                android:textColor="@color/text_caption"
+                                android:textSize="11sp" />
 
                             <TextView
                                 android:id="@+id/text_days_out"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                style="@style/UserStatValue"
+                                android:layout_marginTop="4dp"
                                 android:text="0"
+                                android:textColor="@color/state_error"
                                 android:textSize="24sp"
-                                android:textStyle="bold"
-                                android:textColor="#F44336"
-                                android:layout_marginTop="4dp"/>
+                                tools:text="4" />
                         </LinearLayout>
-                    </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
                 </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    style="@style/UserSectionTitle"
+                    android:layout_marginStart="@dimen/user_page_padding_h"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="@dimen/user_page_padding_h"
+                    android:layout_marginBottom="8dp"
+                    android:text="DAILY RECORDS" />
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view_history"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:nestedScrollingEnabled="false"
+                    android:paddingBottom="88dp"
+                    tools:itemCount="5"
+                    tools:listitem="@layout/item_history" />
+
+                <ProgressBar
+                    android:id="@+id/progress_history"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="32dp"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:id="@+id/layout_empty_history"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="32dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="32dp"
+                    android:visibility="gone"
+                    tools:visibility="visible">
+
+                    <ImageView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:alpha="0.5"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_history_black_24dp"
+                        app:tint="@color/text_caption" />
+
+                    <TextView
+                        android:id="@+id/text_empty_history"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:fontFamily="@font/inter"
+                        android:gravity="center"
+                        android:text="No meal records for this month"
+                        android:textColor="@color/text_caption"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </FrameLayout>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-</FrameLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

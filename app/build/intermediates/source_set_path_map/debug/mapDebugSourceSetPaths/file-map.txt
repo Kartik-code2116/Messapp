@@ -1,64 +1,65 @@
-com.example.messapp-core-common-2.0.3-0 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\03f8a442aec525e53f9b05ae8d4607cf\transformed\core-common-2.0.3\res
-com.example.messapp-lifecycle-viewmodel-2.6.2-1 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\0734e2239e938b1f50f47d380f95412a\transformed\lifecycle-viewmodel-2.6.2\res
-com.example.messapp-core-ktx-1.16.0-2 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\08b54120f52f03598a3089e4c9d62731\transformed\core-ktx-1.16.0\res
-com.example.messapp-viewpager2-1.0.0-3 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\1047a799080beb60979584ed06cb3498\transformed\viewpager2-1.0.0\res
-com.example.messapp-navigation-common-2.8.5-4 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\12fd775b299df57fd460d95b5285ff5f\transformed\navigation-common-2.8.5\res
-com.example.messapp-glide-4.16.0-5 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\130df16a859b99ac6721915c88243f17\transformed\glide-4.16.0\res
-com.example.messapp-fragment-1.6.2-6 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\13a30029f9730e6513308fc187fe2ba9\transformed\fragment-1.6.2\res
-com.example.messapp-activity-1.12.1-7 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\16ff66d68b317e5eb9ff4edd2f619ee6\transformed\activity-1.12.1\res
-com.example.messapp-cardview-1.0.0-8 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\1a002be87aa386cab17a734f8b599a5a\transformed\cardview-1.0.0\res
-com.example.messapp-navigation-ui-2.8.5-9 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\22bd922eafbed51425b12da6239fe078\transformed\navigation-ui-2.8.5\res
-com.example.messapp-navigation-fragment-2.8.5-10 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\250b0464b5263f3add2ecb146027a434\transformed\navigation-fragment-2.8.5\res
-com.example.messapp-graphics-shapes-release-11 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\2bce7e135f679ee313e0bd3d2f3e3045\transformed\graphics-shapes-release\res
-com.example.messapp-play-services-auth-21.1.1-12 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\2bcfbf8afa2423f9fb18cd6e27f24a28\transformed\play-services-auth-21.1.1\res
-com.example.messapp-material-1.13.0-13 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\2e6d6090fc23d8fd0a0c7d0ea1b6a4a7\transformed\material-1.13.0\res
-com.example.messapp-core-viewtree-1.0.0-14 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\308185a87537d287e8b19d71842c0190\transformed\core-viewtree-1.0.0\res
-com.example.messapp-play-services-basement-18.4.0-15 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\316f27d413096b6ed226e9062a492cdb\transformed\play-services-basement-18.4.0\res
-com.example.messapp-core-1.16.0-16 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\37f22d9e56d2be083dec2de94bfbf3f5\transformed\core-1.16.0\res
-com.example.messapp-browser-1.4.0-17 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\4857de4e5dea2b5c00f9df22509fb65f\transformed\browser-1.4.0\res
-com.example.messapp-emoji2-views-helper-1.3.0-18 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\487e5f42ec30be1558dc215ef95a609c\transformed\emoji2-views-helper-1.3.0\res
-com.example.messapp-savedstate-1.2.1-19 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\48e80bc9a04ea893b9d8452de5ced26b\transformed\savedstate-1.2.1\res
-com.example.messapp-firebase-common-21.0.0-20 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\51e2bf098a201f06525e1300f8e9db66\transformed\firebase-common-21.0.0\res
-com.example.messapp-dynamicanimation-1.1.0-21 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\5733b70d4edb223fe8820827dd08ddc5\transformed\dynamicanimation-1.1.0\res
-com.example.messapp-activity-ktx-1.12.1-22 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\593d7694ecb1b93b99c5ee1565ba26fb\transformed\activity-ktx-1.12.1\res
-com.example.messapp-recyclerview-1.2.1-23 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\5a200d7a11e8524fd1c2135e42c79b32\transformed\recyclerview-1.2.1\res
-com.example.messapp-credentials-play-services-auth-1.5.0-24 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\6cf8a86e07638f1f32756ff728dd3bb3\transformed\credentials-play-services-auth-1.5.0\res
-com.example.messapp-lifecycle-process-2.6.2-25 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\71b082896fea4299ceab1d39a64478ec\transformed\lifecycle-process-2.6.2\res
-com.example.messapp-lifecycle-runtime-2.6.2-26 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\74ba93f351dfcc8c4422ca03d7a1fc3d\transformed\lifecycle-runtime-2.6.2\res
-com.example.messapp-lifecycle-livedata-core-2.6.2-27 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\76d8750cc4f1eb072ba409d8fff08ef1\transformed\lifecycle-livedata-core-2.6.2\res
-com.example.messapp-appcompat-resources-1.7.1-28 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\79e1f5145b322937bad096cae2a5ad94\transformed\appcompat-resources-1.7.1\res
-com.example.messapp-transition-1.5.0-29 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\7a5d703cf1e6de9c93ef1c4e5cae404b\transformed\transition-1.5.0\res
-com.example.messapp-lifecycle-runtime-ktx-2.6.2-30 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\7e1c8f811c5e006ad59db08e8e8d5901\transformed\lifecycle-runtime-ktx-2.6.2\res
-com.example.messapp-play-services-base-18.5.0-31 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\9119db4118b5c98552a4b836b36ae901\transformed\play-services-base-18.5.0\res
-com.example.messapp-navigationevent-32 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\91d299a7b70d19d57c26112b482ea2e4\transformed\navigationevent\res
-com.example.messapp-window-1.0.0-33 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\9242386dcbe409d6e538ba569ce2c0bf\transformed\window-1.0.0\res
-com.example.messapp-lifecycle-viewmodel-ktx-2.6.2-34 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\9fff45b674d81c6979dad18f8de95ed6\transformed\lifecycle-viewmodel-ktx-2.6.2\res
-com.example.messapp-savedstate-ktx-1.2.1-35 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\a158a194a2ac30b79e5f3940a74d3bce\transformed\savedstate-ktx-1.2.1\res
-com.example.messapp-credentials-1.5.0-36 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\a30f9c32fbe5a8ddd5b0c8666f7d0b48\transformed\credentials-1.5.0\res
-com.example.messapp-drawerlayout-1.1.1-37 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\b53d57b9810437b13d1801dd2730e4db\transformed\drawerlayout-1.1.1\res
-com.example.messapp-firebase-messaging-24.1.0-38 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\b848f05a7a4c7f164aca30f15fd819c5\transformed\firebase-messaging-24.1.0\res
-com.example.messapp-slidingpanelayout-1.2.0-39 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ba1e014fc736adf0191dec2698c46832\transformed\slidingpanelayout-1.2.0\res
-com.example.messapp-emoji2-1.3.0-40 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\bb6647ca8574d621a6964241e36ed258\transformed\emoji2-1.3.0\res
-com.example.messapp-tracing-1.2.0-41 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\bd0bc197a4aa73ddc6707cc14269202c\transformed\tracing-1.2.0\res
-com.example.messapp-navigation-runtime-2.8.5-42 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\bd2cad1182fa5d31aaca8e697e5bbf9c\transformed\navigation-runtime-2.8.5\res
-com.example.messapp-startup-runtime-1.1.1-43 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\bf87976bda596e6a94e721781323793f\transformed\startup-runtime-1.1.1\res
-com.example.messapp-lifecycle-livedata-core-ktx-2.6.2-44 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\c6d6374f629df1253e59da4ce18d4bcf\transformed\lifecycle-livedata-core-ktx-2.6.2\res
-com.example.messapp-lifecycle-viewmodel-savedstate-2.6.2-45 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\c77212df8b34cc15806d6b88bde2064e\transformed\lifecycle-viewmodel-savedstate-2.6.2\res
-com.example.messapp-appcompat-1.7.1-46 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\cafefebf280a346989a762401cd38065\transformed\appcompat-1.7.1\res
-com.example.messapp-coordinatorlayout-1.1.0-47 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\d7050519134ad718c0e3a827436fa3ba\transformed\coordinatorlayout-1.1.0\res
-com.example.messapp-lifecycle-livedata-2.6.2-48 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\e0fcdc1145961478c40796f116ff3381\transformed\lifecycle-livedata-2.6.2\res
-com.example.messapp-fragment-ktx-1.6.2-49 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\e47aae27245c6db79c57a73095c73323\transformed\fragment-ktx-1.6.2\res
-com.example.messapp-profileinstaller-1.4.0-50 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ea61d69ca3b0e41dbb3669d89f5e1893\transformed\profileinstaller-1.4.0\res
-com.example.messapp-annotation-experimental-1.4.1-51 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\f18ed98cd1a5c3699d8729fdce8ae526\transformed\annotation-experimental-1.4.1\res
-com.example.messapp-biometric-1.1.0-52 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\f58291ab92e9152b1d56a65d4d9f9f91\transformed\biometric-1.1.0\res
-com.example.messapp-constraintlayout-2.2.1-53 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\f5d101d8a40c51f096dd231641a88c58\transformed\constraintlayout-2.2.1\res
-com.example.messapp-core-runtime-2.2.0-54 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\fa0252c91ea60d75806da96c72807255\transformed\core-runtime-2.2.0\res
-com.example.messapp-pngs-55 D:\8)Android Development\messapp\app\build\generated\res\pngs\debug
-com.example.messapp-res-56 D:\8)Android Development\messapp\app\build\generated\res\processDebugGoogleServices
-com.example.messapp-resValues-57 D:\8)Android Development\messapp\app\build\generated\res\resValues\debug
-com.example.messapp-updated_navigation_xml-58 D:\8)Android Development\messapp\app\build\generated\updated_navigation_xml\debug
-com.example.messapp-packageDebugResources-59 D:\8)Android Development\messapp\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
-com.example.messapp-packageDebugResources-60 D:\8)Android Development\messapp\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
-com.example.messapp-debug-61 D:\8)Android Development\messapp\app\build\intermediates\merged_res\debug\mergeDebugResources
-com.example.messapp-debug-62 D:\8)Android Development\messapp\app\src\debug\res
-com.example.messapp-main-63 D:\8)Android Development\messapp\app\src\main\res
+com.example.messapp-savedstate-1.2.1-0 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\00e2d40dd99b520ce4776a5f752d411b\transformed\savedstate-1.2.1\res
+com.example.messapp-browser-1.4.0-1 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\02e48cd5583e2548d60be26ef535c9b0\transformed\browser-1.4.0\res
+com.example.messapp-navigation-common-2.8.5-2 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\09fcfb6b9af254b86086f74b29e5df27\transformed\navigation-common-2.8.5\res
+com.example.messapp-navigation-runtime-2.8.5-3 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\102aea6406f29a1f5f9b5cda3ba4471e\transformed\navigation-runtime-2.8.5\res
+com.example.messapp-transition-1.5.0-4 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\10998bde8ce8aca720a98f71ff0d700f\transformed\transition-1.5.0\res
+com.example.messapp-emoji2-views-helper-1.3.0-5 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\1aa1a256b28be959218d7517099b1008\transformed\emoji2-views-helper-1.3.0\res
+com.example.messapp-annotation-experimental-1.4.1-6 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\1b766b892b6619323c3224c72b34ca9b\transformed\annotation-experimental-1.4.1\res
+com.example.messapp-dynamicanimation-1.1.0-7 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\1c2783f39b80d4b5a9f92e232b83d9d9\transformed\dynamicanimation-1.1.0\res
+com.example.messapp-coordinatorlayout-1.1.0-8 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\1d289b81a7cc2630b92867273dbd8ab5\transformed\coordinatorlayout-1.1.0\res
+com.example.messapp-drawerlayout-1.1.1-9 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\1f8fd8a9dcfe8775ffa066402740660a\transformed\drawerlayout-1.1.1\res
+com.example.messapp-tracing-1.2.0-10 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\22589b3fa65d6d47373bfad5ba152703\transformed\tracing-1.2.0\res
+com.example.messapp-navigation-ui-2.8.5-11 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\333c2d8960c849befb9fd148a3272d2f\transformed\navigation-ui-2.8.5\res
+com.example.messapp-activity-ktx-1.12.1-12 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\395cbbe4201da9a58cc5fb35ac45a635\transformed\activity-ktx-1.12.1\res
+com.example.messapp-emoji2-1.3.0-13 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\43b269e97630017b317da15e141311e4\transformed\emoji2-1.3.0\res
+com.example.messapp-firebase-messaging-24.1.0-14 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\447b126f5b0183547d5b7cf9c685f377\transformed\firebase-messaging-24.1.0\res
+com.example.messapp-viewpager2-1.0.0-15 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\460c2c66cb3df64daedf229b5953d8f1\transformed\viewpager2-1.0.0\res
+com.example.messapp-lifecycle-livedata-core-ktx-2.6.2-16 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\4d0c1ca462099269389b573faea54a66\transformed\lifecycle-livedata-core-ktx-2.6.2\res
+com.example.messapp-play-services-auth-21.1.1-17 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\503a017b8ab26b44fb259d428795cf0e\transformed\play-services-auth-21.1.1\res
+com.example.messapp-firebase-common-21.0.0-18 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\50ab01d72b75a73d807b3861a32c753d\transformed\firebase-common-21.0.0\res
+com.example.messapp-navigation-fragment-2.8.5-19 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\54bb514973b76ed5e4e6caf8e0ed77da\transformed\navigation-fragment-2.8.5\res
+com.example.messapp-glide-4.16.0-20 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\5c2248977a72902ae40a8fe54954793c\transformed\glide-4.16.0\res
+com.example.messapp-fragment-ktx-1.6.2-21 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\630cb201f4c01246552edb094586dc22\transformed\fragment-ktx-1.6.2\res
+com.example.messapp-lifecycle-runtime-2.6.2-22 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\6b244593822c01a8ea9475d061771b0f\transformed\lifecycle-runtime-2.6.2\res
+com.example.messapp-constraintlayout-2.2.1-23 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\6c59fc7a031669271fc5bebdfa922648\transformed\constraintlayout-2.2.1\res
+com.example.messapp-profileinstaller-1.4.0-24 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\71a8bbf18dff6871ec63e2e2e532fe06\transformed\profileinstaller-1.4.0\res
+com.example.messapp-slidingpanelayout-1.2.0-25 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\7a60ae843f0b4395f5424e301c43db8b\transformed\slidingpanelayout-1.2.0\res
+com.example.messapp-lifecycle-process-2.6.2-26 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\7ff51d90fd0761e0c2c35da46fc75608\transformed\lifecycle-process-2.6.2\res
+com.example.messapp-lifecycle-runtime-ktx-2.6.2-27 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\868eeb585fd2dde9c50cc7f80d7af307\transformed\lifecycle-runtime-ktx-2.6.2\res
+com.example.messapp-core-common-2.0.3-28 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\8cd8af6a1b85b1066f14e7f8f23379ea\transformed\core-common-2.0.3\res
+com.example.messapp-graphics-shapes-release-29 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\90a8e5c8693bd788b2b4e5ab748f91c4\transformed\graphics-shapes-release\res
+com.example.messapp-recyclerview-1.2.1-30 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\91e3e84c80f21a70a8087086a08f43ac\transformed\recyclerview-1.2.1\res
+com.example.messapp-appcompat-resources-1.7.1-31 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\94b036ed41b702521a14c92ec16e818b\transformed\appcompat-resources-1.7.1\res
+com.example.messapp-lifecycle-viewmodel-2.6.2-32 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\979c325c263af04a0d39911df894ec94\transformed\lifecycle-viewmodel-2.6.2\res
+com.example.messapp-core-1.16.0-33 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\9ae442ca4c9f4b969e6c2cc5a4bcd80a\transformed\core-1.16.0\res
+com.example.messapp-cardview-1.0.0-34 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\9c55e6b1049f0a7a05b5a9ba5a0b65ac\transformed\cardview-1.0.0\res
+com.example.messapp-material-1.13.0-35 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\a3939834562b7e296195a51f01eff6a4\transformed\material-1.13.0\res
+com.example.messapp-core-viewtree-1.0.0-36 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\a5786583d8e44d89ae057facd43c7f9e\transformed\core-viewtree-1.0.0\res
+com.example.messapp-credentials-1.5.0-37 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\a9724cce9b506b37fad2eeaed9f55e0e\transformed\credentials-1.5.0\res
+com.example.messapp-lifecycle-livedata-core-2.6.2-38 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ae969cbd840e99c50406b13a21e144bc\transformed\lifecycle-livedata-core-2.6.2\res
+com.example.messapp-appcompat-1.7.1-39 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\aede2d2b0c8a4525090273be8a9e7f38\transformed\appcompat-1.7.1\res
+com.example.messapp-core-runtime-2.2.0-40 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\b74a010c121087983d966d258d8733a9\transformed\core-runtime-2.2.0\res
+com.example.messapp-savedstate-ktx-1.2.1-41 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\b8581b06b90a8ad37c843e140d0aa633\transformed\savedstate-ktx-1.2.1\res
+com.example.messapp-biometric-1.1.0-42 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\be3bbff041edfe709926398e69238b78\transformed\biometric-1.1.0\res
+com.example.messapp-core-ktx-1.16.0-43 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\c5cbde01fb04a5b8b942dcfc75e7cf42\transformed\core-ktx-1.16.0\res
+com.example.messapp-lifecycle-viewmodel-savedstate-2.6.2-44 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\c8d04aad8897a5be74b4f67f0921f466\transformed\lifecycle-viewmodel-savedstate-2.6.2\res
+com.example.messapp-credentials-play-services-auth-1.5.0-45 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\cd4f767cb7ca2087a7dd7c609bff5cba\transformed\credentials-play-services-auth-1.5.0\res
+com.example.messapp-play-services-basement-18.4.0-46 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\d25a5950043f4e6ec890e440b1265d5b\transformed\play-services-basement-18.4.0\res
+com.example.messapp-fragment-1.6.2-47 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ddd190511097e3119f6712529ca9d43f\transformed\fragment-1.6.2\res
+com.example.messapp-lifecycle-livedata-2.6.2-48 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\dff424a6bd344d3bc25b1515c8f7763b\transformed\lifecycle-livedata-2.6.2\res
+com.example.messapp-play-services-base-18.5.0-49 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\e40c1b5df8fecaaaf3b78acf301a818c\transformed\play-services-base-18.5.0\res
+com.example.messapp-startup-runtime-1.1.1-50 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\e514afe212a000576d4cb0dc26a56731\transformed\startup-runtime-1.1.1\res
+com.example.messapp-activity-1.12.1-51 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\e69b97aae95d3a63f0e8b39efecd0512\transformed\activity-1.12.1\res
+com.example.messapp-lifecycle-viewmodel-ktx-2.6.2-52 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\e6e632c0273cb776b3d04983e9a6e39f\transformed\lifecycle-viewmodel-ktx-2.6.2\res
+com.example.messapp-swiperefreshlayout-1.2.0-53 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\e892d3b9e1f295dd06bcb8254c252c71\transformed\swiperefreshlayout-1.2.0\res
+com.example.messapp-navigationevent-54 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\f438d626674a0f0c58307b0d53a4bf2d\transformed\navigationevent\res
+com.example.messapp-window-1.0.0-55 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ff798c76f6838492eb62b0536569afa8\transformed\window-1.0.0\res
+com.example.messapp-pngs-56 D:\8)Android Development\messapp\app\build\generated\res\pngs\debug
+com.example.messapp-res-57 D:\8)Android Development\messapp\app\build\generated\res\processDebugGoogleServices
+com.example.messapp-resValues-58 D:\8)Android Development\messapp\app\build\generated\res\resValues\debug
+com.example.messapp-updated_navigation_xml-59 D:\8)Android Development\messapp\app\build\generated\updated_navigation_xml\debug
+com.example.messapp-packageDebugResources-60 D:\8)Android Development\messapp\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
+com.example.messapp-packageDebugResources-61 D:\8)Android Development\messapp\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
+com.example.messapp-debug-62 D:\8)Android Development\messapp\app\build\intermediates\merged_res\debug\mergeDebugResources
+com.example.messapp-debug-63 D:\8)Android Development\messapp\app\src\debug\res
+com.example.messapp-main-64 D:\8)Android Development\messapp\app\src\main\res

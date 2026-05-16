@@ -8,6 +8,7 @@ import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -15,10 +16,13 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.example.messapp.R;
 import com.example.messapp.databinding.FragmentUserHomeBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -76,14 +80,35 @@ public class UserHomeFragment extends Fragment {
 
         todayDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
 
-        binding.textDate.setText(new SimpleDateFormat("EEEE, MMM dd", Locale.getDefault()).format(new Date()));
-
         // FIX #3: Attach click listeners immediately with a guard inside each handler,
         // rather than waiting for Firestore to return.  This guarantees the buttons
         // always respond — even if the user taps before the snapshot arrives.
         setupClickListeners();
+        animateFoodCards();
 
         fetchUserDetails();
+    }
+
+    private void animateFoodCards() {
+        binding.cardBreakfast.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.card_fade_slide_up));
+
+        binding.cardLunch.setTranslationY(18f);
+        binding.cardLunch.setAlpha(0f);
+        binding.cardLunch.animate()
+                .alpha(1f)
+                .translationY(0f)
+                .setStartDelay(90)
+                .setDuration(360)
+                .start();
+
+        binding.cardDinner.setTranslationY(18f);
+        binding.cardDinner.setAlpha(0f);
+        binding.cardDinner.animate()
+                .alpha(1f)
+                .translationY(0f)
+                .setStartDelay(170)
+                .setDuration(360)
+                .start();
     }
 
     private void fetchUserDetails() {
@@ -97,19 +122,15 @@ public class UserHomeFragment extends Fragment {
                 Long dinnerExpiry = documentSnapshot.getLong("dinnerSubscriptionExpiry");
                 Long generalExpiry = documentSnapshot.getLong("subscriptionExpiry");
 
-                String name = documentSnapshot.getString("name");
-                if (name != null) {
-                    binding.textGreeting.setText("Hello, " + name.split(" ")[0] + "!");
-                }
-
                 String preference = documentSnapshot.getString("dietaryPreference");
                 if (preference != null && !preference.isEmpty()) {
                     binding.textLunchPreference.setText(preference.toUpperCase());
                     binding.textLunchPreference.setVisibility(View.VISIBLE);
                     binding.textDinnerPreference.setText(preference.toUpperCase());
                     binding.textDinnerPreference.setVisibility(View.VISIBLE);
-                    int color = preference.equalsIgnoreCase("Veg") ? Color.parseColor("#4CAF50")
-                            : Color.parseColor("#F44336");
+                    int color = preference.equalsIgnoreCase("Veg")
+                            ? themeColor(R.color.state_success)
+                            : themeColor(R.color.state_error);
                     binding.textLunchPreference.setTextColor(color);
                     binding.textDinnerPreference.setTextColor(color);
                 } else {
@@ -199,11 +220,6 @@ public class UserHomeFragment extends Fragment {
     // FIX #3: Called immediately from onViewCreated, not deferred to the Firestore
     // callback.  Each handler guards against missing messId/userId at runtime.
     private void setupClickListeners() {
-        binding.profileContainer.setOnClickListener(v -> {
-            if (getActivity() instanceof com.example.messapp.UserDashboardActivity) {
-                ((com.example.messapp.UserDashboardActivity) getActivity()).openProfileDrawer();
-            }
-        });
         binding.btnLunchInNew.setOnClickListener(v -> markAttendance("LUNCH", "IN"));
         binding.btnLunchOutNew.setOnClickListener(v -> markAttendance("LUNCH", "OUT"));
         binding.btnDinnerInNew.setOnClickListener(v -> markAttendance("DINNER", "IN"));
@@ -523,7 +539,7 @@ public class UserHomeFragment extends Fragment {
         TextView text = new TextView(requireContext());
         text.setText(formatPlannedOutLabel(doc));
         text.setTextSize(14);
-        text.setTextColor(Color.parseColor("#111811"));
+        text.setTextColor(themeColor(R.color.text_body));
         text.setLayoutParams(new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
 
         com.google.android.material.button.MaterialButton cancelButton =
@@ -658,17 +674,21 @@ public class UserHomeFragment extends Fragment {
         return Math.round(value * getResources().getDisplayMetrics().density);
     }
 
+    private int themeColor(@ColorRes int colorRes) {
+        return ContextCompat.getColor(requireContext(), colorRes);
+    }
+
     private void updateButtonUI(String mealType, String status) {
         if (binding == null) return;
 
-        int colorPrimary  = Color.parseColor("#13ec13");
-        int colorTextNormal = Color.parseColor("#111811");
-        int colorTextMuted  = Color.parseColor("#618961");
-        int colorGray     = Color.LTGRAY;
-        int colorGreen    = Color.parseColor("#4CAF50");
-        int colorYellow   = Color.parseColor("#FF9800");
-        int colorRed      = Color.parseColor("#F44336");
-        int colorDisabled = Color.parseColor("#9CA3AF");
+        int colorPrimary = themeColor(R.color.brand_primary);
+        int colorTextOnPrimary = themeColor(R.color.text_on_brand);
+        int colorTextNormal = themeColor(R.color.text_heading);
+        int colorTextMuted = themeColor(R.color.text_caption);
+        int colorGray = themeColor(R.color.neutral_300);
+        int colorGreen = themeColor(R.color.state_success);
+        int colorYellow = themeColor(R.color.state_warning);
+        int colorDisabled = themeColor(R.color.text_disabled);
 
         boolean isSubscribed = mealType.equals("LUNCH") ? isLunchSubscribed : isDinnerSubscribed;
         boolean cutoffPassed = isCutoffPassed(mealType);
@@ -683,7 +703,7 @@ public class UserHomeFragment extends Fragment {
                     binding.textLunchStatusBar.setBackgroundColor(colorDisabled);
                 } else {
                     binding.btnLunchInNew.setBackgroundTintList(ColorStateList.valueOf(colorPrimary));
-                    binding.btnLunchInNew.setTextColor(colorTextNormal);
+                    binding.btnLunchInNew.setTextColor(colorTextOnPrimary);
                     binding.btnLunchOutNew.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
                     binding.btnLunchOutNew.setTextColor(colorTextMuted);
                     binding.textLunchStatus.setText("");
@@ -696,7 +716,7 @@ public class UserHomeFragment extends Fragment {
             }
             if ("IN".equals(status)) {
                 binding.btnLunchInNew.setBackgroundTintList(ColorStateList.valueOf(colorPrimary));
-                binding.btnLunchInNew.setTextColor(colorTextNormal);
+                binding.btnLunchInNew.setTextColor(colorTextOnPrimary);
                 binding.btnLunchOutNew.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
                 binding.btnLunchOutNew.setTextColor(colorTextMuted);
                 binding.btnLunchInNew.setEnabled(false);
@@ -727,7 +747,7 @@ public class UserHomeFragment extends Fragment {
                     binding.textDinnerStatusBar.setBackgroundColor(colorDisabled);
                 } else {
                     binding.btnDinnerInNew.setBackgroundTintList(ColorStateList.valueOf(colorPrimary));
-                    binding.btnDinnerInNew.setTextColor(colorTextNormal);
+                    binding.btnDinnerInNew.setTextColor(colorTextOnPrimary);
                     binding.btnDinnerOutNew.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
                     binding.btnDinnerOutNew.setTextColor(colorTextMuted);
                     binding.textDinnerStatus.setText("");
@@ -740,7 +760,7 @@ public class UserHomeFragment extends Fragment {
             }
             if ("IN".equals(status)) {
                 binding.btnDinnerInNew.setBackgroundTintList(ColorStateList.valueOf(colorPrimary));
-                binding.btnDinnerInNew.setTextColor(colorTextNormal);
+                binding.btnDinnerInNew.setTextColor(colorTextOnPrimary);
                 binding.btnDinnerOutNew.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
                 binding.btnDinnerOutNew.setTextColor(colorTextMuted);
                 binding.btnDinnerInNew.setEnabled(false);
@@ -832,12 +852,12 @@ public class UserHomeFragment extends Fragment {
             timerView.setText(hours > 0
                     ? String.format(Locale.getDefault(), "%dh %02dm left", hours, minutes)
                     : String.format(Locale.getDefault(), "%02d:%02d left", minutes, seconds));
-            timerView.setTextColor(Color.parseColor("#EF4444"));
-            timerView.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FEE2E2")));
+            timerView.setTextColor(themeColor(R.color.state_error));
+            timerView.setBackgroundTintList(ColorStateList.valueOf(themeColor(R.color.semantic_error_bg)));
         } else {
             timerView.setText("LOCKED");
-            timerView.setTextColor(Color.GRAY);
-            timerView.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#F3F4F6")));
+            timerView.setTextColor(themeColor(R.color.text_disabled));
+            timerView.setBackgroundTintList(ColorStateList.valueOf(themeColor(R.color.neutral_100)));
         }
     }
 
@@ -876,18 +896,18 @@ public class UserHomeFragment extends Fragment {
         switch (condition) {
             case "FULL":
                 binding.textMessCondition.setText("Mess is FULL");
-                binding.textMessCondition.setTextColor(Color.parseColor("#EF4444"));
-                indicator.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xFFEF4444));
+                binding.textMessCondition.setTextColor(themeColor(R.color.state_error));
+                indicator.setBackgroundTintList(ColorStateList.valueOf(themeColor(R.color.state_error)));
                 break;
             case "HALF":
                 binding.textMessCondition.setText("Mess is HALF FULL");
-                binding.textMessCondition.setTextColor(Color.parseColor("#F59E0B"));
-                indicator.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xFFF59E0B));
+                binding.textMessCondition.setTextColor(themeColor(R.color.state_warning));
+                indicator.setBackgroundTintList(ColorStateList.valueOf(themeColor(R.color.state_warning)));
                 break;
             case "EMPTY":
                 binding.textMessCondition.setText("Mess is EMPTY");
-                binding.textMessCondition.setTextColor(Color.parseColor("#10B981"));
-                indicator.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xFF10B981));
+                binding.textMessCondition.setTextColor(themeColor(R.color.state_success));
+                indicator.setBackgroundTintList(ColorStateList.valueOf(themeColor(R.color.state_success)));
                 break;
             default:
                 hideMessConditionCard();

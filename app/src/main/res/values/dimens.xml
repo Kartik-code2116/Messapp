@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="user_page_padding_h">20dp</dimen>
+    <dimen name="user_page_padding_v">16dp</dimen>
+    <dimen name="user_card_radius">20dp</dimen>
+    <dimen name="user_card_elevation">2dp</dimen>
+    <dimen name="user_section_spacing">24dp</dimen>
+    <dimen name="user_item_spacing">12dp</dimen>
+</resources>

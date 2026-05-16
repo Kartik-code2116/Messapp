@@ -69,10 +69,54 @@ public class UserDashboardActivity extends AppCompatActivity {
 
         NavigationUI.setupWithNavController(binding.navView, navController);
         setupProfileDrawer();
+        setupTopBar();
+        loadTopBarProfile();
         loadDrawerProfile();
     }
 
+    private void setupTopBar() {
+        binding.userTopBar.textDate.setText(
+                new SimpleDateFormat("EEEE, MMM dd", Locale.getDefault()).format(new Date()));
+
+        binding.userTopBar.profileContainer.setOnClickListener(v -> openProfileDrawer());
+
+        binding.userTopBar.btnNotification.setOnClickListener(v ->
+                Toast.makeText(this, "Notifications coming soon", Toast.LENGTH_SHORT).show());
+    }
+
+    private void loadTopBarProfile() {
+        if (auth.getCurrentUser() == null) {
+            binding.userTopBar.textGreeting.setText(isGuestMode ? "Hello, Guest!" : "Hello!");
+            binding.userTopBar.imgProfile.setImageResource(R.drawable.ic_student_profile);
+            return;
+        }
+
+        String userId = auth.getCurrentUser().getUid();
+        db.collection("users").document(userId).get()
+                .addOnSuccessListener(doc -> {
+                    String name = doc.getString("name");
+                    if (name != null && !name.isEmpty()) {
+                        binding.userTopBar.textGreeting.setText(
+                                "Hello, " + name.split(" ")[0] + "!");
+                    } else {
+                        binding.userTopBar.textGreeting.setText("Hello!");
+                    }
+
+                    String profileImageUrl = doc.getString("profileImageUrl");
+                    if (profileImageUrl != null && !profileImageUrl.isEmpty()) {
+                        Glide.with(this)
+                                .load(profileImageUrl)
+                                .placeholder(R.drawable.ic_student_profile)
+                                .circleCrop()
+                                .into(binding.userTopBar.imgProfile);
+                    } else {
+                        binding.userTopBar.imgProfile.setImageResource(R.drawable.ic_student_profile);
+                    }
+                });
+    }
+
     public void openProfileDrawer() {
+        loadTopBarProfile();
         loadDrawerProfile();
         binding.container.openDrawer(GravityCompat.END);
     }

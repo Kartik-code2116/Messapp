@@ -33,15 +33,20 @@ public final class ActivityUserDashboardBinding implements ViewBinding {
   @NonNull
   public final NavigationView profileDrawer;
 
+  @NonNull
+  public final IncludeUserTopBarBinding userTopBar;
+
   private ActivityUserDashboardBinding(@NonNull DrawerLayout rootView,
       @NonNull DrawerLayout container,
       @NonNull FragmentContainerView navHostFragmentActivityUserDashboard,
-      @NonNull BottomNavigationView navView, @NonNull NavigationView profileDrawer) {
+      @NonNull BottomNavigationView navView, @NonNull NavigationView profileDrawer,
+      @NonNull IncludeUserTopBarBinding userTopBar) {
     this.rootView = rootView;
     this.container = container;
     this.navHostFragmentActivityUserDashboard = navHostFragmentActivityUserDashboard;
     this.navView = navView;
     this.profileDrawer = profileDrawer;
+    this.userTopBar = userTopBar;
   }
 
   @Override
@@ -91,8 +96,15 @@ public final class ActivityUserDashboardBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.user_top_bar;
+      View userTopBar = ViewBindings.findChildViewById(rootView, id);
+      if (userTopBar == null) {
+        break missingId;
+      }
+      IncludeUserTopBarBinding binding_userTopBar = IncludeUserTopBarBinding.bind(userTopBar);
+
       return new ActivityUserDashboardBinding((DrawerLayout) rootView, container,
-          navHostFragmentActivityUserDashboard, navView, profileDrawer);
+          navHostFragmentActivityUserDashboard, navView, profileDrawer, binding_userTopBar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

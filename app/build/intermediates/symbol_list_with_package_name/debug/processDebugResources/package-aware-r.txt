@@ -23,6 +23,7 @@ anim btn_radio_to_off_mtrl_ring_outer_path_animation
 anim btn_radio_to_on_mtrl_dot_group_animation
 anim btn_radio_to_on_mtrl_ring_outer_animation
 anim btn_radio_to_on_mtrl_ring_outer_path_animation
+anim card_fade_slide_up
 anim design_bottom_sheet_slide_in
 anim design_bottom_sheet_slide_out
 anim design_snackbar_in
@@ -1290,6 +1291,7 @@ attr suffixText
 attr suffixTextAppearance
 attr suffixTextColor
 attr suggestionRowLayout
+attr swipeRefreshLayoutProgressSpinnerBackgroundColor
 attr switchMinWidth
 attr switchPadding
 attr switchStyle
@@ -1620,6 +1622,12 @@ color cardview_dark_background
 color cardview_light_background
 color cardview_shadow_end_color
 color cardview_shadow_start_color
+color charcoal_base
+color charcoal_border
+color charcoal_darkest
+color charcoal_elevated
+color charcoal_muted
+color charcoal_surface
 color colorAccent
 color colorPrimary
 color colorPrimaryDark
@@ -1634,6 +1642,10 @@ color common_google_signin_btn_text_light_disabled
 color common_google_signin_btn_text_light_focused
 color common_google_signin_btn_text_light_pressed
 color common_google_signin_btn_tint
+color cream_bright
+color cream_faint
+color cream_muted
+color cream_soft
 color dash_background_light
 color dash_primary
 color dash_primary_10
@@ -2544,6 +2556,11 @@ color neutral_800
 color neutral_900
 color notification_action_color_filter
 color notification_icon_bg_color
+color orange_bright
+color orange_container
+color orange_deep
+color orange_glow
+color orange_primary
 color page_background
 color primary_color
 color primary_dark
@@ -2583,6 +2600,7 @@ color status_out
 color success
 color surface
 color surface_card
+color surface_elevated
 color surface_glass
 color surface_modal
 color switch_thumb_disabled_material_dark
@@ -3640,6 +3658,12 @@ dimen tooltip_precise_anchor_threshold
 dimen tooltip_vertical_padding
 dimen tooltip_y_offset_non_touch
 dimen tooltip_y_offset_touch
+dimen user_card_elevation
+dimen user_card_radius
+dimen user_item_spacing
+dimen user_page_padding_h
+dimen user_page_padding_v
+dimen user_section_spacing
 drawable _c3d318d7_6015_4c92_9b56_8d2c50388d41_
 drawable abc_ab_share_pack_mtrl_alpha
 drawable abc_action_bar_item_background_material
@@ -3730,6 +3754,7 @@ drawable bg_admin_icon_green
 drawable bg_admin_icon_orange
 drawable bg_admin_icon_primary
 drawable bg_admin_stat_card
+drawable bg_bottom_nav
 drawable bg_button_gradient
 drawable bg_capsule_accent
 drawable bg_chip_selected
@@ -3737,10 +3762,15 @@ drawable bg_chip_unselected
 drawable bg_circle_light_green
 drawable bg_circle_primary_border
 drawable bg_circle_surface
+drawable bg_drawer_header
+drawable bg_food_image_warm_overlay
 drawable bg_gradient
 drawable bg_gradient_primary
 drawable bg_input_field
 drawable bg_login_header
+drawable bg_profile_badge
+drawable bg_profile_header
+drawable bg_profile_icon_circle
 drawable bg_profound_gradient
 drawable bg_rounded_card_primary_light
 drawable bg_rounded_card_surface
@@ -3754,6 +3784,7 @@ drawable bg_search_input
 drawable bg_status_pill_danger
 drawable bg_status_pill_neutral
 drawable bg_status_pill_success
+drawable bg_user_day_chip
 drawable btn_checkbox_checked_mtrl
 drawable btn_checkbox_checked_to_unchecked_mtrl_animation
 drawable btn_checkbox_unchecked_mtrl
@@ -3866,6 +3897,7 @@ drawable ic_schedule
 drawable ic_search_black_24
 drawable ic_settings_black_24dp
 drawable ic_star_rate
+drawable ic_steam_subtle
 drawable ic_student_profile
 drawable line_dashed
 drawable m3_avd_hide_password
@@ -4348,6 +4380,9 @@ id included
 id indeterminate
 id indicator_mess_condition
 id info
+id info_row_icon
+id info_row_label
+id info_row_value
 id invisible
 id inward
 id italic
@@ -4360,6 +4395,7 @@ id label_active_students
 id label_mess_details
 id labeled
 id layout
+id layout_empty_history
 id left
 id leftToRight
 id legacy
@@ -4550,6 +4586,7 @@ id profile_image
 id progressBar
 id progress_bar
 id progress_circular
+id progress_history
 id progress_horizontal
 id radio
 id radio_both
@@ -4652,6 +4689,7 @@ id stretch
 id submenuarrow
 id submit_area
 id supportScrollUp
+id swipe_refresh
 id switch_allow_multiple_changes
 id switch_dark_mode
 id tabMode
@@ -4703,6 +4741,7 @@ id text_drawer_email
 id text_drawer_mess
 id text_drawer_name
 id text_drawer_subscription
+id text_empty_history
 id text_expiry_date
 id text_greeting
 id text_history_date
@@ -4815,6 +4854,7 @@ id uniform
 id unlabeled
 id up
 id useLogo
+id user_top_bar
 id vertical
 id vertical_only
 id view_offset_helper
@@ -5007,9 +5047,11 @@ layout fragment_user_profile
 layout header_user_profile_drawer
 layout ime_base_split_test_activity
 layout ime_secondary_split_test_activity
+layout include_user_top_bar
 layout item_history
 layout item_mess_card
 layout item_offer
+layout item_profile_info_row
 layout item_review
 layout item_student
 layout item_student_request
@@ -5655,6 +5697,8 @@ style Platform_V21_AppCompat_Light
 style Platform_V25_AppCompat
 style Platform_V25_AppCompat_Light
 style Platform_Widget_AppCompat_Spinner
+style ProfileCard
+style ProfileSectionTitle
 style Profound_Button
 style Profound_Button_Outlined
 style Profound_Card
@@ -6147,6 +6191,9 @@ style ThemeOverlay_MaterialComponents_TimePicker_Display_TextInputEditText
 style ThemeOverlay_MaterialComponents_Toolbar_Popup_Primary
 style ThemeOverlay_MaterialComponents_Toolbar_Primary
 style ThemeOverlay_MaterialComponents_Toolbar_Surface
+style UserPageTitle
+style UserSectionTitle
+style UserStatValue
 style Widget_AppCompat_ActionBar
 style Widget_AppCompat_ActionBar_Solid
 style Widget_AppCompat_ActionBar_TabBar
@@ -6718,6 +6765,7 @@ styleable StateListDrawable android_dither android_visible android_variablePaddi
 styleable StateListDrawableItem android_drawable
 styleable StateListSizeChange widthChange
 styleable StateSet defaultState
+styleable SwipeRefreshLayout swipeRefreshLayoutProgressSpinnerBackgroundColor
 styleable SwitchCompat android_textOn android_textOff android_thumb showText splitTrack switchMinWidth switchPadding switchTextAppearance thumbTextPadding thumbTint thumbTintMode track trackTint trackTintMode
 styleable SwitchMaterial useMaterialThemeColors
 styleable TabItem android_icon android_layout android_text

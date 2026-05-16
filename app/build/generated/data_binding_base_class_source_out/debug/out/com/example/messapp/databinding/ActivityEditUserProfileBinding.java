@@ -4,10 +4,10 @@ package com.example.messapp.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.messapp.R;
@@ -24,7 +24,7 @@ import java.lang.String;
 
 public final class ActivityEditUserProfileBinding implements ViewBinding {
   @NonNull
-  private final LinearLayout rootView;
+  private final CoordinatorLayout rootView;
 
   @NonNull
   public final FloatingActionButton btnChangePhoto;
@@ -71,7 +71,7 @@ public final class ActivityEditUserProfileBinding implements ViewBinding {
   @NonNull
   public final MaterialToolbar toolbar;
 
-  private ActivityEditUserProfileBinding(@NonNull LinearLayout rootView,
+  private ActivityEditUserProfileBinding(@NonNull CoordinatorLayout rootView,
       @NonNull FloatingActionButton btnChangePhoto, @NonNull MaterialButton btnSaveProfile,
       @NonNull Chip chipBoth, @NonNull Chip chipFemale, @NonNull ChipGroup chipGroupDiet,
       @NonNull ChipGroup chipGroupGender, @NonNull Chip chipMale, @NonNull Chip chipNonVeg,
@@ -98,7 +98,7 @@ public final class ActivityEditUserProfileBinding implements ViewBinding {
 
   @Override
   @NonNull
-  public LinearLayout getRoot() {
+  public CoordinatorLayout getRoot() {
     return rootView;
   }
 
@@ -213,7 +213,7 @@ public final class ActivityEditUserProfileBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityEditUserProfileBinding((LinearLayout) rootView, btnChangePhoto,
+      return new ActivityEditUserProfileBinding((CoordinatorLayout) rootView, btnChangePhoto,
           btnSaveProfile, chipBoth, chipFemale, chipGroupDiet, chipGroupGender, chipMale,
           chipNonVeg, chipOther, chipVeg, etName, etPhone, imgProfileEdit, progressBar, toolbar);
     }

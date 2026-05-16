@@ -17,100 +17,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="100dp">
-
-            <!-- Top Header -->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/top_header"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="20dp">
-
-                <!-- Profile Picture -->
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/profile_container"
-                    android:layout_width="56dp"
-                    android:layout_height="56dp"
-                    app:cardCornerRadius="28dp"
-                    app:cardElevation="0dp"
-                    app:strokeWidth="2dp"
-                    app:strokeColor="@color/brand_primary"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent">
-                    
-                    <ImageView
-                        android:id="@+id/img_profile"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_student_profile"
-                        android:scaleType="centerCrop"
-                        tools:src="@tools:sample/avatars"/>
-                </com.google.android.material.card.MaterialCardView>
-
-                <!-- Greeting & Date -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    app:layout_constraintStart_toEndOf="@id/btn_notification"
-                    app:layout_constraintEnd_toStartOf="@id/profile_container"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent">
-
-                    <TextView
-                        android:id="@+id/text_greeting"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Hello, Alex!"
-                        android:textSize="14sp"
-                        android:fontFamily="@font/inter"
-                        android:textColor="@color/text_body"/>
-
-                    <TextView
-                        android:id="@+id/text_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Monday, Oct 23rd"
-                        android:textSize="20sp"
-                        android:fontFamily="@font/poppins"
-                        android:textStyle="bold"
-                        android:textColor="@color/text_heading"/>
-                </LinearLayout>
-
-                <!-- Notification Button -->
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/btn_notification"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    app:cardCornerRadius="16dp"
-                    app:cardElevation="0dp"
-                    app:strokeWidth="1dp"
-                    app:strokeColor="@color/neutral_200"
-                    app:cardBackgroundColor="@color/white"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent">
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_notification"
-                        app:tint="@color/text_heading"/>
-                </com.google.android.material.card.MaterialCardView>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            android:paddingBottom="96dp">
 
              <!-- Deadline Section -->
             <LinearLayout
                  android:layout_width="match_parent"
                  android:layout_height="wrap_content"
                  android:orientation="vertical"
-                 android:paddingHorizontal="16dp"
-                 android:layout_marginTop="8dp">
+                 android:paddingHorizontal="@dimen/user_page_padding_h"
+                 android:layout_marginTop="4dp">
 
                  <com.google.android.material.card.MaterialCardView
                      android:layout_width="match_parent"
@@ -159,7 +74,7 @@
                                      android:layout_width="60dp"
                                      android:layout_height="50dp"
                                      android:background="@drawable/bg_rounded_card_surface"
-                                     android:backgroundTint="@color/white"
+                                     android:backgroundTint="@color/surface_elevated"
                                      android:text="00"
                                      android:textSize="22sp"
                                      android:fontFamily="@font/poppins"
@@ -216,7 +131,7 @@
                                      android:layout_width="60dp"
                                      android:layout_height="50dp"
                                      android:background="@drawable/bg_rounded_card_surface"
-                                     android:backgroundTint="@color/white"
+                                     android:backgroundTint="@color/surface_elevated"
                                      android:text="00"
                                      android:textSize="22sp"
                                      android:fontFamily="@font/poppins"
@@ -252,7 +167,7 @@
                 android:id="@+id/card_mess_condition"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
+                android:layout_marginHorizontal="@dimen/user_page_padding_h"
                 android:layout_marginTop="16dp"
                 android:visibility="gone"
                 style="@style/Profound.Card">
@@ -305,8 +220,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingHorizontal="20dp"
-                android:paddingTop="32dp"
+                android:paddingHorizontal="@dimen/user_page_padding_h"
+                android:paddingTop="28dp"
                 android:paddingBottom="12dp"
                 android:gravity="center_vertical">
                 
@@ -336,7 +251,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingHorizontal="16dp"
+                android:paddingHorizontal="@dimen/user_page_padding_h"
                 android:clipToPadding="false">
 
                 <com.google.android.material.button.MaterialButton
@@ -416,6 +331,14 @@
                                     android:src="@drawable/ic_breakfast_dining"
                                     android:layout_gravity="center"
                                     app:tint="@color/text_sub"/>
+                                <ImageView
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="top|end"
+                                    android:layout_marginTop="-8dp"
+                                    android:layout_marginEnd="-4dp"
+                                    android:alpha="0.5"
+                                    android:src="@drawable/ic_steam_subtle"/>
                             </FrameLayout>
 
                             <!-- Content -->
@@ -514,6 +437,14 @@
                                     android:src="@drawable/ic_lunch_dining"
                                     android:layout_gravity="center"
                                     app:tint="@color/brand_primary"/>
+                                <ImageView
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="top|end"
+                                    android:layout_marginTop="-8dp"
+                                    android:layout_marginEnd="-4dp"
+                                    android:alpha="0.55"
+                                    android:src="@drawable/ic_steam_subtle"/>
                             </FrameLayout>
 
                             <!-- Content -->
@@ -682,6 +613,14 @@
                                     android:src="@drawable/ic_dinner_dining"
                                     android:layout_gravity="center"
                                     app:tint="@color/brand_secondary"/>
+                                <ImageView
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="top|end"
+                                    android:layout_marginTop="-8dp"
+                                    android:layout_marginEnd="-4dp"
+                                    android:alpha="0.55"
+                                    android:src="@drawable/ic_steam_subtle"/>
                             </FrameLayout>
 
                             <!-- Content -->

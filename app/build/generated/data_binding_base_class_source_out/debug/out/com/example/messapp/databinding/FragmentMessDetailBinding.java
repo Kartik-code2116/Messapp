@@ -4,16 +4,16 @@ package com.example.messapp.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.RatingBar;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.messapp.R;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import java.lang.NullPointerException;
@@ -22,13 +22,13 @@ import java.lang.String;
 
 public final class FragmentMessDetailBinding implements ViewBinding {
   @NonNull
-  private final ScrollView rootView;
+  private final NestedScrollView rootView;
 
   @NonNull
-  public final Button btnSubmitReview;
+  public final MaterialButton btnSubmitReview;
 
   @NonNull
-  public final Button btnSubscribeMess;
+  public final MaterialButton btnSubscribeMess;
 
   @NonNull
   public final RatingBar ratingBarAvg;
@@ -69,10 +69,10 @@ public final class FragmentMessDetailBinding implements ViewBinding {
   @NonNull
   public final TextView textMessDetailName;
 
-  private FragmentMessDetailBinding(@NonNull ScrollView rootView, @NonNull Button btnSubmitReview,
-      @NonNull Button btnSubscribeMess, @NonNull RatingBar ratingBarAvg,
-      @NonNull RatingBar ratingBarUser, @NonNull RecyclerView recyclerViewReviews,
-      @NonNull TextInputEditText reviewCommentEditText,
+  private FragmentMessDetailBinding(@NonNull NestedScrollView rootView,
+      @NonNull MaterialButton btnSubmitReview, @NonNull MaterialButton btnSubscribeMess,
+      @NonNull RatingBar ratingBarAvg, @NonNull RatingBar ratingBarUser,
+      @NonNull RecyclerView recyclerViewReviews, @NonNull TextInputEditText reviewCommentEditText,
       @NonNull TextInputLayout reviewCommentLayout, @NonNull TextView textAddReview,
       @NonNull TextView textAvgRating, @NonNull TextView textMessDetailContact,
       @NonNull TextView textMessDetailDescription, @NonNull TextView textMessDetailDinnerMenu,
@@ -98,7 +98,7 @@ public final class FragmentMessDetailBinding implements ViewBinding {
 
   @Override
   @NonNull
-  public ScrollView getRoot() {
+  public NestedScrollView getRoot() {
     return rootView;
   }
 
@@ -124,13 +124,13 @@ public final class FragmentMessDetailBinding implements ViewBinding {
     int id;
     missingId: {
       id = R.id.btn_submit_review;
-      Button btnSubmitReview = ViewBindings.findChildViewById(rootView, id);
+      MaterialButton btnSubmitReview = ViewBindings.findChildViewById(rootView, id);
       if (btnSubmitReview == null) {
         break missingId;
       }
 
       id = R.id.btn_subscribe_mess;
-      Button btnSubscribeMess = ViewBindings.findChildViewById(rootView, id);
+      MaterialButton btnSubscribeMess = ViewBindings.findChildViewById(rootView, id);
       if (btnSubscribeMess == null) {
         break missingId;
       }
@@ -213,8 +213,8 @@ public final class FragmentMessDetailBinding implements ViewBinding {
         break missingId;
       }
 
-      return new FragmentMessDetailBinding((ScrollView) rootView, btnSubmitReview, btnSubscribeMess,
-          ratingBarAvg, ratingBarUser, recyclerViewReviews, reviewCommentEditText,
+      return new FragmentMessDetailBinding((NestedScrollView) rootView, btnSubmitReview,
+          btnSubscribeMess, ratingBarAvg, ratingBarUser, recyclerViewReviews, reviewCommentEditText,
           reviewCommentLayout, textAddReview, textAvgRating, textMessDetailContact,
           textMessDetailDescription, textMessDetailDinnerMenu, textMessDetailLocation,
           textMessDetailLunchMenu, textMessDetailName);

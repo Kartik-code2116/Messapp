@@ -3,6 +3,7 @@ package com.example.messapp.ui.user.home;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -40,6 +41,10 @@ public class MessAdapter extends ListAdapter<Mess, MessAdapter.MessViewHolder> {
         Mess mess = getItem(position);
         if (mess != null) {
             holder.bind(mess, listener);
+            holder.itemView.startAnimation(AnimationUtils.loadAnimation(
+                    holder.itemView.getContext(),
+                    R.anim.card_fade_slide_up
+            ));
         }
     }
 

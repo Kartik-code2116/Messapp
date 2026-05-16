@@ -1,45 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Cream accent (profile & badges) -->
+    <color name="cream_bright">#FFF8ED</color>
+    <color name="cream_soft">#F5E6D3</color>
+
     <!-- PROFOUND DESIGN SYSTEM PALETTE -->
     
-    <!-- BRAND: Indigo & Slate -->
-    <color name="brand_primary">#6366F1</color>      <!-- Indigo 500 -->
-    <color name="brand_primary_dark">#4F46E5</color> <!-- Indigo 600 -->
-    <color name="brand_primary_light">#818CF8</color><!-- Indigo 400 -->
-    <color name="brand_secondary">#0F172A</color>    <!-- Slate 900 -->
-    <color name="brand_accent">#F43F5E</color>       <!-- Rose 500 -->
+    <!-- BRAND: Warm Food Palette -->
+    <color name="brand_primary">#F97316</color>      <!-- Orange: buttons and highlights -->
+    <color name="brand_primary_dark">#C2410C</color> <!-- Burnt orange -->
+    <color name="brand_primary_light">#FED7AA</color><!-- Soft orange tint -->
+    <color name="brand_secondary">#3D2415</color>    <!-- Dark brown: strong text/icons -->
+    <color name="brand_accent">#DC2626</color>       <!-- Red: offers and important actions -->
 
     <!-- NEUTRALS: Slate Scale -->
-    <color name="neutral_50">#F8FAFC</color>
-    <color name="neutral_100">#F1F5F9</color>
-    <color name="neutral_200">#E2E8F0</color>
-    <color name="neutral_300">#CBD5E1</color>
-    <color name="neutral_400">#94A3B8</color>
-    <color name="neutral_500">#64748B</color>
-    <color name="neutral_600">#475569</color>
-    <color name="neutral_700">#334155</color>
-    <color name="neutral_800">#1E293B</color>
-    <color name="neutral_900">#0F172A</color>
+    <color name="neutral_50">#FFF8ED</color>
+    <color name="neutral_100">#FFF1DC</color>
+    <color name="neutral_200">#F3DEC3</color>
+    <color name="neutral_300">#E5C7A6</color>
+    <color name="neutral_400">#B99672</color>
+    <color name="neutral_500">#8D6E52</color>
+    <color name="neutral_600">#6B4B35</color>
+    <color name="neutral_700">#563726</color>
+    <color name="neutral_800">#452A1C</color>
+    <color name="neutral_900">#2B170D</color>
 
     <color name="grey_700">#616161</color>
 
     <!-- SEMANTIC: Surface & Background -->
-    <color name="background_page">#F8FAFC</color>   <!-- Slate 50 (Light Mode Bg) -->
+    <color name="background_page">#FFF8ED</color>   <!-- Cream background -->
     <color name="surface_card">#FFFFFF</color>
+    <color name="surface_elevated">#FFFFFF</color>
     <color name="surface_glass">#CCFFFFFF</color>   <!-- 80% White -->
     <color name="surface_modal">#FFFFFF</color>
     
     <!-- SEMANTIC: Text -->
-    <color name="text_heading">#0F172A</color>      <!-- Slate 900 -->
-    <color name="text_body">#334155</color>         <!-- Slate 700 -->
-    <color name="text_caption">#64748B</color>      <!-- Slate 500 -->
+    <color name="text_heading">#3D2415</color>      <!-- Dark brown -->
+    <color name="text_body">#5F3B25</color>
+    <color name="text_caption">#8D6E52</color>
     <color name="text_on_brand">#FFFFFF</color>
     <color name="text_on_primary_muted">#B3FFFFFF</color> <!-- 70% White -->
     <color name="text_disabled">#94A3B8</color>
 
     <!-- SEMANTIC: State -->
     <color name="state_success">#10B981</color>     <!-- Emerald 500 -->
-    <color name="state_error">#EF4444</color>       <!-- Red 500 -->
+    <color name="state_error">#DC2626</color>       <!-- Red for offers/actions -->
     <color name="state_warning">#F59E0B</color>     <!-- Amber 500 -->
     <color name="state_info">#3B82F6</color>        <!-- Blue 500 -->
     
@@ -50,7 +55,7 @@
     <color name="text_sub">@color/text_caption</color>
 
     <color name="semantic_success_bg">#ECFDF5</color> <!-- Emerald 50 -->
-    <color name="semantic_error_bg">#FEF2F2</color>   <!-- Red 50 -->
+    <color name="semantic_error_bg">#FEE2E2</color>   <!-- Red 100 -->
     <color name="brand_secondary_light">@color/neutral_100</color>
     
     <!-- Legacy Role Selection Colors -->
@@ -78,9 +83,9 @@
     <color name="divider">@color/neutral_200</color>
 
     <!-- Gradient Tokens -->
-    <color name="gradient_start">#6366F1</color>
-    <color name="gradient_end">#8B5CF6</color>
-    <color name="gradient_overlay">#990F172A</color>
+    <color name="gradient_start">#F97316</color>
+    <color name="gradient_end">#FACC15</color>
+    <color name="gradient_overlay">#803D2415</color>
 
     <!-- Specific UI Colors Remapped -->
     <color name="login_red_btn">@color/state_error</color>
@@ -110,8 +115,8 @@
     <!-- Batch 2 Missing Resources -->
     <color name="admin_divider">@color/neutral_200</color>
     <color name="admin_card_bg">@color/surface_card</color>
-    <color name="admin_accent_orange_faded">#33F59E0B</color> <!-- 20% Alpha Amber -->
-    <color name="admin_primary_faded">#336366F1</color>       <!-- 20% Alpha Indigo -->
+    <color name="admin_accent_orange_faded">#33F97316</color> <!-- 20% Alpha Orange -->
+    <color name="admin_primary_faded">#33F97316</color>       <!-- 20% Alpha Orange -->
     
     <color name="success">@color/state_success</color>
     <color name="dash_primary_10">#1A10B981</color>           <!-- 10% Alpha Emerald -->

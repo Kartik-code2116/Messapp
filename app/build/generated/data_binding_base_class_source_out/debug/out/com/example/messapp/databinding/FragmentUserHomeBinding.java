@@ -4,7 +4,6 @@ package com.example.messapp.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -36,9 +35,6 @@ public final class FragmentUserHomeBinding implements ViewBinding {
   public final MaterialButton btnLunchOutNew;
 
   @NonNull
-  public final MaterialCardView btnNotification;
-
-  @NonNull
   public final MaterialButton btnPlanOutDays;
 
   @NonNull
@@ -60,19 +56,10 @@ public final class FragmentUserHomeBinding implements ViewBinding {
   public final LinearLayout containerPlannedOutDays;
 
   @NonNull
-  public final ImageView imgProfile;
-
-  @NonNull
   public final View indicatorMessCondition;
 
   @NonNull
   public final LinearLayout mealsContainerNew;
-
-  @NonNull
-  public final MaterialCardView profileContainer;
-
-  @NonNull
-  public final TextView textDate;
 
   @NonNull
   public final TextView textDeadlineLabel;
@@ -91,9 +78,6 @@ public final class FragmentUserHomeBinding implements ViewBinding {
 
   @NonNull
   public final TextView textDinnerStatusBar;
-
-  @NonNull
-  public final TextView textGreeting;
 
   @NonNull
   public final TextView textLunchCardTimer;
@@ -125,34 +109,27 @@ public final class FragmentUserHomeBinding implements ViewBinding {
   @NonNull
   public final LinearLayout timerContainer;
 
-  @NonNull
-  public final ConstraintLayout topHeader;
-
   private FragmentUserHomeBinding(@NonNull ConstraintLayout rootView,
       @NonNull MaterialButton btnDinnerInNew, @NonNull MaterialButton btnDinnerOutNew,
       @NonNull MaterialButton btnLunchInNew, @NonNull MaterialButton btnLunchOutNew,
-      @NonNull MaterialCardView btnNotification, @NonNull MaterialButton btnPlanOutDays,
-      @NonNull MaterialCardView cardBreakfast, @NonNull MaterialCardView cardDinner,
-      @NonNull MaterialCardView cardLunch, @NonNull MaterialCardView cardMessCondition,
-      @NonNull MaterialCardView cardPlannedOutDays, @NonNull LinearLayout containerPlannedOutDays,
-      @NonNull ImageView imgProfile, @NonNull View indicatorMessCondition,
-      @NonNull LinearLayout mealsContainerNew, @NonNull MaterialCardView profileContainer,
-      @NonNull TextView textDate, @NonNull TextView textDeadlineLabel,
+      @NonNull MaterialButton btnPlanOutDays, @NonNull MaterialCardView cardBreakfast,
+      @NonNull MaterialCardView cardDinner, @NonNull MaterialCardView cardLunch,
+      @NonNull MaterialCardView cardMessCondition, @NonNull MaterialCardView cardPlannedOutDays,
+      @NonNull LinearLayout containerPlannedOutDays, @NonNull View indicatorMessCondition,
+      @NonNull LinearLayout mealsContainerNew, @NonNull TextView textDeadlineLabel,
       @NonNull TextView textDinnerCardTimer, @NonNull TextView textDinnerMenuNew,
       @NonNull TextView textDinnerPreference, @NonNull TextView textDinnerStatus,
-      @NonNull TextView textDinnerStatusBar, @NonNull TextView textGreeting,
-      @NonNull TextView textLunchCardTimer, @NonNull TextView textLunchMenuNew,
-      @NonNull TextView textLunchPreference, @NonNull TextView textLunchStatus,
-      @NonNull TextView textLunchStatusBar, @NonNull TextView textMessCondition,
-      @NonNull TextView textTimerHours, @NonNull TextView textTimerMins,
-      @NonNull TextView textTimerSecs, @NonNull LinearLayout timerContainer,
-      @NonNull ConstraintLayout topHeader) {
+      @NonNull TextView textDinnerStatusBar, @NonNull TextView textLunchCardTimer,
+      @NonNull TextView textLunchMenuNew, @NonNull TextView textLunchPreference,
+      @NonNull TextView textLunchStatus, @NonNull TextView textLunchStatusBar,
+      @NonNull TextView textMessCondition, @NonNull TextView textTimerHours,
+      @NonNull TextView textTimerMins, @NonNull TextView textTimerSecs,
+      @NonNull LinearLayout timerContainer) {
     this.rootView = rootView;
     this.btnDinnerInNew = btnDinnerInNew;
     this.btnDinnerOutNew = btnDinnerOutNew;
     this.btnLunchInNew = btnLunchInNew;
     this.btnLunchOutNew = btnLunchOutNew;
-    this.btnNotification = btnNotification;
     this.btnPlanOutDays = btnPlanOutDays;
     this.cardBreakfast = cardBreakfast;
     this.cardDinner = cardDinner;
@@ -160,18 +137,14 @@ public final class FragmentUserHomeBinding implements ViewBinding {
     this.cardMessCondition = cardMessCondition;
     this.cardPlannedOutDays = cardPlannedOutDays;
     this.containerPlannedOutDays = containerPlannedOutDays;
-    this.imgProfile = imgProfile;
     this.indicatorMessCondition = indicatorMessCondition;
     this.mealsContainerNew = mealsContainerNew;
-    this.profileContainer = profileContainer;
-    this.textDate = textDate;
     this.textDeadlineLabel = textDeadlineLabel;
     this.textDinnerCardTimer = textDinnerCardTimer;
     this.textDinnerMenuNew = textDinnerMenuNew;
     this.textDinnerPreference = textDinnerPreference;
     this.textDinnerStatus = textDinnerStatus;
     this.textDinnerStatusBar = textDinnerStatusBar;
-    this.textGreeting = textGreeting;
     this.textLunchCardTimer = textLunchCardTimer;
     this.textLunchMenuNew = textLunchMenuNew;
     this.textLunchPreference = textLunchPreference;
@@ -182,7 +155,6 @@ public final class FragmentUserHomeBinding implements ViewBinding {
     this.textTimerMins = textTimerMins;
     this.textTimerSecs = textTimerSecs;
     this.timerContainer = timerContainer;
-    this.topHeader = topHeader;
   }
 
   @Override
@@ -236,12 +208,6 @@ public final class FragmentUserHomeBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.btn_notification;
-      MaterialCardView btnNotification = ViewBindings.findChildViewById(rootView, id);
-      if (btnNotification == null) {
-        break missingId;
-      }
-
       id = R.id.btn_plan_out_days;
       MaterialButton btnPlanOutDays = ViewBindings.findChildViewById(rootView, id);
       if (btnPlanOutDays == null) {
@@ -284,12 +250,6 @@ public final class FragmentUserHomeBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.img_profile;
-      ImageView imgProfile = ViewBindings.findChildViewById(rootView, id);
-      if (imgProfile == null) {
-        break missingId;
-      }
-
       id = R.id.indicator_mess_condition;
       View indicatorMessCondition = ViewBindings.findChildViewById(rootView, id);
       if (indicatorMessCondition == null) {
@@ -299,18 +259,6 @@ public final class FragmentUserHomeBinding implements ViewBinding {
       id = R.id.meals_container_new;
       LinearLayout mealsContainerNew = ViewBindings.findChildViewById(rootView, id);
       if (mealsContainerNew == null) {
-        break missingId;
-      }
-
-      id = R.id.profile_container;
-      MaterialCardView profileContainer = ViewBindings.findChildViewById(rootView, id);
-      if (profileContainer == null) {
-        break missingId;
-      }
-
-      id = R.id.text_date;
-      TextView textDate = ViewBindings.findChildViewById(rootView, id);
-      if (textDate == null) {
         break missingId;
       }
 
@@ -347,12 +295,6 @@ public final class FragmentUserHomeBinding implements ViewBinding {
       id = R.id.text_dinner_status_bar;
       TextView textDinnerStatusBar = ViewBindings.findChildViewById(rootView, id);
       if (textDinnerStatusBar == null) {
-        break missingId;
-      }
-
-      id = R.id.text_greeting;
-      TextView textGreeting = ViewBindings.findChildViewById(rootView, id);
-      if (textGreeting == null) {
         break missingId;
       }
 
@@ -416,21 +358,14 @@ public final class FragmentUserHomeBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.top_header;
-      ConstraintLayout topHeader = ViewBindings.findChildViewById(rootView, id);
-      if (topHeader == null) {
-        break missingId;
-      }
-
       return new FragmentUserHomeBinding((ConstraintLayout) rootView, btnDinnerInNew,
-          btnDinnerOutNew, btnLunchInNew, btnLunchOutNew, btnNotification, btnPlanOutDays,
-          cardBreakfast, cardDinner, cardLunch, cardMessCondition, cardPlannedOutDays,
-          containerPlannedOutDays, imgProfile, indicatorMessCondition, mealsContainerNew,
-          profileContainer, textDate, textDeadlineLabel, textDinnerCardTimer, textDinnerMenuNew,
-          textDinnerPreference, textDinnerStatus, textDinnerStatusBar, textGreeting,
+          btnDinnerOutNew, btnLunchInNew, btnLunchOutNew, btnPlanOutDays, cardBreakfast, cardDinner,
+          cardLunch, cardMessCondition, cardPlannedOutDays, containerPlannedOutDays,
+          indicatorMessCondition, mealsContainerNew, textDeadlineLabel, textDinnerCardTimer,
+          textDinnerMenuNew, textDinnerPreference, textDinnerStatus, textDinnerStatusBar,
           textLunchCardTimer, textLunchMenuNew, textLunchPreference, textLunchStatus,
           textLunchStatusBar, textMessCondition, textTimerHours, textTimerMins, textTimerSecs,
-          timerContainer, topHeader);
+          timerContainer);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

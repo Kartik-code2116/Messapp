@@ -4,12 +4,14 @@ package com.example.messapp.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.messapp.R;
@@ -20,10 +22,16 @@ import java.lang.String;
 
 public final class FragmentUserHistoryBinding implements ViewBinding {
   @NonNull
-  private final FrameLayout rootView;
+  private final SwipeRefreshLayout rootView;
 
   @NonNull
   public final MaterialButton btnChangeMonth;
+
+  @NonNull
+  public final LinearLayout layoutEmptyHistory;
+
+  @NonNull
+  public final ProgressBar progressHistory;
 
   @NonNull
   public final RecyclerView recyclerViewHistory;
@@ -32,10 +40,16 @@ public final class FragmentUserHistoryBinding implements ViewBinding {
   public final Spinner spinnerMonthYear;
 
   @NonNull
+  public final SwipeRefreshLayout swipeRefresh;
+
+  @NonNull
   public final TextView textDaysIn;
 
   @NonNull
   public final TextView textDaysOut;
+
+  @NonNull
+  public final TextView textEmptyHistory;
 
   @NonNull
   public final TextView textTotalDinner;
@@ -43,24 +57,30 @@ public final class FragmentUserHistoryBinding implements ViewBinding {
   @NonNull
   public final TextView textTotalLunch;
 
-  private FragmentUserHistoryBinding(@NonNull FrameLayout rootView,
-      @NonNull MaterialButton btnChangeMonth, @NonNull RecyclerView recyclerViewHistory,
-      @NonNull Spinner spinnerMonthYear, @NonNull TextView textDaysIn,
-      @NonNull TextView textDaysOut, @NonNull TextView textTotalDinner,
+  private FragmentUserHistoryBinding(@NonNull SwipeRefreshLayout rootView,
+      @NonNull MaterialButton btnChangeMonth, @NonNull LinearLayout layoutEmptyHistory,
+      @NonNull ProgressBar progressHistory, @NonNull RecyclerView recyclerViewHistory,
+      @NonNull Spinner spinnerMonthYear, @NonNull SwipeRefreshLayout swipeRefresh,
+      @NonNull TextView textDaysIn, @NonNull TextView textDaysOut,
+      @NonNull TextView textEmptyHistory, @NonNull TextView textTotalDinner,
       @NonNull TextView textTotalLunch) {
     this.rootView = rootView;
     this.btnChangeMonth = btnChangeMonth;
+    this.layoutEmptyHistory = layoutEmptyHistory;
+    this.progressHistory = progressHistory;
     this.recyclerViewHistory = recyclerViewHistory;
     this.spinnerMonthYear = spinnerMonthYear;
+    this.swipeRefresh = swipeRefresh;
     this.textDaysIn = textDaysIn;
     this.textDaysOut = textDaysOut;
+    this.textEmptyHistory = textEmptyHistory;
     this.textTotalDinner = textTotalDinner;
     this.textTotalLunch = textTotalLunch;
   }
 
   @Override
   @NonNull
-  public FrameLayout getRoot() {
+  public SwipeRefreshLayout getRoot() {
     return rootView;
   }
 
@@ -91,6 +111,18 @@ public final class FragmentUserHistoryBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.layout_empty_history;
+      LinearLayout layoutEmptyHistory = ViewBindings.findChildViewById(rootView, id);
+      if (layoutEmptyHistory == null) {
+        break missingId;
+      }
+
+      id = R.id.progress_history;
+      ProgressBar progressHistory = ViewBindings.findChildViewById(rootView, id);
+      if (progressHistory == null) {
+        break missingId;
+      }
+
       id = R.id.recycler_view_history;
       RecyclerView recyclerViewHistory = ViewBindings.findChildViewById(rootView, id);
       if (recyclerViewHistory == null) {
@@ -103,6 +135,8 @@ public final class FragmentUserHistoryBinding implements ViewBinding {
         break missingId;
       }
 
+      SwipeRefreshLayout swipeRefresh = (SwipeRefreshLayout) rootView;
+
       id = R.id.text_days_in;
       TextView textDaysIn = ViewBindings.findChildViewById(rootView, id);
       if (textDaysIn == null) {
@@ -112,6 +146,12 @@ public final class FragmentUserHistoryBinding implements ViewBinding {
       id = R.id.text_days_out;
       TextView textDaysOut = ViewBindings.findChildViewById(rootView, id);
       if (textDaysOut == null) {
+        break missingId;
+      }
+
+      id = R.id.text_empty_history;
+      TextView textEmptyHistory = ViewBindings.findChildViewById(rootView, id);
+      if (textEmptyHistory == null) {
         break missingId;
       }
 
@@ -127,9 +167,9 @@ public final class FragmentUserHistoryBinding implements ViewBinding {
         break missingId;
       }
 
-      return new FragmentUserHistoryBinding((FrameLayout) rootView, btnChangeMonth,
-          recyclerViewHistory, spinnerMonthYear, textDaysIn, textDaysOut, textTotalDinner,
-          textTotalLunch);
+      return new FragmentUserHistoryBinding((SwipeRefreshLayout) rootView, btnChangeMonth,
+          layoutEmptyHistory, progressHistory, recyclerViewHistory, spinnerMonthYear, swipeRefresh,
+          textDaysIn, textDaysOut, textEmptyHistory, textTotalDinner, textTotalLunch);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

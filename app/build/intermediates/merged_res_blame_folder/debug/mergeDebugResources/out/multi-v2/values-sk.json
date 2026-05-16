@@ -1,27 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.messapp-mergeDebugResources-58:/values-sk/values-sk.xml",
+            "outputFile": "com.example.messapp-mergeDebugResources-59:/values-sk/values-sk.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\f58291ab92e9152b1d56a65d4d9f9f91\\transformed\\biometric-1.1.0\\res\\values-sk\\values-sk.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,161,251,378,527,663,792,927,1060,1158,1293,1426",
-                        "endColumns": "105,89,126,148,135,128,134,132,97,134,132,113",
-                        "endOffsets": "156,246,373,522,658,787,922,1055,1153,1288,1421,1535"
-                    },
-                    "to": {
-                        "startLines": "69,71,78,79,80,81,82,83,84,85,86,87",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "6987,7200,7835,7962,8111,8247,8376,8511,8644,8742,8877,9010",
-                        "endColumns": "105,89,126,148,135,128,134,132,97,134,132,113",
-                        "endOffsets": "7088,7285,7957,8106,8242,8371,8506,8639,8737,8872,9005,9119"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\9119db4118b5c98552a4b836b36ae901\\transformed\\play-services-base-18.5.0\\res\\values-sk\\values.xml",
+                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\e40c1b5df8fecaaaf3b78acf301a818c\\transformed\\play-services-base-18.5.0\\res\\values-sk\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -38,24 +21,24 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\a30f9c32fbe5a8ddd5b0c8666f7d0b48\\transformed\\credentials-1.5.0\\res\\values-sk\\values-sk.xml",
+                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\02e48cd5583e2548d60be26ef535c9b0\\transformed\\browser-1.4.0\\res\\values-sk\\values-sk.xml",
                     "from": {
-                        "startLines": "2,3",
-                        "startColumns": "4,4",
-                        "startOffsets": "55,164",
-                        "endColumns": "108,121",
-                        "endOffsets": "159,281"
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,162,265,380",
+                        "endColumns": "106,102,114,101",
+                        "endOffsets": "157,260,375,477"
                     },
                     "to": {
-                        "startLines": "35,36",
-                        "startColumns": "4,4",
-                        "startOffsets": "3140,3249",
-                        "endColumns": "108,121",
-                        "endOffsets": "3244,3366"
+                        "startLines": "70,75,76,77",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "7093,7515,7618,7733",
+                        "endColumns": "106,102,114,101",
+                        "endOffsets": "7195,7613,7728,7830"
                     }
                 },
                 {
-                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\316f27d413096b6ed226e9062a492cdb\\transformed\\play-services-basement-18.4.0\\res\\values-sk\\values.xml",
+                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\d25a5950043f4e6ec890e440b1265d5b\\transformed\\play-services-basement-18.4.0\\res\\values-sk\\values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -72,7 +55,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\2e6d6090fc23d8fd0a0c7d0ea1b6a4a7\\transformed\\material-1.13.0\\res\\values-sk\\values-sk.xml",
+                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\a3939834562b7e296195a51f01eff6a4\\transformed\\material-1.13.0\\res\\values-sk\\values-sk.xml",
                     "from": {
                         "startLines": "2,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -91,7 +74,41 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\37f22d9e56d2be083dec2de94bfbf3f5\\transformed\\core-1.16.0\\res\\values-sk\\values-sk.xml",
+                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\be3bbff041edfe709926398e69238b78\\transformed\\biometric-1.1.0\\res\\values-sk\\values-sk.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,161,251,378,527,663,792,927,1060,1158,1293,1426",
+                        "endColumns": "105,89,126,148,135,128,134,132,97,134,132,113",
+                        "endOffsets": "156,246,373,522,658,787,922,1055,1153,1288,1421,1535"
+                    },
+                    "to": {
+                        "startLines": "69,71,78,79,80,81,82,83,84,85,86,87",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "6987,7200,7835,7962,8111,8247,8376,8511,8644,8742,8877,9010",
+                        "endColumns": "105,89,126,148,135,128,134,132,97,134,132,113",
+                        "endOffsets": "7088,7285,7957,8106,8242,8371,8506,8639,8737,8872,9005,9119"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\a9724cce9b506b37fad2eeaed9f55e0e\\transformed\\credentials-1.5.0\\res\\values-sk\\values-sk.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,164",
+                        "endColumns": "108,121",
+                        "endOffsets": "159,281"
+                    },
+                    "to": {
+                        "startLines": "35,36",
+                        "startColumns": "4,4",
+                        "startOffsets": "3140,3249",
+                        "endColumns": "108,121",
+                        "endOffsets": "3244,3366"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\9ae442ca4c9f4b969e6c2cc5a4bcd80a\\transformed\\core-1.16.0\\res\\values-sk\\values-sk.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
@@ -108,7 +125,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\cafefebf280a346989a762401cd38065\\transformed\\appcompat-1.7.1\\res\\values-sk\\values-sk.xml",
+                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\aede2d2b0c8a4525090273be8a9e7f38\\transformed\\appcompat-1.7.1\\res\\values-sk\\values-sk.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -125,24 +142,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\4857de4e5dea2b5c00f9df22509fb65f\\transformed\\browser-1.4.0\\res\\values-sk\\values-sk.xml",
-                    "from": {
-                        "startLines": "2,3,4,5",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,162,265,380",
-                        "endColumns": "106,102,114,101",
-                        "endOffsets": "157,260,375,477"
-                    },
-                    "to": {
-                        "startLines": "70,75,76,77",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "7093,7515,7618,7733",
-                        "endColumns": "106,102,114,101",
-                        "endOffsets": "7195,7613,7728,7830"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\22bd922eafbed51425b12da6239fe078\\transformed\\navigation-ui-2.8.5\\res\\values-sk\\values-sk.xml",
+                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\333c2d8960c849befb9fd148a3272d2f\\transformed\\navigation-ui-2.8.5\\res\\values-sk\\values-sk.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",

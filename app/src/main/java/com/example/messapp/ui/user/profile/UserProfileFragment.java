@@ -65,6 +65,7 @@ public class UserProfileFragment extends Fragment {
             binding.switchDarkMode.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 if (isChecked != ThemeManager.isDarkMode(requireContext())) {
                     ThemeManager.setDarkMode(requireContext(), isChecked);
+                    requireActivity().recreate();
                 }
             });
         }
@@ -80,7 +81,7 @@ public class UserProfileFragment extends Fragment {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
             if (binding != null) {
-                binding.textProfileEmail.setText("Email: " + currentUser.getEmail());
+                binding.textProfileEmail.setText(currentUser.getEmail());
             }
             db.collection("users").document(currentUser.getUid()).get()
                     .addOnSuccessListener(doc -> {
@@ -90,7 +91,7 @@ public class UserProfileFragment extends Fragment {
                             currentUserMessId = messId;
                             String name = doc.getString("name");
 
-                            binding.textProfileName.setText(name != null ? "Name: " + name : "Name: Not Set");
+                            binding.textProfileName.setText(name != null && !name.isEmpty() ? name : "Student");
 
                             if (messId != null) {
                                 binding.textProfileMessId.setText("Mess ID: " + messId);
@@ -139,7 +140,7 @@ public class UserProfileFragment extends Fragment {
                     if (binding == null) return;
                     String messName = doc.exists() ? doc.getString("name") : null;
                     binding.textProfileMessName.setText(
-                            messName != null ? "Mess Name: " + messName : "Mess Name: Not Found");
+                            messName != null && !messName.isEmpty() ? messName : "Not joined");
                 })
                 .addOnFailureListener(e -> {
                     if (getContext() != null)
@@ -245,15 +246,15 @@ public class UserProfileFragment extends Fragment {
             long diff     = expiry - System.currentTimeMillis();
             long daysLeft = diff / (1000 * 60 * 60 * 24);
             if (daysLeft < 0) {
-                textView.setText(label + ": Expired");
-                textView.setTextColor(android.graphics.Color.RED);
+                textView.setText(label + " · Expired");
+                textView.setTextColor(getResources().getColor(R.color.state_error, requireContext().getTheme()));
             } else {
-                textView.setText(label + ": Active (" + daysLeft + "d left)");
-                textView.setTextColor(getResources().getColor(android.R.color.holo_green_dark));
+                textView.setText(label + " · Active (" + daysLeft + "d left)");
+                textView.setTextColor(getResources().getColor(R.color.state_success, requireContext().getTheme()));
             }
         } else {
-            textView.setText(label + ": No Sub");
-            textView.setTextColor(android.graphics.Color.GRAY);
+            textView.setText(label + " · No subscription");
+            textView.setTextColor(getResources().getColor(R.color.text_caption, requireContext().getTheme()));
         }
     }
 

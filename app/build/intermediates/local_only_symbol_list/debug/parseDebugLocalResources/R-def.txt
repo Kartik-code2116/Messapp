@@ -1,5 +1,6 @@
 R_DEF: Internal format may change without notice
 local
+anim card_fade_slide_up
 anim slide_in_left
 anim slide_in_right
 anim slide_out_left
@@ -29,9 +30,19 @@ color brand_primary_light
 color brand_secondary
 color brand_secondary_light
 color card_surface
+color charcoal_base
+color charcoal_border
+color charcoal_darkest
+color charcoal_elevated
+color charcoal_muted
+color charcoal_surface
 color colorAccent
 color colorPrimary
 color colorPrimaryDark
+color cream_bright
+color cream_faint
+color cream_muted
+color cream_soft
 color dash_background_light
 color dash_primary
 color dash_primary_10
@@ -67,6 +78,11 @@ color neutral_600
 color neutral_700
 color neutral_800
 color neutral_900
+color orange_bright
+color orange_container
+color orange_deep
+color orange_glow
+color orange_primary
 color page_background
 color primary_color
 color primary_dark
@@ -92,6 +108,7 @@ color status_out
 color success
 color surface
 color surface_card
+color surface_elevated
 color surface_glass
 color surface_modal
 color text_body
@@ -106,6 +123,12 @@ color text_primary
 color text_secondary
 color text_sub
 color white
+dimen user_card_elevation
+dimen user_card_radius
+dimen user_item_spacing
+dimen user_page_padding_h
+dimen user_page_padding_v
+dimen user_section_spacing
 drawable _c3d318d7_6015_4c92_9b56_8d2c50388d41_
 drawable annapurna
 drawable bg_admin_action_tile
@@ -115,6 +138,7 @@ drawable bg_admin_icon_green
 drawable bg_admin_icon_orange
 drawable bg_admin_icon_primary
 drawable bg_admin_stat_card
+drawable bg_bottom_nav
 drawable bg_button_gradient
 drawable bg_capsule_accent
 drawable bg_chip_selected
@@ -122,10 +146,15 @@ drawable bg_chip_unselected
 drawable bg_circle_light_green
 drawable bg_circle_primary_border
 drawable bg_circle_surface
+drawable bg_drawer_header
+drawable bg_food_image_warm_overlay
 drawable bg_gradient
 drawable bg_gradient_primary
 drawable bg_input_field
 drawable bg_login_header
+drawable bg_profile_badge
+drawable bg_profile_header
+drawable bg_profile_icon_circle
 drawable bg_profound_gradient
 drawable bg_rounded_card_primary_light
 drawable bg_rounded_card_surface
@@ -139,6 +168,7 @@ drawable bg_search_input
 drawable bg_status_pill_danger
 drawable bg_status_pill_neutral
 drawable bg_status_pill_success
+drawable bg_user_day_chip
 drawable btn_view_details
 drawable circle_border_white
 drawable gradient_background
@@ -191,6 +221,7 @@ drawable ic_restore
 drawable ic_schedule
 drawable ic_settings_black_24dp
 drawable ic_star_rate
+drawable ic_steam_subtle
 drawable ic_student_profile
 drawable line_dashed
 drawable ripple_effect
@@ -347,10 +378,14 @@ id img_profile
 id img_profile_edit
 id img_student
 id indicator_mess_condition
+id info_row_icon
+id info_row_label
+id info_row_value
 id items_toolbar
 id iv_delete_offer
 id label_active_students
 id label_mess_details
+id layout_empty_history
 id logoCard
 id lunch_edit_text
 id lunch_hour_picker
@@ -409,6 +444,7 @@ id profile_drawer
 id profile_image
 id progressBar
 id progress_bar
+id progress_history
 id radio_both
 id radio_dinner
 id radio_extend
@@ -433,6 +469,7 @@ id review_comment_layout
 id reviews_recycler_view
 id search_layout
 id spinner_month_year
+id swipe_refresh
 id switch_allow_multiple_changes
 id switch_dark_mode
 id textSubtitle
@@ -461,6 +498,7 @@ id text_drawer_email
 id text_drawer_mess
 id text_drawer_name
 id text_drawer_subscription
+id text_empty_history
 id text_expiry_date
 id text_greeting
 id text_history_date
@@ -539,6 +577,7 @@ id text_week_range
 id timer_container
 id toolbar
 id top_header
+id user_top_bar
 layout activity_edit_mess_profile
 layout activity_edit_user_profile
 layout activity_login
@@ -569,9 +608,11 @@ layout fragment_user_home
 layout fragment_user_menu
 layout fragment_user_profile
 layout header_user_profile_drawer
+layout include_user_top_bar
 layout item_history
 layout item_mess_card
 layout item_offer
+layout item_profile_info_row
 layout item_review
 layout item_student
 layout item_student_request
@@ -607,6 +648,8 @@ style Base.Theme.Messapp
 style CircleImageStyle
 style CircularImageView
 style NumberPickerTheme
+style ProfileCard
+style ProfileSectionTitle
 style Profound.Button
 style Profound.Button.Outlined
 style Profound.Card
@@ -614,5 +657,8 @@ style Profound.InputLayout
 style RatingBar
 style Theme.Messapp
 style Theme.Messapp.NoActionBar
+style UserPageTitle
+style UserSectionTitle
+style UserStatValue
 xml backup_rules
 xml data_extraction_rules

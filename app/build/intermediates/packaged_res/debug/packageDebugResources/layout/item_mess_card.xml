@@ -5,8 +5,8 @@
     style="@style/Profound.Card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="16dp"
-    android:layout_marginVertical="10dp"
+    android:layout_marginHorizontal="@dimen/user_page_padding_h"
+    android:layout_marginVertical="8dp"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?attr/selectableItemBackground">
@@ -28,6 +28,20 @@
                 android:scaleType="centerCrop"
                 android:src="@color/neutral_200"
                 tools:src="@tools:sample/backgrounds/scenic" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_food_image_warm_overlay" />
+
+            <ImageView
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_gravity="bottom|start"
+                android:layout_marginStart="14dp"
+                android:layout_marginBottom="10dp"
+                android:alpha="0.55"
+                android:src="@drawable/ic_steam_subtle" />
             
             <!-- Rating Badge -->
             <com.google.android.material.card.MaterialCardView
@@ -145,20 +159,25 @@
                     android:textSize="12sp"
                     android:textColor="@color/text_caption"/>
 
-                <TextView
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.Material3.Button.TextButton"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="View Menu"
+                    android:layout_height="36dp"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:fontFamily="@font/inter"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:minHeight="0dp"
+                    android:paddingHorizontal="12dp"
+                    android:text="View details"
                     android:textColor="@color/brand_primary"
+                    android:textSize="13sp"
                     android:textStyle="bold"
-                    android:textSize="14sp"/>
-                
-                <ImageView
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_marginStart="4dp"
-                    android:src="@drawable/ic_arrow_forward"
-                    app:tint="@color/brand_primary"/>
+                    app:icon="@drawable/ic_arrow_forward"
+                    app:iconGravity="end"
+                    app:iconSize="16dp"
+                    app:iconTint="@color/brand_primary" />
             </LinearLayout>
 
         </LinearLayout>

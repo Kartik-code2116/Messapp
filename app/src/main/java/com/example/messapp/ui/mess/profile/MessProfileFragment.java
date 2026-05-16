@@ -53,6 +53,7 @@ public class MessProfileFragment extends Fragment {
         binding.btnNavRevenue.setOnClickListener(v -> handleRevenue());
         binding.btnNavWeeklyMenu.setOnClickListener(v -> handleWeeklyMenu());
         binding.btnMessLogout.setOnClickListener(v -> handleLogout());
+        binding.btnLogoutTop.setOnClickListener(v -> handleLogout());
 
         binding.btnViewStudents.setOnClickListener(v -> handleViewStudents());
 
@@ -67,8 +68,7 @@ public class MessProfileFragment extends Fragment {
             binding.switchDarkMode.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 if (isChecked != ThemeManager.isDarkMode(requireContext())) {
                     ThemeManager.setDarkMode(requireContext(), isChecked);
-                    // No need to call recreate() manually as setDefaultNightMode does it for all
-                    // activities
+                    requireActivity().recreate();
                 }
             });
         }
