@@ -4,24 +4,25 @@ package com.example.messapp.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentContainerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.messapp.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
 
 public final class ActivityUserDashboardBinding implements ViewBinding {
   @NonNull
-  private final RelativeLayout rootView;
+  private final DrawerLayout rootView;
 
   @NonNull
-  public final RelativeLayout container;
+  public final DrawerLayout container;
 
   @NonNull
   public final FragmentContainerView navHostFragmentActivityUserDashboard;
@@ -29,19 +30,23 @@ public final class ActivityUserDashboardBinding implements ViewBinding {
   @NonNull
   public final BottomNavigationView navView;
 
-  private ActivityUserDashboardBinding(@NonNull RelativeLayout rootView,
-      @NonNull RelativeLayout container,
+  @NonNull
+  public final NavigationView profileDrawer;
+
+  private ActivityUserDashboardBinding(@NonNull DrawerLayout rootView,
+      @NonNull DrawerLayout container,
       @NonNull FragmentContainerView navHostFragmentActivityUserDashboard,
-      @NonNull BottomNavigationView navView) {
+      @NonNull BottomNavigationView navView, @NonNull NavigationView profileDrawer) {
     this.rootView = rootView;
     this.container = container;
     this.navHostFragmentActivityUserDashboard = navHostFragmentActivityUserDashboard;
     this.navView = navView;
+    this.profileDrawer = profileDrawer;
   }
 
   @Override
   @NonNull
-  public RelativeLayout getRoot() {
+  public DrawerLayout getRoot() {
     return rootView;
   }
 
@@ -66,7 +71,7 @@ public final class ActivityUserDashboardBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      RelativeLayout container = (RelativeLayout) rootView;
+      DrawerLayout container = (DrawerLayout) rootView;
 
       id = R.id.nav_host_fragment_activity_user_dashboard;
       FragmentContainerView navHostFragmentActivityUserDashboard = ViewBindings.findChildViewById(rootView, id);
@@ -80,8 +85,14 @@ public final class ActivityUserDashboardBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityUserDashboardBinding((RelativeLayout) rootView, container,
-          navHostFragmentActivityUserDashboard, navView);
+      id = R.id.profile_drawer;
+      NavigationView profileDrawer = ViewBindings.findChildViewById(rootView, id);
+      if (profileDrawer == null) {
+        break missingId;
+      }
+
+      return new ActivityUserDashboardBinding((DrawerLayout) rootView, container,
+          navHostFragmentActivityUserDashboard, navView, profileDrawer);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

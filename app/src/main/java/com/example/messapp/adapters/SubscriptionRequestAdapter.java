@@ -2,14 +2,20 @@ package com.example.messapp.adapters;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.messapp.databinding.ItemStudentRequestBinding;
 import com.example.messapp.models.SubscriptionRequest;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-public class SubscriptionRequestAdapter extends RecyclerView.Adapter<SubscriptionRequestAdapter.ViewHolder> {
+public class SubscriptionRequestAdapter
+        extends RecyclerView.Adapter<SubscriptionRequestAdapter.ViewHolder> {
 
     private List<SubscriptionRequest> requests = new ArrayList<>();
     private OnConfirmClickListener confirmListener;
@@ -31,23 +37,58 @@ public class SubscriptionRequestAdapter extends RecyclerView.Adapter<Subscriptio
         this.deleteListener = listener;
     }
 
-    public void setRequests(List<SubscriptionRequest> requests) {
-        this.requests = requests;
-        notifyDataSetChanged();
+    public void setRequests(List<SubscriptionRequest> newRequests) {
+        final List<SubscriptionRequest> oldList = this.requests;
+        final List<SubscriptionRequest> newList =
+                newRequests != null ? newRequests : new ArrayList<>();
+
+        DiffUtil.DiffResult result = DiffUtil.calculateDiff(new RequestDiffCallback(oldList, newList));
+
+        this.requests = newList;
+        result.dispatchUpdatesTo(this);
+    }
+
+    private static class RequestDiffCallback extends DiffUtil.Callback {
+        private final List<SubscriptionRequest> oldList;
+        private final List<SubscriptionRequest> newList;
+
+        public RequestDiffCallback(List<SubscriptionRequest> oldList, List<SubscriptionRequest> newList) {
+            this.oldList = oldList;
+            this.newList = newList;
+        }
+
+        @Override public int getOldListSize() { return oldList.size(); }
+        @Override public int getNewListSize() { return newList.size(); }
+
+        @Override
+        public boolean areItemsTheSame(int oldPos, int newPos) {
+            String oldId = oldList.get(oldPos).getId();
+            String newId = newList.get(newPos).getId();
+            return Objects.equals(oldId, newId);
+        }
+
+        @Override
+        public boolean areContentsTheSame(int oldPos, int newPos) {
+            SubscriptionRequest o = oldList.get(oldPos);
+            SubscriptionRequest n = newList.get(newPos);
+            return Objects.equals(o.getStatus(), n.getStatus())
+                    && Objects.equals(o.getStudentName(), n.getStudentName())
+                    && Objects.equals(o.getType(), n.getType());
+        }
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         ItemStudentRequestBinding binding = ItemStudentRequestBinding.inflate(
-                LayoutInflater.from(parent.getContext()), parent,
-                false);
+                LayoutInflater.from(parent.getContext()), parent, false);
         return new ViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         SubscriptionRequest request = requests.get(position);
+
         holder.binding.textStudentName.setText(request.getStudentName());
         holder.binding.textStudentEmail.setText(request.getStudentEmail());
 
@@ -58,31 +99,26 @@ public class SubscriptionRequestAdapter extends RecyclerView.Adapter<Subscriptio
         }
         holder.binding.textInfo.setText(info);
         if ("PENDING".equals(request.getStatus())) {
-            holder.binding.textInfo.setTextColor(android.graphics.Color.parseColor("#FFA000")); // Amber
+            holder.binding.textInfo.setTextColor(android.graphics.Color.parseColor("#FFA000"));
         }
 
         holder.binding.btnConfirm.setText("Confirm");
         holder.binding.btnConfirm.setOnClickListener(v -> {
-            if (confirmListener != null)
-                confirmListener.onConfirm(request);
+            if (confirmListener != null) confirmListener.onConfirm(request);
         });
 
         holder.binding.btnDelete.setVisibility(android.view.View.VISIBLE);
         holder.binding.btnDelete.setText("Delete");
         holder.binding.btnDelete.setOnClickListener(v -> {
-            if (deleteListener != null)
-                deleteListener.onDelete(request);
+            if (deleteListener != null) deleteListener.onDelete(request);
         });
     }
 
     @Override
-    public int getItemCount() {
-        return requests.size();
-    }
+    public int getItemCount() { return requests.size(); }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        ItemStudentRequestBinding binding;
-
+        final ItemStudentRequestBinding binding;
         public ViewHolder(ItemStudentRequestBinding binding) {
             super(binding.getRoot());
             this.binding = binding;

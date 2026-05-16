@@ -5,16 +5,15 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.navigation.fragment.NavHostFragment;
 
-import androidx.appcompat.widget.Toolbar;
 import com.example.messapp.databinding.ActivityMessDashboardBinding;
 import com.example.messapp.utils.ThemeManager;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,12 +31,10 @@ public class MessDashboardActivity extends AppCompatActivity {
         binding = ActivityMessDashboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // Check if guest mode
         isGuestMode = getIntent().getBooleanExtra("IS_GUEST", false);
         if (isGuestMode) {
             showGuestBanner();
         } else {
-            // Fetch mess name only for authenticated users
             fetchMessName();
         }
 
@@ -49,7 +46,6 @@ public class MessDashboardActivity extends AppCompatActivity {
                 .findFragmentById(R.id.nav_host_fragment_activity_mess_dashboard);
         NavController navController = navHostFragment.getNavController();
 
-        // Pass guest mode to fragments via arguments
         Bundle navArgs = new Bundle();
         navArgs.putBoolean("IS_GUEST", isGuestMode);
         navHostFragment.setArguments(navArgs);
@@ -76,12 +72,19 @@ public class MessDashboardActivity extends AppCompatActivity {
     }
 
     private void fetchMessName() {
-        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        FirebaseFirestore.getInstance().collection("users").document(userId).get().addOnSuccessListener(doc -> {
-            String messId = doc.getString("messId");
-            // Logic to update UI with mess name can be moved to fragments or shared
-            // ViewModel
-        });
+        // FIX #2: getCurrentUser() was called without a null check — crashes if auth
+        // state hasn't resolved yet (e.g. cold start or token refresh in progress).
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser == null) return;
+
+        FirebaseFirestore.getInstance()
+                .collection("users")
+                .document(currentUser.getUid())
+                .get()
+                .addOnSuccessListener(doc -> {
+                    // messId available here if needed; UI updates are handled in fragments
+                    String messId = doc.getString("messId");
+                });
     }
 
     @Override
@@ -100,6 +103,11 @@ public class MessDashboardActivity extends AppCompatActivity {
             if (!isGuestMode) {
                 FirebaseAuth.getInstance().signOut();
             }
+            // FIX #7 (partial): navigate to RoleSelectionActivity on logout so role
+            // context is always fresh — mirrors the correct behavior in UserProfileFragment.
+            Intent intent = new Intent(this, RoleSelectionActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
             finish();
             return true;
         }

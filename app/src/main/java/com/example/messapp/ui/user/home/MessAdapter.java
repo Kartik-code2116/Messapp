@@ -54,6 +54,8 @@ public class MessAdapter extends ListAdapter<Mess, MessAdapter.MessViewHolder> {
             messName = itemView.findViewById(R.id.text_mess_card_name);
             messLocation = itemView.findViewById(R.id.text_mess_card_location);
             messStudents = itemView.findViewById(R.id.text_mess_card_students);
+            // FIX #1: viewDetailsButton was declared but never bound — caused NPE on every item bind
+            viewDetailsButton = itemView.findViewById(R.id.btn_view_students);
         }
 
         void bind(Mess mess, OnMessClickListener listener) {
@@ -66,12 +68,15 @@ public class MessAdapter extends ListAdapter<Mess, MessAdapter.MessViewHolder> {
                     listener.onMessClick(mess);
                 }
             });
-            
-            viewDetailsButton.setOnClickListener(v -> {
-                if (listener != null) {
-                    listener.onViewDetailsClick(mess);
-                }
-            });
+
+            // FIX #1: null-guard in case the layout doesn't have this button
+            if (viewDetailsButton != null) {
+                viewDetailsButton.setOnClickListener(v -> {
+                    if (listener != null) {
+                        listener.onViewDetailsClick(mess);
+                    }
+                });
+            }
         }
     }
 

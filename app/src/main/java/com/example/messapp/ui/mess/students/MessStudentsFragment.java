@@ -641,9 +641,16 @@ public class MessStudentsFragment extends Fragment {
         for (int i = 0; i < allStudentsList.size(); i++) {
             Student student = allStudentsList.get(i);
             String[] statuses = statusMap.get(student.getUserId());
+            long now = System.currentTimeMillis();
+            long lunchExpiry = student.getLunchSubscriptionExpiry() > 0
+                    ? student.getLunchSubscriptionExpiry() : student.getSubscriptionExpiry();
+            long dinnerExpiry = student.getDinnerSubscriptionExpiry() > 0
+                    ? student.getDinnerSubscriptionExpiry() : student.getSubscriptionExpiry();
 
-            String newLunch = (statuses != null) ? statuses[0] : null;
-            String newDinner = (statuses != null) ? statuses[1] : null;
+            String newLunch = (statuses != null && statuses[0] != null) ? statuses[0]
+                    : (lunchExpiry > now ? "IN" : null);
+            String newDinner = (statuses != null && statuses[1] != null) ? statuses[1]
+                    : (dinnerExpiry > now ? "IN" : null);
 
             // Check if status actually changed to avoid unnecessary updates
             // (But more importantly, if it DID change, we MUST create a NEW object)

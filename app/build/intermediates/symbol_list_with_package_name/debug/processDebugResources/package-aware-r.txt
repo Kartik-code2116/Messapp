@@ -3720,6 +3720,7 @@ drawable abc_textfield_search_activated_mtrl_alpha
 drawable abc_textfield_search_default_mtrl_alpha
 drawable abc_textfield_search_material
 drawable abc_vector_test
+drawable annapurna
 drawable avd_hide_password
 drawable avd_show_password
 drawable bg_admin_action_tile
@@ -3761,6 +3762,7 @@ drawable btn_radio_off_mtrl
 drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
+drawable btn_view_details
 drawable circle_border_white
 drawable common_full_open_on_phone
 drawable common_google_signin_btn_icon_dark
@@ -4122,6 +4124,7 @@ id btn_nav_revenue
 id btn_nav_weekly_menu
 id btn_next_week
 id btn_notification
+id btn_plan_out_days
 id btn_prev_week
 id btn_refresh
 id btn_renew_subscription
@@ -4148,6 +4151,7 @@ id card_breakfast
 id card_dinner
 id card_lunch
 id card_mess_condition
+id card_planned_out_days
 id carryVelocity
 id center
 id centerContainer
@@ -4183,6 +4187,7 @@ id container
 id container_dinner
 id container_lunch
 id container_mess_id
+id container_planned_out_days
 id content
 id contentPanel
 id contiguous
@@ -4232,6 +4237,10 @@ id dragLeft
 id dragRight
 id dragStart
 id dragUp
+id drawer_user_history
+id drawer_user_home
+id drawer_user_menu
+id drawer_user_profile
 id dropdown_menu
 id easeIn
 id easeInOut
@@ -4329,6 +4338,7 @@ id ignore
 id ignoreRequest
 id image
 id imgLogo
+id img_drawer_profile
 id img_mess_banner
 id img_profile
 id img_profile_edit
@@ -4535,6 +4545,7 @@ id position
 id postLayout
 id pressed
 id profile_container
+id profile_drawer
 id profile_image
 id progressBar
 id progress_bar
@@ -4688,6 +4699,10 @@ id text_dinner_out_count
 id text_dinner_preference
 id text_dinner_status
 id text_dinner_status_bar
+id text_drawer_email
+id text_drawer_mess
+id text_drawer_name
+id text_drawer_subscription
 id text_expiry_date
 id text_greeting
 id text_history_date
@@ -4989,6 +5004,7 @@ layout fragment_user_history
 layout fragment_user_home
 layout fragment_user_menu
 layout fragment_user_profile
+layout header_user_profile_drawer
 layout ime_base_split_test_activity
 layout ime_secondary_split_test_activity
 layout item_history
@@ -5064,6 +5080,7 @@ layout support_simple_spinner_dropdown_item
 menu bottom_nav_menu
 menu bottom_nav_menu_mess
 menu menu_mess_top_bar
+menu menu_user_profile_drawer
 menu mess_bottom_nav
 menu user_bottom_nav
 mipmap ic_launcher

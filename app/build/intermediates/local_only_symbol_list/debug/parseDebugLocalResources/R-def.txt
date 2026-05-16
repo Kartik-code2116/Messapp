@@ -107,6 +107,7 @@ color text_secondary
 color text_sub
 color white
 drawable _c3d318d7_6015_4c92_9b56_8d2c50388d41_
+drawable annapurna
 drawable bg_admin_action_tile
 drawable bg_admin_card
 drawable bg_admin_icon_gray
@@ -138,6 +139,7 @@ drawable bg_search_input
 drawable bg_status_pill_danger
 drawable bg_status_pill_neutral
 drawable bg_status_pill_success
+drawable btn_view_details
 drawable circle_border_white
 drawable gradient_background
 drawable ic_account_circle
@@ -257,6 +259,7 @@ id btn_nav_revenue
 id btn_nav_weekly_menu
 id btn_next_week
 id btn_notification
+id btn_plan_out_days
 id btn_prev_week
 id btn_refresh
 id btn_renew_subscription
@@ -279,6 +282,7 @@ id card_breakfast
 id card_dinner
 id card_lunch
 id card_mess_condition
+id card_planned_out_days
 id centerContainer
 id chip_both
 id chip_female
@@ -292,6 +296,7 @@ id container
 id container_dinner
 id container_lunch
 id container_mess_id
+id container_planned_out_days
 id day_selector_container
 id day_selector_expandable_container
 id day_selector_header
@@ -300,6 +305,10 @@ id dinner_edit_text
 id dinner_hour_picker
 id dinner_input_layout
 id dinner_minute_picker
+id drawer_user_history
+id drawer_user_home
+id drawer_user_menu
+id drawer_user_profile
 id edit_search_transactions
 id emailEditText
 id etAmount
@@ -332,6 +341,7 @@ id headerBackground
 id header_mess_dashboard
 id icon_search
 id imgLogo
+id img_drawer_profile
 id img_mess_banner
 id img_profile
 id img_profile_edit
@@ -395,6 +405,7 @@ id offerTitleEditText
 id offerTitleLayout
 id passwordEditText
 id profile_container
+id profile_drawer
 id profile_image
 id progressBar
 id progress_bar
@@ -446,6 +457,10 @@ id text_dinner_out_count
 id text_dinner_preference
 id text_dinner_status
 id text_dinner_status_bar
+id text_drawer_email
+id text_drawer_mess
+id text_drawer_name
+id text_drawer_subscription
 id text_expiry_date
 id text_greeting
 id text_history_date
@@ -553,6 +568,7 @@ layout fragment_user_history
 layout fragment_user_home
 layout fragment_user_menu
 layout fragment_user_profile
+layout header_user_profile_drawer
 layout item_history
 layout item_mess_card
 layout item_offer
@@ -563,6 +579,7 @@ layout item_transaction
 menu bottom_nav_menu
 menu bottom_nav_menu_mess
 menu menu_mess_top_bar
+menu menu_user_profile_drawer
 menu mess_bottom_nav
 menu user_bottom_nav
 mipmap ic_launcher

@@ -39,6 +39,9 @@ public final class FragmentUserHomeBinding implements ViewBinding {
   public final MaterialCardView btnNotification;
 
   @NonNull
+  public final MaterialButton btnPlanOutDays;
+
+  @NonNull
   public final MaterialCardView cardBreakfast;
 
   @NonNull
@@ -49,6 +52,12 @@ public final class FragmentUserHomeBinding implements ViewBinding {
 
   @NonNull
   public final MaterialCardView cardMessCondition;
+
+  @NonNull
+  public final MaterialCardView cardPlannedOutDays;
+
+  @NonNull
+  public final LinearLayout containerPlannedOutDays;
 
   @NonNull
   public final ImageView imgProfile;
@@ -122,30 +131,35 @@ public final class FragmentUserHomeBinding implements ViewBinding {
   private FragmentUserHomeBinding(@NonNull ConstraintLayout rootView,
       @NonNull MaterialButton btnDinnerInNew, @NonNull MaterialButton btnDinnerOutNew,
       @NonNull MaterialButton btnLunchInNew, @NonNull MaterialButton btnLunchOutNew,
-      @NonNull MaterialCardView btnNotification, @NonNull MaterialCardView cardBreakfast,
-      @NonNull MaterialCardView cardDinner, @NonNull MaterialCardView cardLunch,
-      @NonNull MaterialCardView cardMessCondition, @NonNull ImageView imgProfile,
-      @NonNull View indicatorMessCondition, @NonNull LinearLayout mealsContainerNew,
-      @NonNull MaterialCardView profileContainer, @NonNull TextView textDate,
-      @NonNull TextView textDeadlineLabel, @NonNull TextView textDinnerCardTimer,
-      @NonNull TextView textDinnerMenuNew, @NonNull TextView textDinnerPreference,
-      @NonNull TextView textDinnerStatus, @NonNull TextView textDinnerStatusBar,
-      @NonNull TextView textGreeting, @NonNull TextView textLunchCardTimer,
-      @NonNull TextView textLunchMenuNew, @NonNull TextView textLunchPreference,
-      @NonNull TextView textLunchStatus, @NonNull TextView textLunchStatusBar,
-      @NonNull TextView textMessCondition, @NonNull TextView textTimerHours,
-      @NonNull TextView textTimerMins, @NonNull TextView textTimerSecs,
-      @NonNull LinearLayout timerContainer, @NonNull ConstraintLayout topHeader) {
+      @NonNull MaterialCardView btnNotification, @NonNull MaterialButton btnPlanOutDays,
+      @NonNull MaterialCardView cardBreakfast, @NonNull MaterialCardView cardDinner,
+      @NonNull MaterialCardView cardLunch, @NonNull MaterialCardView cardMessCondition,
+      @NonNull MaterialCardView cardPlannedOutDays, @NonNull LinearLayout containerPlannedOutDays,
+      @NonNull ImageView imgProfile, @NonNull View indicatorMessCondition,
+      @NonNull LinearLayout mealsContainerNew, @NonNull MaterialCardView profileContainer,
+      @NonNull TextView textDate, @NonNull TextView textDeadlineLabel,
+      @NonNull TextView textDinnerCardTimer, @NonNull TextView textDinnerMenuNew,
+      @NonNull TextView textDinnerPreference, @NonNull TextView textDinnerStatus,
+      @NonNull TextView textDinnerStatusBar, @NonNull TextView textGreeting,
+      @NonNull TextView textLunchCardTimer, @NonNull TextView textLunchMenuNew,
+      @NonNull TextView textLunchPreference, @NonNull TextView textLunchStatus,
+      @NonNull TextView textLunchStatusBar, @NonNull TextView textMessCondition,
+      @NonNull TextView textTimerHours, @NonNull TextView textTimerMins,
+      @NonNull TextView textTimerSecs, @NonNull LinearLayout timerContainer,
+      @NonNull ConstraintLayout topHeader) {
     this.rootView = rootView;
     this.btnDinnerInNew = btnDinnerInNew;
     this.btnDinnerOutNew = btnDinnerOutNew;
     this.btnLunchInNew = btnLunchInNew;
     this.btnLunchOutNew = btnLunchOutNew;
     this.btnNotification = btnNotification;
+    this.btnPlanOutDays = btnPlanOutDays;
     this.cardBreakfast = cardBreakfast;
     this.cardDinner = cardDinner;
     this.cardLunch = cardLunch;
     this.cardMessCondition = cardMessCondition;
+    this.cardPlannedOutDays = cardPlannedOutDays;
+    this.containerPlannedOutDays = containerPlannedOutDays;
     this.imgProfile = imgProfile;
     this.indicatorMessCondition = indicatorMessCondition;
     this.mealsContainerNew = mealsContainerNew;
@@ -228,6 +242,12 @@ public final class FragmentUserHomeBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.btn_plan_out_days;
+      MaterialButton btnPlanOutDays = ViewBindings.findChildViewById(rootView, id);
+      if (btnPlanOutDays == null) {
+        break missingId;
+      }
+
       id = R.id.card_breakfast;
       MaterialCardView cardBreakfast = ViewBindings.findChildViewById(rootView, id);
       if (cardBreakfast == null) {
@@ -249,6 +269,18 @@ public final class FragmentUserHomeBinding implements ViewBinding {
       id = R.id.card_mess_condition;
       MaterialCardView cardMessCondition = ViewBindings.findChildViewById(rootView, id);
       if (cardMessCondition == null) {
+        break missingId;
+      }
+
+      id = R.id.card_planned_out_days;
+      MaterialCardView cardPlannedOutDays = ViewBindings.findChildViewById(rootView, id);
+      if (cardPlannedOutDays == null) {
+        break missingId;
+      }
+
+      id = R.id.container_planned_out_days;
+      LinearLayout containerPlannedOutDays = ViewBindings.findChildViewById(rootView, id);
+      if (containerPlannedOutDays == null) {
         break missingId;
       }
 
@@ -391,11 +423,12 @@ public final class FragmentUserHomeBinding implements ViewBinding {
       }
 
       return new FragmentUserHomeBinding((ConstraintLayout) rootView, btnDinnerInNew,
-          btnDinnerOutNew, btnLunchInNew, btnLunchOutNew, btnNotification, cardBreakfast,
-          cardDinner, cardLunch, cardMessCondition, imgProfile, indicatorMessCondition,
-          mealsContainerNew, profileContainer, textDate, textDeadlineLabel, textDinnerCardTimer,
-          textDinnerMenuNew, textDinnerPreference, textDinnerStatus, textDinnerStatusBar,
-          textGreeting, textLunchCardTimer, textLunchMenuNew, textLunchPreference, textLunchStatus,
+          btnDinnerOutNew, btnLunchInNew, btnLunchOutNew, btnNotification, btnPlanOutDays,
+          cardBreakfast, cardDinner, cardLunch, cardMessCondition, cardPlannedOutDays,
+          containerPlannedOutDays, imgProfile, indicatorMessCondition, mealsContainerNew,
+          profileContainer, textDate, textDeadlineLabel, textDinnerCardTimer, textDinnerMenuNew,
+          textDinnerPreference, textDinnerStatus, textDinnerStatusBar, textGreeting,
+          textLunchCardTimer, textLunchMenuNew, textLunchPreference, textLunchStatus,
           textLunchStatusBar, textMessCondition, textTimerHours, textTimerMins, textTimerSecs,
           timerContainer, topHeader);
     }

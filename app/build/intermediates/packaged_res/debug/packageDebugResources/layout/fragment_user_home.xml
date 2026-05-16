@@ -27,7 +27,7 @@
                 android:padding="20dp">
 
                 <!-- Profile Picture -->
-                 <com.google.android.material.card.MaterialCardView
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/profile_container"
                     android:layout_width="56dp"
                     android:layout_height="56dp"
@@ -35,7 +35,7 @@
                     app:cardElevation="0dp"
                     app:strokeWidth="2dp"
                     app:strokeColor="@color/brand_primary"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent">
                     
@@ -54,8 +54,9 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_marginStart="16dp"
-                    app:layout_constraintStart_toEndOf="@id/profile_container"
-                    app:layout_constraintEnd_toStartOf="@id/btn_notification"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintStart_toEndOf="@id/btn_notification"
+                    app:layout_constraintEnd_toStartOf="@id/profile_container"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent">
 
@@ -89,7 +90,7 @@
                     app:strokeWidth="1dp"
                     app:strokeColor="@color/neutral_200"
                     app:cardBackgroundColor="@color/white"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent">
 
@@ -337,6 +338,51 @@
                 android:orientation="vertical"
                 android:paddingHorizontal="16dp"
                 android:clipToPadding="false">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_plan_out_days"
+                    style="@style/Profound.Button.Outlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:text="Plan OUT Days"
+                    android:textStyle="bold"
+                    app:icon="@drawable/ic_calendar"
+                    app:strokeColor="@color/neutral_300"
+                    android:textColor="@color/text_heading" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_planned_out_days"
+                    style="@style/Profound.Card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:visibility="gone"
+                    tools:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Planned OUT Days"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/poppins"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_heading" />
+
+                        <LinearLayout
+                            android:id="@+id/container_planned_out_days"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:orientation="vertical" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
 
                 <!-- Breakfast Card -->
                 <com.google.android.material.card.MaterialCardView

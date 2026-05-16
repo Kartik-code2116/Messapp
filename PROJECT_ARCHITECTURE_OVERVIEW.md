@@ -147,96 +147,96 @@
 │                    MANAGER CLASSES INTERACTION DIAGRAM                  │
 ├─────────────────────────────────────────────────────────────────────────┤
 │                                                                         │
-│  ┌──────────────────┐                                                   │
-│  │ ProfileManager   │                                                   │
-│  │──────────────────┤                                                   │
-│  │ • fetchMessProf  │───────┐                                           │
-│  │ • updateProfile  │       │                                           │
-│  │ • getCurrentUser │       │ Reads/Writes                              │
-│  │ • isComplete     │       │ Firestore                                 │
-│  └──────────────────┘       │ "messes"                                  │
-│                             │ collection                                │
-│                             │                                           │
-│  ┌──────────────────┐       │                                           │
-│  │ MenuManager      │       │                                           │
-│  │──────────────────┤       │                                           │
-│  │ • createMenu     │───────┼──→ ┌─────────────────┐                    │
-│  │ • getWeeklyMenu  │       │    │   FireStore     │                    │
-│  │ • updateAvail    │       │    │                 │                    │
-│  │ • addMealItems   │       │    │ Collections:    │                    │
-│  └──────────────────┘       │    │ • messes        │                    │
-│                             │    │ • menus         │                    │
-│  ┌──────────────────┐       │    │ • subscriptions │                    │
-│  │SubscriptionMngr  │       │    │ • reviews       │                    │
-│  │──────────────────┤       │    │ • offers        │                    │
-│  │ • createSub      │───────┤    │ • users         │                    │
-│  │ • hasActiveSub   │       │    │ • transactions  │                    │
-│  │ • renewSub       │       │    │ • events        │                    │
-│  │ • cancelSub      │       │    └─────────────────┘                    │
-│  └──────────────────┘       │                                           │
-│                             │                                           │
-│  ┌──────────────────┐       │                                           │
-│  │ PaymentManager   │       │                                           │
-│  │──────────────────┤       │                                           │
-│  │ • processPayment │───────┤ (95% success rate)                        │
-│  │ • getTransact    │       │ Creates subscription                      │
-│  │ • calcRevenue    │       │ on success                                │
-│  │ • getSubCount    │       │                                           │
-│  └──────────────────┘       │                                           │
-│         ↑                   │                                           │
-│         │ Uses              │                                           │
-│         │                   │                                           │
-│  ┌──────────────────┐       │                                           │
-│  │ ReviewManager    │       │                                           │
-│  │──────────────────┤       │                                           │
-│  │ • createReview   │───────┤ (Updates avg rating)                      │
-│  │ • getReviews     │       │                                           │
-│  │ • getAvgRating   │       │                                           │
-│  │ • likeReview     │       │                                           │
-│  │ • updateAvgRating│       │                                           │
-│  └──────────────────┘       │                                           │
-│                             │                                           │
-│  ┌──────────────────┐       │                                           │
-│  │ OfferManager     │       │                                           │
-│  │──────────────────┤       │                                           │
-│  │ • createOffer    │───────┤                                           │
-│  │ • getOffers      │       │                                           │
-│  │ • trackUsage     │       │                                           │
-│  │ • isOfferValid   │       │                                           │
-│  └──────────────────┘       │                                           │
-│                             │                                           │
-│  ┌──────────────────┐       │                                           │
-│  │ DiscoveryManager │       │                                           │
-│  │──────────────────┤       │                                           │
-│  │ • searchMesses   │───────┤ (Client-side search)                      │
-│  │ • advancedSearch │       │                                           │
-│  │ • getTopRated    │       │                                           │
-│  │ • getByPrice     │       │                                           │
-│  │ • getPopular     │       │                                           │
-│  └──────────────────┘       │                                           │
-│                             │                                           │
-│  ┌──────────────────┐       │                                           │
-│  │ AnalyticsManager │       │                                           │
-│  │──────────────────┤       │                                           │
-│  │ • getDashboard   │───────┤ (Aggregates data)                         │
-│  │ • getTotalSubs   │       │                                           │
-│  │ • getRevenue     │       │                                           │
-│  │ • trackPageView  │       │                                           │
-│  └──────────────────┘       │                                           │
-│                             │                                           │
-│  ┌─────────────────────────┐│                                           │
-│  │ FirebaseNotification    ││                                           │
-│  │ Manager (Backbone)      ││                                           │
-│  │─────────────────────────┤│                                           │
-│  │ • createNotifChannel    ││                                           │
-│  │ • getFCMToken           ││                                           │
-│  │ • subscribeToTopic      ││─────┬─ All Managers                       │
-│  │ • saveDeviceToken       ││     │ use FCM for                         │
-│  │ • sendTestNotif         ││     │ notifications                       │
-│  │ • logEvent              ││─────┘                                     │
-│  │ • getNotifPreferences   ││                                           │
-│  └─────────────────────────┘│                                           │
-│                             │                                           │
+│  ┌──────────────────┐                                                   
+│  │ ProfileManager   │                                                   
+│  │──────────────────┤                                                   
+│  │ • fetchMessProf  │───────┐                                           
+│  │ • updateProfile  │       │                                           
+│  │ • getCurrentUser │       │ Reads/Writes                              
+│  │ • isComplete     │       │ Firestore                                 
+│  └──────────────────┘       │ "messes"                                  
+│                             │ collection                                
+│                             │                                           
+│  ┌──────────────────┐       │                                           
+│  │ MenuManager      │       │                                           
+│  │──────────────────┤       │                                           
+│  │ • createMenu     │───────┼──→ ┌─────────────────┐                    
+│  │ • getWeeklyMenu  │       │    │   FireStore     │                    
+│  │ • updateAvail    │       │    │                 │                    
+│  │ • addMealItems   │       │    │ Collections:    │                    
+│  └──────────────────┘       │    │ • messes        │                    
+│                             │    │ • menus         │                    
+│  ┌──────────────────┐       │    │ • subscriptions │                    
+│  │SubscriptionMngr  │       │    │ • reviews       │                    
+│  │──────────────────┤       │    │ • offers        │                    
+│  │ • createSub      │───────┤    │ • users         │                    
+│  │ • hasActiveSub   │       │    │ • transactions  │                    
+│  │ • renewSub       │       │    │ • events        │                    
+│  │ • cancelSub      │       │    └─────────────────┘                    
+│  └──────────────────┘       │                                           
+│                             │                                           
+│  ┌──────────────────┐       │                                           
+│  │ PaymentManager   │       │                                           
+│  │──────────────────┤       │                                           
+│  │ • processPayment │───────┤ (95% success rate)                        
+│  │ • getTransact    │       │ Creates subscription                      
+│  │ • calcRevenue    │       │ on success                                
+│  │ • getSubCount    │       │                                           
+│  └──────────────────┘       │                                           
+│         ↑                   │                                           
+│         │ Uses              │                                           
+│         │                   │                                           
+│  ┌──────────────────┐       │                                           
+│  │ ReviewManager    │       │                                           
+│  │──────────────────┤       │                                           
+│  │ • createReview   │───────┤ (Updates avg rating)                      
+│  │ • getReviews     │       │                                           
+│  │ • getAvgRating   │       │                                           
+│  │ • likeReview     │       │                                           
+│  │ • updateAvgRating│       │                                           
+│  └──────────────────┘       │                                           
+│                             │                                           
+│  ┌──────────────────┐       │                                           
+│  │ OfferManager     │       │                                           
+│  │──────────────────┤       │                                           
+│  │ • createOffer    │───────┤                                           
+│  │ • getOffers      │       │                                           
+│  │ • trackUsage     │       │                                           
+│  │ • isOfferValid   │       │                                           
+│  └──────────────────┘       │                                           
+│                             │                                           
+│  ┌──────────────────┐       │                                           
+│  │ DiscoveryManager │       │                                           
+│  │──────────────────┤       │                                           
+│  │ • searchMesses   │───────┤ (Client-side search)                      
+│  │ • advancedSearch │       │                                           
+│  │ • getTopRated    │       │                                           
+│  │ • getByPrice     │       │                                           
+│  │ • getPopular     │       │                                           
+│  └──────────────────┘       │                                           
+│                             │                                           
+│  ┌──────────────────┐       │                                           
+│  │ AnalyticsManager │       │                                           
+│  │──────────────────┤       │                                           
+│  │ • getDashboard   │───────┤ (Aggregates data)                         
+│  │ • getTotalSubs   │       │                                           
+│  │ • getRevenue     │       │                                           
+│  │ • trackPageView  │       │                                           
+│  └──────────────────┘       │                                           
+│                             │                                           
+│  ┌─────────────────────────┐│                                           
+│  │ FirebaseNotification    ││                                           
+│  │ Manager (Backbone)      ││                                           
+│  │─────────────────────────┤│                                           
+│  │ • createNotifChannel    ││                                           
+│  │ • getFCMToken           ││                                           
+│  │ • subscribeToTopic      ││─────┬─ All Managers                       
+│  │ • saveDeviceToken       ││     │ use FCM for                         
+│  │ • sendTestNotif         ││     │ notifications                       
+│  │ • logEvent              ││─────┘                                     
+│  │ • getNotifPreferences   ││                                           
+│  └─────────────────────────┘│                                           
+│                             │                                           
 └─────────────────────────────────────────────────────────────────────────┘
 ```
 
