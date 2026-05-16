@@ -1,323 +1,120 @@
-# MessApp - Short Workflow Guide
+<h1 align="center">MessApp 🍲</h1>
 
-## What is MessApp?
-A two-sided Android app connecting **students (users)** with **mess owners** for meal subscriptions, menu viewing, and reviews.
+<p align="center">
+  <strong>A dual-sided Android platform connecting students with mess (cafeteria) owners.</strong>
+</p>
 
----
-
-## 🎯 Non-Technical Workflow (For Regular Users)
-
-### **For Students/Users:**
-
-**Step 1: Sign Up**
-- Download the app
-- Create an account with your email
-- Choose "I'm a User/Student"
-- Log in
-
-**Step 2: Browse Mess Places**
-- Open the Home screen
-- See a list of all available mess places nearby
-- Each shows: name, location, price, and star rating
-- Search by location or filter by price range
-
-**Step 3: View Details**
-- Click on a mess you're interested in
-- See their full details: address, contact, what they offer
-- Check today's lunch and dinner menu
-- Read reviews from other students
-- See the average rating
-
-**Step 4: Subscribe**
-- Click the "Subscribe" button
-- A payment process happens (simulated in this version)
-- If successful, you're now a subscriber!
-- Now you can see full menu and write reviews
-
-**Step 5: Daily Usage**
-- Open "My Menu" to see today's lunch & dinner
-- Check your subscription history anytime
-- Leave a review with star rating and comment
-- Unsubscribe anytime you want
-
-**Step 6: Notifications**
-- Get push notifications when the mess updates menu
-- Get alerts about special offers
-- Receive messages from the mess owner
+<p align="center">
+  <img src="https://img.shields.io/badge/Platform-Android-green.svg" alt="Platform: Android">
+  <img src="https://img.shields.io/badge/Language-Java_17-orange.svg" alt="Language: Java">
+  <img src="https://img.shields.io/badge/Min_SDK-24-blue.svg" alt="Min SDK">
+  <img src="https://img.shields.io/badge/Backend-Firebase-FFCA28.svg" alt="Backend">
+</p>
 
 ---
 
-### **For Mess Owners:**
+## 📖 Overview
 
-**Step 1: Set Up Your Mess**
-- Sign up with email
-- Choose "I'm a Mess Owner"
-- Fill in your mess details:
-  - Mess name (e.g., "Sharma's Mess")
-  - Location address
-  - Contact phone number
-  - Monthly price per student
-  - Description of what you offer
-
-**Step 2: Daily Menu Management**
-- Every day, enter the lunch menu before 10 AM
-- Every day, enter the dinner menu before 4 PM
-- After 10 AM, can't edit lunch anymore
-- After 4 PM, can't edit dinner anymore
-- (This ensures timely updates for students)
-
-**Step 3: View Your Students**
-- See how many students subscribed this month
-- Check student names and contact info
-- See who's active and who cancelled
-
-**Step 4: Check Your Dashboard**
-- Total money earned this month
-- Number of students paying you
-- Most popular dishes
-- Trends over time
-
-**Step 5: Handle Reviews**
-- Students write reviews about your mess
-- See what they liked or didn't like
-- Your average rating is calculated automatically
-- Higher ratings = more students will subscribe
-
-**Step 6: Communicate**
-- Send updates to all your current students
-- They get instant push notifications
-- Announce special meals, discounts, or any changes
+**MessApp** is an Android application designed to bridge the gap between students seeking reliable meal subscriptions and mess owners looking for an efficient management platform. It provides a seamless experience for students to discover, subscribe, and review local mess services, while empowering mess owners with a dashboard to manage daily menus, track subscribers, and analyze revenue.
 
 ---
 
-### **Real-World Examples:**
+## ✨ Key Features
 
-**Scenario 1: A Student Subscribes**
-```
-Priya opens MessApp
-  ↓
-Sees "Sharma's Mess" with 4.5 stars (₹2000/month)
-  ↓
-Clicks to see menu → Lunch: Dal-Rice-Vegetables, Dinner: Roti-Curry
-  ↓
-Reads 25 reviews: "Great food!", "Love the variety", "Affordable"
-  ↓
-Clicks "Subscribe" → Payment successful
-  ↓
-Now she can see full menu daily and write reviews
-  ↓
-Tomorrow at 6 AM she checks app → Today's lunch is "Biryani & Raita"
-  ↓
-After eating, she rates 5 stars: "Amazing biryani! Worth it."
-```
+### 🎓 For Students (Users)
+* **Discover & Explore:** Browse nearby mess services with location, price, and rating filters.
+* **Smart Subscriptions:** Subscribe to a mess with simulated payment handling and automatic tracking of active days.
+* **Daily Menu Access:** View the specific lunch and dinner menus updated daily by the mess owner.
+* **Review System:** Share experiences through a 5-star rating system with written comments to help other students.
+* **Real-time Notifications:** Receive instant FCM push notifications regarding menu updates and special offers.
+* **Guest Mode:** Explore the app and view available mess services without creating an account.
 
-**Scenario 2: Mess Owner Updates Menu**
-```
-Raj (Mess Owner) wakes up at 8 AM
-  ↓
-Opens MessApp → Mess Menu section
-  ↓
-Types Lunch: "Aloo Paratha, Pickle, Lassi"
-  ↓
-Clicks "Save"
-  ↓
-All 30 students get a notification: "Menu updated! Check today's lunch"
-  ↓
-Students open app and see the new menu
-  ↓
-Students know what to expect when they come for lunch
-```
-
-**Scenario 3: A Student Reviews the Mess**
-```
-Harsh has been eating at "Golden Kitchen" for 2 months
-  ↓
-Opens the app → Goes to the mess details
-  ↓
-Clicks the 5-star button and writes: "Consistently good quality. Hygiene is great!"
-  ↓
-Clicks "Submit Review"
-  ↓
-His review appears immediately for other students to see
-  ↓
-The app automatically calculates: "Golden Kitchen now has 4.7/5 stars (85 reviews)"
-  ↓
-More students see the high rating and decide to subscribe
-```
+### 👨‍🍳 For Mess Owners (Admins)
+* **Professional Dashboard:** A centralized hub to manage all mess operations seamlessly.
+* **Daily Menu Management:** Update lunch (before 10 AM) and dinner (before 4 PM) menus easily.
+* **Subscriber Tracking:** View a list of all active students, tracking overall member counts.
+* **Business Analytics:** Monitor total revenue, subscriber trends, and popular dishes directly from the app.
+* **Direct Communication:** Send global announcements and updates to all subscribers via push notifications.
+* **Profile Management:** Keep business information, pricing, and descriptions up-to-date.
 
 ---
 
----
+## 🛠️ Technology Stack
 
-## Quick App Flow
-
-### 🔐 **Authentication**
-1. **SplashActivity** → Checks if user is logged in
-2. **RoleSelectionActivity** → User chooses: "User" or "Mess Owner"
-3. **LoginActivity** → Email/Password + Firebase Auth
-
----
-
-### 👤 **USER WORKFLOW**
-
-#### Home Screen (UserHomeFragment)
-- Browse available messes
-- Search and filter by location/price
-- See ratings and reviews
-
-#### Subscribe Flow
-1. Click on a mess → View details
-2. See menu items (lunch/dinner)
-3. Click "Subscribe" → Simulated payment (95% success)
-4. Automatic FCM topic subscription for notifications
-5. Unlock full menu & ability to review
-
-#### My Menu (UserMenuFragment)
-- View today's lunch & dinner for subscribed mess
-- Updated daily by mess owner
-
-#### History (UserHistoryFragment)
-- View all past subscriptions
-- Dates and pricing
-
-#### Profile (UserProfileFragment)
-- User info and preferences
+* **Language:** Java 17
+* **Framework:** Android SDK (API 24 to 36)
+* **Architecture:** Component-based UI with Fragment Navigation and ViewBinding
+* **Backend Integration:**
+  * **Firebase Authentication:** Secure Email/Password login.
+  * **Firebase Cloud Firestore:** NoSQL database for real-time syncing of menus, reviews, and subscriptions.
+  * **Firebase Cloud Messaging (FCM):** Topic-based push notifications.
+  * **Firebase Storage:** Cloud storage for profile and mess images.
+* **UI/UX Components:** 
+  * Material Design 3 (MaterialCardView, BottomNavigationView, DrawerLayout, NavigationView)
+  * Glide for efficient image caching and loading.
+  * SwipeRefreshLayout for dynamic data refresh.
 
 ---
 
-### 👨‍💼 **MESS OWNER WORKFLOW**
-
-#### Dashboard (MessDashboardActivity)
-- **Profile Tab** → Edit mess info (name, location, contact, description, price)
-- **Menu Tab** → Update today's lunch/dinner (10 AM cutoff for lunch, 4 PM for dinner)
-- **Students Tab** → View all current subscribers
-- **Analytics Tab** → See total subscribers, revenue, trends
-
-#### Special Features
-- Can view all reviews customers posted
-- Can edit profile anytime via EditMessProfileActivity
-- Automatic student count updates
-
----
-
-## Core Features
-
-| Feature                 | Details                              |
-|-------------------------|--------------------------------------|
-| **Authentication**      | Firebase Auth (Email/Password)       |
-| **Database**            | Firestore NoSQL                      |
-| **Notifications**       | Firebase Cloud Messaging (FCM)       |
-| **Payments**            | Simulated (95% success rate)         |
-| **Subscriptions**       | Monthly, auto-expiry tracking        |
-| **Reviews**             | 5-star rating system with comments   |
-| **Menu**                | Daily lunch/dinner with time cutoffs |
-| **Analytics**           | Subscriber count, revenue tracking   |
-
----
-
-## Data Models (Firestore Collections)
-
-```
-messes/           → Mess details (name, location, price, rating)
-menus/            → Daily lunch/dinner items
-subscriptions/    → User-Mess subscription records
-reviews/          → Ratings and comments
-transactions/     → Payment records
-users/            → User profiles (role, tokens)
-offers/           → Discounts and promotions
-notification_events/  → Event logs
-```
-
----
-
-## Key Managers
-
-| Manager                         | Purpose                      |
-|---------------------------------|------------------------------|
-| **ProfileManager**              | Mess profile CRUD            |
-| **MenuManager**                 | Create/update daily menus    |
-| **SubscriptionManager**         | Handle subscriptions         |
-| **PaymentManager**              | Process payments (simulated) |
-| **ReviewManager**               | Manage ratings & comments    |
-| **DiscoveryManager**            | Search & filter messes       |
-| **AnalyticsManager**            | Dashboard stats              |
-| **FirebaseNotificationManager** | Push notifications via FCM   |
-
----
-
-## Important Flows
-
-### 1️⃣ Subscribe
-User → Click Subscribe → Payment (simulated) → Create subscription → FCM topic sub → Unlock menu
-
-### 2️⃣ Review
-User → Rate mess → Add comment → Submit → Manager calculates avg rating → Updates mess profile
-
-### 3️⃣ Menu Update
-Mess owner → Enter menu items → Save → Firestore update → Users see updated menu
-
-### 4️⃣ Notification
-Mess owner sends update → FCM topic "mess_[messId]" → All subscribers get push notification
-
----
-
-## Tech Stack
-
-- **Language:** Java 17
-- **Framework:** Android (API 24-36)
-- **UI:** Fragment Navigation, RecyclerView, ViewBinding
-- **Backend:** Firebase (Auth, Firestore, Messaging, Storage)
-- **Build:** Gradle KTS
-
----
-
-## File Structure
+## 🏗️ Project Architecture
 
 ```
 app/src/main/java/com/example/messapp/
-├── Activities/          → Login, Dashboard, Role Selection
-├── Fragments/           → UI screens (Home, Menu, Profile, etc)
-├── Managers/            → Business logic (9 manager classes)
-├── Models/              → Data classes (Mess, Subscription, Review, etc)
-├── Adapters/            → RecyclerView adapters
-└── MyFirebaseMessagingService.java  → FCM handler
+├── adapters/           # RecyclerView Adapters for dynamic lists
+├── fragments/          # Base/legacy UI fragments
+├── managers/           # Business logic handlers (MenuManager, SubscriptionManager)
+├── models/             # POJO Data classes (Mess, Subscription, Review)
+├── ui/                 # UI layers grouped by role
+│   ├── mess/           # Admin fragments (Dashboard, Students, Analytics)
+│   └── user/           # Student fragments (Home, Menu, History, Profile)
+├── utils/              # Helper utilities (ThemeManager)
+├── *Activity.java      # Root level activities (Login, Dashboards, Splash, RoleSelection)
+└── MyFirebaseMessagingService.java # FCM Service handler
 ```
 
 ---
 
-## Quick Reference
+## 🚀 Setup and Installation
 
-**User Can:**
-- Browse messes
-- Subscribe/Unsubscribe
-- View menu items
-- Post reviews
-- See subscription history
-- Manage preferences
+### Prerequisites
+1. **Android Studio** (Koala or newer recommended).
+2. A valid **Firebase Project** configured with Firestore, Auth, Storage, and FCM.
 
-**Mess Owner Can:**
-- Create/edit profile
-- Set daily menu with time cutoffs
-- View subscribers
-- See analytics (revenue, subscriber count)
-- Receive customer reviews
-- Send updates via FCM
-
----
-
-## Status Codes & Constants
-
-- **Subscription Status:** ACTIVE, EXPIRED, CANCELLED
-- **Transaction Status:** SUCCESS, FAILED
-- **User Roles:** USER, MESS_OWNER
-- **Meal Types:** LUNCH, DINNER
-- **Days:** MON, TUE, WED, THU, FRI, SAT, SUN
+### Steps to Run
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/yourusername/messapp.git
+   ```
+2. **Open the project** in Android Studio.
+3. **Add Firebase Credentials:**
+   * Download the `google-services.json` file from your Firebase console.
+   * Place the file in the `app/` directory of the project.
+4. **Sync Gradle:** Wait for Android Studio to download all dependencies.
+5. **Run the App:** Click the run button (`Shift + F10`) to install the app on an emulator or physical device running Android 7.0 (API 24) or higher.
 
 ---
 
-## Firebase Security Notes
+## 🗄️ Database Structure (Firestore)
 
-- Users can only view their own data
-- Mess owners can only edit their mess
-- Firestore rules enforce role-based access
-- FCM topics auto-manage subscriptions
+The NoSQL database relies on the following core collections:
+* `users/` - Stores user profiles and role definitions (`USER` or `MESS_OWNER`).
+* `messes/` - Stores mess business profiles, ratings, and pricing.
+* `menus/` - Daily menu items updated by owners.
+* `subscriptions/` - Tracks active and expired subscriptions linking users to messes.
+* `reviews/` - User-generated reviews tied to specific mess profiles.
+
+---
+
+## 🛡️ Security & Privacy
+* Firestore Security Rules are implemented to ensure users can only modify their own profiles.
+* Mess Owners have exclusive write access to their specific mess profiles and daily menus.
+* Push notifications are securely routed using FCM topics based on subscription status.
+
+---
+
+## 🤝 Contributing
+Contributions, issues, and feature requests are welcome! 
+If you find a bug or have an idea, feel free to open an issue or submit a pull request.
+
+## 📄 License
+This project is for educational and portfolio purposes. All rights reserved.
