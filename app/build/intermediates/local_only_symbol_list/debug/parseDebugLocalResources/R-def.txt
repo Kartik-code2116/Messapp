@@ -219,6 +219,7 @@ drawable ic_refresh
 drawable ic_restaurant
 drawable ic_restore
 drawable ic_schedule
+drawable ic_send
 drawable ic_settings_black_24dp
 drawable ic_star_rate
 drawable ic_steam_subtle
@@ -242,6 +243,7 @@ id action_messProfileFragment_to_navigation_mess_students
 id action_settings
 id action_userHomeFragment_to_messDetailFragment
 id addOfferFragment
+id admin_top_bar
 id app_logo
 id btnForgotPassword
 id btnGoogleLogin
@@ -304,6 +306,7 @@ id btn_save_settings
 id btn_save_weekly_menu
 id btn_select_date
 id btn_select_expiry_date
+id btn_send_message
 id btn_submit_review
 id btn_subscribe_mess
 id btn_user
@@ -338,6 +341,9 @@ id dinner_hour_picker
 id dinner_input_layout
 id dinner_minute_picker
 id divider_drawer
+id drawer_admin_logout
+id drawer_admin_profile
+id drawer_admin_settings
 id drawer_user_history
 id drawer_user_home
 id drawer_user_menu
@@ -497,6 +503,7 @@ id text_dinner_preference
 id text_dinner_status
 id text_dinner_status_bar
 id text_drawer_email
+id text_drawer_members
 id text_drawer_mess
 id text_drawer_name
 id text_drawer_subscription
@@ -609,7 +616,9 @@ layout fragment_user_history
 layout fragment_user_home
 layout fragment_user_menu
 layout fragment_user_profile
+layout header_admin_profile_drawer
 layout header_user_profile_drawer
+layout include_admin_top_bar
 layout include_user_top_bar
 layout item_history
 layout item_mess_card
@@ -621,6 +630,7 @@ layout item_student_request
 layout item_transaction
 menu bottom_nav_menu
 menu bottom_nav_menu_mess
+menu menu_admin_profile_drawer
 menu menu_mess_top_bar
 menu menu_user_profile_drawer
 menu mess_bottom_nav

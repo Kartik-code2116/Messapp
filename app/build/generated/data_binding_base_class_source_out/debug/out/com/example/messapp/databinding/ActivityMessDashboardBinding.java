@@ -5,24 +5,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentContainerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.messapp.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
 
 public final class ActivityMessDashboardBinding implements ViewBinding {
   @NonNull
-  private final RelativeLayout rootView;
+  private final DrawerLayout rootView;
 
   @NonNull
-  public final RelativeLayout container;
+  public final IncludeAdminTopBarBinding adminTopBar;
+
+  @NonNull
+  public final DrawerLayout container;
 
   @NonNull
   public final FragmentContainerView navHostFragmentActivityMessDashboard;
@@ -33,20 +37,26 @@ public final class ActivityMessDashboardBinding implements ViewBinding {
   @NonNull
   public final LinearLayout navViewContainer;
 
-  private ActivityMessDashboardBinding(@NonNull RelativeLayout rootView,
-      @NonNull RelativeLayout container,
+  @NonNull
+  public final NavigationView profileDrawer;
+
+  private ActivityMessDashboardBinding(@NonNull DrawerLayout rootView,
+      @NonNull IncludeAdminTopBarBinding adminTopBar, @NonNull DrawerLayout container,
       @NonNull FragmentContainerView navHostFragmentActivityMessDashboard,
-      @NonNull BottomNavigationView navView, @NonNull LinearLayout navViewContainer) {
+      @NonNull BottomNavigationView navView, @NonNull LinearLayout navViewContainer,
+      @NonNull NavigationView profileDrawer) {
     this.rootView = rootView;
+    this.adminTopBar = adminTopBar;
     this.container = container;
     this.navHostFragmentActivityMessDashboard = navHostFragmentActivityMessDashboard;
     this.navView = navView;
     this.navViewContainer = navViewContainer;
+    this.profileDrawer = profileDrawer;
   }
 
   @Override
   @NonNull
-  public RelativeLayout getRoot() {
+  public DrawerLayout getRoot() {
     return rootView;
   }
 
@@ -71,7 +81,14 @@ public final class ActivityMessDashboardBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      RelativeLayout container = (RelativeLayout) rootView;
+      id = R.id.admin_top_bar;
+      View adminTopBar = ViewBindings.findChildViewById(rootView, id);
+      if (adminTopBar == null) {
+        break missingId;
+      }
+      IncludeAdminTopBarBinding binding_adminTopBar = IncludeAdminTopBarBinding.bind(adminTopBar);
+
+      DrawerLayout container = (DrawerLayout) rootView;
 
       id = R.id.nav_host_fragment_activity_mess_dashboard;
       FragmentContainerView navHostFragmentActivityMessDashboard = ViewBindings.findChildViewById(rootView, id);
@@ -91,8 +108,15 @@ public final class ActivityMessDashboardBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityMessDashboardBinding((RelativeLayout) rootView, container,
-          navHostFragmentActivityMessDashboard, navView, navViewContainer);
+      id = R.id.profile_drawer;
+      NavigationView profileDrawer = ViewBindings.findChildViewById(rootView, id);
+      if (profileDrawer == null) {
+        break missingId;
+      }
+
+      return new ActivityMessDashboardBinding((DrawerLayout) rootView, binding_adminTopBar,
+          container, navHostFragmentActivityMessDashboard, navView, navViewContainer,
+          profileDrawer);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

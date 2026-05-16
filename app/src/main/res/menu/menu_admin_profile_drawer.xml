@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/drawer_admin_profile"
+        android:icon="@drawable/ic_person_black_24dp"
+        android:title="Profile" />
+
+    <item
+        android:id="@+id/drawer_admin_settings"
+        android:icon="@drawable/ic_settings_black_24dp"
+        android:title="Settings" />
+
+    <item
+        android:id="@+id/drawer_admin_logout"
+        android:icon="@drawable/ic_delete"
+        android:title="Logout" />
+</menu>
