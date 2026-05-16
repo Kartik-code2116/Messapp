@@ -4181,6 +4181,7 @@ id cancel_button
 id cardForm
 id card_breakfast
 id card_dinner
+id card_drawer_profile
 id card_lunch
 id card_mess_condition
 id card_planned_out_days
@@ -4261,6 +4262,7 @@ id disableIntraAutoTransition
 id disablePostScroll
 id disableScroll
 id disjoint
+id divider_drawer
 id dragAnticlockwise
 id dragClockwise
 id dragDown

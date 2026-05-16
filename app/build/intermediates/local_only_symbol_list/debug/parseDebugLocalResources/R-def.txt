@@ -311,6 +311,7 @@ id btn_view_students
 id cardForm
 id card_breakfast
 id card_dinner
+id card_drawer_profile
 id card_lunch
 id card_mess_condition
 id card_planned_out_days
@@ -336,6 +337,7 @@ id dinner_edit_text
 id dinner_hour_picker
 id dinner_input_layout
 id dinner_minute_picker
+id divider_drawer
 id drawer_user_history
 id drawer_user_home
 id drawer_user_menu

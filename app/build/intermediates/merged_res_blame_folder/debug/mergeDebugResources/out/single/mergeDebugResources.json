@@ -208,6 +208,10 @@
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\layout\\item_student.xml"
     },
     {
+        "merged": "com.example.messapp-debug-61:/layout_activity_user_dashboard.xml.flat",
+        "source": "com.example.messapp-main-63:/layout/activity_user_dashboard.xml"
+    },
+    {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
     },
@@ -226,10 +230,6 @@
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\drawable_ic_facebook.xml.flat",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\drawable\\ic_facebook.xml"
-    },
-    {
-        "merged": "com.example.messapp-debug-61:/layout_fragment_user_history.xml.flat",
-        "source": "com.example.messapp-main-63:/layout/fragment_user_history.xml"
     },
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\drawable_ic_star_rate.xml.flat",
@@ -506,6 +506,10 @@
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\drawable_bg_bottom_nav.xml.flat",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\drawable\\bg_bottom_nav.xml"
+    },
+    {
+        "merged": "com.example.messapp-debug-61:/layout_header_user_profile_drawer.xml.flat",
+        "source": "com.example.messapp-main-63:/layout/header_user_profile_drawer.xml"
     },
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\drawable_ic_home_black_24dp.xml.flat",
