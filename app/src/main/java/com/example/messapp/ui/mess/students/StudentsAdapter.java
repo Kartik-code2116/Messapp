@@ -92,8 +92,17 @@ public class StudentsAdapter extends ListAdapter<Student, StudentsAdapter.Studen
             textStudentName.setText(student.getName() != null ? student.getName() : "Anonymous Student");
             textStudentEmail.setText(student.getEmail());
 
-            // Bind Lunch Status
             String lunch = student.getLunchStatus() != null ? student.getLunchStatus() : "--";
+            String dinner = student.getDinnerStatus() != null ? student.getDinnerStatus() : "--";
+
+            if ("ONE_TIME".equals(student.getSubscriptionType())) {
+                if ("IN".equals(lunch)) {
+                    dinner = "LOCKED";
+                } else if ("IN".equals(dinner)) {
+                    lunch = "LOCKED";
+                }
+            }
+
             textLunchStatus.setText(lunch);
             int lunchBg = R.drawable.bg_status_pill_neutral;
             if ("IN".equals(lunch))
@@ -102,8 +111,6 @@ public class StudentsAdapter extends ListAdapter<Student, StudentsAdapter.Studen
                 lunchBg = R.drawable.bg_status_pill_danger;
             containerLunch.setBackgroundResource(lunchBg);
 
-            // Bind Dinner Status
-            String dinner = student.getDinnerStatus() != null ? student.getDinnerStatus() : "--";
             textDinnerStatus.setText(dinner);
             int dinnerBg = R.drawable.bg_status_pill_neutral;
             if ("IN".equals(dinner))
