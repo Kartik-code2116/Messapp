@@ -61,6 +61,7 @@ public class StudentsAdapter extends ListAdapter<Student, StudentsAdapter.Studen
         TextView textDinnerStatus;
         TextView textLunchExpiry;
         TextView textDinnerExpiry;
+        TextView textOneTimeExpiry;
         TextView textSubscriptionExpiry;
         android.widget.ImageView imgStudent;
         android.view.View containerLunch;
@@ -77,6 +78,7 @@ public class StudentsAdapter extends ListAdapter<Student, StudentsAdapter.Studen
             textDinnerStatus = itemView.findViewById(R.id.text_dinner_status);
             textLunchExpiry = itemView.findViewById(R.id.text_lunch_expiry);
             textDinnerExpiry = itemView.findViewById(R.id.text_dinner_expiry);
+            textOneTimeExpiry = itemView.findViewById(R.id.text_one_time_expiry);
             textSubscriptionExpiry = itemView.findViewById(R.id.text_subscription_expiry);
             imgStudent = itemView.findViewById(R.id.img_student);
             containerLunch = itemView.findViewById(R.id.container_lunch);
@@ -120,20 +122,38 @@ public class StudentsAdapter extends ListAdapter<Student, StudentsAdapter.Studen
                 imgStudent.setImageResource(R.drawable.ic_person_black_24dp);
             }
 
-            if (student.getLunchSubscriptionExpiry() > 0) {
-                SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
-                String expiryDate = sdf.format(new Date(student.getLunchSubscriptionExpiry()));
-                textLunchExpiry.setText("Lunch: " + expiryDate);
+            if ("ONE_TIME".equals(student.getSubscriptionType())) {
+                textLunchExpiry.setVisibility(View.GONE);
+                textDinnerExpiry.setVisibility(View.GONE);
+                if (textOneTimeExpiry != null) textOneTimeExpiry.setVisibility(View.VISIBLE);
+                
+                if (student.getOneTimeMealExpiry() > 0) {
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+                    String expiryDate = sdf.format(new Date(student.getOneTimeMealExpiry()));
+                    if (textOneTimeExpiry != null) textOneTimeExpiry.setText("One Time: " + expiryDate);
+                } else {
+                    if (textOneTimeExpiry != null) textOneTimeExpiry.setText("One Time: No Sub");
+                }
             } else {
-                textLunchExpiry.setText("Lunch: No Sub");
-            }
+                textLunchExpiry.setVisibility(View.VISIBLE);
+                textDinnerExpiry.setVisibility(View.VISIBLE);
+                if (textOneTimeExpiry != null) textOneTimeExpiry.setVisibility(View.GONE);
 
-            if (student.getDinnerSubscriptionExpiry() > 0) {
-                SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
-                String expiryDate = sdf.format(new Date(student.getDinnerSubscriptionExpiry()));
-                textDinnerExpiry.setText("Dinner: " + expiryDate);
-            } else {
-                textDinnerExpiry.setText("Dinner: No Sub");
+                if (student.getLunchSubscriptionExpiry() > 0) {
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+                    String expiryDate = sdf.format(new Date(student.getLunchSubscriptionExpiry()));
+                    textLunchExpiry.setText("Lunch: " + expiryDate);
+                } else {
+                    textLunchExpiry.setText("Lunch: No Sub");
+                }
+
+                if (student.getDinnerSubscriptionExpiry() > 0) {
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+                    String expiryDate = sdf.format(new Date(student.getDinnerSubscriptionExpiry()));
+                    textDinnerExpiry.setText("Dinner: " + expiryDate);
+                } else {
+                    textDinnerExpiry.setText("Dinner: No Sub");
+                }
             }
 
             // Show days remaining for quick admin visibility
@@ -142,7 +162,15 @@ public class StudentsAdapter extends ListAdapter<Student, StudentsAdapter.Studen
                     ? student.getLunchSubscriptionExpiry() : student.getSubscriptionExpiry();
             long dinnerExp = student.getDinnerSubscriptionExpiry() > 0
                     ? student.getDinnerSubscriptionExpiry() : student.getSubscriptionExpiry();
-            long maxExp = Math.max(lunchExp, dinnerExp);
+            long oneTimeExp = student.getOneTimeMealExpiry() > 0
+                    ? student.getOneTimeMealExpiry() : student.getSubscriptionExpiry();
+                    
+            long maxExp;
+            if ("ONE_TIME".equals(student.getSubscriptionType())) {
+                maxExp = oneTimeExp;
+            } else {
+                maxExp = Math.max(lunchExp, dinnerExp);
+            }
             if (maxExp > now) {
                 long daysLeft = (maxExp - now) / (1000 * 60 * 60 * 24);
                 textSubscriptionExpiry.setText(daysLeft + "d remaining");
@@ -185,8 +213,10 @@ public class StudentsAdapter extends ListAdapter<Student, StudentsAdapter.Studen
                    Objects.equals(oldItem.getEmail(), newItem.getEmail()) &&
                    Objects.equals(oldItem.getLunchStatus(), newItem.getLunchStatus()) &&
                    Objects.equals(oldItem.getDinnerStatus(), newItem.getDinnerStatus()) &&
+                   Objects.equals(oldItem.getSubscriptionType(), newItem.getSubscriptionType()) &&
                    oldItem.getLunchSubscriptionExpiry() == newItem.getLunchSubscriptionExpiry() &&
-                   oldItem.getDinnerSubscriptionExpiry() == newItem.getDinnerSubscriptionExpiry();
+                   oldItem.getDinnerSubscriptionExpiry() == newItem.getDinnerSubscriptionExpiry() &&
+                   oldItem.getOneTimeMealExpiry() == newItem.getOneTimeMealExpiry();
         }
     }
 }

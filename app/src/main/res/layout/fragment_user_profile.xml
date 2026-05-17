@@ -392,6 +392,18 @@
                             tools:textColor="@color/state_success" />
 
                         <TextView
+                            android:id="@+id/text_one_time_expiry"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:fontFamily="@font/inter"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:visibility="gone"
+                            tools:text="One Time · Active (12d left)"
+                            tools:textColor="@color/state_success" />
+
+                        <TextView
                             android:id="@+id/text_subscription_expiry"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

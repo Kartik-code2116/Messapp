@@ -40,10 +40,6 @@
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\layout\\dialog_manage_subscription.xml"
     },
     {
-        "merged": "com.example.messapp-mergeDebugResources-60:/layout/activity_login.xml",
-        "source": "com.example.messapp-main-63:/layout/activity_login.xml"
-    },
-    {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-mergeDebugResources-60:\\layout\\item_student_request.xml",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\layout\\item_student_request.xml"
     },
@@ -66,6 +62,10 @@
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-mergeDebugResources-60:\\layout\\item_profile_info_row.xml",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\layout\\item_profile_info_row.xml"
+    },
+    {
+        "merged": "com.example.messapp-mergeDebugResources-60:/layout/item_student.xml",
+        "source": "com.example.messapp-main-63:/layout/item_student.xml"
     },
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-mergeDebugResources-60:\\layout\\header_user_profile_drawer.xml",

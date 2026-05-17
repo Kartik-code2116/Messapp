@@ -125,6 +125,11 @@ public class MessRequestsFragment extends Fragment {
         TextInputEditText etAmount = dialogView.findViewById(R.id.etAmount);
         TextInputEditText etDays   = dialogView.findViewById(R.id.etDays);
         android.widget.RadioGroup radioGroupMealType = dialogView.findViewById(R.id.radio_group_meal_type);
+        android.widget.TextView textOneTimeInfo = dialogView.findViewById(R.id.text_one_time_info);
+
+        radioGroupMealType.setOnCheckedChangeListener((group, checkedId) -> {
+            textOneTimeInfo.setVisibility(checkedId == R.id.radio_one_time ? View.VISIBLE : View.GONE);
+        });
 
         new androidx.appcompat.app.AlertDialog.Builder(getContext())
                 .setView(dialogView)
@@ -139,6 +144,7 @@ public class MessRequestsFragment extends Fragment {
                     int selectedId = radioGroupMealType.getCheckedRadioButtonId();
                     if (selectedId == R.id.radio_lunch)        mealType = "LUNCH";
                     else if (selectedId == R.id.radio_dinner)  mealType = "DINNER";
+                    else if (selectedId == R.id.radio_one_time) mealType = "ONE_TIME";
                     grantSubscription(request, Double.parseDouble(amountStr), Integer.parseInt(daysStr), mealType);
                 })
                 .setNegativeButton("Cancel", null)
@@ -152,35 +158,50 @@ public class MessRequestsFragment extends Fragment {
                 .addOnSuccessListener(doc -> {
                     long lunchExpiry   = System.currentTimeMillis();
                     long dinnerExpiry  = System.currentTimeMillis();
+                    long oneTimeExpiry = System.currentTimeMillis();
                     long generalExpiry = System.currentTimeMillis();
 
                     if (doc.exists()) {
                         Long existingL = doc.getLong("lunchSubscriptionExpiry");
                         Long existingD = doc.getLong("dinnerSubscriptionExpiry");
+                        Long existingO = doc.getLong("oneTimeMealExpiry");
                         Long existingG = doc.getLong("subscriptionExpiry");
                         if (existingL != null && existingL > lunchExpiry)   lunchExpiry   = existingL;
                         if (existingD != null && existingD > dinnerExpiry)  dinnerExpiry  = existingD;
+                        if (existingO != null && existingO > oneTimeExpiry) oneTimeExpiry = existingO;
                         if (existingG != null && existingG > generalExpiry) generalExpiry = existingG;
                     }
 
-                    if (mealType.equals("LUNCH") || mealType.equals("BOTH")) {
+                    if (mealType.equals("ONE_TIME")) {
                         Calendar cal = Calendar.getInstance();
-                        cal.setTimeInMillis(lunchExpiry);
+                        cal.setTimeInMillis(oneTimeExpiry);
                         cal.add(Calendar.DAY_OF_YEAR, days);
-                        lunchExpiry = cal.getTimeInMillis();
+                        oneTimeExpiry = cal.getTimeInMillis();
+                        lunchExpiry = 0;
+                        dinnerExpiry = 0;
+                    } else {
+                        if (mealType.equals("LUNCH") || mealType.equals("BOTH")) {
+                            Calendar cal = Calendar.getInstance();
+                            cal.setTimeInMillis(lunchExpiry);
+                            cal.add(Calendar.DAY_OF_YEAR, days);
+                            lunchExpiry = cal.getTimeInMillis();
+                        }
+                        if (mealType.equals("DINNER") || mealType.equals("BOTH")) {
+                            Calendar cal = Calendar.getInstance();
+                            cal.setTimeInMillis(dinnerExpiry);
+                            cal.add(Calendar.DAY_OF_YEAR, days);
+                            dinnerExpiry = cal.getTimeInMillis();
+                        }
+                        oneTimeExpiry = 0;
                     }
-                    if (mealType.equals("DINNER") || mealType.equals("BOTH")) {
-                        Calendar cal = Calendar.getInstance();
-                        cal.setTimeInMillis(dinnerExpiry);
-                        cal.add(Calendar.DAY_OF_YEAR, days);
-                        dinnerExpiry = cal.getTimeInMillis();
-                    }
-                    generalExpiry = Math.max(lunchExpiry, dinnerExpiry);
+                    generalExpiry = Math.max(oneTimeExpiry, Math.max(lunchExpiry, dinnerExpiry));
 
                     Map<String, Object> userUpdate = new HashMap<>();
                     userUpdate.put("subscriptionExpiry",       generalExpiry);
                     userUpdate.put("lunchSubscriptionExpiry",  lunchExpiry);
                     userUpdate.put("dinnerSubscriptionExpiry", dinnerExpiry);
+                    userUpdate.put("oneTimeMealExpiry",        oneTimeExpiry);
+                    userUpdate.put("subscriptionType",         mealType);
 
                     String transId = db.collection("transactions").document().getId();
                     com.example.messapp.models.Transaction transaction =

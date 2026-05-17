@@ -4,9 +4,10 @@ package com.example.messapp.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.ScrollView;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
@@ -19,7 +20,7 @@ import java.lang.String;
 
 public final class DialogGrantSubscriptionBinding implements ViewBinding {
   @NonNull
-  private final LinearLayout rootView;
+  private final ScrollView rootView;
 
   @NonNull
   public final TextInputEditText etAmount;
@@ -39,10 +40,17 @@ public final class DialogGrantSubscriptionBinding implements ViewBinding {
   @NonNull
   public final RadioButton radioLunch;
 
-  private DialogGrantSubscriptionBinding(@NonNull LinearLayout rootView,
+  @NonNull
+  public final RadioButton radioOneTime;
+
+  @NonNull
+  public final TextView textOneTimeInfo;
+
+  private DialogGrantSubscriptionBinding(@NonNull ScrollView rootView,
       @NonNull TextInputEditText etAmount, @NonNull TextInputEditText etDays,
       @NonNull RadioButton radioBoth, @NonNull RadioButton radioDinner,
-      @NonNull RadioGroup radioGroupMealType, @NonNull RadioButton radioLunch) {
+      @NonNull RadioGroup radioGroupMealType, @NonNull RadioButton radioLunch,
+      @NonNull RadioButton radioOneTime, @NonNull TextView textOneTimeInfo) {
     this.rootView = rootView;
     this.etAmount = etAmount;
     this.etDays = etDays;
@@ -50,11 +58,13 @@ public final class DialogGrantSubscriptionBinding implements ViewBinding {
     this.radioDinner = radioDinner;
     this.radioGroupMealType = radioGroupMealType;
     this.radioLunch = radioLunch;
+    this.radioOneTime = radioOneTime;
+    this.textOneTimeInfo = textOneTimeInfo;
   }
 
   @Override
   @NonNull
-  public LinearLayout getRoot() {
+  public ScrollView getRoot() {
     return rootView;
   }
 
@@ -115,8 +125,20 @@ public final class DialogGrantSubscriptionBinding implements ViewBinding {
         break missingId;
       }
 
-      return new DialogGrantSubscriptionBinding((LinearLayout) rootView, etAmount, etDays,
-          radioBoth, radioDinner, radioGroupMealType, radioLunch);
+      id = R.id.radio_one_time;
+      RadioButton radioOneTime = ViewBindings.findChildViewById(rootView, id);
+      if (radioOneTime == null) {
+        break missingId;
+      }
+
+      id = R.id.text_one_time_info;
+      TextView textOneTimeInfo = ViewBindings.findChildViewById(rootView, id);
+      if (textOneTimeInfo == null) {
+        break missingId;
+      }
+
+      return new DialogGrantSubscriptionBinding((ScrollView) rootView, etAmount, etDays, radioBoth,
+          radioDinner, radioGroupMealType, radioLunch, radioOneTime, textOneTimeInfo);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

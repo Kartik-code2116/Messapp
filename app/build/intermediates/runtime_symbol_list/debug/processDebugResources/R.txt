@@ -4808,6 +4808,7 @@ int id text_offer_description 0x7f0a0327
 int id text_offer_discount 0x7f0a0328
 int id text_offer_expiry 0x7f0a0329
 int id text_offer_title 0x7f0a032a
+int id text_one_time_expiry 0x7f0a0391
 int id text_one_time_info 0x7f0a0389
 int id text_owner_email 0x7f0a032b
 int id text_profile_email 0x7f0a032c

@@ -106,12 +106,25 @@ public class UserProfileFragment extends Fragment {
 
                             Long lunchExpiry   = doc.getLong("lunchSubscriptionExpiry");
                             Long dinnerExpiry  = doc.getLong("dinnerSubscriptionExpiry");
+                            Long oneTimeExpiry = doc.getLong("oneTimeMealExpiry");
                             Long generalExpiry = doc.getLong("subscriptionExpiry");
+                            String subType     = doc.getString("subscriptionType");
 
-                            updateSubscriptionStatus(binding.textLunchExpiry,  "Lunch",
-                                    lunchExpiry  != null ? lunchExpiry  : (generalExpiry != null ? generalExpiry : 0));
-                            updateSubscriptionStatus(binding.textDinnerExpiry, "Dinner",
-                                    dinnerExpiry != null ? dinnerExpiry : (generalExpiry != null ? generalExpiry : 0));
+                            if ("ONE_TIME".equals(subType)) {
+                                binding.textLunchExpiry.setVisibility(View.GONE);
+                                binding.textDinnerExpiry.setVisibility(View.GONE);
+                                binding.textOneTimeExpiry.setVisibility(View.VISIBLE);
+                                updateSubscriptionStatus(binding.textOneTimeExpiry, "One Time a Day",
+                                        oneTimeExpiry != null ? oneTimeExpiry : (generalExpiry != null ? generalExpiry : 0));
+                            } else {
+                                binding.textLunchExpiry.setVisibility(View.VISIBLE);
+                                binding.textDinnerExpiry.setVisibility(View.VISIBLE);
+                                binding.textOneTimeExpiry.setVisibility(View.GONE);
+                                updateSubscriptionStatus(binding.textLunchExpiry,  "Lunch",
+                                        lunchExpiry  != null ? lunchExpiry  : (generalExpiry != null ? generalExpiry : 0));
+                                updateSubscriptionStatus(binding.textDinnerExpiry, "Dinner",
+                                        dinnerExpiry != null ? dinnerExpiry : (generalExpiry != null ? generalExpiry : 0));
+                            }
 
                             binding.textSubscriptionExpiry.setVisibility(View.GONE);
 

@@ -1,90 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="24dp">
+    android:layout_height="wrap_content">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Grant Subscription"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@color/text_primary"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Enter the payment details received from the student."
-        android:textSize="14sp"/>
-
-    <com.google.android.material.textfield.TextInputLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="Amount Received (₹)">
+        android:orientation="vertical"
+        android:padding="24dp">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etAmount"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Grant Subscription"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Enter the payment details received from the student."
+            android:textSize="14sp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginTop="16dp"
+            android:hint="Amount Received (₹)">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="Days to Grant">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etDays"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
-            android:text="30"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginTop="16dp"
+            android:hint="Days to Grant">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Select Meal Type"
-        android:textSize="14sp"
-        android:textColor="@color/text_primary"
-        android:layout_marginBottom="8dp"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etDays"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:text="30"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <RadioGroup
-        android:id="@+id/radio_group_meal_type"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="16dp">
-
-        <RadioButton
-            android:id="@+id/radio_lunch"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lunch"
-            android:layout_weight="1"/>
+            android:layout_marginTop="16dp"
+            android:text="Select Meal Type"
+            android:textSize="14sp"
+            android:textColor="@color/text_primary"
+            android:layout_marginBottom="8dp"/>
 
-        <RadioButton
-            android:id="@+id/radio_dinner"
-            android:layout_width="wrap_content"
+        <RadioGroup
+            android:id="@+id/radio_group_meal_type"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Dinner"
-            android:layout_weight="1"/>
+            android:orientation="vertical"
+            android:layout_marginBottom="8dp">
 
-        <RadioButton
-            android:id="@+id/radio_both"
-            android:layout_width="wrap_content"
+            <RadioButton
+                android:id="@+id/radio_lunch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lunch only"
+                android:layout_marginBottom="4dp"/>
+
+            <RadioButton
+                android:id="@+id/radio_dinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Dinner only"
+                android:layout_marginBottom="4dp"/>
+
+            <RadioButton
+                android:id="@+id/radio_both"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Both (Lunch + Dinner)"
+                android:checked="true"
+                android:layout_marginBottom="4dp"/>
+
+            <RadioButton
+                android:id="@+id/radio_one_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="One Time a Day (student picks either Lunch OR Dinner each day)"/>
+        </RadioGroup>
+
+        <!-- Info shown only when One Time a Day is selected -->
+        <TextView
+            android:id="@+id/text_one_time_info"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Both"
-            android:checked="true"
-            android:layout_weight="1"/>
-    </RadioGroup>
+            android:text="⚠️ One Time a Day: Student can mark IN for only ONE meal per day. Both lunch and dinner cards are shown, but once they mark IN on one, the other is automatically locked for that day."
+            android:textSize="12sp"
+            android:textColor="@color/brand_primary"
+            android:background="@drawable/bg_rounded_card_surface"
+            android:backgroundTint="@color/brand_primary_light"
+            android:padding="12dp"
+            android:layout_marginBottom="12dp"
+            android:visibility="gone"/>
 
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>

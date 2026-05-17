@@ -132,6 +132,16 @@
                     android:textSize="12sp"
                     android:fontFamily="@font/inter" />
 
+                <TextView
+                    android:id="@+id/text_one_time_expiry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="One Time: 12 Oct 2024"
+                    android:textColor="@color/text_body"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/inter"
+                    android:visibility="gone" />
+
             </LinearLayout>
             
             <!-- Hidden legacy view -->
