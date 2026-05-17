@@ -124,6 +124,166 @@
                     app:strokeColor="@color/neutral_300"
                     android:textColor="@color/text_heading" />
 
+                <!-- Auto-Select Daily Meal (Lunch/Dinner subscribers only) -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_daily_auto_select"
+                    style="@style/Profound.Card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:visibility="gone"
+                    tools:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="4dp">
+
+                            <ImageView
+                                android:layout_width="22dp"
+                                android:layout_height="22dp"
+                                android:layout_marginEnd="10dp"
+                                android:src="@drawable/ic_schedule"
+                                app:tint="@color/brand_primary" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Auto-Select Daily Meal"
+                                android:textSize="16sp"
+                                android:fontFamily="@font/poppins"
+                                android:textStyle="bold"
+                                android:textColor="@color/text_heading" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Enable to be automatically counted as IN every day without manually selecting. You can still mark OUT to skip."
+                            android:textSize="12sp"
+                            android:layout_marginBottom="16dp"
+                            android:fontFamily="@font/inter"
+                            android:textColor="@color/text_body" />
+
+                        <!-- Lunch auto-select row -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="12dp">
+
+                            <FrameLayout
+                                android:layout_width="36dp"
+                                android:layout_height="36dp"
+                                android:background="@drawable/bg_rounded_card_surface"
+                                android:backgroundTint="@color/brand_primary_light"
+                                android:layout_marginEnd="12dp">
+                                <ImageView
+                                    android:layout_width="18dp"
+                                    android:layout_height="18dp"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/ic_restaurant"
+                                    app:tint="@color/brand_primary" />
+                            </FrameLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Lunch"
+                                    android:textSize="14sp"
+                                    android:fontFamily="@font/inter"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/text_heading" />
+                                <TextView
+                                    android:id="@+id/text_auto_lunch_status"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Auto-select off"
+                                    android:textSize="12sp"
+                                    android:fontFamily="@font/inter"
+                                    android:textColor="@color/text_caption" />
+                            </LinearLayout>
+
+                            <com.google.android.material.materialswitch.MaterialSwitch
+                                android:id="@+id/switch_auto_lunch"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                        <!-- Divider -->
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/divider"
+                            android:layout_marginBottom="12dp" />
+
+                        <!-- Dinner auto-select row -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <FrameLayout
+                                android:layout_width="36dp"
+                                android:layout_height="36dp"
+                                android:background="@drawable/bg_rounded_card_surface"
+                                android:backgroundTint="@color/brand_secondary_light"
+                                android:layout_marginEnd="12dp">
+                                <ImageView
+                                    android:layout_width="18dp"
+                                    android:layout_height="18dp"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/ic_restaurant"
+                                    app:tint="@color/brand_secondary" />
+                            </FrameLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Dinner"
+                                    android:textSize="14sp"
+                                    android:fontFamily="@font/inter"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/text_heading" />
+                                <TextView
+                                    android:id="@+id/text_auto_dinner_status"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Auto-select off"
+                                    android:textSize="12sp"
+                                    android:fontFamily="@font/inter"
+                                    android:textColor="@color/text_caption" />
+                            </LinearLayout>
+
+                            <com.google.android.material.materialswitch.MaterialSwitch
+                                android:id="@+id/switch_auto_dinner"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/card_one_time_auto_select"
                     style="@style/Profound.Card"

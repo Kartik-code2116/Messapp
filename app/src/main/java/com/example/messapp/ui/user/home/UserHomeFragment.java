@@ -52,6 +52,8 @@ public class UserHomeFragment extends Fragment {
     private boolean isOneTimeSubscribed = false;  // ONE_TIME subscription active
     private boolean oneTimeMealUsedToday = false; // student already used their one meal today
     private boolean allowMultipleChanges = false;
+    private boolean autoSelectLunch = false;   // daily auto-IN for lunch
+    private boolean autoSelectDinner = false;  // daily auto-IN for dinner
     private CountDownTimer timer;
     private ListenerRegistration plannedOutListener;
     private String currentUserOneTimeAutoSelect;
@@ -130,6 +132,13 @@ public class UserHomeFragment extends Fragment {
                 }
 
                 checkSubscription(lunchExpiry, dinnerExpiry, generalExpiry, oneTimeExpiry, subscriptionType, oneTimeAutoSelect);
+
+                // Read daily auto-select preferences
+                Boolean autoL = documentSnapshot.getBoolean("autoSelectLunch");
+                Boolean autoD = documentSnapshot.getBoolean("autoSelectDinner");
+                autoSelectLunch  = Boolean.TRUE.equals(autoL);
+                autoSelectDinner = Boolean.TRUE.equals(autoD);
+
                 fetchMessSettings();
                 loadMenu();
                 listenToMySelection();
@@ -171,6 +180,12 @@ public class UserHomeFragment extends Fragment {
                     : (generalExpiry != null && generalExpiry > 0 ? generalExpiry : 0);
             isLunchSubscribed  = lExp > now;
             isDinnerSubscribed = dExp > now;
+            // Show daily auto-select card only when at least one meal is active
+            if (isLunchSubscribed || isDinnerSubscribed) {
+                setupDailyAutoSelectCard();
+            } else {
+                binding.cardDailyAutoSelect.setVisibility(View.GONE);
+            }
         }
     }
     private void setupAutoSelectListener() {
@@ -212,6 +227,58 @@ public class UserHomeFragment extends Fragment {
                     if (binding != null) {
                         Toast.makeText(getContext(), "Auto-select preference saved", Toast.LENGTH_SHORT).show();
                     }
+                });
+    }
+
+    private void setupDailyAutoSelectCard() {
+        if (binding == null) return;
+        binding.cardDailyAutoSelect.setVisibility(View.VISIBLE);
+
+        // Set switch states without triggering listeners
+        binding.switchAutoLunch.setOnCheckedChangeListener(null);
+        binding.switchAutoDinner.setOnCheckedChangeListener(null);
+        binding.switchAutoLunch.setChecked(autoSelectLunch);
+        binding.switchAutoDinner.setChecked(autoSelectDinner);
+        updateDailyAutoSelectSubtext();
+
+        binding.switchAutoLunch.setEnabled(isLunchSubscribed);
+        binding.switchAutoDinner.setEnabled(isDinnerSubscribed);
+
+        binding.switchAutoLunch.setOnCheckedChangeListener((btn, checked) -> {
+            autoSelectLunch = checked;
+            saveDailyAutoSelect();
+            updateDailyAutoSelectSubtext();
+        });
+        binding.switchAutoDinner.setOnCheckedChangeListener((btn, checked) -> {
+            autoSelectDinner = checked;
+            saveDailyAutoSelect();
+            updateDailyAutoSelectSubtext();
+        });
+    }
+
+    private void updateDailyAutoSelectSubtext() {
+        if (binding == null) return;
+        binding.textAutoLunchStatus.setText(autoSelectLunch
+                ? "Auto-select ON — you'll be counted IN daily"
+                : "Auto-select off — select manually each day");
+        binding.textAutoLunchStatus.setTextColor(themeColor(
+                autoSelectLunch ? R.color.state_success : R.color.text_caption));
+        binding.textAutoDinnerStatus.setText(autoSelectDinner
+                ? "Auto-select ON — you'll be counted IN daily"
+                : "Auto-select off — select manually each day");
+        binding.textAutoDinnerStatus.setTextColor(themeColor(
+                autoSelectDinner ? R.color.state_success : R.color.text_caption));
+    }
+
+    private void saveDailyAutoSelect() {
+        if (userId == null) return;
+        Map<String, Object> updates = new HashMap<>();
+        updates.put("autoSelectLunch",  autoSelectLunch);
+        updates.put("autoSelectDinner", autoSelectDinner);
+        db.collection("users").document(userId).update(updates)
+                .addOnFailureListener(e -> {
+                    if (getContext() != null)
+                        Toast.makeText(getContext(), "Failed to save setting", Toast.LENGTH_SHORT).show();
                 });
     }
 
@@ -968,16 +1035,26 @@ public class UserHomeFragment extends Fragment {
                     binding.textLunchStatusBar.setText(!isSubscribed
                             ? "Status: Subscription Expired" : "Status: Cutoff Time Passed");
                     binding.textLunchStatusBar.setBackgroundColor(colorDisabled);
+                } else if (autoSelectLunch) {
+                    // Auto-select is ON — show as Auto IN
+                    binding.btnLunchInNew.setBackgroundTintList(ColorStateList.valueOf(colorGreen));
+                    binding.btnLunchInNew.setTextColor(Color.WHITE);
+                    binding.btnLunchOutNew.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
+                    binding.btnLunchOutNew.setTextColor(colorTextMuted);
+                    binding.textLunchStatus.setText("Auto-selected IN");
+                    binding.textLunchStatus.setTextColor(colorGreen);
+                    binding.textLunchStatusBar.setText("Status: Auto IN ✓");
+                    binding.textLunchStatusBar.setBackgroundColor(colorGreen);
                 } else {
                     binding.btnLunchInNew.setBackgroundTintList(ColorStateList.valueOf(colorPrimary));
                     binding.btnLunchInNew.setTextColor(colorTextOnPrimary);
                     binding.btnLunchOutNew.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
                     binding.btnLunchOutNew.setTextColor(colorTextMuted);
                     binding.textLunchStatus.setText("");
-                    binding.textLunchStatusBar.setText("Status: IN");
-                    binding.textLunchStatusBar.setBackgroundColor(colorGreen);
+                    binding.textLunchStatusBar.setText("Status: Not selected");
+                    binding.textLunchStatusBar.setBackgroundColor(colorYellow);
                 }
-                binding.btnLunchInNew.setEnabled(false);
+                binding.btnLunchInNew.setEnabled(!autoSelectLunch && canMark);
                 binding.btnLunchOutNew.setEnabled(canMark);
                 return;
             }
@@ -1013,16 +1090,26 @@ public class UserHomeFragment extends Fragment {
                     binding.textDinnerStatusBar.setText(!isSubscribed
                             ? "Status: Subscription Expired" : "Status: Cutoff Time Passed");
                     binding.textDinnerStatusBar.setBackgroundColor(colorDisabled);
+                } else if (autoSelectDinner) {
+                    // Auto-select is ON — show as Auto IN
+                    binding.btnDinnerInNew.setBackgroundTintList(ColorStateList.valueOf(colorGreen));
+                    binding.btnDinnerInNew.setTextColor(Color.WHITE);
+                    binding.btnDinnerOutNew.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
+                    binding.btnDinnerOutNew.setTextColor(colorTextMuted);
+                    binding.textDinnerStatus.setText("Auto-selected IN");
+                    binding.textDinnerStatus.setTextColor(colorGreen);
+                    binding.textDinnerStatusBar.setText("Status: Auto IN ✓");
+                    binding.textDinnerStatusBar.setBackgroundColor(colorGreen);
                 } else {
                     binding.btnDinnerInNew.setBackgroundTintList(ColorStateList.valueOf(colorPrimary));
                     binding.btnDinnerInNew.setTextColor(colorTextOnPrimary);
                     binding.btnDinnerOutNew.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
                     binding.btnDinnerOutNew.setTextColor(colorTextMuted);
                     binding.textDinnerStatus.setText("");
-                    binding.textDinnerStatusBar.setText("Status: IN");
-                    binding.textDinnerStatusBar.setBackgroundColor(colorGreen);
+                    binding.textDinnerStatusBar.setText("Status: Not selected");
+                    binding.textDinnerStatusBar.setBackgroundColor(colorYellow);
                 }
-                binding.btnDinnerInNew.setEnabled(false);
+                binding.btnDinnerInNew.setEnabled(!autoSelectDinner && canMark);
                 binding.btnDinnerOutNew.setEnabled(canMark);
                 return;
             }

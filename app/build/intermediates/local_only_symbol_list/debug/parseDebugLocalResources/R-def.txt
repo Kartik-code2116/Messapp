@@ -319,6 +319,7 @@ id btn_user
 id btn_view_students
 id cardForm
 id card_breakfast
+id card_daily_auto_select
 id card_dinner
 id card_drawer_profile
 id card_lunch
@@ -498,12 +499,16 @@ id studentPhoneLayout
 id swipe_refresh
 id swipe_refresh_layout
 id switch_allow_multiple_changes
+id switch_auto_dinner
+id switch_auto_lunch
 id switch_dark_mode
 id textSubtitle
 id textTitle
 id text_active_filter
 id text_active_students_count
 id text_add_review
+id text_auto_dinner_status
+id text_auto_lunch_status
 id text_avg_rating
 id text_current_condition
 id text_current_expiry
