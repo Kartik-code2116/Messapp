@@ -59,6 +59,19 @@
                     android:ellipsize="end"
                     android:singleLine="true" />
 
+                <TextView
+                    android:id="@+id/text_student_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="+91 9876543210"
+                    android:textColor="@color/text_sub"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/inter"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:visibility="gone"
+                    tools:visibility="visible" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -243,7 +256,6 @@
 
         <!-- Hidden legacy fields for compatibility -->
         <TextView android:id="@+id/text_student_status" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone" />
-        <TextView android:id="@+id/text_student_phone" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone" />
         <TextView android:id="@+id/text_student_gender" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone" />
 
     </LinearLayout>

@@ -57,6 +57,7 @@ public class StudentsAdapter extends ListAdapter<Student, StudentsAdapter.Studen
     static class StudentViewHolder extends RecyclerView.ViewHolder {
         TextView textStudentName;
         TextView textStudentEmail;
+        TextView textStudentPhone;
         TextView textLunchStatus;
         TextView textDinnerStatus;
         TextView textLunchExpiry;
@@ -74,6 +75,7 @@ public class StudentsAdapter extends ListAdapter<Student, StudentsAdapter.Studen
             super(itemView);
             textStudentName = itemView.findViewById(R.id.text_student_name);
             textStudentEmail = itemView.findViewById(R.id.text_student_email);
+            textStudentPhone = itemView.findViewById(R.id.text_student_phone);
             textLunchStatus = itemView.findViewById(R.id.text_lunch_status);
             textDinnerStatus = itemView.findViewById(R.id.text_dinner_status);
             textLunchExpiry = itemView.findViewById(R.id.text_lunch_expiry);
@@ -91,6 +93,13 @@ public class StudentsAdapter extends ListAdapter<Student, StudentsAdapter.Studen
         public void bind(Student student, OnManageClickListener listener) {
             textStudentName.setText(student.getName() != null ? student.getName() : "Anonymous Student");
             textStudentEmail.setText(student.getEmail());
+            
+            if (student.getPhone() != null && !student.getPhone().isEmpty()) {
+                textStudentPhone.setText(student.getPhone());
+                textStudentPhone.setVisibility(View.VISIBLE);
+            } else {
+                textStudentPhone.setVisibility(View.GONE);
+            }
 
             String lunch = student.getLunchStatus() != null ? student.getLunchStatus() : "--";
             String dinner = student.getDinnerStatus() != null ? student.getDinnerStatus() : "--";

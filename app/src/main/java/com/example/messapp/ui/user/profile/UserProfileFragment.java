@@ -96,6 +96,9 @@ public class UserProfileFragment extends Fragment {
                             binding.textProfileName.setText(displayName);
                             binding.textProfileNameCard.setText(displayName);
 
+                            String phone = doc.getString("phone");
+                            binding.textProfilePhone.setText(phone != null && !phone.isEmpty() ? phone : "Not set");
+
                             if (messId != null) {
                                 binding.textProfileMessId.setText("Mess ID: " + messId);
                                 fetchMessName(messId);
