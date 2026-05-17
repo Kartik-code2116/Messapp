@@ -4189,6 +4189,7 @@ id callMeasure
 id cancel_button
 id cardForm
 id card_breakfast
+id card_daily_auto_select
 id card_dinner
 id card_drawer_profile
 id card_lunch
@@ -4718,6 +4719,8 @@ id supportScrollUp
 id swipe_refresh
 id swipe_refresh_layout
 id switch_allow_multiple_changes
+id switch_auto_dinner
+id switch_auto_lunch
 id switch_dark_mode
 id tabMode
 id tag_accessibility_actions
@@ -4747,6 +4750,8 @@ id textTop
 id text_active_filter
 id text_active_students_count
 id text_add_review
+id text_auto_dinner_status
+id text_auto_lunch_status
 id text_avg_rating
 id text_current_condition
 id text_current_expiry
