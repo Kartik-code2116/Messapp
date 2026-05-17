@@ -14,7 +14,9 @@ import com.example.messapp.utils.ThemeManager;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.ListenerRegistration;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,6 +34,11 @@ public class MessDashboardActivity extends AppCompatActivity {
     private ActivityMessDashboardBinding binding;
     private boolean isGuestMode = false;
     private NavController navController;
+    private ListenerRegistration profileListener;
+    // Cached values — updated by the real-time listener
+    private String cachedName;
+    private String cachedProfileImageUrl;
+    private String cachedMessId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +51,6 @@ public class MessDashboardActivity extends AppCompatActivity {
         isGuestMode = getIntent().getBooleanExtra("IS_GUEST", false);
         if (isGuestMode) {
             showGuestBanner();
-        } else {
-            fetchMessName();
         }
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
@@ -61,16 +66,32 @@ public class MessDashboardActivity extends AppCompatActivity {
         navHostFragment.setArguments(navArgs);
 
         NavigationUI.setupWithNavController(binding.navView, navController);
-
+        setupSmoothBottomNav();
         setupProfileDrawer();
         setupTopBar();
-        loadTopBarProfile();
-        loadDrawerProfile();
+        startProfileListener();
+    }
+
+    /**
+     * Override bottom-nav to avoid abrupt fragment replace; uses NavController
+     * which applies the enter/exit animations defined in the nav graph.
+     */
+    private void setupSmoothBottomNav() {
+        binding.navView.setOnItemSelectedListener(item -> {
+            int id = item.getItemId();
+            if (navController.getCurrentDestination() != null
+                    && navController.getCurrentDestination().getId() == id) {
+                return true;
+            }
+            navController.navigate(id);
+            return true;
+        });
+        binding.navView.setOnItemReselectedListener(item -> { /* no-op */ });
     }
 
     private void showGuestBanner() {
         Snackbar.make(binding.getRoot(),
-            "Guest Mode - Sign up for full access",
+            "Guest Mode — Sign up for full access",
             Snackbar.LENGTH_LONG)
             .setAction("SIGN UP", v -> {
                 Intent intent = new Intent(this, RoleSelectionActivity.class);
@@ -86,22 +107,6 @@ public class MessDashboardActivity extends AppCompatActivity {
         return isGuestMode;
     }
 
-    private void fetchMessName() {
-        // FIX #2: getCurrentUser() was called without a null check — crashes if auth
-        // state hasn't resolved yet (e.g. cold start or token refresh in progress).
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (currentUser == null) return;
-
-        FirebaseFirestore.getInstance()
-                .collection("users")
-                .document(currentUser.getUid())
-                .get()
-                .addOnSuccessListener(doc -> {
-                    // messId available here if needed; UI updates are handled in fragments
-                    String messId = doc.getString("messId");
-                });
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_mess_top_bar, menu);
@@ -113,15 +118,10 @@ public class MessDashboardActivity extends AppCompatActivity {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             startActivity(new Intent(this, com.example.messapp.ui.mess.settings.MessSettingsActivity.class));
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             return true;
         } else if (id == R.id.action_logout) {
-            if (!isGuestMode) {
-                FirebaseAuth.getInstance().signOut();
-            }
-            Intent intent = new Intent(this, RoleSelectionActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            finish();
+            performLogout();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -134,31 +134,33 @@ public class MessDashboardActivity extends AppCompatActivity {
         binding.adminTopBar.profileContainer.setOnClickListener(v -> openProfileDrawer());
 
         binding.adminTopBar.btnSendMessage.setOnClickListener(v ->
-                Toast.makeText(this, "Send Message to Everyone - Coming soon", Toast.LENGTH_SHORT).show());
+                Toast.makeText(this, "Send Message to Everyone — Coming soon", Toast.LENGTH_SHORT).show());
     }
 
-    private void loadTopBarProfile() {
+    /** One real-time listener keeps profile data fresh without extra Firestore reads. */
+    private void startProfileListener() {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser == null) {
             binding.adminTopBar.textGreeting.setText(isGuestMode ? "Hello, Guest!" : "Hello Admin!");
             binding.adminTopBar.imgProfile.setImageResource(R.drawable.ic_student_profile);
             return;
         }
-
         String userId = currentUser.getUid();
-        FirebaseFirestore.getInstance().collection("users").document(userId).get()
-                .addOnSuccessListener(doc -> {
-                    String name = doc.getString("name");
-                    if (name != null && !name.isEmpty()) {
-                        binding.adminTopBar.textGreeting.setText("Hello, " + name.split(" ")[0] + "!");
-                    } else {
-                        binding.adminTopBar.textGreeting.setText("Hello Admin!");
-                    }
+        profileListener = FirebaseFirestore.getInstance().collection("users").document(userId)
+                .addSnapshotListener((doc, e) -> {
+                    if (doc == null) return;
+                    cachedName = doc.getString("name");
+                    cachedProfileImageUrl = doc.getString("profileImageUrl");
+                    cachedMessId = doc.getString("messId");
 
-                    String profileImageUrl = doc.getString("profileImageUrl");
-                    if (profileImageUrl != null && !profileImageUrl.isEmpty()) {
+                    String greeting = (cachedName != null && !cachedName.isEmpty())
+                            ? "Hello, " + cachedName.split(" ")[0] + "!"
+                            : "Hello Admin!";
+                    binding.adminTopBar.textGreeting.setText(greeting);
+
+                    if (cachedProfileImageUrl != null && !cachedProfileImageUrl.isEmpty()) {
                         Glide.with(this)
-                                .load(profileImageUrl)
+                                .load(cachedProfileImageUrl)
                                 .placeholder(R.drawable.ic_student_profile)
                                 .circleCrop()
                                 .into(binding.adminTopBar.imgProfile);
@@ -169,8 +171,7 @@ public class MessDashboardActivity extends AppCompatActivity {
     }
 
     public void openProfileDrawer() {
-        loadTopBarProfile();
-        loadDrawerProfile();
+        populateDrawer();
         binding.container.openDrawer(GravityCompat.END);
     }
 
@@ -182,28 +183,35 @@ public class MessDashboardActivity extends AppCompatActivity {
                 binding.navView.setSelectedItemId(R.id.navigation_mess_profile);
             } else if (id == R.id.drawer_admin_settings) {
                 startActivity(new Intent(this, com.example.messapp.ui.mess.settings.MessSettingsActivity.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             } else if (id == R.id.drawer_admin_notifications) {
-                Toast.makeText(this, "Notification Settings - Coming soon", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Notification Settings — Coming soon", Toast.LENGTH_SHORT).show();
             } else if (id == R.id.drawer_admin_logout) {
-                if (!isGuestMode) {
-                    FirebaseAuth.getInstance().signOut();
-                }
-                Intent intent = new Intent(this, RoleSelectionActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                finish();
+                performLogout();
             }
             binding.container.closeDrawer(GravityCompat.END);
             return true;
         });
     }
 
-    private void loadDrawerProfile() {
+    private void performLogout() {
+        if (!isGuestMode) {
+            FirebaseAuth.getInstance().signOut();
+        }
+        Intent intent = new Intent(this, RoleSelectionActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        finish();
+    }
+
+    /** Uses cached data to populate the drawer instantly — no extra Firestore call needed for most fields. */
+    private void populateDrawer() {
         View header = binding.profileDrawer.getHeaderView(0);
-        TextView nameView = header.findViewById(R.id.text_drawer_name);
-        TextView emailView = header.findViewById(R.id.text_drawer_email);
+        TextView nameView    = header.findViewById(R.id.text_drawer_name);
+        TextView emailView   = header.findViewById(R.id.text_drawer_email);
         TextView membersView = header.findViewById(R.id.text_drawer_members);
-        TextView ratingView = header.findViewById(R.id.text_drawer_rating);
+        TextView ratingView  = header.findViewById(R.id.text_drawer_rating);
         TextView revenueView = header.findViewById(R.id.text_drawer_revenue);
         TextView messNameView = header.findViewById(R.id.text_drawer_mess_name);
         ImageView profileImage = header.findViewById(R.id.img_drawer_profile);
@@ -213,39 +221,33 @@ public class MessDashboardActivity extends AppCompatActivity {
             nameView.setText(isGuestMode ? "Guest Admin" : "Mess Owner");
             emailView.setText("Not signed in");
             if (membersView != null) membersView.setText("0");
-            if (ratingView != null) ratingView.setText("0.0");
+            if (ratingView  != null) ratingView.setText("0.0");
             if (revenueView != null) revenueView.setText("₹0");
             if (messNameView != null) messNameView.setText("My Mess");
             profileImage.setImageResource(R.drawable.ic_student_profile);
             return;
         }
 
-        String userId = currentUser.getUid();
-        FirebaseFirestore.getInstance().collection("users").document(userId).get()
-                .addOnSuccessListener(doc -> {
-                    String name = doc.getString("name");
-                    nameView.setText(name != null && !name.isEmpty() ? name : "Mess Owner");
+        nameView.setText(cachedName != null && !cachedName.isEmpty() ? cachedName : "Mess Owner");
+        emailView.setText(currentUser.getEmail());
 
-                    String email = doc.getString("email");
-                    emailView.setText(email != null && !email.isEmpty() ? email : currentUser.getEmail());
+        if (cachedProfileImageUrl != null && !cachedProfileImageUrl.isEmpty()) {
+            Glide.with(this)
+                    .load(cachedProfileImageUrl)
+                    .placeholder(R.drawable.ic_student_profile)
+                    .circleCrop()
+                    .into(profileImage);
+        } else {
+            profileImage.setImageResource(R.drawable.ic_student_profile);
+        }
 
-                    String messId = doc.getString("messId");
-                    if (messId != null && !messId.isEmpty()) {
-                        loadMessDetails(messId, membersView, ratingView, revenueView, messNameView);
-                    }
-
-                    String profileImageUrl = doc.getString("profileImageUrl");
-                    if (profileImageUrl != null && !profileImageUrl.isEmpty()) {
-                        Glide.with(this)
-                                .load(profileImageUrl)
-                                .placeholder(R.drawable.ic_student_profile)
-                                .circleCrop()
-                                .into(profileImage);
-                    }
-                });
+        if (cachedMessId != null && !cachedMessId.isEmpty()) {
+            loadMessDetails(cachedMessId, membersView, ratingView, revenueView, messNameView);
+        }
     }
 
-    private void loadMessDetails(String messId, TextView membersView, TextView ratingView, TextView revenueView, TextView messNameView) {
+    private void loadMessDetails(String messId, TextView membersView, TextView ratingView,
+                                  TextView revenueView, TextView messNameView) {
         FirebaseFirestore.getInstance().collection("messes").document(messId).get()
                 .addOnSuccessListener(doc -> {
                     if (membersView != null) {
@@ -258,13 +260,19 @@ public class MessDashboardActivity extends AppCompatActivity {
                     }
                     if (revenueView != null) {
                         Double revenue = doc.getDouble("totalRevenue");
-                        revenueView.setText("₹" + String.valueOf(revenue != null ? revenue.intValue() : 0));
+                        revenueView.setText("₹" + (revenue != null ? revenue.intValue() : 0));
                     }
                     if (messNameView != null) {
                         String messName = doc.getString("name");
                         messNameView.setText(messName != null && !messName.isEmpty() ? messName : "My Mess");
                     }
                 });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (profileListener != null) profileListener.remove();
     }
 
     @Override

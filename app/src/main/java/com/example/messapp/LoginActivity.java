@@ -512,11 +512,11 @@ public class LoginActivity extends AppCompatActivity {
         // Cache role in shared prefs so FCM service can route notifications correctly
         getSharedPreferences("user_prefs", MODE_PRIVATE).edit().putString("role", role).apply();
         saveFCMToken();
-        if ("MESS_OWNER".equals(role)) {
-            startActivity(new Intent(LoginActivity.this, MessDashboardActivity.class));
-        } else {
-            startActivity(new Intent(LoginActivity.this, UserDashboardActivity.class));
-        }
+        Intent intent = "MESS_OWNER".equals(role)
+                ? new Intent(LoginActivity.this, MessDashboardActivity.class)
+                : new Intent(LoginActivity.this, UserDashboardActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         finishAffinity();
     }
 
@@ -530,6 +530,7 @@ public class LoginActivity extends AppCompatActivity {
         intent.putExtra("IS_GUEST", true);
         Log.d("LoginActivity", "Navigating to dashboard as guest, role: " + role);
         startActivity(intent);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         finishAffinity();
     }
 

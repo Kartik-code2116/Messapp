@@ -354,6 +354,14 @@ public class UserHomeFragment extends Fragment {
         binding.btnDinnerInNew.setOnClickListener(v  -> markAttendance("DINNER", "IN"));
         binding.btnDinnerOutNew.setOnClickListener(v -> markAttendance("DINNER", "OUT"));
         binding.btnPlanOutDays.setOnClickListener(v  -> showOutPlanDialog());
+        binding.textViewWeek.setOnClickListener(v -> {
+            // Switch the bottom nav tab — this avoids stacking Menu on the back stack
+            com.google.android.material.bottomnavigation.BottomNavigationView navView =
+                    requireActivity().findViewById(R.id.nav_view);
+            if (navView != null) {
+                navView.setSelectedItemId(R.id.navigation_user_menu);
+            }
+        });
     }
 
     private void markAttendance(String mealType, String status) {

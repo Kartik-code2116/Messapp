@@ -17,9 +17,12 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.bumptech.glide.Glide;
 import com.example.messapp.databinding.ActivityUserDashboardBinding;
 import com.example.messapp.utils.ThemeManager;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.ListenerRegistration;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -32,6 +35,11 @@ public class UserDashboardActivity extends AppCompatActivity {
     private NavController navController;
     private FirebaseFirestore db;
     private FirebaseAuth auth;
+    private ListenerRegistration profileListener;
+    // Cache profile data to avoid re-fetching on every drawer open
+    private String cachedName;
+    private String cachedProfileImageUrl;
+    private String cachedMessId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,17 +51,11 @@ public class UserDashboardActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
 
-        // Check if guest mode
         isGuestMode = getIntent().getBooleanExtra("IS_GUEST", false);
         if (isGuestMode) {
             showGuestBanner();
         }
 
-        // Setup Toolbar
-        // Toolbar removed in favor of fragment-specific headers
-
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_user_home, R.id.navigation_user_menu, R.id.navigation_user_history,
                 R.id.navigation_user_profile)
@@ -62,16 +64,35 @@ public class UserDashboardActivity extends AppCompatActivity {
                 .findFragmentById(R.id.nav_host_fragment_activity_user_dashboard);
         navController = navHostFragment.getNavController();
 
-        // Pass guest mode to fragments via arguments
         Bundle navArgs = new Bundle();
         navArgs.putBoolean("IS_GUEST", isGuestMode);
         navHostFragment.setArguments(navArgs);
 
         NavigationUI.setupWithNavController(binding.navView, navController);
+        setupSmoothBottomNav();
         setupProfileDrawer();
         setupTopBar();
-        loadTopBarProfile();
-        loadDrawerProfile();
+        startProfileListener();
+    }
+
+    /**
+     * Override bottom-nav tab switches to use a smooth fade animation
+     * instead of the default abrupt fragment replace.
+     */
+    private void setupSmoothBottomNav() {
+        binding.navView.setOnItemSelectedListener(item -> {
+            int id = item.getItemId();
+            // Don't re-navigate to the currently selected destination
+            if (navController.getCurrentDestination() != null
+                    && navController.getCurrentDestination().getId() == id) {
+                return true;
+            }
+            // Navigate using NavController (honours the back stack correctly)
+            navController.navigate(id);
+            return true;
+        });
+        // Prevent re-selecting the same tab from triggering navigation
+        binding.navView.setOnItemReselectedListener(item -> { /* no-op */ });
     }
 
     private void setupTopBar() {
@@ -84,40 +105,45 @@ public class UserDashboardActivity extends AppCompatActivity {
                 Toast.makeText(this, "Notifications coming soon", Toast.LENGTH_SHORT).show());
     }
 
-    private void loadTopBarProfile() {
+    /**
+     * One real-time listener instead of one-shot get() on every drawer open.
+     * Cached values update the top bar and drawer immediately.
+     */
+    private void startProfileListener() {
         if (auth.getCurrentUser() == null) {
-            binding.userTopBar.textGreeting.setText(isGuestMode ? "Hello, Guest!" : "Hello!");
-            binding.userTopBar.imgProfile.setImageResource(R.drawable.ic_student_profile);
+            applyProfileToTopBar(isGuestMode ? "Hello, Guest!" : "Hello!", null);
             return;
         }
-
         String userId = auth.getCurrentUser().getUid();
-        db.collection("users").document(userId).get()
-                .addOnSuccessListener(doc -> {
-                    String name = doc.getString("name");
-                    if (name != null && !name.isEmpty()) {
-                        binding.userTopBar.textGreeting.setText(
-                                "Hello, " + name.split(" ")[0] + "!");
-                    } else {
-                        binding.userTopBar.textGreeting.setText("Hello!");
-                    }
+        profileListener = db.collection("users").document(userId)
+                .addSnapshotListener((doc, e) -> {
+                    if (doc == null) return;
+                    cachedName = doc.getString("name");
+                    cachedProfileImageUrl = doc.getString("profileImageUrl");
+                    cachedMessId = doc.getString("messId");
 
-                    String profileImageUrl = doc.getString("profileImageUrl");
-                    if (profileImageUrl != null && !profileImageUrl.isEmpty()) {
-                        Glide.with(this)
-                                .load(profileImageUrl)
-                                .placeholder(R.drawable.ic_student_profile)
-                                .circleCrop()
-                                .into(binding.userTopBar.imgProfile);
-                    } else {
-                        binding.userTopBar.imgProfile.setImageResource(R.drawable.ic_student_profile);
-                    }
+                    String greeting = (cachedName != null && !cachedName.isEmpty())
+                            ? "Hello, " + cachedName.split(" ")[0] + "!"
+                            : "Hello!";
+                    applyProfileToTopBar(greeting, cachedProfileImageUrl);
                 });
     }
 
+    private void applyProfileToTopBar(String greeting, String imageUrl) {
+        binding.userTopBar.textGreeting.setText(greeting);
+        if (imageUrl != null && !imageUrl.isEmpty()) {
+            Glide.with(this)
+                    .load(imageUrl)
+                    .placeholder(R.drawable.ic_student_profile)
+                    .circleCrop()
+                    .into(binding.userTopBar.imgProfile);
+        } else {
+            binding.userTopBar.imgProfile.setImageResource(R.drawable.ic_student_profile);
+        }
+    }
+
     public void openProfileDrawer() {
-        loadTopBarProfile();
-        loadDrawerProfile();
+        populateDrawer();
         binding.container.openDrawer(GravityCompat.END);
     }
 
@@ -126,33 +152,30 @@ public class UserDashboardActivity extends AppCompatActivity {
             int id = item.getItemId();
             if (id == R.id.drawer_user_profile) {
                 navController.navigate(R.id.navigation_user_profile);
+                binding.navView.setSelectedItemId(R.id.navigation_user_profile);
             } else if (id == R.id.drawer_user_menu) {
                 navController.navigate(R.id.navigation_user_menu);
+                binding.navView.setSelectedItemId(R.id.navigation_user_menu);
             } else if (id == R.id.drawer_user_history) {
                 navController.navigate(R.id.navigation_user_history);
+                binding.navView.setSelectedItemId(R.id.navigation_user_history);
             } else if (id == R.id.drawer_user_home) {
                 navController.navigate(R.id.navigation_user_home);
+                binding.navView.setSelectedItemId(R.id.navigation_user_home);
             }
-            binding.navView.setSelectedItemId(mapDrawerItemToBottomItem(id));
             binding.container.closeDrawer(GravityCompat.END);
             return true;
         });
     }
 
-    private int mapDrawerItemToBottomItem(int drawerItemId) {
-        if (drawerItemId == R.id.drawer_user_profile) return R.id.navigation_user_profile;
-        if (drawerItemId == R.id.drawer_user_menu) return R.id.navigation_user_menu;
-        if (drawerItemId == R.id.drawer_user_history) return R.id.navigation_user_history;
-        return R.id.navigation_user_home;
-    }
-
-    private void loadDrawerProfile() {
+    /** Populate drawer using cached data — avoids a Firestore round-trip on every open. */
+    private void populateDrawer() {
         View header = binding.profileDrawer.getHeaderView(0);
-        TextView nameView = header.findViewById(R.id.text_drawer_name);
-        TextView emailView = header.findViewById(R.id.text_drawer_email);
-        TextView messView = header.findViewById(R.id.text_drawer_mess);
+        TextView nameView         = header.findViewById(R.id.text_drawer_name);
+        TextView emailView        = header.findViewById(R.id.text_drawer_email);
+        TextView messView         = header.findViewById(R.id.text_drawer_mess);
         TextView subscriptionView = header.findViewById(R.id.text_drawer_subscription);
-        ImageView profileImage = header.findViewById(R.id.img_drawer_profile);
+        ImageView profileImage    = header.findViewById(R.id.img_drawer_profile);
 
         if (auth.getCurrentUser() == null) {
             nameView.setText(isGuestMode ? "Guest Student" : "Student");
@@ -163,32 +186,31 @@ public class UserDashboardActivity extends AppCompatActivity {
             return;
         }
 
-        String userId = auth.getCurrentUser().getUid();
         emailView.setText(auth.getCurrentUser().getEmail());
+        nameView.setText(cachedName != null && !cachedName.isEmpty() ? cachedName : "Student");
+        messView.setText(cachedMessId != null && !cachedMessId.isEmpty()
+                ? "Mess ID: " + cachedMessId : "Mess: Not Joined");
+
+        if (cachedProfileImageUrl != null && !cachedProfileImageUrl.isEmpty()) {
+            Glide.with(this)
+                    .load(cachedProfileImageUrl)
+                    .placeholder(R.drawable.ic_student_profile)
+                    .circleCrop()
+                    .into(profileImage);
+        } else {
+            profileImage.setImageResource(R.drawable.ic_student_profile);
+        }
+
+        // Load subscription info separately (less critical, fine to fetch once)
+        String userId = auth.getCurrentUser().getUid();
         db.collection("users").document(userId).get()
                 .addOnSuccessListener(doc -> {
-                    String name = doc.getString("name");
-                    String messId = doc.getString("messId");
-                    String profileImageUrl = doc.getString("profileImageUrl");
-                    Long lunchExpiry = doc.getLong("lunchSubscriptionExpiry");
-                    Long dinnerExpiry = doc.getLong("dinnerSubscriptionExpiry");
+                    if (doc == null) return;
+                    Long lunchExpiry   = doc.getLong("lunchSubscriptionExpiry");
+                    Long dinnerExpiry  = doc.getLong("dinnerSubscriptionExpiry");
                     Long generalExpiry = doc.getLong("subscriptionExpiry");
-
-                    nameView.setText(name != null && !name.isEmpty() ? name : "Student");
-                    messView.setText(messId != null && !messId.isEmpty() ? "Mess ID: " + messId : "Mess: Not Joined");
                     subscriptionView.setText(buildSubscriptionText(lunchExpiry, dinnerExpiry, generalExpiry));
-
-                    if (profileImageUrl != null && !profileImageUrl.isEmpty()) {
-                        Glide.with(this)
-                                .load(profileImageUrl)
-                                .placeholder(R.drawable.ic_student_profile)
-                                .circleCrop()
-                                .into(profileImage);
-                    } else {
-                        profileImage.setImageResource(R.drawable.ic_student_profile);
-                    }
-                })
-                .addOnFailureListener(e -> Toast.makeText(this, "Unable to load profile details", Toast.LENGTH_SHORT).show());
+                });
     }
 
     private String buildSubscriptionText(Long lunchExpiry, Long dinnerExpiry, Long generalExpiry) {
@@ -203,8 +225,8 @@ public class UserDashboardActivity extends AppCompatActivity {
     }
 
     private void showGuestBanner() {
-        Snackbar.make(binding.getRoot(), 
-            "Guest Mode - Sign up for full access", 
+        Snackbar.make(binding.getRoot(),
+            "Guest Mode — Sign up for full access",
             Snackbar.LENGTH_LONG)
             .setAction("SIGN UP", v -> {
                 Intent intent = new Intent(this, RoleSelectionActivity.class);
@@ -218,6 +240,12 @@ public class UserDashboardActivity extends AppCompatActivity {
 
     public boolean isGuestMode() {
         return isGuestMode;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (profileListener != null) profileListener.remove();
     }
 
     @Override

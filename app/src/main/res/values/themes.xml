@@ -1,6 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.Messapp" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Smooth window transitions for all activities -->
+        <item name="android:windowAnimationStyle">@style/WindowAnimation.Slide</item>
         <!-- Brand Colors -->
         <item name="colorPrimary">@color/brand_primary</item>
         <item name="colorOnPrimary">@color/text_on_brand</item>
@@ -110,4 +112,13 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/text_heading</item>
     </style>
+
+    <!-- Window slide animations applied to every activity transition -->
+    <style name="WindowAnimation.Slide" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
+        <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>
+        <item name="android:activityCloseEnterAnimation">@anim/slide_in_left</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
+    </style>
+
 </resources>

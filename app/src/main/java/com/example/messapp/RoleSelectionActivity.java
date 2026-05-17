@@ -82,8 +82,7 @@ public class RoleSelectionActivity extends AppCompatActivity {
             intent.putExtra("ROLE", role);
             Log.d(TAG, "Starting LoginActivity with role: " + role);
             startActivity(intent);
-            // Delay finish to allow activity to start properly
-            // finish(); // Keep usage of back button to role selection possible
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         } catch (Exception e) {
             Log.e(TAG, "Error starting LoginActivity", e);
             Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();

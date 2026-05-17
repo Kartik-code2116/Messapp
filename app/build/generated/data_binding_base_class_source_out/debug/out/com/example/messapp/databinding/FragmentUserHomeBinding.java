@@ -127,6 +127,9 @@ public final class FragmentUserHomeBinding implements ViewBinding {
   @NonNull
   public final TextView textMessCondition;
 
+  @NonNull
+  public final TextView textViewWeek;
+
   private FragmentUserHomeBinding(@NonNull ConstraintLayout rootView,
       @NonNull MaterialButton btnDinnerInNew, @NonNull MaterialButton btnDinnerOutNew,
       @NonNull MaterialButton btnLunchInNew, @NonNull MaterialButton btnLunchOutNew,
@@ -144,7 +147,8 @@ public final class FragmentUserHomeBinding implements ViewBinding {
       @NonNull TextView textDinnerStatus, @NonNull TextView textDinnerStatusBar,
       @NonNull TextView textLunchCardTimer, @NonNull TextView textLunchMenuNew,
       @NonNull TextView textLunchPreference, @NonNull TextView textLunchStatus,
-      @NonNull TextView textLunchStatusBar, @NonNull TextView textMessCondition) {
+      @NonNull TextView textLunchStatusBar, @NonNull TextView textMessCondition,
+      @NonNull TextView textViewWeek) {
     this.rootView = rootView;
     this.btnDinnerInNew = btnDinnerInNew;
     this.btnDinnerOutNew = btnDinnerOutNew;
@@ -180,6 +184,7 @@ public final class FragmentUserHomeBinding implements ViewBinding {
     this.textLunchStatus = textLunchStatus;
     this.textLunchStatusBar = textLunchStatusBar;
     this.textMessCondition = textMessCondition;
+    this.textViewWeek = textViewWeek;
   }
 
   @Override
@@ -413,6 +418,12 @@ public final class FragmentUserHomeBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.text_view_week;
+      TextView textViewWeek = ViewBindings.findChildViewById(rootView, id);
+      if (textViewWeek == null) {
+        break missingId;
+      }
+
       return new FragmentUserHomeBinding((ConstraintLayout) rootView, btnDinnerInNew,
           btnDinnerOutNew, btnLunchInNew, btnLunchOutNew, btnPlanOutDays, cardBreakfast,
           cardDailyAutoSelect, cardDinner, cardLunch, cardMessCondition, cardOneTimeAutoSelect,
@@ -421,7 +432,7 @@ public final class FragmentUserHomeBinding implements ViewBinding {
           switchAutoLunch, textAutoDinnerStatus, textAutoLunchStatus, textDinnerCardTimer,
           textDinnerMenuNew, textDinnerPreference, textDinnerStatus, textDinnerStatusBar,
           textLunchCardTimer, textLunchMenuNew, textLunchPreference, textLunchStatus,
-          textLunchStatusBar, textMessCondition);
+          textLunchStatusBar, textMessCondition, textViewWeek);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

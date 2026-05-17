@@ -1,6 +1,8 @@
 R_DEF: Internal format may change without notice
 local
 anim card_fade_slide_up
+anim fade_in
+anim fade_out
 anim slide_in_left
 anim slide_in_right
 anim slide_out_left
@@ -610,6 +612,7 @@ id text_trans_student_email
 id text_trans_student_name
 id text_trans_type_badge
 id text_transaction_count
+id text_view_week
 id text_week_range
 id toolbar
 id top_header
@@ -699,5 +702,6 @@ style Theme.Messapp.NoActionBar
 style UserPageTitle
 style UserSectionTitle
 style UserStatValue
+style WindowAnimation.Slide
 xml backup_rules
 xml data_extraction_rules

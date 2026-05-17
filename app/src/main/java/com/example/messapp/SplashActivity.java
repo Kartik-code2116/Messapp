@@ -26,44 +26,42 @@ public class SplashActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        // Animation Code
-        android.view.View logoCard = findViewById(R.id.logoCard);
+        // --- Entrance animations ---
+        android.view.View logoCard  = findViewById(R.id.logoCard);
         android.view.View textTitle = findViewById(R.id.textTitle);
 
         logoCard.setAlpha(0f);
-        logoCard.setScaleX(0.5f);
-        logoCard.setScaleY(0.5f);
+        logoCard.setScaleX(0.6f);
+        logoCard.setScaleY(0.6f);
 
         textTitle.setAlpha(0f);
-        textTitle.setTranslationY(50f);
+        textTitle.setTranslationY(40f);
 
         logoCard.animate()
                 .alpha(1f)
                 .scaleX(1f)
                 .scaleY(1f)
-                .setDuration(1200)
-                .setInterpolator(new android.view.animation.OvershootInterpolator())
+                .setDuration(900)
+                .setInterpolator(new android.view.animation.OvershootInterpolator(1.2f))
                 .start();
 
         textTitle.animate()
                 .alpha(1f)
                 .translationY(0f)
-                .setStartDelay(300)
-                .setDuration(1000)
+                .setStartDelay(250)
+                .setDuration(700)
                 .setInterpolator(new android.view.animation.DecelerateInterpolator())
                 .start();
 
+        // Navigate after animation settles
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
             FirebaseUser currentUser = mAuth.getCurrentUser();
             if (currentUser != null) {
-                // User is logged in, fetch role and navigate to dashboard
                 fetchUserRole(currentUser);
             } else {
-                // No user logged in, navigate to Role Selection
-                startActivity(new Intent(SplashActivity.this, RoleSelectionActivity.class));
-                finish();
+                navigateTo(new Intent(SplashActivity.this, RoleSelectionActivity.class));
             }
-        }, 2500); // Increased delay slightly to let animation finish
+        }, 1800);
     }
 
     private void fetchUserRole(FirebaseUser user) {
@@ -73,24 +71,24 @@ public class SplashActivity extends AppCompatActivity {
                         String role = documentSnapshot.getString("role");
                         navigateToDashboard(role);
                     } else {
-                        // User data not found, navigate to Role Selection
-                        startActivity(new Intent(SplashActivity.this, RoleSelectionActivity.class));
-                        finish();
+                        navigateTo(new Intent(SplashActivity.this, RoleSelectionActivity.class));
                     }
                 })
-                .addOnFailureListener(e -> {
-                    // Error fetching user data, navigate to Role Selection
-                    startActivity(new Intent(SplashActivity.this, RoleSelectionActivity.class));
-                    finish();
-                });
+                .addOnFailureListener(e ->
+                        navigateTo(new Intent(SplashActivity.this, RoleSelectionActivity.class)));
     }
 
     private void navigateToDashboard(String role) {
-        if ("MESS_OWNER".equals(role)) {
-            startActivity(new Intent(SplashActivity.this, MessDashboardActivity.class));
-        } else {
-            startActivity(new Intent(SplashActivity.this, UserDashboardActivity.class));
-        }
+        Intent intent = "MESS_OWNER".equals(role)
+                ? new Intent(SplashActivity.this, MessDashboardActivity.class)
+                : new Intent(SplashActivity.this, UserDashboardActivity.class);
+        navigateTo(intent);
+    }
+
+    /** Centralised navigation with a consistent fade-out transition from splash. */
+    private void navigateTo(Intent intent) {
+        startActivity(intent);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         finish();
     }
 }
