@@ -380,6 +380,12 @@ public class MessStudentsFragment extends Fragment {
             long dinnerExp = student.getDinnerSubscriptionExpiry() > 0 ? student.getDinnerSubscriptionExpiry()
                     : (student.getSubscriptionExpiry() > 0 ? student.getSubscriptionExpiry() : 0);
 
+            if ("ONE_TIME".equals(student.getSubscriptionType())) {
+                long oneTimeExp = student.getOneTimeMealExpiry() > 0 ? student.getOneTimeMealExpiry() : student.getSubscriptionExpiry();
+                lunchExp = oneTimeExp;
+                dinnerExp = oneTimeExp;
+            }
+
             boolean isLunchSubscribed = lunchExp > currentTimeMillis;
             boolean isDinnerSubscribed = dinnerExp > currentTimeMillis;
             boolean isSubscribed = isLunchSubscribed || isDinnerSubscribed; // At least one active
@@ -396,6 +402,33 @@ public class MessStudentsFragment extends Fragment {
             if (!matchesSearch)
                 continue;
 
+            String effectiveLunchStatus = lunchStatus;
+            String effectiveDinnerStatus = dinnerStatus;
+
+            if ("ONE_TIME".equals(student.getSubscriptionType())) {
+                boolean isOut = "OUT".equals(lunchStatus) || "OUT".equals(dinnerStatus);
+                if (isOut) {
+                    effectiveLunchStatus = "OUT";
+                    effectiveDinnerStatus = "OUT";
+                } else if ("IN".equals(lunchStatus)) {
+                    effectiveDinnerStatus = "LOCKED";
+                } else if ("IN".equals(dinnerStatus)) {
+                    effectiveLunchStatus = "LOCKED";
+                } else {
+                    String autoSelect = student.getOneTimeAutoSelect();
+                    boolean isReset = "RESET".equals(lunchStatus) || "RESET".equals(dinnerStatus);
+                    if (!isReset) {
+                        if ("LUNCH".equals(autoSelect)) {
+                            effectiveLunchStatus = "IN (Auto)";
+                            effectiveDinnerStatus = "LOCKED";
+                        } else if ("DINNER".equals(autoSelect)) {
+                            effectiveDinnerStatus = "IN (Auto)";
+                            effectiveLunchStatus = "LOCKED";
+                        }
+                    }
+                }
+            }
+
             if (filterType.equals("All")) {
                 filteredStudentsList.add(student);
             } else if (filterType.equals("Active Today") && isSubscribed) {
@@ -403,18 +436,16 @@ public class MessStudentsFragment extends Fragment {
             } else if (filterType.equals("Expired Today") && !isSubscribed) {
                 filteredStudentsList.add(student);
             } else if (filterType.equals("IN Today")) {
-                // Check if marked IN for lunch or dinner (and has active subscription for that
-                // meal)
-                boolean lunchIn = "IN".equals(lunchStatus) && isLunchSubscribed;
-                boolean dinnerIn = "IN".equals(dinnerStatus) && isDinnerSubscribed;
+                // Check if marked IN for lunch or dinner (and has active subscription for that meal)
+                boolean lunchIn = effectiveLunchStatus.startsWith("IN") && isLunchSubscribed;
+                boolean dinnerIn = effectiveDinnerStatus.startsWith("IN") && isDinnerSubscribed;
                 if (lunchIn || dinnerIn) {
                     filteredStudentsList.add(student);
                 }
             } else if (filterType.equals("OUT Today")) {
-                // Check if marked OUT for lunch or dinner (and has active subscription for that
-                // meal)
-                boolean lunchOut = "OUT".equals(lunchStatus) && isLunchSubscribed;
-                boolean dinnerOut = "OUT".equals(dinnerStatus) && isDinnerSubscribed;
+                // Check if marked OUT for lunch or dinner (and has active subscription for that meal)
+                boolean lunchOut = "OUT".equals(effectiveLunchStatus) && isLunchSubscribed;
+                boolean dinnerOut = "OUT".equals(effectiveDinnerStatus) && isDinnerSubscribed;
                 if (lunchOut || dinnerOut) {
                     filteredStudentsList.add(student);
                 }
