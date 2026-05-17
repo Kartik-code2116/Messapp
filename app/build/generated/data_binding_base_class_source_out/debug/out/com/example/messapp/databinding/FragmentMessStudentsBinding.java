@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -15,11 +14,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.messapp.R;
 import com.google.android.material.card.MaterialCardView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -28,9 +27,6 @@ import java.lang.String;
 public final class FragmentMessStudentsBinding implements ViewBinding {
   @NonNull
   private final FrameLayout rootView;
-
-  @NonNull
-  public final ImageButton btnBack;
 
   @NonNull
   public final Button btnFilterActiveToday;
@@ -54,9 +50,6 @@ public final class FragmentMessStudentsBinding implements ViewBinding {
   public final MaterialCardView btnFilterOutTodayCard;
 
   @NonNull
-  public final FloatingActionButton btnRefresh;
-
-  @NonNull
   public final EditText etSearch;
 
   @NonNull
@@ -72,18 +65,20 @@ public final class FragmentMessStudentsBinding implements ViewBinding {
   public final TextInputLayout searchLayout;
 
   @NonNull
+  public final SwipeRefreshLayout swipeRefreshLayout;
+
+  @NonNull
   public final TextView textTotalStudentsCount;
 
-  private FragmentMessStudentsBinding(@NonNull FrameLayout rootView, @NonNull ImageButton btnBack,
+  private FragmentMessStudentsBinding(@NonNull FrameLayout rootView,
       @NonNull Button btnFilterActiveToday, @NonNull Button btnFilterAll,
       @NonNull Button btnFilterExpiredToday, @NonNull LinearLayout btnFilterInToday,
       @NonNull MaterialCardView btnFilterInTodayCard, @NonNull LinearLayout btnFilterOutToday,
-      @NonNull MaterialCardView btnFilterOutTodayCard, @NonNull FloatingActionButton btnRefresh,
-      @NonNull EditText etSearch, @NonNull ImageView iconSearch, @NonNull ProgressBar progressBar,
+      @NonNull MaterialCardView btnFilterOutTodayCard, @NonNull EditText etSearch,
+      @NonNull ImageView iconSearch, @NonNull ProgressBar progressBar,
       @NonNull RecyclerView recyclerViewStudents, @NonNull TextInputLayout searchLayout,
-      @NonNull TextView textTotalStudentsCount) {
+      @NonNull SwipeRefreshLayout swipeRefreshLayout, @NonNull TextView textTotalStudentsCount) {
     this.rootView = rootView;
-    this.btnBack = btnBack;
     this.btnFilterActiveToday = btnFilterActiveToday;
     this.btnFilterAll = btnFilterAll;
     this.btnFilterExpiredToday = btnFilterExpiredToday;
@@ -91,12 +86,12 @@ public final class FragmentMessStudentsBinding implements ViewBinding {
     this.btnFilterInTodayCard = btnFilterInTodayCard;
     this.btnFilterOutToday = btnFilterOutToday;
     this.btnFilterOutTodayCard = btnFilterOutTodayCard;
-    this.btnRefresh = btnRefresh;
     this.etSearch = etSearch;
     this.iconSearch = iconSearch;
     this.progressBar = progressBar;
     this.recyclerViewStudents = recyclerViewStudents;
     this.searchLayout = searchLayout;
+    this.swipeRefreshLayout = swipeRefreshLayout;
     this.textTotalStudentsCount = textTotalStudentsCount;
   }
 
@@ -127,12 +122,6 @@ public final class FragmentMessStudentsBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.btn_back;
-      ImageButton btnBack = ViewBindings.findChildViewById(rootView, id);
-      if (btnBack == null) {
-        break missingId;
-      }
-
       id = R.id.btn_filter_active_today;
       Button btnFilterActiveToday = ViewBindings.findChildViewById(rootView, id);
       if (btnFilterActiveToday == null) {
@@ -175,12 +164,6 @@ public final class FragmentMessStudentsBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.btn_refresh;
-      FloatingActionButton btnRefresh = ViewBindings.findChildViewById(rootView, id);
-      if (btnRefresh == null) {
-        break missingId;
-      }
-
       id = R.id.et_search;
       EditText etSearch = ViewBindings.findChildViewById(rootView, id);
       if (etSearch == null) {
@@ -211,16 +194,22 @@ public final class FragmentMessStudentsBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.swipe_refresh_layout;
+      SwipeRefreshLayout swipeRefreshLayout = ViewBindings.findChildViewById(rootView, id);
+      if (swipeRefreshLayout == null) {
+        break missingId;
+      }
+
       id = R.id.text_total_students_count;
       TextView textTotalStudentsCount = ViewBindings.findChildViewById(rootView, id);
       if (textTotalStudentsCount == null) {
         break missingId;
       }
 
-      return new FragmentMessStudentsBinding((FrameLayout) rootView, btnBack, btnFilterActiveToday,
+      return new FragmentMessStudentsBinding((FrameLayout) rootView, btnFilterActiveToday,
           btnFilterAll, btnFilterExpiredToday, btnFilterInToday, btnFilterInTodayCard,
-          btnFilterOutToday, btnFilterOutTodayCard, btnRefresh, etSearch, iconSearch, progressBar,
-          recyclerViewStudents, searchLayout, textTotalStudentsCount);
+          btnFilterOutToday, btnFilterOutTodayCard, etSearch, iconSearch, progressBar,
+          recyclerViewStudents, searchLayout, swipeRefreshLayout, textTotalStudentsCount);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

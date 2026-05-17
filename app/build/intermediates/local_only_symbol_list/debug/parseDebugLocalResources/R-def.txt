@@ -300,7 +300,6 @@ id btn_next_week
 id btn_notification
 id btn_plan_out_days
 id btn_prev_week
-id btn_refresh
 id btn_renew_subscription
 id btn_reset_all_attendance
 id btn_reset_status
@@ -496,6 +495,7 @@ id studentNameLayout
 id studentPhoneEditText
 id studentPhoneLayout
 id swipe_refresh
+id swipe_refresh_layout
 id switch_allow_multiple_changes
 id switch_dark_mode
 id textSubtitle

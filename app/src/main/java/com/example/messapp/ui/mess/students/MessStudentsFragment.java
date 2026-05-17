@@ -272,18 +272,14 @@ public class MessStudentsFragment extends Fragment {
     }
 
     private void setupFilters() {
-        binding.btnBack.setOnClickListener(v -> {
-            if (getActivity() != null)
-                getActivity().onBackPressed();
-        });
-
-        binding.btnRefresh.setOnClickListener(v -> {
+        binding.swipeRefreshLayout.setOnRefreshListener(() -> {
             binding.etSearch.setText("");
             currentSearchQuery = "";
             currentFilterType = "All";
             updateFilterUI();
             fetchMessOwnerData(); // This will re-trigger the data fetch
-            Toast.makeText(getContext(), "Refreshing data...", Toast.LENGTH_SHORT).show();
+            binding.swipeRefreshLayout.setRefreshing(false);
+            Toast.makeText(getContext(), "Refreshed data", Toast.LENGTH_SHORT).show();
         });
 
         binding.btnFilterAll.setOnClickListener(v -> {
