@@ -548,7 +548,44 @@ public class MessDashboardFragment extends Fragment {
                         return;
                     }
                     com.google.firebase.firestore.WriteBatch batch = db.batch();
-                    for (DocumentSnapshot doc : query) batch.delete(doc.getReference());
+                    for (DocumentSnapshot doc : query) {
+                        String uId = doc.getString("userId");
+                        if (uId != null) {
+                            DocumentSnapshot userDoc = userDocs.get(uId);
+                            if (userDoc != null) {
+                                boolean isOneTime = "ONE_TIME".equals(userDoc.getString("subscriptionType"));
+                                if (!isOneTime) {
+                                    String lunch = doc.getString("lunch");
+                                    String dinner = doc.getString("dinner");
+                                    
+                                    long lunchExpiry = userDoc.getLong("lunchSubscriptionExpiry") != null ? userDoc.getLong("lunchSubscriptionExpiry") : 0;
+                                    long dinnerExpiry = userDoc.getLong("dinnerSubscriptionExpiry") != null ? userDoc.getLong("dinnerSubscriptionExpiry") : 0;
+                                    
+                                    boolean updated = false;
+                                    if ("OUT".equals(lunch) && lunchExpiry > 0) {
+                                        lunchExpiry = Math.max(System.currentTimeMillis(), lunchExpiry - (24 * 60 * 60 * 1000L));
+                                        updated = true;
+                                    }
+                                    if ("OUT".equals(dinner) && dinnerExpiry > 0) {
+                                        dinnerExpiry = Math.max(System.currentTimeMillis(), dinnerExpiry - (24 * 60 * 60 * 1000L));
+                                        updated = true;
+                                    }
+                                    
+                                    if (updated) {
+                                        long generalExpiry = Math.max(lunchExpiry, dinnerExpiry);
+                                        batch.update(userDoc.getReference(), "lunchSubscriptionExpiry", lunchExpiry,
+                                                                             "dinnerSubscriptionExpiry", dinnerExpiry,
+                                                                             "subscriptionExpiry", generalExpiry);
+                                    }
+                                }
+                            }
+                        }
+                        Map<String, Object> resetData = new HashMap<>();
+                        resetData.put("lunch", "RESET");
+                        resetData.put("dinner", "RESET");
+                        resetData.put("timestamp", System.currentTimeMillis());
+                        batch.set(doc.getReference(), resetData, com.google.firebase.firestore.SetOptions.merge());
+                    }
                     batch.commit()
                             .addOnSuccessListener(v -> {
                                 if (binding == null) return;

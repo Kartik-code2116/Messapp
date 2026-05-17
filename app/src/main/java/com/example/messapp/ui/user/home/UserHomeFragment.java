@@ -398,8 +398,12 @@ public class UserHomeFragment extends Fragment {
         boolean lunchExplicitIn = "IN".equals(lunchStatus);
         boolean dinnerExplicitIn = "IN".equals(dinnerStatus);
         
-        boolean lunchChosen  = lunchExplicitIn || (!dinnerExplicitIn && "LUNCH".equals(autoSelect));
-        boolean dinnerChosen = dinnerExplicitIn || (!lunchExplicitIn && "DINNER".equals(autoSelect));
+        boolean isReset = "RESET".equals(lunchStatus) || "RESET".equals(dinnerStatus);
+        boolean isLunchOut = "OUT".equals(lunchStatus);
+        boolean isDinnerOut = "OUT".equals(dinnerStatus);
+        
+        boolean lunchChosen  = lunchExplicitIn || (!isReset && !isLunchOut && !dinnerExplicitIn && "LUNCH".equals(autoSelect));
+        boolean dinnerChosen = dinnerExplicitIn || (!isReset && !isDinnerOut && !lunchExplicitIn && "DINNER".equals(autoSelect));
 
         // ---- Lunch card ----
         if (lunchChosen) {
@@ -861,7 +865,7 @@ public class UserHomeFragment extends Fragment {
 
         if (mealType.equals("LUNCH")) {
             binding.btnLunchOutNew.setVisibility(View.VISIBLE); // restore for normal subs
-            if (status == null) {
+            if (status == null || "RESET".equals(status)) {
                 binding.textLunchStatusBar.setTextColor(Color.WHITE);
                 if (!canMark) {
                     binding.textLunchStatusBar.setText(!isSubscribed
@@ -906,7 +910,7 @@ public class UserHomeFragment extends Fragment {
             }
         } else {
             binding.btnDinnerOutNew.setVisibility(View.VISIBLE);
-            if (status == null) {
+            if (status == null || "RESET".equals(status)) {
                 binding.textDinnerStatusBar.setTextColor(Color.WHITE);
                 if (!canMark) {
                     binding.textDinnerStatusBar.setText(!isSubscribed

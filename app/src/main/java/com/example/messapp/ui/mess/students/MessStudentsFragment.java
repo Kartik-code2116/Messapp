@@ -214,20 +214,58 @@ public class MessStudentsFragment extends Fragment {
                         + " to re-enter their meal status for today?")
                 .setPositiveButton("Reset", (dialog, which) -> {
                     binding.progressBar.setVisibility(View.VISIBLE);
-                    db.collection("meal_selections").document(selectionDocId)
-                            .delete()
-                            .addOnSuccessListener(aVoid -> {
-                                if (binding == null)
-                                    return;
-                                binding.progressBar.setVisibility(View.GONE);
-                                Toast.makeText(getContext(), "Status reset successfully!", Toast.LENGTH_SHORT).show();
-                            })
-                            .addOnFailureListener(e -> {
-                                if (binding == null)
-                                    return;
-                                binding.progressBar.setVisibility(View.GONE);
-                                Toast.makeText(getContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                            });
+                    com.google.firebase.firestore.DocumentReference mealRef = db.collection("meal_selections").document(selectionDocId);
+                    com.google.firebase.firestore.DocumentReference userRef = db.collection("users").document(student.getUserId());
+                    
+                    db.runTransaction(transaction -> {
+                        com.google.firebase.firestore.DocumentSnapshot mealSnap = transaction.get(mealRef);
+                        com.google.firebase.firestore.DocumentSnapshot userSnap = transaction.get(userRef);
+                        
+                        if (mealSnap.exists() && userSnap.exists()) {
+                            boolean isOneTime = "ONE_TIME".equals(userSnap.getString("subscriptionType"));
+                            if (!isOneTime) {
+                                String lunch = mealSnap.getString("lunch");
+                                String dinner = mealSnap.getString("dinner");
+                                
+                                long lunchExpiry = userSnap.getLong("lunchSubscriptionExpiry") != null ? userSnap.getLong("lunchSubscriptionExpiry") : 0;
+                                long dinnerExpiry = userSnap.getLong("dinnerSubscriptionExpiry") != null ? userSnap.getLong("dinnerSubscriptionExpiry") : 0;
+                                
+                                boolean updated = false;
+                                if ("OUT".equals(lunch) && lunchExpiry > 0) {
+                                    lunchExpiry = Math.max(System.currentTimeMillis(), lunchExpiry - (24 * 60 * 60 * 1000L));
+                                    updated = true;
+                                }
+                                if ("OUT".equals(dinner) && dinnerExpiry > 0) {
+                                    dinnerExpiry = Math.max(System.currentTimeMillis(), dinnerExpiry - (24 * 60 * 60 * 1000L));
+                                    updated = true;
+                                }
+                                
+                                if (updated) {
+                                    long generalExpiry = Math.max(lunchExpiry, dinnerExpiry);
+                                    transaction.update(userRef, "lunchSubscriptionExpiry", lunchExpiry,
+                                                                 "dinnerSubscriptionExpiry", dinnerExpiry,
+                                                                 "subscriptionExpiry", generalExpiry);
+                                }
+                            }
+                        }
+                        Map<String, Object> resetData = new HashMap<>();
+                        resetData.put("lunch", "RESET");
+                        resetData.put("dinner", "RESET");
+                        resetData.put("timestamp", System.currentTimeMillis());
+                        resetData.put("userId", student.getUserId());
+                        resetData.put("messId", currentMessId);
+                        resetData.put("date", todayDate);
+                        transaction.set(mealRef, resetData, com.google.firebase.firestore.SetOptions.merge());
+                        return null;
+                    }).addOnSuccessListener(aVoid -> {
+                        if (binding == null) return;
+                        binding.progressBar.setVisibility(View.GONE);
+                        Toast.makeText(getContext(), "Status reset successfully!", Toast.LENGTH_SHORT).show();
+                    }).addOnFailureListener(e -> {
+                        if (binding == null) return;
+                        binding.progressBar.setVisibility(View.GONE);
+                        Toast.makeText(getContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    });
                 })
                 .setNegativeButton("Cancel", null)
                 .show();

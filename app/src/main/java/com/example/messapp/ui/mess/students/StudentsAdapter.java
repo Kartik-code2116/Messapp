@@ -103,14 +103,23 @@ public class StudentsAdapter extends ListAdapter<Student, StudentsAdapter.Studen
                 } else {
                     // No explicit selection yet, check auto-select
                     String autoSelect = student.getOneTimeAutoSelect();
-                    if ("LUNCH".equals(autoSelect)) {
-                        lunch = "IN (Auto)";
-                        dinner = "LOCKED";
-                    } else if ("DINNER".equals(autoSelect)) {
-                        dinner = "IN (Auto)";
-                        lunch = "LOCKED";
+                    boolean isReset = "RESET".equals(lunch) || "RESET".equals(dinner);
+                    if (!isReset) {
+                        if ("LUNCH".equals(autoSelect)) {
+                            lunch = "IN (Auto)";
+                            dinner = "LOCKED";
+                        } else if ("DINNER".equals(autoSelect)) {
+                            dinner = "IN (Auto)";
+                            lunch = "LOCKED";
+                        }
+                    } else {
+                        if ("RESET".equals(lunch)) lunch = "--";
+                        if ("RESET".equals(dinner)) dinner = "--";
                     }
                 }
+            } else {
+                if ("RESET".equals(lunch)) lunch = "--";
+                if ("RESET".equals(dinner)) dinner = "--";
             }
 
             textLunchStatus.setText(lunch);
