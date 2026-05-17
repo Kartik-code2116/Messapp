@@ -72,6 +72,18 @@ public final class ActivityLoginBinding implements ViewBinding {
   public final CircularProgressIndicator progressBar;
 
   @NonNull
+  public final TextInputEditText studentNameEditText;
+
+  @NonNull
+  public final TextInputLayout studentNameLayout;
+
+  @NonNull
+  public final TextInputEditText studentPhoneEditText;
+
+  @NonNull
+  public final TextInputLayout studentPhoneLayout;
+
+  @NonNull
   public final TextView textSubtitle;
 
   @NonNull
@@ -85,6 +97,8 @@ public final class ActivityLoginBinding implements ViewBinding {
       @NonNull TextInputEditText messIdEditText, @NonNull TextInputLayout messIdLayout,
       @NonNull TextInputEditText messNameEditText, @NonNull TextInputLayout messNameLayout,
       @NonNull TextInputEditText passwordEditText, @NonNull CircularProgressIndicator progressBar,
+      @NonNull TextInputEditText studentNameEditText, @NonNull TextInputLayout studentNameLayout,
+      @NonNull TextInputEditText studentPhoneEditText, @NonNull TextInputLayout studentPhoneLayout,
       @NonNull TextView textSubtitle, @NonNull TextView textTitle) {
     this.rootView = rootView;
     this.btnForgotPassword = btnForgotPassword;
@@ -102,6 +116,10 @@ public final class ActivityLoginBinding implements ViewBinding {
     this.messNameLayout = messNameLayout;
     this.passwordEditText = passwordEditText;
     this.progressBar = progressBar;
+    this.studentNameEditText = studentNameEditText;
+    this.studentNameLayout = studentNameLayout;
+    this.studentPhoneEditText = studentPhoneEditText;
+    this.studentPhoneLayout = studentPhoneLayout;
     this.textSubtitle = textSubtitle;
     this.textTitle = textTitle;
   }
@@ -223,6 +241,30 @@ public final class ActivityLoginBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.studentNameEditText;
+      TextInputEditText studentNameEditText = ViewBindings.findChildViewById(rootView, id);
+      if (studentNameEditText == null) {
+        break missingId;
+      }
+
+      id = R.id.studentNameLayout;
+      TextInputLayout studentNameLayout = ViewBindings.findChildViewById(rootView, id);
+      if (studentNameLayout == null) {
+        break missingId;
+      }
+
+      id = R.id.studentPhoneEditText;
+      TextInputEditText studentPhoneEditText = ViewBindings.findChildViewById(rootView, id);
+      if (studentPhoneEditText == null) {
+        break missingId;
+      }
+
+      id = R.id.studentPhoneLayout;
+      TextInputLayout studentPhoneLayout = ViewBindings.findChildViewById(rootView, id);
+      if (studentPhoneLayout == null) {
+        break missingId;
+      }
+
       id = R.id.textSubtitle;
       TextView textSubtitle = ViewBindings.findChildViewById(rootView, id);
       if (textSubtitle == null) {
@@ -238,7 +280,8 @@ public final class ActivityLoginBinding implements ViewBinding {
       return new ActivityLoginBinding((ScrollView) rootView, btnForgotPassword, btnGoogleLogin,
           btnMainAction, btnSwitchMode, cardForm, emailEditText, headerBackground, imgLogo,
           logoCard, messIdEditText, messIdLayout, messNameEditText, messNameLayout,
-          passwordEditText, progressBar, textSubtitle, textTitle);
+          passwordEditText, progressBar, studentNameEditText, studentNameLayout,
+          studentPhoneEditText, studentPhoneLayout, textSubtitle, textTitle);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

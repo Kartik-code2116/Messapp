@@ -62,6 +62,9 @@ public final class FragmentUserProfileBinding implements ViewBinding {
   public final TextView textProfileEmail;
 
   @NonNull
+  public final TextView textProfileEmailCard;
+
+  @NonNull
   public final TextView textProfileMessId;
 
   @NonNull
@@ -69,6 +72,12 @@ public final class FragmentUserProfileBinding implements ViewBinding {
 
   @NonNull
   public final TextView textProfileName;
+
+  @NonNull
+  public final TextView textProfileNameCard;
+
+  @NonNull
+  public final TextView textProfilePhone;
 
   @NonNull
   public final TextView textSubscriptionExpiry;
@@ -80,8 +89,10 @@ public final class FragmentUserProfileBinding implements ViewBinding {
       @NonNull ShapeableImageView profileImage, @NonNull ProgressBar progressBar,
       @NonNull MaterialSwitch switchDarkMode, @NonNull TextView textDinnerExpiry,
       @NonNull TextView textLunchExpiry, @NonNull TextView textProfileEmail,
-      @NonNull TextView textProfileMessId, @NonNull TextView textProfileMessName,
-      @NonNull TextView textProfileName, @NonNull TextView textSubscriptionExpiry) {
+      @NonNull TextView textProfileEmailCard, @NonNull TextView textProfileMessId,
+      @NonNull TextView textProfileMessName, @NonNull TextView textProfileName,
+      @NonNull TextView textProfileNameCard, @NonNull TextView textProfilePhone,
+      @NonNull TextView textSubscriptionExpiry) {
     this.rootView = rootView;
     this.btnChangePassword = btnChangePassword;
     this.btnEditProfileImage = btnEditProfileImage;
@@ -95,9 +106,12 @@ public final class FragmentUserProfileBinding implements ViewBinding {
     this.textDinnerExpiry = textDinnerExpiry;
     this.textLunchExpiry = textLunchExpiry;
     this.textProfileEmail = textProfileEmail;
+    this.textProfileEmailCard = textProfileEmailCard;
     this.textProfileMessId = textProfileMessId;
     this.textProfileMessName = textProfileMessName;
     this.textProfileName = textProfileName;
+    this.textProfileNameCard = textProfileNameCard;
+    this.textProfilePhone = textProfilePhone;
     this.textSubscriptionExpiry = textSubscriptionExpiry;
   }
 
@@ -200,6 +214,12 @@ public final class FragmentUserProfileBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.text_profile_email_card;
+      TextView textProfileEmailCard = ViewBindings.findChildViewById(rootView, id);
+      if (textProfileEmailCard == null) {
+        break missingId;
+      }
+
       id = R.id.text_profile_mess_id;
       TextView textProfileMessId = ViewBindings.findChildViewById(rootView, id);
       if (textProfileMessId == null) {
@@ -218,6 +238,18 @@ public final class FragmentUserProfileBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.text_profile_name_card;
+      TextView textProfileNameCard = ViewBindings.findChildViewById(rootView, id);
+      if (textProfileNameCard == null) {
+        break missingId;
+      }
+
+      id = R.id.text_profile_phone;
+      TextView textProfilePhone = ViewBindings.findChildViewById(rootView, id);
+      if (textProfilePhone == null) {
+        break missingId;
+      }
+
       id = R.id.text_subscription_expiry;
       TextView textSubscriptionExpiry = ViewBindings.findChildViewById(rootView, id);
       if (textSubscriptionExpiry == null) {
@@ -227,8 +259,8 @@ public final class FragmentUserProfileBinding implements ViewBinding {
       return new FragmentUserProfileBinding((FrameLayout) rootView, btnChangePassword,
           btnEditProfileImage, btnHelpSupport, btnLogout, btnMyReviews, btnRenewSubscription,
           profileImage, progressBar, switchDarkMode, textDinnerExpiry, textLunchExpiry,
-          textProfileEmail, textProfileMessId, textProfileMessName, textProfileName,
-          textSubscriptionExpiry);
+          textProfileEmail, textProfileEmailCard, textProfileMessId, textProfileMessName,
+          textProfileName, textProfileNameCard, textProfilePhone, textSubscriptionExpiry);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

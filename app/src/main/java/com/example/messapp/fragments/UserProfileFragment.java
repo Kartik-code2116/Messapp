@@ -71,8 +71,16 @@ public class UserProfileFragment extends Fragment {
                         String messId = documentSnapshot.getString("messId");
                         binding.textProfileMessId.setText(messId);
 
-                        // User doesn't have a name field in mockup, using email or "Student"
-                        binding.textProfileName.setText("Student");
+                        // Load name (from signup) or fallback to "Student"
+                        String name = documentSnapshot.getString("name");
+                        if (name != null && !name.isEmpty()) {
+                            binding.textProfileName.setText(name);
+                            binding.textProfilePhone.setText(documentSnapshot.getString("phone") != null ? 
+                                documentSnapshot.getString("phone") : "Not set");
+                        } else {
+                            binding.textProfileName.setText("Student");
+                            binding.textProfilePhone.setText("Not set");
+                        }
 
                         fetchMessName(messId);
                     }

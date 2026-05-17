@@ -129,6 +129,7 @@ dimen user_item_spacing
 dimen user_page_padding_h
 dimen user_page_padding_v
 dimen user_section_spacing
+drawable _1778945082032
 drawable _c3d318d7_6015_4c92_9b56_8d2c50388d41_
 drawable annapurna
 drawable bg_admin_action_tile
@@ -465,6 +466,7 @@ id radio_extend
 id radio_group_meal_type
 id radio_group_mode
 id radio_lunch
+id radio_one_time
 id radio_reduce
 id rating_bar
 id rating_bar_avg
@@ -484,6 +486,10 @@ id reviews_recycler_view
 id search_layout
 id spinner_month_year
 id stats_container
+id studentNameEditText
+id studentNameLayout
+id studentPhoneEditText
+id studentPhoneLayout
 id swipe_refresh
 id switch_allow_multiple_changes
 id switch_dark_mode
@@ -557,11 +563,15 @@ id text_offer_description
 id text_offer_discount
 id text_offer_expiry
 id text_offer_title
+id text_one_time_info
 id text_owner_email
 id text_profile_email
+id text_profile_email_card
 id text_profile_mess_id
 id text_profile_mess_name
 id text_profile_name
+id text_profile_name_card
+id text_profile_phone
 id text_rating
 id text_revenue_basis
 id text_revenue_subtitle

@@ -13,6 +13,10 @@ public class Student {
     private String gender;
     private String dietaryPreference; // e.g., "Veg", "Non-Veg"
     private String profileImageUrl;
+    // "LUNCH", "DINNER", "BOTH", "ONE_TIME" — set by admin when granting subscription
+    private String subscriptionType;
+    // For ONE_TIME subscriptions: shared expiry used for both lunch and dinner slots
+    private long oneTimeMealExpiry;
 
     public Student() {
         // Required no-argument constructor for Firebase
@@ -49,6 +53,26 @@ public class Student {
         this.gender = gender;
         this.dietaryPreference = dietaryPreference;
         this.profileImageUrl = profileImageUrl;
+    }
+
+    public String getSubscriptionType() {
+        return subscriptionType;
+    }
+
+    public void setSubscriptionType(String subscriptionType) {
+        this.subscriptionType = subscriptionType;
+    }
+
+    public long getOneTimeMealExpiry() {
+        return oneTimeMealExpiry;
+    }
+
+    public void setOneTimeMealExpiry(long oneTimeMealExpiry) {
+        this.oneTimeMealExpiry = oneTimeMealExpiry;
+    }
+
+    public boolean isOneTimeSubscription() {
+        return "ONE_TIME".equals(subscriptionType);
     }
 
     public long getSubscriptionExpiry() {
@@ -152,7 +176,7 @@ public class Student {
     }
 
     public Student copy() {
-        return new Student(
+        Student s = new Student(
                 userId,
                 email,
                 name,
@@ -165,5 +189,8 @@ public class Student {
                 gender,
                 dietaryPreference,
                 profileImageUrl);
+        s.subscriptionType = subscriptionType;
+        s.oneTimeMealExpiry = oneTimeMealExpiry;
+        return s;
     }
 }

@@ -82,6 +82,7 @@ public class UserProfileFragment extends Fragment {
         if (currentUser != null) {
             if (binding != null) {
                 binding.textProfileEmail.setText(currentUser.getEmail());
+                binding.textProfileEmailCard.setText(currentUser.getEmail());
             }
             db.collection("users").document(currentUser.getUid()).get()
                     .addOnSuccessListener(doc -> {
@@ -91,7 +92,9 @@ public class UserProfileFragment extends Fragment {
                             currentUserMessId = messId;
                             String name = doc.getString("name");
 
-                            binding.textProfileName.setText(name != null && !name.isEmpty() ? name : "Student");
+                            String displayName = name != null && !name.isEmpty() ? name : "Student";
+                            binding.textProfileName.setText(displayName);
+                            binding.textProfileNameCard.setText(displayName);
 
                             if (messId != null) {
                                 binding.textProfileMessId.setText("Mess ID: " + messId);

@@ -91,6 +91,42 @@
                 android:orientation="vertical"
                 android:padding="24dp">
 
+                <!-- Student Name Input (Signup only) -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/studentNameLayout"
+                    style="@style/Profound.InputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Full Name"
+                    android:layout_marginTop="16dp"
+                    android:visibility="gone"
+                    app:startIconDrawable="@drawable/ic_person"
+                    app:startIconTint="@color/brand_primary">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/studentNameEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName|textCapWords"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Student Phone Input (Signup only) -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/studentPhoneLayout"
+                    style="@style/Profound.InputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Phone Number"
+                    android:layout_marginTop="16dp"
+                    android:visibility="gone"
+                    app:startIconDrawable="@drawable/ic_call"
+                    app:startIconTint="@color/brand_primary">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/studentPhoneEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="phone"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
                 <!-- MESS ID Input -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/messIdLayout"

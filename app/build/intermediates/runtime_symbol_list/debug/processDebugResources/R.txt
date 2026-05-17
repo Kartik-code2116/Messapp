@@ -3663,6 +3663,7 @@ int dimen user_item_spacing 0x7f07040d
 int dimen user_page_padding_h 0x7f07040e
 int dimen user_page_padding_v 0x7f07040f
 int dimen user_section_spacing 0x7f070410
+int drawable _1778945082032 0x7f08016a
 int drawable _c3d318d7_6015_4c92_9b56_8d2c50388d41_ 0x7f080028
 int drawable abc_ab_share_pack_mtrl_alpha 0x7f080029
 int drawable abc_action_bar_item_background_material 0x7f08002a
@@ -4608,6 +4609,7 @@ int id radio_extend 0x7f0a0265
 int id radio_group_meal_type 0x7f0a0266
 int id radio_group_mode 0x7f0a0267
 int id radio_lunch 0x7f0a0268
+int id radio_one_time 0x7f0a0388
 int id radio_reduce 0x7f0a0269
 int id rating_bar 0x7f0a026a
 int id rating_bar_avg 0x7f0a026b
@@ -4700,6 +4702,10 @@ int id staticPostLayout 0x7f0a02c1
 int id stats_container 0x7f0a02c2
 int id stop 0x7f0a02c3
 int id stretch 0x7f0a02c4
+int id studentNameEditText 0x7f0a038a
+int id studentNameLayout 0x7f0a038b
+int id studentPhoneEditText 0x7f0a038c
+int id studentPhoneLayout 0x7f0a038d
 int id submenuarrow 0x7f0a02c5
 int id submit_area 0x7f0a02c6
 int id supportScrollUp 0x7f0a02c7
@@ -4802,11 +4808,15 @@ int id text_offer_description 0x7f0a0327
 int id text_offer_discount 0x7f0a0328
 int id text_offer_expiry 0x7f0a0329
 int id text_offer_title 0x7f0a032a
+int id text_one_time_info 0x7f0a0389
 int id text_owner_email 0x7f0a032b
 int id text_profile_email 0x7f0a032c
+int id text_profile_email_card 0x7f0a038e
 int id text_profile_mess_id 0x7f0a032d
 int id text_profile_mess_name 0x7f0a032e
 int id text_profile_name 0x7f0a032f
+int id text_profile_name_card 0x7f0a038f
+int id text_profile_phone 0x7f0a0390
 int id text_rating 0x7f0a0330
 int id text_revenue_basis 0x7f0a0331
 int id text_revenue_subtitle 0x7f0a0332

@@ -62,10 +62,15 @@ public class UserHistoryFragment extends Fragment {
                         String lunch = doc.getString("lunch");
                         String dinner = doc.getString("dinner");
 
-                        if ("IN".equals(lunch) || "IN".equals(dinner)) {
+                        // BUG FIX: Show ALL entries (IN and OUT), not just IN.
+                        // A student who was absent all week would see a blank history
+                        // with the old filter. Now every marked day appears.
+                        if (date != null && (lunch != null || dinner != null)) {
                             items.add(new HistoryItem(date, lunch, dinner));
                         }
                     }
+                    // Sort by date descending so newest entries appear first
+                    items.sort((a, b) -> b.date.compareTo(a.date));
                     adapter.setItems(items);
                 });
     }

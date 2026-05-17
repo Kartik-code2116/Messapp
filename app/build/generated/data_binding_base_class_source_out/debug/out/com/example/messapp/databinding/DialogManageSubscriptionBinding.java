@@ -47,17 +47,24 @@ public final class DialogManageSubscriptionBinding implements ViewBinding {
   public final RadioButton radioLunch;
 
   @NonNull
+  public final RadioButton radioOneTime;
+
+  @NonNull
   public final RadioButton radioReduce;
 
   @NonNull
   public final TextView textCurrentExpiry;
+
+  @NonNull
+  public final TextView textOneTimeInfo;
 
   private DialogManageSubscriptionBinding(@NonNull ScrollView rootView,
       @NonNull TextInputEditText etAmount, @NonNull TextInputEditText etDays,
       @NonNull RadioButton radioBoth, @NonNull RadioButton radioDinner,
       @NonNull RadioButton radioExtend, @NonNull RadioGroup radioGroupMealType,
       @NonNull RadioGroup radioGroupMode, @NonNull RadioButton radioLunch,
-      @NonNull RadioButton radioReduce, @NonNull TextView textCurrentExpiry) {
+      @NonNull RadioButton radioOneTime, @NonNull RadioButton radioReduce,
+      @NonNull TextView textCurrentExpiry, @NonNull TextView textOneTimeInfo) {
     this.rootView = rootView;
     this.etAmount = etAmount;
     this.etDays = etDays;
@@ -67,8 +74,10 @@ public final class DialogManageSubscriptionBinding implements ViewBinding {
     this.radioGroupMealType = radioGroupMealType;
     this.radioGroupMode = radioGroupMode;
     this.radioLunch = radioLunch;
+    this.radioOneTime = radioOneTime;
     this.radioReduce = radioReduce;
     this.textCurrentExpiry = textCurrentExpiry;
+    this.textOneTimeInfo = textOneTimeInfo;
   }
 
   @Override
@@ -146,6 +155,12 @@ public final class DialogManageSubscriptionBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.radio_one_time;
+      RadioButton radioOneTime = ViewBindings.findChildViewById(rootView, id);
+      if (radioOneTime == null) {
+        break missingId;
+      }
+
       id = R.id.radio_reduce;
       RadioButton radioReduce = ViewBindings.findChildViewById(rootView, id);
       if (radioReduce == null) {
@@ -158,9 +173,15 @@ public final class DialogManageSubscriptionBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.text_one_time_info;
+      TextView textOneTimeInfo = ViewBindings.findChildViewById(rootView, id);
+      if (textOneTimeInfo == null) {
+        break missingId;
+      }
+
       return new DialogManageSubscriptionBinding((ScrollView) rootView, etAmount, etDays, radioBoth,
-          radioDinner, radioExtend, radioGroupMealType, radioGroupMode, radioLunch, radioReduce,
-          textCurrentExpiry);
+          radioDinner, radioExtend, radioGroupMealType, radioGroupMode, radioLunch, radioOneTime,
+          radioReduce, textCurrentExpiry, textOneTimeInfo);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

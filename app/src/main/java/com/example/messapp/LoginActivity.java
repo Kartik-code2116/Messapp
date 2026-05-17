@@ -83,6 +83,14 @@ public class LoginActivity extends AppCompatActivity {
                 Log.e("LoginActivity", "btnMainAction is null");
             }
 
+            // Student Name & Phone click listeners (already in layout)
+            if (binding.studentNameEditText != null) {
+                binding.studentNameEditText.setOnClickListener(v -> {});
+            }
+            if (binding.studentPhoneEditText != null) {
+                binding.studentPhoneEditText.setOnClickListener(v -> {});
+            }
+
             if (binding.btnSwitchMode != null) {
                 binding.btnSwitchMode.setOnClickListener(v -> {
                     isLoginMode = !isLoginMode;
@@ -133,6 +141,13 @@ public class LoginActivity extends AppCompatActivity {
                 if (binding.messNameLayout != null) {
                     binding.messNameLayout.setVisibility(View.GONE);
                 }
+                // Hide student fields during login
+                if (binding.studentNameLayout != null) {
+                    binding.studentNameLayout.setVisibility(View.GONE);
+                }
+                if (binding.studentPhoneLayout != null) {
+                    binding.studentPhoneLayout.setVisibility(View.GONE);
+                }
             } else {
                 if (binding.textTitle != null) {
                     binding.textTitle.setText("Create Account");
@@ -150,12 +165,26 @@ public class LoginActivity extends AppCompatActivity {
                     if (binding.messIdLayout != null) {
                         binding.messIdLayout.setVisibility(View.GONE);
                     }
+                    // Hide student fields for mess owner
+                    if (binding.studentNameLayout != null) {
+                        binding.studentNameLayout.setVisibility(View.GONE);
+                    }
+                    if (binding.studentPhoneLayout != null) {
+                        binding.studentPhoneLayout.setVisibility(View.GONE);
+                    }
                 } else {
                     if (binding.messIdLayout != null) {
                         binding.messIdLayout.setVisibility(View.VISIBLE);
                     }
                     if (binding.messNameLayout != null) {
                         binding.messNameLayout.setVisibility(View.GONE);
+                    }
+                    // Show student name & phone fields for student signup
+                    if (binding.studentNameLayout != null) {
+                        binding.studentNameLayout.setVisibility(View.VISIBLE);
+                    }
+                    if (binding.studentPhoneLayout != null) {
+                        binding.studentPhoneLayout.setVisibility(View.VISIBLE);
                     }
                 }
             }
@@ -190,6 +219,8 @@ public class LoginActivity extends AppCompatActivity {
         String email = binding.emailEditText.getText().toString().trim();
         String password = binding.passwordEditText.getText().toString().trim();
         String extraData = "";
+        String studentName = "";
+        String studentPhone = "";
 
         if ("MESS_OWNER".equals(currentRole)) {
             extraData = binding.messNameEditText.getText().toString().trim();
@@ -203,6 +234,17 @@ public class LoginActivity extends AppCompatActivity {
                 binding.messIdEditText.setError("Required");
                 return;
             }
+            // Get student name and phone
+            studentName = binding.studentNameEditText.getText().toString().trim();
+            studentPhone = binding.studentPhoneEditText.getText().toString().trim();
+            if (TextUtils.isEmpty(studentName)) {
+                binding.studentNameEditText.setError("Required");
+                return;
+            }
+            if (TextUtils.isEmpty(studentPhone)) {
+                binding.studentPhoneEditText.setError("Required");
+                return;
+            }
         }
 
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password))
@@ -210,10 +252,12 @@ public class LoginActivity extends AppCompatActivity {
 
         binding.progressBar.setVisibility(View.VISIBLE);
         String finalExtraData = extraData;
+        String finalStudentName = studentName;
+        String finalStudentPhone = studentPhone;
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        saveUserToFirestore(mAuth.getCurrentUser(), currentRole, finalExtraData);
+                        saveUserToFirestore(mAuth.getCurrentUser(), currentRole, finalExtraData, finalStudentName, finalStudentPhone);
                     } else {
                         binding.progressBar.setVisibility(View.GONE);
                         Toast.makeText(LoginActivity.this, "Signup Failed: " + task.getException().getMessage(),
@@ -311,6 +355,8 @@ public class LoginActivity extends AppCompatActivity {
                     } else {
                         // New user from Google, need to sign them up with current role
                         String extraData = "";
+                        String studentName = "";
+                        String studentPhone = "";
                         if ("MESS_OWNER".equals(currentRole)) {
                             extraData = binding.messNameEditText.getText().toString().trim();
                             if (TextUtils.isEmpty(extraData)) {
@@ -331,8 +377,31 @@ public class LoginActivity extends AppCompatActivity {
                                         .show();
                                 return;
                             }
+                            // Get student name and phone for Google sign-in
+                            studentName = binding.studentNameEditText.getText().toString().trim();
+                            studentPhone = binding.studentPhoneEditText.getText().toString().trim();
+                            if (TextUtils.isEmpty(studentName)) {
+                                binding.progressBar.setVisibility(View.GONE);
+                                binding.studentNameLayout.setVisibility(View.VISIBLE);
+                                binding.studentNameEditText.setError("Please enter your name");
+                                Toast.makeText(this, "Please enter your name and click Google again", Toast.LENGTH_LONG)
+                                        .show();
+                                return;
+                            }
+                            if (TextUtils.isEmpty(studentPhone)) {
+                                binding.progressBar.setVisibility(View.GONE);
+                                binding.studentPhoneLayout.setVisibility(View.VISIBLE);
+                                binding.studentPhoneEditText.setError("Please enter your phone");
+                                Toast.makeText(this, "Please enter your phone and click Google again", Toast.LENGTH_LONG)
+                                        .show();
+                                return;
+                            }
                         }
-                        saveUserToFirestore(user, currentRole, extraData);
+                        // Capture as final for lambda
+                        final String finalExtraData = extraData;
+                        final String finalStudentName = studentName;
+                        final String finalStudentPhone = studentPhone;
+                        saveUserToFirestore(user, currentRole, finalExtraData, finalStudentName, finalStudentPhone);
                     }
                 })
                 .addOnFailureListener(e -> {
@@ -341,13 +410,21 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    private void saveUserToFirestore(FirebaseUser user, String role, String extraData) {
+    private void saveUserToFirestore(FirebaseUser user, String role, String extraData, String studentName, String studentPhone) {
         if (user == null)
             return;
 
         Map<String, Object> userData = new HashMap<>();
         userData.put("email", user.getEmail());
         userData.put("role", role);
+
+        // Add student name and phone for student users
+        if (!TextUtils.isEmpty(studentName)) {
+            userData.put("name", studentName);
+        }
+        if (!TextUtils.isEmpty(studentPhone)) {
+            userData.put("phone", studentPhone);
+        }
 
         final String[] messIdHolder = new String[1];
         if ("MESS_OWNER".equals(role)) {

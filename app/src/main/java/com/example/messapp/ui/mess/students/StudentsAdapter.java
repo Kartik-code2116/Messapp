@@ -17,6 +17,7 @@ import com.example.messapp.models.Student;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 public class StudentsAdapter extends ListAdapter<Student, StudentsAdapter.StudentViewHolder> {
 
@@ -135,11 +136,18 @@ public class StudentsAdapter extends ListAdapter<Student, StudentsAdapter.Studen
                 textDinnerExpiry.setText("Dinner: No Sub");
             }
 
-            // Keep legacy field hidden logic or updated for compatibility
-            if (student.getSubscriptionExpiry() > 0) {
-                SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
-                String expiryDate = sdf.format(new Date(student.getSubscriptionExpiry()));
-                textSubscriptionExpiry.setText("Expires: " + expiryDate);
+            // Show days remaining for quick admin visibility
+            long now = System.currentTimeMillis();
+            long lunchExp = student.getLunchSubscriptionExpiry() > 0
+                    ? student.getLunchSubscriptionExpiry() : student.getSubscriptionExpiry();
+            long dinnerExp = student.getDinnerSubscriptionExpiry() > 0
+                    ? student.getDinnerSubscriptionExpiry() : student.getSubscriptionExpiry();
+            long maxExp = Math.max(lunchExp, dinnerExp);
+            if (maxExp > now) {
+                long daysLeft = (maxExp - now) / (1000 * 60 * 60 * 24);
+                textSubscriptionExpiry.setText(daysLeft + "d remaining");
+            } else if (maxExp > 0) {
+                textSubscriptionExpiry.setText("Expired");
             } else {
                 textSubscriptionExpiry.setText("No Subscription");
             }
@@ -172,10 +180,11 @@ public class StudentsAdapter extends ListAdapter<Student, StudentsAdapter.Studen
 
         @Override
         public boolean areContentsTheSame(@NonNull Student oldItem, @NonNull Student newItem) {
-            return oldItem.getName() != null && oldItem.getName().equals(newItem.getName()) &&
-                   oldItem.getEmail() != null && oldItem.getEmail().equals(newItem.getEmail()) &&
-                   oldItem.getLunchStatus() != null && oldItem.getLunchStatus().equals(newItem.getLunchStatus()) &&
-                   oldItem.getDinnerStatus() != null && oldItem.getDinnerStatus().equals(newItem.getDinnerStatus()) &&
+            // BUG FIX: use Objects.equals() to avoid NullPointerException when any field is null
+            return Objects.equals(oldItem.getName(), newItem.getName()) &&
+                   Objects.equals(oldItem.getEmail(), newItem.getEmail()) &&
+                   Objects.equals(oldItem.getLunchStatus(), newItem.getLunchStatus()) &&
+                   Objects.equals(oldItem.getDinnerStatus(), newItem.getDinnerStatus()) &&
                    oldItem.getLunchSubscriptionExpiry() == newItem.getLunchSubscriptionExpiry() &&
                    oldItem.getDinnerSubscriptionExpiry() == newItem.getDinnerSubscriptionExpiry();
         }

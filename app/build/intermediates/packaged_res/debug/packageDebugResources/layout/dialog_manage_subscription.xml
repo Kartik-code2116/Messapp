@@ -61,31 +61,51 @@
             android:id="@+id/radio_group_meal_type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="16dp">
+            android:orientation="vertical"
+            android:layout_marginBottom="8dp">
 
             <RadioButton
                 android:id="@+id/radio_lunch"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Lunch"
-                android:layout_weight="1"/>
+                android:text="Lunch only"
+                android:layout_marginBottom="4dp"/>
 
             <RadioButton
                 android:id="@+id/radio_dinner"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Dinner"
-                android:layout_weight="1"/>
+                android:text="Dinner only"
+                android:layout_marginBottom="4dp"/>
 
             <RadioButton
                 android:id="@+id/radio_both"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Both"
+                android:text="Both (Lunch + Dinner)"
                 android:checked="true"
-                android:layout_weight="1"/>
+                android:layout_marginBottom="4dp"/>
+
+            <RadioButton
+                android:id="@+id/radio_one_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="One Time a Day (student picks either Lunch OR Dinner each day)"/>
         </RadioGroup>
+
+        <!-- Info shown only when One Time a Day is selected -->
+        <TextView
+            android:id="@+id/text_one_time_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="⚠️ One Time a Day: Student can mark IN for only ONE meal per day. Both lunch and dinner cards are shown, but once they mark IN on one, the other is automatically locked for that day."
+            android:textSize="12sp"
+            android:textColor="@color/brand_primary"
+            android:background="@drawable/bg_rounded_card_surface"
+            android:backgroundTint="@color/brand_primary_light"
+            android:padding="12dp"
+            android:layout_marginBottom="12dp"
+            android:visibility="gone"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"

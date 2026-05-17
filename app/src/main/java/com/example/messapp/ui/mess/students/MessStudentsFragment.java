@@ -398,21 +398,37 @@ public class MessStudentsFragment extends Fragment {
         RadioGroup radioGroupMode = dialogView.findViewById(R.id.radio_group_mode);
         RadioButton radioExtend = dialogView.findViewById(R.id.radio_extend);
         TextInputEditText etDays = dialogView.findViewById(R.id.et_days);
-        // Ah, I see I used et_days/et_amount in XML but in Java I might have had
-        // different IDs before? No, they were et_days/et_amount.
         TextInputEditText etAmount = dialogView.findViewById(R.id.et_amount);
         RadioGroup radioGroupMealType = dialogView.findViewById(R.id.radio_group_meal_type);
+        android.widget.TextView textOneTimeInfo = dialogView.findViewById(R.id.text_one_time_info);
+        RadioButton radioOneTime = dialogView.findViewById(R.id.radio_one_time);
+
+        // Show/hide the ONE_TIME info banner when that option is selected
+        radioGroupMealType.setOnCheckedChangeListener((group, checkedId) -> {
+            textOneTimeInfo.setVisibility(checkedId == R.id.radio_one_time ? View.VISIBLE : View.GONE);
+        });
 
         long lunchExpiry = student.getLunchSubscriptionExpiry();
         long dinnerExpiry = student.getDinnerSubscriptionExpiry();
+        long oneTimeExpiry = student.getOneTimeMealExpiry();
+        long now = System.currentTimeMillis();
+
         String lunchText = (lunchExpiry > 0)
                 ? new SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(new Date(lunchExpiry))
                 : "Not Active";
         String dinnerText = (dinnerExpiry > 0)
                 ? new SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(new Date(dinnerExpiry))
                 : "Not Active";
+        String oneTimeText = (oneTimeExpiry > 0)
+                ? new SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(new Date(oneTimeExpiry))
+                : "Not Active";
+        String currentType = student.getSubscriptionType() != null ? student.getSubscriptionType() : "BOTH";
 
-        textCurrentExpiry.setText("Lunch: " + lunchText + "\nDinner: " + dinnerText);
+        textCurrentExpiry.setText(
+                "Lunch: " + lunchText +
+                "\nDinner: " + dinnerText +
+                "\nOne Time: " + oneTimeText +
+                "\nCurrent type: " + currentType);
 
         new AlertDialog.Builder(getContext())
                 .setView(dialogView)
@@ -431,10 +447,9 @@ public class MessStudentsFragment extends Fragment {
 
                     String mealType = "BOTH";
                     int selectedId = radioGroupMealType.getCheckedRadioButtonId();
-                    if (selectedId == R.id.radio_lunch)
-                        mealType = "LUNCH";
-                    else if (selectedId == R.id.radio_dinner)
-                        mealType = "DINNER";
+                    if (selectedId == R.id.radio_lunch)        mealType = "LUNCH";
+                    else if (selectedId == R.id.radio_dinner)  mealType = "DINNER";
+                    else if (selectedId == R.id.radio_one_time) mealType = "ONE_TIME";
 
                     manageSubscription(student, amount, days, isExtend, mealType);
                 })
@@ -449,27 +464,40 @@ public class MessStudentsFragment extends Fragment {
 
         long newLunchExpiry = student.getLunchSubscriptionExpiry();
         long newDinnerExpiry = student.getDinnerSubscriptionExpiry();
+        long newOneTimeExpiry = student.getOneTimeMealExpiry();
         long now = System.currentTimeMillis();
 
-        if (mealType.equals("LUNCH") || mealType.equals("BOTH")) {
-            long base = (newLunchExpiry > now) ? newLunchExpiry : now;
+        if (mealType.equals("ONE_TIME")) {
+            // ONE_TIME: extend/reduce a single shared expiry bucket
+            long base = (newOneTimeExpiry > now) ? newOneTimeExpiry : now;
             Calendar cal = Calendar.getInstance();
             cal.setTimeInMillis(base);
             cal.add(Calendar.DAY_OF_YEAR, isExtend ? days : -days);
-            newLunchExpiry = cal.getTimeInMillis();
+            newOneTimeExpiry = cal.getTimeInMillis();
+            // Clear lunch/dinner expiry so those are not accidentally active
+            newLunchExpiry = 0;
+            newDinnerExpiry = 0;
+        } else {
+            if (mealType.equals("LUNCH") || mealType.equals("BOTH")) {
+                long base = (newLunchExpiry > now) ? newLunchExpiry : now;
+                Calendar cal = Calendar.getInstance();
+                cal.setTimeInMillis(base);
+                cal.add(Calendar.DAY_OF_YEAR, isExtend ? days : -days);
+                newLunchExpiry = cal.getTimeInMillis();
+            }
+            if (mealType.equals("DINNER") || mealType.equals("BOTH")) {
+                long base = (newDinnerExpiry > now) ? newDinnerExpiry : now;
+                Calendar cal = Calendar.getInstance();
+                cal.setTimeInMillis(base);
+                cal.add(Calendar.DAY_OF_YEAR, isExtend ? days : -days);
+                newDinnerExpiry = cal.getTimeInMillis();
+            }
+            // Switching from ONE_TIME to lunch/dinner: clear one-time expiry
+            newOneTimeExpiry = 0;
         }
 
-        if (mealType.equals("DINNER") || mealType.equals("BOTH")) {
-            long base = (newDinnerExpiry > now) ? newDinnerExpiry : now;
-            Calendar cal = Calendar.getInstance();
-            cal.setTimeInMillis(base);
-            cal.add(Calendar.DAY_OF_YEAR, isExtend ? days : -days);
-            newDinnerExpiry = cal.getTimeInMillis();
-        }
-
-        // Also update legacy field for safety (use the max of two)
-        long overallExpiry = Math.max(newLunchExpiry, newDinnerExpiry);
-        // If reduced below now, it's expired.
+        // Overall expiry = max of all active fields
+        long overallExpiry = Math.max(newOneTimeExpiry, Math.max(newLunchExpiry, newDinnerExpiry));
 
         if (currentMessId == null) {
             Toast.makeText(getContext(), "Error: Mess ID not found.", Toast.LENGTH_SHORT).show();
@@ -478,15 +506,6 @@ public class MessStudentsFragment extends Fragment {
         }
 
         String transId = db.collection("transactions").document().getId();
-        // Negative days for record if reducing? Or just keep transaction positive as a
-        // record of change?
-        // Usually transaction amount tracks money. If cutting days and refunding,
-        // amount should be negative.
-        // If just cutting days (penalty), amount might be 0.
-        // We will store exactly what user entered for amount.
-
-        // However, for days granted log, if reducing, we might want to log negative
-        // days.
         int loggedDays = isExtend ? days : -days;
 
         com.example.messapp.models.Transaction transaction = new com.example.messapp.models.Transaction(
@@ -499,10 +518,16 @@ public class MessStudentsFragment extends Fragment {
                 mealType);
 
         com.google.firebase.firestore.WriteBatch batch = db.batch();
-        batch.update(db.collection("users").document(student.getUserId()),
-                "subscriptionExpiry", overallExpiry,
-                "lunchSubscriptionExpiry", newLunchExpiry,
-                "dinnerSubscriptionExpiry", newDinnerExpiry);
+        com.google.firebase.firestore.DocumentReference userRef =
+                db.collection("users").document(student.getUserId());
+
+        java.util.Map<String, Object> userUpdates = new java.util.HashMap<>();
+        userUpdates.put("subscriptionExpiry", overallExpiry);
+        userUpdates.put("lunchSubscriptionExpiry", newLunchExpiry);
+        userUpdates.put("dinnerSubscriptionExpiry", newDinnerExpiry);
+        userUpdates.put("oneTimeMealExpiry", newOneTimeExpiry);
+        userUpdates.put("subscriptionType", mealType);
+        batch.update(userRef, userUpdates);
         batch.set(db.collection("transactions").document(transId), transaction);
 
         batch.commit()
@@ -511,7 +536,9 @@ public class MessStudentsFragment extends Fragment {
                         return;
                     binding.progressBar.setVisibility(View.GONE);
                     String action = isExtend ? "extended" : "reduced";
-                    Toast.makeText(getContext(), "Subscription " + action + " by " + days + " days.",
+                    String typeLabel = mealType.equals("ONE_TIME") ? "One Time a Day" : mealType;
+                    Toast.makeText(getContext(),
+                            typeLabel + " subscription " + action + " by " + days + " days.",
                             Toast.LENGTH_SHORT).show();
                 })
                 .addOnFailureListener(e -> {
@@ -648,9 +675,9 @@ public class MessStudentsFragment extends Fragment {
                     ? student.getDinnerSubscriptionExpiry() : student.getSubscriptionExpiry();
 
             String newLunch = (statuses != null && statuses[0] != null) ? statuses[0]
-                    : (lunchExpiry > now ? "IN" : null);
+                    : null; // BUG FIX: default to null (pending/--) instead of "IN" when no selection exists
             String newDinner = (statuses != null && statuses[1] != null) ? statuses[1]
-                    : (dinnerExpiry > now ? "IN" : null);
+                    : null; // BUG FIX: admin sees "--" for students who haven't marked yet
 
             // Check if status actually changed to avoid unnecessary updates
             // (But more importantly, if it DID change, we MUST create a NEW object)
