@@ -13,7 +13,8 @@
         <item name="android:textColor">@color/text_on_brand</item>
         <item name="cornerRadius">16dp</item>
         <item name="android:fontFamily">@font/poppins_medium</item>
-        <item name="android:paddingVertical">12dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
     </style>
 
     <style name="Profound.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">

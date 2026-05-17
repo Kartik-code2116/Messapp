@@ -30,7 +30,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="16dp"
+                android:paddingStart="16dp" android:paddingEnd="16dp"
                 android:paddingTop="24dp"
                 android:paddingBottom="8dp">
 
@@ -47,7 +47,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
+                android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="12dp"
                 android:text="PENDING SUBSCRIPTIONS"
@@ -68,7 +68,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
+                android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
                 android:layout_marginBottom="12dp"
                 android:text="MEAL REQUESTS"
                 android:textSize="11sp"

@@ -25,7 +25,7 @@
                 android:id="@+id/card_mess_condition"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/user_page_padding_h"
+                android:layout_marginStart="@dimen/user_page_padding_h" android:layout_marginEnd="@dimen/user_page_padding_h"
                 android:layout_marginTop="16dp"
                 android:visibility="gone"
                 style="@style/Profound.Card">
@@ -78,7 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingHorizontal="@dimen/user_page_padding_h"
+                android:paddingStart="@dimen/user_page_padding_h" android:paddingEnd="@dimen/user_page_padding_h"
                 android:paddingTop="28dp"
                 android:paddingBottom="12dp"
                 android:gravity="center_vertical">
@@ -105,8 +105,8 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:paddingHorizontal="4dp"
-                    android:paddingVertical="4dp"/>
+                    android:paddingStart="4dp" android:paddingEnd="4dp"
+                    android:paddingTop="4dp" android:paddingBottom="4dp"/>
             </LinearLayout>
 
             <!-- Meal Cards Container (Keeping IDs consistent) -->
@@ -115,7 +115,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingHorizontal="@dimen/user_page_padding_h"
+                android:paddingStart="@dimen/user_page_padding_h" android:paddingEnd="@dimen/user_page_padding_h"
                 android:clipToPadding="false">
 
                 <com.google.android.material.button.MaterialButton
@@ -462,8 +462,8 @@
                                         android:textColor="@color/text_caption"
                                         android:background="@drawable/bg_rounded_card_surface"
                                         android:backgroundTint="@color/neutral_200"
-                                        android:paddingHorizontal="8dp"
-                                        android:paddingVertical="4dp"/>
+                                        android:paddingStart="8dp" android:paddingEnd="8dp"
+                                        android:paddingTop="4dp" android:paddingBottom="4dp"/>
                                 </LinearLayout>
 
                                 <TextView
@@ -509,7 +509,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
-                            android:paddingHorizontal="20dp"
+                            android:paddingStart="20dp" android:paddingEnd="20dp"
                             android:paddingTop="20dp"
                             android:paddingBottom="12dp">
 
@@ -569,8 +569,8 @@
                                         android:textColor="@color/semantic_success"
                                         android:background="@drawable/bg_rounded_card_surface"
                                         android:backgroundTint="@color/semantic_success_bg"
-                                        android:paddingHorizontal="8dp"
-                                        android:paddingVertical="4dp"
+                                        android:paddingStart="8dp" android:paddingEnd="8dp"
+                                        android:paddingTop="4dp" android:paddingBottom="4dp"
                                         android:visibility="gone"
                                         tools:visibility="visible"/>
 
@@ -586,8 +586,8 @@
                                         android:textColor="@color/semantic_error"
                                         android:background="@drawable/bg_rounded_card_surface"
                                         android:backgroundTint="@color/semantic_error_bg"
-                                        android:paddingHorizontal="8dp"
-                                        android:paddingVertical="4dp"
+                                        android:paddingStart="8dp" android:paddingEnd="8dp"
+                                        android:paddingTop="4dp" android:paddingBottom="4dp"
                                         android:visibility="gone"
                                         tools:visibility="visible"/>
                                 </LinearLayout>
@@ -608,7 +608,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:paddingHorizontal="20dp"
+                            android:paddingStart="20dp" android:paddingEnd="20dp"
                             android:paddingBottom="20dp"
                             android:orientation="vertical">
                             
@@ -745,8 +745,8 @@
                                         android:textColor="@color/semantic_success"
                                         android:background="@drawable/bg_rounded_card_surface"
                                         android:backgroundTint="@color/semantic_success_bg"
-                                        android:paddingHorizontal="8dp"
-                                        android:paddingVertical="4dp"
+                                        android:paddingStart="8dp" android:paddingEnd="8dp"
+                                        android:paddingTop="4dp" android:paddingBottom="4dp"
                                         android:visibility="gone"
                                         tools:visibility="visible"/>
 
@@ -762,8 +762,8 @@
                                         android:textColor="@color/semantic_error"
                                         android:background="@drawable/bg_rounded_card_surface"
                                         android:backgroundTint="@color/semantic_error_bg"
-                                        android:paddingHorizontal="8dp"
-                                        android:paddingVertical="4dp"
+                                        android:paddingStart="8dp" android:paddingEnd="8dp"
+                                        android:paddingTop="4dp" android:paddingBottom="4dp"
                                         android:visibility="gone"
                                         tools:visibility="visible"/>
                                 </LinearLayout>
@@ -784,7 +784,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:paddingHorizontal="20dp"
+                            android:paddingStart="20dp" android:paddingEnd="20dp"
                             android:paddingBottom="20dp"
                             android:orientation="vertical">
                             

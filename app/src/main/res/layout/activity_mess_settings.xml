@@ -149,7 +149,7 @@
                             android:textSize="32sp"
                             android:textStyle="bold"
                             android:textColor="@color/dash_text_primary"
-                            android:layout_marginHorizontal="16dp"
+                            android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
                             android:layout_marginTop="24dp" />
 
                         <!-- Minute Picker -->
@@ -262,7 +262,7 @@
                             android:textSize="32sp"
                             android:textStyle="bold"
                             android:textColor="@color/dash_text_primary"
-                            android:layout_marginHorizontal="16dp"
+                            android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
                             android:layout_marginTop="24dp" />
 
                         <!-- Minute Picker -->

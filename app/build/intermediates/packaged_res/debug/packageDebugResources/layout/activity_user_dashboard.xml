@@ -52,14 +52,11 @@
         android:layout_height="match_parent"
         android:layout_gravity="end"
         android:background="@color/surface_card"
+        android:fitsSystemWindows="true"
         app:headerLayout="@layout/header_user_profile_drawer"
-        app:itemIconPadding="20dp"
-        app:itemIconSize="24dp"
-        app:itemHorizontalPadding="24dp"
-        app:itemVerticalPadding="14dp"
         app:itemIconTint="@color/brand_primary"
         app:itemTextColor="@color/text_heading"
-        app:itemShapeFillColor="@color/brand_primary_light"
+        app:itemBackground="@drawable/selector_drawer_item"
         app:menu="@menu/menu_user_profile_drawer" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -52,6 +52,7 @@ color dash_primary_20
 color dash_text_green
 color dash_text_primary
 color divider
+color drawer_logout_color
 color gradient_end
 color gradient_overlay
 color gradient_start
@@ -146,10 +147,14 @@ drawable bg_button_gradient
 drawable bg_capsule_accent
 drawable bg_chip_selected
 drawable bg_chip_unselected
+drawable bg_circle_avatar_drawer
 drawable bg_circle_light_green
 drawable bg_circle_primary_border
 drawable bg_circle_surface
+drawable bg_drawer_avatar_ring
 drawable bg_drawer_header
+drawable bg_drawer_menu_item
+drawable bg_drawer_stat_pill
 drawable bg_food_image_warm_overlay
 drawable bg_gradient
 drawable bg_gradient_primary
@@ -233,7 +238,9 @@ drawable ic_star_rate
 drawable ic_steam_subtle
 drawable ic_student_profile
 drawable line_dashed
+drawable ripple_drawer_item
 drawable ripple_effect
+drawable selector_drawer_item
 drawable status_background_in
 drawable status_background_none
 drawable status_background_out
@@ -249,7 +256,6 @@ id action_messProfileFragment_to_messOffersFragment
 id action_messProfileFragment_to_messRevenueFragment
 id action_messProfileFragment_to_navigation_mess_students
 id action_settings
-id action_userHomeFragment_to_messDetailFragment
 id addOfferFragment
 id admin_top_bar
 id app_logo
@@ -323,7 +329,6 @@ id cardForm
 id card_breakfast
 id card_daily_auto_select
 id card_dinner
-id card_drawer_profile
 id card_lunch
 id card_mess_condition
 id card_one_time_auto_select
@@ -350,13 +355,13 @@ id dinner_edit_text
 id dinner_hour_picker
 id dinner_input_layout
 id dinner_minute_picker
-id divider_drawer
 id drawer_admin_logout
 id drawer_admin_notifications
 id drawer_admin_profile
 id drawer_admin_settings
 id drawer_user_history
 id drawer_user_home
+id drawer_user_logout
 id drawer_user_menu
 id drawer_user_profile
 id edit_search_transactions
@@ -387,6 +392,9 @@ id et_wednesday_lunch
 id fab_add_offer
 id fab_add_review
 id fab_day_selector
+id group_account
+id group_manage
+id group_nav
 id headerBackground
 id header_mess_dashboard
 id icon_search
@@ -410,13 +418,11 @@ id lunch_edit_text
 id lunch_hour_picker
 id lunch_input_layout
 id lunch_minute_picker
-id main
 id meals_container_new
 id messContactEditText
 id messContactLayout
 id messDescriptionEditText
 id messDescriptionLayout
-id messDetailFragment
 id messIdEditText
 id messIdLayout
 id messLocationEditText
@@ -493,7 +499,6 @@ id review_comment_layout
 id reviews_recycler_view
 id search_layout
 id spinner_month_year
-id stats_container
 id studentNameEditText
 id studentNameLayout
 id studentPhoneEditText
@@ -620,7 +625,6 @@ id user_top_bar
 layout activity_edit_mess_profile
 layout activity_edit_user_profile
 layout activity_login
-layout activity_main
 layout activity_mess_dashboard
 layout activity_mess_reviews
 layout activity_mess_settings
@@ -702,6 +706,5 @@ style Theme.Messapp.NoActionBar
 style UserPageTitle
 style UserSectionTitle
 style UserStatValue
-style WindowAnimation.Slide
 xml backup_rules
 xml data_extraction_rules

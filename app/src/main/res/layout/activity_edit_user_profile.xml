@@ -33,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingHorizontal="@dimen/user_page_padding_h"
+            android:paddingStart="@dimen/user_page_padding_h" android:paddingEnd="@dimen/user_page_padding_h"
             android:paddingBottom="32dp">
 
             <!-- Photo -->

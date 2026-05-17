@@ -66,13 +66,16 @@ public class UserMenuFragment extends Fragment {
 
     private void fetchUserMessId() {
         if (mAuth.getCurrentUser() == null) {
-            binding.textLunchMenuDisplay.setText("Sign in to view menu");
-            binding.textDinnerMenuDisplay.setText("Sign in to view menu");
+            if (binding != null) {
+                binding.textLunchMenuDisplay.setText("Sign in to view menu");
+                binding.textDinnerMenuDisplay.setText("Sign in to view menu");
+            }
             return;
         }
         String userId = mAuth.getCurrentUser().getUid();
         db.collection("users").document(userId).get()
                 .addOnSuccessListener(documentSnapshot -> {
+                    if (binding == null) return;
                     if (documentSnapshot.exists()) {
                         currentMessId = documentSnapshot.getString("messId");
                         if (currentMessId != null) {
@@ -80,11 +83,16 @@ public class UserMenuFragment extends Fragment {
                             loadMenuForDate(currentCalendar);
                         }
                     } else {
-                        Toast.makeText(getContext(), "User data not found", Toast.LENGTH_SHORT).show();
+                        if (getContext() != null) {
+                            Toast.makeText(getContext(), "User data not found", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(getContext(), "Error loading user data", Toast.LENGTH_SHORT).show();
+                    if (binding == null) return;
+                    if (getContext() != null) {
+                        Toast.makeText(getContext(), "Error loading user data", Toast.LENGTH_SHORT).show();
+                    }
                 });
     }
 
@@ -95,6 +103,7 @@ public class UserMenuFragment extends Fragment {
     }
 
     private void toggleDaySelector() {
+        if (binding == null) return;
         isDaySelectorExpanded = !isDaySelectorExpanded;
 
         // Rotate FAB icon 180 degrees
@@ -140,7 +149,9 @@ public class UserMenuFragment extends Fragment {
         alphaAnim.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
-                binding.daySelectorExpandableContainer.setVisibility(View.GONE);
+                if (binding != null) {
+                    binding.daySelectorExpandableContainer.setVisibility(View.GONE);
+                }
             }
         });
 
@@ -204,14 +215,17 @@ public class UserMenuFragment extends Fragment {
         updateDayButtonStyles();
 
         // Auto collapse after selection with delay
-        binding.daySelectorExpandableContainer.postDelayed(() -> {
-            if (isDaySelectorExpanded) {
-                toggleDaySelector();
-            }
-        }, 500);
+        if (binding != null) {
+            binding.daySelectorExpandableContainer.postDelayed(() -> {
+                if (binding != null && isDaySelectorExpanded) {
+                    toggleDaySelector();
+                }
+            }, 500);
+        }
     }
 
     private void updateDayButtonStyles() {
+        if (binding == null) return;
         LinearLayout daySelectorContainer = binding.daySelectorContainer;
         for (int i = 0; i < daySelectorContainer.getChildCount(); i++) {
             Button button = (Button) daySelectorContainer.getChildAt(i);
@@ -247,6 +261,7 @@ public class UserMenuFragment extends Fragment {
                 .whereEqualTo("date", formattedDate)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
+                    if (binding == null) return;
                     if (!queryDocumentSnapshots.isEmpty()) {
                         String lunchMenu = queryDocumentSnapshots.getDocuments().get(0).getString("lunch");
                         String dinnerMenu = queryDocumentSnapshots.getDocuments().get(0).getString("dinner");
@@ -259,7 +274,10 @@ public class UserMenuFragment extends Fragment {
                     }
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(getContext(), "Error loading menu for " + formattedDate, Toast.LENGTH_SHORT).show();
+                    if (binding == null) return;
+                    if (getContext() != null) {
+                        Toast.makeText(getContext(), "Error loading menu for " + formattedDate, Toast.LENGTH_SHORT).show();
+                    }
                     binding.textLunchMenuDisplay.setText("Error loading menu.");
                     binding.textDinnerMenuDisplay.setText("Error loading menu.");
                 });

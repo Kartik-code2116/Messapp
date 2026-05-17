@@ -24,22 +24,4 @@ app:startDestination="@id/navigation_user_home" >
     android:name="com.example.messapp.ui.user.profile.UserProfileFragment"
     android:label="Profile"
     tools:layout="@layout/fragment_user_profile" />
-<fragment
-    android:id="@+id/messDetailFragment"
-    android:name="com.example.messapp.ui.user.MessDetailFragment"
-    android:label="Mess Details"
-    tools:layout="@layout/fragment_mess_detail" >
-
-    <argument
-        android:name="messId"
-        app:argType="string" />
-
-</fragment>
-<action
-    android:id="@+id/action_userHomeFragment_to_messDetailFragment"
-    app:destination="@id/messDetailFragment"
-    app:enterAnim="@anim/slide_in_right"
-    app:exitAnim="@anim/slide_out_left"
-    app:popEnterAnim="@anim/slide_in_left"
-    app:popExitAnim="@anim/slide_out_right" />
 </navigation>

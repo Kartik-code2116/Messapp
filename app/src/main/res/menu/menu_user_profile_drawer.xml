@@ -1,22 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/drawer_user_profile"
-        android:icon="@drawable/ic_person_black_24dp"
-        android:title="Profile" />
 
-    <item
-        android:id="@+id/drawer_user_menu"
-        android:icon="@drawable/ic_menu_book_black_24dp"
-        android:title="Menu" />
+    <group
+        android:id="@+id/group_nav"
+        android:checkableBehavior="none">
 
-    <item
-        android:id="@+id/drawer_user_history"
-        android:icon="@drawable/ic_history_black_24dp"
-        android:title="History" />
+        <item
+            android:id="@+id/drawer_user_home"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="Home" />
 
-    <item
-        android:id="@+id/drawer_user_home"
-        android:icon="@drawable/ic_home_black_24dp"
-        android:title="Home" />
+        <item
+            android:id="@+id/drawer_user_menu"
+            android:icon="@drawable/ic_menu_book_black_24dp"
+            android:title="Today's Menu" />
+
+        <item
+            android:id="@+id/drawer_user_history"
+            android:icon="@drawable/ic_history_black_24dp"
+            android:title="Meal History" />
+
+        <item
+            android:id="@+id/drawer_user_profile"
+            android:icon="@drawable/ic_person_black_24dp"
+            android:title="My Profile" />
+    </group>
+
+    <group
+        android:id="@+id/group_account"
+        android:checkableBehavior="none">
+
+        <item
+            android:id="@+id/drawer_user_logout"
+            android:icon="@drawable/ic_logout"
+            android:title="Sign Out" />
+    </group>
+
 </menu>

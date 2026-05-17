@@ -39,7 +39,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/bg_search_input"
                     android:elevation="2dp">
@@ -60,7 +60,7 @@
                         android:layout_toEndOf="@id/icon_search"
                         android:background="@android:color/transparent"
                         android:hint="Search by name or email"
-                        android:paddingHorizontal="12dp"
+                        android:paddingStart="12dp" android:paddingEnd="12dp"
                         android:textColor="#121617"
                         android:textColorHint="@color/ios_grey_400"
                         android:textSize="14sp" />
@@ -70,7 +70,7 @@
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
                     android:layout_marginTop="20dp"
                     app:cardCornerRadius="16dp"
                     app:cardElevation="2dp"
@@ -137,7 +137,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:paddingHorizontal="16dp"
+                    android:paddingStart="16dp" android:paddingEnd="16dp"
                     android:scrollbars="none">
 
                     <LinearLayout
@@ -157,7 +157,7 @@
                             android:textSize="13sp"
                             android:textStyle="bold"
                             android:minWidth="60dp"
-                            android:paddingHorizontal="16dp" />
+                            android:paddingStart="16dp" android:paddingEnd="16dp" />
 
                         <Button
                             android:id="@+id/btn_filter_active_today"
@@ -169,7 +169,7 @@
                             android:textAllCaps="false"
                             android:textColor="#4B5563"
                             android:textSize="13sp"
-                            android:paddingHorizontal="16dp"
+                            android:paddingStart="16dp" android:paddingEnd="16dp"
                             android:elevation="1dp" />
 
                         <Button
@@ -182,7 +182,7 @@
                             android:textAllCaps="false"
                             android:textColor="#4B5563"
                             android:textSize="13sp"
-                            android:paddingHorizontal="16dp"
+                            android:paddingStart="16dp" android:paddingEnd="16dp"
                             android:elevation="1dp" />
 
                     </LinearLayout>
@@ -193,7 +193,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -226,7 +226,7 @@
                                 android:id="@+id/btn_filter_in_today"
                                 android:layout_width="wrap_content"
                                 android:layout_height="28dp"
-                                android:paddingHorizontal="12dp"
+                                android:paddingStart="12dp" android:paddingEnd="12dp"
                                 android:gravity="center"
                                 android:orientation="horizontal">
                                 <View android:layout_width="6dp" android:layout_height="6dp" android:background="@color/ios_success" />
@@ -256,7 +256,7 @@
                                 android:id="@+id/btn_filter_out_today"
                                 android:layout_width="wrap_content"
                                 android:layout_height="28dp"
-                                android:paddingHorizontal="12dp"
+                                android:paddingStart="12dp" android:paddingEnd="12dp"
                                 android:gravity="center"
                                 android:orientation="horizontal">
                                 <TextView
@@ -276,7 +276,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
-                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
                     android:text="STUDENT DIRECTORY"
                     android:textColor="#9CA3AF"
                     android:textSize="11sp"

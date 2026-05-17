@@ -1697,6 +1697,7 @@ color dim_foreground_disabled_material_light
 color dim_foreground_material_dark
 color dim_foreground_material_light
 color divider
+color drawer_logout_color
 color error_color_material_dark
 color error_color_material_light
 color foreground_material_dark
@@ -3762,10 +3763,14 @@ drawable bg_button_gradient
 drawable bg_capsule_accent
 drawable bg_chip_selected
 drawable bg_chip_unselected
+drawable bg_circle_avatar_drawer
 drawable bg_circle_light_green
 drawable bg_circle_primary_border
 drawable bg_circle_surface
+drawable bg_drawer_avatar_ring
 drawable bg_drawer_header
+drawable bg_drawer_menu_item
+drawable bg_drawer_stat_pill
 drawable bg_food_image_warm_overlay
 drawable bg_gradient
 drawable bg_gradient_primary
@@ -3982,7 +3987,9 @@ drawable notification_template_icon_bg
 drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
+drawable ripple_drawer_item
 drawable ripple_effect
+drawable selector_drawer_item
 drawable status_background_in
 drawable status_background_none
 drawable status_background_out
@@ -4070,7 +4077,6 @@ id action_mode_bar_stub
 id action_mode_close_button
 id action_settings
 id action_text
-id action_userHomeFragment_to_messDetailFragment
 id actions
 id activity_chooser_view_content
 id add
@@ -4193,7 +4199,6 @@ id cardForm
 id card_breakfast
 id card_daily_auto_select
 id card_dinner
-id card_drawer_profile
 id card_lunch
 id card_mess_condition
 id card_one_time_auto_select
@@ -4275,7 +4280,6 @@ id disableIntraAutoTransition
 id disablePostScroll
 id disableScroll
 id disjoint
-id divider_drawer
 id dragAnticlockwise
 id dragClockwise
 id dragDown
@@ -4290,6 +4294,7 @@ id drawer_admin_profile
 id drawer_admin_settings
 id drawer_user_history
 id drawer_user_home
+id drawer_user_logout
 id drawer_user_menu
 id drawer_user_profile
 id dropdown_menu
@@ -4366,7 +4371,10 @@ id glide_custom_view_target_tag
 id gone
 id graph
 id graph_wrap
+id group_account
 id group_divider
+id group_manage
+id group_nav
 id grouping
 id groups
 id headerBackground
@@ -4432,7 +4440,6 @@ id lunch_hour_picker
 id lunch_input_layout
 id lunch_minute_picker
 id m3_side_sheet
-id main
 id marquee
 id masked
 id match_constraint
@@ -4463,7 +4470,6 @@ id messContactEditText
 id messContactLayout
 id messDescriptionEditText
 id messDescriptionLayout
-id messDetailFragment
 id messIdEditText
 id messIdLayout
 id messLocationEditText
@@ -4708,7 +4714,6 @@ id startVertical
 id start_center
 id staticLayout
 id staticPostLayout
-id stats_container
 id stop
 id stretch
 id studentNameEditText
@@ -5038,7 +5043,6 @@ layout abc_tooltip
 layout activity_edit_mess_profile
 layout activity_edit_user_profile
 layout activity_login
-layout activity_main
 layout activity_mess_dashboard
 layout activity_mess_reviews
 layout activity_mess_settings
@@ -6649,7 +6653,6 @@ style Widget_MaterialComponents_Toolbar_PrimarySurface
 style Widget_MaterialComponents_Toolbar_Surface
 style Widget_MaterialComponents_Tooltip
 style Widget_Support_CoordinatorLayout
-style WindowAnimation_Slide
 styleable ActionBar background backgroundSplit backgroundStacked contentInsetEnd contentInsetEndWithActions contentInsetLeft contentInsetRight contentInsetStart contentInsetStartWithNavigation customNavigationLayout displayOptions divider elevation height hideOnContentScroll homeAsUpIndicator homeLayout icon indeterminateProgressStyle itemPadding logo navigationMode popupTheme progressBarPadding progressBarStyle subtitle subtitleTextStyle title titleTextStyle
 styleable ActionBarLayout android_layout_gravity
 styleable ActionMenuItemView android_minWidth

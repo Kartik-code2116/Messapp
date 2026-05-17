@@ -5,8 +5,8 @@
     style="@style/Profound.Card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="@dimen/user_page_padding_h"
-    android:layout_marginVertical="6dp">
+    android:layout_marginStart="@dimen/user_page_padding_h" android:layout_marginEnd="@dimen/user_page_padding_h"
+    android:layout_marginTop="6dp" android:layout_marginBottom="6dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,7 +28,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginVertical="12dp"
+            android:layout_marginTop="12dp" android:layout_marginBottom="12dp"
             android:background="@color/divider" />
 
         <LinearLayout
@@ -44,8 +44,8 @@
                 android:backgroundTint="@color/neutral_50"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingHorizontal="12dp"
-                android:paddingVertical="10dp">
+                android:paddingStart="12dp" android:paddingEnd="12dp"
+                android:paddingTop="10dp" android:paddingBottom="10dp">
 
                 <ImageView
                     android:layout_width="18dp"
@@ -78,8 +78,8 @@
                 android:backgroundTint="@color/neutral_50"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingHorizontal="12dp"
-                android:paddingVertical="10dp">
+                android:paddingStart="12dp" android:paddingEnd="12dp"
+                android:paddingTop="10dp" android:paddingBottom="10dp">
 
                 <ImageView
                     android:layout_width="18dp"

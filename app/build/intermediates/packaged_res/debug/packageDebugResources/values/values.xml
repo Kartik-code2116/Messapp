@@ -36,10 +36,18 @@
     <color name="brand_secondary">#3D2415</color>
     <color name="brand_secondary_light">@color/neutral_100</color>
     <color name="card_surface">@color/surface_card</color>
+    <color name="charcoal_base">#FFF8ED</color>
+    <color name="charcoal_border">#F3DEC3</color>
+    <color name="charcoal_darkest">#2B170D</color>
+    <color name="charcoal_elevated">#FFFFFF</color>
+    <color name="charcoal_muted">#B99672</color>
+    <color name="charcoal_surface">#FFFFFF</color>
     <color name="colorAccent">@color/brand_accent</color>
     <color name="colorPrimary">@color/brand_primary</color>
     <color name="colorPrimaryDark">@color/brand_primary_dark</color>
     <color name="cream_bright">#FFF8ED</color>
+    <color name="cream_faint">#B99672</color>
+    <color name="cream_muted">#8D6E52</color>
     <color name="cream_soft">#F5E6D3</color>
     <color name="dash_background_light">@color/background_page</color>
     <color name="dash_primary">@color/state_success</color>
@@ -76,6 +84,11 @@
     <color name="neutral_700">#563726</color>
     <color name="neutral_800">#452A1C</color>
     <color name="neutral_900">#2B170D</color>
+    <color name="orange_bright">#FB923C</color>
+    <color name="orange_container">#FED7AA</color>
+    <color name="orange_deep">#C2410C</color>
+    <color name="orange_glow">#33F97316</color>
+    <color name="orange_primary">#F97316</color>
     <color name="page_background">@color/background_page</color>
     <color name="primary_color">@color/brand_primary</color>
     <color name="primary_dark">@color/brand_primary_dark</color>
@@ -140,8 +153,6 @@
     <string name="total_students_label">Total Students: %s</string>
     <style name="Base.Theme.Messapp" parent="Theme.Material3.DayNight.NoActionBar">
         
-        <item name="android:windowAnimationStyle">@style/WindowAnimation.Slide</item>
-        
         <item name="colorPrimary">@color/brand_primary</item>
         <item name="colorOnPrimary">@color/text_on_brand</item>
         <item name="colorPrimaryContainer">@color/brand_primary_light</item>
@@ -195,7 +206,8 @@
         <item name="android:textColor">@color/text_on_brand</item>
         <item name="cornerRadius">16dp</item>
         <item name="android:fontFamily">@font/poppins_medium</item>
-        <item name="android:paddingVertical">12dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
     </style>
     <style name="Profound.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
         <item name="android:textColor">@color/brand_primary</item>
@@ -243,11 +255,5 @@
         <item name="android:textSize">28sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/text_heading</item>
-    </style>
-    <style name="WindowAnimation.Slide" parent="@android:style/Animation.Activity">
-        <item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
-        <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>
-        <item name="android:activityCloseEnterAnimation">@anim/slide_in_left</item>
-        <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
     </style>
 </resources>

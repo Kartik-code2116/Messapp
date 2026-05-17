@@ -1,8 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.Messapp" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Smooth window transitions for all activities -->
-        <item name="android:windowAnimationStyle">@style/WindowAnimation.Slide</item>
         <!-- Brand Colors -->
         <item name="colorPrimary">@color/brand_primary</item>
         <item name="colorOnPrimary">@color/text_on_brand</item>
@@ -36,7 +34,6 @@
 
     <!-- PROFOUND COMPONENT STYLES -->
 
-    <!-- Glass Card Style -->
     <style name="Profound.Card" parent="Widget.Material3.CardView.Elevated">
         <item name="cardCornerRadius">20dp</item>
         <item name="cardElevation">4dp</item>
@@ -45,16 +42,15 @@
         <item name="strokeColor">@color/neutral_200</item>
     </style>
     
-    <!-- Primary Button -->
     <style name="Profound.Button" parent="Widget.Material3.Button">
         <item name="android:backgroundTint">@color/brand_primary</item>
         <item name="android:textColor">@color/text_on_brand</item>
         <item name="cornerRadius">16dp</item>
         <item name="android:fontFamily">@font/poppins_medium</item>
-        <item name="android:paddingVertical">12dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
     </style>
     
-    <!-- Outline/Secondary Button -->
     <style name="Profound.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
         <item name="android:textColor">@color/brand_primary</item>
         <item name="strokeColor">@color/brand_primary</item>
@@ -62,7 +58,6 @@
         <item name="android:fontFamily">@font/poppins_medium</item>
     </style>
 
-    <!-- Input Fields -->
     <style name="Profound.InputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
         <item name="boxCornerRadiusTopStart">12dp</item>
         <item name="boxCornerRadiusTopEnd">12dp</item>
@@ -111,14 +106,6 @@
         <item name="android:textSize">28sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/text_heading</item>
-    </style>
-
-    <!-- Window slide animations applied to every activity transition -->
-    <style name="WindowAnimation.Slide" parent="@android:style/Animation.Activity">
-        <item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
-        <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>
-        <item name="android:activityCloseEnterAnimation">@anim/slide_in_left</item>
-        <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
     </style>
 
 </resources>

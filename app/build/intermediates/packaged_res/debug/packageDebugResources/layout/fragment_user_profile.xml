@@ -108,8 +108,8 @@
                         android:background="@drawable/bg_profile_badge"
                         android:fontFamily="@font/inter"
                         android:letterSpacing="0.06"
-                        android:paddingHorizontal="14dp"
-                        android:paddingVertical="5dp"
+                        android:paddingStart="14dp" android:paddingEnd="14dp"
+                        android:paddingTop="5dp" android:paddingBottom="5dp"
                         android:text="STUDENT"
                         android:textColor="@color/text_on_brand"
                         android:textSize="11sp"
@@ -185,7 +185,7 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:layout_marginVertical="16dp"
+                            android:layout_marginTop="16dp" android:layout_marginBottom="16dp"
                             android:background="@color/divider" />
 
                         <!-- Phone Row -->
@@ -239,7 +239,7 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:layout_marginVertical="16dp"
+                            android:layout_marginTop="16dp" android:layout_marginBottom="16dp"
                             android:background="@color/divider" />
 
                         <!-- Email Row -->
@@ -358,7 +358,7 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:layout_marginVertical="16dp"
+                            android:layout_marginTop="16dp" android:layout_marginBottom="16dp"
                             android:background="@color/divider" />
 
                         <TextView
@@ -441,8 +441,8 @@
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
-                        android:paddingHorizontal="16dp"
-                        android:paddingVertical="14dp">
+                        android:paddingStart="16dp" android:paddingEnd="16dp"
+                        android:paddingTop="14dp" android:paddingBottom="14dp">
 
                         <FrameLayout
                             android:layout_width="44dp"
@@ -487,7 +487,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:paddingVertical="4dp">
+                        android:paddingTop="4dp" android:paddingBottom="4dp">
 
                         <LinearLayout
                             android:id="@+id/btn_my_reviews"
@@ -497,7 +497,7 @@
                             android:clickable="true"
                             android:focusable="true"
                             android:gravity="center_vertical"
-                            android:paddingHorizontal="16dp">
+                            android:paddingStart="16dp" android:paddingEnd="16dp">
 
                             <FrameLayout
                                 android:layout_width="40dp"
@@ -532,7 +532,7 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:layout_marginHorizontal="16dp"
+                            android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
                             android:background="@color/divider" />
 
                         <LinearLayout
@@ -543,7 +543,7 @@
                             android:clickable="true"
                             android:focusable="true"
                             android:gravity="center_vertical"
-                            android:paddingHorizontal="16dp">
+                            android:paddingStart="16dp" android:paddingEnd="16dp">
 
                             <FrameLayout
                                 android:layout_width="40dp"
@@ -578,7 +578,7 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:layout_marginHorizontal="16dp"
+                            android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
                             android:background="@color/divider" />
 
                         <LinearLayout
@@ -589,7 +589,7 @@
                             android:clickable="true"
                             android:focusable="true"
                             android:gravity="center_vertical"
-                            android:paddingHorizontal="16dp">
+                            android:paddingStart="16dp" android:paddingEnd="16dp">
 
                             <FrameLayout
                                 android:layout_width="40dp"
@@ -624,7 +624,7 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:layout_marginHorizontal="16dp"
+                            android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
                             android:background="@color/divider" />
 
                         <LinearLayout
@@ -635,7 +635,7 @@
                             android:clickable="true"
                             android:focusable="true"
                             android:gravity="center_vertical"
-                            android:paddingHorizontal="16dp">
+                            android:paddingStart="16dp" android:paddingEnd="16dp">
 
                             <FrameLayout
                                 android:layout_width="40dp"

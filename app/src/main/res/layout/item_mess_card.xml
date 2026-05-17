@@ -5,8 +5,8 @@
     style="@style/Profound.Card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="@dimen/user_page_padding_h"
-    android:layout_marginVertical="8dp"
+    android:layout_marginStart="@dimen/user_page_padding_h" android:layout_marginEnd="@dimen/user_page_padding_h"
+    android:layout_marginTop="8dp" android:layout_marginBottom="8dp"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?attr/selectableItemBackground">
@@ -56,8 +56,8 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingHorizontal="8dp"
-                    android:paddingVertical="4dp"
+                    android:paddingStart="8dp" android:paddingEnd="8dp"
+                    android:paddingTop="4dp" android:paddingBottom="4dp"
                     android:gravity="center_vertical">
                     
                     <ImageView
@@ -142,7 +142,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/neutral_200"
-                android:layout_marginVertical="12dp"/>
+                android:layout_marginTop="12dp" android:layout_marginBottom="12dp"/>
 
             <!-- Action -->
             <LinearLayout
@@ -169,7 +169,7 @@
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
                     android:minHeight="0dp"
-                    android:paddingHorizontal="12dp"
+                    android:paddingStart="12dp" android:paddingEnd="12dp"
                     android:text="View details"
                     android:textColor="@color/brand_primary"
                     android:textSize="13sp"

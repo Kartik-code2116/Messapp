@@ -30,8 +30,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/card_surface"
-                android:paddingHorizontal="20dp"
-                android:paddingVertical="16dp"
+                android:paddingStart="20dp" android:paddingEnd="20dp"
+                android:paddingTop="16dp" android:paddingBottom="16dp"
                 android:elevation="2dp">
 
                 <TextView
@@ -71,7 +71,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
+                android:layout_marginStart="20dp" android:layout_marginEnd="20dp"
                 android:layout_marginTop="20dp"
                 app:cardCornerRadius="24dp"
                 app:cardElevation="0dp"
@@ -140,7 +140,7 @@
                             android:layout_width="1dp"
                             android:layout_height="24dp"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginHorizontal="16dp"
+                            android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
                             android:background="@color/border_color" />
 
                         <LinearLayout
@@ -176,7 +176,7 @@
                 android:id="@+id/text_revenue_basis"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="24dp"
+                android:layout_marginStart="24dp" android:layout_marginEnd="24dp"
                 android:layout_marginTop="12dp"
                 android:fontFamily="sans-serif-medium"
                 android:text="Based on 0 active subscriptions at ₹0.00/mo"
@@ -189,7 +189,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:orientation="vertical"
-                android:paddingHorizontal="20dp">
+                android:paddingStart="20dp" android:paddingEnd="20dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -209,7 +209,7 @@
                         android:fontFamily="sans-serif-medium"
                         android:hint="Search student or email"
                         android:inputType="text"
-                        android:paddingHorizontal="16dp"
+                        android:paddingStart="16dp" android:paddingEnd="16dp"
                         android:textColor="@color/text_main"
                         android:textSize="14sp" />
 
@@ -233,8 +233,8 @@
                     android:background="@drawable/bg_capsule_accent"
                     android:backgroundTint="@color/accent_primary"
                     android:fontFamily="sans-serif-bold"
-                    android:paddingHorizontal="12dp"
-                    android:paddingVertical="6dp"
+                    android:paddingStart="12dp" android:paddingEnd="12dp"
+                    android:paddingTop="6dp" android:paddingBottom="6dp"
                     android:text="Date: Oct 2023 ✕"
                     android:textColor="@color/white"
                     android:textSize="11sp"
@@ -249,7 +249,7 @@
                 android:layout_marginTop="24dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingHorizontal="20dp">
+                android:paddingStart="20dp" android:paddingEnd="20dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -276,7 +276,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:nestedScrollingEnabled="false"
-                android:paddingHorizontal="12dp"
+                android:paddingStart="12dp" android:paddingEnd="12dp"
                 tools:listitem="@layout/item_transaction" />
 
         </LinearLayout>

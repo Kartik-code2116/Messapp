@@ -1,11 +1,16 @@
 package com.example.messapp;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.navigation.NavController;
-import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -31,6 +36,8 @@ import java.util.Locale;
 
 public class MessDashboardActivity extends AppCompatActivity {
 
+    private static final String TAG = "MessDashboardActivity";
+
     private ActivityMessDashboardBinding binding;
     private boolean isGuestMode = false;
     private NavController navController;
@@ -49,27 +56,42 @@ public class MessDashboardActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         isGuestMode = getIntent().getBooleanExtra("IS_GUEST", false);
-        if (isGuestMode) {
-            showGuestBanner();
-        }
+        binding.getRoot().post(this::initNavigation);
+    }
 
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_mess_dashboard, R.id.navigation_mess_menu, R.id.navigation_mess_students,
-                R.id.navigation_mess_profile, R.id.navigation_mess_offers)
-                .build();
+    private void initNavigation() {
+        if (isFinishing()) return;
+
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.nav_host_fragment_activity_mess_dashboard);
-        navController = navHostFragment.getNavController();
+        if (navHostFragment == null) {
+            Log.e(TAG, "NavHostFragment missing — returning to role selection");
+            redirectToRoleSelection();
+            return;
+        }
 
-        Bundle navArgs = new Bundle();
-        navArgs.putBoolean("IS_GUEST", isGuestMode);
-        navHostFragment.setArguments(navArgs);
+        try {
+            navController = navHostFragment.getNavController();
+            NavigationUI.setupWithNavController(binding.navView, navController);
+            setupSmoothBottomNav();
+            setupProfileDrawer();
+            binding.profileDrawer.post(this::styleDrawerLogoutItem);
+            setupTopBar();
+            startProfileListener();
+            if (isGuestMode) {
+                showGuestBanner();
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to initialize navigation", e);
+            redirectToRoleSelection();
+        }
+    }
 
-        NavigationUI.setupWithNavController(binding.navView, navController);
-        setupSmoothBottomNav();
-        setupProfileDrawer();
-        setupTopBar();
-        startProfileListener();
+    private void redirectToRoleSelection() {
+        Intent intent = new Intent(this, RoleSelectionActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 
     /**
@@ -175,6 +197,29 @@ public class MessDashboardActivity extends AppCompatActivity {
         binding.container.openDrawer(GravityCompat.END);
     }
 
+    private void styleDrawerLogoutItem() {
+        try {
+            MenuItem logout = binding.profileDrawer.getMenu().findItem(R.id.drawer_admin_logout);
+            if (logout == null) return;
+            Drawable icon = logout.getIcon();
+            if (icon != null) {
+                Drawable tinted = DrawableCompat.wrap(icon.mutate());
+                DrawableCompat.setTint(tinted, ContextCompat.getColor(this, R.color.state_error));
+                logout.setIcon(tinted);
+            }
+            CharSequence title = logout.getTitle();
+            if (title != null) {
+                SpannableString styled = new SpannableString(title);
+                styled.setSpan(
+                        new ForegroundColorSpan(ContextCompat.getColor(this, R.color.state_error)),
+                        0, styled.length(), 0);
+                logout.setTitle(styled);
+            }
+        } catch (Exception e) {
+            Log.w(TAG, "Could not style logout drawer item", e);
+        }
+    }
+
     private void setupProfileDrawer() {
         binding.profileDrawer.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
@@ -197,6 +242,7 @@ public class MessDashboardActivity extends AppCompatActivity {
     private void performLogout() {
         if (!isGuestMode) {
             FirebaseAuth.getInstance().signOut();
+            getSharedPreferences("user_prefs", MODE_PRIVATE).edit().remove("role").apply();
         }
         Intent intent = new Intent(this, RoleSelectionActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -207,7 +253,10 @@ public class MessDashboardActivity extends AppCompatActivity {
 
     /** Uses cached data to populate the drawer instantly — no extra Firestore call needed for most fields. */
     private void populateDrawer() {
+        if (binding.profileDrawer.getHeaderCount() == 0) return;
         View header = binding.profileDrawer.getHeaderView(0);
+        if (header == null) return;
+
         TextView nameView    = header.findViewById(R.id.text_drawer_name);
         TextView emailView   = header.findViewById(R.id.text_drawer_email);
         TextView membersView = header.findViewById(R.id.text_drawer_members);
@@ -215,6 +264,7 @@ public class MessDashboardActivity extends AppCompatActivity {
         TextView revenueView = header.findViewById(R.id.text_drawer_revenue);
         TextView messNameView = header.findViewById(R.id.text_drawer_mess_name);
         ImageView profileImage = header.findViewById(R.id.img_drawer_profile);
+        if (nameView == null || emailView == null || profileImage == null) return;
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser == null) {

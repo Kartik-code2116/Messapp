@@ -24,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingHorizontal="@dimen/user_page_padding_h"
+                android:paddingStart="@dimen/user_page_padding_h" android:paddingEnd="@dimen/user_page_padding_h"
                 android:paddingTop="8dp"
                 android:paddingBottom="4dp">
 
@@ -46,7 +46,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/user_page_padding_h"
+                android:layout_marginStart="@dimen/user_page_padding_h" android:layout_marginEnd="@dimen/user_page_padding_h"
                 android:layout_marginTop="16dp"
                 style="@style/Profound.Card">
 
@@ -101,7 +101,7 @@
                 android:id="@+id/day_selector_expandable_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/user_page_padding_h"
+                android:layout_marginStart="@dimen/user_page_padding_h" android:layout_marginEnd="@dimen/user_page_padding_h"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/bg_user_day_chip"
                 android:orientation="vertical"
@@ -129,7 +129,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/user_page_padding_h"
+                android:layout_marginStart="@dimen/user_page_padding_h" android:layout_marginEnd="@dimen/user_page_padding_h"
                 android:layout_marginBottom="16dp"
                 style="@style/Profound.Card">
 
@@ -194,7 +194,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/user_page_padding_h"
+                android:layout_marginStart="@dimen/user_page_padding_h" android:layout_marginEnd="@dimen/user_page_padding_h"
                 android:layout_marginBottom="16dp"
                 style="@style/Profound.Card">
 

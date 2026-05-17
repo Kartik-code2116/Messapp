@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
-                android:paddingHorizontal="@dimen/user_page_padding_h"
+                android:paddingStart="@dimen/user_page_padding_h" android:paddingEnd="@dimen/user_page_padding_h"
                 android:paddingTop="24dp">
 
                 <TextView
@@ -77,7 +77,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="-32dp"
             android:orientation="vertical"
-            android:paddingHorizontal="@dimen/user_page_padding_h">
+            android:paddingStart="@dimen/user_page_padding_h" android:paddingEnd="@dimen/user_page_padding_h">
 
             <!-- Contact & description -->
             <com.google.android.material.card.MaterialCardView
@@ -127,7 +127,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginVertical="16dp"
+                        android:layout_marginTop="16dp" android:layout_marginBottom="16dp"
                         android:background="@color/divider" />
 
                     <TextView

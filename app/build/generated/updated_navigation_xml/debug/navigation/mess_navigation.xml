@@ -27,25 +27,13 @@ app:startDestination="@id/navigation_mess_dashboard" >
 
     <action
         android:id="@+id/action_messProfileFragment_to_messOffersFragment"
-        app:destination="@id/navigation_mess_offers"
-        app:enterAnim="@anim/slide_in_right"
-        app:exitAnim="@anim/slide_out_left"
-        app:popEnterAnim="@anim/slide_in_left"
-        app:popExitAnim="@anim/slide_out_right" />
+        app:destination="@id/navigation_mess_offers" />
     <action
         android:id="@+id/action_messProfileFragment_to_messRevenueFragment"
-        app:destination="@id/navigation_mess_revenue"
-        app:enterAnim="@anim/slide_in_right"
-        app:exitAnim="@anim/slide_out_left"
-        app:popEnterAnim="@anim/slide_in_left"
-        app:popExitAnim="@anim/slide_out_right" />
+        app:destination="@id/navigation_mess_revenue" />
     <action
         android:id="@+id/action_messProfileFragment_to_navigation_mess_students"
-        app:destination="@id/navigation_mess_students"
-        app:enterAnim="@anim/slide_in_right"
-        app:exitAnim="@anim/slide_out_left"
-        app:popEnterAnim="@anim/slide_in_left"
-        app:popExitAnim="@anim/slide_out_right" />
+        app:destination="@id/navigation_mess_students" />
 
 </fragment>
 <fragment
@@ -61,11 +49,7 @@ app:startDestination="@id/navigation_mess_dashboard" >
 
     <action
         android:id="@+id/action_messOffersFragment_to_addOfferFragment"
-        app:destination="@id/addOfferFragment"
-        app:enterAnim="@anim/slide_in_right"
-        app:exitAnim="@anim/slide_out_left"
-        app:popEnterAnim="@anim/slide_in_left"
-        app:popExitAnim="@anim/slide_out_right" />
+        app:destination="@id/addOfferFragment" />
 
 </fragment>
 <fragment

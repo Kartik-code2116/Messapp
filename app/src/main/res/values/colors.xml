@@ -3,6 +3,23 @@
     <!-- Cream accent (profile & badges) -->
     <color name="cream_bright">#FFF8ED</color>
     <color name="cream_soft">#F5E6D3</color>
+    <color name="cream_muted">#8D6E52</color>
+    <color name="cream_faint">#B99672</color>
+
+    <!-- Charcoal scale (light-mode defaults; overridden in values-night) -->
+    <color name="charcoal_darkest">#2B170D</color>
+    <color name="charcoal_base">#FFF8ED</color>
+    <color name="charcoal_surface">#FFFFFF</color>
+    <color name="charcoal_elevated">#FFFFFF</color>
+    <color name="charcoal_border">#F3DEC3</color>
+    <color name="charcoal_muted">#B99672</color>
+
+    <!-- Orange scale (light-mode defaults; overridden in values-night) -->
+    <color name="orange_primary">#F97316</color>
+    <color name="orange_bright">#FB923C</color>
+    <color name="orange_deep">#C2410C</color>
+    <color name="orange_glow">#33F97316</color>
+    <color name="orange_container">#FED7AA</color>
 
     <!-- PROFOUND DESIGN SYSTEM PALETTE -->
     

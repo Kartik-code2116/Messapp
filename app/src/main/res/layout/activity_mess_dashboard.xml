@@ -38,7 +38,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/neutral_200"/>
+                android:background="@color/neutral_200" />
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/nav_view"
@@ -58,21 +58,15 @@
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/profile_drawer"
-        android:layout_width="320dp"
+        android:layout_width="300dp"
         android:layout_height="match_parent"
         android:layout_gravity="end"
         android:background="@color/surface_card"
-        android:fitsSystemWindows="false"
+        android:fitsSystemWindows="true"
         app:headerLayout="@layout/header_admin_profile_drawer"
-        app:itemIconPadding="16dp"
-        app:itemIconSize="22dp"
-        app:itemHorizontalPadding="20dp"
-        app:itemVerticalPadding="12dp"
-        app:itemIconTint="@color/text_secondary"
-        app:itemTextColor="@color/text_primary"
-        app:itemShapeFillColor="@color/brand_primary_light"
-        app:itemRippleColor="@color/brand_primary_light"
-        app:subheaderTextAppearance="@style/TextAppearance.Material3.LabelMedium"
+        app:itemIconTint="@color/brand_primary"
+        app:itemTextColor="@color/text_heading"
+        app:itemBackground="@drawable/selector_drawer_item"
         app:menu="@menu/menu_admin_profile_drawer" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:paddingVertical="10dp">
+    android:paddingTop="10dp" android:paddingBottom="10dp">
 
     <FrameLayout
         android:layout_width="40dp"

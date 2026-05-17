@@ -13,3 +13,6 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# MiniMax AI agent skills (not part of this Android app)
+.minimax/

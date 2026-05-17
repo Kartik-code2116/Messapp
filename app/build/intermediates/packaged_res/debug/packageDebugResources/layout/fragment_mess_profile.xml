@@ -108,8 +108,8 @@
                     android:background="@drawable/bg_profile_badge"
                     android:fontFamily="@font/inter"
                     android:letterSpacing="0.06"
-                    android:paddingHorizontal="14dp"
-                    android:paddingVertical="5dp"
+                    android:paddingStart="14dp" android:paddingEnd="14dp"
+                    android:paddingTop="5dp" android:paddingBottom="5dp"
                     android:text="MESS OWNER"
                     android:textColor="@color/text_on_brand"
                     android:textSize="11sp"
@@ -123,7 +123,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="-40dp"
             android:orientation="vertical"
-            android:paddingHorizontal="20dp">
+            android:paddingStart="20dp" android:paddingEnd="20dp">
 
             <TextView
                 style="@style/ProfileSectionTitle"
@@ -165,8 +165,8 @@
                             android:background="@drawable/bg_profile_icon_circle"
                             android:gravity="center_vertical"
                             android:orientation="horizontal"
-                            android:paddingHorizontal="10dp"
-                            android:paddingVertical="6dp">
+                            android:paddingStart="10dp" android:paddingEnd="10dp"
+                            android:paddingTop="6dp" android:paddingBottom="6dp">
 
                             <TextView
                                 android:id="@+id/text_mess_profile_id"
@@ -191,7 +191,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginVertical="16dp"
+                        android:layout_marginTop="16dp" android:layout_marginBottom="16dp"
                         android:background="@color/divider" />
 
                     <LinearLayout
@@ -328,8 +328,8 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/bg_profile_icon_circle"
                             android:fontFamily="@font/inter"
-                            android:paddingHorizontal="10dp"
-                            android:paddingVertical="4dp"
+                            android:paddingStart="10dp" android:paddingEnd="10dp"
+                            android:paddingTop="4dp" android:paddingBottom="4dp"
                             android:text="LIVE"
                             android:textColor="@color/state_success"
                             android:textSize="10sp"
@@ -397,7 +397,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:paddingVertical="4dp">
+                    android:paddingTop="4dp" android:paddingBottom="4dp">
 
                     <LinearLayout
                         android:id="@+id/btn_nav_edit_profile"
@@ -405,7 +405,7 @@
                         android:layout_height="56dp"
                         android:background="?attr/selectableItemBackground"
                         android:gravity="center_vertical"
-                        android:paddingHorizontal="16dp">
+                        android:paddingStart="16dp" android:paddingEnd="16dp">
 
                         <FrameLayout
                             android:layout_width="40dp"
@@ -441,7 +441,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
                         android:background="@color/divider" />
 
                     <LinearLayout
@@ -450,7 +450,7 @@
                         android:layout_height="56dp"
                         android:background="?attr/selectableItemBackground"
                         android:gravity="center_vertical"
-                        android:paddingHorizontal="16dp">
+                        android:paddingStart="16dp" android:paddingEnd="16dp">
 
                         <FrameLayout
                             android:layout_width="40dp"
@@ -481,8 +481,8 @@
                             android:layout_marginEnd="8dp"
                             android:background="@drawable/bg_profile_icon_circle"
                             android:fontFamily="@font/inter"
-                            android:paddingHorizontal="8dp"
-                            android:paddingVertical="3dp"
+                            android:paddingStart="8dp" android:paddingEnd="8dp"
+                            android:paddingTop="3dp" android:paddingBottom="3dp"
                             android:text="3"
                             android:textColor="@color/brand_primary"
                             android:textSize="10sp"
@@ -499,7 +499,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
                         android:background="@color/divider" />
 
                     <LinearLayout
@@ -508,7 +508,7 @@
                         android:layout_height="56dp"
                         android:background="?attr/selectableItemBackground"
                         android:gravity="center_vertical"
-                        android:paddingHorizontal="16dp">
+                        android:paddingStart="16dp" android:paddingEnd="16dp">
 
                         <FrameLayout
                             android:layout_width="40dp"
@@ -544,7 +544,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
                         android:background="@color/divider" />
 
                     <LinearLayout
@@ -553,7 +553,7 @@
                         android:layout_height="56dp"
                         android:background="?attr/selectableItemBackground"
                         android:gravity="center_vertical"
-                        android:paddingHorizontal="16dp">
+                        android:paddingStart="16dp" android:paddingEnd="16dp">
 
                         <FrameLayout
                             android:layout_width="40dp"
@@ -603,8 +603,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:paddingHorizontal="16dp"
-                    android:paddingVertical="14dp">
+                    android:paddingStart="16dp" android:paddingEnd="16dp"
+                    android:paddingTop="14dp" android:paddingBottom="14dp">
 
                     <FrameLayout
                         android:layout_width="44dp"

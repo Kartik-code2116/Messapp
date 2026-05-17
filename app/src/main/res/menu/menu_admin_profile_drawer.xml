@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="none">
+    <group
+        android:id="@+id/group_manage"
+        android:checkableBehavior="none">
+
         <item
             android:id="@+id/drawer_admin_profile"
             android:icon="@drawable/ic_person_outline"
@@ -18,15 +21,14 @@
             android:title="Notifications" />
     </group>
 
-    <item android:title="">
-        <menu>
-            <group android:checkableBehavior="none">
-                <item
-                    android:id="@+id/drawer_admin_logout"
-                    android:icon="@drawable/ic_logout"
-                    android:title="Logout" />
-            </group>
-        </menu>
-    </item>
+    <group
+        android:id="@+id/group_account"
+        android:checkableBehavior="none">
+
+        <item
+            android:id="@+id/drawer_admin_logout"
+            android:icon="@drawable/ic_logout"
+            android:title="Sign Out" />
+    </group>
 
 </menu>
