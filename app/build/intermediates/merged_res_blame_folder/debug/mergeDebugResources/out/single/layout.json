@@ -132,6 +132,10 @@
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\layout\\dialog_add_review.xml"
     },
     {
+        "merged": "com.example.messapp-mergeDebugResources-60:/layout/fragment_user_home.xml",
+        "source": "com.example.messapp-main-63:/layout/fragment_user_home.xml"
+    },
+    {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-mergeDebugResources-60:\\layout\\activity_mess_dashboard.xml",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\layout\\activity_mess_dashboard.xml"
     },

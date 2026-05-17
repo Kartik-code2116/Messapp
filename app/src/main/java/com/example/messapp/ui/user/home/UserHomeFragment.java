@@ -1094,19 +1094,7 @@ public class UserHomeFragment extends Fragment {
                     }
                 }
 
-                binding.textDeadlineLabel.setText("UPCOMING DEADLINE: " + targetLabel);
-                long diff = mainTarget.getTimeInMillis() - nowMs;
-                if (diff > 0) {
-                    long hours   = TimeUnit.MILLISECONDS.toHours(diff);
-                    long minutes = TimeUnit.MILLISECONDS.toMinutes(diff) % 60;
-                    long seconds = TimeUnit.MILLISECONDS.toSeconds(diff) % 60;
-                    if (binding.textTimerHours != null)
-                        binding.textTimerHours.setText(String.format(Locale.getDefault(), "%02d", hours));
-                    if (binding.textTimerMins  != null)
-                        binding.textTimerMins.setText(String.format(Locale.getDefault(), "%02d", minutes));
-                    if (binding.textTimerSecs  != null)
-                        binding.textTimerSecs.setText(String.format(Locale.getDefault(), "%02d", seconds));
-                }
+
             }
             @Override public void onFinish() {}
         };

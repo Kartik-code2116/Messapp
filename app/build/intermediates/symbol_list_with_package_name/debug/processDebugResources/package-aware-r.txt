@@ -4753,7 +4753,6 @@ id text_dashboard_timer
 id text_date
 id text_days_in
 id text_days_out
-id text_deadline_label
 id text_dinner_card_timer
 id text_dinner_expiry
 id text_dinner_in_count
@@ -4839,9 +4838,6 @@ id text_student_name
 id text_student_phone
 id text_student_status
 id text_subscription_expiry
-id text_timer_hours
-id text_timer_mins
-id text_timer_secs
 id text_total_dinner
 id text_total_lunch
 id text_total_revenue_all_time
@@ -4862,7 +4858,6 @@ id textinput_placeholder
 id textinput_prefix_text
 id textinput_suffix_text
 id time
-id timer_container
 id title
 id titleDividerNoCustom
 id title_template

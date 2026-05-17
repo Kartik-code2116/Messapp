@@ -109,7 +109,7 @@
                                 android:id="@+id/text_total_students_count"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="124"
+                                android:text="0"
                                 android:textColor="#111827"
                                 android:textSize="32sp"
                                 android:textStyle="bold" />

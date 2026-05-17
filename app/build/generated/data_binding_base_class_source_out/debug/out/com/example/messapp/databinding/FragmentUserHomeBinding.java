@@ -79,9 +79,6 @@ public final class FragmentUserHomeBinding implements ViewBinding {
   public final RadioGroup radioGroupAutoSelect;
 
   @NonNull
-  public final TextView textDeadlineLabel;
-
-  @NonNull
   public final TextView textDinnerCardTimer;
 
   @NonNull
@@ -114,18 +111,6 @@ public final class FragmentUserHomeBinding implements ViewBinding {
   @NonNull
   public final TextView textMessCondition;
 
-  @NonNull
-  public final TextView textTimerHours;
-
-  @NonNull
-  public final TextView textTimerMins;
-
-  @NonNull
-  public final TextView textTimerSecs;
-
-  @NonNull
-  public final LinearLayout timerContainer;
-
   private FragmentUserHomeBinding(@NonNull ConstraintLayout rootView,
       @NonNull MaterialButton btnDinnerInNew, @NonNull MaterialButton btnDinnerOutNew,
       @NonNull MaterialButton btnLunchInNew, @NonNull MaterialButton btnLunchOutNew,
@@ -136,14 +121,12 @@ public final class FragmentUserHomeBinding implements ViewBinding {
       @NonNull View indicatorMessCondition, @NonNull LinearLayout mealsContainerNew,
       @NonNull RadioButton radioAutoDinner, @NonNull RadioButton radioAutoLunch,
       @NonNull RadioButton radioAutoNone, @NonNull RadioGroup radioGroupAutoSelect,
-      @NonNull TextView textDeadlineLabel, @NonNull TextView textDinnerCardTimer,
-      @NonNull TextView textDinnerMenuNew, @NonNull TextView textDinnerPreference,
-      @NonNull TextView textDinnerStatus, @NonNull TextView textDinnerStatusBar,
-      @NonNull TextView textLunchCardTimer, @NonNull TextView textLunchMenuNew,
-      @NonNull TextView textLunchPreference, @NonNull TextView textLunchStatus,
-      @NonNull TextView textLunchStatusBar, @NonNull TextView textMessCondition,
-      @NonNull TextView textTimerHours, @NonNull TextView textTimerMins,
-      @NonNull TextView textTimerSecs, @NonNull LinearLayout timerContainer) {
+      @NonNull TextView textDinnerCardTimer, @NonNull TextView textDinnerMenuNew,
+      @NonNull TextView textDinnerPreference, @NonNull TextView textDinnerStatus,
+      @NonNull TextView textDinnerStatusBar, @NonNull TextView textLunchCardTimer,
+      @NonNull TextView textLunchMenuNew, @NonNull TextView textLunchPreference,
+      @NonNull TextView textLunchStatus, @NonNull TextView textLunchStatusBar,
+      @NonNull TextView textMessCondition) {
     this.rootView = rootView;
     this.btnDinnerInNew = btnDinnerInNew;
     this.btnDinnerOutNew = btnDinnerOutNew;
@@ -163,7 +146,6 @@ public final class FragmentUserHomeBinding implements ViewBinding {
     this.radioAutoLunch = radioAutoLunch;
     this.radioAutoNone = radioAutoNone;
     this.radioGroupAutoSelect = radioGroupAutoSelect;
-    this.textDeadlineLabel = textDeadlineLabel;
     this.textDinnerCardTimer = textDinnerCardTimer;
     this.textDinnerMenuNew = textDinnerMenuNew;
     this.textDinnerPreference = textDinnerPreference;
@@ -175,10 +157,6 @@ public final class FragmentUserHomeBinding implements ViewBinding {
     this.textLunchStatus = textLunchStatus;
     this.textLunchStatusBar = textLunchStatusBar;
     this.textMessCondition = textMessCondition;
-    this.textTimerHours = textTimerHours;
-    this.textTimerMins = textTimerMins;
-    this.textTimerSecs = textTimerSecs;
-    this.timerContainer = timerContainer;
   }
 
   @Override
@@ -316,12 +294,6 @@ public final class FragmentUserHomeBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.text_deadline_label;
-      TextView textDeadlineLabel = ViewBindings.findChildViewById(rootView, id);
-      if (textDeadlineLabel == null) {
-        break missingId;
-      }
-
       id = R.id.text_dinner_card_timer;
       TextView textDinnerCardTimer = ViewBindings.findChildViewById(rootView, id);
       if (textDinnerCardTimer == null) {
@@ -388,39 +360,14 @@ public final class FragmentUserHomeBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.text_timer_hours;
-      TextView textTimerHours = ViewBindings.findChildViewById(rootView, id);
-      if (textTimerHours == null) {
-        break missingId;
-      }
-
-      id = R.id.text_timer_mins;
-      TextView textTimerMins = ViewBindings.findChildViewById(rootView, id);
-      if (textTimerMins == null) {
-        break missingId;
-      }
-
-      id = R.id.text_timer_secs;
-      TextView textTimerSecs = ViewBindings.findChildViewById(rootView, id);
-      if (textTimerSecs == null) {
-        break missingId;
-      }
-
-      id = R.id.timer_container;
-      LinearLayout timerContainer = ViewBindings.findChildViewById(rootView, id);
-      if (timerContainer == null) {
-        break missingId;
-      }
-
       return new FragmentUserHomeBinding((ConstraintLayout) rootView, btnDinnerInNew,
           btnDinnerOutNew, btnLunchInNew, btnLunchOutNew, btnPlanOutDays, cardBreakfast, cardDinner,
           cardLunch, cardMessCondition, cardOneTimeAutoSelect, cardPlannedOutDays,
           containerPlannedOutDays, indicatorMessCondition, mealsContainerNew, radioAutoDinner,
-          radioAutoLunch, radioAutoNone, radioGroupAutoSelect, textDeadlineLabel,
-          textDinnerCardTimer, textDinnerMenuNew, textDinnerPreference, textDinnerStatus,
-          textDinnerStatusBar, textLunchCardTimer, textLunchMenuNew, textLunchPreference,
-          textLunchStatus, textLunchStatusBar, textMessCondition, textTimerHours, textTimerMins,
-          textTimerSecs, timerContainer);
+          radioAutoLunch, radioAutoNone, radioGroupAutoSelect, textDinnerCardTimer,
+          textDinnerMenuNew, textDinnerPreference, textDinnerStatus, textDinnerStatusBar,
+          textLunchCardTimer, textLunchMenuNew, textLunchPreference, textLunchStatus,
+          textLunchStatusBar, textMessCondition);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

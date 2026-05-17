@@ -510,7 +510,6 @@ id text_dashboard_timer
 id text_date
 id text_days_in
 id text_days_out
-id text_deadline_label
 id text_dinner_card_timer
 id text_dinner_expiry
 id text_dinner_in_count
@@ -593,9 +592,6 @@ id text_student_name
 id text_student_phone
 id text_student_status
 id text_subscription_expiry
-id text_timer_hours
-id text_timer_mins
-id text_timer_secs
 id text_total_dinner
 id text_total_lunch
 id text_total_revenue_all_time
@@ -609,7 +605,6 @@ id text_trans_student_name
 id text_trans_type_badge
 id text_transaction_count
 id text_week_range
-id timer_container
 id toolbar
 id top_header
 id user_top_bar
