@@ -33,6 +33,9 @@ public final class FragmentMessDashboardBinding implements ViewBinding {
   public final MaterialButton btnConditionHalf;
 
   @NonNull
+  public final MaterialButton btnConditionNotConform;
+
+  @NonNull
   public final MaterialButton btnResetAllAttendance;
 
   @NonNull
@@ -73,17 +76,19 @@ public final class FragmentMessDashboardBinding implements ViewBinding {
 
   private FragmentMessDashboardBinding(@NonNull FrameLayout rootView,
       @NonNull MaterialButton btnConditionEmpty, @NonNull MaterialButton btnConditionFull,
-      @NonNull MaterialButton btnConditionHalf, @NonNull MaterialButton btnResetAllAttendance,
-      @NonNull LinearLayout headerMessDashboard, @NonNull ProgressBar progressBar,
-      @NonNull RecyclerView recyclerPending, @NonNull TextView textCurrentCondition,
-      @NonNull TextView textDashboardTimer, @NonNull TextView textDinnerInCount,
-      @NonNull TextView textDinnerOutCount, @NonNull TextView textLunchInCount,
-      @NonNull TextView textLunchOutCount, @NonNull TextView textMessDashboardDate,
-      @NonNull TextView textMessDashboardName, @NonNull TextView textTotalStudents) {
+      @NonNull MaterialButton btnConditionHalf, @NonNull MaterialButton btnConditionNotConform,
+      @NonNull MaterialButton btnResetAllAttendance, @NonNull LinearLayout headerMessDashboard,
+      @NonNull ProgressBar progressBar, @NonNull RecyclerView recyclerPending,
+      @NonNull TextView textCurrentCondition, @NonNull TextView textDashboardTimer,
+      @NonNull TextView textDinnerInCount, @NonNull TextView textDinnerOutCount,
+      @NonNull TextView textLunchInCount, @NonNull TextView textLunchOutCount,
+      @NonNull TextView textMessDashboardDate, @NonNull TextView textMessDashboardName,
+      @NonNull TextView textTotalStudents) {
     this.rootView = rootView;
     this.btnConditionEmpty = btnConditionEmpty;
     this.btnConditionFull = btnConditionFull;
     this.btnConditionHalf = btnConditionHalf;
+    this.btnConditionNotConform = btnConditionNotConform;
     this.btnResetAllAttendance = btnResetAllAttendance;
     this.headerMessDashboard = headerMessDashboard;
     this.progressBar = progressBar;
@@ -141,6 +146,12 @@ public final class FragmentMessDashboardBinding implements ViewBinding {
       id = R.id.btn_condition_half;
       MaterialButton btnConditionHalf = ViewBindings.findChildViewById(rootView, id);
       if (btnConditionHalf == null) {
+        break missingId;
+      }
+
+      id = R.id.btn_condition_not_conform;
+      MaterialButton btnConditionNotConform = ViewBindings.findChildViewById(rootView, id);
+      if (btnConditionNotConform == null) {
         break missingId;
       }
 
@@ -223,10 +234,10 @@ public final class FragmentMessDashboardBinding implements ViewBinding {
       }
 
       return new FragmentMessDashboardBinding((FrameLayout) rootView, btnConditionEmpty,
-          btnConditionFull, btnConditionHalf, btnResetAllAttendance, headerMessDashboard,
-          progressBar, recyclerPending, textCurrentCondition, textDashboardTimer, textDinnerInCount,
-          textDinnerOutCount, textLunchInCount, textLunchOutCount, textMessDashboardDate,
-          textMessDashboardName, textTotalStudents);
+          btnConditionFull, btnConditionHalf, btnConditionNotConform, btnResetAllAttendance,
+          headerMessDashboard, progressBar, recyclerPending, textCurrentCondition,
+          textDashboardTimer, textDinnerInCount, textDinnerOutCount, textLunchInCount,
+          textLunchOutCount, textMessDashboardDate, textMessDashboardName, textTotalStudents);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

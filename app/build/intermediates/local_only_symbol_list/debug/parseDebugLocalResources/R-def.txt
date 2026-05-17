@@ -264,6 +264,7 @@ id btn_change_photo
 id btn_condition_empty
 id btn_condition_full
 id btn_condition_half
+id btn_condition_not_conform
 id btn_confirm
 id btn_copy_mess_id
 id btn_delete

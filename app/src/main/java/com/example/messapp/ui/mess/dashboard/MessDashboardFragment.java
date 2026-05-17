@@ -226,6 +226,7 @@ public class MessDashboardFragment extends Fragment {
         binding.btnConditionFull.setOnClickListener(v -> updateMessCondition("FULL"));
         binding.btnConditionHalf.setOnClickListener(v -> updateMessCondition("HALF"));
         binding.btnConditionEmpty.setOnClickListener(v -> updateMessCondition("EMPTY"));
+        binding.btnConditionNotConform.setOnClickListener(v -> updateMessCondition("NOT_CONFORM"));
     }
 
     private void updateMessCondition(String condition) {
@@ -281,6 +282,12 @@ public class MessDashboardFragment extends Fragment {
                 binding.btnConditionEmpty.setTextColor(0xFFFFFFFF);
                 binding.btnConditionEmpty.setStrokeWidth(0);
                 break;
+            case "NOT_CONFORM":
+                binding.btnConditionNotConform.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xFF6B7280));
+                binding.btnConditionNotConform.setTextColor(0xFFFFFFFF);
+                binding.btnConditionNotConform.setStrokeWidth(0);
+                binding.textCurrentCondition.setText("Current: Not Conform");
+                break;
         }
     }
 
@@ -292,6 +299,8 @@ public class MessDashboardFragment extends Fragment {
         binding.btnConditionHalf.setTextColor(0xFFF59E0B); binding.btnConditionHalf.setStrokeWidth(2);
         binding.btnConditionEmpty.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xFFFFFFFF));
         binding.btnConditionEmpty.setTextColor(0xFF10B981); binding.btnConditionEmpty.setStrokeWidth(2);
+        binding.btnConditionNotConform.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xFFFFFFFF));
+        binding.btnConditionNotConform.setTextColor(0xFF6B7280); binding.btnConditionNotConform.setStrokeWidth(2);
     }
 
     private void fetchMessOwnerData() {
