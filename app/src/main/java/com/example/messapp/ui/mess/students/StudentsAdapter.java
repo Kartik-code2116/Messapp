@@ -100,12 +100,22 @@ public class StudentsAdapter extends ListAdapter<Student, StudentsAdapter.Studen
                     dinner = "LOCKED";
                 } else if ("IN".equals(dinner)) {
                     lunch = "LOCKED";
+                } else {
+                    // No explicit selection yet, check auto-select
+                    String autoSelect = student.getOneTimeAutoSelect();
+                    if ("LUNCH".equals(autoSelect)) {
+                        lunch = "IN (Auto)";
+                        dinner = "LOCKED";
+                    } else if ("DINNER".equals(autoSelect)) {
+                        dinner = "IN (Auto)";
+                        lunch = "LOCKED";
+                    }
                 }
             }
 
             textLunchStatus.setText(lunch);
             int lunchBg = R.drawable.bg_status_pill_neutral;
-            if ("IN".equals(lunch))
+            if ("IN".equals(lunch) || "IN (Auto)".equals(lunch))
                 lunchBg = R.drawable.bg_status_pill_success;
             else if ("OUT".equals(lunch))
                 lunchBg = R.drawable.bg_status_pill_danger;
@@ -113,7 +123,7 @@ public class StudentsAdapter extends ListAdapter<Student, StudentsAdapter.Studen
 
             textDinnerStatus.setText(dinner);
             int dinnerBg = R.drawable.bg_status_pill_neutral;
-            if ("IN".equals(dinner))
+            if ("IN".equals(dinner) || "IN (Auto)".equals(dinner))
                 dinnerBg = R.drawable.bg_status_pill_success;
             else if ("OUT".equals(dinner))
                 dinnerBg = R.drawable.bg_status_pill_danger;

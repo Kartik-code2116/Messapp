@@ -32,10 +32,6 @@
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\drawable\\ic_restore.xml"
     },
     {
-        "merged": "com.example.messapp-debug-61:/layout_item_student.xml.flat",
-        "source": "com.example.messapp-main-63:/layout/item_student.xml"
-    },
-    {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\drawable_bg_profile_header.xml.flat",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\drawable\\bg_profile_header.xml"
     },
@@ -718,6 +714,10 @@
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\layout_activity_splash_screen.xml.flat",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\layout\\activity_splash_screen.xml"
+    },
+    {
+        "merged": "com.example.messapp-debug-61:/layout_fragment_user_home.xml.flat",
+        "source": "com.example.messapp-main-63:/layout/fragment_user_home.xml"
     },
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\layout_fragment_mess_dashboard.xml.flat",

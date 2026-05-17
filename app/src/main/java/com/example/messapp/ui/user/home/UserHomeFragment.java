@@ -54,6 +54,7 @@ public class UserHomeFragment extends Fragment {
     private boolean allowMultipleChanges = false;
     private CountDownTimer timer;
     private ListenerRegistration plannedOutListener;
+    private String currentUserOneTimeAutoSelect;
 
     private boolean listenersAttached = false;
 
@@ -109,6 +110,8 @@ public class UserHomeFragment extends Fragment {
                 Long generalExpiry = documentSnapshot.getLong("subscriptionExpiry");
                 Long oneTimeExpiry = documentSnapshot.getLong("oneTimeMealExpiry");
                 String subscriptionType = documentSnapshot.getString("subscriptionType");
+                String oneTimeAutoSelect = documentSnapshot.getString("oneTimeAutoSelect");
+                currentUserOneTimeAutoSelect = oneTimeAutoSelect;
 
                 String preference = documentSnapshot.getString("dietaryPreference");
                 if (preference != null && !preference.isEmpty()) {
@@ -126,7 +129,7 @@ public class UserHomeFragment extends Fragment {
                     binding.textDinnerPreference.setVisibility(View.GONE);
                 }
 
-                checkSubscription(lunchExpiry, dinnerExpiry, generalExpiry, oneTimeExpiry, subscriptionType);
+                checkSubscription(lunchExpiry, dinnerExpiry, generalExpiry, oneTimeExpiry, subscriptionType, oneTimeAutoSelect);
                 fetchMessSettings();
                 loadMenu();
                 listenToMySelection();
@@ -137,7 +140,7 @@ public class UserHomeFragment extends Fragment {
     }
 
     private void checkSubscription(Long lunchExpiry, Long dinnerExpiry, Long generalExpiry,
-                                   Long oneTimeExpiry, String subscriptionType) {
+                                   Long oneTimeExpiry, String subscriptionType, String oneTimeAutoSelect) {
         long now = System.currentTimeMillis();
 
         // Check ONE_TIME first
@@ -148,7 +151,25 @@ public class UserHomeFragment extends Fragment {
             // ONE_TIME: both cards render, but the standard lunch/dinner flags stay false
             isLunchSubscribed  = false;
             isDinnerSubscribed = false;
+            binding.cardOneTimeAutoSelect.setVisibility(View.VISIBLE);
+            
+            // Set the radio button without triggering the listener
+            binding.radioGroupAutoSelect.setOnCheckedChangeListener(null);
+            if ("LUNCH".equals(oneTimeAutoSelect)) {
+                binding.radioAutoLunch.setChecked(true);
+            } else if ("DINNER".equals(oneTimeAutoSelect)) {
+                binding.radioAutoDinner.setChecked(true);
+            } else {
+                binding.radioAutoNone.setChecked(true);
+            }
+            binding.radioGroupAutoSelect.setOnCheckedChangeListener((group, checkedId) -> {
+                String selection = "NONE";
+                if (checkedId == R.id.radio_auto_lunch) selection = "LUNCH";
+                else if (checkedId == R.id.radio_auto_dinner) selection = "DINNER";
+                updateAutoSelectPreference(selection);
+            });
         } else {
+            binding.cardOneTimeAutoSelect.setVisibility(View.GONE);
             long lExp = (lunchExpiry  != null && lunchExpiry  > 0) ? lunchExpiry
                     : (generalExpiry != null && generalExpiry > 0 ? generalExpiry : 0);
             long dExp = (dinnerExpiry != null && dinnerExpiry > 0) ? dinnerExpiry
@@ -156,6 +177,17 @@ public class UserHomeFragment extends Fragment {
             isLunchSubscribed  = lExp > now;
             isDinnerSubscribed = dExp > now;
         }
+    }
+    
+    private void updateAutoSelectPreference(String selection) {
+        if (userId == null) return;
+        db.collection("users").document(userId)
+                .update("oneTimeAutoSelect", selection)
+                .addOnSuccessListener(aVoid -> {
+                    if (binding != null) {
+                        Toast.makeText(getContext(), "Auto-select preference saved", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     private void fetchMessSettings() {
@@ -216,7 +248,7 @@ public class UserHomeFragment extends Fragment {
                     if (isOneTimeSubscribed) {
                         // Track whether any meal is already claimed today
                         oneTimeMealUsedToday = "IN".equals(lunchStatus) || "IN".equals(dinnerStatus);
-                        updateOneTimeButtonUI(lunchStatus, dinnerStatus);
+                        updateOneTimeButtonUI(lunchStatus, dinnerStatus, currentUserOneTimeAutoSelect);
                     } else {
                         updateButtonUI("LUNCH",  lunchStatus);
                         updateButtonUI("DINNER", dinnerStatus);
@@ -350,7 +382,7 @@ public class UserHomeFragment extends Fragment {
     //  the IN button on the other card is locked for the rest of
     //  the day.
     // ────────────────────────────────────────────────────────────
-    private void updateOneTimeButtonUI(String lunchStatus, String dinnerStatus) {
+    private void updateOneTimeButtonUI(String lunchStatus, String dinnerStatus, String autoSelect) {
         if (binding == null) return;
 
         boolean cutoffLunch  = isCutoffPassed("LUNCH");
@@ -363,8 +395,11 @@ public class UserHomeFragment extends Fragment {
         int colorDisabled     = themeColor(R.color.text_disabled);
         int colorAmber        = themeColor(R.color.state_warning);
 
-        boolean lunchChosen  = "IN".equals(lunchStatus);
-        boolean dinnerChosen = "IN".equals(dinnerStatus);
+        boolean lunchExplicitIn = "IN".equals(lunchStatus);
+        boolean dinnerExplicitIn = "IN".equals(dinnerStatus);
+        
+        boolean lunchChosen  = lunchExplicitIn || (!dinnerExplicitIn && "LUNCH".equals(autoSelect));
+        boolean dinnerChosen = dinnerExplicitIn || (!lunchExplicitIn && "DINNER".equals(autoSelect));
 
         // ---- Lunch card ----
         if (lunchChosen) {
@@ -374,7 +409,7 @@ public class UserHomeFragment extends Fragment {
             binding.btnLunchInNew.setEnabled(false);
             binding.btnLunchOutNew.setVisibility(View.GONE); // OUT not applicable for ONE_TIME
             binding.textLunchStatus.setText("Today's meal selected");
-            binding.textLunchStatusBar.setText("ONE TIME - Used");
+            binding.textLunchStatusBar.setText(lunchExplicitIn ? "ONE TIME - Used" : "ONE TIME - Auto Selected");
             binding.textLunchStatusBar.setBackgroundColor(colorGreen);
             binding.textLunchStatusBar.setTextColor(Color.WHITE);
         } else if (dinnerChosen) {
@@ -413,7 +448,7 @@ public class UserHomeFragment extends Fragment {
             binding.btnDinnerInNew.setEnabled(false);
             binding.btnDinnerOutNew.setVisibility(View.GONE);
             binding.textDinnerStatus.setText("Today's meal selected");
-            binding.textDinnerStatusBar.setText("ONE TIME - Used");
+            binding.textDinnerStatusBar.setText(dinnerExplicitIn ? "ONE TIME - Used" : "ONE TIME - Auto Selected");
             binding.textDinnerStatusBar.setBackgroundColor(colorGreen);
             binding.textDinnerStatusBar.setTextColor(Color.WHITE);
         } else if (lunchChosen) {

@@ -17,6 +17,8 @@ public class Student {
     private String subscriptionType;
     // For ONE_TIME subscriptions: shared expiry used for both lunch and dinner slots
     private long oneTimeMealExpiry;
+    // For ONE_TIME subscriptions: auto-select preference ("LUNCH", "DINNER", "NONE")
+    private String oneTimeAutoSelect;
 
     public Student() {
         // Required no-argument constructor for Firebase
@@ -69,6 +71,14 @@ public class Student {
 
     public void setOneTimeMealExpiry(long oneTimeMealExpiry) {
         this.oneTimeMealExpiry = oneTimeMealExpiry;
+    }
+    
+    public String getOneTimeAutoSelect() {
+        return oneTimeAutoSelect;
+    }
+    
+    public void setOneTimeAutoSelect(String oneTimeAutoSelect) {
+        this.oneTimeAutoSelect = oneTimeAutoSelect;
     }
 
     public boolean isOneTimeSubscription() {
@@ -191,6 +201,7 @@ public class Student {
                 profileImageUrl);
         s.subscriptionType = subscriptionType;
         s.oneTimeMealExpiry = oneTimeMealExpiry;
+        s.oneTimeAutoSelect = oneTimeAutoSelect;
         return s;
     }
 }

@@ -4192,6 +4192,7 @@ int id card_dinner 0x7f0a00c4
 int id card_drawer_profile 0x7f0a00c5
 int id card_lunch 0x7f0a00c6
 int id card_mess_condition 0x7f0a00c7
+int id card_one_time_auto_select 0x7f0a0392
 int id card_planned_out_days 0x7f0a00c8
 int id carryVelocity 0x7f0a00c9
 int id center 0x7f0a00ca
@@ -4603,9 +4604,13 @@ int id progress_circular 0x7f0a025f
 int id progress_history 0x7f0a0260
 int id progress_horizontal 0x7f0a0261
 int id radio 0x7f0a0262
+int id radio_auto_dinner 0x7f0a0393
+int id radio_auto_lunch 0x7f0a0394
+int id radio_auto_none 0x7f0a0395
 int id radio_both 0x7f0a0263
 int id radio_dinner 0x7f0a0264
 int id radio_extend 0x7f0a0265
+int id radio_group_auto_select 0x7f0a0396
 int id radio_group_meal_type 0x7f0a0266
 int id radio_group_mode 0x7f0a0267
 int id radio_lunch 0x7f0a0268

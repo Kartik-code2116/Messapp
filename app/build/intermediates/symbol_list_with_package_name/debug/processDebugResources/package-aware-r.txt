@@ -4193,6 +4193,7 @@ id card_dinner
 id card_drawer_profile
 id card_lunch
 id card_mess_condition
+id card_one_time_auto_select
 id card_planned_out_days
 id carryVelocity
 id center
@@ -4604,9 +4605,13 @@ id progress_circular
 id progress_history
 id progress_horizontal
 id radio
+id radio_auto_dinner
+id radio_auto_lunch
+id radio_auto_none
 id radio_both
 id radio_dinner
 id radio_extend
+id radio_group_auto_select
 id radio_group_meal_type
 id radio_group_mode
 id radio_lunch

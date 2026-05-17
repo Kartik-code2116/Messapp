@@ -52,10 +52,8 @@ public class MessDashboardFragment extends Fragment {
     private List<SubscriptionRequest> pendingRequests = new ArrayList<>();
     private ListenerRegistration requestsListener;
     private android.os.CountDownTimer dashboardTimer;
-    private int activeLunchStudents = 0;
-    private int activeDinnerStudents = 0;
-    private int lunchOutToday = 0;
-    private int dinnerOutToday = 0;
+    private Map<String, DocumentSnapshot> userDocs = new HashMap<>();
+    private Map<String, DocumentSnapshot> mealDocs = new HashMap<>();
     private int lunchCutoffHour   = 10;
     private int lunchCutoffMinute = 30;
     private int dinnerCutoffHour   = 16;
@@ -367,23 +365,10 @@ public class MessDashboardFragment extends Fragment {
                 .addSnapshotListener((snapshots, e) -> {
                     if (binding == null || e != null) return;
                     if (snapshots != null) {
-                        int active = 0;
-                        activeLunchStudents = 0;
-                        activeDinnerStudents = 0;
-                        long now = System.currentTimeMillis();
+                        userDocs.clear();
                         for (DocumentSnapshot doc : snapshots.getDocuments()) {
-                            Long expiry = doc.getLong("subscriptionExpiry");
-                            Long lunchExpiry = doc.getLong("lunchSubscriptionExpiry");
-                            Long dinnerExpiry = doc.getLong("dinnerSubscriptionExpiry");
-                            long lunchExp = lunchExpiry != null && lunchExpiry > 0
-                                    ? lunchExpiry : (expiry != null ? expiry : 0);
-                            long dinnerExp = dinnerExpiry != null && dinnerExpiry > 0
-                                    ? dinnerExpiry : (expiry != null ? expiry : 0);
-                            if (lunchExp > now) activeLunchStudents++;
-                            if (dinnerExp > now) activeDinnerStudents++;
-                            if (expiry != null && expiry > now) active++;
+                            userDocs.put(doc.getId(), doc);
                         }
-                        binding.textTotalStudents.setText(String.valueOf(active));
                         updateDefaultInMealCounts();
                     }
                 });
@@ -403,18 +388,13 @@ public class MessDashboardFragment extends Fragment {
                                         @Nullable FirebaseFirestoreException e) {
                         if (binding == null || e != null) return;
 
-                        lunchOutToday = 0;
-                        dinnerOutToday = 0;
-
+                        mealDocs.clear();
                         if (snapshots != null) {
                             for (DocumentSnapshot doc : snapshots.getDocuments()) {
-                                String lunch  = doc.getString("lunch");
-                                String dinner = doc.getString("dinner");
-                                if ("OUT".equals(lunch))  lunchOutToday++;
-                                if ("OUT".equals(dinner)) dinnerOutToday++;
+                                String uId = doc.getString("userId");
+                                if (uId != null) mealDocs.put(uId, doc);
                             }
                         }
-
                         updateDefaultInMealCounts();
                     }
                 });
@@ -422,12 +402,68 @@ public class MessDashboardFragment extends Fragment {
 
     private void updateDefaultInMealCounts() {
         if (binding == null) return;
-        int lunchIn = Math.max(0, activeLunchStudents - lunchOutToday);
-        int dinnerIn = Math.max(0, activeDinnerStudents - dinnerOutToday);
-        binding.textLunchInCount.setText(String.valueOf(lunchIn));
-        binding.textLunchOutCount.setText(String.valueOf(lunchOutToday));
-        binding.textDinnerInCount.setText(String.valueOf(dinnerIn));
-        binding.textDinnerOutCount.setText(String.valueOf(dinnerOutToday));
+        
+        int totalActive = 0;
+        int lunchInCount = 0;
+        int lunchOutCount = 0;
+        int dinnerInCount = 0;
+        int dinnerOutCount = 0;
+        long now = System.currentTimeMillis();
+
+        for (DocumentSnapshot userDoc : userDocs.values()) {
+            Long expiry = userDoc.getLong("subscriptionExpiry");
+            Long lunchExpiry = userDoc.getLong("lunchSubscriptionExpiry");
+            Long dinnerExpiry = userDoc.getLong("dinnerSubscriptionExpiry");
+            Long oneTimeExpiry = userDoc.getLong("oneTimeMealExpiry");
+            String subType = userDoc.getString("subscriptionType");
+            String autoSelect = userDoc.getString("oneTimeAutoSelect");
+            
+            if (expiry != null && expiry > now) totalActive++;
+            
+            boolean isOneTime = "ONE_TIME".equals(subType) && oneTimeExpiry != null && oneTimeExpiry > now;
+            
+            long lunchExp = lunchExpiry != null && lunchExpiry > 0 ? lunchExpiry : (expiry != null ? expiry : 0);
+            long dinnerExp = dinnerExpiry != null && dinnerExpiry > 0 ? dinnerExpiry : (expiry != null ? expiry : 0);
+            
+            boolean isRegLunchActive = !isOneTime && lunchExp > now;
+            boolean isRegDinnerActive = !isOneTime && dinnerExp > now;
+            
+            DocumentSnapshot mealDoc = mealDocs.get(userDoc.getId());
+            String explicitLunch = mealDoc != null ? mealDoc.getString("lunch") : null;
+            String explicitDinner = mealDoc != null ? mealDoc.getString("dinner") : null;
+            
+            // Lunch logic
+            if (isOneTime) {
+                if ("IN".equals(explicitLunch)) {
+                    lunchInCount++;
+                } else if ("LUNCH".equals(autoSelect)) {
+                    if (!"OUT".equals(explicitLunch)) lunchInCount++;
+                    else lunchOutCount++;
+                }
+            } else if (isRegLunchActive) {
+                if ("OUT".equals(explicitLunch)) lunchOutCount++;
+                else lunchInCount++;
+            }
+            
+            // Dinner logic
+            if (isOneTime) {
+                if ("IN".equals(explicitDinner)) {
+                    dinnerInCount++;
+                } else if ("DINNER".equals(autoSelect)) {
+                    if (!"OUT".equals(explicitDinner)) dinnerInCount++;
+                    else dinnerOutCount++;
+                }
+            } else if (isRegDinnerActive) {
+                if ("OUT".equals(explicitDinner)) dinnerOutCount++;
+                else dinnerInCount++;
+            }
+        }
+        
+        binding.textTotalStudents.setText(String.valueOf(totalActive));
+        binding.textLunchInCount.setText(String.valueOf(lunchInCount));
+        binding.textLunchOutCount.setText(String.valueOf(lunchOutCount));
+        binding.textDinnerInCount.setText(String.valueOf(dinnerInCount));
+        binding.textDinnerOutCount.setText(String.valueOf(dinnerOutCount));
     }
 
     private void fetchMessSettings() {

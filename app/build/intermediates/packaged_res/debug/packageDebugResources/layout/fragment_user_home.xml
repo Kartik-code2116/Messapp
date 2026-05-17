@@ -267,6 +267,70 @@
                     android:textColor="@color/text_heading" />
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_one_time_auto_select"
+                    style="@style/Profound.Card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:visibility="gone"
+                    tools:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Auto-Select Daily Meal"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/poppins"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_heading" />
+                        
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Choose your preferred meal. We will automatically assume you are IN for it every day."
+                            android:textSize="12sp"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="@font/inter"
+                            android:textColor="@color/text_body" />
+
+                        <RadioGroup
+                            android:id="@+id/radio_group_auto_select"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/radio_auto_none"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:text="None" />
+                                
+                            <RadioButton
+                                android:id="@+id/radio_auto_lunch"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:text="Lunch" />
+
+                            <RadioButton
+                                android:id="@+id/radio_auto_dinner"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:text="Dinner" />
+                        </RadioGroup>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/card_planned_out_days"
                     style="@style/Profound.Card"
                     android:layout_width="match_parent"
