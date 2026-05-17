@@ -96,7 +96,11 @@ public class StudentsAdapter extends ListAdapter<Student, StudentsAdapter.Studen
             String dinner = student.getDinnerStatus() != null ? student.getDinnerStatus() : "--";
 
             if ("ONE_TIME".equals(student.getSubscriptionType())) {
-                if ("IN".equals(lunch)) {
+                boolean isOut = "OUT".equals(lunch) || "OUT".equals(dinner);
+                if (isOut) {
+                    lunch = "OUT";
+                    dinner = "OUT";
+                } else if ("IN".equals(lunch)) {
                     dinner = "LOCKED";
                 } else if ("IN".equals(dinner)) {
                     lunch = "LOCKED";
