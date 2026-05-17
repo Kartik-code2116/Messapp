@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_page">
+    android:background="@color/background_page"
+    tools:context=".ui.mess.dashboard.MessDashboardFragment">
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -14,80 +16,190 @@
         android:elevation="10dp"
         android:visibility="gone" />
 
-    <androidx.core.widget.NestedScrollView
+    <!-- ═══════════════════════════════════════════ -->
+    <!--   AppBarLayout: scroll-hide / scroll-show   -->
+    <!-- ═══════════════════════════════════════════ -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar_dashboard"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true"
-        tools:context=".ui.mess.dashboard.MessDashboardFragment">
+        android:layout_height="wrap_content"
+        android:background="@color/background_page"
+        app:elevation="0dp">
 
+        <!-- ════════════════════════════════════ -->
+        <!--     ADMIN DASHBOARD HEADER BANNER    -->
+        <!-- ════════════════════════════════════ -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="100dp">
+            android:background="@drawable/bg_admin_header_banner"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingTop="32dp"
+            android:paddingBottom="20dp"
+            app:layout_scrollFlags="scroll|enterAlways|snap">
 
-            <!-- Header Section -->
-            <RelativeLayout
+            <!-- Row 1: Icon + Mess Name -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="20dp" android:paddingEnd="20dp"
-                android:paddingTop="32dp"
-                android:paddingBottom="12dp">
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
+                <!-- Icon circle -->
+                <FrameLayout
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bg_circle_surface"
+                    android:backgroundTint="#33FFFFFF">
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_restaurant"
+                        app:tint="#FFFFFF" />
+                </FrameLayout>
+
+                <!-- Name + label -->
                 <LinearLayout
-                    android:id="@+id/header_mess_dashboard"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:orientation="vertical"
-                    android:layout_alignParentStart="true"
-                    android:layout_toStartOf="@id/text_dashboard_timer">
+                    android:layout_marginStart="12dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="ADMIN PANEL"
+                        android:textSize="9sp"
+                        android:fontFamily="@font/inter"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.10"
+                        android:textColor="#99FFFFFF" />
 
                     <TextView
                         android:id="@+id/text_mess_dashboard_name"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Mess Name Placeholder"
-                        android:textSize="22sp"
+                        android:text="Mess Name"
+                        android:textSize="20sp"
                         android:fontFamily="@font/poppins"
                         android:textStyle="bold"
-                        android:textColor="@color/text_heading"/>
+                        android:textColor="#FFFFFF"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:layout_marginTop="1dp"
+                        tools:text="Shree Sai Mess" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="12dp"
+                android:background="#33FFFFFF" />
+
+            <!-- Row 2: Date (left) + Deadline pill (right) -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!-- Date row — fills space to the left of deadline -->
+                <LinearLayout
+                    android:id="@+id/layout_date_row"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toStartOf="@id/layout_deadline_container"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingEnd="8dp">
+
+                    <ImageView
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:src="@drawable/ic_calendar"
+                        app:tint="#CCFFFFFF" />
 
                     <TextView
                         android:id="@+id/text_mess_dashboard_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Date Placeholder"
-                        android:textSize="14sp"
+                        android:layout_marginStart="6dp"
+                        android:text="Sunday, 1 Jan 2025"
+                        android:textSize="12sp"
                         android:fontFamily="@font/inter"
-                        android:textColor="@color/text_sub"
-                        android:layout_marginTop="4dp"/>
+                        android:textColor="#CCFFFFFF"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        tools:text="Sunday, 17 May 2026" />
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/text_dashboard_timer"
+                <!-- Deadline pill — anchored right, hidden until active -->
+                <LinearLayout
+                    android:id="@+id/layout_deadline_container"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:background="@drawable/bg_rounded_card_surface"
-                    android:backgroundTint="@color/semantic_error_bg"
-                    android:paddingStart="12dp" android:paddingEnd="12dp"
-                    android:paddingTop="8dp" android:paddingBottom="8dp"
-                    android:text="Deadline: --:--"
-                    android:textColor="@color/semantic_error"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/inter"
-                    android:textStyle="bold"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/bg_deadline_pill"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
                     android:visibility="gone"
-                    tools:visibility="visible" />
+                    tools:visibility="visible">
+
+                    <ImageView
+                        android:layout_width="13dp"
+                        android:layout_height="13dp"
+                        android:src="@drawable/ic_schedule"
+                        app:tint="#FACC15" />
+
+                    <TextView
+                        android:id="@+id/text_dashboard_timer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="--:--:--"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/poppins"
+                        android:textStyle="bold"
+                        android:textColor="#FACC15"
+                        tools:text="02:30:00" />
+                </LinearLayout>
+
             </RelativeLayout>
+
+        </LinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- Scrollable content sits below the AppBar -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="20dp"
+            android:paddingBottom="100dp">
 
             <!-- Mess Condition Card -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
-                android:layout_marginTop="8dp"
                 android:layout_marginBottom="16dp"
                 style="@style/Profound.Card">
 
@@ -213,7 +325,7 @@
                         android:textSize="13sp"
                         android:fontFamily="@font/inter"
                         android:textColor="@color/text_sub"
-                        android:textStyle="italic" 
+                        android:textStyle="italic"
                         android:gravity="center"
                         android:layout_gravity="center_horizontal"/>
 
@@ -534,4 +646,4 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-</FrameLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

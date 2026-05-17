@@ -60,7 +60,8 @@ public class MessDashboardActivity extends AppCompatActivity {
     }
 
     private void initNavigation() {
-        if (isFinishing()) return;
+        if (isFinishing())
+            return;
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.nav_host_fragment_activity_mess_dashboard);
@@ -108,21 +109,22 @@ public class MessDashboardActivity extends AppCompatActivity {
             navController.navigate(id);
             return true;
         });
-        binding.navView.setOnItemReselectedListener(item -> { /* no-op */ });
+        binding.navView.setOnItemReselectedListener(item -> {
+            /* no-op */ });
     }
 
     private void showGuestBanner() {
         Snackbar.make(binding.getRoot(),
-            "Guest Mode — Sign up for full access",
-            Snackbar.LENGTH_LONG)
-            .setAction("SIGN UP", v -> {
-                Intent intent = new Intent(this, RoleSelectionActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                finish();
-            })
-            .setActionTextColor(getResources().getColor(android.R.color.holo_blue_light, getTheme()))
-            .show();
+                "Guest Mode — Sign up for full access",
+                Snackbar.LENGTH_LONG)
+                .setAction("SIGN UP", v -> {
+                    Intent intent = new Intent(this, RoleSelectionActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
+                })
+                .setActionTextColor(getResources().getColor(android.R.color.holo_blue_light, getTheme()))
+                .show();
     }
 
     public boolean isGuestMode() {
@@ -155,11 +157,14 @@ public class MessDashboardActivity extends AppCompatActivity {
 
         binding.adminTopBar.profileContainer.setOnClickListener(v -> openProfileDrawer());
 
-        binding.adminTopBar.btnSendMessage.setOnClickListener(v ->
-                Toast.makeText(this, "Send Message to Everyone — Coming soon", Toast.LENGTH_SHORT).show());
+        binding.adminTopBar.btnSendMessage.setOnClickListener(
+                v -> Toast.makeText(this, "Send Message to Everyone — Coming soon", Toast.LENGTH_SHORT).show());
     }
 
-    /** One real-time listener keeps profile data fresh without extra Firestore reads. */
+    /**
+     * One real-time listener keeps profile data fresh without extra Firestore
+     * reads.
+     */
     private void startProfileListener() {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser == null) {
@@ -170,7 +175,8 @@ public class MessDashboardActivity extends AppCompatActivity {
         String userId = currentUser.getUid();
         profileListener = FirebaseFirestore.getInstance().collection("users").document(userId)
                 .addSnapshotListener((doc, e) -> {
-                    if (doc == null) return;
+                    if (doc == null)
+                        return;
                     cachedName = doc.getString("name");
                     cachedProfileImageUrl = doc.getString("profileImageUrl");
                     cachedMessId = doc.getString("messId");
@@ -200,7 +206,8 @@ public class MessDashboardActivity extends AppCompatActivity {
     private void styleDrawerLogoutItem() {
         try {
             MenuItem logout = binding.profileDrawer.getMenu().findItem(R.id.drawer_admin_logout);
-            if (logout == null) return;
+            if (logout == null)
+                return;
             Drawable icon = logout.getIcon();
             if (icon != null) {
                 Drawable tinted = DrawableCompat.wrap(icon.mutate());
@@ -251,29 +258,39 @@ public class MessDashboardActivity extends AppCompatActivity {
         finish();
     }
 
-    /** Uses cached data to populate the drawer instantly — no extra Firestore call needed for most fields. */
+    /**
+     * Uses cached data to populate the drawer instantly — no extra Firestore call
+     * needed for most fields.
+     */
     private void populateDrawer() {
-        if (binding.profileDrawer.getHeaderCount() == 0) return;
+        if (binding.profileDrawer.getHeaderCount() == 0)
+            return;
         View header = binding.profileDrawer.getHeaderView(0);
-        if (header == null) return;
+        if (header == null)
+            return;
 
-        TextView nameView    = header.findViewById(R.id.text_drawer_name);
-        TextView emailView   = header.findViewById(R.id.text_drawer_email);
+        TextView nameView = header.findViewById(R.id.text_drawer_name);
+        TextView emailView = header.findViewById(R.id.text_drawer_email);
         TextView membersView = header.findViewById(R.id.text_drawer_members);
-        TextView ratingView  = header.findViewById(R.id.text_drawer_rating);
+        TextView ratingView = header.findViewById(R.id.text_drawer_rating);
         TextView revenueView = header.findViewById(R.id.text_drawer_revenue);
         TextView messNameView = header.findViewById(R.id.text_drawer_mess_name);
         ImageView profileImage = header.findViewById(R.id.img_drawer_profile);
-        if (nameView == null || emailView == null || profileImage == null) return;
+        if (nameView == null || emailView == null || profileImage == null)
+            return;
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser == null) {
             nameView.setText(isGuestMode ? "Guest Admin" : "Mess Owner");
             emailView.setText("Not signed in");
-            if (membersView != null) membersView.setText("0");
-            if (ratingView  != null) ratingView.setText("0.0");
-            if (revenueView != null) revenueView.setText("₹0");
-            if (messNameView != null) messNameView.setText("My Mess");
+            if (membersView != null)
+                membersView.setText("0");
+            if (ratingView != null)
+                ratingView.setText("0.0");
+            if (revenueView != null)
+                revenueView.setText("₹0");
+            if (messNameView != null)
+                messNameView.setText("My Mess");
             profileImage.setImageResource(R.drawable.ic_student_profile);
             return;
         }
@@ -297,7 +314,7 @@ public class MessDashboardActivity extends AppCompatActivity {
     }
 
     private void loadMessDetails(String messId, TextView membersView, TextView ratingView,
-                                  TextView revenueView, TextView messNameView) {
+            TextView revenueView, TextView messNameView) {
         FirebaseFirestore.getInstance().collection("messes").document(messId).get()
                 .addOnSuccessListener(doc -> {
                     if (membersView != null) {
@@ -322,7 +339,8 @@ public class MessDashboardActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (profileListener != null) profileListener.remove();
+        if (profileListener != null)
+            profileListener.remove();
     }
 
     @Override

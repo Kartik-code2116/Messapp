@@ -4,16 +4,17 @@ package com.example.messapp.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.messapp.R;
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.button.MaterialButton;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -21,7 +22,10 @@ import java.lang.String;
 
 public final class FragmentMessDashboardBinding implements ViewBinding {
   @NonNull
-  private final FrameLayout rootView;
+  private final CoordinatorLayout rootView;
+
+  @NonNull
+  public final AppBarLayout appbarDashboard;
 
   @NonNull
   public final MaterialButton btnConditionEmpty;
@@ -39,7 +43,10 @@ public final class FragmentMessDashboardBinding implements ViewBinding {
   public final MaterialButton btnResetAllAttendance;
 
   @NonNull
-  public final LinearLayout headerMessDashboard;
+  public final LinearLayout layoutDateRow;
+
+  @NonNull
+  public final LinearLayout layoutDeadlineContainer;
 
   @NonNull
   public final ProgressBar progressBar;
@@ -74,10 +81,11 @@ public final class FragmentMessDashboardBinding implements ViewBinding {
   @NonNull
   public final TextView textTotalStudents;
 
-  private FragmentMessDashboardBinding(@NonNull FrameLayout rootView,
-      @NonNull MaterialButton btnConditionEmpty, @NonNull MaterialButton btnConditionFull,
-      @NonNull MaterialButton btnConditionHalf, @NonNull MaterialButton btnConditionNotConform,
-      @NonNull MaterialButton btnResetAllAttendance, @NonNull LinearLayout headerMessDashboard,
+  private FragmentMessDashboardBinding(@NonNull CoordinatorLayout rootView,
+      @NonNull AppBarLayout appbarDashboard, @NonNull MaterialButton btnConditionEmpty,
+      @NonNull MaterialButton btnConditionFull, @NonNull MaterialButton btnConditionHalf,
+      @NonNull MaterialButton btnConditionNotConform, @NonNull MaterialButton btnResetAllAttendance,
+      @NonNull LinearLayout layoutDateRow, @NonNull LinearLayout layoutDeadlineContainer,
       @NonNull ProgressBar progressBar, @NonNull RecyclerView recyclerPending,
       @NonNull TextView textCurrentCondition, @NonNull TextView textDashboardTimer,
       @NonNull TextView textDinnerInCount, @NonNull TextView textDinnerOutCount,
@@ -85,12 +93,14 @@ public final class FragmentMessDashboardBinding implements ViewBinding {
       @NonNull TextView textMessDashboardDate, @NonNull TextView textMessDashboardName,
       @NonNull TextView textTotalStudents) {
     this.rootView = rootView;
+    this.appbarDashboard = appbarDashboard;
     this.btnConditionEmpty = btnConditionEmpty;
     this.btnConditionFull = btnConditionFull;
     this.btnConditionHalf = btnConditionHalf;
     this.btnConditionNotConform = btnConditionNotConform;
     this.btnResetAllAttendance = btnResetAllAttendance;
-    this.headerMessDashboard = headerMessDashboard;
+    this.layoutDateRow = layoutDateRow;
+    this.layoutDeadlineContainer = layoutDeadlineContainer;
     this.progressBar = progressBar;
     this.recyclerPending = recyclerPending;
     this.textCurrentCondition = textCurrentCondition;
@@ -106,7 +116,7 @@ public final class FragmentMessDashboardBinding implements ViewBinding {
 
   @Override
   @NonNull
-  public FrameLayout getRoot() {
+  public CoordinatorLayout getRoot() {
     return rootView;
   }
 
@@ -131,6 +141,12 @@ public final class FragmentMessDashboardBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.appbar_dashboard;
+      AppBarLayout appbarDashboard = ViewBindings.findChildViewById(rootView, id);
+      if (appbarDashboard == null) {
+        break missingId;
+      }
+
       id = R.id.btn_condition_empty;
       MaterialButton btnConditionEmpty = ViewBindings.findChildViewById(rootView, id);
       if (btnConditionEmpty == null) {
@@ -161,9 +177,15 @@ public final class FragmentMessDashboardBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.header_mess_dashboard;
-      LinearLayout headerMessDashboard = ViewBindings.findChildViewById(rootView, id);
-      if (headerMessDashboard == null) {
+      id = R.id.layout_date_row;
+      LinearLayout layoutDateRow = ViewBindings.findChildViewById(rootView, id);
+      if (layoutDateRow == null) {
+        break missingId;
+      }
+
+      id = R.id.layout_deadline_container;
+      LinearLayout layoutDeadlineContainer = ViewBindings.findChildViewById(rootView, id);
+      if (layoutDeadlineContainer == null) {
         break missingId;
       }
 
@@ -233,11 +255,12 @@ public final class FragmentMessDashboardBinding implements ViewBinding {
         break missingId;
       }
 
-      return new FragmentMessDashboardBinding((FrameLayout) rootView, btnConditionEmpty,
-          btnConditionFull, btnConditionHalf, btnConditionNotConform, btnResetAllAttendance,
-          headerMessDashboard, progressBar, recyclerPending, textCurrentCondition,
-          textDashboardTimer, textDinnerInCount, textDinnerOutCount, textLunchInCount,
-          textLunchOutCount, textMessDashboardDate, textMessDashboardName, textTotalStudents);
+      return new FragmentMessDashboardBinding((CoordinatorLayout) rootView, appbarDashboard,
+          btnConditionEmpty, btnConditionFull, btnConditionHalf, btnConditionNotConform,
+          btnResetAllAttendance, layoutDateRow, layoutDeadlineContainer, progressBar,
+          recyclerPending, textCurrentCondition, textDashboardTimer, textDinnerInCount,
+          textDinnerOutCount, textLunchInCount, textLunchOutCount, textMessDashboardDate,
+          textMessDashboardName, textTotalStudents);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

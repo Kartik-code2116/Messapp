@@ -6,13 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewbinding.ViewBinding;
@@ -26,7 +26,7 @@ import java.lang.String;
 
 public final class FragmentMessStudentsBinding implements ViewBinding {
   @NonNull
-  private final FrameLayout rootView;
+  private final CoordinatorLayout rootView;
 
   @NonNull
   public final Button btnFilterActiveToday;
@@ -70,7 +70,7 @@ public final class FragmentMessStudentsBinding implements ViewBinding {
   @NonNull
   public final TextView textTotalStudentsCount;
 
-  private FragmentMessStudentsBinding(@NonNull FrameLayout rootView,
+  private FragmentMessStudentsBinding(@NonNull CoordinatorLayout rootView,
       @NonNull Button btnFilterActiveToday, @NonNull Button btnFilterAll,
       @NonNull Button btnFilterExpiredToday, @NonNull LinearLayout btnFilterInToday,
       @NonNull MaterialCardView btnFilterInTodayCard, @NonNull LinearLayout btnFilterOutToday,
@@ -97,7 +97,7 @@ public final class FragmentMessStudentsBinding implements ViewBinding {
 
   @Override
   @NonNull
-  public FrameLayout getRoot() {
+  public CoordinatorLayout getRoot() {
     return rootView;
   }
 
@@ -206,7 +206,7 @@ public final class FragmentMessStudentsBinding implements ViewBinding {
         break missingId;
       }
 
-      return new FragmentMessStudentsBinding((FrameLayout) rootView, btnFilterActiveToday,
+      return new FragmentMessStudentsBinding((CoordinatorLayout) rootView, btnFilterActiveToday,
           btnFilterAll, btnFilterExpiredToday, btnFilterInToday, btnFilterInTodayCard,
           btnFilterOutToday, btnFilterOutTodayCard, etSearch, iconSearch, progressBar,
           recyclerViewStudents, searchLayout, swipeRefreshLayout, textTotalStudentsCount);

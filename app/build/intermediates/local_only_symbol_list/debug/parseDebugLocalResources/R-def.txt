@@ -137,6 +137,7 @@ drawable _c3d318d7_6015_4c92_9b56_8d2c50388d41_
 drawable annapurna
 drawable bg_admin_action_tile
 drawable bg_admin_card
+drawable bg_admin_header_banner
 drawable bg_admin_icon_gray
 drawable bg_admin_icon_green
 drawable bg_admin_icon_orange
@@ -151,6 +152,7 @@ drawable bg_circle_avatar_drawer
 drawable bg_circle_light_green
 drawable bg_circle_primary_border
 drawable bg_circle_surface
+drawable bg_deadline_pill
 drawable bg_drawer_avatar_ring
 drawable bg_drawer_header
 drawable bg_drawer_menu_item
@@ -259,6 +261,7 @@ id action_settings
 id addOfferFragment
 id admin_top_bar
 id app_logo
+id appbar_dashboard
 id btnForgotPassword
 id btnGoogleLogin
 id btnMainAction
@@ -396,7 +399,6 @@ id group_account
 id group_manage
 id group_nav
 id headerBackground
-id header_mess_dashboard
 id icon_search
 id imgLogo
 id img_drawer_profile
@@ -412,6 +414,8 @@ id items_toolbar
 id iv_delete_offer
 id label_active_students
 id label_mess_details
+id layout_date_row
+id layout_deadline_container
 id layout_empty_history
 id logoCard
 id lunch_edit_text

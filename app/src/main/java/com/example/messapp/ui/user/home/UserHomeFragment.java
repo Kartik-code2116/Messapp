@@ -49,11 +49,11 @@ public class UserHomeFragment extends Fragment {
     private String todayDate;
     private boolean isLunchSubscribed = false;
     private boolean isDinnerSubscribed = false;
-    private boolean isOneTimeSubscribed = false;  // ONE_TIME subscription active
+    private boolean isOneTimeSubscribed = false; // ONE_TIME subscription active
     private boolean oneTimeMealUsedToday = false; // student already used their one meal today
     private boolean allowMultipleChanges = false;
-    private boolean autoSelectLunch = false;   // daily auto-IN for lunch
-    private boolean autoSelectDinner = false;  // daily auto-IN for dinner
+    private boolean autoSelectLunch = false; // daily auto-IN for lunch
+    private boolean autoSelectDinner = false; // daily auto-IN for dinner
     private CountDownTimer timer;
     private ListenerRegistration plannedOutListener;
     private String currentUserOneTimeAutoSelect;
@@ -101,14 +101,16 @@ public class UserHomeFragment extends Fragment {
     }
 
     private void fetchUserDetails() {
-        if (userId == null) return;
+        if (userId == null)
+            return;
 
         db.collection("users").document(userId).addSnapshotListener((documentSnapshot, e) -> {
-            if (binding == null) return;
+            if (binding == null)
+                return;
             if (documentSnapshot != null && documentSnapshot.exists()) {
                 messId = documentSnapshot.getString("messId");
-                Long lunchExpiry   = documentSnapshot.getLong("lunchSubscriptionExpiry");
-                Long dinnerExpiry  = documentSnapshot.getLong("dinnerSubscriptionExpiry");
+                Long lunchExpiry = documentSnapshot.getLong("lunchSubscriptionExpiry");
+                Long dinnerExpiry = documentSnapshot.getLong("dinnerSubscriptionExpiry");
                 Long generalExpiry = documentSnapshot.getLong("subscriptionExpiry");
                 Long oneTimeExpiry = documentSnapshot.getLong("oneTimeMealExpiry");
                 String subscriptionType = documentSnapshot.getString("subscriptionType");
@@ -131,12 +133,13 @@ public class UserHomeFragment extends Fragment {
                     binding.textDinnerPreference.setVisibility(View.GONE);
                 }
 
-                checkSubscription(lunchExpiry, dinnerExpiry, generalExpiry, oneTimeExpiry, subscriptionType, oneTimeAutoSelect);
+                checkSubscription(lunchExpiry, dinnerExpiry, generalExpiry, oneTimeExpiry, subscriptionType,
+                        oneTimeAutoSelect);
 
                 // Read daily auto-select preferences
                 Boolean autoL = documentSnapshot.getBoolean("autoSelectLunch");
                 Boolean autoD = documentSnapshot.getBoolean("autoSelectDinner");
-                autoSelectLunch  = Boolean.TRUE.equals(autoL);
+                autoSelectLunch = Boolean.TRUE.equals(autoL);
                 autoSelectDinner = Boolean.TRUE.equals(autoD);
 
                 fetchMessSettings();
@@ -149,7 +152,7 @@ public class UserHomeFragment extends Fragment {
     }
 
     private void checkSubscription(Long lunchExpiry, Long dinnerExpiry, Long generalExpiry,
-                                   Long oneTimeExpiry, String subscriptionType, String oneTimeAutoSelect) {
+            Long oneTimeExpiry, String subscriptionType, String oneTimeAutoSelect) {
         long now = System.currentTimeMillis();
 
         // Check ONE_TIME first
@@ -158,10 +161,10 @@ public class UserHomeFragment extends Fragment {
 
         if (isOneTimeSubscribed) {
             // ONE_TIME: both cards render, but the standard lunch/dinner flags stay false
-            isLunchSubscribed  = false;
+            isLunchSubscribed = false;
             isDinnerSubscribed = false;
             binding.cardOneTimeAutoSelect.setVisibility(View.VISIBLE);
-            
+
             // Set the radio button without triggering the listener
             binding.radioGroupAutoSelect.setOnCheckedChangeListener(null);
             if ("LUNCH".equals(oneTimeAutoSelect)) {
@@ -174,11 +177,11 @@ public class UserHomeFragment extends Fragment {
             setupAutoSelectListener();
         } else {
             binding.cardOneTimeAutoSelect.setVisibility(View.GONE);
-            long lExp = (lunchExpiry  != null && lunchExpiry  > 0) ? lunchExpiry
+            long lExp = (lunchExpiry != null && lunchExpiry > 0) ? lunchExpiry
                     : (generalExpiry != null && generalExpiry > 0 ? generalExpiry : 0);
             long dExp = (dinnerExpiry != null && dinnerExpiry > 0) ? dinnerExpiry
                     : (generalExpiry != null && generalExpiry > 0 ? generalExpiry : 0);
-            isLunchSubscribed  = lExp > now;
+            isLunchSubscribed = lExp > now;
             isDinnerSubscribed = dExp > now;
             // Show daily auto-select card only when at least one meal is active
             if (isLunchSubscribed || isDinnerSubscribed) {
@@ -188,18 +191,26 @@ public class UserHomeFragment extends Fragment {
             }
         }
     }
+
     private void setupAutoSelectListener() {
         binding.radioGroupAutoSelect.setOnCheckedChangeListener((group, checkedId) -> {
             String selection = "NONE";
-            if (checkedId == R.id.radio_auto_lunch) selection = "LUNCH";
-            else if (checkedId == R.id.radio_auto_dinner) selection = "DINNER";
+            if (checkedId == R.id.radio_auto_lunch)
+                selection = "LUNCH";
+            else if (checkedId == R.id.radio_auto_dinner)
+                selection = "DINNER";
 
             boolean block = false;
-            if ("LUNCH".equals(currentUserOneTimeAutoSelect) && isCutoffPassed("LUNCH")) block = true;
-            if ("DINNER".equals(currentUserOneTimeAutoSelect) && isCutoffPassed("DINNER")) block = true;
-            if ("LUNCH".equals(selection) && isCutoffPassed("LUNCH")) block = true;
-            if ("DINNER".equals(selection) && isCutoffPassed("DINNER")) block = true;
-            if (oneTimeMealUsedToday) block = true;
+            if ("LUNCH".equals(currentUserOneTimeAutoSelect) && isCutoffPassed("LUNCH"))
+                block = true;
+            if ("DINNER".equals(currentUserOneTimeAutoSelect) && isCutoffPassed("DINNER"))
+                block = true;
+            if ("LUNCH".equals(selection) && isCutoffPassed("LUNCH"))
+                block = true;
+            if ("DINNER".equals(selection) && isCutoffPassed("DINNER"))
+                block = true;
+            if (oneTimeMealUsedToday)
+                block = true;
 
             if (block) {
                 Toast.makeText(getContext(), "Cannot change preference at this time.", Toast.LENGTH_SHORT).show();
@@ -220,7 +231,8 @@ public class UserHomeFragment extends Fragment {
     }
 
     private void updateAutoSelectPreference(String selection) {
-        if (userId == null) return;
+        if (userId == null)
+            return;
         db.collection("users").document(userId)
                 .update("oneTimeAutoSelect", selection)
                 .addOnSuccessListener(aVoid -> {
@@ -231,7 +243,8 @@ public class UserHomeFragment extends Fragment {
     }
 
     private void setupDailyAutoSelectCard() {
-        if (binding == null) return;
+        if (binding == null)
+            return;
         binding.cardDailyAutoSelect.setVisibility(View.VISIBLE);
 
         // Set switch states without triggering listeners
@@ -257,7 +270,8 @@ public class UserHomeFragment extends Fragment {
     }
 
     private void updateDailyAutoSelectSubtext() {
-        if (binding == null) return;
+        if (binding == null)
+            return;
         binding.textAutoLunchStatus.setText(autoSelectLunch
                 ? "Auto-select ON — you'll be counted IN daily"
                 : "Auto-select off — select manually each day");
@@ -271,9 +285,10 @@ public class UserHomeFragment extends Fragment {
     }
 
     private void saveDailyAutoSelect() {
-        if (userId == null) return;
+        if (userId == null)
+            return;
         Map<String, Object> updates = new HashMap<>();
-        updates.put("autoSelectLunch",  autoSelectLunch);
+        updates.put("autoSelectLunch", autoSelectLunch);
         updates.put("autoSelectDinner", autoSelectDinner);
         db.collection("users").document(userId).update(updates)
                 .addOnFailureListener(e -> {
@@ -283,21 +298,27 @@ public class UserHomeFragment extends Fragment {
     }
 
     private void fetchMessSettings() {
-        if (messId == null) return;
+        if (messId == null)
+            return;
 
         db.collection("mess_settings").document(messId).get()
                 .addOnSuccessListener(documentSnapshot -> {
-                    if (binding == null) return;
+                    if (binding == null)
+                        return;
                     if (documentSnapshot.exists()) {
-                        Long lunchHour   = documentSnapshot.getLong("lunchCutoffHour");
+                        Long lunchHour = documentSnapshot.getLong("lunchCutoffHour");
                         Long lunchMinute = documentSnapshot.getLong("lunchCutoffMinute");
-                        Long dinnerHour  = documentSnapshot.getLong("dinnerCutoffHour");
+                        Long dinnerHour = documentSnapshot.getLong("dinnerCutoffHour");
                         Long dinnerMinute = documentSnapshot.getLong("dinnerCutoffMinute");
 
-                        if (lunchHour   != null) lunchCutoffHour   = lunchHour.intValue();
-                        if (lunchMinute != null) lunchCutoffMinute = lunchMinute.intValue();
-                        if (dinnerHour  != null) dinnerCutoffHour  = dinnerHour.intValue();
-                        if (dinnerMinute != null) dinnerCutoffMinute = dinnerMinute.intValue();
+                        if (lunchHour != null)
+                            lunchCutoffHour = lunchHour.intValue();
+                        if (lunchMinute != null)
+                            lunchCutoffMinute = lunchMinute.intValue();
+                        if (dinnerHour != null)
+                            dinnerCutoffHour = dinnerHour.intValue();
+                        if (dinnerMinute != null)
+                            dinnerCutoffMinute = dinnerMinute.intValue();
 
                         Boolean amc = documentSnapshot.getBoolean("allowMultipleChanges");
                         allowMultipleChanges = (amc != null && amc);
@@ -307,16 +328,19 @@ public class UserHomeFragment extends Fragment {
     }
 
     private void loadMenu() {
-        if (messId == null) return;
+        if (messId == null)
+            return;
 
         db.collection("menus").document(messId + "_" + todayDate).get()
                 .addOnSuccessListener(documentSnapshot -> {
-                    if (binding == null) return;
+                    if (binding == null)
+                        return;
                     if (documentSnapshot.exists()) {
-                        String lunch  = documentSnapshot.getString("lunch");
+                        String lunch = documentSnapshot.getString("lunch");
                         String dinner = documentSnapshot.getString("dinner");
-                        binding.textLunchMenuNew.setText(lunch  != null && !lunch.isEmpty()  ? lunch  : "menu is not set");
-                        binding.textDinnerMenuNew.setText(dinner != null && !dinner.isEmpty() ? dinner : "menu is not set");
+                        binding.textLunchMenuNew.setText(lunch != null && !lunch.isEmpty() ? lunch : "menu is not set");
+                        binding.textDinnerMenuNew
+                                .setText(dinner != null && !dinner.isEmpty() ? dinner : "menu is not set");
                     } else {
                         binding.textLunchMenuNew.setText("menu is not set");
                         binding.textDinnerMenuNew.setText("menu is not set");
@@ -325,15 +349,17 @@ public class UserHomeFragment extends Fragment {
     }
 
     private void listenToMySelection() {
-        if (messId == null || userId == null) return;
+        if (messId == null || userId == null)
+            return;
 
         db.collection("meal_selections").document(messId + "_" + todayDate + "_" + userId)
                 .addSnapshotListener((documentSnapshot, e) -> {
-                    if (binding == null) return;
-                    String lunchStatus  = null;
+                    if (binding == null)
+                        return;
+                    String lunchStatus = null;
                     String dinnerStatus = null;
                     if (documentSnapshot != null && documentSnapshot.exists()) {
-                        lunchStatus  = documentSnapshot.getString("lunch");
+                        lunchStatus = documentSnapshot.getString("lunch");
                         dinnerStatus = documentSnapshot.getString("dinner");
                     }
 
@@ -342,22 +368,22 @@ public class UserHomeFragment extends Fragment {
                         oneTimeMealUsedToday = "IN".equals(lunchStatus) || "IN".equals(dinnerStatus);
                         updateOneTimeButtonUI(lunchStatus, dinnerStatus, currentUserOneTimeAutoSelect);
                     } else {
-                        updateButtonUI("LUNCH",  lunchStatus);
+                        updateButtonUI("LUNCH", lunchStatus);
                         updateButtonUI("DINNER", dinnerStatus);
                     }
                 });
     }
 
     private void setupClickListeners() {
-        binding.btnLunchInNew.setOnClickListener(v  -> markAttendance("LUNCH",  "IN"));
-        binding.btnLunchOutNew.setOnClickListener(v -> markAttendance("LUNCH",  "OUT"));
-        binding.btnDinnerInNew.setOnClickListener(v  -> markAttendance("DINNER", "IN"));
+        binding.btnLunchInNew.setOnClickListener(v -> markAttendance("LUNCH", "IN"));
+        binding.btnLunchOutNew.setOnClickListener(v -> markAttendance("LUNCH", "OUT"));
+        binding.btnDinnerInNew.setOnClickListener(v -> markAttendance("DINNER", "IN"));
         binding.btnDinnerOutNew.setOnClickListener(v -> markAttendance("DINNER", "OUT"));
-        binding.btnPlanOutDays.setOnClickListener(v  -> showOutPlanDialog());
+        binding.btnPlanOutDays.setOnClickListener(v -> showOutPlanDialog());
         binding.textViewWeek.setOnClickListener(v -> {
             // Switch the bottom nav tab — this avoids stacking Menu on the back stack
-            com.google.android.material.bottomnavigation.BottomNavigationView navView =
-                    requireActivity().findViewById(R.id.nav_view);
+            com.google.android.material.bottomnavigation.BottomNavigationView navView = requireActivity()
+                    .findViewById(R.id.nav_view);
             if (navView != null) {
                 navView.setSelectedItemId(R.id.navigation_user_menu);
             }
@@ -365,7 +391,8 @@ public class UserHomeFragment extends Fragment {
     }
 
     private void markAttendance(String mealType, String status) {
-        if (binding == null) return;
+        if (binding == null)
+            return;
 
         if (messId == null || userId == null) {
             Toast.makeText(getContext(), "Still loading your profile, please wait...", Toast.LENGTH_SHORT).show();
@@ -399,7 +426,7 @@ public class UserHomeFragment extends Fragment {
 
         if (isCutoffPassed(mealType)) {
             String cutoffTime = mealType.equals("LUNCH")
-                    ? String.format(Locale.getDefault(), "%02d:%02d", lunchCutoffHour,  lunchCutoffMinute)
+                    ? String.format(Locale.getDefault(), "%02d:%02d", lunchCutoffHour, lunchCutoffMinute)
                     : String.format(Locale.getDefault(), "%02d:%02d", dinnerCutoffHour, dinnerCutoffMinute);
             Toast.makeText(getContext(),
                     "Cutoff time (" + cutoffTime + ") has passed for " + mealType + ".",
@@ -412,39 +439,45 @@ public class UserHomeFragment extends Fragment {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
             selectedDate.setTime(sdf.parse(todayDate));
-            today.set(Calendar.HOUR_OF_DAY, 0); today.set(Calendar.MINUTE, 0);
-            today.set(Calendar.SECOND, 0);       today.set(Calendar.MILLISECOND, 0);
-            selectedDate.set(Calendar.HOUR_OF_DAY, 0); selectedDate.set(Calendar.MINUTE, 0);
-            selectedDate.set(Calendar.SECOND, 0);       selectedDate.set(Calendar.MILLISECOND, 0);
+            today.set(Calendar.HOUR_OF_DAY, 0);
+            today.set(Calendar.MINUTE, 0);
+            today.set(Calendar.SECOND, 0);
+            today.set(Calendar.MILLISECOND, 0);
+            selectedDate.set(Calendar.HOUR_OF_DAY, 0);
+            selectedDate.set(Calendar.MINUTE, 0);
+            selectedDate.set(Calendar.SECOND, 0);
+            selectedDate.set(Calendar.MILLISECOND, 0);
             if (selectedDate.before(today)) {
                 Toast.makeText(getContext(), "Cannot mark attendance for past dates",
                         Toast.LENGTH_SHORT).show();
                 return;
             }
-        } catch (Exception ex) { /* continue */ }
+        } catch (Exception ex) {
+            /* continue */ }
 
         updateAttendanceAndSubscription(todayDate, mealType, status)
                 .addOnSuccessListener(aVoid -> {
-                    if (binding == null) return;
+                    if (binding == null)
+                        return;
                     // No day-credit for OUT on ONE_TIME (the unused meal simply doesn't count)
                     String suffix = !isOneTimeSubscribed && "OUT".equals(status)
-                            ? " Subscription day credited." : "";
+                            ? " Subscription day credited."
+                            : "";
                     Toast.makeText(getContext(), mealType + " marked as " + status + "!" + suffix,
                             Toast.LENGTH_SHORT).show();
                 })
                 .addOnFailureListener(ex -> {
-                    if (binding == null) return;
+                    if (binding == null)
+                        return;
                     Toast.makeText(getContext(), "Error: " + ex.getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }
 
     private com.google.android.gms.tasks.Task<Void> updateAttendanceAndSubscription(
             String date, String mealType, String status) {
-        String docId  = messId + "_" + date + "_" + userId;
-        com.google.firebase.firestore.DocumentReference mealRef =
-                db.collection("meal_selections").document(docId);
-        com.google.firebase.firestore.DocumentReference userRef =
-                db.collection("users").document(userId);
+        String docId = messId + "_" + date + "_" + userId;
+        com.google.firebase.firestore.DocumentReference mealRef = db.collection("meal_selections").document(docId);
+        com.google.firebase.firestore.DocumentReference userRef = db.collection("users").document(userId);
         String statusKey = mealType.equals("LUNCH") ? "lunch" : "dinner";
 
         return db.runTransaction(transaction -> {
@@ -455,15 +488,15 @@ public class UserHomeFragment extends Fragment {
             Map<String, Object> mealData = new HashMap<>();
             mealData.put(statusKey, status);
             mealData.put("userId", userId);
-            mealData.put("date",   date);
+            mealData.put("date", date);
             mealData.put("messId", messId);
             mealData.put("timestamp", System.currentTimeMillis());
             transaction.set(mealRef, mealData, com.google.firebase.firestore.SetOptions.merge());
 
             // Only adjust subscription expiry for non-ONE_TIME users
             if (!isOneTimeSubscribed) {
-                long currentExpiry  = getExpiryForMeal(userSnapshot, mealType);
-                long updatedExpiry  = currentExpiry;
+                long currentExpiry = getExpiryForMeal(userSnapshot, mealType);
+                long updatedExpiry = currentExpiry;
                 if ("OUT".equals(status) && !"OUT".equals(previousStatus)) {
                     updatedExpiry += MILLIS_PER_DAY;
                 } else if ("IN".equals(status) && "OUT".equals(previousStatus)) {
@@ -478,34 +511,37 @@ public class UserHomeFragment extends Fragment {
     }
 
     // ────────────────────────────────────────────────────────────
-    //  ONE_TIME UI: renders both cards, but once one is chosen
-    //  the IN button on the other card is locked for the rest of
-    //  the day.
+    // ONE_TIME UI: renders both cards, but once one is chosen
+    // the IN button on the other card is locked for the rest of
+    // the day.
     // ────────────────────────────────────────────────────────────
     private void updateOneTimeButtonUI(String lunchStatus, String dinnerStatus, String autoSelect) {
-        if (binding == null) return;
+        if (binding == null)
+            return;
 
-        boolean cutoffLunch  = isCutoffPassed("LUNCH");
+        boolean cutoffLunch = isCutoffPassed("LUNCH");
         boolean cutoffDinner = isCutoffPassed("DINNER");
 
-        int colorPrimary      = themeColor(R.color.brand_primary);
+        int colorPrimary = themeColor(R.color.brand_primary);
         int colorTextOnPrimary = themeColor(R.color.text_on_brand);
-        int colorTextNormal   = themeColor(R.color.text_heading);
-        int colorTextMuted    = themeColor(R.color.text_caption);
-        int colorGray         = themeColor(R.color.neutral_300);
-        int colorGreen        = themeColor(R.color.state_success);
-        int colorDisabled     = themeColor(R.color.text_disabled);
-        int colorAmber        = themeColor(R.color.state_warning);
+        int colorTextNormal = themeColor(R.color.text_heading);
+        int colorTextMuted = themeColor(R.color.text_caption);
+        int colorGray = themeColor(R.color.neutral_300);
+        int colorGreen = themeColor(R.color.state_success);
+        int colorDisabled = themeColor(R.color.text_disabled);
+        int colorAmber = themeColor(R.color.state_warning);
 
         boolean lunchExplicitIn = "IN".equals(lunchStatus);
         boolean dinnerExplicitIn = "IN".equals(dinnerStatus);
-        
+
         boolean isReset = "RESET".equals(lunchStatus) || "RESET".equals(dinnerStatus);
         boolean isLunchOut = "OUT".equals(lunchStatus);
         boolean isDinnerOut = "OUT".equals(dinnerStatus);
-        
-        boolean lunchChosen  = lunchExplicitIn || (!isReset && !isLunchOut && !dinnerExplicitIn && "LUNCH".equals(autoSelect));
-        boolean dinnerChosen = dinnerExplicitIn || (!isReset && !isDinnerOut && !lunchExplicitIn && "DINNER".equals(autoSelect));
+
+        boolean lunchChosen = lunchExplicitIn
+                || (!isReset && !isLunchOut && !dinnerExplicitIn && "LUNCH".equals(autoSelect));
+        boolean dinnerChosen = dinnerExplicitIn
+                || (!isReset && !isDinnerOut && !lunchExplicitIn && "DINNER".equals(autoSelect));
 
         // ---- Lunch card ----
         if (lunchChosen) {
@@ -614,9 +650,12 @@ public class UserHomeFragment extends Fragment {
         }
 
         boolean disableAutoSelect = false;
-        if ("LUNCH".equals(autoSelect) && cutoffLunch) disableAutoSelect = true;
-        if ("DINNER".equals(autoSelect) && cutoffDinner) disableAutoSelect = true;
-        if (lunchExplicitIn || dinnerExplicitIn) disableAutoSelect = true;
+        if ("LUNCH".equals(autoSelect) && cutoffLunch)
+            disableAutoSelect = true;
+        if ("DINNER".equals(autoSelect) && cutoffDinner)
+            disableAutoSelect = true;
+        if (lunchExplicitIn || dinnerExplicitIn)
+            disableAutoSelect = true;
 
         binding.radioAutoLunch.setEnabled(!disableAutoSelect);
         binding.radioAutoDinner.setEnabled(!disableAutoSelect);
@@ -624,7 +663,8 @@ public class UserHomeFragment extends Fragment {
     }
 
     private void showOutPlanDialog() {
-        if (binding == null) return;
+        if (binding == null)
+            return;
         if (messId == null || userId == null) {
             Toast.makeText(getContext(), "Still loading your profile, please wait...", Toast.LENGTH_SHORT).show();
             return;
@@ -639,12 +679,12 @@ public class UserHomeFragment extends Fragment {
         datePicker.setMinDate(startOfToday().getTimeInMillis());
         container.addView(datePicker);
 
-        com.google.android.material.textfield.TextInputLayout daysLayout =
-                new com.google.android.material.textfield.TextInputLayout(requireContext());
+        com.google.android.material.textfield.TextInputLayout daysLayout = new com.google.android.material.textfield.TextInputLayout(
+                requireContext());
         daysLayout.setHint("How many days?");
         daysLayout.setPadding(0, dp(12), 0, 0);
-        com.google.android.material.textfield.TextInputEditText daysInput =
-                new com.google.android.material.textfield.TextInputEditText(requireContext());
+        com.google.android.material.textfield.TextInputEditText daysInput = new com.google.android.material.textfield.TextInputEditText(
+                requireContext());
         daysInput.setInputType(InputType.TYPE_CLASS_NUMBER);
         daysLayout.addView(daysInput);
         container.addView(daysLayout);
@@ -652,19 +692,20 @@ public class UserHomeFragment extends Fragment {
         RadioGroup mealGroup = new RadioGroup(requireContext());
         mealGroup.setOrientation(RadioGroup.HORIZONTAL);
         mealGroup.setPadding(0, dp(12), 0, 0);
-        int lunchId  = View.generateViewId();
+        int lunchId = View.generateViewId();
         int dinnerId = View.generateViewId();
-        int bothId   = View.generateViewId();
-        RadioButton lunch  = createMealRadioButton(lunchId,  "Lunch");
+        int bothId = View.generateViewId();
+        RadioButton lunch = createMealRadioButton(lunchId, "Lunch");
         RadioButton dinner = createMealRadioButton(dinnerId, "Dinner");
-        RadioButton both   = createMealRadioButton(bothId,   "Both");
+        RadioButton both = createMealRadioButton(bothId, "Both");
         mealGroup.addView(lunch);
         mealGroup.addView(dinner);
         mealGroup.addView(both);
         mealGroup.check(bothId);
-        
+
         if (isOneTimeSubscribed) {
-            // For One Time subscriptions, they only get 1 meal a day, so planning OUT applies to the whole day.
+            // For One Time subscriptions, they only get 1 meal a day, so planning OUT
+            // applies to the whole day.
             mealGroup.setVisibility(View.GONE);
         }
         container.addView(mealGroup);
@@ -691,8 +732,10 @@ public class UserHomeFragment extends Fragment {
 
                     String mealType = "BOTH";
                     int selectedId = mealGroup.getCheckedRadioButtonId();
-                    if (selectedId == lunchId)       mealType = "LUNCH";
-                    else if (selectedId == dinnerId) mealType = "DINNER";
+                    if (selectedId == lunchId)
+                        mealType = "LUNCH";
+                    else if (selectedId == dinnerId)
+                        mealType = "DINNER";
 
                     applyOutPlan(startDate, days, mealType);
                 })
@@ -710,7 +753,8 @@ public class UserHomeFragment extends Fragment {
     }
 
     private void applyOutPlan(Calendar startDate, int days, String mealType) {
-        if (binding == null) return;
+        if (binding == null)
+            return;
         if (!isOneTimeSubscribed) {
             if ((mealType.equals("LUNCH") || mealType.equals("BOTH")) && !isLunchSubscribed) {
                 Toast.makeText(getContext(), "Lunch subscription is expired. Please renew first.",
@@ -733,8 +777,7 @@ public class UserHomeFragment extends Fragment {
             cursor.add(Calendar.DAY_OF_YEAR, 1);
         }
 
-        com.google.firebase.firestore.DocumentReference userRef =
-                db.collection("users").document(userId);
+        com.google.firebase.firestore.DocumentReference userRef = db.collection("users").document(userId);
 
         db.runTransaction(transaction -> {
             com.google.firebase.firestore.DocumentSnapshot userSnapshot = transaction.get(userRef);
@@ -742,33 +785,35 @@ public class UserHomeFragment extends Fragment {
             List<com.google.firebase.firestore.DocumentSnapshot> mealSnapshots = new ArrayList<>();
 
             for (String date : dates) {
-                com.google.firebase.firestore.DocumentReference ref =
-                        db.collection("meal_selections").document(messId + "_" + date + "_" + userId);
+                com.google.firebase.firestore.DocumentReference ref = db.collection("meal_selections")
+                        .document(messId + "_" + date + "_" + userId);
                 mealRefs.add(ref);
                 mealSnapshots.add(transaction.get(ref));
             }
 
-            int lunchCredits  = 0;
+            int lunchCredits = 0;
             int dinnerCredits = 0;
             long timestamp = System.currentTimeMillis();
             for (int i = 0; i < dates.size(); i++) {
                 Map<String, Object> mealData = new HashMap<>();
-                mealData.put("userId",  userId);
-                mealData.put("date",    dates.get(i));
-                mealData.put("messId",  messId);
+                mealData.put("userId", userId);
+                mealData.put("date", dates.get(i));
+                mealData.put("messId", messId);
                 mealData.put("timestamp", timestamp);
                 mealData.put("plannedOut", true);
 
                 com.google.firebase.firestore.DocumentSnapshot snapshot = mealSnapshots.get(i);
                 if (mealType.equals("LUNCH") || mealType.equals("BOTH")) {
                     String previousLunch = snapshot.exists() ? snapshot.getString("lunch") : null;
-                    if (!"OUT".equals(previousLunch)) lunchCredits++;
+                    if (!"OUT".equals(previousLunch))
+                        lunchCredits++;
                     mealData.put("lunch", "OUT");
                     mealData.put("plannedOutLunch", true);
                 }
                 if (mealType.equals("DINNER") || mealType.equals("BOTH")) {
                     String previousDinner = snapshot.exists() ? snapshot.getString("dinner") : null;
-                    if (!"OUT".equals(previousDinner)) dinnerCredits++;
+                    if (!"OUT".equals(previousDinner))
+                        dinnerCredits++;
                     mealData.put("dinner", "OUT");
                     mealData.put("plannedOutDinner", true);
                 }
@@ -779,13 +824,16 @@ public class UserHomeFragment extends Fragment {
                 int oneTimeCredits = 0;
                 for (int i = 0; i < dates.size(); i++) {
                     com.google.firebase.firestore.DocumentSnapshot snapshot = mealSnapshots.get(i);
-                    boolean previouslyPlannedOut = snapshot.exists() && Boolean.TRUE.equals(snapshot.getBoolean("plannedOut"));
+                    boolean previouslyPlannedOut = snapshot.exists()
+                            && Boolean.TRUE.equals(snapshot.getBoolean("plannedOut"));
                     if (!previouslyPlannedOut) {
                         oneTimeCredits++;
                     }
                 }
                 if (oneTimeCredits > 0) {
-                    long currentOneTimeExpiry = userSnapshot.getLong("oneTimeMealExpiry") != null ? userSnapshot.getLong("oneTimeMealExpiry") : 0L;
+                    long currentOneTimeExpiry = userSnapshot.getLong("oneTimeMealExpiry") != null
+                            ? userSnapshot.getLong("oneTimeMealExpiry")
+                            : 0L;
                     long updatedOneTimeExpiry = currentOneTimeExpiry + (oneTimeCredits * MILLIS_PER_DAY);
                     Map<String, Object> updates = new HashMap<>();
                     updates.put("oneTimeMealExpiry", updatedOneTimeExpiry);
@@ -793,38 +841,45 @@ public class UserHomeFragment extends Fragment {
                     transaction.update(userRef, updates);
                 }
             } else {
-                long updatedLunchExpiry  = getExpiryForMeal(userSnapshot, "LUNCH")  + (lunchCredits  * MILLIS_PER_DAY);
+                long updatedLunchExpiry = getExpiryForMeal(userSnapshot, "LUNCH") + (lunchCredits * MILLIS_PER_DAY);
                 long updatedDinnerExpiry = getExpiryForMeal(userSnapshot, "DINNER") + (dinnerCredits * MILLIS_PER_DAY);
                 if (lunchCredits > 0 || dinnerCredits > 0) {
                     Map<String, Object> updates = new HashMap<>();
-                    if (lunchCredits  > 0) updates.put("lunchSubscriptionExpiry",  updatedLunchExpiry);
-                    if (dinnerCredits > 0) updates.put("dinnerSubscriptionExpiry", updatedDinnerExpiry);
+                    if (lunchCredits > 0)
+                        updates.put("lunchSubscriptionExpiry", updatedLunchExpiry);
+                    if (dinnerCredits > 0)
+                        updates.put("dinnerSubscriptionExpiry", updatedDinnerExpiry);
                     updates.put("subscriptionExpiry", Math.max(updatedLunchExpiry, updatedDinnerExpiry));
                     transaction.update(userRef, updates);
                 }
             }
             return null;
         }).addOnSuccessListener(aVoid -> {
-            if (binding == null) return;
+            if (binding == null)
+                return;
             binding.btnPlanOutDays.setEnabled(true);
             Toast.makeText(getContext(), "OUT days saved. Subscription credited.", Toast.LENGTH_SHORT).show();
         }).addOnFailureListener(e -> {
-            if (binding == null) return;
+            if (binding == null)
+                return;
             binding.btnPlanOutDays.setEnabled(true);
             Toast.makeText(getContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         });
     }
 
     private void listenToPlannedOutDays() {
-        if (messId == null || userId == null) return;
-        if (plannedOutListener != null) plannedOutListener.remove();
+        if (messId == null || userId == null)
+            return;
+        if (plannedOutListener != null)
+            plannedOutListener.remove();
 
         plannedOutListener = db.collection("meal_selections")
                 .whereEqualTo("messId", messId)
                 .whereEqualTo("userId", userId)
                 .whereEqualTo("plannedOut", true)
                 .addSnapshotListener((snapshots, e) -> {
-                    if (binding == null || e != null) return;
+                    if (binding == null || e != null)
+                        return;
                     binding.containerPlannedOutDays.removeAllViews();
                     if (snapshots == null || snapshots.isEmpty()) {
                         binding.cardPlannedOutDays.setVisibility(View.GONE);
@@ -840,10 +895,12 @@ public class UserHomeFragment extends Fragment {
                     }
 
                     plannedDocs.sort((left, right) -> {
-                        String leftDate  = left.getString("date");
+                        String leftDate = left.getString("date");
                         String rightDate = right.getString("date");
-                        if (leftDate  == null) return 1;
-                        if (rightDate == null) return -1;
+                        if (leftDate == null)
+                            return 1;
+                        if (rightDate == null)
+                            return -1;
                         return leftDate.compareTo(rightDate);
                     });
 
@@ -861,8 +918,8 @@ public class UserHomeFragment extends Fragment {
 
     // BUG FIX: only the specific flags, not the catch-all plannedOut==true
     private boolean hasPlannedOutMeal(com.google.firebase.firestore.DocumentSnapshot doc) {
-        return (Boolean.TRUE.equals(doc.getBoolean("plannedOutLunch"))  && "OUT".equals(doc.getString("lunch")))
-            || (Boolean.TRUE.equals(doc.getBoolean("plannedOutDinner")) && "OUT".equals(doc.getString("dinner")));
+        return (Boolean.TRUE.equals(doc.getBoolean("plannedOutLunch")) && "OUT".equals(doc.getString("lunch")))
+                || (Boolean.TRUE.equals(doc.getBoolean("plannedOutDinner")) && "OUT".equals(doc.getString("dinner")));
     }
 
     private View createPlannedOutRow(com.google.firebase.firestore.DocumentSnapshot doc) {
@@ -877,8 +934,8 @@ public class UserHomeFragment extends Fragment {
         text.setTextColor(themeColor(R.color.text_body));
         text.setLayoutParams(new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
 
-        com.google.android.material.button.MaterialButton cancelButton =
-                new com.google.android.material.button.MaterialButton(requireContext());
+        com.google.android.material.button.MaterialButton cancelButton = new com.google.android.material.button.MaterialButton(
+                requireContext());
         cancelButton.setText("Cancel");
         cancelButton.setTextSize(12);
         cancelButton.setOnClickListener(v -> confirmCancelPlannedOut(doc));
@@ -896,16 +953,20 @@ public class UserHomeFragment extends Fragment {
             if (parsedDate != null) {
                 date = new SimpleDateFormat("EEE, dd MMM", Locale.getDefault()).format(parsedDate);
             }
-        } catch (Exception ignored) { }
+        } catch (Exception ignored) {
+        }
         return date + " - " + meal;
     }
 
     private String getPlannedOutMealLabel(com.google.firebase.firestore.DocumentSnapshot doc) {
-        boolean lunch  = "OUT".equals(doc.getString("lunch"));
+        boolean lunch = "OUT".equals(doc.getString("lunch"));
         boolean dinner = "OUT".equals(doc.getString("dinner"));
-        if (lunch && dinner) return "Lunch & Dinner";
-        if (lunch)  return "Lunch";
-        if (dinner) return "Dinner";
+        if (lunch && dinner)
+            return "Lunch & Dinner";
+        if (lunch)
+            return "Lunch";
+        if (dinner)
+            return "Dinner";
         return "OUT";
     }
 
@@ -919,25 +980,29 @@ public class UserHomeFragment extends Fragment {
     }
 
     private void cancelPlannedOut(String documentId) {
-        if (binding == null || userId == null) return;
+        if (binding == null || userId == null)
+            return;
         binding.btnPlanOutDays.setEnabled(false);
 
-        com.google.firebase.firestore.DocumentReference mealRef =
-                db.collection("meal_selections").document(documentId);
-        com.google.firebase.firestore.DocumentReference userRef =
-                db.collection("users").document(userId);
+        com.google.firebase.firestore.DocumentReference mealRef = db.collection("meal_selections").document(documentId);
+        com.google.firebase.firestore.DocumentReference userRef = db.collection("users").document(userId);
 
         db.runTransaction(transaction -> {
             com.google.firebase.firestore.DocumentSnapshot mealSnapshot = transaction.get(mealRef);
             com.google.firebase.firestore.DocumentSnapshot userSnapshot = transaction.get(userRef);
-            if (!mealSnapshot.exists()) return null;
+            if (!mealSnapshot.exists())
+                return null;
 
             if (isOneTimeSubscribed) {
-                boolean cancelOneTime = "OUT".equals(mealSnapshot.getString("lunch")) && "OUT".equals(mealSnapshot.getString("dinner")) && Boolean.TRUE.equals(mealSnapshot.getBoolean("plannedOut"));
+                boolean cancelOneTime = "OUT".equals(mealSnapshot.getString("lunch"))
+                        && "OUT".equals(mealSnapshot.getString("dinner"))
+                        && Boolean.TRUE.equals(mealSnapshot.getBoolean("plannedOut"));
                 if (cancelOneTime) {
                     transaction.delete(mealRef);
 
-                    long currentExpiry = userSnapshot.getLong("oneTimeMealExpiry") != null ? userSnapshot.getLong("oneTimeMealExpiry") : 0L;
+                    long currentExpiry = userSnapshot.getLong("oneTimeMealExpiry") != null
+                            ? userSnapshot.getLong("oneTimeMealExpiry")
+                            : 0L;
                     long revertedExpiry = Math.max(System.currentTimeMillis(), currentExpiry - MILLIS_PER_DAY);
                     Map<String, Object> userUpdates = new HashMap<>();
                     userUpdates.put("oneTimeMealExpiry", revertedExpiry);
@@ -945,28 +1010,38 @@ public class UserHomeFragment extends Fragment {
                     transaction.update(userRef, userUpdates);
                 }
             } else {
-                boolean cancelLunch  = "OUT".equals(mealSnapshot.getString("lunch"))
+                boolean cancelLunch = "OUT".equals(mealSnapshot.getString("lunch"))
                         && (Boolean.TRUE.equals(mealSnapshot.getBoolean("plannedOutLunch"))
-                         || Boolean.TRUE.equals(mealSnapshot.getBoolean("plannedOut")));
+                                || Boolean.TRUE.equals(mealSnapshot.getBoolean("plannedOut")));
                 boolean cancelDinner = "OUT".equals(mealSnapshot.getString("dinner"))
                         && (Boolean.TRUE.equals(mealSnapshot.getBoolean("plannedOutDinner"))
-                         || Boolean.TRUE.equals(mealSnapshot.getBoolean("plannedOut")));
+                                || Boolean.TRUE.equals(mealSnapshot.getBoolean("plannedOut")));
 
                 Map<String, Object> mealUpdates = new HashMap<>();
-                if (cancelLunch)  { mealUpdates.put("lunch",  "IN"); mealUpdates.put("plannedOutLunch",  false); }
-                if (cancelDinner) { mealUpdates.put("dinner", "IN"); mealUpdates.put("plannedOutDinner", false); }
+                if (cancelLunch) {
+                    mealUpdates.put("lunch", "IN");
+                    mealUpdates.put("plannedOutLunch", false);
+                }
+                if (cancelDinner) {
+                    mealUpdates.put("dinner", "IN");
+                    mealUpdates.put("plannedOutDinner", false);
+                }
                 mealUpdates.put("plannedOut", false);
                 mealUpdates.put("timestamp", System.currentTimeMillis());
                 transaction.update(mealRef, mealUpdates);
 
-                long lunchExpiry  = getExpiryForMeal(userSnapshot, "LUNCH");
+                long lunchExpiry = getExpiryForMeal(userSnapshot, "LUNCH");
                 long dinnerExpiry = getExpiryForMeal(userSnapshot, "DINNER");
-                if (cancelLunch)  lunchExpiry  = Math.max(System.currentTimeMillis(), lunchExpiry  - MILLIS_PER_DAY);
-                if (cancelDinner) dinnerExpiry = Math.max(System.currentTimeMillis(), dinnerExpiry - MILLIS_PER_DAY);
+                if (cancelLunch)
+                    lunchExpiry = Math.max(System.currentTimeMillis(), lunchExpiry - MILLIS_PER_DAY);
+                if (cancelDinner)
+                    dinnerExpiry = Math.max(System.currentTimeMillis(), dinnerExpiry - MILLIS_PER_DAY);
 
                 Map<String, Object> userUpdates = new HashMap<>();
-                if (cancelLunch)  userUpdates.put("lunchSubscriptionExpiry",  lunchExpiry);
-                if (cancelDinner) userUpdates.put("dinnerSubscriptionExpiry", dinnerExpiry);
+                if (cancelLunch)
+                    userUpdates.put("lunchSubscriptionExpiry", lunchExpiry);
+                if (cancelDinner)
+                    userUpdates.put("dinnerSubscriptionExpiry", dinnerExpiry);
                 if (cancelLunch || cancelDinner) {
                     userUpdates.put("subscriptionExpiry", Math.max(lunchExpiry, dinnerExpiry));
                     transaction.update(userRef, userUpdates);
@@ -974,11 +1049,13 @@ public class UserHomeFragment extends Fragment {
             }
             return null;
         }).addOnSuccessListener(aVoid -> {
-            if (binding == null) return;
+            if (binding == null)
+                return;
             binding.btnPlanOutDays.setEnabled(true);
             Toast.makeText(getContext(), "OUT plan cancelled.", Toast.LENGTH_SHORT).show();
         }).addOnFailureListener(e -> {
-            if (binding == null) return;
+            if (binding == null)
+                return;
             binding.btnPlanOutDays.setEnabled(true);
             Toast.makeText(getContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         });
@@ -987,8 +1064,9 @@ public class UserHomeFragment extends Fragment {
     private long getExpiryForMeal(com.google.firebase.firestore.DocumentSnapshot userSnapshot, String mealType) {
         String expiryKey = mealType.equals("LUNCH") ? "lunchSubscriptionExpiry" : "dinnerSubscriptionExpiry";
         Long specificExpiry = userSnapshot.getLong(expiryKey);
-        Long generalExpiry  = userSnapshot.getLong("subscriptionExpiry");
-        if (specificExpiry != null && specificExpiry > 0) return specificExpiry;
+        Long generalExpiry = userSnapshot.getLong("subscriptionExpiry");
+        if (specificExpiry != null && specificExpiry > 0)
+            return specificExpiry;
         return generalExpiry != null ? generalExpiry : System.currentTimeMillis();
     }
 
@@ -996,8 +1074,8 @@ public class UserHomeFragment extends Fragment {
             com.google.firebase.firestore.DocumentReference userRef,
             com.google.firebase.firestore.DocumentSnapshot userSnapshot,
             String mealType, long updatedExpiry) {
-        String expiryKey   = mealType.equals("LUNCH") ? "lunchSubscriptionExpiry" : "dinnerSubscriptionExpiry";
-        long otherExpiry   = getExpiryForMeal(userSnapshot, mealType.equals("LUNCH") ? "DINNER" : "LUNCH");
+        String expiryKey = mealType.equals("LUNCH") ? "lunchSubscriptionExpiry" : "dinnerSubscriptionExpiry";
+        long otherExpiry = getExpiryForMeal(userSnapshot, mealType.equals("LUNCH") ? "DINNER" : "LUNCH");
         long overallExpiry = Math.max(updatedExpiry, otherExpiry);
         transaction.update(userRef, expiryKey, updatedExpiry, "subscriptionExpiry", overallExpiry);
     }
@@ -1020,20 +1098,21 @@ public class UserHomeFragment extends Fragment {
     }
 
     private void updateButtonUI(String mealType, String status) {
-        if (binding == null) return;
+        if (binding == null)
+            return;
 
-        int colorPrimary       = themeColor(R.color.brand_primary);
+        int colorPrimary = themeColor(R.color.brand_primary);
         int colorTextOnPrimary = themeColor(R.color.text_on_brand);
-        int colorTextNormal    = themeColor(R.color.text_heading);
-        int colorTextMuted     = themeColor(R.color.text_caption);
-        int colorGray          = themeColor(R.color.neutral_300);
-        int colorGreen         = themeColor(R.color.state_success);
-        int colorYellow        = themeColor(R.color.state_warning);
-        int colorDisabled      = themeColor(R.color.text_disabled);
+        int colorTextNormal = themeColor(R.color.text_heading);
+        int colorTextMuted = themeColor(R.color.text_caption);
+        int colorGray = themeColor(R.color.neutral_300);
+        int colorGreen = themeColor(R.color.state_success);
+        int colorYellow = themeColor(R.color.state_warning);
+        int colorDisabled = themeColor(R.color.text_disabled);
 
         boolean isSubscribed = mealType.equals("LUNCH") ? isLunchSubscribed : isDinnerSubscribed;
         boolean cutoffPassed = isCutoffPassed(mealType);
-        boolean canMark      = isSubscribed && !cutoffPassed;
+        boolean canMark = isSubscribed && !cutoffPassed;
 
         if (mealType.equals("LUNCH")) {
             binding.btnLunchOutNew.setVisibility(View.VISIBLE); // restore for normal subs
@@ -1041,7 +1120,8 @@ public class UserHomeFragment extends Fragment {
                 binding.textLunchStatusBar.setTextColor(Color.WHITE);
                 if (!canMark) {
                     binding.textLunchStatusBar.setText(!isSubscribed
-                            ? "Status: Subscription Expired" : "Status: Cutoff Time Passed");
+                            ? "Status: Subscription Expired"
+                            : "Status: Cutoff Time Passed");
                     binding.textLunchStatusBar.setBackgroundColor(colorDisabled);
                 } else if (autoSelectLunch) {
                     // Auto-select is ON — show as Auto IN
@@ -1096,7 +1176,8 @@ public class UserHomeFragment extends Fragment {
                 binding.textDinnerStatusBar.setTextColor(Color.WHITE);
                 if (!canMark) {
                     binding.textDinnerStatusBar.setText(!isSubscribed
-                            ? "Status: Subscription Expired" : "Status: Cutoff Time Passed");
+                            ? "Status: Subscription Expired"
+                            : "Status: Cutoff Time Passed");
                     binding.textDinnerStatusBar.setBackgroundColor(colorDisabled);
                 } else if (autoSelectDinner) {
                     // Auto-select is ON — show as Auto IN
@@ -1149,58 +1230,63 @@ public class UserHomeFragment extends Fragment {
     }
 
     private void startDeadlineTimer() {
-        if (timer != null) timer.cancel();
+        if (timer != null)
+            timer.cancel();
 
         timer = new CountDownTimer(Long.MAX_VALUE, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                if (binding == null) return;
+                if (binding == null)
+                    return;
 
-                Calendar now  = Calendar.getInstance();
-                long nowMs    = now.getTimeInMillis();
+                Calendar now = Calendar.getInstance();
+                long nowMs = now.getTimeInMillis();
 
                 Calendar lunchTarget = (Calendar) now.clone();
                 lunchTarget.set(Calendar.HOUR_OF_DAY, lunchCutoffHour);
-                lunchTarget.set(Calendar.MINUTE,      lunchCutoffMinute);
-                lunchTarget.set(Calendar.SECOND,      0);
+                lunchTarget.set(Calendar.MINUTE, lunchCutoffMinute);
+                lunchTarget.set(Calendar.SECOND, 0);
                 updateCardTimer(binding.textLunchCardTimer, lunchTarget.getTimeInMillis() - nowMs);
 
                 Calendar dinnerTarget = (Calendar) now.clone();
                 dinnerTarget.set(Calendar.HOUR_OF_DAY, dinnerCutoffHour);
-                dinnerTarget.set(Calendar.MINUTE,      dinnerCutoffMinute);
-                dinnerTarget.set(Calendar.SECOND,      0);
+                dinnerTarget.set(Calendar.MINUTE, dinnerCutoffMinute);
+                dinnerTarget.set(Calendar.SECOND, 0);
                 updateCardTimer(binding.textDinnerCardTimer, dinnerTarget.getTimeInMillis() - nowMs);
 
                 Calendar mainTarget = (Calendar) now.clone();
-                String targetLabel  = "LUNCH";
+                String targetLabel = "LUNCH";
                 mainTarget.set(Calendar.HOUR_OF_DAY, lunchCutoffHour);
-                mainTarget.set(Calendar.MINUTE,      lunchCutoffMinute);
-                mainTarget.set(Calendar.SECOND,      0);
+                mainTarget.set(Calendar.MINUTE, lunchCutoffMinute);
+                mainTarget.set(Calendar.SECOND, 0);
 
                 if (now.after(mainTarget)) {
                     mainTarget.set(Calendar.HOUR_OF_DAY, dinnerCutoffHour);
-                    mainTarget.set(Calendar.MINUTE,      dinnerCutoffMinute);
+                    mainTarget.set(Calendar.MINUTE, dinnerCutoffMinute);
                     targetLabel = "DINNER";
                     if (now.after(mainTarget)) {
                         mainTarget.add(Calendar.DAY_OF_YEAR, 1);
                         mainTarget.set(Calendar.HOUR_OF_DAY, lunchCutoffHour);
-                        mainTarget.set(Calendar.MINUTE,      lunchCutoffMinute);
+                        mainTarget.set(Calendar.MINUTE, lunchCutoffMinute);
                         targetLabel = "TOMORROW'S LUNCH";
                     }
                 }
 
-
             }
-            @Override public void onFinish() {}
+
+            @Override
+            public void onFinish() {
+            }
         };
         timer.start();
     }
 
     private void updateCardTimer(TextView timerView, long diff) {
-        if (timerView == null) return;
+        if (timerView == null)
+            return;
         timerView.setVisibility(View.VISIBLE);
         if (diff > 0) {
-            long hours   = TimeUnit.MILLISECONDS.toHours(diff);
+            long hours = TimeUnit.MILLISECONDS.toHours(diff);
             long minutes = TimeUnit.MILLISECONDS.toMinutes(diff) % 60;
             long seconds = TimeUnit.MILLISECONDS.toSeconds(diff) % 60;
             timerView.setText(hours > 0
@@ -1216,27 +1302,32 @@ public class UserHomeFragment extends Fragment {
     }
 
     private boolean isCutoffPassed(String mealType) {
-        Calendar now    = Calendar.getInstance();
-        int hour        = now.get(Calendar.HOUR_OF_DAY);
-        int minute      = now.get(Calendar.MINUTE);
+        Calendar now = Calendar.getInstance();
+        int hour = now.get(Calendar.HOUR_OF_DAY);
+        int minute = now.get(Calendar.MINUTE);
         if (mealType.equals("LUNCH")) {
-            return (hour > lunchCutoffHour)  || (hour == lunchCutoffHour  && minute >= lunchCutoffMinute);
+            return (hour > lunchCutoffHour) || (hour == lunchCutoffHour && minute >= lunchCutoffMinute);
         } else {
             return (hour > dinnerCutoffHour) || (hour == dinnerCutoffHour && minute >= dinnerCutoffMinute);
         }
     }
 
     private void listenToMessCondition() {
-        if (messId == null) return;
+        if (messId == null)
+            return;
 
         db.collection("mess_settings").document(messId)
                 .addSnapshotListener((documentSnapshot, e) -> {
-                    if (binding == null) return;
-                    if (e != null) return;
+                    if (binding == null)
+                        return;
+                    if (e != null)
+                        return;
                     if (documentSnapshot != null && documentSnapshot.exists()) {
                         String condition = documentSnapshot.getString("messCondition");
-                        if (condition != null) updateMessConditionDisplay(condition);
-                        else hideMessConditionCard();
+                        if (condition != null)
+                            updateMessConditionDisplay(condition);
+                        else
+                            hideMessConditionCard();
                     } else {
                         hideMessConditionCard();
                     }
@@ -1244,7 +1335,8 @@ public class UserHomeFragment extends Fragment {
     }
 
     private void updateMessConditionDisplay(String condition) {
-        if (binding == null) return;
+        if (binding == null)
+            return;
         binding.cardMessCondition.setVisibility(View.VISIBLE);
         View indicator = binding.indicatorMessCondition;
         switch (condition) {
@@ -1269,14 +1361,17 @@ public class UserHomeFragment extends Fragment {
     }
 
     private void hideMessConditionCard() {
-        if (binding != null) binding.cardMessCondition.setVisibility(View.GONE);
+        if (binding != null)
+            binding.cardMessCondition.setVisibility(View.GONE);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (timer != null) timer.cancel();
-        if (plannedOutListener != null) plannedOutListener.remove();
+        if (timer != null)
+            timer.cancel();
+        if (plannedOutListener != null)
+            plannedOutListener.remove();
         binding = null;
     }
 }

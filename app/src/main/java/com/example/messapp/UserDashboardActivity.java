@@ -66,7 +66,8 @@ public class UserDashboardActivity extends AppCompatActivity {
     }
 
     private void initNavigation() {
-        if (isFinishing()) return;
+        if (isFinishing())
+            return;
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.nav_host_fragment_activity_user_dashboard);
@@ -117,7 +118,8 @@ public class UserDashboardActivity extends AppCompatActivity {
             return true;
         });
         // Prevent re-selecting the same tab from triggering navigation
-        binding.navView.setOnItemReselectedListener(item -> { /* no-op */ });
+        binding.navView.setOnItemReselectedListener(item -> {
+            /* no-op */ });
     }
 
     private void setupTopBar() {
@@ -126,8 +128,8 @@ public class UserDashboardActivity extends AppCompatActivity {
 
         binding.userTopBar.profileContainer.setOnClickListener(v -> openProfileDrawer());
 
-        binding.userTopBar.btnNotification.setOnClickListener(v ->
-                Toast.makeText(this, "Notifications coming soon", Toast.LENGTH_SHORT).show());
+        binding.userTopBar.btnNotification
+                .setOnClickListener(v -> Toast.makeText(this, "Notifications coming soon", Toast.LENGTH_SHORT).show());
     }
 
     /**
@@ -142,7 +144,8 @@ public class UserDashboardActivity extends AppCompatActivity {
         String userId = auth.getCurrentUser().getUid();
         profileListener = db.collection("users").document(userId)
                 .addSnapshotListener((doc, e) -> {
-                    if (doc == null) return;
+                    if (doc == null)
+                        return;
                     cachedName = doc.getString("name");
                     cachedProfileImageUrl = doc.getString("profileImageUrl");
                     cachedMessId = doc.getString("messId");
@@ -175,7 +178,8 @@ public class UserDashboardActivity extends AppCompatActivity {
     private void styleDrawerLogoutItem() {
         try {
             MenuItem logout = binding.profileDrawer.getMenu().findItem(R.id.drawer_user_logout);
-            if (logout == null) return;
+            if (logout == null)
+                return;
             Drawable icon = logout.getIcon();
             if (icon != null) {
                 Drawable tinted = DrawableCompat.wrap(icon.mutate());
@@ -232,17 +236,22 @@ public class UserDashboardActivity extends AppCompatActivity {
         finish();
     }
 
-    /** Populate drawer using cached data — avoids a Firestore round-trip on every open. */
+    /**
+     * Populate drawer using cached data — avoids a Firestore round-trip on every
+     * open.
+     */
     private void populateDrawer() {
-        if (binding.profileDrawer.getHeaderCount() == 0) return;
+        if (binding.profileDrawer.getHeaderCount() == 0)
+            return;
         View header = binding.profileDrawer.getHeaderView(0);
-        if (header == null) return;
+        if (header == null)
+            return;
 
-        TextView nameView         = header.findViewById(R.id.text_drawer_name);
-        TextView emailView        = header.findViewById(R.id.text_drawer_email);
-        TextView messView         = header.findViewById(R.id.text_drawer_mess);
+        TextView nameView = header.findViewById(R.id.text_drawer_name);
+        TextView emailView = header.findViewById(R.id.text_drawer_email);
+        TextView messView = header.findViewById(R.id.text_drawer_mess);
         TextView subscriptionView = header.findViewById(R.id.text_drawer_subscription);
-        ImageView profileImage    = header.findViewById(R.id.img_drawer_profile);
+        ImageView profileImage = header.findViewById(R.id.img_drawer_profile);
         if (nameView == null || emailView == null || messView == null
                 || subscriptionView == null || profileImage == null) {
             return;
@@ -260,7 +269,8 @@ public class UserDashboardActivity extends AppCompatActivity {
         emailView.setText(auth.getCurrentUser().getEmail());
         nameView.setText(cachedName != null && !cachedName.isEmpty() ? cachedName : "Student");
         messView.setText(cachedMessId != null && !cachedMessId.isEmpty()
-                ? cachedMessId : "Not Joined");
+                ? cachedMessId
+                : "Not Joined");
 
         if (cachedProfileImageUrl != null && !cachedProfileImageUrl.isEmpty()) {
             Glide.with(this)
@@ -276,9 +286,10 @@ public class UserDashboardActivity extends AppCompatActivity {
         String userId = auth.getCurrentUser().getUid();
         db.collection("users").document(userId).get()
                 .addOnSuccessListener(doc -> {
-                    if (doc == null) return;
-                    Long lunchExpiry   = doc.getLong("lunchSubscriptionExpiry");
-                    Long dinnerExpiry  = doc.getLong("dinnerSubscriptionExpiry");
+                    if (doc == null)
+                        return;
+                    Long lunchExpiry = doc.getLong("lunchSubscriptionExpiry");
+                    Long dinnerExpiry = doc.getLong("dinnerSubscriptionExpiry");
                     Long generalExpiry = doc.getLong("subscriptionExpiry");
                     subscriptionView.setText(
                             buildDrawerSubscriptionText(lunchExpiry, dinnerExpiry, generalExpiry));
@@ -291,27 +302,31 @@ public class UserDashboardActivity extends AppCompatActivity {
                 : (generalExpiry != null ? generalExpiry : 0);
         long dinner = dinnerExpiry != null && dinnerExpiry > 0 ? dinnerExpiry
                 : (generalExpiry != null ? generalExpiry : 0);
-        if (lunch <= 0 && dinner <= 0) return "Not Active";
+        if (lunch <= 0 && dinner <= 0)
+            return "Not Active";
         boolean lunchActive = lunch > System.currentTimeMillis();
         boolean dinnerActive = dinner > System.currentTimeMillis();
-        if (lunchActive && dinnerActive) return "Lunch & Dinner";
-        if (lunchActive) return "Lunch active";
-        if (dinnerActive) return "Dinner active";
+        if (lunchActive && dinnerActive)
+            return "Lunch & Dinner";
+        if (lunchActive)
+            return "Lunch active";
+        if (dinnerActive)
+            return "Dinner active";
         return "Expired";
     }
 
     private void showGuestBanner() {
         Snackbar.make(binding.getRoot(),
-            "Guest Mode — Sign up for full access",
-            Snackbar.LENGTH_LONG)
-            .setAction("SIGN UP", v -> {
-                Intent intent = new Intent(this, RoleSelectionActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                finish();
-            })
-            .setActionTextColor(getResources().getColor(android.R.color.holo_blue_light, getTheme()))
-            .show();
+                "Guest Mode — Sign up for full access",
+                Snackbar.LENGTH_LONG)
+                .setAction("SIGN UP", v -> {
+                    Intent intent = new Intent(this, RoleSelectionActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
+                })
+                .setActionTextColor(getResources().getColor(android.R.color.holo_blue_light, getTheme()))
+                .show();
     }
 
     public boolean isGuestMode() {
@@ -321,14 +336,16 @@ public class UserDashboardActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (profileListener != null) profileListener.remove();
+        if (profileListener != null)
+            profileListener.remove();
     }
 
     @Override
     public boolean onSupportNavigateUp() {
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.nav_host_fragment_activity_user_dashboard);
-        if (navHostFragment == null) return super.onSupportNavigateUp();
+        if (navHostFragment == null)
+            return super.onSupportNavigateUp();
         NavController navController = navHostFragment.getNavController();
         return navController.navigateUp() || super.onSupportNavigateUp();
     }

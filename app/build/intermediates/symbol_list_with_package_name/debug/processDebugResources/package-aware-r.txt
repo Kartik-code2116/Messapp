@@ -3753,6 +3753,7 @@ drawable avd_hide_password
 drawable avd_show_password
 drawable bg_admin_action_tile
 drawable bg_admin_card
+drawable bg_admin_header_banner
 drawable bg_admin_icon_gray
 drawable bg_admin_icon_green
 drawable bg_admin_icon_orange
@@ -3767,6 +3768,7 @@ drawable bg_circle_avatar_drawer
 drawable bg_circle_light_green
 drawable bg_circle_primary_border
 drawable bg_circle_surface
+drawable bg_deadline_pill
 drawable bg_drawer_avatar_ring
 drawable bg_drawer_header
 drawable bg_drawer_menu_item
@@ -4097,6 +4099,7 @@ id animateToStart
 id antiClockwise
 id anticipate
 id app_logo
+id appbar_dashboard
 id arc
 id asConfigured
 id async
@@ -4378,7 +4381,6 @@ id group_nav
 id grouping
 id groups
 id headerBackground
-id header_mess_dashboard
 id header_title
 id hidden
 id hide_ime_id
@@ -4422,6 +4424,8 @@ id label_active_students
 id label_mess_details
 id labeled
 id layout
+id layout_date_row
+id layout_deadline_container
 id layout_empty_history
 id left
 id leftToRight
