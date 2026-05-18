@@ -469,24 +469,63 @@ public class MessDashboardActivity extends AppCompatActivity {
 
     private void loadMessDetails(String messId, TextView membersView, TextView ratingView,
             TextView revenueView, TextView messNameView) {
+        // 1. Fetch rating and mess name from mess document
         FirebaseFirestore.getInstance().collection("messes").document(messId).get()
                 .addOnSuccessListener(doc -> {
-                    if (membersView != null) {
-                        Long memberCount = doc.getLong("studentCount");
-                        membersView.setText(String.valueOf(memberCount != null ? memberCount : 0));
-                    }
                     if (ratingView != null) {
                         Double rating = doc.getDouble("avgRating");
-                        ratingView.setText(String.format("%.1f", rating != null ? rating : 0.0));
-                    }
-                    if (revenueView != null) {
-                        Double revenue = doc.getDouble("totalRevenue");
-                        revenueView.setText("₹" + (revenue != null ? revenue.intValue() : 0));
+                        ratingView.setText(String.format(Locale.getDefault(), "%.1f", rating != null ? rating : 0.0));
                     }
                     if (messNameView != null) {
                         String messName = doc.getString("name");
                         messNameView.setText(messName != null && !messName.isEmpty() ? messName : "My Mess");
                     }
+                });
+
+        // 2. Query dynamically joined student members (role = USER)
+        FirebaseFirestore.getInstance().collection("users")
+                .whereEqualTo("messId", messId)
+                .whereEqualTo("role", "USER")
+                .get()
+                .addOnSuccessListener(snapshots -> {
+                    int joinedCount = snapshots != null ? snapshots.size() : 0;
+                    if (membersView != null) {
+                        membersView.setText(String.valueOf(joinedCount));
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    if (membersView != null) membersView.setText("0");
+                });
+
+        // 3. Query transactions dynamically to calculate current month's revenue
+        java.util.Calendar calendar = java.util.Calendar.getInstance();
+        calendar.set(java.util.Calendar.DAY_OF_MONTH, 1);
+        calendar.set(java.util.Calendar.HOUR_OF_DAY, 0);
+        calendar.set(java.util.Calendar.MINUTE, 0);
+        calendar.set(java.util.Calendar.SECOND, 0);
+        calendar.set(java.util.Calendar.MILLISECOND, 0);
+        long startOfMonth = calendar.getTimeInMillis();
+
+        FirebaseFirestore.getInstance().collection("transactions")
+                .whereEqualTo("messId", messId)
+                .get()
+                .addOnSuccessListener(snapshots -> {
+                    double monthlySum = 0;
+                    if (snapshots != null) {
+                        for (DocumentSnapshot transDoc : snapshots.getDocuments()) {
+                            Long timestamp = transDoc.getLong("timestamp");
+                            Double amount = transDoc.getDouble("amount");
+                            if (timestamp != null && timestamp >= startOfMonth && amount != null) {
+                                monthlySum += amount;
+                            }
+                        }
+                    }
+                    if (revenueView != null) {
+                        revenueView.setText("₹" + (int) monthlySum);
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    if (revenueView != null) revenueView.setText("₹0");
                 });
     }
 

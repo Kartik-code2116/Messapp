@@ -377,7 +377,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="TOTAL STUDENTS"
+                            android:text="TODAY'S ATTENDANCE"
                             android:textColor="@color/text_caption"
                             android:textSize="11sp"
                             android:fontFamily="@font/inter"

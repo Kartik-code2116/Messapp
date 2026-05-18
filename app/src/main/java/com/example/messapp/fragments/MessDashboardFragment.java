@@ -34,6 +34,8 @@ public class MessDashboardFragment extends Fragment {
     private String messId;
     private String todayDate;
     private RequestAdapter adapter;
+    private List<String> activeStudentIds = new ArrayList<>();
+    private List<DocumentSnapshot> todayMealSelections = new ArrayList<>();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -71,10 +73,28 @@ public class MessDashboardFragment extends Fragment {
     }
 
     private void listenToTotalStudents() {
-        db.collection("users").whereEqualTo("messId", messId)
+        db.collection("users").whereEqualTo("messId", messId).whereEqualTo("role", "USER")
                 .addSnapshotListener((value, error) -> {
                     if (value != null) {
-                        binding.textTotalStudents.setText(String.valueOf(value.size()));
+                        activeStudentIds.clear();
+                        long currentTime = System.currentTimeMillis();
+                        for (DocumentSnapshot doc : value.getDocuments()) {
+                            Long lunchExp = doc.getLong("lunchSubscriptionExpiry");
+                            Long dinnerExp = doc.getLong("dinnerSubscriptionExpiry");
+                            Long subExp = doc.getLong("subscriptionExpiry");
+
+                            long lExp = lunchExp != null ? lunchExp : 0L;
+                            long dExp = dinnerExp != null ? dinnerExp : 0L;
+                            long sExp = subExp != null ? subExp : 0L;
+
+                            long activeLunch = lExp > 0 ? lExp : sExp;
+                            long activeDinner = dExp > 0 ? dExp : sExp;
+
+                            if (activeLunch > currentTime || activeDinner > currentTime) {
+                                activeStudentIds.add(doc.getId());
+                            }
+                        }
+                        updateAttendanceProgress();
                     }
                 });
     }
@@ -85,6 +105,9 @@ public class MessDashboardFragment extends Fragment {
                 .whereEqualTo("date", todayDate)
                 .addSnapshotListener((value, error) -> {
                     if (value != null) {
+                        todayMealSelections.clear();
+                        todayMealSelections.addAll(value.getDocuments());
+
                         int lunchIn = 0, lunchOut = 0;
                         int dinnerIn = 0, dinnerOut = 0;
                         List<MealRequest> pendingRequests = new ArrayList<>();
@@ -118,8 +141,28 @@ public class MessDashboardFragment extends Fragment {
                         binding.textDinnerOutCount.setText(String.valueOf(dinnerOut));
 
                         adapter.setRequests(pendingRequests);
+                        updateAttendanceProgress();
                     }
                 });
+    }
+
+    private void updateAttendanceProgress() {
+        if (binding == null) return;
+
+        int submittedCount = 0;
+        for (DocumentSnapshot doc : todayMealSelections) {
+            String userId = doc.getString("userId");
+            if (userId != null && activeStudentIds.contains(userId)) {
+                String l = doc.getString("lunch");
+                String d = doc.getString("dinner");
+                if ("IN".equals(l) || "OUT".equals(l) || "IN".equals(d) || "OUT".equals(d)) {
+                    submittedCount++;
+                }
+            }
+        }
+
+        String progressText = submittedCount + " / " + activeStudentIds.size();
+        binding.textTotalStudents.setText(progressText);
     }
 
     private void confirmRequest(MealRequest request) {

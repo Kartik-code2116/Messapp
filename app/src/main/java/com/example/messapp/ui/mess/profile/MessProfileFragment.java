@@ -159,8 +159,25 @@ public class MessProfileFragment extends Fragment {
                         return;
                     }
                     if (snapshots != null) {
-                        int count = snapshots.size();
-                        binding.textActiveStudentsCount.setText(String.valueOf(count));
+                        int activeCount = 0;
+                        long currentTime = System.currentTimeMillis();
+                        for (com.google.firebase.firestore.DocumentSnapshot doc : snapshots.getDocuments()) {
+                            Long lunchExp = doc.getLong("lunchSubscriptionExpiry");
+                            Long dinnerExp = doc.getLong("dinnerSubscriptionExpiry");
+                            Long subExp = doc.getLong("subscriptionExpiry");
+
+                            long lExp = lunchExp != null ? lunchExp : 0L;
+                            long dExp = dinnerExp != null ? dinnerExp : 0L;
+                            long sExp = subExp != null ? subExp : 0L;
+
+                            long activeLunch = lExp > 0 ? lExp : sExp;
+                            long activeDinner = dExp > 0 ? dExp : sExp;
+
+                            if (activeLunch > currentTime || activeDinner > currentTime) {
+                                activeCount++;
+                            }
+                        }
+                        binding.textActiveStudentsCount.setText(String.valueOf(activeCount));
                     }
                 });
     }
@@ -245,3 +262,4 @@ public class MessProfileFragment extends Fragment {
         binding = null;
     }
 }
+
