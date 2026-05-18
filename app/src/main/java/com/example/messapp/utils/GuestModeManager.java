@@ -15,8 +15,6 @@ import com.google.android.material.snackbar.Snackbar;
  */
 public class GuestModeManager {
 
-    private static final String PREFS_NAME = "GuestModePrefs";
-    private static final String KEY_IS_GUEST = "is_guest";
 
     private final Context context;
     private final boolean isGuestMode;
