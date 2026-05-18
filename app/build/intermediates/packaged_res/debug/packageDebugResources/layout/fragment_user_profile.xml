@@ -126,11 +126,6 @@
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp">
 
-                <!-- Contact Info Section -->
-                <TextView
-                    style="@style/ProfileSectionTitle"
-                    android:text="CONTACT INFORMATION" />
-
                 <com.google.android.material.card.MaterialCardView
                     style="@style/ProfileCard"
                     android:layout_width="match_parent"
@@ -142,6 +137,21 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:padding="20dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins"
+                            android:text="Contact Information"
+                            android:textColor="@color/text_heading"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="16dp" android:layout_marginBottom="16dp"
+                            android:background="@color/divider" />
 
                         <!-- Name Row -->
                         <LinearLayout
@@ -301,10 +311,6 @@
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <TextView
-                    style="@style/ProfileSectionTitle"
-                    android:text="MESS &amp; SUBSCRIPTION" />
-
                 <com.google.android.material.card.MaterialCardView
                     style="@style/ProfileCard"
                     android:layout_width="match_parent"
@@ -316,6 +322,21 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:padding="20dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins"
+                            android:text="Mess &amp; Subscription"
+                            android:textColor="@color/text_heading"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="16dp" android:layout_marginBottom="16dp"
+                            android:background="@color/divider" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -459,10 +480,6 @@
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <TextView
-                    style="@style/ProfileSectionTitle"
-                    android:text="APPEARANCE" />
-
                 <com.google.android.material.card.MaterialCardView
                     style="@style/ProfileCard"
                     android:layout_width="match_parent"
@@ -472,44 +489,65 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingStart="16dp" android:paddingEnd="16dp"
-                        android:paddingTop="14dp" android:paddingBottom="14dp">
-
-                        <FrameLayout
-                            android:layout_width="44dp"
-                            android:layout_height="44dp"
-                            android:background="@drawable/bg_profile_icon_circle">
-
-                            <ImageView
-                                android:layout_width="22dp"
-                                android:layout_height="22dp"
-                                android:layout_gravity="center"
-                                android:src="@drawable/ic_dark_mode"
-                                app:tint="@color/brand_primary" />
-                        </FrameLayout>
+                        android:orientation="vertical"
+                        android:paddingTop="4dp" android:paddingBottom="4dp">
 
                         <TextView
-                            android:layout_width="0dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="14dp"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/inter"
-                            android:text="Dark mode"
+                            android:fontFamily="@font/poppins"
+                            android:text="Appearance"
                             android:textColor="@color/text_heading"
-                            android:textSize="16sp" />
+                            android:textSize="17sp"
+                            android:textStyle="bold"
+                            android:paddingStart="16dp" android:paddingEnd="16dp"
+                            android:paddingTop="12dp" android:paddingBottom="8dp" />
 
-                        <com.google.android.material.materialswitch.MaterialSwitch
-                            android:id="@+id/switch_dark_mode"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
+                            android:layout_marginTop="8dp" android:layout_marginBottom="8dp"
+                            android:background="@color/divider" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingStart="16dp" android:paddingEnd="16dp"
+                            android:paddingTop="10dp" android:paddingBottom="10dp">
+
+                            <FrameLayout
+                                android:layout_width="44dp"
+                                android:layout_height="44dp"
+                                android:background="@drawable/bg_profile_icon_circle">
+
+                                <ImageView
+                                    android:layout_width="22dp"
+                                    android:layout_height="22dp"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/ic_dark_mode"
+                                    app:tint="@color/brand_primary" />
+                            </FrameLayout>
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="14dp"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/inter"
+                                android:text="Dark mode"
+                                android:textColor="@color/text_heading"
+                                android:textSize="16sp" />
+
+                            <com.google.android.material.materialswitch.MaterialSwitch
+                                android:id="@+id/switch_dark_mode"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
-
-                <TextView
-                    style="@style/ProfileSectionTitle"
-                    android:text="ACCOUNT SETTINGS" />
 
                 <com.google.android.material.card.MaterialCardView
                     style="@style/ProfileCard"
@@ -521,6 +559,24 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:paddingTop="4dp" android:paddingBottom="4dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins"
+                            android:text="Account Settings"
+                            android:textColor="@color/text_heading"
+                            android:textSize="17sp"
+                            android:textStyle="bold"
+                            android:paddingStart="16dp" android:paddingEnd="16dp"
+                            android:paddingTop="12dp" android:paddingBottom="8dp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
+                            android:layout_marginTop="8dp" android:layout_marginBottom="8dp"
+                            android:background="@color/divider" />
 
                         <LinearLayout
                             android:id="@+id/btn_my_reviews"
