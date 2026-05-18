@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.activity.OnBackPressedCallback;
 
 import com.example.messapp.databinding.ActivityLoginBinding;
 import com.example.messapp.utils.ThemeManager;
@@ -70,6 +71,7 @@ public class LoginActivity extends AppCompatActivity {
 
             Log.d("LoginActivity", "User role: " + currentRole);
             updateUI();
+            setupBackNavigation();
 
             // Set click listeners with null checks
             if (binding.btnMainAction != null) {
@@ -116,6 +118,19 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
             finish();
         }
+    }
+
+    private void setupBackNavigation() {
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                Intent intent = new Intent(LoginActivity.this, RoleSelectionActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                finish();
+            }
+        });
     }
 
     private void updateUI() {
