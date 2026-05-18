@@ -243,10 +243,7 @@ public class MessMenuFragment extends Fragment {
             menuText = binding.dinnerEditText.getText().toString().trim();
         }
 
-        if (menuText.isEmpty()) {
-            Toast.makeText(getContext(), "Menu cannot be empty.", Toast.LENGTH_SHORT).show();
-            return;
-        }
+
 
         Calendar now = Calendar.getInstance();
         Calendar selectedDate = (Calendar) selectedDateCalendar.clone();
@@ -317,7 +314,10 @@ public class MessMenuFragment extends Fragment {
             menuRef.set(menuData)
                     .addOnSuccessListener(aVoid -> {
                         if (binding == null) return;
-                        Toast.makeText(getContext(), mealType + " menu saved successfully!", Toast.LENGTH_SHORT).show();
+                        String message = menuText.isEmpty() ? 
+                                mealType.substring(0, 1).toUpperCase() + mealType.substring(1) + " menu removed successfully!" :
+                                mealType.substring(0, 1).toUpperCase() + mealType.substring(1) + " menu saved successfully!";
+                        Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
                         loadMenuForSelectedDate(); // Refresh menu display and button states
                     })
                     .addOnFailureListener(e -> {
