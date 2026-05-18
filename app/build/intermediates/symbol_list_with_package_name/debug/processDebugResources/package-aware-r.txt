@@ -4152,6 +4152,7 @@ id btn_condition_not_conform
 id btn_confirm
 id btn_copy_mess_id
 id btn_delete
+id btn_delete_message
 id btn_delete_permanently
 id btn_delete_subscription
 id btn_dinner_in_new
@@ -4201,6 +4202,7 @@ id btn_send_message
 id btn_submit_review
 id btn_subscribe_mess
 id btn_user
+id btn_view_sent_messages
 id btn_view_students
 id btn_write_review
 id buttonPanel
@@ -4443,6 +4445,7 @@ id layout_date_row
 id layout_deadline_container
 id layout_empty_history
 id layout_notification_list
+id layout_sent_messages_list
 id left
 id leftToRight
 id legacy
@@ -4805,6 +4808,7 @@ id text_drawer_revenue
 id text_drawer_subscription
 id text_empty_history
 id text_empty_notifications
+id text_empty_sent_messages
 id text_expiry_date
 id text_greeting
 id text_history_date
@@ -4840,6 +4844,9 @@ id text_mess_profile_description
 id text_mess_profile_id
 id text_mess_profile_location
 id text_mess_profile_name
+id text_message_body
+id text_message_date
+id text_message_title
 id text_monthly_revenue_actual
 id text_monthly_revenue_expected
 id text_no_reviews
@@ -5097,6 +5104,7 @@ layout dialog_grant_subscription
 layout dialog_manage_subscription
 layout dialog_notifications
 layout dialog_send_message
+layout dialog_sent_messages
 layout fingerprint_dialog_layout
 layout fragment_add_offer
 layout fragment_mess_dashboard
@@ -5122,6 +5130,7 @@ layout item_mess_card
 layout item_offer
 layout item_profile_info_row
 layout item_review
+layout item_sent_message
 layout item_student
 layout item_student_request
 layout item_transaction

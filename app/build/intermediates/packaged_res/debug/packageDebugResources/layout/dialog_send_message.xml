@@ -48,4 +48,13 @@
             android:inputType="textMultiLine|textCapSentences"
             android:minLines="4" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_view_sent_messages"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="View Sent Messages"
+        android:textColor="@color/brand_primary" />
 </LinearLayout>

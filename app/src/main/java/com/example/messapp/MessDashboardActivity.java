@@ -29,8 +29,12 @@ import com.google.firebase.firestore.ListenerRegistration;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import android.widget.Toast;
 import androidx.core.view.GravityCompat;
 import com.bumptech.glide.Glide;
@@ -178,12 +182,20 @@ public class MessDashboardActivity extends AppCompatActivity {
         View dialogView = getLayoutInflater().inflate(R.layout.dialog_send_message, null);
         TextInputEditText titleInput = dialogView.findViewById(R.id.input_message_title);
         TextInputEditText bodyInput = dialogView.findViewById(R.id.input_message_body);
+        View btnViewSentMessages = dialogView.findViewById(R.id.btn_view_sent_messages);
 
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setView(dialogView)
                 .setPositiveButton("Send", null)
                 .setNegativeButton("Cancel", null)
                 .create();
+
+        if (btnViewSentMessages != null) {
+            btnViewSentMessages.setOnClickListener(v -> {
+                dialog.dismiss();
+                showSentMessagesDialog();
+            });
+        }
 
         dialog.setOnShowListener(dialogInterface -> dialog.getButton(AlertDialog.BUTTON_POSITIVE)
                 .setOnClickListener(v -> {
@@ -214,6 +226,92 @@ public class MessDashboardActivity extends AppCompatActivity {
                             },
                             e -> Toast.makeText(this, "Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show());
                 }));
+        dialog.show();
+    }
+
+    private void showSentMessagesDialog() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (isGuestMode || currentUser == null) {
+            Toast.makeText(this, "Sign in as mess admin to view sent messages.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (cachedMessId == null || cachedMessId.isEmpty()) {
+            Toast.makeText(this, "Mess ID not available yet.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_sent_messages, null);
+        LinearLayout listContainer = dialogView.findViewById(R.id.layout_sent_messages_list);
+        TextView emptyText = dialogView.findViewById(R.id.text_empty_sent_messages);
+
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setView(dialogView)
+                .setPositiveButton("Close", null)
+                .create();
+
+        FirebaseFirestore.getInstance().collection(MessNotificationManager.COLLECTION)
+                .whereEqualTo("messId", cachedMessId)
+                .whereEqualTo("type", MessNotificationManager.TYPE_ADMIN_MESSAGE)
+                .get()
+                .addOnSuccessListener(snapshot -> {
+                    if (isFinishing()) return;
+                    List<DocumentSnapshot> notifications = new ArrayList<>(snapshot.getDocuments());
+                    Collections.sort(notifications, (left, right) -> {
+                        Long leftCreated = left.getLong("createdAt");
+                        Long rightCreated = right.getLong("createdAt");
+                        long leftVal = leftCreated != null ? leftCreated : 0L;
+                        long rightVal = rightCreated != null ? rightCreated : 0L;
+                        return Long.compare(rightVal, leftVal);
+                    });
+
+                    emptyText.setVisibility(notifications.isEmpty() ? View.VISIBLE : View.GONE);
+                    listContainer.removeAllViews();
+                    for (DocumentSnapshot doc : notifications) {
+                        View row = getLayoutInflater().inflate(R.layout.item_sent_message, null);
+                        TextView textTitle = row.findViewById(R.id.text_message_title);
+                        TextView textBody = row.findViewById(R.id.text_message_body);
+                        TextView textDate = row.findViewById(R.id.text_message_date);
+                        View btnDelete = row.findViewById(R.id.btn_delete_message);
+
+                        textTitle.setText(doc.getString("title"));
+                        textBody.setText(doc.getString("message"));
+
+                        Long createdAt = doc.getLong("createdAt");
+                        if (createdAt != null) {
+                            textDate.setText(java.text.DateFormat.getDateTimeInstance(
+                                    java.text.DateFormat.MEDIUM, java.text.DateFormat.SHORT)
+                                    .format(new Date(createdAt)));
+                        } else {
+                            textDate.setText("");
+                        }
+
+                        btnDelete.setOnClickListener(v -> {
+                            new AlertDialog.Builder(this)
+                                    .setTitle("Delete Message")
+                                    .setMessage("Are you sure you want to delete this message? Students will no longer see it.")
+                                    .setPositiveButton("Delete", (d, w) -> {
+                                        doc.getReference().delete()
+                                                .addOnSuccessListener(aVoid -> {
+                                                    Toast.makeText(this, "Message deleted.", Toast.LENGTH_SHORT).show();
+                                                    listContainer.removeView(row);
+                                                    if (listContainer.getChildCount() == 0) {
+                                                        emptyText.setVisibility(View.VISIBLE);
+                                                    }
+                                                })
+                                                .addOnFailureListener(e -> Toast.makeText(this, "Failed to delete: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                                    })
+                                    .setNegativeButton("Cancel", null)
+                                    .show();
+                        });
+
+                        listContainer.addView(row);
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    if (isFinishing()) return;
+                    Toast.makeText(this, "Failed to load messages: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+
         dialog.show();
     }
 

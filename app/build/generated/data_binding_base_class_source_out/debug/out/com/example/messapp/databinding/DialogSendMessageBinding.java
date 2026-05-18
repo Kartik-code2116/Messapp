@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.messapp.R;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -20,14 +21,19 @@ public final class DialogSendMessageBinding implements ViewBinding {
   private final LinearLayout rootView;
 
   @NonNull
+  public final MaterialButton btnViewSentMessages;
+
+  @NonNull
   public final TextInputEditText inputMessageBody;
 
   @NonNull
   public final TextInputEditText inputMessageTitle;
 
   private DialogSendMessageBinding(@NonNull LinearLayout rootView,
-      @NonNull TextInputEditText inputMessageBody, @NonNull TextInputEditText inputMessageTitle) {
+      @NonNull MaterialButton btnViewSentMessages, @NonNull TextInputEditText inputMessageBody,
+      @NonNull TextInputEditText inputMessageTitle) {
     this.rootView = rootView;
+    this.btnViewSentMessages = btnViewSentMessages;
     this.inputMessageBody = inputMessageBody;
     this.inputMessageTitle = inputMessageTitle;
   }
@@ -59,6 +65,12 @@ public final class DialogSendMessageBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.btn_view_sent_messages;
+      MaterialButton btnViewSentMessages = ViewBindings.findChildViewById(rootView, id);
+      if (btnViewSentMessages == null) {
+        break missingId;
+      }
+
       id = R.id.input_message_body;
       TextInputEditText inputMessageBody = ViewBindings.findChildViewById(rootView, id);
       if (inputMessageBody == null) {
@@ -71,8 +83,8 @@ public final class DialogSendMessageBinding implements ViewBinding {
         break missingId;
       }
 
-      return new DialogSendMessageBinding((LinearLayout) rootView, inputMessageBody,
-          inputMessageTitle);
+      return new DialogSendMessageBinding((LinearLayout) rootView, btnViewSentMessages,
+          inputMessageBody, inputMessageTitle);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
