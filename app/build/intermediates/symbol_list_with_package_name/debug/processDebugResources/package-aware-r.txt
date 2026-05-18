@@ -4224,6 +4224,7 @@ id card_add_review
 id card_breakfast
 id card_daily_auto_select
 id card_dinner
+id card_empty_state
 id card_guest
 id card_lunch
 id card_mess_condition
@@ -4454,7 +4455,9 @@ id layout
 id layout_date_row
 id layout_deadline_container
 id layout_empty_history
+id layout_meal_requests
 id layout_notification_list
+id layout_pending_subs
 id layout_sent_messages_list
 id left
 id leftToRight

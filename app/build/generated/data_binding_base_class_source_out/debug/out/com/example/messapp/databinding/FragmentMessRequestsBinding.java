@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.messapp.R;
+import com.google.android.material.card.MaterialCardView;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
@@ -19,6 +21,15 @@ import java.lang.String;
 public final class FragmentMessRequestsBinding implements ViewBinding {
   @NonNull
   private final FrameLayout rootView;
+
+  @NonNull
+  public final MaterialCardView cardEmptyState;
+
+  @NonNull
+  public final LinearLayout layoutMealRequests;
+
+  @NonNull
+  public final LinearLayout layoutPendingSubs;
 
   @NonNull
   public final ProgressBar progressBar;
@@ -30,9 +41,13 @@ public final class FragmentMessRequestsBinding implements ViewBinding {
   public final RecyclerView recyclerViewRequests;
 
   private FragmentMessRequestsBinding(@NonNull FrameLayout rootView,
-      @NonNull ProgressBar progressBar, @NonNull RecyclerView recyclerPending,
-      @NonNull RecyclerView recyclerViewRequests) {
+      @NonNull MaterialCardView cardEmptyState, @NonNull LinearLayout layoutMealRequests,
+      @NonNull LinearLayout layoutPendingSubs, @NonNull ProgressBar progressBar,
+      @NonNull RecyclerView recyclerPending, @NonNull RecyclerView recyclerViewRequests) {
     this.rootView = rootView;
+    this.cardEmptyState = cardEmptyState;
+    this.layoutMealRequests = layoutMealRequests;
+    this.layoutPendingSubs = layoutPendingSubs;
     this.progressBar = progressBar;
     this.recyclerPending = recyclerPending;
     this.recyclerViewRequests = recyclerViewRequests;
@@ -65,6 +80,24 @@ public final class FragmentMessRequestsBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.card_empty_state;
+      MaterialCardView cardEmptyState = ViewBindings.findChildViewById(rootView, id);
+      if (cardEmptyState == null) {
+        break missingId;
+      }
+
+      id = R.id.layout_meal_requests;
+      LinearLayout layoutMealRequests = ViewBindings.findChildViewById(rootView, id);
+      if (layoutMealRequests == null) {
+        break missingId;
+      }
+
+      id = R.id.layout_pending_subs;
+      LinearLayout layoutPendingSubs = ViewBindings.findChildViewById(rootView, id);
+      if (layoutPendingSubs == null) {
+        break missingId;
+      }
+
       id = R.id.progressBar;
       ProgressBar progressBar = ViewBindings.findChildViewById(rootView, id);
       if (progressBar == null) {
@@ -83,7 +116,8 @@ public final class FragmentMessRequestsBinding implements ViewBinding {
         break missingId;
       }
 
-      return new FragmentMessRequestsBinding((FrameLayout) rootView, progressBar, recyclerPending,
+      return new FragmentMessRequestsBinding((FrameLayout) rootView, cardEmptyState,
+          layoutMealRequests, layoutPendingSubs, progressBar, recyclerPending,
           recyclerViewRequests);
     }
     String missingId = rootView.getResources().getResourceName(id);

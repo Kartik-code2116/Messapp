@@ -46,6 +46,10 @@ public class MessRequestsFragment extends Fragment {
     private String currentMessId;
     private ProgressBar progressBar;
 
+    private View cardEmptyState;
+    private View layoutPendingSubs;
+    private View layoutMealRequests;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
@@ -55,6 +59,9 @@ public class MessRequestsFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
 
         progressBar = view.findViewById(R.id.progressBar);
+        cardEmptyState = view.findViewById(R.id.card_empty_state);
+        layoutPendingSubs = view.findViewById(R.id.layout_pending_subs);
+        layoutMealRequests = view.findViewById(R.id.layout_meal_requests);
 
         setupMealRequests(view);
         setupSubscriptionRequests(view);
@@ -118,6 +125,7 @@ public class MessRequestsFragment extends Fragment {
                         if (req != null) subRequestList.add(req);
                     }
                     subRequestAdapter.setRequests(subRequestList);
+                    updateUIState();
                 });
     }
 
@@ -277,9 +285,25 @@ public class MessRequestsFragment extends Fragment {
                             mealRequestList.add(request);
                         }
                         mealRequestAdapter.setRequests(mealRequestList);
+                        updateUIState();
                     } else {
                         Toast.makeText(getContext(), "Error getting requests", Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    private void updateUIState() {
+        boolean hasSubs = subRequestList != null && !subRequestList.isEmpty();
+        boolean hasMeals = mealRequestList != null && !mealRequestList.isEmpty();
+
+        if (layoutPendingSubs != null) {
+            layoutPendingSubs.setVisibility(hasSubs ? View.VISIBLE : View.GONE);
+        }
+        if (layoutMealRequests != null) {
+            layoutMealRequests.setVisibility(hasMeals ? View.VISIBLE : View.GONE);
+        }
+        if (cardEmptyState != null) {
+            cardEmptyState.setVisibility((!hasSubs && !hasMeals) ? View.VISIBLE : View.GONE);
+        }
     }
 }
