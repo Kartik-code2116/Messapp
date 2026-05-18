@@ -41,7 +41,7 @@ public class SplashActivity extends AppCompatActivity {
             goToDashboard(cachedRole);
         } else {
             // Signed in locally but offline / Firestore unavailable
-            goToDashboard("USER");
+            goToRoleSelection();
         }
     };
 

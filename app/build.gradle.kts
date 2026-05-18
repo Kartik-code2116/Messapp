@@ -54,7 +54,6 @@ dependencies {
     implementation(libs.googleid)
     implementation(libs.firebase.storage)
     implementation(libs.glide)
-    implementation(libs.swiperefreshlayout)
     annotationProcessor(libs.glide.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)

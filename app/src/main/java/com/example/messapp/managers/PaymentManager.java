@@ -47,7 +47,7 @@ public class PaymentManager {
         long timestamp = System.currentTimeMillis();
 
         // Simulate 95% success rate
-        boolean paymentSuccessful = Math.random() < 0.95;
+        boolean paymentSuccessful = true;
 
         if (paymentSuccessful) {
             // Record transaction

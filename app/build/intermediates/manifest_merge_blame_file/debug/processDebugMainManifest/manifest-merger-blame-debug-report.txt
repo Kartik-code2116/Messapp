@@ -14,15 +14,15 @@
 12    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 12-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:6:5-79
 12-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:6:22-76
-13    <uses-permission android:name="android.permission.USE_BIOMETRIC" /> <!-- suppress DeprecatedClassUsageInspection -->
-13-->[androidx.biometric:biometric:1.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\be3bbff041edfe709926398e69238b78\transformed\biometric-1.1.0\AndroidManifest.xml:24:5-72
-13-->[androidx.biometric:biometric:1.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\be3bbff041edfe709926398e69238b78\transformed\biometric-1.1.0\AndroidManifest.xml:24:22-69
-14    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
-14-->[androidx.biometric:biometric:1.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\be3bbff041edfe709926398e69238b78\transformed\biometric-1.1.0\AndroidManifest.xml:27:5-74
-14-->[androidx.biometric:biometric:1.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\be3bbff041edfe709926398e69238b78\transformed\biometric-1.1.0\AndroidManifest.xml:27:22-71
-15    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-15-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\447b126f5b0183547d5b7cf9c685f377\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:23:5-77
-15-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\447b126f5b0183547d5b7cf9c685f377\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:23:22-74
+13    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+13-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:7:5-77
+13-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:7:22-74
+14    <uses-permission android:name="android.permission.USE_BIOMETRIC" /> <!-- suppress DeprecatedClassUsageInspection -->
+14-->[androidx.biometric:biometric:1.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\be3bbff041edfe709926398e69238b78\transformed\biometric-1.1.0\AndroidManifest.xml:24:5-72
+14-->[androidx.biometric:biometric:1.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\be3bbff041edfe709926398e69238b78\transformed\biometric-1.1.0\AndroidManifest.xml:24:22-69
+15    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+15-->[androidx.biometric:biometric:1.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\be3bbff041edfe709926398e69238b78\transformed\biometric-1.1.0\AndroidManifest.xml:27:5-74
+15-->[androidx.biometric:biometric:1.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\be3bbff041edfe709926398e69238b78\transformed\biometric-1.1.0\AndroidManifest.xml:27:22-71
 16    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- Required by older versions of Google Play services to create IID tokens -->
 16-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\447b126f5b0183547d5b7cf9c685f377\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:24:5-68
 16-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\447b126f5b0183547d5b7cf9c685f377\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:24:22-65
@@ -45,139 +45,139 @@
 24-->[androidx.core:core:1.16.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\9ae442ca4c9f4b969e6c2cc5a4bcd80a\transformed\core-1.16.0\AndroidManifest.xml:26:22-94
 25
 26    <application
-26-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:8:5-57:19
+26-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:9:5-58:19
 27        android:allowBackup="true"
-27-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:9:9-35
+27-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:10:9-35
 28        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 28-->[androidx.core:core:1.16.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\9ae442ca4c9f4b969e6c2cc5a4bcd80a\transformed\core-1.16.0\AndroidManifest.xml:28:18-86
 29        android:dataExtractionRules="@xml/data_extraction_rules"
-29-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:10:9-65
+29-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:11:9-65
 30        android:debuggable="true"
 31        android:extractNativeLibs="false"
 32        android:fullBackupContent="@xml/backup_rules"
-32-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:11:9-54
+32-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:12:9-54
 33        android:hardwareAccelerated="true"
-33-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:12:9-43
-34        android:icon="@drawable/annapurna"
-34-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:13:9-43
+33-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:13:9-43
+34        android:icon="@drawable/messapp"
+34-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:14:9-41
 35        android:label="@string/app_name"
-35-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:14:9-41
-36        android:roundIcon="@drawable/annapurna"
-36-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:15:9-48
+35-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:15:9-41
+36        android:roundIcon="@drawable/messapp"
+36-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:16:9-46
 37        android:supportsRtl="true"
-37-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:16:9-35
+37-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:17:9-35
 38        android:testOnly="true"
 39        android:theme="@style/Theme.Messapp" >
-39-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:17:9-45
+39-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:18:9-45
 40        <activity
-40-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:19:9-27:20
+40-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:20:9-28:20
 41            android:name="com.example.messapp.SplashActivity"
-41-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:20:13-43
+41-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:21:13-43
 42            android:exported="true"
-42-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:21:13-36
+42-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:22:13-36
 43            android:theme="@style/Theme.Messapp.NoActionBar" >
-43-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:22:13-61
+43-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:23:13-61
 44            <intent-filter>
-44-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:23:13-26:29
+44-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:24:13-27:29
 45                <action android:name="android.intent.action.MAIN" />
-45-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:24:17-69
-45-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:24:25-66
+45-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:25:17-69
+45-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:25:25-66
 46
 47                <category android:name="android.intent.category.LAUNCHER" />
-47-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:25:17-77
-47-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:25:27-74
+47-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:26:17-77
+47-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:26:27-74
 48            </intent-filter>
 49        </activity>
 50        <activity
-50-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:28:9-30:39
+50-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:29:9-31:39
 51            android:name="com.example.messapp.RoleSelectionActivity"
-51-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:29:13-50
+51-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:30:13-50
 52            android:exported="false" />
-52-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:30:13-37
+52-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:31:13-37
 53        <activity
-53-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:31:9-76
+53-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:32:9-76
 54            android:name="com.example.messapp.LoginActivity"
-54-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:31:19-48
+54-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:32:19-48
 55            android:exported="false" />
-55-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:31:49-73
+55-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:32:49-73
 56        <activity
-56-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:32:9-84
+56-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:33:9-84
 57            android:name="com.example.messapp.UserDashboardActivity"
-57-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:32:19-56
+57-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:33:19-56
 58            android:exported="false" />
-58-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:32:57-81
+58-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:33:57-81
 59        <activity
-59-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:33:9-84
+59-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:34:9-84
 60            android:name="com.example.messapp.MessDashboardActivity"
-60-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:33:19-56
+60-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:34:19-56
 61            android:exported="false" />
-61-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:33:57-81
+61-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:34:57-81
 62        <activity
-62-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:34:9-86
+62-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:35:9-86
 63            android:name="com.example.messapp.EditMessProfileActivity"
-63-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:34:19-58
+63-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:35:19-58
 64            android:exported="false" />
-64-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:34:59-83
+64-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:35:59-83
 65        <activity
-65-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:35:9-102
+65-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:36:9-102
 66            android:name="com.example.messapp.ui.user.profile.EditUserProfileActivity"
-66-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:35:19-74
+66-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:36:19-74
 67            android:exported="false" />
-67-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:35:75-99
+67-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:36:75-99
 68        <activity
-68-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:36:9-100
+68-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:37:9-100
 69            android:name="com.example.messapp.ui.mess.settings.MessSettingsActivity"
-69-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:36:19-72
+69-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:37:19-72
 70            android:exported="false" />
-70-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:36:73-97
+70-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:37:73-97
 71        <activity
-71-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:37:9-100
+71-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:38:9-100
 72            android:name="com.example.messapp.ui.mess.weeklymenu.WeeklyMenuActivity"
-72-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:37:19-72
+72-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:38:19-72
 73            android:exported="false" />
-73-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:37:73-97
+73-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:38:73-97
 74        <activity
-74-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:38:9-82
+74-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:39:9-82
 75            android:name="com.example.messapp.MessReviewsActivity"
-75-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:38:19-54
+75-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:39:19-54
 76            android:exported="false" />
-76-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:38:55-79
+76-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:39:55-79
 77        <activity
-77-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:39:9-80
+77-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:40:9-80
 78            android:name="com.example.messapp.MyReviewsActivity"
-78-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:39:19-52
+78-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:40:19-52
 79            android:exported="false" />
-79-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:39:53-77
+79-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:40:53-77
 80
 81        <service
-81-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:41:9-47:19
+81-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:42:9-48:19
 82            android:name="com.example.messapp.MyFirebaseMessagingService"
-82-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:42:13-55
+82-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:43:13-55
 83            android:exported="false" >
-83-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:43:13-37
+83-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:44:13-37
 84            <intent-filter>
-84-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:44:13-46:29
+84-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:45:13-47:29
 85                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-85-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:45:17-78
-85-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:45:25-75
+85-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:46:17-78
+85-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:46:25-75
 86            </intent-filter>
 87        </service>
 88
 89        <activity
-89-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:49:9-52:75
+89-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:50:9-53:75
 90            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-90-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:50:13-79
+90-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:51:13-79
 91            android:exported="false"
-91-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:51:13-37
+91-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:52:13-37
 92            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-92-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:52:13-72
+92-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:53:13-72
 93
 94        <meta-data
-94-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:54:9-56:69
+94-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:55:9-57:69
 95            android:name="com.google.android.gms.version"
-95-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:55:13-58
+95-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:56:13-58
 96            android:value="@integer/google_play_services_version" />
-96-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:56:13-66
+96-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:57:13-66
 97
 98        <activity
 98-->[com.google.firebase:firebase-auth:24.0.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\c5681728da83fbf4fd46d2fc93cdfeb3\transformed\firebase-auth-24.0.1\AndroidManifest.xml:29:9-46:20
@@ -425,10 +425,10 @@
 227            android:exported="false" >
 227-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\447b126f5b0183547d5b7cf9c685f377\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:49:13-37
 228            <intent-filter android:priority="-500" >
-228-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:44:13-46:29
+228-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:45:13-47:29
 229                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-229-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:45:17-78
-229-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:45:25-75
+229-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:46:17-78
+229-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:46:25-75
 230            </intent-filter>
 231        </service>
 232

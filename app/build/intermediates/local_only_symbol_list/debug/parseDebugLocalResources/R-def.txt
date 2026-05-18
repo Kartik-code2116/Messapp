@@ -247,6 +247,7 @@ drawable ic_star_rate
 drawable ic_steam_subtle
 drawable ic_student_profile
 drawable line_dashed
+drawable messapp
 drawable ripple_drawer_item
 drawable ripple_effect
 drawable selector_drawer_item

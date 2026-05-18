@@ -224,7 +224,8 @@ public class LoginActivity extends AppCompatActivity {
                         fetchUserRole(mAuth.getCurrentUser()); // Verify role matches
                     } else {
                         binding.progressBar.setVisibility(View.GONE);
-                        Toast.makeText(LoginActivity.this, "Login Failed: " + task.getException().getMessage(),
+                        String errMsg = task.getException() != null ? task.getException().getMessage() : "Unknown error";
+                        Toast.makeText(LoginActivity.this, "Login Failed: " + errMsg,
                                 Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -275,7 +276,8 @@ public class LoginActivity extends AppCompatActivity {
                         saveUserToFirestore(mAuth.getCurrentUser(), currentRole, finalExtraData, finalStudentName, finalStudentPhone);
                     } else {
                         binding.progressBar.setVisibility(View.GONE);
-                        Toast.makeText(LoginActivity.this, "Signup Failed: " + task.getException().getMessage(),
+                        String errMsg = task.getException() != null ? task.getException().getMessage() : "Unknown error";
+                        Toast.makeText(LoginActivity.this, "Signup Failed: " + errMsg,
                                 Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -307,7 +309,7 @@ public class LoginActivity extends AppCompatActivity {
 
         GetGoogleIdOption googleIdOption = new GetGoogleIdOption.Builder()
                 .setFilterByAuthorizedAccounts(false)
-                .setServerClientId("355370937322-q0146f9culvl5d04d2k0eopcbal7sim0.apps.googleusercontent.com")
+                .setServerClientId(getString(R.string.default_web_client_id))
                 .setAutoSelectEnabled(false)
                 .build();
 

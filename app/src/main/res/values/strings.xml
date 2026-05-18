@@ -9,4 +9,5 @@
     <string name="offer_discount_format">Discount: %.0f%% OFF</string>
     <string name="offer_expiry_format">Expires: %s</string>
     <string name="offer_expiry_not_available">Expires: N/A</string>
+    <string name="default_web_client_id" translatable="false">355370937322-q0146f9culvl5d04d2k0eopcbal7sim0.apps.googleusercontent.com</string>
 </resources>

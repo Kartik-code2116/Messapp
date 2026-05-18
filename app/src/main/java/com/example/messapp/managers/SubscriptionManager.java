@@ -164,21 +164,9 @@ public class SubscriptionManager {
     /**
      * Update user's subscribed messes list
      */
-    @SuppressWarnings("unchecked")
     private void updateUserSubscriptions(String userId, String messId) {
-        db.collection("users").document(userId).get()
-                .addOnSuccessListener(documentSnapshot -> {
-                    if (documentSnapshot.exists()) {
-                        List<String> subscribedMesses = (List<String>) documentSnapshot.get("subscribedMesses");
-                        if (subscribedMesses == null) {
-                            subscribedMesses = new ArrayList<>();
-                        }
-                        if (!subscribedMesses.contains(messId)) {
-                            subscribedMesses.add(messId);
-                            db.collection("users").document(userId).update("subscribedMesses", subscribedMesses);
-                        }
-                    }
-                });
+        db.collection("users").document(userId)
+                .update("subscribedMesses", com.google.firebase.firestore.FieldValue.arrayUnion(messId));
     }
 
     /**

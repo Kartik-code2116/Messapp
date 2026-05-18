@@ -56,11 +56,12 @@ public class UserHomeFragment extends Fragment {
     private boolean autoSelectDinner = false; // daily auto-IN for dinner
     private CountDownTimer timer;
     private ListenerRegistration plannedOutListener;
+    private ListenerRegistration userListener;
+    private ListenerRegistration mealSelectionListener;
+    private ListenerRegistration messSettingsListener;
     private String currentUserOneTimeAutoSelect;
     private String todayBreakfastMenu = "";
     private String selectedBreakfastItem = "";
-
-    private boolean listenersAttached = false;
 
     // Cutoff times (defaults)
     private int lunchCutoffHour = 10;
@@ -106,7 +107,7 @@ public class UserHomeFragment extends Fragment {
         if (userId == null)
             return;
 
-        db.collection("users").document(userId).addSnapshotListener((documentSnapshot, e) -> {
+        userListener = db.collection("users").document(userId).addSnapshotListener((documentSnapshot, e) -> {
             if (binding == null)
                 return;
             if (documentSnapshot != null && documentSnapshot.exists()) {
@@ -360,7 +361,7 @@ public class UserHomeFragment extends Fragment {
         if (messId == null || userId == null)
             return;
 
-        db.collection("meal_selections").document(messId + "_" + todayDate + "_" + userId)
+        mealSelectionListener = db.collection("meal_selections").document(messId + "_" + todayDate + "_" + userId)
                 .addSnapshotListener((documentSnapshot, e) -> {
                     if (binding == null)
                         return;
@@ -1268,25 +1269,6 @@ public class UserHomeFragment extends Fragment {
                 dinnerTarget.set(Calendar.MINUTE, dinnerCutoffMinute);
                 dinnerTarget.set(Calendar.SECOND, 0);
                 updateCardTimer(binding.textDinnerCardTimer, dinnerTarget.getTimeInMillis() - nowMs);
-
-                Calendar mainTarget = (Calendar) now.clone();
-                String targetLabel = "LUNCH";
-                mainTarget.set(Calendar.HOUR_OF_DAY, lunchCutoffHour);
-                mainTarget.set(Calendar.MINUTE, lunchCutoffMinute);
-                mainTarget.set(Calendar.SECOND, 0);
-
-                if (now.after(mainTarget)) {
-                    mainTarget.set(Calendar.HOUR_OF_DAY, dinnerCutoffHour);
-                    mainTarget.set(Calendar.MINUTE, dinnerCutoffMinute);
-                    targetLabel = "DINNER";
-                    if (now.after(mainTarget)) {
-                        mainTarget.add(Calendar.DAY_OF_YEAR, 1);
-                        mainTarget.set(Calendar.HOUR_OF_DAY, lunchCutoffHour);
-                        mainTarget.set(Calendar.MINUTE, lunchCutoffMinute);
-                        targetLabel = "TOMORROW'S LUNCH";
-                    }
-                }
-
             }
 
             @Override
@@ -1331,7 +1313,7 @@ public class UserHomeFragment extends Fragment {
         if (messId == null)
             return;
 
-        db.collection("mess_settings").document(messId)
+        messSettingsListener = db.collection("mess_settings").document(messId)
                 .addSnapshotListener((documentSnapshot, e) -> {
                     if (binding == null)
                         return;
@@ -1502,6 +1484,12 @@ public class UserHomeFragment extends Fragment {
             timer.cancel();
         if (plannedOutListener != null)
             plannedOutListener.remove();
+        if (userListener != null)
+            userListener.remove();
+        if (mealSelectionListener != null)
+            mealSelectionListener.remove();
+        if (messSettingsListener != null)
+            messSettingsListener.remove();
         binding = null;
     }
 }

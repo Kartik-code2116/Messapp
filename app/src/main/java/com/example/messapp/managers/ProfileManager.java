@@ -131,6 +131,8 @@ public class ProfileManager {
                         } else {
                             callback.onFailure("Profile incomplete");
                         }
+                    } else {
+                        callback.onFailure("Mess document not found");
                     }
                 })
                 .addOnFailureListener(e -> callback.onFailure(e.getMessage()));
