@@ -5,8 +5,10 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.text.SpannableString;
+import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
@@ -15,7 +17,9 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.messapp.databinding.ActivityMessDashboardBinding;
+import com.example.messapp.managers.MessNotificationManager;
 import com.example.messapp.utils.ThemeManager;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -157,8 +161,60 @@ public class MessDashboardActivity extends AppCompatActivity {
 
         binding.adminTopBar.profileContainer.setOnClickListener(v -> openProfileDrawer());
 
-        binding.adminTopBar.btnSendMessage.setOnClickListener(
-                v -> Toast.makeText(this, "Send Message to Everyone — Coming soon", Toast.LENGTH_SHORT).show());
+        binding.adminTopBar.btnSendMessage.setOnClickListener(v -> showSendMessageDialog());
+    }
+
+    private void showSendMessageDialog() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (isGuestMode || currentUser == null) {
+            Toast.makeText(this, "Sign in as mess admin to send messages.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (cachedMessId == null || cachedMessId.isEmpty()) {
+            Toast.makeText(this, "Mess ID not available yet.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_send_message, null);
+        TextInputEditText titleInput = dialogView.findViewById(R.id.input_message_title);
+        TextInputEditText bodyInput = dialogView.findViewById(R.id.input_message_body);
+
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setView(dialogView)
+                .setPositiveButton("Send", null)
+                .setNegativeButton("Cancel", null)
+                .create();
+
+        dialog.setOnShowListener(dialogInterface -> dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+                .setOnClickListener(v -> {
+                    String title = titleInput.getText() != null
+                            ? titleInput.getText().toString().trim() : "";
+                    String message = bodyInput.getText() != null
+                            ? bodyInput.getText().toString().trim() : "";
+                    if (TextUtils.isEmpty(title)) {
+                        titleInput.setError("Required");
+                        return;
+                    }
+                    if (TextUtils.isEmpty(message)) {
+                        bodyInput.setError("Required");
+                        return;
+                    }
+
+                    String senderName = cachedName != null && !cachedName.isEmpty()
+                            ? cachedName : "Mess Admin";
+                    MessNotificationManager.sendAdminMessage(
+                            cachedMessId,
+                            currentUser.getUid(),
+                            senderName,
+                            title,
+                            message,
+                            () -> {
+                                Toast.makeText(this, "Message sent to students.", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                            },
+                            e -> Toast.makeText(this, "Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                }));
+        dialog.show();
     }
 
     /**

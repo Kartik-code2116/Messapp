@@ -27,6 +27,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import com.example.messapp.adapters.SubscriptionRequestAdapter;
+import com.example.messapp.managers.MessNotificationManager;
 import com.example.messapp.models.SubscriptionRequest;
 import com.google.android.material.textfield.TextInputEditText;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -185,12 +186,22 @@ public class MessDashboardFragment extends Fragment {
                     com.google.firebase.firestore.WriteBatch batch = db.batch();
                     batch.update(db.collection("users").document(request.getStudentId()), userUpdate);
                     batch.update(db.collection("subscriptionRequests").document(request.getId()), "status", "GRANTED");
+                    final long notificationExpiry = generalExpiry;
 
                     batch.commit()
                             .addOnSuccessListener(aVoid -> {
                                 if (binding == null)
                                     return;
                                 binding.progressBar.setVisibility(View.GONE);
+                                String senderId = mAuth.getCurrentUser() != null
+                                        ? mAuth.getCurrentUser().getUid() : "";
+                                MessNotificationManager.sendSubscriptionGranted(
+                                        request.getMessId(),
+                                        senderId,
+                                        request.getStudentId(),
+                                        mealType,
+                                        days,
+                                        notificationExpiry);
                                 Toast.makeText(getContext(), "Subscription granted!", Toast.LENGTH_SHORT).show();
                             })
                             .addOnFailureListener(e -> {

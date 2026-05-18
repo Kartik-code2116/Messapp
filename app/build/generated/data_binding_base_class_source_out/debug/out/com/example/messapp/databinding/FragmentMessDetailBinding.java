@@ -14,6 +14,7 @@ import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.messapp.R;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import java.lang.NullPointerException;
@@ -25,10 +26,19 @@ public final class FragmentMessDetailBinding implements ViewBinding {
   private final NestedScrollView rootView;
 
   @NonNull
+  public final MaterialButton btnSeeReviews;
+
+  @NonNull
   public final MaterialButton btnSubmitReview;
 
   @NonNull
   public final MaterialButton btnSubscribeMess;
+
+  @NonNull
+  public final MaterialButton btnWriteReview;
+
+  @NonNull
+  public final MaterialCardView cardAddReview;
 
   @NonNull
   public final RatingBar ratingBarAvg;
@@ -70,17 +80,22 @@ public final class FragmentMessDetailBinding implements ViewBinding {
   public final TextView textMessDetailName;
 
   private FragmentMessDetailBinding(@NonNull NestedScrollView rootView,
-      @NonNull MaterialButton btnSubmitReview, @NonNull MaterialButton btnSubscribeMess,
-      @NonNull RatingBar ratingBarAvg, @NonNull RatingBar ratingBarUser,
-      @NonNull RecyclerView recyclerViewReviews, @NonNull TextInputEditText reviewCommentEditText,
+      @NonNull MaterialButton btnSeeReviews, @NonNull MaterialButton btnSubmitReview,
+      @NonNull MaterialButton btnSubscribeMess, @NonNull MaterialButton btnWriteReview,
+      @NonNull MaterialCardView cardAddReview, @NonNull RatingBar ratingBarAvg,
+      @NonNull RatingBar ratingBarUser, @NonNull RecyclerView recyclerViewReviews,
+      @NonNull TextInputEditText reviewCommentEditText,
       @NonNull TextInputLayout reviewCommentLayout, @NonNull TextView textAddReview,
       @NonNull TextView textAvgRating, @NonNull TextView textMessDetailContact,
       @NonNull TextView textMessDetailDescription, @NonNull TextView textMessDetailDinnerMenu,
       @NonNull TextView textMessDetailLocation, @NonNull TextView textMessDetailLunchMenu,
       @NonNull TextView textMessDetailName) {
     this.rootView = rootView;
+    this.btnSeeReviews = btnSeeReviews;
     this.btnSubmitReview = btnSubmitReview;
     this.btnSubscribeMess = btnSubscribeMess;
+    this.btnWriteReview = btnWriteReview;
+    this.cardAddReview = cardAddReview;
     this.ratingBarAvg = ratingBarAvg;
     this.ratingBarUser = ratingBarUser;
     this.recyclerViewReviews = recyclerViewReviews;
@@ -123,6 +138,12 @@ public final class FragmentMessDetailBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.btn_see_reviews;
+      MaterialButton btnSeeReviews = ViewBindings.findChildViewById(rootView, id);
+      if (btnSeeReviews == null) {
+        break missingId;
+      }
+
       id = R.id.btn_submit_review;
       MaterialButton btnSubmitReview = ViewBindings.findChildViewById(rootView, id);
       if (btnSubmitReview == null) {
@@ -132,6 +153,18 @@ public final class FragmentMessDetailBinding implements ViewBinding {
       id = R.id.btn_subscribe_mess;
       MaterialButton btnSubscribeMess = ViewBindings.findChildViewById(rootView, id);
       if (btnSubscribeMess == null) {
+        break missingId;
+      }
+
+      id = R.id.btn_write_review;
+      MaterialButton btnWriteReview = ViewBindings.findChildViewById(rootView, id);
+      if (btnWriteReview == null) {
+        break missingId;
+      }
+
+      id = R.id.card_add_review;
+      MaterialCardView cardAddReview = ViewBindings.findChildViewById(rootView, id);
+      if (cardAddReview == null) {
         break missingId;
       }
 
@@ -213,11 +246,12 @@ public final class FragmentMessDetailBinding implements ViewBinding {
         break missingId;
       }
 
-      return new FragmentMessDetailBinding((NestedScrollView) rootView, btnSubmitReview,
-          btnSubscribeMess, ratingBarAvg, ratingBarUser, recyclerViewReviews, reviewCommentEditText,
-          reviewCommentLayout, textAddReview, textAvgRating, textMessDetailContact,
-          textMessDetailDescription, textMessDetailDinnerMenu, textMessDetailLocation,
-          textMessDetailLunchMenu, textMessDetailName);
+      return new FragmentMessDetailBinding((NestedScrollView) rootView, btnSeeReviews,
+          btnSubmitReview, btnSubscribeMess, btnWriteReview, cardAddReview, ratingBarAvg,
+          ratingBarUser, recyclerViewReviews, reviewCommentEditText, reviewCommentLayout,
+          textAddReview, textAvgRating, textMessDetailContact, textMessDetailDescription,
+          textMessDetailDinnerMenu, textMessDetailLocation, textMessDetailLunchMenu,
+          textMessDetailName);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

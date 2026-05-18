@@ -345,7 +345,7 @@
                         android:textColor="@color/text_heading"
                         android:textSize="40sp"
                         android:textStyle="bold"
-                        tools:text="128" />
+                        tools:text="1" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -380,6 +380,67 @@
                         android:layout_marginTop="16dp"
                         android:text="View student list"
                         app:strokeColor="@color/brand_primary" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                style="@style/ProfileSectionTitle"
+                android:text="REVIEWS" />
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/ProfileCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins"
+                        android:text="Mess reviews"
+                        android:textColor="@color/text_heading"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:fontFamily="@font/inter"
+                        android:text="See feedback written by students for your mess."
+                        android:textColor="@color/text_caption"
+                        android:textSize="13sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_see_reviews"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="See User Reviews" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_write_review"
+                            style="@style/Profound.Button"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:text="Write Review"
+                            android:visibility="gone" />
+                    </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 

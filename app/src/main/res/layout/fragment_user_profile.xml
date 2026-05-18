@@ -423,6 +423,30 @@
                             android:layout_marginTop="18dp"
                             android:text="Renew subscription"
                             app:strokeColor="@color/brand_primary" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btn_see_reviews"
+                                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="My Reviews" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btn_write_review"
+                                style="@style/Profound.Button"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="12dp"
+                                android:layout_weight="1"
+                                android:text="Write Review" />
+                        </LinearLayout>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
@@ -518,7 +542,7 @@
                                 android:layout_marginStart="14dp"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/inter"
-                                android:text="Mess reviews"
+                                android:text="My reviews"
                                 android:textColor="@color/text_heading"
                                 android:textSize="15sp" />
 

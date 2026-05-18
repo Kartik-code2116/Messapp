@@ -14,17 +14,21 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.messapp.models.Review;
+import com.example.messapp.managers.ReviewManager;
 import com.example.messapp.ui.user.ReviewAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MessReviewsActivity extends AppCompatActivity {
+
+    public static final String EXTRA_MESS_ID = "messId";
+    public static final String EXTRA_OPEN_REVIEW_DIALOG = "OPEN_REVIEW_DIALOG";
 
     private RecyclerView recyclerView;
     private FloatingActionButton fabAddReview;
@@ -32,9 +36,11 @@ public class MessReviewsActivity extends AppCompatActivity {
     private ReviewAdapter adapter;
     private List<Review> reviewList;
     private FirebaseFirestore db;
+    private ReviewManager reviewManager;
     private String currentMessId;
     private String currentUserId;
     private String currentUserName;
+    private String currentRole;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +57,12 @@ public class MessReviewsActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
         db = FirebaseFirestore.getInstance();
-        currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        currentMessId = getIntent().getStringExtra("messId");
+        reviewManager = new ReviewManager();
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            currentUserId = currentUser.getUid();
+        }
+        currentMessId = getIntent().getStringExtra(EXTRA_MESS_ID);
 
         recyclerView = findViewById(R.id.recycler_reviews);
         fabAddReview = findViewById(R.id.fab_add_review);
@@ -63,50 +73,125 @@ public class MessReviewsActivity extends AppCompatActivity {
         adapter = new ReviewAdapter(reviewList);
         recyclerView.setAdapter(adapter);
 
-        if (currentMessId == null) {
-            Toast.makeText(this, "Error: Mess not found", Toast.LENGTH_SHORT).show();
-            finish();
-            return;
+        if (currentUserId != null) {
+            fetchUserContextAndLoadReviews();
+        } else {
+            fabAddReview.setVisibility(View.GONE);
+            if (currentMessId == null) {
+                Toast.makeText(this, "Please login to view reviews", Toast.LENGTH_SHORT).show();
+                finish();
+                return;
+            }
+            loadMessReviews();
         }
-
-        fetchUserName();
-        loadReviews();
 
         fabAddReview.setOnClickListener(v -> showAddReviewDialog());
     }
 
-    private void fetchUserName() {
+    private void fetchUserContextAndLoadReviews() {
         db.collection("users").document(currentUserId).get()
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
                         currentUserName = documentSnapshot.getString("name");
                         if (currentUserName == null)
-                            currentUserName = "Anonymous";
+                            currentUserName = "Student";
+                        currentRole = documentSnapshot.getString("role");
+
+                        String profileMessId = documentSnapshot.getString("messId");
+                        if ("MESS_OWNER".equals(currentRole)) {
+                            currentMessId = profileMessId;
+                            fabAddReview.setVisibility(View.GONE);
+                            if (getSupportActionBar() != null) {
+                                getSupportActionBar().setTitle("User Reviews");
+                            }
+                            loadMessReviews();
+                        } else {
+                            if (currentMessId == null) {
+                                currentMessId = profileMessId;
+                            }
+                            fabAddReview.setVisibility(currentMessId != null ? View.VISIBLE : View.GONE);
+                            if (getSupportActionBar() != null) {
+                                getSupportActionBar().setTitle("My Reviews");
+                            }
+                            loadMyReviews();
+                            if (getIntent().getBooleanExtra(EXTRA_OPEN_REVIEW_DIALOG, false)) {
+                                fabAddReview.post(this::showAddReviewDialog);
+                            }
+                        }
+                    } else {
+                        Toast.makeText(this, "User data not found", Toast.LENGTH_SHORT).show();
+                        finish();
                     }
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Error loading user data: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    finish();
                 });
     }
 
-    private void loadReviews() {
-        db.collection("reviews")
-                .whereEqualTo("messId", currentMessId)
-                .orderBy("timestamp", Query.Direction.DESCENDING)
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    reviewList.clear();
-                    if (!queryDocumentSnapshots.isEmpty()) {
-                        reviewList.addAll(queryDocumentSnapshots.toObjects(Review.class));
-                        textNoReviews.setVisibility(View.GONE);
-                    } else {
-                        textNoReviews.setVisibility(View.VISIBLE);
-                    }
-                    adapter.notifyDataSetChanged();
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(this, "Error loading reviews: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                });
+    private void loadMessReviews() {
+        if (currentMessId == null) {
+            Toast.makeText(this, "Mess not found", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+
+        reviewManager.getMessReviews(currentMessId, new ReviewManager.ReviewListCallback() {
+            @Override
+            public void onSuccess(List<Review> reviews) {
+                reviewList.clear();
+                if (!reviews.isEmpty()) {
+                    reviewList.addAll(reviews);
+                    textNoReviews.setVisibility(View.GONE);
+                } else {
+                    textNoReviews.setVisibility(View.VISIBLE);
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(String errorMessage) {
+                Toast.makeText(MessReviewsActivity.this, "Error loading reviews: " + errorMessage, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void loadMyReviews() {
+        reviewManager.getReviewsForUser(currentUserId, new ReviewManager.ReviewListCallback() {
+            @Override
+            public void onSuccess(List<Review> reviews) {
+                reviewList.clear();
+                if (!reviews.isEmpty()) {
+                    reviewList.addAll(reviews);
+                    textNoReviews.setVisibility(View.GONE);
+                } else {
+                    textNoReviews.setText("You haven't written any reviews yet.");
+                    textNoReviews.setVisibility(View.VISIBLE);
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(String errorMessage) {
+                Toast.makeText(MessReviewsActivity.this, "Error loading reviews: " + errorMessage, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void showAddReviewDialog() {
+        if (currentUserId == null) {
+            Toast.makeText(this, "Please login to add a review", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if ("MESS_OWNER".equals(currentRole)) {
+            Toast.makeText(this, "Mess owners can view reviews only", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (currentMessId == null) {
+            Toast.makeText(this, "Join a mess first to add a review", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_add_review, null);
 
         RatingBar ratingBar = dialogView.findViewById(R.id.rating_bar);
@@ -142,24 +227,19 @@ public class MessReviewsActivity extends AppCompatActivity {
     }
 
     private void submitReview(float rating, String comment) {
-        String reviewId = db.collection("reviews").document().getId();
-        Review review = new Review(
-                reviewId,
-                currentMessId,
-                currentUserId,
+        reviewManager.createReview(currentMessId, rating, comment,
                 currentUserName != null ? currentUserName : "Student",
-                rating,
-                comment,
-                null // ServerTimestamp will fill this
-        );
+                new ReviewManager.UpdateCallback() {
+            @Override
+            public void onSuccess() {
+                Toast.makeText(MessReviewsActivity.this, "Review submitted!", Toast.LENGTH_SHORT).show();
+                loadMyReviews();
+            }
 
-        db.collection("reviews").document(reviewId).set(review)
-                .addOnSuccessListener(aVoid -> {
-                    Toast.makeText(this, "Review submitted!", Toast.LENGTH_SHORT).show();
-                    loadReviews(); // Refresh list
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(this, "Failed to submit review: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                });
+            @Override
+            public void onFailure(String errorMessage) {
+                Toast.makeText(MessReviewsActivity.this, "Failed to submit review: " + errorMessage, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

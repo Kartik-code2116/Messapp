@@ -43,16 +43,12 @@ public class UserProfileFragment extends Fragment {
         binding.btnRenewSubscription.setOnClickListener(v -> handleRenewSubscription());
         binding.btnEditProfileImage.setOnClickListener(v ->
                 startActivity(new Intent(getActivity(), EditUserProfileActivity.class)));
+        binding.btnSeeReviews.setOnClickListener(v -> openMessReviews(false));
+        binding.btnWriteReview.setOnClickListener(v -> openMessReviews(true));
 
         binding.btnMyReviews.setOnClickListener(v -> {
-            if (currentUserMessId != null) {
-                Intent intent = new Intent(getActivity(), com.example.messapp.MessReviewsActivity.class);
-                intent.putExtra("messId", currentUserMessId);
-                startActivity(intent);
-            } else {
-                Toast.makeText(getContext(), "Please wait for profile to load or join a mess.",
-                        Toast.LENGTH_SHORT).show();
-            }
+            Intent intent = new Intent(getActivity(), com.example.messapp.MyReviewsActivity.class);
+            startActivity(intent);
         });
 
         setupThemeToggle();
@@ -165,6 +161,18 @@ public class UserProfileFragment extends Fragment {
                     if (getContext() != null)
                         Toast.makeText(getContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
+    }
+
+    private void openMessReviews(boolean openReviewDialog) {
+        if (currentUserMessId == null || currentUserMessId.isEmpty()) {
+            Toast.makeText(getContext(), "Join a mess first to use reviews.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Intent intent = new Intent(getActivity(), com.example.messapp.MessReviewsActivity.class);
+        intent.putExtra(com.example.messapp.MessReviewsActivity.EXTRA_MESS_ID, currentUserMessId);
+        intent.putExtra(com.example.messapp.MessReviewsActivity.EXTRA_OPEN_REVIEW_DIALOG, openReviewDialog);
+        startActivity(intent);
     }
 
     private void handleChangePassword() {

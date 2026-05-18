@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.messapp.R;
 import com.example.messapp.adapters.RequestAdapter;
 import com.example.messapp.adapters.SubscriptionRequestAdapter;
+import com.example.messapp.managers.MessNotificationManager;
 import com.example.messapp.models.MealRequest;
 import com.example.messapp.models.SubscriptionRequest;
 import com.google.android.material.textfield.TextInputEditText;
@@ -213,10 +214,20 @@ public class MessRequestsFragment extends Fragment {
                     batch.update(db.collection("users").document(request.getStudentId()), userUpdate);
                     batch.update(db.collection("subscriptionRequests").document(request.getId()), "status", "GRANTED");
                     batch.set(db.collection("transactions").document(transId), transaction);
+                    final long notificationExpiry = generalExpiry;
 
                     batch.commit()
                             .addOnSuccessListener(aVoid -> {
                                 if (progressBar != null) progressBar.setVisibility(View.GONE);
+                                String senderId = mAuth.getCurrentUser() != null
+                                        ? mAuth.getCurrentUser().getUid() : "";
+                                MessNotificationManager.sendSubscriptionGranted(
+                                        currentMessId,
+                                        senderId,
+                                        request.getStudentId(),
+                                        mealType,
+                                        days,
+                                        notificationExpiry);
                                 Toast.makeText(getContext(), "Subscription granted!", Toast.LENGTH_SHORT).show();
                                 fetchSubscriptionRequests();
                             })

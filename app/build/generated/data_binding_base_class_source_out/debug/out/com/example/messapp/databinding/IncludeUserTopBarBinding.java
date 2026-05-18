@@ -37,18 +37,23 @@ public final class IncludeUserTopBarBinding implements ViewBinding {
   public final TextView textGreeting;
 
   @NonNull
+  public final TextView textNotificationBadge;
+
+  @NonNull
   public final ConstraintLayout topHeader;
 
   private IncludeUserTopBarBinding(@NonNull ConstraintLayout rootView,
       @NonNull MaterialCardView btnNotification, @NonNull ImageView imgProfile,
       @NonNull MaterialCardView profileContainer, @NonNull TextView textDate,
-      @NonNull TextView textGreeting, @NonNull ConstraintLayout topHeader) {
+      @NonNull TextView textGreeting, @NonNull TextView textNotificationBadge,
+      @NonNull ConstraintLayout topHeader) {
     this.rootView = rootView;
     this.btnNotification = btnNotification;
     this.imgProfile = imgProfile;
     this.profileContainer = profileContainer;
     this.textDate = textDate;
     this.textGreeting = textGreeting;
+    this.textNotificationBadge = textNotificationBadge;
     this.topHeader = topHeader;
   }
 
@@ -109,10 +114,16 @@ public final class IncludeUserTopBarBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.text_notification_badge;
+      TextView textNotificationBadge = ViewBindings.findChildViewById(rootView, id);
+      if (textNotificationBadge == null) {
+        break missingId;
+      }
+
       ConstraintLayout topHeader = (ConstraintLayout) rootView;
 
       return new IncludeUserTopBarBinding((ConstraintLayout) rootView, btnNotification, imgProfile,
-          profileContainer, textDate, textGreeting, topHeader);
+          profileContainer, textDate, textGreeting, textNotificationBadge, topHeader);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -36,6 +36,7 @@
         <activity android:name=".ui.mess.settings.MessSettingsActivity" android:exported="false" />
         <activity android:name=".ui.mess.weeklymenu.WeeklyMenuActivity" android:exported="false" />
         <activity android:name=".MessReviewsActivity" android:exported="false" />
+        <activity android:name=".MyReviewsActivity" android:exported="false" />
 
         <service
             android:name=".MyFirebaseMessagingService"

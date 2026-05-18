@@ -18,6 +18,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.messapp.EditMessProfileActivity;
 import com.example.messapp.LoginActivity;
+import com.example.messapp.MessReviewsActivity;
 import com.example.messapp.R;
 import com.example.messapp.databinding.FragmentMessProfileBinding;
 import com.example.messapp.models.Mess;
@@ -52,6 +53,8 @@ public class MessProfileFragment extends Fragment {
         binding.btnNavOffers.setOnClickListener(v -> handleOffers());
         binding.btnNavRevenue.setOnClickListener(v -> handleRevenue());
         binding.btnNavWeeklyMenu.setOnClickListener(v -> handleWeeklyMenu());
+        binding.btnSeeReviews.setOnClickListener(v -> openMessReviews(false));
+        binding.btnWriteReview.setVisibility(View.GONE);
         binding.btnMessLogout.setOnClickListener(v -> handleLogout());
         binding.btnLogoutTop.setOnClickListener(v -> handleLogout());
 
@@ -203,6 +206,18 @@ public class MessProfileFragment extends Fragment {
 
     private void handleSettings() {
         Intent intent = new Intent(requireActivity(), MessSettingsActivity.class);
+        startActivity(intent);
+    }
+
+    private void openMessReviews(boolean openReviewDialog) {
+        if (currentMessId == null || currentMessId.isEmpty()) {
+            Toast.makeText(requireContext(), "Mess ID not available yet.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Intent intent = new Intent(requireActivity(), MessReviewsActivity.class);
+        intent.putExtra(MessReviewsActivity.EXTRA_MESS_ID, currentMessId);
+        intent.putExtra(MessReviewsActivity.EXTRA_OPEN_REVIEW_DIALOG, openReviewDialog);
         startActivity(intent);
     }
 

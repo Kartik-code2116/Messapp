@@ -1,5 +1,6 @@
 package com.example.messapp.ui.user;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -13,25 +14,25 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.messapp.Mess;
+import com.example.messapp.MessReviewsActivity;
+import com.example.messapp.managers.ReviewManager;
 import com.example.messapp.databinding.FragmentMessDetailBinding;
 import com.example.messapp.models.Review;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 public class MessDetailFragment extends Fragment {
 
     private FragmentMessDetailBinding binding;
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
+    private ReviewManager reviewManager;
     private String messId;
     private ReviewAdapter reviewAdapter;
     private List<Review> reviewList;
@@ -50,13 +51,17 @@ public class MessDetailFragment extends Fragment {
         binding = FragmentMessDetailBinding.inflate(inflater, container, false);
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
+        reviewManager = new ReviewManager();
 
         setupRecyclerView();
         loadMessDetails();
         loadReviews();
+        updateReviewFormVisibility();
 
         binding.btnSubmitReview.setOnClickListener(v -> submitReview());
         binding.btnSubscribeMess.setOnClickListener(v -> subscribeToMess());
+        binding.btnSeeReviews.setOnClickListener(v -> openReviewsScreen());
+        binding.btnWriteReview.setOnClickListener(v -> scrollToReviewForm());
 
         return binding.getRoot();
     }
@@ -78,7 +83,9 @@ public class MessDetailFragment extends Fragment {
                         Mess mess = documentSnapshot.toObject(Mess.class);
                         if (mess != null) {
                             binding.textMessDetailName.setText(mess.getName());
-                            binding.textMessDetailLocation.setText("Location: " + mess.getLocation());
+                            binding.textMessDetailLocation.setText(valueOrFallback(mess.getLocation(), "Location not set"));
+                            binding.textMessDetailContact.setText("Contact: " + valueOrFallback(mess.getContact(), "Not set"));
+                            binding.textMessDetailDescription.setText(valueOrFallback(mess.getDescription(), "No description available"));
                             // Assuming Mess model has these fields or load them from dailyMenu
                             loadDailyMenu(messId);
                         }
@@ -102,15 +109,17 @@ public class MessDetailFragment extends Fragment {
     }
 
     private void loadReviews() {
-        db.collection("reviews")
-                .whereEqualTo("messId", messId)
-                .orderBy("timestamp", Query.Direction.DESCENDING)
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
+        if (messId == null) {
+            return;
+        }
+
+        reviewManager.getMessReviews(messId, new ReviewManager.ReviewListCallback() {
+            @Override
+            public void onSuccess(List<Review> reviews) {
+                if (binding == null) return;
                     reviewList.clear();
                     float totalRating = 0;
-                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                        Review review = document.toObject(Review.class);
+                for (Review review : reviews) {
                         reviewList.add(review);
                         totalRating += review.getRating();
                     }
@@ -124,10 +133,24 @@ public class MessDetailFragment extends Fragment {
                         binding.ratingBarAvg.setRating(0);
                         binding.textAvgRating.setText("No Reviews");
                     }
-                });
+            }
+
+            @Override
+            public void onFailure(String errorMessage) {
+                if (getContext() != null) {
+                    Toast.makeText(getContext(), "Failed to load reviews: " + errorMessage, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     private void submitReview() {
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser == null) {
+            Toast.makeText(getContext(), "Please login to submit a review", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         String comment = binding.reviewCommentEditText.getText().toString().trim();
         float rating = binding.ratingBarUser.getRating();
 
@@ -141,32 +164,46 @@ public class MessDetailFragment extends Fragment {
             return;
         }
 
-        String userId = mAuth.getCurrentUser().getUid();
-        // We might need to fetch user name here, but for now using a placeholder or
-        // keeping it empty
-        // In a real app, you'd fetch the user's name from his profile
+        binding.btnSubmitReview.setEnabled(false);
+        String userId = currentUser.getUid();
         db.collection("users").document(userId).get().addOnSuccessListener(userDoc -> {
+            if (binding == null) return;
             String userName = userDoc.getString("name");
             if (userName == null)
-                userName = "Anonymous";
+                userName = "Student";
 
-            String reviewId = UUID.randomUUID().toString();
-            Review review = new Review(reviewId, messId, userId, userName, rating, comment, new Date());
-
-            db.collection("reviews").document(reviewId).set(review)
-                    .addOnSuccessListener(aVoid -> {
+            reviewManager.createReview(messId, rating, comment, userName, new ReviewManager.UpdateCallback() {
+                @Override
+                public void onSuccess() {
+                    if (binding == null) return;
                         Toast.makeText(getContext(), "Review submitted!", Toast.LENGTH_SHORT).show();
                         binding.reviewCommentEditText.setText("");
                         binding.ratingBarUser.setRating(0);
+                    binding.btnSubmitReview.setEnabled(true);
                         loadReviews();
-                    })
-                    .addOnFailureListener(
-                            e -> Toast.makeText(getContext(), "Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                }
+
+                @Override
+                public void onFailure(String errorMessage) {
+                    if (binding == null) return;
+                    binding.btnSubmitReview.setEnabled(true);
+                    Toast.makeText(getContext(), "Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }).addOnFailureListener(e -> {
+            if (binding == null) return;
+            binding.btnSubmitReview.setEnabled(true);
+            Toast.makeText(getContext(), "Failed to load user profile", Toast.LENGTH_SHORT).show();
         });
     }
 
     private void subscribeToMess() {
-        String userId = mAuth.getCurrentUser().getUid();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser == null) {
+            Toast.makeText(getContext(), "Please login to subscribe", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String userId = currentUser.getUid();
         Map<String, Object> updates = new HashMap<>();
         updates.put("messId", messId);
 
@@ -175,6 +212,38 @@ public class MessDetailFragment extends Fragment {
                         aVoid -> Toast.makeText(getContext(), "Successfully subscribed!", Toast.LENGTH_SHORT).show())
                 .addOnFailureListener(e -> Toast
                         .makeText(getContext(), "Subscription failed: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+    }
+
+    private void updateReviewFormVisibility() {
+        boolean isLoggedIn = mAuth.getCurrentUser() != null;
+        binding.textAddReview.setVisibility(isLoggedIn ? View.VISIBLE : View.GONE);
+        binding.cardAddReview.setVisibility(isLoggedIn ? View.VISIBLE : View.GONE);
+        binding.btnWriteReview.setVisibility(isLoggedIn ? View.VISIBLE : View.GONE);
+    }
+
+    private void openReviewsScreen() {
+        if (messId == null) {
+            Toast.makeText(getContext(), "Mess not found", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Intent intent = new Intent(requireContext(), MessReviewsActivity.class);
+        intent.putExtra(MessReviewsActivity.EXTRA_MESS_ID, messId);
+        startActivity(intent);
+    }
+
+    private void scrollToReviewForm() {
+        if (mAuth.getCurrentUser() == null) {
+            Toast.makeText(getContext(), "Please login to write a review", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        binding.getRoot().smoothScrollTo(0, binding.cardAddReview.getTop());
+        binding.reviewCommentEditText.requestFocus();
+    }
+
+    private String valueOrFallback(String value, String fallback) {
+        return value != null && !value.trim().isEmpty() ? value : fallback;
     }
 
     @Override

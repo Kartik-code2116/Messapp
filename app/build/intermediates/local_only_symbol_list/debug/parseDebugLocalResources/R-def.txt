@@ -328,6 +328,7 @@ id btn_save_offer
 id btn_save_profile
 id btn_save_settings
 id btn_save_weekly_menu
+id btn_see_reviews
 id btn_select_date
 id btn_select_expiry_date
 id btn_send_message
@@ -335,7 +336,9 @@ id btn_submit_review
 id btn_subscribe_mess
 id btn_user
 id btn_view_students
+id btn_write_review
 id cardForm
+id card_add_review
 id card_breakfast
 id card_daily_auto_select
 id card_dinner
@@ -420,6 +423,8 @@ id indicator_mess_condition
 id info_row_icon
 id info_row_label
 id info_row_value
+id input_message_body
+id input_message_title
 id items_toolbar
 id iv_delete_offer
 id label_active_students
@@ -427,6 +432,7 @@ id label_mess_details
 id layout_date_row
 id layout_deadline_container
 id layout_empty_history
+id layout_notification_list
 id logoCard
 id lunch_edit_text
 id lunch_hour_picker
@@ -555,6 +561,7 @@ id text_drawer_rating
 id text_drawer_revenue
 id text_drawer_subscription
 id text_empty_history
+id text_empty_notifications
 id text_expiry_date
 id text_greeting
 id text_history_date
@@ -590,6 +597,7 @@ id text_mess_profile_name
 id text_monthly_revenue_actual
 id text_monthly_revenue_expected
 id text_no_reviews
+id text_notification_badge
 id text_offer_description
 id text_offer_discount
 id text_offer_expiry
@@ -651,6 +659,8 @@ layout dialog_add_review
 layout dialog_freeze_delete
 layout dialog_grant_subscription
 layout dialog_manage_subscription
+layout dialog_notifications
+layout dialog_send_message
 layout fragment_add_offer
 layout fragment_mess_dashboard
 layout fragment_mess_detail

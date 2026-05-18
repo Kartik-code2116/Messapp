@@ -44,6 +44,12 @@ public final class FragmentUserProfileBinding implements ViewBinding {
   public final MaterialButton btnRenewSubscription;
 
   @NonNull
+  public final MaterialButton btnSeeReviews;
+
+  @NonNull
+  public final MaterialButton btnWriteReview;
+
+  @NonNull
   public final ShapeableImageView profileImage;
 
   @NonNull
@@ -89,6 +95,7 @@ public final class FragmentUserProfileBinding implements ViewBinding {
       @NonNull LinearLayout btnChangePassword, @NonNull FloatingActionButton btnEditProfileImage,
       @NonNull LinearLayout btnHelpSupport, @NonNull LinearLayout btnLogout,
       @NonNull LinearLayout btnMyReviews, @NonNull MaterialButton btnRenewSubscription,
+      @NonNull MaterialButton btnSeeReviews, @NonNull MaterialButton btnWriteReview,
       @NonNull ShapeableImageView profileImage, @NonNull ProgressBar progressBar,
       @NonNull MaterialSwitch switchDarkMode, @NonNull TextView textDinnerExpiry,
       @NonNull TextView textLunchExpiry, @NonNull TextView textOneTimeExpiry,
@@ -103,6 +110,8 @@ public final class FragmentUserProfileBinding implements ViewBinding {
     this.btnLogout = btnLogout;
     this.btnMyReviews = btnMyReviews;
     this.btnRenewSubscription = btnRenewSubscription;
+    this.btnSeeReviews = btnSeeReviews;
+    this.btnWriteReview = btnWriteReview;
     this.profileImage = profileImage;
     this.progressBar = progressBar;
     this.switchDarkMode = switchDarkMode;
@@ -179,6 +188,18 @@ public final class FragmentUserProfileBinding implements ViewBinding {
       id = R.id.btn_renew_subscription;
       MaterialButton btnRenewSubscription = ViewBindings.findChildViewById(rootView, id);
       if (btnRenewSubscription == null) {
+        break missingId;
+      }
+
+      id = R.id.btn_see_reviews;
+      MaterialButton btnSeeReviews = ViewBindings.findChildViewById(rootView, id);
+      if (btnSeeReviews == null) {
+        break missingId;
+      }
+
+      id = R.id.btn_write_review;
+      MaterialButton btnWriteReview = ViewBindings.findChildViewById(rootView, id);
+      if (btnWriteReview == null) {
         break missingId;
       }
 
@@ -268,10 +289,10 @@ public final class FragmentUserProfileBinding implements ViewBinding {
 
       return new FragmentUserProfileBinding((FrameLayout) rootView, btnChangePassword,
           btnEditProfileImage, btnHelpSupport, btnLogout, btnMyReviews, btnRenewSubscription,
-          profileImage, progressBar, switchDarkMode, textDinnerExpiry, textLunchExpiry,
-          textOneTimeExpiry, textProfileEmail, textProfileEmailCard, textProfileMessId,
-          textProfileMessName, textProfileName, textProfileNameCard, textProfilePhone,
-          textSubscriptionExpiry);
+          btnSeeReviews, btnWriteReview, profileImage, progressBar, switchDarkMode,
+          textDinnerExpiry, textLunchExpiry, textOneTimeExpiry, textProfileEmail,
+          textProfileEmailCard, textProfileMessId, textProfileMessName, textProfileName,
+          textProfileNameCard, textProfilePhone, textSubscriptionExpiry);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

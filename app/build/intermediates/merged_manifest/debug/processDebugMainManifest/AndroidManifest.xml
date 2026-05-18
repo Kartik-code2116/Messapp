@@ -74,6 +74,9 @@
         <activity
             android:name="com.example.messapp.MessReviewsActivity"
             android:exported="false" />
+        <activity
+            android:name="com.example.messapp.MyReviewsActivity"
+            android:exported="false" />
 
         <service
             android:name="com.example.messapp.MyFirebaseMessagingService"

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,12 +25,17 @@ public final class ActivityMyReviewsBinding implements ViewBinding {
   public final RecyclerView reviewsRecyclerView;
 
   @NonNull
+  public final TextView textNoReviews;
+
+  @NonNull
   public final MaterialToolbar toolbar;
 
   private ActivityMyReviewsBinding(@NonNull LinearLayout rootView,
-      @NonNull RecyclerView reviewsRecyclerView, @NonNull MaterialToolbar toolbar) {
+      @NonNull RecyclerView reviewsRecyclerView, @NonNull TextView textNoReviews,
+      @NonNull MaterialToolbar toolbar) {
     this.rootView = rootView;
     this.reviewsRecyclerView = reviewsRecyclerView;
+    this.textNoReviews = textNoReviews;
     this.toolbar = toolbar;
   }
 
@@ -66,13 +72,20 @@ public final class ActivityMyReviewsBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.text_no_reviews;
+      TextView textNoReviews = ViewBindings.findChildViewById(rootView, id);
+      if (textNoReviews == null) {
+        break missingId;
+      }
+
       id = R.id.toolbar;
       MaterialToolbar toolbar = ViewBindings.findChildViewById(rootView, id);
       if (toolbar == null) {
         break missingId;
       }
 
-      return new ActivityMyReviewsBinding((LinearLayout) rootView, reviewsRecyclerView, toolbar);
+      return new ActivityMyReviewsBinding((LinearLayout) rootView, reviewsRecyclerView,
+          textNoReviews, toolbar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

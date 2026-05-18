@@ -8,9 +8,11 @@ import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
@@ -22,6 +24,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.bumptech.glide.Glide;
 import com.example.messapp.databinding.ActivityUserDashboardBinding;
+import com.example.messapp.managers.MessNotificationManager;
 import com.example.messapp.utils.ThemeManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
@@ -30,8 +33,12 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class UserDashboardActivity extends AppCompatActivity {
@@ -44,10 +51,13 @@ public class UserDashboardActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private FirebaseAuth auth;
     private ListenerRegistration profileListener;
+    private ListenerRegistration notificationListener;
     // Cache profile data to avoid re-fetching on every drawer open
     private String cachedName;
     private String cachedProfileImageUrl;
     private String cachedMessId;
+    private long cachedNotificationSeenAt;
+    private String activeNotificationMessId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,8 +138,7 @@ public class UserDashboardActivity extends AppCompatActivity {
 
         binding.userTopBar.profileContainer.setOnClickListener(v -> openProfileDrawer());
 
-        binding.userTopBar.btnNotification
-                .setOnClickListener(v -> Toast.makeText(this, "Notifications coming soon", Toast.LENGTH_SHORT).show());
+        binding.userTopBar.btnNotification.setOnClickListener(v -> showNotificationsDialog());
     }
 
     /**
@@ -149,12 +158,153 @@ public class UserDashboardActivity extends AppCompatActivity {
                     cachedName = doc.getString("name");
                     cachedProfileImageUrl = doc.getString("profileImageUrl");
                     cachedMessId = doc.getString("messId");
+                    Long seenAt = doc.getLong("lastNotificationSeenAt");
+                    cachedNotificationSeenAt = seenAt != null ? seenAt : 0L;
 
                     String greeting = (cachedName != null && !cachedName.isEmpty())
                             ? "Hello, " + cachedName.split(" ")[0] + "!"
                             : "Hello!";
                     applyProfileToTopBar(greeting, cachedProfileImageUrl);
+                    startNotificationListenerIfReady();
                 });
+    }
+
+    private void startNotificationListenerIfReady() {
+        if (auth.getCurrentUser() == null || cachedMessId == null || cachedMessId.isEmpty()) {
+            updateNotificationBadge(0);
+            return;
+        }
+        if (cachedMessId.equals(activeNotificationMessId) && notificationListener != null) {
+            return;
+        }
+        if (notificationListener != null) {
+            notificationListener.remove();
+        }
+        activeNotificationMessId = cachedMessId;
+        String userId = auth.getCurrentUser().getUid();
+        notificationListener = db.collection(MessNotificationManager.COLLECTION)
+                .whereEqualTo("messId", cachedMessId)
+                .addSnapshotListener((snapshot, e) -> {
+                    if (snapshot == null) {
+                        updateNotificationBadge(0);
+                        return;
+                    }
+                    int unread = 0;
+                    for (DocumentSnapshot doc : snapshot.getDocuments()) {
+                        if (!isNotificationVisibleForUser(doc, userId)) {
+                            continue;
+                        }
+                        Long createdAt = doc.getLong("createdAt");
+                        if (createdAt != null && createdAt > cachedNotificationSeenAt) {
+                            unread++;
+                        }
+                    }
+                    updateNotificationBadge(unread);
+                });
+    }
+
+    private boolean isNotificationVisibleForUser(DocumentSnapshot doc, String userId) {
+        String targetUserId = doc.getString("targetUserId");
+        return targetUserId == null || targetUserId.isEmpty() || targetUserId.equals(userId);
+    }
+
+    private void updateNotificationBadge(int unreadCount) {
+        if (binding == null || binding.userTopBar == null) {
+            return;
+        }
+        if (unreadCount <= 0) {
+            binding.userTopBar.textNotificationBadge.setVisibility(View.GONE);
+            return;
+        }
+        binding.userTopBar.textNotificationBadge.setText(unreadCount > 9 ? "9+" : String.valueOf(unreadCount));
+        binding.userTopBar.textNotificationBadge.setVisibility(View.VISIBLE);
+    }
+
+    private void showNotificationsDialog() {
+        if (auth.getCurrentUser() == null) {
+            Toast.makeText(this, "Sign in to view notifications.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (cachedMessId == null || cachedMessId.isEmpty()) {
+            Toast.makeText(this, "Join a mess to receive notifications.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_notifications, null);
+        LinearLayout listContainer = dialogView.findViewById(R.id.layout_notification_list);
+        TextView emptyText = dialogView.findViewById(R.id.text_empty_notifications);
+        String userId = auth.getCurrentUser().getUid();
+
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setView(dialogView)
+                .setPositiveButton("Close", null)
+                .create();
+
+        db.collection(MessNotificationManager.COLLECTION)
+                .whereEqualTo("messId", cachedMessId)
+                .get()
+                .addOnSuccessListener(snapshot -> {
+                    List<DocumentSnapshot> notifications = new ArrayList<>();
+                    for (DocumentSnapshot doc : snapshot.getDocuments()) {
+                        if (isNotificationVisibleForUser(doc, userId)) {
+                            notifications.add(doc);
+                        }
+                    }
+                    Collections.sort(notifications, (left, right) -> Long.compare(
+                            valueOrZero(right.getLong("createdAt")),
+                            valueOrZero(left.getLong("createdAt"))));
+
+                    emptyText.setVisibility(notifications.isEmpty() ? View.VISIBLE : View.GONE);
+                    listContainer.removeAllViews();
+                    for (DocumentSnapshot doc : notifications) {
+                        listContainer.addView(createNotificationRow(doc));
+                    }
+
+                    db.collection("users").document(userId)
+                            .update("lastNotificationSeenAt", System.currentTimeMillis());
+                    cachedNotificationSeenAt = System.currentTimeMillis();
+                    updateNotificationBadge(0);
+                })
+                .addOnFailureListener(e ->
+                        Toast.makeText(this, "Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+
+        dialog.show();
+    }
+
+    private View createNotificationRow(DocumentSnapshot doc) {
+        LinearLayout row = new LinearLayout(this);
+        row.setOrientation(LinearLayout.VERTICAL);
+        row.setPadding(0, 14, 0, 14);
+
+        TextView title = new TextView(this);
+        title.setText(doc.getString("title") != null ? doc.getString("title") : "Notification");
+        title.setTextColor(ContextCompat.getColor(this, R.color.text_heading));
+        title.setTextSize(15);
+        title.setTypeface(title.getTypeface(), android.graphics.Typeface.BOLD);
+        row.addView(title);
+
+        TextView message = new TextView(this);
+        message.setText(doc.getString("message") != null ? doc.getString("message") : "");
+        message.setTextColor(ContextCompat.getColor(this, R.color.text_body));
+        message.setTextSize(14);
+        message.setPadding(0, 4, 0, 0);
+        row.addView(message);
+
+        Long createdAt = doc.getLong("createdAt");
+        if (createdAt != null) {
+            TextView date = new TextView(this);
+            date.setText(DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT)
+                    .format(new Date(createdAt)));
+            date.setTextColor(ContextCompat.getColor(this, R.color.text_caption));
+            date.setTextSize(12);
+            date.setPadding(0, 6, 0, 0);
+            row.addView(date);
+        }
+        return row;
+    }
+
+    private long valueOrZero(Long value) {
+        return value != null ? value : 0L;
     }
 
     private void applyProfileToTopBar(String greeting, String imageUrl) {
@@ -338,6 +488,8 @@ public class UserDashboardActivity extends AppCompatActivity {
         super.onDestroy();
         if (profileListener != null)
             profileListener.remove();
+        if (notificationListener != null)
+            notificationListener.remove();
     }
 
     @Override

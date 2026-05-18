@@ -5,9 +5,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,14 +58,37 @@ public class ReviewManager {
             callback.onFailure("User not authenticated");
             return;
         }
+        if (messId == null || messId.trim().isEmpty()) {
+            callback.onFailure("Mess not found");
+            return;
+        }
+        if (rating <= 0) {
+            callback.onFailure("Please provide a rating");
+            return;
+        }
 
+        getUserReviewForMess(currentUser.getUid(), messId, new ReviewCallback() {
+            @Override
+            public void onSuccess(Review review) {
+                updateReview(review.getReviewId(), rating, comment, callback);
+            }
+
+            @Override
+            public void onFailure(String errorMessage) {
+                createNewReview(messId, rating, comment, userName, callback, currentUser);
+            }
+        });
+    }
+
+    private void createNewReview(String messId, float rating, String comment, String userName, UpdateCallback callback,
+            FirebaseUser currentUser) {
         String reviewId = "REVIEW_" + UUID.randomUUID().toString().substring(0, 8);
 
         Map<String, Object> reviewData = new HashMap<>();
         reviewData.put("reviewId", reviewId);
         reviewData.put("messId", messId);
         reviewData.put("userId", currentUser.getUid());
-        reviewData.put("userName", userName);
+        reviewData.put("userName", userName != null && !userName.trim().isEmpty() ? userName : "Student");
         reviewData.put("rating", rating);
         reviewData.put("comment", comment);
         reviewData.put("timestamp", FieldValue.serverTimestamp());
@@ -73,8 +96,7 @@ public class ReviewManager {
 
         db.collection("reviews").document(reviewId).set(reviewData)
                 .addOnSuccessListener(aVoid -> {
-                    // Update mess average rating
-                    updateMessAverageRating(messId);
+                    updateMessRatingAfterCreate(messId, rating);
                     callback.onSuccess();
                 })
                 .addOnFailureListener(e -> callback.onFailure(e.getMessage()));
@@ -86,16 +108,19 @@ public class ReviewManager {
     public void getMessReviews(String messId, ReviewListCallback callback) {
         db.collection("reviews")
                 .whereEqualTo("messId", messId)
-                .orderBy("timestamp")
                 .get()
                 .addOnSuccessListener(querySnapshot -> {
                     List<Review> reviews = new ArrayList<>();
-                    for (int i = querySnapshot.getDocuments().size() - 1; i >= 0; i--) {
+                    for (int i = 0; i < querySnapshot.getDocuments().size(); i++) {
                         Review review = querySnapshot.getDocuments().get(i).toObject(Review.class);
                         if (review != null) {
+                            if (review.getReviewId() == null) {
+                                review.setReviewId(querySnapshot.getDocuments().get(i).getId());
+                            }
                             reviews.add(review);
                         }
                     }
+                    sortNewestFirst(reviews);
                     callback.onSuccess(reviews);
                 })
                 .addOnFailureListener(e -> callback.onFailure(e.getMessage()));
@@ -107,15 +132,22 @@ public class ReviewManager {
     public void getReviewsForUser(String userId, ReviewListCallback callback) {
         db.collection("reviews")
                 .whereEqualTo("userId", userId)
-                .orderBy("timestamp", Query.Direction.DESCENDING)
                 .get()
                 .addOnSuccessListener(querySnapshot -> {
+                    List<Review> reviews = new ArrayList<>();
                     if (querySnapshot != null) {
-                        List<Review> reviews = querySnapshot.toObjects(Review.class);
-                        callback.onSuccess(reviews);
-                    } else {
-                        callback.onSuccess(new ArrayList<>());
+                        for (int i = 0; i < querySnapshot.getDocuments().size(); i++) {
+                            Review review = querySnapshot.getDocuments().get(i).toObject(Review.class);
+                            if (review != null) {
+                                if (review.getReviewId() == null) {
+                                    review.setReviewId(querySnapshot.getDocuments().get(i).getId());
+                                }
+                                reviews.add(review);
+                            }
+                        }
                     }
+                    sortNewestFirst(reviews);
+                    callback.onSuccess(reviews);
                 })
                 .addOnFailureListener(e -> callback.onFailure(e.getMessage()));
     }
@@ -185,14 +217,18 @@ public class ReviewManager {
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
                         String messId = documentSnapshot.getString("messId");
+                        Double oldRatingDouble = documentSnapshot.getDouble("rating");
+                        double oldRating = oldRatingDouble != null ? oldRatingDouble : 0.0;
                         db.collection("reviews").document(reviewId).update(updates)
                                 .addOnSuccessListener(aVoid -> {
                                     if (messId != null) {
-                                        updateMessAverageRating(messId);
+                                        updateMessRatingAfterUpdate(messId, oldRating, rating);
                                     }
                                     callback.onSuccess();
                                 })
                                 .addOnFailureListener(e -> callback.onFailure(e.getMessage()));
+                    } else {
+                        callback.onFailure("Review not found");
                     }
                 })
                 .addOnFailureListener(e -> callback.onFailure(e.getMessage()));
@@ -206,14 +242,18 @@ public class ReviewManager {
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
                         String messId = documentSnapshot.getString("messId");
+                        Double oldRatingDouble = documentSnapshot.getDouble("rating");
+                        double oldRating = oldRatingDouble != null ? oldRatingDouble : 0.0;
                         db.collection("reviews").document(reviewId).delete()
                                 .addOnSuccessListener(aVoid -> {
                                     if (messId != null) {
-                                        updateMessAverageRating(messId);
+                                        updateMessRatingAfterDelete(messId, oldRating);
                                     }
                                     callback.onSuccess();
                                 })
                                 .addOnFailureListener(e -> callback.onFailure(e.getMessage()));
+                    } else {
+                        callback.onFailure("Review not found");
                     }
                 })
                 .addOnFailureListener(e -> callback.onFailure(e.getMessage()));
@@ -226,10 +266,13 @@ public class ReviewManager {
         db.collection("reviews").document(reviewId).get()
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
-                        long likes = documentSnapshot.getLong("likes");
+                        Long currentLikes = documentSnapshot.getLong("likes");
+                        long likes = currentLikes != null ? currentLikes : 0;
                         db.collection("reviews").document(reviewId).update("likes", likes + 1)
                                 .addOnSuccessListener(aVoid -> callback.onSuccess())
                                 .addOnFailureListener(e -> callback.onFailure(e.getMessage()));
+                    } else {
+                        callback.onFailure("Review not found");
                     }
                 })
                 .addOnFailureListener(e -> callback.onFailure(e.getMessage()));
@@ -247,6 +290,9 @@ public class ReviewManager {
                     if (querySnapshot.getDocuments().size() > 0) {
                         Review review = querySnapshot.getDocuments().get(0).toObject(Review.class);
                         if (review != null) {
+                            if (review.getReviewId() == null) {
+                                review.setReviewId(querySnapshot.getDocuments().get(0).getId());
+                            }
                             callback.onSuccess(review);
                         } else {
                             callback.onFailure("Failed to parse review");
@@ -256,5 +302,62 @@ public class ReviewManager {
                     }
                 })
                 .addOnFailureListener(e -> callback.onFailure(e.getMessage()));
+    }
+
+    private void updateMessRatingAfterCreate(String messId, double newRating) {
+        db.runTransaction(transaction -> {
+            com.google.firebase.firestore.DocumentReference messRef = db.collection("messes").document(messId);
+            com.google.firebase.firestore.DocumentSnapshot messDoc = transaction.get(messRef);
+            Double avgRatingValue = messDoc.getDouble("avgRating");
+            Long reviewCountValue = messDoc.getLong("numReviews");
+            double avgRating = avgRatingValue != null ? avgRatingValue : 0.0;
+            long reviewCount = reviewCountValue != null ? reviewCountValue : 0;
+            long updatedCount = reviewCount + 1;
+            double updatedAverage = ((avgRating * reviewCount) + newRating) / updatedCount;
+            transaction.update(messRef, "avgRating", updatedAverage, "numReviews", updatedCount);
+            return null;
+        });
+    }
+
+    private void updateMessRatingAfterUpdate(String messId, double oldRating, double newRating) {
+        db.runTransaction(transaction -> {
+            com.google.firebase.firestore.DocumentReference messRef = db.collection("messes").document(messId);
+            com.google.firebase.firestore.DocumentSnapshot messDoc = transaction.get(messRef);
+            Double avgRatingValue = messDoc.getDouble("avgRating");
+            Long reviewCountValue = messDoc.getLong("numReviews");
+            double avgRating = avgRatingValue != null ? avgRatingValue : 0.0;
+            long reviewCount = reviewCountValue != null ? reviewCountValue : 0;
+            if (reviewCount <= 0) {
+                transaction.update(messRef, "avgRating", newRating, "numReviews", 1);
+                return null;
+            }
+            double updatedAverage = ((avgRating * reviewCount) - oldRating + newRating) / reviewCount;
+            transaction.update(messRef, "avgRating", updatedAverage, "numReviews", reviewCount);
+            return null;
+        });
+    }
+
+    private void updateMessRatingAfterDelete(String messId, double oldRating) {
+        db.runTransaction(transaction -> {
+            com.google.firebase.firestore.DocumentReference messRef = db.collection("messes").document(messId);
+            com.google.firebase.firestore.DocumentSnapshot messDoc = transaction.get(messRef);
+            Double avgRatingValue = messDoc.getDouble("avgRating");
+            Long reviewCountValue = messDoc.getLong("numReviews");
+            double avgRating = avgRatingValue != null ? avgRatingValue : 0.0;
+            long reviewCount = reviewCountValue != null ? reviewCountValue : 0;
+            long updatedCount = Math.max(0, reviewCount - 1);
+            double updatedAverage = updatedCount == 0 ? 0.0 : ((avgRating * reviewCount) - oldRating) / updatedCount;
+            transaction.update(messRef, "avgRating", updatedAverage, "numReviews", updatedCount);
+            return null;
+        });
+    }
+
+    private void sortNewestFirst(List<Review> reviews) {
+        Collections.sort(reviews, (first, second) -> {
+            if (first.getTimestamp() == null && second.getTimestamp() == null) return 0;
+            if (first.getTimestamp() == null) return 1;
+            if (second.getTimestamp() == null) return -1;
+            return second.getTimestamp().compareTo(first.getTimestamp());
+        });
     }
 }
