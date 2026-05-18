@@ -24,6 +24,15 @@ public final class FragmentMessMenuBinding implements ViewBinding {
   private final FrameLayout rootView;
 
   @NonNull
+  public final TextInputEditText breakfastEditText;
+
+  @NonNull
+  public final TextInputLayout breakfastInputLayout;
+
+  @NonNull
+  public final MaterialButton btnSaveBreakfast;
+
+  @NonNull
   public final MaterialButton btnSaveDinner;
 
   @NonNull
@@ -51,12 +60,16 @@ public final class FragmentMessMenuBinding implements ViewBinding {
   public final TextView textSelectedDate;
 
   private FragmentMessMenuBinding(@NonNull FrameLayout rootView,
-      @NonNull MaterialButton btnSaveDinner, @NonNull MaterialButton btnSaveLunch,
-      @NonNull MaterialButton btnSelectDate, @NonNull TextInputEditText dinnerEditText,
-      @NonNull TextInputLayout dinnerInputLayout, @NonNull TextInputEditText lunchEditText,
-      @NonNull TextInputLayout lunchInputLayout, @NonNull ProgressBar progressBar,
-      @NonNull TextView textSelectedDate) {
+      @NonNull TextInputEditText breakfastEditText, @NonNull TextInputLayout breakfastInputLayout,
+      @NonNull MaterialButton btnSaveBreakfast, @NonNull MaterialButton btnSaveDinner,
+      @NonNull MaterialButton btnSaveLunch, @NonNull MaterialButton btnSelectDate,
+      @NonNull TextInputEditText dinnerEditText, @NonNull TextInputLayout dinnerInputLayout,
+      @NonNull TextInputEditText lunchEditText, @NonNull TextInputLayout lunchInputLayout,
+      @NonNull ProgressBar progressBar, @NonNull TextView textSelectedDate) {
     this.rootView = rootView;
+    this.breakfastEditText = breakfastEditText;
+    this.breakfastInputLayout = breakfastInputLayout;
+    this.btnSaveBreakfast = btnSaveBreakfast;
     this.btnSaveDinner = btnSaveDinner;
     this.btnSaveLunch = btnSaveLunch;
     this.btnSelectDate = btnSelectDate;
@@ -95,6 +108,24 @@ public final class FragmentMessMenuBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.breakfast_edit_text;
+      TextInputEditText breakfastEditText = ViewBindings.findChildViewById(rootView, id);
+      if (breakfastEditText == null) {
+        break missingId;
+      }
+
+      id = R.id.breakfast_input_layout;
+      TextInputLayout breakfastInputLayout = ViewBindings.findChildViewById(rootView, id);
+      if (breakfastInputLayout == null) {
+        break missingId;
+      }
+
+      id = R.id.btn_save_breakfast;
+      MaterialButton btnSaveBreakfast = ViewBindings.findChildViewById(rootView, id);
+      if (btnSaveBreakfast == null) {
+        break missingId;
+      }
+
       id = R.id.btn_save_dinner;
       MaterialButton btnSaveDinner = ViewBindings.findChildViewById(rootView, id);
       if (btnSaveDinner == null) {
@@ -149,9 +180,10 @@ public final class FragmentMessMenuBinding implements ViewBinding {
         break missingId;
       }
 
-      return new FragmentMessMenuBinding((FrameLayout) rootView, btnSaveDinner, btnSaveLunch,
-          btnSelectDate, dinnerEditText, dinnerInputLayout, lunchEditText, lunchInputLayout,
-          progressBar, textSelectedDate);
+      return new FragmentMessMenuBinding((FrameLayout) rootView, breakfastEditText,
+          breakfastInputLayout, btnSaveBreakfast, btnSaveDinner, btnSaveLunch, btnSelectDate,
+          dinnerEditText, dinnerInputLayout, lunchEditText, lunchInputLayout, progressBar,
+          textSelectedDate);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

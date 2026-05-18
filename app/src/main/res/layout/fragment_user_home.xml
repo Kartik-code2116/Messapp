@@ -394,7 +394,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    android:alpha="0.8">
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -412,13 +414,13 @@
                                 android:layout_width="56dp"
                                 android:layout_height="56dp"
                                 android:background="@drawable/bg_rounded_card_surface"
-                                android:backgroundTint="@color/neutral_100">
+                                android:backgroundTint="@color/brand_primary_light">
                                 <ImageView
                                     android:layout_width="28dp"
                                     android:layout_height="28dp"
                                     android:src="@drawable/ic_breakfast_dining"
                                     android:layout_gravity="center"
-                                    app:tint="@color/text_sub"/>
+                                    app:tint="@color/brand_primary"/>
                                 <ImageView
                                     android:layout_width="30dp"
                                     android:layout_height="30dp"
@@ -453,23 +455,25 @@
                                         android:textColor="@color/text_heading"/>
                                     
                                     <TextView
+                                        android:id="@+id/text_breakfast_badge"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="ENDED"
+                                        android:text="AVAILABLE"
                                         android:textSize="11sp"
                                         android:fontFamily="@font/inter"
                                         android:textStyle="bold"
-                                        android:textColor="@color/text_caption"
+                                        android:textColor="@color/brand_primary"
                                         android:background="@drawable/bg_rounded_card_surface"
-                                        android:backgroundTint="@color/neutral_200"
+                                        android:backgroundTint="@color/brand_primary_light"
                                         android:paddingStart="8dp" android:paddingEnd="8dp"
                                         android:paddingTop="4dp" android:paddingBottom="4dp"/>
                                 </LinearLayout>
 
                                 <TextView
+                                    android:id="@+id/text_breakfast_menu"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Scrambled eggs, toast, seasonal fruit"
+                                    android:text="Loading breakfast items..."
                                     android:textSize="14sp"
                                     android:fontFamily="@font/inter"
                                     android:textColor="@color/text_body"
@@ -479,10 +483,11 @@
                         
                         <!-- Status Bar -->
                         <TextView
+                            android:id="@+id/text_breakfast_status_bar"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@color/neutral_100"
-                            android:text="Status: IN"
+                            android:text="Status: Not Selected"
                             android:textColor="@color/text_sub"
                             android:textStyle="bold"
                             android:textSize="13sp"

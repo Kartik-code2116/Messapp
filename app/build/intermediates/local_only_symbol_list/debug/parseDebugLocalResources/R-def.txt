@@ -269,6 +269,8 @@ id addOfferFragment
 id admin_top_bar
 id app_logo
 id appbar_dashboard
+id breakfast_edit_text
+id breakfast_input_layout
 id btnForgotPassword
 id btnGoogleLogin
 id btnMainAction
@@ -323,6 +325,7 @@ id btn_prev_week
 id btn_renew_subscription
 id btn_reset_all_attendance
 id btn_reset_status
+id btn_save_breakfast
 id btn_save_dinner
 id btn_save_lunch
 id btn_save_offer
@@ -540,6 +543,10 @@ id text_add_review
 id text_auto_dinner_status
 id text_auto_lunch_status
 id text_avg_rating
+id text_breakfast_badge
+id text_breakfast_counts_breakdown
+id text_breakfast_menu
+id text_breakfast_status_bar
 id text_current_condition
 id text_current_expiry
 id text_dashboard_timer

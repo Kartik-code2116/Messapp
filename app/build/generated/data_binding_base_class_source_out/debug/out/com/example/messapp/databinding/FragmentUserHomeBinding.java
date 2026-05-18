@@ -95,6 +95,15 @@ public final class FragmentUserHomeBinding implements ViewBinding {
   public final TextView textAutoLunchStatus;
 
   @NonNull
+  public final TextView textBreakfastBadge;
+
+  @NonNull
+  public final TextView textBreakfastMenu;
+
+  @NonNull
+  public final TextView textBreakfastStatusBar;
+
+  @NonNull
   public final TextView textDinnerCardTimer;
 
   @NonNull
@@ -142,13 +151,14 @@ public final class FragmentUserHomeBinding implements ViewBinding {
       @NonNull RadioButton radioAutoLunch, @NonNull RadioButton radioAutoNone,
       @NonNull RadioGroup radioGroupAutoSelect, @NonNull MaterialSwitch switchAutoDinner,
       @NonNull MaterialSwitch switchAutoLunch, @NonNull TextView textAutoDinnerStatus,
-      @NonNull TextView textAutoLunchStatus, @NonNull TextView textDinnerCardTimer,
-      @NonNull TextView textDinnerMenuNew, @NonNull TextView textDinnerPreference,
-      @NonNull TextView textDinnerStatus, @NonNull TextView textDinnerStatusBar,
-      @NonNull TextView textLunchCardTimer, @NonNull TextView textLunchMenuNew,
-      @NonNull TextView textLunchPreference, @NonNull TextView textLunchStatus,
-      @NonNull TextView textLunchStatusBar, @NonNull TextView textMessCondition,
-      @NonNull TextView textViewWeek) {
+      @NonNull TextView textAutoLunchStatus, @NonNull TextView textBreakfastBadge,
+      @NonNull TextView textBreakfastMenu, @NonNull TextView textBreakfastStatusBar,
+      @NonNull TextView textDinnerCardTimer, @NonNull TextView textDinnerMenuNew,
+      @NonNull TextView textDinnerPreference, @NonNull TextView textDinnerStatus,
+      @NonNull TextView textDinnerStatusBar, @NonNull TextView textLunchCardTimer,
+      @NonNull TextView textLunchMenuNew, @NonNull TextView textLunchPreference,
+      @NonNull TextView textLunchStatus, @NonNull TextView textLunchStatusBar,
+      @NonNull TextView textMessCondition, @NonNull TextView textViewWeek) {
     this.rootView = rootView;
     this.btnDinnerInNew = btnDinnerInNew;
     this.btnDinnerOutNew = btnDinnerOutNew;
@@ -173,6 +183,9 @@ public final class FragmentUserHomeBinding implements ViewBinding {
     this.switchAutoLunch = switchAutoLunch;
     this.textAutoDinnerStatus = textAutoDinnerStatus;
     this.textAutoLunchStatus = textAutoLunchStatus;
+    this.textBreakfastBadge = textBreakfastBadge;
+    this.textBreakfastMenu = textBreakfastMenu;
+    this.textBreakfastStatusBar = textBreakfastStatusBar;
     this.textDinnerCardTimer = textDinnerCardTimer;
     this.textDinnerMenuNew = textDinnerMenuNew;
     this.textDinnerPreference = textDinnerPreference;
@@ -352,6 +365,24 @@ public final class FragmentUserHomeBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.text_breakfast_badge;
+      TextView textBreakfastBadge = ViewBindings.findChildViewById(rootView, id);
+      if (textBreakfastBadge == null) {
+        break missingId;
+      }
+
+      id = R.id.text_breakfast_menu;
+      TextView textBreakfastMenu = ViewBindings.findChildViewById(rootView, id);
+      if (textBreakfastMenu == null) {
+        break missingId;
+      }
+
+      id = R.id.text_breakfast_status_bar;
+      TextView textBreakfastStatusBar = ViewBindings.findChildViewById(rootView, id);
+      if (textBreakfastStatusBar == null) {
+        break missingId;
+      }
+
       id = R.id.text_dinner_card_timer;
       TextView textDinnerCardTimer = ViewBindings.findChildViewById(rootView, id);
       if (textDinnerCardTimer == null) {
@@ -429,10 +460,11 @@ public final class FragmentUserHomeBinding implements ViewBinding {
           cardDailyAutoSelect, cardDinner, cardLunch, cardMessCondition, cardOneTimeAutoSelect,
           cardPlannedOutDays, containerPlannedOutDays, indicatorMessCondition, mealsContainerNew,
           radioAutoDinner, radioAutoLunch, radioAutoNone, radioGroupAutoSelect, switchAutoDinner,
-          switchAutoLunch, textAutoDinnerStatus, textAutoLunchStatus, textDinnerCardTimer,
-          textDinnerMenuNew, textDinnerPreference, textDinnerStatus, textDinnerStatusBar,
-          textLunchCardTimer, textLunchMenuNew, textLunchPreference, textLunchStatus,
-          textLunchStatusBar, textMessCondition, textViewWeek);
+          switchAutoLunch, textAutoDinnerStatus, textAutoLunchStatus, textBreakfastBadge,
+          textBreakfastMenu, textBreakfastStatusBar, textDinnerCardTimer, textDinnerMenuNew,
+          textDinnerPreference, textDinnerStatus, textDinnerStatusBar, textLunchCardTimer,
+          textLunchMenuNew, textLunchPreference, textLunchStatus, textLunchStatusBar,
+          textMessCondition, textViewWeek);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

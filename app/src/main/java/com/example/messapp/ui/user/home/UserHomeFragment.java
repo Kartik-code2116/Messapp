@@ -57,6 +57,8 @@ public class UserHomeFragment extends Fragment {
     private CountDownTimer timer;
     private ListenerRegistration plannedOutListener;
     private String currentUserOneTimeAutoSelect;
+    private String todayBreakfastMenu = "";
+    private String selectedBreakfastItem = "";
 
     private boolean listenersAttached = false;
 
@@ -133,14 +135,14 @@ public class UserHomeFragment extends Fragment {
                     binding.textDinnerPreference.setVisibility(View.GONE);
                 }
 
-                checkSubscription(lunchExpiry, dinnerExpiry, generalExpiry, oneTimeExpiry, subscriptionType,
-                        oneTimeAutoSelect);
-
-                // Read daily auto-select preferences
+                // Read daily auto-select preferences first so checkSubscription has the correct flags
                 Boolean autoL = documentSnapshot.getBoolean("autoSelectLunch");
                 Boolean autoD = documentSnapshot.getBoolean("autoSelectDinner");
                 autoSelectLunch = Boolean.TRUE.equals(autoL);
                 autoSelectDinner = Boolean.TRUE.equals(autoD);
+
+                checkSubscription(lunchExpiry, dinnerExpiry, generalExpiry, oneTimeExpiry, subscriptionType,
+                        oneTimeAutoSelect);
 
                 fetchMessSettings();
                 loadMenu();
@@ -336,12 +338,18 @@ public class UserHomeFragment extends Fragment {
                     if (binding == null)
                         return;
                     if (documentSnapshot.exists()) {
+                        String breakfast = documentSnapshot.getString("breakfast");
                         String lunch = documentSnapshot.getString("lunch");
                         String dinner = documentSnapshot.getString("dinner");
+
+                        todayBreakfastMenu = (breakfast != null && !breakfast.isEmpty()) ? breakfast : "";
+                        binding.textBreakfastMenu.setText(!todayBreakfastMenu.isEmpty() ? todayBreakfastMenu : "menu is not set");
                         binding.textLunchMenuNew.setText(lunch != null && !lunch.isEmpty() ? lunch : "menu is not set");
                         binding.textDinnerMenuNew
                                 .setText(dinner != null && !dinner.isEmpty() ? dinner : "menu is not set");
                     } else {
+                        todayBreakfastMenu = "";
+                        binding.textBreakfastMenu.setText("menu is not set");
                         binding.textLunchMenuNew.setText("menu is not set");
                         binding.textDinnerMenuNew.setText("menu is not set");
                     }
@@ -356,12 +364,18 @@ public class UserHomeFragment extends Fragment {
                 .addSnapshotListener((documentSnapshot, e) -> {
                     if (binding == null)
                         return;
+                    String breakfastStatus = null;
+                    String breakfastItem = null;
                     String lunchStatus = null;
                     String dinnerStatus = null;
                     if (documentSnapshot != null && documentSnapshot.exists()) {
+                        breakfastStatus = documentSnapshot.getString("breakfast");
+                        breakfastItem = documentSnapshot.getString("breakfast_item");
                         lunchStatus = documentSnapshot.getString("lunch");
                         dinnerStatus = documentSnapshot.getString("dinner");
                     }
+
+                    updateBreakfastCardUI(breakfastStatus, breakfastItem);
 
                     if (isOneTimeSubscribed) {
                         // Track whether any meal is already claimed today
@@ -375,6 +389,7 @@ public class UserHomeFragment extends Fragment {
     }
 
     private void setupClickListeners() {
+        binding.cardBreakfast.setOnClickListener(v -> showBreakfastOptionsDialog());
         binding.btnLunchInNew.setOnClickListener(v -> markAttendance("LUNCH", "IN"));
         binding.btnLunchOutNew.setOnClickListener(v -> markAttendance("LUNCH", "OUT"));
         binding.btnDinnerInNew.setOnClickListener(v -> markAttendance("DINNER", "IN"));
@@ -1363,6 +1378,121 @@ public class UserHomeFragment extends Fragment {
     private void hideMessConditionCard() {
         if (binding != null)
             binding.cardMessCondition.setVisibility(View.GONE);
+    }
+
+    private void updateBreakfastCardUI(String status, String item) {
+        if (binding == null) return;
+        if ("IN".equals(status)) {
+            selectedBreakfastItem = item != null ? item : "";
+            binding.textBreakfastStatusBar.setText("Status: IN" + (!selectedBreakfastItem.isEmpty() ? " (" + selectedBreakfastItem + ")" : ""));
+            binding.textBreakfastStatusBar.setBackgroundColor(themeColor(R.color.state_success));
+            binding.textBreakfastStatusBar.setTextColor(Color.WHITE);
+            binding.textBreakfastBadge.setText("IN");
+            binding.textBreakfastBadge.setTextColor(Color.WHITE);
+            binding.textBreakfastBadge.setBackgroundTintList(ColorStateList.valueOf(themeColor(R.color.state_success)));
+        } else {
+            selectedBreakfastItem = "";
+            binding.textBreakfastStatusBar.setText("Status: Not Selected");
+            binding.textBreakfastStatusBar.setBackgroundColor(themeColor(R.color.neutral_100));
+            binding.textBreakfastStatusBar.setTextColor(themeColor(R.color.text_sub));
+            binding.textBreakfastBadge.setText("AVAILABLE");
+            binding.textBreakfastBadge.setTextColor(themeColor(R.color.brand_primary));
+            binding.textBreakfastBadge.setBackgroundTintList(ColorStateList.valueOf(themeColor(R.color.brand_primary_light)));
+        }
+    }
+
+    private void showBreakfastOptionsDialog() {
+        if (todayBreakfastMenu == null || todayBreakfastMenu.trim().isEmpty() || todayBreakfastMenu.equals("menu is not set")) {
+            Toast.makeText(getContext(), "Breakfast menu is not set by admin today.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Split breakfast by comma
+        String[] options = todayBreakfastMenu.split(",");
+        for (int i = 0; i < options.length; i++) {
+            options[i] = options[i].trim();
+        }
+
+        // Find selected index if any
+        int selectedIndex = -1;
+        for (int i = 0; i < options.length; i++) {
+            if (options[i].equalsIgnoreCase(selectedBreakfastItem)) {
+                selectedIndex = i;
+                break;
+            }
+        }
+
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(requireContext())
+                .setTitle("Select Breakfast Option")
+                .setSingleChoiceItems(options, selectedIndex, (dialog, which) -> {
+                    String selectedOption = options[which];
+                    saveBreakfastSelection(selectedOption);
+                    dialog.dismiss();
+                })
+                .setNegativeButton("Cancel", null);
+
+        if (selectedBreakfastItem != null && !selectedBreakfastItem.isEmpty()) {
+            builder.setNeutralButton("Clear Selection", (dialog, which) -> {
+                clearBreakfastSelection();
+            });
+        }
+
+        builder.show();
+    }
+
+    private void saveBreakfastSelection(String selectedOption) {
+        if (messId == null || userId == null) {
+            Toast.makeText(getContext(), "Profile data still loading, please wait...", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String docId = messId + "_" + todayDate + "_" + userId;
+        com.google.firebase.firestore.DocumentReference mealRef = db.collection("meal_selections").document(docId);
+
+        Map<String, Object> mealData = new HashMap<>();
+        mealData.put("breakfast", "IN");
+        mealData.put("breakfast_item", selectedOption);
+        mealData.put("userId", userId);
+        mealData.put("date", todayDate);
+        mealData.put("messId", messId);
+        mealData.put("timestamp", System.currentTimeMillis());
+
+        mealRef.set(mealData, com.google.firebase.firestore.SetOptions.merge())
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(getContext(), "Breakfast selection saved: " + selectedOption, Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(getContext(), "Failed to save selection: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+    }
+
+    private void clearBreakfastSelection() {
+        if (messId == null || userId == null) {
+            Toast.makeText(getContext(), "Profile data still loading, please wait...", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String docId = messId + "_" + todayDate + "_" + userId;
+        com.google.firebase.firestore.DocumentReference mealRef = db.collection("meal_selections").document(docId);
+
+        Map<String, Object> mealData = new HashMap<>();
+        mealData.put("breakfast", "OUT");
+        mealData.put("breakfast_item", com.google.firebase.firestore.FieldValue.delete());
+
+        mealRef.update(mealData)
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(getContext(), "Breakfast selection removed.", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    // Fallback to set with merge if document is not created yet
+                    mealRef.set(mealData, com.google.firebase.firestore.SetOptions.merge())
+                            .addOnSuccessListener(aVoid2 -> {
+                                Toast.makeText(getContext(), "Breakfast selection removed.", Toast.LENGTH_SHORT).show();
+                            })
+                            .addOnFailureListener(ex -> {
+                                Toast.makeText(getContext(), "Failed to remove selection: " + ex.getMessage(), Toast.LENGTH_SHORT).show();
+                            });
+                });
     }
 
     @Override

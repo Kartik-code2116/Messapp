@@ -112,11 +112,26 @@ public class MessDashboardFragment extends Fragment {
                         int dinnerIn = 0, dinnerOut = 0;
                         List<MealRequest> pendingRequests = new ArrayList<>();
 
+                        Map<String, Integer> breakfastCounts = new HashMap<>();
+                        int breakfastInTotal = 0;
+
                         for (QueryDocumentSnapshot doc : value) {
                             String l = doc.getString("lunch");
                             String d = doc.getString("dinner");
                             String lApp = doc.getString("lunch_approval");
                             String dApp = doc.getString("dinner_approval");
+
+                            String breakfastStatus = doc.getString("breakfast");
+                            if ("IN".equals(breakfastStatus)) {
+                                String item = doc.getString("breakfast_item");
+                                if (item == null || item.trim().isEmpty()) {
+                                    item = "Standard/Default";
+                                } else {
+                                    item = item.trim();
+                                }
+                                breakfastCounts.put(item, breakfastCounts.getOrDefault(item, 0) + 1);
+                                breakfastInTotal++;
+                            }
 
                             if ("IN".equals(l))
                                 lunchIn++;
@@ -139,6 +154,18 @@ public class MessDashboardFragment extends Fragment {
                         binding.textLunchOutCount.setText(String.valueOf(lunchOut));
                         binding.textDinnerInCount.setText(String.valueOf(dinnerIn));
                         binding.textDinnerOutCount.setText(String.valueOf(dinnerOut));
+
+                        if (breakfastInTotal == 0) {
+                            binding.textBreakfastCountsBreakdown.setText("No student selections today yet.");
+                        } else {
+                            StringBuilder breakdown = new StringBuilder();
+                            breakdown.append("Total Selections: ").append(breakfastInTotal).append("\n\n");
+                            for (Map.Entry<String, Integer> entry : breakfastCounts.entrySet()) {
+                                breakdown.append("• ").append(entry.getKey()).append(": ")
+                                        .append(entry.getValue()).append(" student(s)\n");
+                            }
+                            binding.textBreakfastCountsBreakdown.setText(breakdown.toString().trim());
+                        }
 
                         adapter.setRequests(pendingRequests);
                         updateAttendanceProgress();

@@ -48,6 +48,7 @@ public class MessMenuFragment extends Fragment {
         fetchMessIdAndSetup();
 
         binding.btnSelectDate.setOnClickListener(v -> showDatePickerDialog());
+        binding.btnSaveBreakfast.setOnClickListener(v -> saveMenu("breakfast"));
         binding.btnSaveLunch.setOnClickListener(v -> saveMenu("lunch"));
         binding.btnSaveDinner.setOnClickListener(v -> saveMenu("dinner"));
 
@@ -117,14 +118,17 @@ public class MessMenuFragment extends Fragment {
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     if (binding == null) return;
+                    String breakfastMenu = "";
                     String lunchMenu = "";
                     String dinnerMenu = "";
                     if (!queryDocumentSnapshots.isEmpty()) {
+                        breakfastMenu = queryDocumentSnapshots.getDocuments().get(0).getString("breakfast");
                         lunchMenu = queryDocumentSnapshots.getDocuments().get(0).getString("lunch");
                         dinnerMenu = queryDocumentSnapshots.getDocuments().get(0).getString("dinner");
                     }
-                    binding.lunchEditText.setText(lunchMenu);
-                    binding.dinnerEditText.setText(dinnerMenu);
+                    binding.breakfastEditText.setText(breakfastMenu != null ? breakfastMenu : "");
+                    binding.lunchEditText.setText(lunchMenu != null ? lunchMenu : "");
+                    binding.dinnerEditText.setText(dinnerMenu != null ? dinnerMenu : "");
 
                     // Apply time-based editing restrictions
                     applyMenuEditingRestrictions();
@@ -133,6 +137,7 @@ public class MessMenuFragment extends Fragment {
                 .addOnFailureListener(e -> {
                     if (binding == null) return;
                     Toast.makeText(getContext(), "Error loading menu: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    binding.breakfastEditText.setText("");
                     binding.lunchEditText.setText("");
                     binding.dinnerEditText.setText("");
                     applyMenuEditingRestrictions(); // Still apply restrictions even on error
@@ -187,6 +192,8 @@ public class MessMenuFragment extends Fragment {
 
         if (isPast) {
             // Past dates - disable editing
+            binding.breakfastEditText.setEnabled(false);
+            binding.btnSaveBreakfast.setEnabled(false);
             binding.lunchEditText.setEnabled(false);
             binding.btnSaveLunch.setEnabled(false);
             binding.dinnerEditText.setEnabled(false);
@@ -198,6 +205,9 @@ public class MessMenuFragment extends Fragment {
             boolean dinnerCutoffPassed = (currentHour > dinnerCutoffHour) || 
                                         (currentHour == dinnerCutoffHour && currentMinute >= dinnerCutoffMinute);
 
+            binding.breakfastEditText.setEnabled(true);
+            binding.btnSaveBreakfast.setEnabled(true);
+
             binding.lunchEditText.setEnabled(!lunchCutoffPassed);
             binding.btnSaveLunch.setEnabled(!lunchCutoffPassed);
             
@@ -205,6 +215,8 @@ public class MessMenuFragment extends Fragment {
             binding.btnSaveDinner.setEnabled(!dinnerCutoffPassed);
         } else {
             // Future dates - allow editing
+            binding.breakfastEditText.setEnabled(true);
+            binding.btnSaveBreakfast.setEnabled(true);
             binding.lunchEditText.setEnabled(true);
             binding.btnSaveLunch.setEnabled(true);
             binding.dinnerEditText.setEnabled(true);
@@ -223,7 +235,9 @@ public class MessMenuFragment extends Fragment {
                 .format(selectedDateCalendar.getTime());
         String menuText;
 
-        if (mealType.equals("lunch")) {
+        if (mealType.equals("breakfast")) {
+            menuText = binding.breakfastEditText.getText().toString().trim();
+        } else if (mealType.equals("lunch")) {
             menuText = binding.lunchEditText.getText().toString().trim();
         } else {
             menuText = binding.dinnerEditText.getText().toString().trim();

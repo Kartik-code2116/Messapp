@@ -508,10 +508,18 @@ public class MessDashboardFragment extends Fragment {
                         lunchOutCount++;
                 }
             } else if (isRegLunchActive) {
-                if ("OUT".equals(explicitLunch))
-                    lunchOutCount++;
-                else
-                    lunchInCount++;
+                boolean autoLunch = Boolean.TRUE.equals(userDoc.getBoolean("autoSelectLunch"));
+                if (autoLunch) {
+                    if ("OUT".equals(explicitLunch))
+                        lunchOutCount++;
+                    else
+                        lunchInCount++;
+                } else {
+                    if ("IN".equals(explicitLunch))
+                        lunchInCount++;
+                    else
+                        lunchOutCount++;
+                }
             }
 
             // Dinner logic
@@ -525,10 +533,18 @@ public class MessDashboardFragment extends Fragment {
                         dinnerOutCount++;
                 }
             } else if (isRegDinnerActive) {
-                if ("OUT".equals(explicitDinner))
-                    dinnerOutCount++;
-                else
-                    dinnerInCount++;
+                boolean autoDinner = Boolean.TRUE.equals(userDoc.getBoolean("autoSelectDinner"));
+                if (autoDinner) {
+                    if ("OUT".equals(explicitDinner))
+                        dinnerOutCount++;
+                    else
+                        dinnerInCount++;
+                } else {
+                    if ("IN".equals(explicitDinner))
+                        dinnerInCount++;
+                    else
+                        dinnerOutCount++;
+                }
             }
         }
 
@@ -537,6 +553,36 @@ public class MessDashboardFragment extends Fragment {
         binding.textLunchOutCount.setText(String.valueOf(lunchOutCount));
         binding.textDinnerInCount.setText(String.valueOf(dinnerInCount));
         binding.textDinnerOutCount.setText(String.valueOf(dinnerOutCount));
+
+        // Compute breakfast selections count breakdown
+        Map<String, Integer> breakfastCounts = new HashMap<>();
+        int breakfastInTotal = 0;
+
+        for (DocumentSnapshot mealDoc : mealDocs.values()) {
+            String breakfastStatus = mealDoc.getString("breakfast");
+            if ("IN".equals(breakfastStatus)) {
+                String item = mealDoc.getString("breakfast_item");
+                if (item == null || item.trim().isEmpty()) {
+                    item = "Standard/Default";
+                } else {
+                    item = item.trim();
+                }
+                breakfastCounts.put(item, breakfastCounts.getOrDefault(item, 0) + 1);
+                breakfastInTotal++;
+            }
+        }
+
+        if (breakfastInTotal == 0) {
+            binding.textBreakfastCountsBreakdown.setText("No student selections today yet.");
+        } else {
+            StringBuilder breakdown = new StringBuilder();
+            breakdown.append("Total Selections: ").append(breakfastInTotal).append("\n\n");
+            for (Map.Entry<String, Integer> entry : breakfastCounts.entrySet()) {
+                breakdown.append("• ").append(entry.getKey()).append(": ")
+                        .append(entry.getValue()).append(" student(s)\n");
+            }
+            binding.textBreakfastCountsBreakdown.setText(breakdown.toString().trim());
+        }
     }
 
     private void fetchMessSettings() {
