@@ -79,6 +79,7 @@
     <color name="text_primary">@color/text_heading</color>
     <color name="text_secondary">@color/text_body</color>
     <color name="blue_accent">@color/state_info</color>
+    <color name="role_student_container">#EAF3FF</color>
 
     <!-- LEGACY MAPPINGS (for backward compatibility) -->
     <color name="colorPrimary">@color/brand_primary</color>

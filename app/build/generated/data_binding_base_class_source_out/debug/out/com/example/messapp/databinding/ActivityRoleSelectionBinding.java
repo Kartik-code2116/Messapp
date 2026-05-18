@@ -11,6 +11,7 @@ import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.messapp.R;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.card.MaterialCardView;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
@@ -28,13 +29,26 @@ public final class ActivityRoleSelectionBinding implements ViewBinding {
   @NonNull
   public final MaterialButton btnUser;
 
+  @NonNull
+  public final MaterialCardView cardGuest;
+
+  @NonNull
+  public final MaterialCardView cardMessOwner;
+
+  @NonNull
+  public final MaterialCardView cardUser;
+
   private ActivityRoleSelectionBinding(@NonNull ScrollView rootView,
       @NonNull MaterialButton btnGuest, @NonNull MaterialButton btnMessUncal,
-      @NonNull MaterialButton btnUser) {
+      @NonNull MaterialButton btnUser, @NonNull MaterialCardView cardGuest,
+      @NonNull MaterialCardView cardMessOwner, @NonNull MaterialCardView cardUser) {
     this.rootView = rootView;
     this.btnGuest = btnGuest;
     this.btnMessUncal = btnMessUncal;
     this.btnUser = btnUser;
+    this.cardGuest = cardGuest;
+    this.cardMessOwner = cardMessOwner;
+    this.cardUser = cardUser;
   }
 
   @Override
@@ -82,8 +96,26 @@ public final class ActivityRoleSelectionBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.card_guest;
+      MaterialCardView cardGuest = ViewBindings.findChildViewById(rootView, id);
+      if (cardGuest == null) {
+        break missingId;
+      }
+
+      id = R.id.card_mess_owner;
+      MaterialCardView cardMessOwner = ViewBindings.findChildViewById(rootView, id);
+      if (cardMessOwner == null) {
+        break missingId;
+      }
+
+      id = R.id.card_user;
+      MaterialCardView cardUser = ViewBindings.findChildViewById(rootView, id);
+      if (cardUser == null) {
+        break missingId;
+      }
+
       return new ActivityRoleSelectionBinding((ScrollView) rootView, btnGuest, btnMessUncal,
-          btnUser);
+          btnUser, cardGuest, cardMessOwner, cardUser);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

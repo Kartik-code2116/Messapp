@@ -97,6 +97,7 @@
     <color name="secondary_light">#3D2020</color>
 
     <color name="blue_accent">#82B1FF</color>
+    <color name="role_student_container">#1F2D3D</color>
 
     <color name="gradient_start">@color/orange_primary</color>
     <color name="gradient_end">#FACC15</color>

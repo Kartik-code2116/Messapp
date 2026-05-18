@@ -91,6 +91,7 @@ color primary_color
 color primary_dark
 color primary_light
 color primary_variant
+color role_student_container
 color secondary
 color secondary_dark
 color secondary_light
@@ -166,6 +167,12 @@ drawable bg_profile_badge
 drawable bg_profile_header
 drawable bg_profile_icon_circle
 drawable bg_profound_gradient
+drawable bg_role_feature_chip
+drawable bg_role_guest_icon
+drawable bg_role_logo_plate
+drawable bg_role_owner_icon
+drawable bg_role_selection_page
+drawable bg_role_student_icon
 drawable bg_rounded_card_primary_light
 drawable bg_rounded_card_surface
 drawable bg_rounded_input
@@ -332,10 +339,13 @@ id cardForm
 id card_breakfast
 id card_daily_auto_select
 id card_dinner
+id card_guest
 id card_lunch
 id card_mess_condition
+id card_mess_owner
 id card_one_time_auto_select
 id card_planned_out_days
+id card_user
 id centerContainer
 id chip_both
 id chip_female
