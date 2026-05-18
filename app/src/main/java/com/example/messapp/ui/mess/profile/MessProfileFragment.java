@@ -59,6 +59,7 @@ public class MessProfileFragment extends Fragment {
         binding.btnLogoutTop.setOnClickListener(v -> handleLogout());
 
         binding.btnViewStudents.setOnClickListener(v -> handleViewStudents());
+        binding.btnHelpSupport.setOnClickListener(v -> showHelpSupportDialog());
 
         setupThemeToggle();
 
@@ -251,6 +252,99 @@ public class MessProfileFragment extends Fragment {
                 })
                 .setNegativeButton("No", null)
                 .show();
+    }
+
+
+    private void showHelpSupportDialog() {
+        if (getContext() == null) return;
+
+        android.view.View dialogView = LayoutInflater.from(requireContext())
+                .inflate(R.layout.dialog_help_support, null);
+
+        AlertDialog dialog = new AlertDialog.Builder(requireContext())
+                .setView(dialogView)
+                .create();
+
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        }
+
+        android.widget.TextView textPhone = dialogView.findViewById(R.id.support_phone);
+        android.widget.TextView textInsta = dialogView.findViewById(R.id.support_instagram);
+        android.widget.TextView textEmail = dialogView.findViewById(R.id.support_email);
+
+        android.view.View btnCopyPhone = dialogView.findViewById(R.id.btn_copy_phone);
+        android.view.View btnActionPhone = dialogView.findViewById(R.id.btn_action_phone);
+
+        android.view.View btnCopyInsta = dialogView.findViewById(R.id.btn_copy_instagram);
+        android.view.View btnActionInsta = dialogView.findViewById(R.id.btn_action_instagram);
+
+        android.view.View btnCopyEmail = dialogView.findViewById(R.id.btn_copy_email);
+        android.view.View btnActionEmail = dialogView.findViewById(R.id.btn_action_email);
+
+        android.view.View btnClose = dialogView.findViewById(R.id.btn_dialog_close);
+
+        btnCopyPhone.setOnClickListener(v -> {
+            ClipboardManager clipboard = (ClipboardManager) requireContext().getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData clip = ClipData.newPlainText("Phone Number", textPhone.getText().toString());
+            clipboard.setPrimaryClip(clip);
+            Toast.makeText(getContext(), "Phone number copied!", Toast.LENGTH_SHORT).show();
+        });
+
+        btnActionPhone.setOnClickListener(v -> {
+            try {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:" + textPhone.getText().toString().replaceAll(" ", "")));
+                startActivity(intent);
+            } catch (Exception ex) {
+                Toast.makeText(getContext(), "Unable to open dialer", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnCopyInsta.setOnClickListener(v -> {
+            ClipboardManager clipboard = (ClipboardManager) requireContext().getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData clip = ClipData.newPlainText("Instagram Handle", textInsta.getText().toString());
+            clipboard.setPrimaryClip(clip);
+            Toast.makeText(getContext(), "Instagram handle copied!", Toast.LENGTH_SHORT).show();
+        });
+
+        btnActionInsta.setOnClickListener(v -> {
+            try {
+                String handle = textInsta.getText().toString();
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://instagram.com/_u/" + handle));
+                intent.setPackage("com.instagram.android");
+                try {
+                    startActivity(intent);
+                } catch (android.content.ActivityNotFoundException e) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://instagram.com/" + handle)));
+                }
+            } catch (Exception ex) {
+                Toast.makeText(getContext(), "Unable to open Instagram", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnCopyEmail.setOnClickListener(v -> {
+            ClipboardManager clipboard = (ClipboardManager) requireContext().getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData clip = ClipData.newPlainText("Email Address", textEmail.getText().toString());
+            clipboard.setPrimaryClip(clip);
+            Toast.makeText(getContext(), "Email copied!", Toast.LENGTH_SHORT).show();
+        });
+
+        btnActionEmail.setOnClickListener(v -> {
+            try {
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse("mailto:"));
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{textEmail.getText().toString()});
+                intent.putExtra(Intent.EXTRA_SUBJECT, "MessApp Support Request");
+                startActivity(intent);
+            } catch (Exception ex) {
+                Toast.makeText(getContext(), "Unable to open Email client", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnClose.setOnClickListener(v -> dialog.dismiss());
+
+        dialog.show();
     }
 
     @Override

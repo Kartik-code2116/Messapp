@@ -32,6 +32,9 @@ public final class FragmentMessProfileBinding implements ViewBinding {
   public final FloatingActionButton btnEditProfileImage;
 
   @NonNull
+  public final LinearLayout btnHelpSupport;
+
+  @NonNull
   public final ImageView btnLogoutTop;
 
   @NonNull
@@ -95,20 +98,22 @@ public final class FragmentMessProfileBinding implements ViewBinding {
   public final TextView textOwnerEmail;
 
   private FragmentMessProfileBinding(@NonNull ScrollView rootView, @NonNull ImageView btnCopyMessId,
-      @NonNull FloatingActionButton btnEditProfileImage, @NonNull ImageView btnLogoutTop,
-      @NonNull MaterialButton btnMessLogout, @NonNull LinearLayout btnNavEditProfile,
-      @NonNull LinearLayout btnNavOffers, @NonNull LinearLayout btnNavRevenue,
-      @NonNull LinearLayout btnNavWeeklyMenu, @NonNull MaterialButton btnSeeReviews,
-      @NonNull MaterialButton btnViewStudents, @NonNull MaterialButton btnWriteReview,
-      @NonNull LinearLayout containerMessId, @NonNull TextView labelActiveStudents,
-      @NonNull TextView labelMessDetails, @NonNull ShapeableImageView messProfileImage,
-      @NonNull MaterialSwitch switchDarkMode, @NonNull TextView textActiveStudentsCount,
-      @NonNull TextView textMessProfileContact, @NonNull TextView textMessProfileDescription,
-      @NonNull TextView textMessProfileId, @NonNull TextView textMessProfileLocation,
-      @NonNull TextView textMessProfileName, @NonNull TextView textOwnerEmail) {
+      @NonNull FloatingActionButton btnEditProfileImage, @NonNull LinearLayout btnHelpSupport,
+      @NonNull ImageView btnLogoutTop, @NonNull MaterialButton btnMessLogout,
+      @NonNull LinearLayout btnNavEditProfile, @NonNull LinearLayout btnNavOffers,
+      @NonNull LinearLayout btnNavRevenue, @NonNull LinearLayout btnNavWeeklyMenu,
+      @NonNull MaterialButton btnSeeReviews, @NonNull MaterialButton btnViewStudents,
+      @NonNull MaterialButton btnWriteReview, @NonNull LinearLayout containerMessId,
+      @NonNull TextView labelActiveStudents, @NonNull TextView labelMessDetails,
+      @NonNull ShapeableImageView messProfileImage, @NonNull MaterialSwitch switchDarkMode,
+      @NonNull TextView textActiveStudentsCount, @NonNull TextView textMessProfileContact,
+      @NonNull TextView textMessProfileDescription, @NonNull TextView textMessProfileId,
+      @NonNull TextView textMessProfileLocation, @NonNull TextView textMessProfileName,
+      @NonNull TextView textOwnerEmail) {
     this.rootView = rootView;
     this.btnCopyMessId = btnCopyMessId;
     this.btnEditProfileImage = btnEditProfileImage;
+    this.btnHelpSupport = btnHelpSupport;
     this.btnLogoutTop = btnLogoutTop;
     this.btnMessLogout = btnMessLogout;
     this.btnNavEditProfile = btnNavEditProfile;
@@ -168,6 +173,12 @@ public final class FragmentMessProfileBinding implements ViewBinding {
       id = R.id.btn_edit_profile_image;
       FloatingActionButton btnEditProfileImage = ViewBindings.findChildViewById(rootView, id);
       if (btnEditProfileImage == null) {
+        break missingId;
+      }
+
+      id = R.id.btn_help_support;
+      LinearLayout btnHelpSupport = ViewBindings.findChildViewById(rootView, id);
+      if (btnHelpSupport == null) {
         break missingId;
       }
 
@@ -298,11 +309,12 @@ public final class FragmentMessProfileBinding implements ViewBinding {
       }
 
       return new FragmentMessProfileBinding((ScrollView) rootView, btnCopyMessId,
-          btnEditProfileImage, btnLogoutTop, btnMessLogout, btnNavEditProfile, btnNavOffers,
-          btnNavRevenue, btnNavWeeklyMenu, btnSeeReviews, btnViewStudents, btnWriteReview,
-          containerMessId, labelActiveStudents, labelMessDetails, messProfileImage, switchDarkMode,
-          textActiveStudentsCount, textMessProfileContact, textMessProfileDescription,
-          textMessProfileId, textMessProfileLocation, textMessProfileName, textOwnerEmail);
+          btnEditProfileImage, btnHelpSupport, btnLogoutTop, btnMessLogout, btnNavEditProfile,
+          btnNavOffers, btnNavRevenue, btnNavWeeklyMenu, btnSeeReviews, btnViewStudents,
+          btnWriteReview, containerMessId, labelActiveStudents, labelMessDetails, messProfileImage,
+          switchDarkMode, textActiveStudentsCount, textMessProfileContact,
+          textMessProfileDescription, textMessProfileId, textMessProfileLocation,
+          textMessProfileName, textOwnerEmail);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

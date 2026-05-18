@@ -276,6 +276,9 @@ id btnGoogleLogin
 id btnMainAction
 id btnSaveProfile
 id btnSwitchMode
+id btn_action_email
+id btn_action_instagram
+id btn_action_phone
 id btn_back
 id btn_cancel
 id btn_change_month
@@ -286,11 +289,15 @@ id btn_condition_full
 id btn_condition_half
 id btn_condition_not_conform
 id btn_confirm
+id btn_copy_email
+id btn_copy_instagram
 id btn_copy_mess_id
+id btn_copy_phone
 id btn_delete
 id btn_delete_message
 id btn_delete_permanently
 id btn_delete_subscription
+id btn_dialog_close
 id btn_dinner_in_new
 id btn_dinner_out_new
 id btn_edit_price
@@ -529,6 +536,9 @@ id studentNameEditText
 id studentNameLayout
 id studentPhoneEditText
 id studentPhoneLayout
+id support_email
+id support_instagram
+id support_phone
 id swipe_refresh
 id swipe_refresh_layout
 id switch_allow_multiple_changes
@@ -672,6 +682,7 @@ layout activity_weekly_menu
 layout dialog_add_review
 layout dialog_freeze_delete
 layout dialog_grant_subscription
+layout dialog_help_support
 layout dialog_manage_subscription
 layout dialog_notifications
 layout dialog_send_message
