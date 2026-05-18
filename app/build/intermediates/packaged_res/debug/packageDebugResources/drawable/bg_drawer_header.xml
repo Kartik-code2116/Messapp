@@ -1,10 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle">
-    <gradient
-        android:angle="135"
-        android:startColor="#C2410C"
-        android:centerColor="#F97316"
-        android:endColor="#FB923C"
-        android:type="linear" />
-</shape>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <!-- Base Warm Food Brand Gradient -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="135"
+                android:startColor="@color/brand_primary_dark"
+                android:centerColor="@color/brand_primary"
+                android:endColor="@color/orange_bright"
+                android:type="linear" />
+        </shape>
+    </item>
+
+    <!-- Translucent Overlay for Glassmorphism & Depth -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="45"
+                android:startColor="#26FFFFFF"
+                android:centerColor="#00000000"
+                android:endColor="#1A000000"
+                android:type="linear" />
+        </shape>
+    </item>
+
+</layer-list>
