@@ -495,7 +495,11 @@ public class MessStudentsFragment extends Fragment {
                 "\nOne Time: " + oneTimeText +
                 "\nCurrent type: " + currentType);
 
-        new AlertDialog.Builder(getContext())
+        // Detect ONE_TIME student who has already used one meal today — offer Grant Both Meals
+        boolean isOneTimeWithMealUsed = "ONE_TIME".equals(student.getSubscriptionType())
+                && ("IN".equals(student.getLunchStatus()) || "IN".equals(student.getDinnerStatus()));
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext())
                 .setView(dialogView)
                 .setPositiveButton("Confirm", (dialog, which) -> {
                     String daysStr = etDays.getText().toString().trim();
@@ -518,8 +522,87 @@ public class MessStudentsFragment extends Fragment {
 
                     manageSubscription(student, amount, days, isExtend, mealType);
                 })
+                .setNegativeButton("Cancel", null);
+
+        if (isOneTimeWithMealUsed) {
+            builder.setNeutralButton("Grant Both Meals Today", (d, w) ->
+                    showGrantBothMealsConfirmation(student));
+        }
+
+        builder.show();
+    }
+
+    /**
+     * Shown when admin taps "Grant Both Meals Today" for a ONE_TIME subscriber
+     * who has already used their one meal for the day.
+     */
+    private void showGrantBothMealsConfirmation(Student student) {
+        String usedMeal   = "IN".equals(student.getLunchStatus()) ? "Lunch" : "Dinner";
+        String otherMeal  = "Lunch".equals(usedMeal) ? "Dinner" : "Lunch";
+        String studentName = student.getName() != null ? student.getName() : "This student";
+
+        new AlertDialog.Builder(getContext())
+                .setTitle("Grant Both Meals Today")
+                .setMessage(studentName + " has already taken " + usedMeal + " today "
+                        + "(ONE TIME subscription).\n\n"
+                        + "Granting this override will:\n"
+                        + "  • Unlock " + otherMeal + " for them today\n"
+                        + "  • Deduct 1 extra day from their subscription\n\n"
+                        + "Proceed?")
+                .setPositiveButton("Yes, Grant Both", (d, w) -> grantBothMealsToday(student))
                 .setNegativeButton("Cancel", null)
                 .show();
+    }
+
+    /**
+     * Admin override: allows a ONE_TIME subscriber to take both meals today.
+     * Sets adminAllowedBoth = true in meal_selections and deducts 1 day from
+     * the student's oneTimeMealExpiry.
+     */
+    private void grantBothMealsToday(Student student) {
+        if (binding == null || currentMessId == null) return;
+        binding.progressBar.setVisibility(View.VISIBLE);
+
+        String todayDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        String selectionDocId = currentMessId + "_" + todayDate + "_" + student.getUserId();
+
+        com.google.firebase.firestore.DocumentReference mealRef =
+                db.collection("meal_selections").document(selectionDocId);
+        com.google.firebase.firestore.DocumentReference userRef =
+                db.collection("users").document(student.getUserId());
+
+        db.runTransaction(transaction -> {
+            com.google.firebase.firestore.DocumentSnapshot userSnap = transaction.get(userRef);
+
+            // Deduct 1 day from oneTimeMealExpiry (cost of the extra meal)
+            long currentOneTimeExpiry = userSnap.getLong("oneTimeMealExpiry") != null
+                    ? userSnap.getLong("oneTimeMealExpiry") : 0L;
+            long updatedOneTimeExpiry = Math.max(
+                    System.currentTimeMillis(),
+                    currentOneTimeExpiry - (24L * 60 * 60 * 1000));
+
+            transaction.update(userRef,
+                    "oneTimeMealExpiry", updatedOneTimeExpiry,
+                    "subscriptionExpiry", updatedOneTimeExpiry);
+
+            // Flag today's meal_selections doc so the user's home screen unlocks the second meal
+            Map<String, Object> mealData = new HashMap<>();
+            mealData.put("adminAllowedBoth", true);
+            mealData.put("adminAllowedBothTimestamp", System.currentTimeMillis());
+            transaction.set(mealRef, mealData, com.google.firebase.firestore.SetOptions.merge());
+
+            return null;
+        }).addOnSuccessListener(aVoid -> {
+            if (binding == null) return;
+            binding.progressBar.setVisibility(View.GONE);
+            Toast.makeText(getContext(),
+                    "Both meals granted for today. 1 day deducted from subscription.",
+                    Toast.LENGTH_LONG).show();
+        }).addOnFailureListener(e -> {
+            if (binding == null) return;
+            binding.progressBar.setVisibility(View.GONE);
+            Toast.makeText(getContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        });
     }
 
     private void manageSubscription(Student student, double amount, int days, boolean isExtend, String mealType) {
