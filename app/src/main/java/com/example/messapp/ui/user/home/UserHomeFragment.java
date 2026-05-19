@@ -380,8 +380,11 @@ public class UserHomeFragment extends Fragment {
 
                     if (isOneTimeSubscribed) {
                         // Track whether any meal is already claimed today
-                        oneTimeMealUsedToday = "IN".equals(lunchStatus) || "IN".equals(dinnerStatus);
-                        updateOneTimeButtonUI(lunchStatus, dinnerStatus, currentUserOneTimeAutoSelect);
+                        boolean adminAllowedBoth = documentSnapshot != null && Boolean.TRUE.equals(documentSnapshot.getBoolean("adminAllowedBoth"));
+                        boolean bothIn = "IN".equals(lunchStatus) && "IN".equals(dinnerStatus);
+                        boolean eitherIn = "IN".equals(lunchStatus) || "IN".equals(dinnerStatus);
+                        oneTimeMealUsedToday = adminAllowedBoth ? bothIn : eitherIn;
+                        updateOneTimeButtonUI(lunchStatus, dinnerStatus, currentUserOneTimeAutoSelect, adminAllowedBoth);
                     } else {
                         updateButtonUI("LUNCH", lunchStatus);
                         updateButtonUI("DINNER", dinnerStatus);
@@ -531,7 +534,7 @@ public class UserHomeFragment extends Fragment {
     // the IN button on the other card is locked for the rest of
     // the day.
     // ────────────────────────────────────────────────────────────
-    private void updateOneTimeButtonUI(String lunchStatus, String dinnerStatus, String autoSelect) {
+    private void updateOneTimeButtonUI(String lunchStatus, String dinnerStatus, String autoSelect, boolean adminAllowedBoth) {
         if (binding == null)
             return;
 
@@ -555,9 +558,9 @@ public class UserHomeFragment extends Fragment {
         boolean isDinnerOut = "OUT".equals(dinnerStatus);
 
         boolean lunchChosen = lunchExplicitIn
-                || (!isReset && !isLunchOut && !dinnerExplicitIn && "LUNCH".equals(autoSelect));
+                || (!isReset && !isLunchOut && !dinnerExplicitIn && "LUNCH".equals(autoSelect) && !adminAllowedBoth);
         boolean dinnerChosen = dinnerExplicitIn
-                || (!isReset && !isDinnerOut && !lunchExplicitIn && "DINNER".equals(autoSelect));
+                || (!isReset && !isDinnerOut && !lunchExplicitIn && "DINNER".equals(autoSelect) && !adminAllowedBoth);
 
         // ---- Lunch card ----
         if (lunchChosen) {
@@ -567,10 +570,10 @@ public class UserHomeFragment extends Fragment {
             binding.btnLunchInNew.setEnabled(false);
             binding.btnLunchOutNew.setVisibility(View.GONE); // OUT not applicable for ONE_TIME
             binding.textLunchStatus.setText("Today's meal selected");
-            binding.textLunchStatusBar.setText(lunchExplicitIn ? "ONE TIME - Used" : "ONE TIME - Auto Selected");
+            binding.textLunchStatusBar.setText(lunchExplicitIn ? (adminAllowedBoth ? "ONE TIME - Granted (Used)" : "ONE TIME - Used") : "ONE TIME - Auto Selected");
             binding.textLunchStatusBar.setBackgroundColor(colorGreen);
             binding.textLunchStatusBar.setTextColor(Color.WHITE);
-        } else if (dinnerChosen) {
+        } else if (dinnerChosen && !adminAllowedBoth) {
             // Dinner was already chosen today — lock lunch card entirely
             binding.btnLunchInNew.setEnabled(false);
             binding.btnLunchInNew.setBackgroundTintList(ColorStateList.valueOf(colorDisabled));
@@ -606,7 +609,11 @@ public class UserHomeFragment extends Fragment {
                 binding.btnLunchInNew.setEnabled(true);
                 binding.btnLunchInNew.setBackgroundTintList(ColorStateList.valueOf(colorPrimary));
                 binding.btnLunchInNew.setTextColor(colorTextOnPrimary);
-                binding.textLunchStatusBar.setText("ONE TIME - Tap IN to select Lunch");
+                if (adminAllowedBoth) {
+                    binding.textLunchStatusBar.setText("ONE TIME - Granted (Tap IN for Lunch)");
+                } else {
+                    binding.textLunchStatusBar.setText("ONE TIME - Tap IN to select Lunch");
+                }
                 binding.textLunchStatusBar.setBackgroundColor(colorAmber);
             }
             binding.textLunchStatus.setText("");
@@ -620,10 +627,10 @@ public class UserHomeFragment extends Fragment {
             binding.btnDinnerInNew.setEnabled(false);
             binding.btnDinnerOutNew.setVisibility(View.GONE);
             binding.textDinnerStatus.setText("Today's meal selected");
-            binding.textDinnerStatusBar.setText(dinnerExplicitIn ? "ONE TIME - Used" : "ONE TIME - Auto Selected");
+            binding.textDinnerStatusBar.setText(dinnerExplicitIn ? (adminAllowedBoth ? "ONE TIME - Granted (Used)" : "ONE TIME - Used") : "ONE TIME - Auto Selected");
             binding.textDinnerStatusBar.setBackgroundColor(colorGreen);
             binding.textDinnerStatusBar.setTextColor(Color.WHITE);
-        } else if (lunchChosen) {
+        } else if (lunchChosen && !adminAllowedBoth) {
             // Lunch was chosen — lock dinner card
             binding.btnDinnerInNew.setEnabled(false);
             binding.btnDinnerInNew.setBackgroundTintList(ColorStateList.valueOf(colorDisabled));
@@ -658,7 +665,11 @@ public class UserHomeFragment extends Fragment {
                 binding.btnDinnerInNew.setEnabled(true);
                 binding.btnDinnerInNew.setBackgroundTintList(ColorStateList.valueOf(colorPrimary));
                 binding.btnDinnerInNew.setTextColor(colorTextOnPrimary);
-                binding.textDinnerStatusBar.setText("ONE TIME - Tap IN to select Dinner");
+                if (adminAllowedBoth) {
+                    binding.textDinnerStatusBar.setText("ONE TIME - Granted (Tap IN for Dinner)");
+                } else {
+                    binding.textDinnerStatusBar.setText("ONE TIME - Tap IN to select Dinner");
+                }
                 binding.textDinnerStatusBar.setBackgroundColor(colorAmber);
             }
             binding.textDinnerStatus.setText("");
