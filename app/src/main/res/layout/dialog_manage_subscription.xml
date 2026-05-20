@@ -106,7 +106,7 @@
             android:backgroundTint="@color/brand_primary_light"
             android:padding="12dp"
             android:layout_marginBottom="12dp"
-            android:visibility="gone"/>
+            android:visibility="visible"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"

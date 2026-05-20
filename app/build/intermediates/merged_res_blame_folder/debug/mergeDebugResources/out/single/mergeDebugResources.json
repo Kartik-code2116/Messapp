@@ -164,6 +164,10 @@
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\drawable\\bg_deadline_pill.xml"
     },
     {
+        "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\anim_dialog_exit.xml.flat",
+        "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\anim\\dialog_exit.xml"
+    },
+    {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\drawable_bg_drawer_avatar_ring.xml.flat",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\drawable\\bg_drawer_avatar_ring.xml"
     },
@@ -508,10 +512,6 @@
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\drawable\\bg_drawer_header.xml"
     },
     {
-        "merged": "com.example.messapp-debug-61:/anim_dialog_exit.xml.flat",
-        "source": "com.example.messapp-main-63:/anim/dialog_exit.xml"
-    },
-    {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\drawable_circle_border_white.xml.flat",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\drawable\\circle_border_white.xml"
     },
@@ -550,6 +550,10 @@
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\drawable_bg_login_header.xml.flat",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\drawable\\bg_login_header.xml"
+    },
+    {
+        "merged": "com.example.messapp-debug-61:/layout_dialog_manage_subscription.xml.flat",
+        "source": "com.example.messapp-main-63:/layout/dialog_manage_subscription.xml"
     },
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\layout_item_review.xml.flat",
@@ -732,6 +736,10 @@
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\drawable\\bg_role_logo_plate.xml"
     },
     {
+        "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\anim_dialog_enter.xml.flat",
+        "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\anim\\dialog_enter.xml"
+    },
+    {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\menu_menu_admin_profile_drawer.xml.flat",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\menu\\menu_admin_profile_drawer.xml"
     },
@@ -778,10 +786,6 @@
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\color_selector_nav_admin.xml.flat",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\color\\selector_nav_admin.xml"
-    },
-    {
-        "merged": "com.example.messapp-debug-61:/anim_dialog_enter.xml.flat",
-        "source": "com.example.messapp-main-63:/anim/dialog_enter.xml"
     },
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\layout_include_admin_top_bar.xml.flat",

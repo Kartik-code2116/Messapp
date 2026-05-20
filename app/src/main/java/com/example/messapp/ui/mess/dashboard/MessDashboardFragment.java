@@ -114,14 +114,14 @@ public class MessDashboardFragment extends Fragment {
                         Toast.makeText(getContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    String mealType = "BOTH";
+                    String mealType = "ONE_TIME";
                     int selectedId = radioGroupMealType.getCheckedRadioButtonId();
                     if (selectedId == R.id.radio_lunch)
                         mealType = "LUNCH";
                     else if (selectedId == R.id.radio_dinner)
                         mealType = "DINNER";
-                    else if (selectedId == R.id.radio_one_time)
-                        mealType = "ONE_TIME";
+                    else if (selectedId == R.id.radio_both)
+                        mealType = "BOTH";
                     grantSubscription(request, Double.parseDouble(amountStr), Integer.parseInt(daysStr), mealType);
                 })
                 .setNegativeButton("Cancel", null)

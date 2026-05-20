@@ -2,93 +2,86 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // Reusable optimized helper functions
-    function isAuthenticated() {
-      return request.auth != null;
-    }
-
+    // Reusable Helper: Gets current user's data once to save on billable reads
     function getUserData() {
       return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
     }
 
-    function isMessOwner() {
-      return isAuthenticated() && getUserData().role == "MESS_OWNER";
-    }
-
-    // Users: only the owner can write their own doc; mess owners can also update users (for granting subscriptions)
+    // Users: Only the owner can write their own doc; mess owners can update roles/subscriptions
     match /users/{userId} {
-      allow read: if isAuthenticated();
-      allow write: if isAuthenticated() && (
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && (
         request.auth.uid == userId ||
-        isMessOwner()
+        getUserData().role == "MESS_OWNER"
       );
     }
 
-    // Messes: anyone can read (guest mode); only verified mess owners can write
+    // Messes: Public read for guest browsing; only Mess Owners can create/edit messes
     match /messes/{messId} {
-      allow read: if true;  // Guest mode needs public read
-      allow write: if isMessOwner();
+      allow read: if true; 
+      allow write: if request.auth != null && getUserData().role == "MESS_OWNER";
     }
 
-    // Menus: anyone authenticated can read; only mess owners can write
+    // Menus: Anyone authenticated can read; only Mess Owners can update menus
     match /menus/{docId} {
-      allow read: if isAuthenticated();
-      allow write: if isMessOwner();
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && getUserData().role == "MESS_OWNER";
     }
 
-    // Mess settings: authenticated read; only mess owners can write
+    // Mess settings: Authenticated read; only Mess Owners can edit settings
     match /mess_settings/{messId} {
-      allow read: if isAuthenticated();
-      allow write: if isMessOwner();
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && getUserData().role == "MESS_OWNER";
     }
 
-    // Meal selections: users can write their own; mess owner can read all
+    // Meal selections: Users can read/write their own; mess owners can read/write all
+    // (Mess owners need write access for "Grant Both Meals Today" feature)
     match /meal_selections/{docId} {
-      allow read: if isAuthenticated();
-      allow write: if isAuthenticated();
+      allow read: if request.auth != null && (
+        resource.data.userId == request.auth.uid || 
+        getUserData().role == "MESS_OWNER"
+      );
+      allow write: if request.auth != null && (
+        request.resource.data.userId == request.auth.uid ||
+        getUserData().role == "MESS_OWNER"
+      );
     }
 
-    // Subscriptions: authenticated access only
+    // Subscriptions & Requests: Authenticated access
     match /subscriptions/{subId} {
-      allow read: if isAuthenticated();
-      allow write: if isAuthenticated();
+      allow read, write: if request.auth != null; 
     }
 
-    // Subscription requests: authenticated access only
     match /subscriptionRequests/{reqId} {
-      allow read: if isAuthenticated();
-      allow write: if isAuthenticated();
+      allow read, write: if request.auth != null;
     }
 
-    // Mess notifications: authenticated users in the app can read/write feed items
+    // Mess notifications: Authenticated users can read; only Mess Owners publish notifications
     match /mess_notifications/{notificationId} {
-      allow read: if isAuthenticated();
-      allow write: if isAuthenticated();
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && getUserData().role == "MESS_OWNER";
     }
 
-    // Transactions: authenticated read; only mess owners can create; no updates/deletes allowed
+    // Transactions: Immutable financial ledger — create only, never update/delete
+    // Mess owners create transactions when granting subscriptions (userId = student's ID)
     match /transactions/{txnId} {
-      allow read: if isAuthenticated();
-      allow create: if isMessOwner();
+      allow read: if request.auth != null && (
+        resource.data.userId == request.auth.uid || 
+        getUserData().role == "MESS_OWNER"
+      );
+      allow create: if request.auth != null;
       allow update, delete: if false;
     }
 
-    // Reviews: students can read/manage their own reviews; mess owners can read reviews for their own mess
+    // Reviews: Students manage their own; mess owners read reviews matching their assigned messId
     match /reviews/{reviewId} {
-      allow read: if isAuthenticated()
-        && (
-          resource.data.userId == request.auth.uid ||
-          (
-            isMessOwner() &&
-            getUserData().messId == resource.data.messId
-          )
-        );
-      allow create: if isAuthenticated()
+      allow read: if request.auth != null && (
+        resource.data.userId == request.auth.uid ||
+        (getUserData().role == "MESS_OWNER" && getUserData().messId == resource.data.messId)
+      );
+      allow create: if request.auth != null 
         && request.resource.data.userId == request.auth.uid;
-      allow update: if isAuthenticated()
-        && resource.data.userId == request.auth.uid
-        && request.resource.data.userId == request.auth.uid;
-      allow delete: if isAuthenticated()
+      allow update, delete: if request.auth != null 
         && resource.data.userId == request.auth.uid;
     }
   }

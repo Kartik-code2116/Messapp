@@ -514,11 +514,11 @@ public class MessStudentsFragment extends Fragment {
                     double amount = Double.parseDouble(amountStr);
                     boolean isExtend = radioExtend.isChecked();
 
-                    String mealType = "BOTH";
+                    String mealType = "ONE_TIME";
                     int selectedId = radioGroupMealType.getCheckedRadioButtonId();
                     if (selectedId == R.id.radio_lunch)        mealType = "LUNCH";
                     else if (selectedId == R.id.radio_dinner)  mealType = "DINNER";
-                    else if (selectedId == R.id.radio_one_time) mealType = "ONE_TIME";
+                    else if (selectedId == R.id.radio_both)    mealType = "BOTH";
 
                     manageSubscription(student, amount, days, isExtend, mealType);
                 })
