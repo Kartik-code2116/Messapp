@@ -21,6 +21,7 @@ import com.example.messapp.databinding.FragmentUserProfileBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.ListenerRegistration;
 
 import com.example.messapp.utils.ThemeManager;
 
@@ -30,6 +31,7 @@ public class UserProfileFragment extends Fragment {
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private String currentUserMessId;
+    private ListenerRegistration profileListener;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
             ViewGroup container, Bundle savedInstanceState) {
@@ -74,83 +76,86 @@ public class UserProfileFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        loadUserProfile();
+        // Real-time listener handles updates; no extra fetch needed.
     }
 
     private void loadUserProfile() {
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser != null) {
-            if (binding != null) {
-                binding.textProfileEmail.setText(currentUser.getEmail());
-                binding.textProfileEmailCard.setText(currentUser.getEmail());
-            }
-            db.collection("users").document(currentUser.getUid()).get()
-                    .addOnSuccessListener(doc -> {
-                        if (binding == null) return;
-                        if (doc.exists()) {
-                            String messId = doc.getString("messId");
-                            currentUserMessId = messId;
-                            String name = doc.getString("name");
-
-                            String displayName = name != null && !name.isEmpty() ? name : "Student";
-                            binding.textProfileName.setText(displayName);
-                            binding.textProfileNameCard.setText(displayName);
-
-                            String phone = doc.getString("phone");
-                            binding.textProfilePhone.setText(phone != null && !phone.isEmpty() ? phone : "Not set");
-
-                            if (messId != null) {
-                                binding.textProfileMessId.setText("Mess ID: " + messId);
-                                fetchMessName(messId);
-                            } else {
-                                binding.textProfileMessId.setVisibility(View.GONE);
-                                binding.textProfileMessName.setText("Not Joined");
-                            }
-
-                            Long lunchExpiry   = doc.getLong("lunchSubscriptionExpiry");
-                            Long dinnerExpiry  = doc.getLong("dinnerSubscriptionExpiry");
-                            Long oneTimeExpiry = doc.getLong("oneTimeMealExpiry");
-                            Long generalExpiry = doc.getLong("subscriptionExpiry");
-                            String subType     = doc.getString("subscriptionType");
-
-                            if ("ONE_TIME".equals(subType)) {
-                                binding.textLunchExpiry.setVisibility(View.GONE);
-                                binding.textDinnerExpiry.setVisibility(View.GONE);
-                                binding.textOneTimeExpiry.setVisibility(View.VISIBLE);
-                                updateSubscriptionStatus(binding.textOneTimeExpiry, "One Time a Day",
-                                        oneTimeExpiry != null ? oneTimeExpiry : (generalExpiry != null ? generalExpiry : 0));
-                            } else {
-                                binding.textLunchExpiry.setVisibility(View.VISIBLE);
-                                binding.textDinnerExpiry.setVisibility(View.VISIBLE);
-                                binding.textOneTimeExpiry.setVisibility(View.GONE);
-                                updateSubscriptionStatus(binding.textLunchExpiry,  "Lunch",
-                                        lunchExpiry  != null ? lunchExpiry  : (generalExpiry != null ? generalExpiry : 0));
-                                updateSubscriptionStatus(binding.textDinnerExpiry, "Dinner",
-                                        dinnerExpiry != null ? dinnerExpiry : (generalExpiry != null ? generalExpiry : 0));
-                            }
-
-                            binding.textSubscriptionExpiry.setVisibility(View.GONE);
-
-                            String profileImageUrl = doc.getString("profileImageUrl");
-                            if (profileImageUrl != null && !profileImageUrl.isEmpty()) {
-                                com.bumptech.glide.Glide.with(this)
-                                        .load(profileImageUrl)
-                                        .placeholder(R.drawable.ic_person_black_24dp)
-                                        .into(binding.profileImage);
-                            }
-                        } else {
-                            if (getContext() != null)
-                                Toast.makeText(getContext(), "User data not found", Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .addOnFailureListener(e -> {
-                        if (getContext() != null)
-                            Toast.makeText(getContext(), "Error loading profile", Toast.LENGTH_SHORT).show();
-                    });
-        } else {
+        if (currentUser == null) {
             if (getContext() != null)
                 Toast.makeText(getContext(), "User not logged in", Toast.LENGTH_SHORT).show();
+            return;
         }
+
+        // Show email immediately from FirebaseAuth (no Firestore round-trip needed)
+        if (binding != null) {
+            binding.textProfileEmail.setText(currentUser.getEmail());
+            binding.textProfileEmailCard.setText(currentUser.getEmail());
+        }
+
+        // Use a real-time listener so the profile photo (and all data) refreshes
+        // automatically the moment the user saves changes in EditUserProfileActivity.
+        if (profileListener != null) return; // already listening
+        profileListener = db.collection("users").document(currentUser.getUid())
+                .addSnapshotListener((doc, error) -> {
+                    if (binding == null) return;
+                    if (error != null || doc == null || !doc.exists()) return;
+
+                    String messId = doc.getString("messId");
+                    currentUserMessId = messId;
+                    String name = doc.getString("name");
+
+                    String displayName = name != null && !name.isEmpty() ? name : "Student";
+                    binding.textProfileName.setText(displayName);
+                    binding.textProfileNameCard.setText(displayName);
+
+                    String phone = doc.getString("phone");
+                    binding.textProfilePhone.setText(phone != null && !phone.isEmpty() ? phone : "Not set");
+
+                    if (messId != null) {
+                        binding.textProfileMessId.setText("Mess ID: " + messId);
+                        fetchMessName(messId);
+                    } else {
+                        binding.textProfileMessId.setVisibility(View.GONE);
+                        binding.textProfileMessName.setText("Not Joined");
+                    }
+
+                    Long lunchExpiry   = doc.getLong("lunchSubscriptionExpiry");
+                    Long dinnerExpiry  = doc.getLong("dinnerSubscriptionExpiry");
+                    Long oneTimeExpiry = doc.getLong("oneTimeMealExpiry");
+                    Long generalExpiry = doc.getLong("subscriptionExpiry");
+                    String subType     = doc.getString("subscriptionType");
+
+                    if ("ONE_TIME".equals(subType)) {
+                        binding.textLunchExpiry.setVisibility(View.GONE);
+                        binding.textDinnerExpiry.setVisibility(View.GONE);
+                        binding.textOneTimeExpiry.setVisibility(View.VISIBLE);
+                        updateSubscriptionStatus(binding.textOneTimeExpiry, "One Time a Day",
+                                oneTimeExpiry != null ? oneTimeExpiry : (generalExpiry != null ? generalExpiry : 0));
+                    } else {
+                        binding.textLunchExpiry.setVisibility(View.VISIBLE);
+                        binding.textDinnerExpiry.setVisibility(View.VISIBLE);
+                        binding.textOneTimeExpiry.setVisibility(View.GONE);
+                        updateSubscriptionStatus(binding.textLunchExpiry,  "Lunch",
+                                lunchExpiry  != null ? lunchExpiry  : (generalExpiry != null ? generalExpiry : 0));
+                        updateSubscriptionStatus(binding.textDinnerExpiry, "Dinner",
+                                dinnerExpiry != null ? dinnerExpiry : (generalExpiry != null ? generalExpiry : 0));
+                    }
+
+                    binding.textSubscriptionExpiry.setVisibility(View.GONE);
+
+                    // Load profile photo — show placeholder if none set
+                    String profileImageUrl = doc.getString("profileImageUrl");
+                    if (profileImageUrl != null && !profileImageUrl.isEmpty()) {
+                        com.bumptech.glide.Glide.with(this)
+                                .load(profileImageUrl)
+                                .placeholder(R.drawable.ic_person_black_24dp)
+                                .circleCrop()
+                                .into(binding.profileImage);
+                    } else {
+                        binding.profileImage.setImageResource(R.drawable.ic_person_black_24dp);
+                    }
+                });
     }
 
     private void fetchMessName(String messId) {
@@ -420,6 +425,10 @@ public class UserProfileFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        if (profileListener != null) {
+            profileListener.remove();
+            profileListener = null;
+        }
         binding = null;
     }
 }

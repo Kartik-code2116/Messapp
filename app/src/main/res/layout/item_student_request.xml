@@ -20,19 +20,16 @@
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
-            <FrameLayout
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/img_student"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:background="@drawable/bg_circle_surface"
-                android:backgroundTint="@color/brand_primary_light">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_student_profile"
-                    app:tint="@color/brand_primary" />
-            </FrameLayout>
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_student_profile"
+                app:shapeAppearanceOverlay="@style/CircleImageStyle"
+                android:background="@color/neutral_100"
+                app:strokeWidth="0dp"
+                tools:src="@tools:sample/avatars" />
 
             <LinearLayout
                 android:layout_width="0dp"

@@ -9,6 +9,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.messapp.databinding.ItemStudentRequestBinding;
 import com.example.messapp.models.SubscriptionRequest;
+import com.bumptech.glide.Glide;
+import com.example.messapp.R;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,6 +94,24 @@ public class SubscriptionRequestAdapter
 
         holder.binding.textStudentName.setText(request.getStudentName());
         holder.binding.textStudentEmail.setText(request.getStudentEmail());
+
+        holder.binding.imgStudent.setImageResource(R.drawable.ic_student_profile);
+        if (request.getStudentId() != null) {
+            final String studentId = request.getStudentId();
+            holder.itemView.setTag(studentId);
+            FirebaseFirestore.getInstance().collection("users").document(studentId).get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        if (Objects.equals(holder.itemView.getTag(), studentId) && documentSnapshot.exists()) {
+                            String profileImageUrl = documentSnapshot.getString("profileImageUrl");
+                            if (profileImageUrl != null && !profileImageUrl.isEmpty()) {
+                                Glide.with(holder.itemView.getContext())
+                                        .load(profileImageUrl)
+                                        .placeholder(R.drawable.ic_student_profile)
+                                        .into(holder.binding.imgStudent);
+                            }
+                        }
+                    });
+        }
 
         holder.binding.textInfo.setVisibility(android.view.View.VISIBLE);
         String info = "Status: " + request.getStatus();

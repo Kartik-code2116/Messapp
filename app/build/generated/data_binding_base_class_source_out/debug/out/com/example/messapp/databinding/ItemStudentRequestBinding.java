@@ -12,6 +12,7 @@ import androidx.viewbinding.ViewBindings;
 import com.example.messapp.R;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.imageview.ShapeableImageView;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
@@ -27,6 +28,9 @@ public final class ItemStudentRequestBinding implements ViewBinding {
   public final MaterialButton btnDelete;
 
   @NonNull
+  public final ShapeableImageView imgStudent;
+
+  @NonNull
   public final TextView textInfo;
 
   @NonNull
@@ -37,11 +41,12 @@ public final class ItemStudentRequestBinding implements ViewBinding {
 
   private ItemStudentRequestBinding(@NonNull MaterialCardView rootView,
       @NonNull MaterialButton btnConfirm, @NonNull MaterialButton btnDelete,
-      @NonNull TextView textInfo, @NonNull TextView textStudentEmail,
-      @NonNull TextView textStudentName) {
+      @NonNull ShapeableImageView imgStudent, @NonNull TextView textInfo,
+      @NonNull TextView textStudentEmail, @NonNull TextView textStudentName) {
     this.rootView = rootView;
     this.btnConfirm = btnConfirm;
     this.btnDelete = btnDelete;
+    this.imgStudent = imgStudent;
     this.textInfo = textInfo;
     this.textStudentEmail = textStudentEmail;
     this.textStudentName = textStudentName;
@@ -86,6 +91,12 @@ public final class ItemStudentRequestBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.img_student;
+      ShapeableImageView imgStudent = ViewBindings.findChildViewById(rootView, id);
+      if (imgStudent == null) {
+        break missingId;
+      }
+
       id = R.id.text_info;
       TextView textInfo = ViewBindings.findChildViewById(rootView, id);
       if (textInfo == null) {
@@ -105,7 +116,7 @@ public final class ItemStudentRequestBinding implements ViewBinding {
       }
 
       return new ItemStudentRequestBinding((MaterialCardView) rootView, btnConfirm, btnDelete,
-          textInfo, textStudentEmail, textStudentName);
+          imgStudent, textInfo, textStudentEmail, textStudentName);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
