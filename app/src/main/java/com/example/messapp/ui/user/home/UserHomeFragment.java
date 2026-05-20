@@ -428,9 +428,7 @@ public class UserHomeFragment extends Fragment {
                 return;
             }
             if (oneTimeMealUsedToday) {
-                Toast.makeText(getContext(),
-                        "You have already used your one meal for today!",
-                        Toast.LENGTH_LONG).show();
+                showExtraMealRequestDialog(mealType);
                 return;
             }
         } else {
@@ -529,6 +527,40 @@ public class UserHomeFragment extends Fragment {
         });
     }
 
+    private void showExtraMealRequestDialog(String mealType) {
+        new androidx.appcompat.app.AlertDialog.Builder(requireContext())
+                .setTitle("Extra Meal Request")
+                .setMessage("You have already used your one meal for today. Would you like to request an extra meal? This will deduct 1 day from your subscription.")
+                .setPositiveButton("Request", (dialog, which) -> sendExtraMealRequest(mealType))
+                .setNegativeButton("Cancel", null)
+                .show();
+    }
+
+    private void sendExtraMealRequest(String mealType) {
+        if (userId == null || messId == null) return;
+        db.collection("users").document(userId).get().addOnSuccessListener(doc -> {
+            String studentName = doc.getString("name");
+            if (studentName == null || studentName.isEmpty()) studentName = "Student";
+
+            String requestId = db.collection("subscriptionRequests").document().getId();
+            String email = doc.getString("email");
+            if (email == null) email = "";
+            com.example.messapp.models.SubscriptionRequest request = new com.example.messapp.models.SubscriptionRequest(
+                    requestId, userId, studentName, email, messId, System.currentTimeMillis(), "PENDING", "EXTRA_" + mealType
+            );
+
+            db.collection("subscriptionRequests").document(requestId).set(request)
+                    .addOnSuccessListener(aVoid -> {
+                        if (getContext() != null) Toast.makeText(getContext(), "Extra meal requested successfully!", Toast.LENGTH_SHORT).show();
+                    })
+                    .addOnFailureListener(e -> {
+                        if (getContext() != null) Toast.makeText(getContext(), "Failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    });
+        }).addOnFailureListener(e -> {
+            if (getContext() != null) Toast.makeText(getContext(), "Failed to fetch user: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        });
+    }
+
     // ────────────────────────────────────────────────────────────
     // ONE_TIME UI: renders both cards, but once one is chosen
     // the IN button on the other card is locked for the rest of
@@ -562,6 +594,9 @@ public class UserHomeFragment extends Fragment {
         boolean dinnerChosen = dinnerExplicitIn
                 || (!isReset && !isDinnerOut && !lunchExplicitIn && "DINNER".equals(autoSelect) && !adminAllowedBoth);
 
+        binding.btnLunchInNew.setText("IN");
+        binding.btnDinnerInNew.setText("IN");
+
         // ---- Lunch card ----
         if (lunchChosen) {
             // This meal was chosen — show as selected IN, lock both buttons
@@ -575,13 +610,23 @@ public class UserHomeFragment extends Fragment {
             binding.textLunchStatusBar.setTextColor(Color.WHITE);
         } else if (dinnerChosen && !adminAllowedBoth) {
             // Dinner was already chosen today — lock lunch card entirely
-            binding.btnLunchInNew.setEnabled(false);
-            binding.btnLunchInNew.setBackgroundTintList(ColorStateList.valueOf(colorDisabled));
-            binding.btnLunchInNew.setTextColor(Color.WHITE);
+            if (cutoffLunch) {
+                binding.btnLunchInNew.setEnabled(false);
+                binding.btnLunchInNew.setBackgroundTintList(ColorStateList.valueOf(colorDisabled));
+                binding.btnLunchInNew.setTextColor(Color.WHITE);
+                binding.textLunchStatusBar.setText("ONE TIME - Cutoff Passed");
+                binding.textLunchStatusBar.setBackgroundColor(colorDisabled);
+                binding.textLunchStatus.setText("Dinner already selected today");
+            } else {
+                binding.btnLunchInNew.setEnabled(true);
+                binding.btnLunchInNew.setBackgroundTintList(ColorStateList.valueOf(colorAmber));
+                binding.btnLunchInNew.setTextColor(Color.WHITE);
+                binding.btnLunchInNew.setText("Request Extra");
+                binding.textLunchStatusBar.setText("ONE TIME - Locked (Tap to request)");
+                binding.textLunchStatusBar.setBackgroundColor(colorDisabled);
+                binding.textLunchStatus.setText("Dinner already selected today");
+            }
             binding.btnLunchOutNew.setVisibility(View.GONE);
-            binding.textLunchStatus.setText("Dinner already selected today");
-            binding.textLunchStatusBar.setText("ONE TIME - Locked");
-            binding.textLunchStatusBar.setBackgroundColor(colorDisabled);
             binding.textLunchStatusBar.setTextColor(Color.WHITE);
         } else if (isLunchOut && isDinnerOut) {
             // Both marked OUT via Plan OUT Days
@@ -632,13 +677,23 @@ public class UserHomeFragment extends Fragment {
             binding.textDinnerStatusBar.setTextColor(Color.WHITE);
         } else if (lunchChosen && !adminAllowedBoth) {
             // Lunch was chosen — lock dinner card
-            binding.btnDinnerInNew.setEnabled(false);
-            binding.btnDinnerInNew.setBackgroundTintList(ColorStateList.valueOf(colorDisabled));
-            binding.btnDinnerInNew.setTextColor(Color.WHITE);
+            if (cutoffDinner) {
+                binding.btnDinnerInNew.setEnabled(false);
+                binding.btnDinnerInNew.setBackgroundTintList(ColorStateList.valueOf(colorDisabled));
+                binding.btnDinnerInNew.setTextColor(Color.WHITE);
+                binding.textDinnerStatusBar.setText("ONE TIME - Cutoff Passed");
+                binding.textDinnerStatusBar.setBackgroundColor(colorDisabled);
+                binding.textDinnerStatus.setText("Lunch already selected today");
+            } else {
+                binding.btnDinnerInNew.setEnabled(true);
+                binding.btnDinnerInNew.setBackgroundTintList(ColorStateList.valueOf(colorAmber));
+                binding.btnDinnerInNew.setTextColor(Color.WHITE);
+                binding.btnDinnerInNew.setText("Request Extra");
+                binding.textDinnerStatusBar.setText("ONE TIME - Locked (Tap to request)");
+                binding.textDinnerStatusBar.setBackgroundColor(colorDisabled);
+                binding.textDinnerStatus.setText("Lunch already selected today");
+            }
             binding.btnDinnerOutNew.setVisibility(View.GONE);
-            binding.textDinnerStatus.setText("Lunch already selected today");
-            binding.textDinnerStatusBar.setText("ONE TIME - Locked");
-            binding.textDinnerStatusBar.setBackgroundColor(colorDisabled);
             binding.textDinnerStatusBar.setTextColor(Color.WHITE);
         } else if (isLunchOut && isDinnerOut) {
             // Dinner card also Planned OUT

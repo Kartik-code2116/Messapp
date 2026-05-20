@@ -49,7 +49,6 @@ public class MessRequestsFragment extends Fragment {
     private View cardEmptyState;
     private View layoutPendingSubs;
     private View layoutMealRequests;
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
@@ -66,6 +65,14 @@ public class MessRequestsFragment extends Fragment {
         setupMealRequests(view);
         setupSubscriptionRequests(view);
         fetchMessIdAndLoadData();
+        
+        androidx.swiperefreshlayout.widget.SwipeRefreshLayout swipeRefresh = view.findViewById(R.id.swipe_refresh_requests);
+        if (swipeRefresh != null) {
+            swipeRefresh.setOnRefreshListener(() -> {
+                fetchMessIdAndLoadData();
+                swipeRefresh.setRefreshing(false);
+            });
+        }
 
         return view;
     }
@@ -77,13 +84,55 @@ public class MessRequestsFragment extends Fragment {
         recyclerViewMealRequests.setAdapter(mealRequestAdapter);
 
         mealRequestAdapter.setOnConfirmClickListener(request -> {
-            db.collection("meal_requests").document(request.getId()).delete()
-                    .addOnSuccessListener(aVoid -> {
-                        Toast.makeText(getContext(), "Request confirmed and removed", Toast.LENGTH_SHORT).show();
-                        fetchMealRequests();
-                    })
-                    .addOnFailureListener(e ->
-                        Toast.makeText(getContext(), "Error confirming request", Toast.LENGTH_SHORT).show());
+            confirmExtraMealRequest(request);
+        });
+    }
+
+    private void confirmExtraMealRequest(MealRequest request) {
+        if (request.getUserId() == null || request.getId() == null) {
+            Toast.makeText(getContext(), "Invalid request data", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (progressBar != null) progressBar.setVisibility(View.VISIBLE);
+        
+        com.google.firebase.firestore.DocumentReference userRef = db.collection("users").document(request.getUserId());
+        String date = request.getDate() != null ? request.getDate() : new java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault()).format(new java.util.Date());
+        String mealDocId = currentMessId + "_" + date + "_" + request.getUserId();
+        com.google.firebase.firestore.DocumentReference mealRef = db.collection("meal_selections").document(mealDocId);
+        com.google.firebase.firestore.DocumentReference reqRef = db.collection("subscriptionRequests").document(request.getId());
+
+        db.runTransaction(transaction -> {
+            com.google.firebase.firestore.DocumentSnapshot userSnapshot = transaction.get(userRef);
+            if (userSnapshot.exists()) {
+                Long oneTimeExpiry = userSnapshot.getLong("oneTimeMealExpiry");
+                if (oneTimeExpiry != null) {
+                    transaction.update(userRef, "oneTimeMealExpiry", oneTimeExpiry - (24 * 60 * 60 * 1000L));
+                    Long generalExpiry = userSnapshot.getLong("subscriptionExpiry");
+                    if (generalExpiry != null && generalExpiry.equals(oneTimeExpiry)) {
+                         transaction.update(userRef, "subscriptionExpiry", generalExpiry - (24 * 60 * 60 * 1000L));
+                    }
+                }
+            }
+
+            Map<String, Object> mealUpdate = new HashMap<>();
+            mealUpdate.put("adminAllowedBoth", true);
+            String statusKey = "LUNCH".equals(request.getMealType()) ? "lunch" : "dinner";
+            mealUpdate.put(statusKey, "IN");
+            mealUpdate.put("userId", request.getUserId());
+            mealUpdate.put("messId", currentMessId);
+            mealUpdate.put("date", date);
+            mealUpdate.put("timestamp", System.currentTimeMillis());
+            transaction.set(mealRef, mealUpdate, com.google.firebase.firestore.SetOptions.merge());
+
+            transaction.delete(reqRef);
+            return null;
+        }).addOnSuccessListener(aVoid -> {
+            if (progressBar != null) progressBar.setVisibility(View.GONE);
+            Toast.makeText(getContext(), "Extra meal allowed and 1 day deducted.", Toast.LENGTH_SHORT).show();
+            fetchSubscriptionRequests();
+        }).addOnFailureListener(e -> {
+            if (progressBar != null) progressBar.setVisibility(View.GONE);
+            Toast.makeText(getContext(), "Error confirming request: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         });
     }
 
@@ -106,7 +155,6 @@ public class MessRequestsFragment extends Fragment {
                     if (doc.exists()) {
                         currentMessId = doc.getString("messId");
                         if (currentMessId != null) {
-                            fetchMealRequests();
                             fetchSubscriptionRequests();
                         }
                     }
@@ -120,11 +168,25 @@ public class MessRequestsFragment extends Fragment {
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     subRequestList.clear();
+                    mealRequestList.clear();
+                    String todayDate = new java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault()).format(new java.util.Date());
                     for (DocumentSnapshot doc : queryDocumentSnapshots) {
                         SubscriptionRequest req = doc.toObject(SubscriptionRequest.class);
-                        if (req != null) subRequestList.add(req);
+                        if (req != null) {
+                            if (req.getType() != null && req.getType().startsWith("EXTRA_")) {
+                                String mealType = req.getType().replace("EXTRA_", "");
+                                MealRequest mealReq = new MealRequest(
+                                    req.getId(), req.getStudentId(), req.getStudentName(),
+                                    req.getMessId(), todayDate, mealType
+                                );
+                                mealRequestList.add(mealReq);
+                            } else {
+                                subRequestList.add(req);
+                            }
+                        }
                     }
                     subRequestAdapter.setRequests(subRequestList);
+                    mealRequestAdapter.setRequests(mealRequestList);
                     updateUIState();
                 });
     }
@@ -265,31 +327,6 @@ public class MessRequestsFragment extends Fragment {
                 })
                 .setNegativeButton("Cancel", null)
                 .show();
-    }
-
-    // FIX #5: Added .whereEqualTo("messId", currentMessId) filter so this mess owner
-    // only sees their own meal requests, not requests from every mess in the system.
-    private void fetchMealRequests() {
-        if (currentMessId == null) return;
-        db.collection("meal_requests")
-                .whereEqualTo("messId", currentMessId)   // <-- the critical missing filter
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        mealRequestList.clear();
-                        for (DocumentSnapshot document : task.getResult()) {
-                            MealRequest request = new MealRequest(
-                                    document.getId(),
-                                    document.getString("userId"),
-                                    document.getString("mealType"));
-                            mealRequestList.add(request);
-                        }
-                        mealRequestAdapter.setRequests(mealRequestList);
-                        updateUIState();
-                    } else {
-                        Toast.makeText(getContext(), "Error getting requests", Toast.LENGTH_SHORT).show();
-                    }
-                });
     }
 
     private void updateUIState() {

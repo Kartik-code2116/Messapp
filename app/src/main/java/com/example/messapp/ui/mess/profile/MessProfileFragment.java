@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+import android.graphics.Bitmap;
+import android.graphics.Color;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -29,6 +31,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 
 public class MessProfileFragment extends Fragment {
 
@@ -47,7 +53,7 @@ public class MessProfileFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        binding.btnCopyMessId.setOnClickListener(v -> copyMessIdToClipboard());
+        binding.btnCopyMessId.setOnClickListener(v -> showQrCodeDialog());
         binding.btnNavEditProfile.setOnClickListener(v -> handleEditProfile());
         binding.btnEditProfileImage.setOnClickListener(v -> handleEditProfile());
         binding.btnNavOffers.setOnClickListener(v -> handleOffers());
@@ -183,16 +189,44 @@ public class MessProfileFragment extends Fragment {
                 });
     }
 
-    private void copyMessIdToClipboard() {
-        if (currentMessId != null) {
-            ClipboardManager clipboard = (ClipboardManager) requireContext()
-                    .getSystemService(Context.CLIPBOARD_SERVICE);
-            ClipData clip = ClipData.newPlainText("Mess ID", currentMessId);
-            clipboard.setPrimaryClip(clip);
-            Toast.makeText(requireContext(), "Mess ID copied to clipboard", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(requireContext(), "Mess ID not available to copy.", Toast.LENGTH_SHORT).show();
+    private void showQrCodeDialog() {
+        if (currentMessId == null) {
+            Toast.makeText(requireContext(), "Mess ID not available.", Toast.LENGTH_SHORT).show();
+            return;
         }
+
+        View dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_qr_code, null);
+        AlertDialog dialog = new AlertDialog.Builder(requireContext())
+                .setView(dialogView)
+                .create();
+
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        }
+
+        android.widget.ImageView imgQrCode = dialogView.findViewById(R.id.img_qr_code);
+        android.view.View btnClose = dialogView.findViewById(R.id.btn_close_qr);
+
+        String qrText = "Mess ID: " + currentMessId + "\nDownload App: https://play.google.com/store/apps/details?id=com.example.messapp";
+        try {
+            QRCodeWriter writer = new QRCodeWriter();
+            BitMatrix bitMatrix = writer.encode(qrText, BarcodeFormat.QR_CODE, 512, 512);
+            int width = bitMatrix.getWidth();
+            int height = bitMatrix.getHeight();
+            Bitmap bmp = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+            for (int x = 0; x < width; x++) {
+                for (int y = 0; y < height; y++) {
+                    bmp.setPixel(x, y, bitMatrix.get(x, y) ? Color.BLACK : Color.WHITE);
+                }
+            }
+            imgQrCode.setImageBitmap(bmp);
+        } catch (WriterException e) {
+            e.printStackTrace();
+            Toast.makeText(requireContext(), "Failed to generate QR code", Toast.LENGTH_SHORT).show();
+        }
+
+        btnClose.setOnClickListener(v -> dialog.dismiss());
+        dialog.show();
     }
 
     private void handleEditProfile() {

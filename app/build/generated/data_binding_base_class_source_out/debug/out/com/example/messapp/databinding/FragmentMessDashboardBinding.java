@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.messapp.R;
@@ -55,6 +56,9 @@ public final class FragmentMessDashboardBinding implements ViewBinding {
   public final RecyclerView recyclerPending;
 
   @NonNull
+  public final SwipeRefreshLayout swipeRefreshDashboard;
+
+  @NonNull
   public final TextView textBreakfastCountsBreakdown;
 
   @NonNull
@@ -90,6 +94,7 @@ public final class FragmentMessDashboardBinding implements ViewBinding {
       @NonNull MaterialButton btnConditionNotConform, @NonNull MaterialButton btnResetAllAttendance,
       @NonNull LinearLayout layoutDateRow, @NonNull LinearLayout layoutDeadlineContainer,
       @NonNull ProgressBar progressBar, @NonNull RecyclerView recyclerPending,
+      @NonNull SwipeRefreshLayout swipeRefreshDashboard,
       @NonNull TextView textBreakfastCountsBreakdown, @NonNull TextView textCurrentCondition,
       @NonNull TextView textDashboardTimer, @NonNull TextView textDinnerInCount,
       @NonNull TextView textDinnerOutCount, @NonNull TextView textLunchInCount,
@@ -106,6 +111,7 @@ public final class FragmentMessDashboardBinding implements ViewBinding {
     this.layoutDeadlineContainer = layoutDeadlineContainer;
     this.progressBar = progressBar;
     this.recyclerPending = recyclerPending;
+    this.swipeRefreshDashboard = swipeRefreshDashboard;
     this.textBreakfastCountsBreakdown = textBreakfastCountsBreakdown;
     this.textCurrentCondition = textCurrentCondition;
     this.textDashboardTimer = textDashboardTimer;
@@ -205,6 +211,12 @@ public final class FragmentMessDashboardBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.swipe_refresh_dashboard;
+      SwipeRefreshLayout swipeRefreshDashboard = ViewBindings.findChildViewById(rootView, id);
+      if (swipeRefreshDashboard == null) {
+        break missingId;
+      }
+
       id = R.id.text_breakfast_counts_breakdown;
       TextView textBreakfastCountsBreakdown = ViewBindings.findChildViewById(rootView, id);
       if (textBreakfastCountsBreakdown == null) {
@@ -268,9 +280,10 @@ public final class FragmentMessDashboardBinding implements ViewBinding {
       return new FragmentMessDashboardBinding((CoordinatorLayout) rootView, appbarDashboard,
           btnConditionEmpty, btnConditionFull, btnConditionHalf, btnConditionNotConform,
           btnResetAllAttendance, layoutDateRow, layoutDeadlineContainer, progressBar,
-          recyclerPending, textBreakfastCountsBreakdown, textCurrentCondition, textDashboardTimer,
-          textDinnerInCount, textDinnerOutCount, textLunchInCount, textLunchOutCount,
-          textMessDashboardDate, textMessDashboardName, textTotalStudents);
+          recyclerPending, swipeRefreshDashboard, textBreakfastCountsBreakdown,
+          textCurrentCondition, textDashboardTimer, textDinnerInCount, textDinnerOutCount,
+          textLunchInCount, textLunchOutCount, textMessDashboardDate, textMessDashboardName,
+          textTotalStudents);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

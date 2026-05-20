@@ -3,24 +3,24 @@
 3    package="com.example.messapp.test" >
 4
 5    <uses-sdk
-5-->D:\8)Android Development\messapp\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest11122676294315764577.xml:5:5-74
+5-->D:\8)Android Development\messapp\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest2122057669165467946.xml:5:5-74
 6        android:minSdkVersion="24"
-6-->D:\8)Android Development\messapp\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest11122676294315764577.xml:5:15-41
+6-->D:\8)Android Development\messapp\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest2122057669165467946.xml:5:15-41
 7        android:targetSdkVersion="36" />
-7-->D:\8)Android Development\messapp\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest11122676294315764577.xml:5:42-71
+7-->D:\8)Android Development\messapp\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest2122057669165467946.xml:5:42-71
 8
 9    <instrumentation
-9-->D:\8)Android Development\messapp\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest11122676294315764577.xml:11:5-15:69
+9-->D:\8)Android Development\messapp\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest2122057669165467946.xml:11:5-15:69
 10        android:name="androidx.test.runner.AndroidJUnitRunner"
-10-->D:\8)Android Development\messapp\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest11122676294315764577.xml:11:22-76
+10-->D:\8)Android Development\messapp\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest2122057669165467946.xml:11:22-76
 11        android:functionalTest="false"
-11-->D:\8)Android Development\messapp\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest11122676294315764577.xml:14:22-52
+11-->D:\8)Android Development\messapp\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest2122057669165467946.xml:14:22-52
 12        android:handleProfiling="false"
-12-->D:\8)Android Development\messapp\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest11122676294315764577.xml:13:22-53
+12-->D:\8)Android Development\messapp\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest2122057669165467946.xml:13:22-53
 13        android:label="Tests for com.example.messapp"
-13-->D:\8)Android Development\messapp\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest11122676294315764577.xml:15:22-67
+13-->D:\8)Android Development\messapp\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest2122057669165467946.xml:15:22-67
 14        android:targetPackage="com.example.messapp" />
-14-->D:\8)Android Development\messapp\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest11122676294315764577.xml:12:22-65
+14-->D:\8)Android Development\messapp\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest2122057669165467946.xml:12:22-65
 15
 16    <queries>
 16-->[androidx.test:runner:1.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\c6fde9127199ad239f0424eab806f9c9\transformed\runner-1.7.0\AndroidManifest.xml:24:5-28:15
@@ -40,12 +40,12 @@
 22-->[androidx.test:core:1.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\b57c91cd18a761ccd7e87064f63a04a4\transformed\core-1.7.0\AndroidManifest.xml:24:22-69
 23
 24    <application
-24-->D:\8)Android Development\messapp\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest11122676294315764577.xml:7:5-9:19
+24-->D:\8)Android Development\messapp\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest2122057669165467946.xml:7:5-9:19
 25        android:debuggable="true"
 26        android:extractNativeLibs="false" >
 27        <uses-library android:name="android.test.runner" />
-27-->D:\8)Android Development\messapp\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest11122676294315764577.xml:8:9-60
-27-->D:\8)Android Development\messapp\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest11122676294315764577.xml:8:23-57
+27-->D:\8)Android Development\messapp\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest2122057669165467946.xml:8:9-60
+27-->D:\8)Android Development\messapp\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest2122057669165467946.xml:8:23-57
 28
 29        <activity
 29-->[androidx.test:core:1.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\b57c91cd18a761ccd7e87064f63a04a4\transformed\core-1.7.0\AndroidManifest.xml:27:9-34:20

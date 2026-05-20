@@ -76,6 +76,11 @@ public class MessDashboardFragment extends Fragment {
         setupMessConditionButtons();
         binding.btnResetAllAttendance.setOnClickListener(v -> showResetConfirmation());
         fetchMessOwnerData();
+        
+        binding.swipeRefreshDashboard.setOnRefreshListener(() -> {
+            fetchMessOwnerData();
+            binding.swipeRefreshDashboard.setRefreshing(false);
+        });
 
         return root;
     }

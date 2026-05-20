@@ -39,10 +39,11 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         MealRequest request = requests.get(position);
-        holder.binding.textStudentName.setText("User: " + request.getUserId());
-        holder.binding.textStudentEmail.setText("Type: " + request.getMealType());
-        holder.binding.textInfo.setVisibility(android.view.View.GONE);
-        holder.binding.btnConfirm.setText("Confirm");
+        holder.binding.textStudentName.setText(request.getStudentName() != null ? request.getStudentName() : "User: " + request.getUserId());
+        holder.binding.textStudentEmail.setText("Extra Meal: " + request.getMealType() + " | Date: " + request.getDate());
+        holder.binding.textInfo.setVisibility(android.view.View.VISIBLE);
+        holder.binding.textInfo.setText("Deducts 1 day from subscription.");
+        holder.binding.btnConfirm.setText("Allow Extra");
         holder.binding.btnConfirm.setOnClickListener(v -> {
             if (listener != null)
                 listener.onConfirm(request);

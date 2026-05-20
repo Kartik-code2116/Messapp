@@ -10,6 +10,7 @@ import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.messapp.R;
@@ -40,10 +41,14 @@ public final class FragmentMessRequestsBinding implements ViewBinding {
   @NonNull
   public final RecyclerView recyclerViewRequests;
 
+  @NonNull
+  public final SwipeRefreshLayout swipeRefreshRequests;
+
   private FragmentMessRequestsBinding(@NonNull FrameLayout rootView,
       @NonNull MaterialCardView cardEmptyState, @NonNull LinearLayout layoutMealRequests,
       @NonNull LinearLayout layoutPendingSubs, @NonNull ProgressBar progressBar,
-      @NonNull RecyclerView recyclerPending, @NonNull RecyclerView recyclerViewRequests) {
+      @NonNull RecyclerView recyclerPending, @NonNull RecyclerView recyclerViewRequests,
+      @NonNull SwipeRefreshLayout swipeRefreshRequests) {
     this.rootView = rootView;
     this.cardEmptyState = cardEmptyState;
     this.layoutMealRequests = layoutMealRequests;
@@ -51,6 +56,7 @@ public final class FragmentMessRequestsBinding implements ViewBinding {
     this.progressBar = progressBar;
     this.recyclerPending = recyclerPending;
     this.recyclerViewRequests = recyclerViewRequests;
+    this.swipeRefreshRequests = swipeRefreshRequests;
   }
 
   @Override
@@ -116,9 +122,15 @@ public final class FragmentMessRequestsBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.swipe_refresh_requests;
+      SwipeRefreshLayout swipeRefreshRequests = ViewBindings.findChildViewById(rootView, id);
+      if (swipeRefreshRequests == null) {
+        break missingId;
+      }
+
       return new FragmentMessRequestsBinding((FrameLayout) rootView, cardEmptyState,
-          layoutMealRequests, layoutPendingSubs, progressBar, recyclerPending,
-          recyclerViewRequests);
+          layoutMealRequests, layoutPendingSubs, progressBar, recyclerPending, recyclerViewRequests,
+          swipeRefreshRequests);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

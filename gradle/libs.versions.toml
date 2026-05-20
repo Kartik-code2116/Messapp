@@ -37,6 +37,7 @@ glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "gl
 glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glide" }
 firebase-storage = { group = "com.google.firebase", name = "firebase-storage" }
 swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
+zxing = { group = "com.google.zxing", name = "core", version = "3.5.3" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -285,6 +285,7 @@ id btn_cancel
 id btn_change_month
 id btn_change_password
 id btn_change_photo
+id btn_close_qr
 id btn_condition_empty
 id btn_condition_full
 id btn_condition_half
@@ -432,6 +433,7 @@ id img_drawer_profile
 id img_mess_banner
 id img_profile
 id img_profile_edit
+id img_qr_code
 id img_student
 id indicator_mess_condition
 id info_row_icon
@@ -544,7 +546,9 @@ id support_email
 id support_instagram
 id support_phone
 id swipe_refresh
+id swipe_refresh_dashboard
 id swipe_refresh_layout
+id swipe_refresh_requests
 id switch_allow_multiple_changes
 id switch_auto_dinner
 id switch_auto_lunch
@@ -689,6 +693,7 @@ layout dialog_grant_subscription
 layout dialog_help_support
 layout dialog_manage_subscription
 layout dialog_notifications
+layout dialog_qr_code
 layout dialog_send_message
 layout dialog_sent_messages
 layout fragment_add_offer
