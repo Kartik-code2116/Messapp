@@ -1,6 +1,8 @@
 R_DEF: Internal format may change without notice
 local
 anim card_fade_slide_up
+anim dialog_enter
+anim dialog_exit
 anim fade_in
 anim fade_out
 anim slide_in_left
@@ -755,6 +757,7 @@ string total_students_label
 style Base.Theme.Messapp
 style CircleImageStyle
 style CircularImageView
+style DialogAnimation
 style NumberPickerTheme
 style ProfileCard
 style ProfileSectionTitle

@@ -184,6 +184,10 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/dialog_enter</item>
+        <item name="android:windowExitAnimation">@anim/dialog_exit</item>
+    </style>
     <style name="NumberPickerTheme" parent="Theme.AppCompat.Light">
         <item name="colorControlNormal">@color/dash_primary</item>
         <item name="android:textColorPrimary">@color/dash_text_primary</item>

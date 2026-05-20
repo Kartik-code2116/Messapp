@@ -42,6 +42,7 @@ public class MessProfileFragment extends Fragment {
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private String currentMessId;
+    private Bitmap qrCodeBitmap = null;
     private ListenerRegistration studentsListener;
 
     @Override
@@ -101,8 +102,15 @@ public class MessProfileFragment extends Fragment {
                         if (binding == null)
                             return;
                         if (documentSnapshot.exists()) {
-                            currentMessId = documentSnapshot.getString("messId");
-                            if (currentMessId != null) {
+                            String newMessId = documentSnapshot.getString("messId");
+                            if (newMessId != null) {
+                                if (!newMessId.equals(currentMessId)) {
+                                    currentMessId = newMessId;
+                                    qrCodeBitmap = null; // reset cache
+                                    preGenerateQrCode(currentMessId);
+                                } else if (qrCodeBitmap == null) {
+                                    preGenerateQrCode(currentMessId);
+                                }
                                 fetchMessDetails(currentMessId);
                                 setupRealtimeStudentsCount(currentMessId);
                             } else {
@@ -202,31 +210,79 @@ public class MessProfileFragment extends Fragment {
 
         if (dialog.getWindow() != null) {
             dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+            dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         }
 
         android.widget.ImageView imgQrCode = dialogView.findViewById(R.id.img_qr_code);
         android.view.View btnClose = dialogView.findViewById(R.id.btn_close_qr);
 
-        String qrText = "Mess ID: " + currentMessId + "\nDownload App: https://play.google.com/store/apps/details?id=com.example.messapp";
-        try {
-            QRCodeWriter writer = new QRCodeWriter();
-            BitMatrix bitMatrix = writer.encode(qrText, BarcodeFormat.QR_CODE, 512, 512);
-            int width = bitMatrix.getWidth();
-            int height = bitMatrix.getHeight();
-            Bitmap bmp = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
-            for (int x = 0; x < width; x++) {
-                for (int y = 0; y < height; y++) {
-                    bmp.setPixel(x, y, bitMatrix.get(x, y) ? Color.BLACK : Color.WHITE);
+        if (qrCodeBitmap != null) {
+            imgQrCode.setImageBitmap(qrCodeBitmap);
+        } else {
+            // Generate in background thread and set it dynamically to keep the click event perfectly smooth
+            new Thread(() -> {
+                String qrText = "Mess ID: " + currentMessId + "\nDownload App: https://play.google.com/store/apps/details?id=com.example.messapp";
+                try {
+                    QRCodeWriter writer = new QRCodeWriter();
+                    BitMatrix bitMatrix = writer.encode(qrText, BarcodeFormat.QR_CODE, 512, 512);
+                    int width = bitMatrix.getWidth();
+                    int height = bitMatrix.getHeight();
+                    int[] pixels = new int[width * height];
+                    for (int y = 0; y < height; y++) {
+                        int offset = y * width;
+                        for (int x = 0; x < width; x++) {
+                            pixels[offset + x] = bitMatrix.get(x, y) ? Color.BLACK : Color.WHITE;
+                        }
+                    }
+                    Bitmap bmp = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+                    bmp.setPixels(pixels, 0, width, 0, 0, width, height);
+                    qrCodeBitmap = bmp;
+
+                    if (getActivity() != null) {
+                        getActivity().runOnUiThread(() -> {
+                            if (imgQrCode != null) {
+                                imgQrCode.setImageBitmap(bmp);
+                            }
+                        });
+                    }
+                } catch (WriterException e) {
+                    e.printStackTrace();
+                    if (getActivity() != null) {
+                        getActivity().runOnUiThread(() -> {
+                            Toast.makeText(requireContext(), "Failed to generate QR code", Toast.LENGTH_SHORT).show();
+                        });
+                    }
                 }
-            }
-            imgQrCode.setImageBitmap(bmp);
-        } catch (WriterException e) {
-            e.printStackTrace();
-            Toast.makeText(requireContext(), "Failed to generate QR code", Toast.LENGTH_SHORT).show();
+            }).start();
         }
 
         btnClose.setOnClickListener(v -> dialog.dismiss());
         dialog.show();
+    }
+
+    private void preGenerateQrCode(String messId) {
+        if (messId == null || messId.isEmpty()) return;
+        new Thread(() -> {
+            String qrText = "Mess ID: " + messId + "\nDownload App: https://play.google.com/store/apps/details?id=com.example.messapp";
+            try {
+                QRCodeWriter writer = new QRCodeWriter();
+                BitMatrix bitMatrix = writer.encode(qrText, BarcodeFormat.QR_CODE, 512, 512);
+                int width = bitMatrix.getWidth();
+                int height = bitMatrix.getHeight();
+                int[] pixels = new int[width * height];
+                for (int y = 0; y < height; y++) {
+                    int offset = y * width;
+                    for (int x = 0; x < width; x++) {
+                        pixels[offset + x] = bitMatrix.get(x, y) ? Color.BLACK : Color.WHITE;
+                    }
+                }
+                Bitmap bmp = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+                bmp.setPixels(pixels, 0, width, 0, 0, width, height);
+                qrCodeBitmap = bmp;
+            } catch (WriterException e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
 
     private void handleEditProfile() {
