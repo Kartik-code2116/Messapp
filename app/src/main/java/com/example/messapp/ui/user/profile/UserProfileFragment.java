@@ -247,6 +247,42 @@ public class UserProfileFragment extends Fragment {
         android.view.View btnActionEmail = dialogView.findViewById(R.id.btn_action_email);
 
         android.view.View btnClose = dialogView.findViewById(R.id.btn_dialog_close);
+        
+        // Default static data for app-level support
+        String defaultPhone = "+91 98765 43210";
+        String defaultInsta = "messapp_support";
+        String defaultEmail = "support@messapp.com";
+        
+        if (currentUserMessId != null && !currentUserMessId.isEmpty()) {
+            db.collection("messes").document(currentUserMessId).get().addOnSuccessListener(doc -> {
+                if (doc.exists()) {
+                    String contact = doc.getString("contact");
+                    if (contact != null && !contact.isEmpty()) {
+                        textPhone.setText(contact);
+                    }
+                    String messName = doc.getString("name");
+                    if (messName != null && !messName.isEmpty()) {
+                        textInsta.setText(messName.toLowerCase().replaceAll("\\s+", "_"));
+                    }
+                    
+                    String ownerId = doc.getString("ownerId");
+                    if (ownerId != null && !ownerId.isEmpty()) {
+                        db.collection("users").document(ownerId).get().addOnSuccessListener(userDoc -> {
+                            if (userDoc.exists()) {
+                                String email = userDoc.getString("email");
+                                if (email != null && !email.isEmpty()) {
+                                    textEmail.setText(email);
+                                }
+                                String phone = userDoc.getString("phone");
+                                if ((contact == null || contact.isEmpty()) && phone != null && !phone.isEmpty()) {
+                                    textPhone.setText(phone);
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        }
 
         btnCopyPhone.setOnClickListener(v -> {
             ClipboardManager clipboard = (ClipboardManager) requireContext().getSystemService(Context.CLIPBOARD_SERVICE);

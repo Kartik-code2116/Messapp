@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.messapp.R;
@@ -34,6 +35,9 @@ public final class FragmentUserMenuBinding implements ViewBinding {
   public final FloatingActionButton fabDaySelector;
 
   @NonNull
+  public final SwipeRefreshLayout swipeRefreshUserMenu;
+
+  @NonNull
   public final TextView textDinnerMenuDisplay;
 
   @NonNull
@@ -45,13 +49,15 @@ public final class FragmentUserMenuBinding implements ViewBinding {
   private FragmentUserMenuBinding(@NonNull FrameLayout rootView,
       @NonNull LinearLayout daySelectorContainer,
       @NonNull LinearLayout daySelectorExpandableContainer, @NonNull LinearLayout daySelectorHeader,
-      @NonNull FloatingActionButton fabDaySelector, @NonNull TextView textDinnerMenuDisplay,
+      @NonNull FloatingActionButton fabDaySelector,
+      @NonNull SwipeRefreshLayout swipeRefreshUserMenu, @NonNull TextView textDinnerMenuDisplay,
       @NonNull TextView textLunchMenuDisplay, @NonNull TextView textSelectedDay) {
     this.rootView = rootView;
     this.daySelectorContainer = daySelectorContainer;
     this.daySelectorExpandableContainer = daySelectorExpandableContainer;
     this.daySelectorHeader = daySelectorHeader;
     this.fabDaySelector = fabDaySelector;
+    this.swipeRefreshUserMenu = swipeRefreshUserMenu;
     this.textDinnerMenuDisplay = textDinnerMenuDisplay;
     this.textLunchMenuDisplay = textLunchMenuDisplay;
     this.textSelectedDay = textSelectedDay;
@@ -108,6 +114,12 @@ public final class FragmentUserMenuBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.swipe_refresh_user_menu;
+      SwipeRefreshLayout swipeRefreshUserMenu = ViewBindings.findChildViewById(rootView, id);
+      if (swipeRefreshUserMenu == null) {
+        break missingId;
+      }
+
       id = R.id.text_dinner_menu_display;
       TextView textDinnerMenuDisplay = ViewBindings.findChildViewById(rootView, id);
       if (textDinnerMenuDisplay == null) {
@@ -127,8 +139,8 @@ public final class FragmentUserMenuBinding implements ViewBinding {
       }
 
       return new FragmentUserMenuBinding((FrameLayout) rootView, daySelectorContainer,
-          daySelectorExpandableContainer, daySelectorHeader, fabDaySelector, textDinnerMenuDisplay,
-          textLunchMenuDisplay, textSelectedDay);
+          daySelectorExpandableContainer, daySelectorHeader, fabDaySelector, swipeRefreshUserMenu,
+          textDinnerMenuDisplay, textLunchMenuDisplay, textSelectedDay);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -9,9 +9,9 @@
               <option name="connection">
                 <ConnectionSetting>
                   <option name="appId" value="com.example.messapp" />
-                  <option name="mobileSdkAppId" value="1:723848034358:android:c5ccd1883d47bc70ff4097" />
-                  <option name="projectId" value="messapp-30ca2" />
-                  <option name="projectNumber" value="723848034358" />
+                  <option name="mobileSdkAppId" value="1:355370937322:android:06cf215b144b44585ba093" />
+                  <option name="projectId" value="messapp-5275d" />
+                  <option name="projectNumber" value="355370937322" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

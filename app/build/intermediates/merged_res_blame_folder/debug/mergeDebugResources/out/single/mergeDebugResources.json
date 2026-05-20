@@ -12,12 +12,12 @@
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\layout\\dialog_freeze_delete.xml"
     },
     {
-        "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\drawable_bg_rounded_primary_border.xml.flat",
-        "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\drawable\\bg_rounded_primary_border.xml"
-    },
-    {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\drawable_ic_dark_mode.xml.flat",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\drawable\\ic_dark_mode.xml"
+    },
+    {
+        "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\drawable_bg_rounded_primary_border.xml.flat",
+        "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\drawable\\bg_rounded_primary_border.xml"
     },
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\drawable_ic_restore.xml.flat",
@@ -84,12 +84,12 @@
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\layout\\activity_mess_settings.xml"
     },
     {
-        "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\drawable_ic_location_on.xml.flat",
-        "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\drawable\\ic_location_on.xml"
-    },
-    {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\layout_fragment_mess_detail.xml.flat",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\layout\\fragment_mess_detail.xml"
+    },
+    {
+        "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\drawable_ic_location_on.xml.flat",
+        "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\drawable\\ic_location_on.xml"
     },
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\drawable_bg_gradient_primary.xml.flat",
@@ -104,12 +104,12 @@
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\drawable_ic_arrow_right.xml.flat",
-        "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\drawable\\ic_arrow_right.xml"
-    },
-    {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\drawable_bg_search_input.xml.flat",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\drawable\\bg_search_input.xml"
+    },
+    {
+        "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\drawable_ic_arrow_right.xml.flat",
+        "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\drawable\\ic_arrow_right.xml"
     },
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\drawable_ic_arrow_forward.xml.flat",
@@ -240,20 +240,20 @@
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\mipmap-hdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\menu_menu_mess_top_bar.xml.flat",
-        "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\menu\\menu_mess_top_bar.xml"
-    },
-    {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\drawable_ic_launcher_foreground.xml.flat",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\drawable\\ic_launcher_foreground.xml"
     },
     {
-        "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\font_poppins_regular.xml.flat",
-        "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\font\\poppins_regular.xml"
+        "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\menu_menu_mess_top_bar.xml.flat",
+        "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\menu\\menu_mess_top_bar.xml"
     },
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\drawable_ic_lock.xml.flat",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\drawable\\ic_lock.xml"
+    },
+    {
+        "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\font_poppins_regular.xml.flat",
+        "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\font\\poppins_regular.xml"
     },
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\xml_data_extraction_rules.xml.flat",
@@ -300,20 +300,16 @@
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\layout\\activity_role_selection.xml"
     },
     {
-        "merged": "com.example.messapp-debug-61:/layout_fragment_mess_requests.xml.flat",
-        "source": "com.example.messapp-main-63:/layout/fragment_mess_requests.xml"
-    },
-    {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\layout_dialog_help_support.xml.flat",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\layout\\dialog_help_support.xml"
     },
     {
-        "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\font_poppins_bold.xml.flat",
-        "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\font\\poppins_bold.xml"
-    },
-    {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\drawable_line_dashed.xml.flat",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\drawable\\line_dashed.xml"
+    },
+    {
+        "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\font_poppins_bold.xml.flat",
+        "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\font\\poppins_bold.xml"
     },
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\drawable_gradient_background.xml.flat",
@@ -552,6 +548,10 @@
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\drawable\\bg_login_header.xml"
     },
     {
+        "merged": "com.example.messapp-debug-61:/layout_dialog_manage_subscription.xml.flat",
+        "source": "com.example.messapp-main-63:/layout/dialog_manage_subscription.xml"
+    },
+    {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\layout_item_review.xml.flat",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\layout\\item_review.xml"
     },
@@ -562,6 +562,10 @@
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.example.messapp-debug-61:/layout_fragment_user_menu.xml.flat",
+        "source": "com.example.messapp-main-63:/layout/fragment_user_menu.xml"
     },
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\drawable_ic_call.xml.flat",
@@ -658,10 +662,6 @@
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\layout_fragment_add_offer.xml.flat",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\layout\\fragment_add_offer.xml"
-    },
-    {
-        "merged": "com.example.messapp-debug-61:/layout_fragment_mess_dashboard.xml.flat",
-        "source": "com.example.messapp-main-63:/layout/fragment_mess_dashboard.xml"
     },
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\drawable_bg_rounded_input.xml.flat",
@@ -834,5 +834,9 @@
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-debug-61:\\layout_activity_splash_screen.xml.flat",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\layout\\activity_splash_screen.xml"
+    },
+    {
+        "merged": "com.example.messapp-debug-61:/layout_fragment_user_home.xml.flat",
+        "source": "com.example.messapp-main-63:/layout/fragment_user_home.xml"
     }
 ]

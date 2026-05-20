@@ -4,12 +4,12 @@
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\layout\\activity_weekly_menu.xml"
     },
     {
-        "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-mergeDebugResources-60:\\layout\\header_admin_profile_drawer.xml",
-        "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\layout\\header_admin_profile_drawer.xml"
-    },
-    {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-mergeDebugResources-60:\\layout\\dialog_grant_subscription.xml",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\layout\\dialog_grant_subscription.xml"
+    },
+    {
+        "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-mergeDebugResources-60:\\layout\\header_admin_profile_drawer.xml",
+        "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\layout\\header_admin_profile_drawer.xml"
     },
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-mergeDebugResources-60:\\layout\\activity_mess_settings.xml",
@@ -52,20 +52,20 @@
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\layout\\dialog_send_message.xml"
     },
     {
-        "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-mergeDebugResources-60:\\layout\\dialog_qr_code.xml",
-        "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\layout\\dialog_qr_code.xml"
+        "merged": "com.example.messapp-mergeDebugResources-60:/layout/dialog_manage_subscription.xml",
+        "source": "com.example.messapp-main-63:/layout/dialog_manage_subscription.xml"
     },
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-mergeDebugResources-60:\\layout\\activity_login.xml",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\layout\\activity_login.xml"
     },
     {
-        "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-mergeDebugResources-60:\\layout\\item_mess_card.xml",
-        "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\layout\\item_mess_card.xml"
+        "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-mergeDebugResources-60:\\layout\\dialog_qr_code.xml",
+        "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\layout\\dialog_qr_code.xml"
     },
     {
-        "merged": "com.example.messapp-mergeDebugResources-60:/layout/fragment_mess_dashboard.xml",
-        "source": "com.example.messapp-main-63:/layout/fragment_mess_dashboard.xml"
+        "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-mergeDebugResources-60:\\layout\\item_mess_card.xml",
+        "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\layout\\item_mess_card.xml"
     },
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-mergeDebugResources-60:\\layout\\item_student.xml",
@@ -76,12 +76,16 @@
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\layout\\include_admin_top_bar.xml"
     },
     {
+        "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-mergeDebugResources-60:\\layout\\activity_edit_user_profile.xml",
+        "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\layout\\activity_edit_user_profile.xml"
+    },
+    {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-mergeDebugResources-60:\\layout\\fragment_mess_requests.xml",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\layout\\fragment_mess_requests.xml"
     },
     {
-        "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-mergeDebugResources-60:\\layout\\activity_edit_user_profile.xml",
-        "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\layout\\activity_edit_user_profile.xml"
+        "merged": "com.example.messapp-mergeDebugResources-60:/layout/fragment_user_home.xml",
+        "source": "com.example.messapp-main-63:/layout/fragment_user_home.xml"
     },
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-mergeDebugResources-60:\\layout\\fragment_mess_menu.xml",
@@ -98,10 +102,6 @@
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-mergeDebugResources-60:\\layout\\activity_edit_mess_profile.xml",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\layout\\activity_edit_mess_profile.xml"
-    },
-    {
-        "merged": "com.example.messapp-mergeDebugResources-60:/layout/fragment_mess_requests.xml",
-        "source": "com.example.messapp-main-63:/layout/fragment_mess_requests.xml"
     },
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-mergeDebugResources-60:\\layout\\activity_splash_screen.xml",
@@ -174,6 +174,10 @@
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-mergeDebugResources-60:\\layout\\fragment_mess_offers.xml",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-main-63:\\layout\\fragment_mess_offers.xml"
+    },
+    {
+        "merged": "com.example.messapp-mergeDebugResources-60:/layout/fragment_user_menu.xml",
+        "source": "com.example.messapp-main-63:/layout/fragment_user_menu.xml"
     },
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.example.messapp-mergeDebugResources-60:\\layout\\fragment_user_history.xml",

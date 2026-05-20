@@ -131,7 +131,7 @@
     <dimen name="user_card_elevation">2dp</dimen>
     <dimen name="user_card_radius">20dp</dimen>
     <dimen name="user_item_spacing">12dp</dimen>
-    <dimen name="user_page_padding_h">20dp</dimen>
+    <dimen name="user_page_padding_h">14dp</dimen>
     <dimen name="user_page_padding_v">16dp</dimen>
     <dimen name="user_section_spacing">24dp</dimen>
     <item name="recycler_view_reviews" type="id"/>

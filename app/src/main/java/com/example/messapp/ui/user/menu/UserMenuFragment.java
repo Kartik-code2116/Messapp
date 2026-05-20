@@ -60,6 +60,11 @@ public class UserMenuFragment extends Fragment {
 
         // Setup FAB click listener for expand/collapse animation
         binding.fabDaySelector.setOnClickListener(v -> toggleDaySelector());
+        
+        binding.swipeRefreshUserMenu.setOnRefreshListener(() -> {
+            fetchUserMessId();
+            binding.swipeRefreshUserMenu.setRefreshing(false);
+        });
 
         return root;
     }

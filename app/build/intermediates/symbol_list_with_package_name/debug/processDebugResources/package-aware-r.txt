@@ -4769,6 +4769,8 @@ id swipe_refresh
 id swipe_refresh_dashboard
 id swipe_refresh_layout
 id swipe_refresh_requests
+id swipe_refresh_user_home
+id swipe_refresh_user_menu
 id switch_allow_multiple_changes
 id switch_auto_dinner
 id switch_auto_lunch

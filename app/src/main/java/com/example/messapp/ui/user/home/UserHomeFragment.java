@@ -89,6 +89,11 @@ public class UserHomeFragment extends Fragment {
         setupClickListeners();
         animateFoodCards();
         fetchUserDetails();
+        
+        binding.swipeRefreshUserHome.setOnRefreshListener(() -> {
+            fetchUserDetails();
+            binding.swipeRefreshUserHome.setRefreshing(false);
+        });
     }
 
     private void animateFoodCards() {
