@@ -29,6 +29,7 @@ import java.util.Locale;
 import com.example.messapp.adapters.SubscriptionRequestAdapter;
 import com.example.messapp.managers.MessNotificationManager;
 import com.example.messapp.models.SubscriptionRequest;
+import com.example.messapp.models.Transaction;
 import com.google.android.material.textfield.TextInputEditText;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import java.util.ArrayList;
@@ -187,10 +188,21 @@ public class MessDashboardFragment extends Fragment {
                     userUpdate.put("oneTimeMealExpiry", oneTimeExpiry);
                     userUpdate.put("subscriptionType", mealType);
 
-                    // Use a batch so user-update and status-update are atomic
+                    String transId = db.collection("transactions").document().getId();
+                    Transaction transaction = new Transaction(
+                            transId,
+                            currentMessId,
+                            request.getStudentId(),
+                            amount,
+                            days,
+                            System.currentTimeMillis(),
+                            mealType);
+
+                    // Use a batch so user-update, status-update, and transaction are atomic
                     com.google.firebase.firestore.WriteBatch batch = db.batch();
                     batch.update(db.collection("users").document(request.getStudentId()), userUpdate);
                     batch.update(db.collection("subscriptionRequests").document(request.getId()), "status", "GRANTED");
+                    batch.set(db.collection("transactions").document(transId), transaction);
                     final long notificationExpiry = generalExpiry;
 
                     batch.commit()

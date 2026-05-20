@@ -53,7 +53,7 @@ public class MessProfileFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        binding.btnCopyMessId.setOnClickListener(v -> showQrCodeDialog());
+        binding.containerMessId.setOnClickListener(v -> showQrCodeDialog());
         binding.btnNavEditProfile.setOnClickListener(v -> handleEditProfile());
         binding.btnEditProfileImage.setOnClickListener(v -> handleEditProfile());
         binding.btnNavOffers.setOnClickListener(v -> handleOffers());

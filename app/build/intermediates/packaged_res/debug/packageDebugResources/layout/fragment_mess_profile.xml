@@ -159,10 +159,15 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@drawable/bg_profile_icon_circle"
+                            android:foreground="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:focusable="true"
                             android:gravity="center_vertical"
                             android:orientation="horizontal"
-                            android:paddingStart="10dp" android:paddingEnd="10dp"
-                            android:paddingTop="6dp" android:paddingBottom="6dp">
+                            android:paddingStart="10dp"
+                            android:paddingTop="6dp"
+                            android:paddingEnd="10dp"
+                            android:paddingBottom="6dp">
 
                             <TextView
                                 android:id="@+id/text_mess_profile_id"
