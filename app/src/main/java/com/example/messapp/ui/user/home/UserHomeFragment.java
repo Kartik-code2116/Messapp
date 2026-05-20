@@ -62,6 +62,7 @@ public class UserHomeFragment extends Fragment {
     private String currentUserOneTimeAutoSelect;
     private String todayBreakfastMenu = "";
     private String selectedBreakfastItem = "";
+    private boolean profileLoaded = false;
 
     // Cutoff times (defaults)
     private int lunchCutoffHour = 10;
@@ -109,13 +110,28 @@ public class UserHomeFragment extends Fragment {
     }
 
     private void fetchUserDetails() {
-        if (userId == null)
+        if (userId == null) {
+            showProfileError("You are not signed in. Please log in to continue.");
             return;
+        }
+
+        if (userListener != null) {
+            userListener.remove();
+        }
 
         userListener = db.collection("users").document(userId).addSnapshotListener((documentSnapshot, e) -> {
             if (binding == null)
                 return;
+            if (e != null) {
+                android.util.Log.e("UserHomeFragment", "Error fetching user details", e);
+                if (!profileLoaded) {
+                    showProfileError("Failed to load profile. Tap to retry.");
+                }
+                return;
+            }
             if (documentSnapshot != null && documentSnapshot.exists()) {
+                profileLoaded = true;
+                hideProfileError();
                 messId = documentSnapshot.getString("messId");
                 Long lunchExpiry = documentSnapshot.getLong("lunchSubscriptionExpiry");
                 Long dinnerExpiry = documentSnapshot.getLong("dinnerSubscriptionExpiry");
@@ -155,8 +171,52 @@ public class UserHomeFragment extends Fragment {
                 listenToMySelection();
                 listenToPlannedOutDays();
                 listenToMessCondition();
+            } else {
+                if (!profileLoaded) {
+                    showProfileError("User profile not found. Please complete your registration.");
+                }
             }
         });
+    }
+
+    private void showProfileError(String message) {
+        if (binding == null) return;
+        // Disable meal buttons and show a clear error message via the status bars
+        binding.textLunchStatusBar.setText(message);
+        binding.textLunchStatusBar.setBackgroundColor(themeColor(R.color.state_error));
+        binding.textLunchStatusBar.setTextColor(android.graphics.Color.WHITE);
+        binding.btnLunchInNew.setEnabled(false);
+        binding.btnLunchOutNew.setEnabled(false);
+
+        binding.textDinnerStatusBar.setText(message);
+        binding.textDinnerStatusBar.setBackgroundColor(themeColor(R.color.state_error));
+        binding.textDinnerStatusBar.setTextColor(android.graphics.Color.WHITE);
+        binding.btnDinnerInNew.setEnabled(false);
+        binding.btnDinnerOutNew.setEnabled(false);
+
+        // Make cards tappable to retry
+        View.OnClickListener retryListener = v -> {
+            if (userId == null && FirebaseAuth.getInstance().getCurrentUser() != null) {
+                userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            }
+            fetchUserDetails();
+            Toast.makeText(getContext(), "Retrying...", Toast.LENGTH_SHORT).show();
+        };
+        binding.cardLunch.setOnClickListener(retryListener);
+        binding.cardDinner.setOnClickListener(retryListener);
+    }
+
+    private void hideProfileError() {
+        if (binding == null) return;
+        // Remove retry listeners from cards (they don't normally have one)
+        binding.cardLunch.setOnClickListener(null);
+        binding.cardDinner.setOnClickListener(null);
+        // Re-enable buttons — the updateButtonUI / updateOneTimeButtonUI calls
+        // that follow will set the correct enabled states
+        binding.btnLunchInNew.setEnabled(true);
+        binding.btnLunchOutNew.setEnabled(true);
+        binding.btnDinnerInNew.setEnabled(true);
+        binding.btnDinnerOutNew.setEnabled(true);
     }
 
     private void checkSubscription(Long lunchExpiry, Long dinnerExpiry, Long generalExpiry,

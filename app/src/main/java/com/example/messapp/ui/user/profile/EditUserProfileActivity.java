@@ -52,6 +52,12 @@ public class EditUserProfileActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         storage = FirebaseStorage.getInstance("gs://messapp-5275d.firebasestorage.app");
+
+        if (mAuth.getCurrentUser() == null) {
+            Toast.makeText(this, "Please sign in first", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
         userId = mAuth.getCurrentUser().getUid();
 
         setupToolbar();

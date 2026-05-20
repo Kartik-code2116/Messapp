@@ -1,5 +1,5 @@
-com.example.messapp.test.app-tracing-1.2.0-0 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\22589b3fa65d6d47373bfad5ba152703\transformed\tracing-1.2.0\res
-com.example.messapp.test.app-core-1.7.0-1 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\b57c91cd18a761ccd7e87064f63a04a4\transformed\core-1.7.0\res
+com.example.messapp.test.app-tracing-1.2.0-0 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\2e18dbdfa54c2ee9783995242ee8cc3c\transformed\tracing-1.2.0\res
+com.example.messapp.test.app-core-1.7.0-1 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\e713a5ee94a73ee8c4696d819979538a\transformed\core-1.7.0\res
 com.example.messapp.test.app-androidTest-2 D:\8)Android Development\messapp\app\build\generated\res\resValues\androidTest\debug
 com.example.messapp.test.app-updated_navigation_xml-3 D:\8)Android Development\messapp\app\build\generated\updated_navigation_xml\debugAndroidTest
 com.example.messapp.test.app-mergeDebugAndroidTestResources-4 D:\8)Android Development\messapp\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
