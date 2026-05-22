@@ -31,13 +31,13 @@
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/nav_view"
-            android:layout_width="match_parent"
+            android:layout_width="398dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="@drawable/bg_bottom_nav"
             android:elevation="12dp"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
+            android:paddingTop="1dp"
+            android:paddingBottom="1dp"
             app:itemActiveIndicatorStyle="@style/Widget.Material3.BottomNavigationView.ActiveIndicator"
             app:itemIconTint="@color/selector_nav_user"
             app:itemRippleColor="@color/brand_primary_light"

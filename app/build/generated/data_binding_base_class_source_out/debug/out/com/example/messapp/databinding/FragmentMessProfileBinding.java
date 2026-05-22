@@ -50,6 +50,9 @@ public final class FragmentMessProfileBinding implements ViewBinding {
   public final LinearLayout btnNavRevenue;
 
   @NonNull
+  public final LinearLayout btnNavSubscriptionReport;
+
+  @NonNull
   public final LinearLayout btnNavWeeklyMenu;
 
   @NonNull
@@ -101,15 +104,15 @@ public final class FragmentMessProfileBinding implements ViewBinding {
       @NonNull FloatingActionButton btnEditProfileImage, @NonNull LinearLayout btnHelpSupport,
       @NonNull ImageView btnLogoutTop, @NonNull MaterialButton btnMessLogout,
       @NonNull LinearLayout btnNavEditProfile, @NonNull LinearLayout btnNavOffers,
-      @NonNull LinearLayout btnNavRevenue, @NonNull LinearLayout btnNavWeeklyMenu,
-      @NonNull MaterialButton btnSeeReviews, @NonNull MaterialButton btnViewStudents,
-      @NonNull MaterialButton btnWriteReview, @NonNull LinearLayout containerMessId,
-      @NonNull TextView labelActiveStudents, @NonNull TextView labelMessDetails,
-      @NonNull ShapeableImageView messProfileImage, @NonNull MaterialSwitch switchDarkMode,
-      @NonNull TextView textActiveStudentsCount, @NonNull TextView textMessProfileContact,
-      @NonNull TextView textMessProfileDescription, @NonNull TextView textMessProfileId,
-      @NonNull TextView textMessProfileLocation, @NonNull TextView textMessProfileName,
-      @NonNull TextView textOwnerEmail) {
+      @NonNull LinearLayout btnNavRevenue, @NonNull LinearLayout btnNavSubscriptionReport,
+      @NonNull LinearLayout btnNavWeeklyMenu, @NonNull MaterialButton btnSeeReviews,
+      @NonNull MaterialButton btnViewStudents, @NonNull MaterialButton btnWriteReview,
+      @NonNull LinearLayout containerMessId, @NonNull TextView labelActiveStudents,
+      @NonNull TextView labelMessDetails, @NonNull ShapeableImageView messProfileImage,
+      @NonNull MaterialSwitch switchDarkMode, @NonNull TextView textActiveStudentsCount,
+      @NonNull TextView textMessProfileContact, @NonNull TextView textMessProfileDescription,
+      @NonNull TextView textMessProfileId, @NonNull TextView textMessProfileLocation,
+      @NonNull TextView textMessProfileName, @NonNull TextView textOwnerEmail) {
     this.rootView = rootView;
     this.btnCopyMessId = btnCopyMessId;
     this.btnEditProfileImage = btnEditProfileImage;
@@ -119,6 +122,7 @@ public final class FragmentMessProfileBinding implements ViewBinding {
     this.btnNavEditProfile = btnNavEditProfile;
     this.btnNavOffers = btnNavOffers;
     this.btnNavRevenue = btnNavRevenue;
+    this.btnNavSubscriptionReport = btnNavSubscriptionReport;
     this.btnNavWeeklyMenu = btnNavWeeklyMenu;
     this.btnSeeReviews = btnSeeReviews;
     this.btnViewStudents = btnViewStudents;
@@ -209,6 +213,12 @@ public final class FragmentMessProfileBinding implements ViewBinding {
       id = R.id.btn_nav_revenue;
       LinearLayout btnNavRevenue = ViewBindings.findChildViewById(rootView, id);
       if (btnNavRevenue == null) {
+        break missingId;
+      }
+
+      id = R.id.btn_nav_subscription_report;
+      LinearLayout btnNavSubscriptionReport = ViewBindings.findChildViewById(rootView, id);
+      if (btnNavSubscriptionReport == null) {
         break missingId;
       }
 
@@ -310,9 +320,9 @@ public final class FragmentMessProfileBinding implements ViewBinding {
 
       return new FragmentMessProfileBinding((ScrollView) rootView, btnCopyMessId,
           btnEditProfileImage, btnHelpSupport, btnLogoutTop, btnMessLogout, btnNavEditProfile,
-          btnNavOffers, btnNavRevenue, btnNavWeeklyMenu, btnSeeReviews, btnViewStudents,
-          btnWriteReview, containerMessId, labelActiveStudents, labelMessDetails, messProfileImage,
-          switchDarkMode, textActiveStudentsCount, textMessProfileContact,
+          btnNavOffers, btnNavRevenue, btnNavSubscriptionReport, btnNavWeeklyMenu, btnSeeReviews,
+          btnViewStudents, btnWriteReview, containerMessId, labelActiveStudents, labelMessDetails,
+          messProfileImage, switchDarkMode, textActiveStudentsCount, textMessProfileContact,
           textMessProfileDescription, textMessProfileId, textMessProfileLocation,
           textMessProfileName, textOwnerEmail);
     }

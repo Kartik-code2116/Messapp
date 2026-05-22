@@ -60,6 +60,9 @@ public final class ItemStudentBinding implements ViewBinding {
   public final TextView textStudentEmail;
 
   @NonNull
+  public final TextView textStudentExtraInfo;
+
+  @NonNull
   public final TextView textStudentGender;
 
   @NonNull
@@ -81,9 +84,9 @@ public final class ItemStudentBinding implements ViewBinding {
       @NonNull TextView textDinnerExpiry, @NonNull TextView textDinnerStatus,
       @NonNull TextView textLunchExpiry, @NonNull TextView textLunchStatus,
       @NonNull TextView textOneTimeExpiry, @NonNull TextView textStudentEmail,
-      @NonNull TextView textStudentGender, @NonNull TextView textStudentName,
-      @NonNull TextView textStudentPhone, @NonNull TextView textStudentStatus,
-      @NonNull TextView textSubscriptionExpiry) {
+      @NonNull TextView textStudentExtraInfo, @NonNull TextView textStudentGender,
+      @NonNull TextView textStudentName, @NonNull TextView textStudentPhone,
+      @NonNull TextView textStudentStatus, @NonNull TextView textSubscriptionExpiry) {
     this.rootView = rootView;
     this.btnDeleteSubscription = btnDeleteSubscription;
     this.btnGrantSubscription = btnGrantSubscription;
@@ -97,6 +100,7 @@ public final class ItemStudentBinding implements ViewBinding {
     this.textLunchStatus = textLunchStatus;
     this.textOneTimeExpiry = textOneTimeExpiry;
     this.textStudentEmail = textStudentEmail;
+    this.textStudentExtraInfo = textStudentExtraInfo;
     this.textStudentGender = textStudentGender;
     this.textStudentName = textStudentName;
     this.textStudentPhone = textStudentPhone;
@@ -203,6 +207,12 @@ public final class ItemStudentBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.text_student_extra_info;
+      TextView textStudentExtraInfo = ViewBindings.findChildViewById(rootView, id);
+      if (textStudentExtraInfo == null) {
+        break missingId;
+      }
+
       id = R.id.text_student_gender;
       TextView textStudentGender = ViewBindings.findChildViewById(rootView, id);
       if (textStudentGender == null) {
@@ -236,8 +246,8 @@ public final class ItemStudentBinding implements ViewBinding {
       return new ItemStudentBinding((MaterialCardView) rootView, btnDeleteSubscription,
           btnGrantSubscription, btnResetStatus, containerDinner, containerLunch, imgStudent,
           textDinnerExpiry, textDinnerStatus, textLunchExpiry, textLunchStatus, textOneTimeExpiry,
-          textStudentEmail, textStudentGender, textStudentName, textStudentPhone, textStudentStatus,
-          textSubscriptionExpiry);
+          textStudentEmail, textStudentExtraInfo, textStudentGender, textStudentName,
+          textStudentPhone, textStudentStatus, textSubscriptionExpiry);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

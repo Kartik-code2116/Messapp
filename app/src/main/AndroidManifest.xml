@@ -38,6 +38,17 @@
         <activity android:name=".ui.mess.weeklymenu.WeeklyMenuActivity" android:exported="false" />
         <activity android:name=".MessReviewsActivity" android:exported="false" />
         <activity android:name=".MyReviewsActivity" android:exported="false" />
+        <activity android:name=".ui.mess.reports.SubscriptionReportActivity" android:exported="false" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.messapp.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
 
         <service
             android:name=".MyFirebaseMessagingService"

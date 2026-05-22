@@ -72,6 +72,30 @@
                     android:visibility="gone"
                     tools:visibility="visible" />
 
+                <TextView
+                    android:id="@+id/text_student_extra_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_caption"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/inter"
+                    android:visibility="gone"
+                    tools:visibility="visible"
+                    tools:text="Veg • Male" />
+
+                <TextView
+                    android:id="@+id/text_subscription_expiry"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textColor="@color/state_success"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/inter"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    tools:visibility="visible"
+                    tools:text="BOTH • 15 days left (Expires 12 Oct 2024)" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -157,12 +181,7 @@
 
             </LinearLayout>
             
-            <!-- Hidden legacy view -->
-            <TextView
-                android:id="@+id/text_subscription_expiry"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:visibility="gone" />
+            <!-- Legacy view removed to be repositioned above -->
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_reset_status"

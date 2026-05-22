@@ -3871,6 +3871,7 @@ drawable ic_dark_mode
 drawable ic_dashboard_black_24dp
 drawable ic_delete
 drawable ic_dinner_dining
+drawable ic_download
 drawable ic_edit
 drawable ic_email
 drawable ic_expand_less_22px
@@ -3916,6 +3917,7 @@ drawable ic_refresh
 drawable ic_restaurant
 drawable ic_restore
 drawable ic_schedule
+drawable ic_search
 drawable ic_search_black_24
 drawable ic_send
 drawable ic_settings_black_24dp
@@ -4172,6 +4174,7 @@ id btn_dinner_in_new
 id btn_dinner_out_new
 id btn_edit_price
 id btn_edit_profile_image
+id btn_export_pdf
 id btn_filter_active_today
 id btn_filter_all
 id btn_filter_date
@@ -4194,6 +4197,7 @@ id btn_my_reviews
 id btn_nav_edit_profile
 id btn_nav_offers
 id btn_nav_revenue
+id btn_nav_subscription_report
 id btn_nav_weekly_menu
 id btn_next_week
 id btn_notification
@@ -4250,6 +4254,9 @@ id checkbox
 id checked
 id chip_both
 id chip_female
+id chip_filter_active
+id chip_filter_all
+id chip_filter_expired
 id chip_group_diet
 id chip_group_gender
 id chip_male
@@ -4268,6 +4275,7 @@ id compress
 id confirm_button
 id constraint
 id container
+id container_avatar
 id container_dinner
 id container_lunch
 id container_mess_id
@@ -4337,6 +4345,7 @@ id easeOut
 id east
 id edge
 id edit_query
+id edit_search_report
 id edit_search_transactions
 id edit_text_id
 id elastic
@@ -4434,6 +4443,7 @@ id img_mess_banner
 id img_profile
 id img_profile_edit
 id img_qr_code
+id img_search_icon
 id img_student
 id immediateStop
 id included
@@ -4460,10 +4470,12 @@ id layout
 id layout_date_row
 id layout_deadline_container
 id layout_empty_history
+id layout_empty_state
 id layout_meal_requests
 id layout_notification_list
 id layout_pending_subs
 id layout_sent_messages_list
+id layout_status_badge
 id left
 id leftToRight
 id legacy
@@ -4654,6 +4666,7 @@ id progress_bar
 id progress_circular
 id progress_history
 id progress_horizontal
+id progress_loading_report
 id radio
 id radio_auto_dinner
 id radio_auto_lunch
@@ -4675,6 +4688,7 @@ id ratio
 id rectangles
 id recycler_pending
 id recycler_reviews
+id recycler_subscription_report
 id recycler_view_history
 id recycler_view_offers
 id recycler_view_requests
@@ -4807,11 +4821,15 @@ id text_active_students_count
 id text_add_review
 id text_auto_dinner_status
 id text_auto_lunch_status
+id text_avatar_initial
 id text_avg_rating
 id text_breakfast_badge
 id text_breakfast_counts_breakdown
 id text_breakfast_menu
 id text_breakfast_status_bar
+id text_chip_active
+id text_chip_all
+id text_chip_expired
 id text_current_condition
 id text_current_expiry
 id text_dashboard_timer
@@ -4845,6 +4863,7 @@ id text_info
 id text_input_end_icon
 id text_input_error_icon
 id text_input_start_icon
+id text_join_date
 id text_lunch_card_timer
 id text_lunch_expiry
 id text_lunch_in_count
@@ -4895,6 +4914,7 @@ id text_profile_name
 id text_profile_name_card
 id text_profile_phone
 id text_rating
+id text_remaining_days
 id text_revenue_basis
 id text_revenue_subtitle
 id text_revenue_title
@@ -4903,12 +4923,18 @@ id text_review_date
 id text_reviewer_name
 id text_selected_date
 id text_selected_day
+id text_stat_active
+id text_stat_expired
+id text_stat_total
+id text_status_pill
 id text_student_email
+id text_student_extra_info
 id text_student_gender
 id text_student_name
 id text_student_phone
 id text_student_status
 id text_subscription_expiry
+id text_subscription_type
 id text_total_dinner
 id text_total_lunch
 id text_total_revenue_all_time
@@ -4935,6 +4961,7 @@ id titleDividerNoCustom
 id title_template
 id toggle
 id toolbar
+id toolbar_report
 id top
 id topPanel
 id top_center
@@ -5107,6 +5134,7 @@ layout activity_mess_settings
 layout activity_my_reviews
 layout activity_role_selection
 layout activity_splash_screen
+layout activity_subscription_report
 layout activity_user_dashboard
 layout activity_weekly_menu
 layout browser_actions_context_menu_page
@@ -5164,6 +5192,7 @@ layout item_review
 layout item_sent_message
 layout item_student
 layout item_student_request
+layout item_subscription_report_row
 layout item_transaction
 layout m3_alert_dialog
 layout m3_alert_dialog_actions
@@ -6899,6 +6928,7 @@ styleable ViewTransition android_id SharedValue SharedValueId clearsTag duration
 styleable include constraintSet
 xml backup_rules
 xml data_extraction_rules
+xml file_paths
 xml image_share_filepaths
 xml m3_button_group_child_size_change
 xml m3_split_button_inner_corner_size_state_list

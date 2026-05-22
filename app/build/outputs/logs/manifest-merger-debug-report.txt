@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:2:1-60:12
-INJECTED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:2:1-60:12
-INJECTED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:2:1-60:12
-INJECTED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:2:1-60:12
+ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:2:1-71:12
+INJECTED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:2:1-71:12
+INJECTED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:2:1-71:12
+INJECTED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:2:1-71:12
 MERGED from [androidx.databinding:viewbinding:8.13.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\4eb32eb7b95cf3ae3c196fcf3cd387fb\transformed\viewbinding-8.13.2\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.navigation:navigation-common:2.8.5] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\1921d9c2dfe805c71959a765827eac07\transformed\navigation-common-2.8.5\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.navigation:navigation-runtime:2.8.5] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\c1459e9545f301c690c10ac252dcea04\transformed\navigation-runtime-2.8.5\AndroidManifest.xml:17:1-22:12
@@ -166,8 +166,8 @@ MERGED from [com.google.firebase:firebase-messaging:24.1.0] C:\Users\KARTIK DILI
 	android:name
 		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:7:22-74
 application
-ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:9:5-58:19
-INJECTED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:9:5-58:19
+ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:9:5-69:19
+INJECTED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:9:5-69:19
 MERGED from [com.google.android.material:material:1.13.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\d4991d929a474b6140978cc8284dee1d\transformed\material-1.13.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.13.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\d4991d929a474b6140978cc8284dee1d\transformed\material-1.13.0\AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.2.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\db20649554ca1f562a4e3ef59e9ac5e2\transformed\constraintlayout-2.2.1\AndroidManifest.xml:7:5-20
@@ -338,36 +338,58 @@ ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:40:
 		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:40:53-77
 	android:name
 		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:40:19-52
+activity#com.example.messapp.ui.mess.reports.SubscriptionReportActivity
+ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:41:9-105
+	android:exported
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:41:78-102
+	android:name
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:41:19-77
+provider#androidx.core.content.FileProvider
+ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:43:9-51:20
+	android:grantUriPermissions
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:47:13-47
+	android:authorities
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:45:13-67
+	android:exported
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:46:13-37
+	android:name
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:44:13-62
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:48:13-50:54
+	android:resource
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:50:17-51
+	android:name
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:49:17-67
 service#com.example.messapp.MyFirebaseMessagingService
-ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:42:9-48:19
+ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:53:9-59:19
 	android:exported
-		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:44:13-37
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:55:13-37
 	android:name
-		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:43:13-55
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:54:13-55
 intent-filter#action:name:com.google.firebase.MESSAGING_EVENT
-ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:45:13-47:29
+ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:56:13-58:29
 action#com.google.firebase.MESSAGING_EVENT
-ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:46:17-78
+ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:57:17-78
 	android:name
-		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:46:25-75
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:57:25-75
 activity#com.google.android.gms.common.api.GoogleApiActivity
-ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:50:9-53:75
+ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:61:9-64:75
 MERGED from [com.google.android.gms:play-services-base:18.5.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\03ff1b595c8f22ccda103c3923f67f40\transformed\play-services-base-18.5.0\AndroidManifest.xml:5:9-173
 MERGED from [com.google.android.gms:play-services-base:18.5.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\03ff1b595c8f22ccda103c3923f67f40\transformed\play-services-base-18.5.0\AndroidManifest.xml:5:9-173
 	android:exported
-		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:52:13-37
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:63:13-37
 	android:theme
-		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:53:13-72
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:64:13-72
 	android:name
-		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:51:13-79
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:62:13-79
 meta-data#com.google.android.gms.version
-ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:55:9-57:69
+ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:66:9-68:69
 MERGED from [com.google.android.gms:play-services-basement:18.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ed98de772834bfe3dd0ba5f8ee4a52e8\transformed\play-services-basement-18.4.0\AndroidManifest.xml:6:9-122
 MERGED from [com.google.android.gms:play-services-basement:18.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ed98de772834bfe3dd0ba5f8ee4a52e8\transformed\play-services-basement-18.4.0\AndroidManifest.xml:6:9-122
 	android:value
-		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:57:13-66
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:68:13-66
 	android:name
-		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:56:13-58
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:67:13-58
 uses-sdk
 INJECTED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml

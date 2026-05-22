@@ -64,6 +64,7 @@ public class StudentsAdapter extends ListAdapter<Student, StudentsAdapter.Studen
         TextView textDinnerExpiry;
         TextView textOneTimeExpiry;
         TextView textSubscriptionExpiry;
+        TextView textStudentExtraInfo;
         android.widget.ImageView imgStudent;
         android.view.View containerLunch;
         android.view.View containerDinner;
@@ -82,6 +83,7 @@ public class StudentsAdapter extends ListAdapter<Student, StudentsAdapter.Studen
             textDinnerExpiry = itemView.findViewById(R.id.text_dinner_expiry);
             textOneTimeExpiry = itemView.findViewById(R.id.text_one_time_expiry);
             textSubscriptionExpiry = itemView.findViewById(R.id.text_subscription_expiry);
+            textStudentExtraInfo = itemView.findViewById(R.id.text_student_extra_info);
             imgStudent = itemView.findViewById(R.id.img_student);
             containerLunch = itemView.findViewById(R.id.container_lunch);
             containerDinner = itemView.findViewById(R.id.container_dinner);
@@ -99,6 +101,23 @@ public class StudentsAdapter extends ListAdapter<Student, StudentsAdapter.Studen
                 textStudentPhone.setVisibility(View.VISIBLE);
             } else {
                 textStudentPhone.setVisibility(View.GONE);
+            }
+
+            StringBuilder extraInfo = new StringBuilder();
+            if (student.getDietaryPreference() != null && !student.getDietaryPreference().isEmpty()) {
+                extraInfo.append(student.getDietaryPreference());
+            }
+            if (student.getGender() != null && !student.getGender().isEmpty()) {
+                if (extraInfo.length() > 0) {
+                    extraInfo.append(" • ");
+                }
+                extraInfo.append(student.getGender());
+            }
+            if (extraInfo.length() > 0) {
+                textStudentExtraInfo.setText(extraInfo.toString());
+                textStudentExtraInfo.setVisibility(View.VISIBLE);
+            } else {
+                textStudentExtraInfo.setVisibility(View.GONE);
             }
 
             String lunch = student.getLunchStatus() != null ? student.getLunchStatus() : "--";
@@ -210,13 +229,37 @@ public class StudentsAdapter extends ListAdapter<Student, StudentsAdapter.Studen
             } else {
                 maxExp = Math.max(lunchExp, dinnerExp);
             }
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+            String expiryDateStr = maxExp > 0 ? sdf.format(new Date(maxExp)) : "";
+            
+            String subType = student.getSubscriptionType() != null ? student.getSubscriptionType() : "NONE";
+            if ("ONE_TIME".equals(subType)) {
+                subType = "ONE TIME";
+            }
+            
             if (maxExp > now) {
                 long daysLeft = (maxExp - now) / (1000 * 60 * 60 * 24);
-                textSubscriptionExpiry.setText(daysLeft + "d remaining");
+                // Color the days remaining and type green
+                textSubscriptionExpiry.setTextColor(itemView.getContext().getResources().getColor(R.color.state_success));
+                String text = subType + " • " + daysLeft + " days left";
+                if (!expiryDateStr.isEmpty()) {
+                    text += " (Expires " + expiryDateStr + ")";
+                }
+                textSubscriptionExpiry.setText(text);
+                textSubscriptionExpiry.setVisibility(View.VISIBLE);
             } else if (maxExp > 0) {
-                textSubscriptionExpiry.setText("Expired");
+                textSubscriptionExpiry.setTextColor(itemView.getContext().getResources().getColor(R.color.state_error));
+                String text = subType + " • Expired";
+                if (!expiryDateStr.isEmpty()) {
+                    text += " (" + expiryDateStr + ")";
+                }
+                textSubscriptionExpiry.setText(text);
+                textSubscriptionExpiry.setVisibility(View.VISIBLE);
             } else {
+                textSubscriptionExpiry.setTextColor(itemView.getContext().getResources().getColor(R.color.text_caption));
                 textSubscriptionExpiry.setText("No Subscription");
+                textSubscriptionExpiry.setVisibility(View.VISIBLE);
             }
 
             btnRenew.setOnClickListener(v -> {

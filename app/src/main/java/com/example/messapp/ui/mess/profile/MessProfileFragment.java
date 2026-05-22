@@ -26,6 +26,7 @@ import com.example.messapp.databinding.FragmentMessProfileBinding;
 import com.example.messapp.models.Mess;
 import com.example.messapp.ui.mess.settings.MessSettingsActivity;
 import com.example.messapp.ui.mess.weeklymenu.WeeklyMenuActivity;
+import com.example.messapp.ui.mess.reports.SubscriptionReportActivity;
 import com.example.messapp.utils.ThemeManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -59,6 +60,7 @@ public class MessProfileFragment extends Fragment {
         binding.btnEditProfileImage.setOnClickListener(v -> handleEditProfile());
         binding.btnNavOffers.setOnClickListener(v -> handleOffers());
         binding.btnNavRevenue.setOnClickListener(v -> handleRevenue());
+        binding.btnNavSubscriptionReport.setOnClickListener(v -> handleSubscriptionReport());
         binding.btnNavWeeklyMenu.setOnClickListener(v -> handleWeeklyMenu());
         binding.btnSeeReviews.setOnClickListener(v -> openMessReviews(false));
         binding.btnWriteReview.setVisibility(View.GONE);
@@ -301,6 +303,16 @@ public class MessProfileFragment extends Fragment {
 
     private void handleRevenue() {
         NavHostFragment.findNavController(this).navigate(R.id.action_messProfileFragment_to_messRevenueFragment);
+    }
+
+    private void handleSubscriptionReport() {
+        if (currentMessId != null) {
+            Intent intent = new Intent(requireActivity(), SubscriptionReportActivity.class);
+            intent.putExtra("EXTRA_MESS_ID", currentMessId);
+            startActivity(intent);
+        } else {
+            Toast.makeText(requireContext(), "Mess ID not available.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void handleViewStudents() {
