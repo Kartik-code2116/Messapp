@@ -18,9 +18,13 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.util.Calendar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -60,10 +64,14 @@ public class SubscriptionReportActivity extends AppCompatActivity {
     private View layoutEmptyState;
     private View progressLoadingReport;
     private View btnExportPdf;
+    private Spinner spinnerMonthFilter;
+    private Spinner spinnerYearFilter;
 
     private List<Student> allStudentsList = new ArrayList<>();
+    private List<Student> monthFilteredList = new ArrayList<>();
     private List<Student> filteredStudentsList = new ArrayList<>();
     private Map<String, Long> studentJoinDates = new HashMap<>();
+    private Map<String, List<Long>> studentTransactions = new HashMap<>();
 
     private String currentSearchQuery = "";
     private String currentFilter = "ALL"; // "ALL", "ACTIVE", "EXPIRED"
@@ -109,6 +117,52 @@ public class SubscriptionReportActivity extends AppCompatActivity {
         recyclerSubscriptionReport.setLayoutManager(new LinearLayoutManager(this));
         adapter = new ReportAdapter(this, filteredStudentsList, studentJoinDates);
         recyclerSubscriptionReport.setAdapter(adapter);
+
+        setupSpinners();
+    }
+
+    private void setupSpinners() {
+        spinnerMonthFilter = findViewById(R.id.spinner_month_filter);
+        spinnerYearFilter = findViewById(R.id.spinner_year_filter);
+
+        String[] months = {
+            "All Months", "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        };
+        ArrayAdapter<String> monthAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, months);
+        monthAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerMonthFilter.setAdapter(monthAdapter);
+
+        Calendar currentCal = Calendar.getInstance();
+        int currentYear = currentCal.get(Calendar.YEAR);
+        List<String> years = new ArrayList<>();
+        years.add(String.valueOf(currentYear));
+        years.add(String.valueOf(currentYear - 1));
+        years.add(String.valueOf(currentYear - 2));
+
+        ArrayAdapter<String> yearAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, years);
+        yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerYearFilter.setAdapter(yearAdapter);
+
+        // Set default month selection to current month + 1 (since 0 is All Months)
+        int currentMonthIndex = currentCal.get(Calendar.MONTH) + 1;
+        spinnerMonthFilter.setSelection(currentMonthIndex);
+        spinnerYearFilter.setSelection(0); // Current year
+
+        AdapterView.OnItemSelectedListener spinnerListener = new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (allStudentsList != null && !allStudentsList.isEmpty()) {
+                    applyFiltersAndSearch();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        };
+
+        spinnerMonthFilter.setOnItemSelectedListener(spinnerListener);
+        spinnerYearFilter.setOnItemSelectedListener(spinnerListener);
     }
 
     private void setupListeners() {
@@ -155,13 +209,20 @@ public class SubscriptionReportActivity extends AppCompatActivity {
                 .get()
                 .addOnSuccessListener(transactionDocs -> {
                     studentJoinDates.clear();
+                    studentTransactions.clear();
                     for (DocumentSnapshot doc : transactionDocs.getDocuments()) {
                         String userId = doc.getString("userId");
                         Long timestamp = doc.getLong("timestamp");
                         if (userId != null && timestamp != null) {
+                            // Join date calculation (earliest timestamp)
                             if (!studentJoinDates.containsKey(userId) || timestamp < studentJoinDates.get(userId)) {
                                 studentJoinDates.put(userId, timestamp);
                             }
+                            // Store all transaction dates per student
+                            if (!studentTransactions.containsKey(userId)) {
+                                studentTransactions.put(userId, new ArrayList<>());
+                            }
+                            studentTransactions.get(userId).add(timestamp);
                         }
                     }
 
@@ -195,7 +256,6 @@ public class SubscriptionReportActivity extends AppCompatActivity {
                         return name1.compareTo(name2);
                     });
 
-                    calculateStatistics();
                     applyFiltersAndSearch();
                     showLoading(false);
                 })
@@ -205,14 +265,82 @@ public class SubscriptionReportActivity extends AppCompatActivity {
                 });
     }
 
-    private void calculateStatistics() {
-        int total = allStudentsList.size();
+    private long[] getSelectedMonthBoundaries() {
+        int monthPos = spinnerMonthFilter.getSelectedItemPosition();
+        if (monthPos == 0) {
+            // "All Months" selected
+            return new long[]{0, Long.MAX_VALUE};
+        }
+
+        int selectedMonth = monthPos - 1; // 0 for Jan, 11 for Dec
+        String yearStr = (String) spinnerYearFilter.getSelectedItem();
+        int selectedYear = Integer.parseInt(yearStr);
+
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, selectedYear);
+        cal.set(Calendar.MONTH, selectedMonth);
+        cal.set(Calendar.DAY_OF_MONTH, 1);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        long monthStart = cal.getTimeInMillis();
+
+        cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
+        cal.set(Calendar.HOUR_OF_DAY, 23);
+        cal.set(Calendar.MINUTE, 59);
+        cal.set(Calendar.SECOND, 59);
+        cal.set(Calendar.MILLISECOND, 999);
+        long monthEnd = cal.getTimeInMillis();
+
+        return new long[]{monthStart, monthEnd};
+    }
+
+    private boolean doesStudentBelongToMonth(Student student, long monthStart, long monthEnd) {
+        if (monthStart == 0) {
+            return true;
+        }
+
+        // 1. Check if the student made a transaction within this month
+        List<Long> txs = studentTransactions.get(student.getUserId());
+        if (txs != null) {
+            for (long tx : txs) {
+                if (tx >= monthStart && tx <= monthEnd) {
+                    return true;
+                }
+            }
+        }
+
+        // 2. Check if their subscription duration overlaps with this month
+        long lunchExp = student.getLunchSubscriptionExpiry();
+        long dinnerExp = student.getDinnerSubscriptionExpiry();
+        long oneTimeExp = student.getOneTimeMealExpiry();
+        long subExp = student.getSubscriptionExpiry();
+
+        long maxExp = "ONE_TIME".equals(student.getSubscriptionType())
+                ? (oneTimeExp > 0 ? oneTimeExp : subExp)
+                : Math.max(lunchExp > 0 ? lunchExp : subExp, dinnerExp > 0 ? dinnerExp : subExp);
+
+        if (maxExp > 0) {
+            Long joinDate = studentJoinDates.get(student.getUserId());
+            long startBound = (joinDate != null && joinDate > 0) ? joinDate : 0;
+
+            // Overlap check: [startBound, maxExp] overlaps with [monthStart, monthEnd]
+            if (startBound <= monthEnd && maxExp >= monthStart) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private void calculateStatistics(List<Student> list, long nowOrMonthStart) {
+        int total = list.size();
         int active = 0;
         int expired = 0;
-        long now = System.currentTimeMillis();
 
-        for (Student student : allStudentsList) {
-            if (isStudentActive(student, now)) {
+        for (Student student : list) {
+            if (isStudentActiveForMonth(student, nowOrMonthStart)) {
                 active++;
             } else {
                 expired++;
@@ -224,21 +352,17 @@ public class SubscriptionReportActivity extends AppCompatActivity {
         textStatExpired.setText(String.valueOf(expired));
     }
 
-    private boolean isStudentActive(Student student, long now) {
+    private boolean isStudentActiveForMonth(Student student, long nowOrMonthStart) {
         long lunchExp = student.getLunchSubscriptionExpiry();
         long dinnerExp = student.getDinnerSubscriptionExpiry();
         long oneTimeExp = student.getOneTimeMealExpiry();
         long subExp = student.getSubscriptionExpiry();
 
-        long maxExp;
-        if ("ONE_TIME".equals(student.getSubscriptionType())) {
-            maxExp = oneTimeExp > 0 ? oneTimeExp : subExp;
-        } else {
-            long lExp = lunchExp > 0 ? lunchExp : subExp;
-            long dExp = dinnerExp > 0 ? dinnerExp : subExp;
-            maxExp = Math.max(lExp, dExp);
-        }
-        return maxExp > now;
+        long maxExp = "ONE_TIME".equals(student.getSubscriptionType())
+                ? (oneTimeExp > 0 ? oneTimeExp : subExp)
+                : Math.max(lunchExp > 0 ? lunchExp : subExp, dinnerExp > 0 ? dinnerExp : subExp);
+
+        return maxExp > 0 && maxExp >= nowOrMonthStart;
     }
 
     private void selectFilter(String filter) {
@@ -277,9 +401,26 @@ public class SubscriptionReportActivity extends AppCompatActivity {
 
     private void applyFiltersAndSearch() {
         filteredStudentsList.clear();
-        long now = System.currentTimeMillis();
+        monthFilteredList.clear();
 
+        long[] boundaries = getSelectedMonthBoundaries();
+        long monthStart = boundaries[0];
+        long monthEnd = boundaries[1];
+
+        // 1. Filter by selected Month/Year
         for (Student student : allStudentsList) {
+            if (doesStudentBelongToMonth(student, monthStart, monthEnd)) {
+                monthFilteredList.add(student);
+            }
+        }
+
+        // 2. Calculate statistics for this month/year selection
+        long now = System.currentTimeMillis();
+        long nowOrMonthStart = (monthStart == 0) ? now : monthStart;
+        calculateStatistics(monthFilteredList, nowOrMonthStart);
+
+        // 3. Apply Search & Status filters to monthFilteredList
+        for (Student student : monthFilteredList) {
             // Apply Search Query
             boolean matchesSearch = true;
             if (!currentSearchQuery.isEmpty()) {
@@ -291,7 +432,7 @@ public class SubscriptionReportActivity extends AppCompatActivity {
             if (!matchesSearch) continue;
 
             // Apply Filter Chips
-            boolean isActive = isStudentActive(student, now);
+            boolean isActive = isStudentActiveForMonth(student, nowOrMonthStart);
             if ("ACTIVE".equals(currentFilter) && !isActive) {
                 continue;
             }
@@ -324,8 +465,11 @@ public class SubscriptionReportActivity extends AppCompatActivity {
     /**
      * NATIVE A4 HIGH-FIDELITY PDF REPORT GENERATOR WITH PAGINATION
      */
+    /**
+     * NATIVE A4 HIGH-FIDELITY PDF REPORT GENERATOR WITH PAGINATION
+     */
     private void generateAndOpenPDFReport() {
-        if (allStudentsList.isEmpty()) {
+        if (monthFilteredList.isEmpty()) {
             Toast.makeText(this, "No records to export.", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -384,18 +528,26 @@ public class SubscriptionReportActivity extends AppCompatActivity {
         zebraPaint.setColor(0xFFFFF8ED); // alternating row cream color
 
         // Pagination and layout limits
+        long[] boundaries = getSelectedMonthBoundaries();
+        long monthStart = boundaries[0];
+        long monthEnd = boundaries[1];
+        long now = System.currentTimeMillis();
+        long nowOrMonthStart = (monthStart == 0) ? now : monthStart;
+
         int currentItemIndex = 0;
-        int totalItems = allStudentsList.size();
+        int totalItems = monthFilteredList.size();
         int pageNumber = 1;
 
         // Statistics computation for the report header
         int totalCount = totalItems;
         int activeCount = 0;
         int expiredCount = 0;
-        long now = System.currentTimeMillis();
-        for (Student s : allStudentsList) {
-            if (isStudentActive(s, now)) activeCount++;
-            else expiredCount++;
+        for (Student s : monthFilteredList) {
+            if (isStudentActiveForMonth(s, nowOrMonthStart)) {
+                activeCount++;
+            } else {
+                expiredCount++;
+            }
         }
 
         // Layout constants
@@ -432,7 +584,14 @@ public class SubscriptionReportActivity extends AppCompatActivity {
 
                 // Mess Name and Report Title
                 canvas.drawText(messName.toUpperCase(), 35, 48, titlePaint);
-                canvas.drawText("SUBSCRIPTION REPORT", 35, 62, subTitlePaint);
+
+                String subtitleStr = "SUBSCRIPTION REPORT - ALL TIME";
+                if (monthStart != 0) {
+                    String monthName = spinnerMonthFilter.getSelectedItem().toString().toUpperCase();
+                    String yearStr = spinnerYearFilter.getSelectedItem().toString();
+                    subtitleStr = "SUBSCRIPTION REPORT - " + monthName + " " + yearStr;
+                }
+                canvas.drawText(subtitleStr, 35, 62, subTitlePaint);
 
                 // Meta Info Block (Right-aligned)
                 canvas.drawText("Report ID: SUB-" + messId.substring(0, Math.min(messId.length(), 6)).toUpperCase(), pageWidth - 180, 42, metaPaint);
@@ -479,7 +638,14 @@ public class SubscriptionReportActivity extends AppCompatActivity {
             } else {
                 // Subsequent page headers
                 canvas.drawRect(25, 20, pageWidth - 25, 22, primaryLinePaint);
-                canvas.drawText(messName + " - Subscription Report", 35, 38, titlePaint);
+
+                String headerStr = messName + " - Subscription Report";
+                if (monthStart != 0) {
+                    String monthName = spinnerMonthFilter.getSelectedItem().toString();
+                    String yearStr = spinnerYearFilter.getSelectedItem().toString();
+                    headerStr = messName + " - " + monthName + " " + yearStr + " Report";
+                }
+                canvas.drawText(headerStr, 35, 38, titlePaint);
                 canvas.drawText("Page " + pageNumber + " of " + totalPages, pageWidth - 100, 38, metaPaint);
                 canvas.drawLine(25, 48, pageWidth - 25, 48, linePaint);
             }
@@ -505,7 +671,7 @@ public class SubscriptionReportActivity extends AppCompatActivity {
             SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
 
             for (int i = 0; i < limit && currentItemIndex < totalItems; i++) {
-                Student student = allStudentsList.get(currentItemIndex);
+                Student student = monthFilteredList.get(currentItemIndex);
                 int srNo = currentItemIndex + 1;
 
                 // Alternate Row Zebra Painting
@@ -547,10 +713,14 @@ public class SubscriptionReportActivity extends AppCompatActivity {
                 canvas.drawText(expiryDateStr, 400, y + 15, tableBodyPaint);
 
                 // Status Column
-                if (maxExp > now) {
-                    long daysLeft = (maxExp - now) / (1000 * 60 * 60 * 24);
-                    String daysStr = daysLeft == 0 ? "Expires today" : daysLeft + " days left";
-                    canvas.drawText(daysStr, 490, y + 15, statusActivePaint);
+                if (isStudentActiveForMonth(student, nowOrMonthStart)) {
+                    if (maxExp > now) {
+                        long daysLeft = (maxExp - now) / (1000 * 60 * 60 * 24);
+                        String daysStr = daysLeft == 0 ? "Expires today" : daysLeft + " days left";
+                        canvas.drawText(daysStr, 490, y + 15, statusActivePaint);
+                    } else {
+                        canvas.drawText("ACTIVE", 490, y + 15, statusActivePaint);
+                    }
                 } else if (maxExp > 0) {
                     canvas.drawText("EXPIRED", 490, y + 15, statusExpiredPaint);
                 } else {
@@ -580,7 +750,14 @@ public class SubscriptionReportActivity extends AppCompatActivity {
     }
 
     private void savePDFToDisk(PdfDocument pdfDocument) {
-        String filename = "Mess_Subscription_Report_" + System.currentTimeMillis() + ".pdf";
+        String reportTag = "AllTime";
+        int monthPos = spinnerMonthFilter.getSelectedItemPosition();
+        if (monthPos > 0) {
+            String monthName = spinnerMonthFilter.getSelectedItem().toString();
+            String yearStr = spinnerYearFilter.getSelectedItem().toString();
+            reportTag = monthName + "_" + yearStr;
+        }
+        String filename = "Subscription_Report_" + reportTag + "_" + System.currentTimeMillis() + ".pdf";
 
         // Step 1: Write to Cache Directory for quick View/Share capability
         File cacheFile = new File(getCacheDir(), "subscription_report.pdf");

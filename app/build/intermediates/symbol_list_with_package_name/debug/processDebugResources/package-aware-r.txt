@@ -4751,7 +4751,9 @@ id snapMargins
 id south
 id spacer
 id special_effects_controller_view_tag
+id spinner_month_filter
 id spinner_month_year
+id spinner_year_filter
 id spline
 id split_action_bar
 id spread

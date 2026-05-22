@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -56,6 +57,12 @@ public final class ActivitySubscriptionReportBinding implements ViewBinding {
   public final RecyclerView recyclerSubscriptionReport;
 
   @NonNull
+  public final Spinner spinnerMonthFilter;
+
+  @NonNull
+  public final Spinner spinnerYearFilter;
+
+  @NonNull
   public final TextView textChipActive;
 
   @NonNull
@@ -82,6 +89,7 @@ public final class ActivitySubscriptionReportBinding implements ViewBinding {
       @NonNull MaterialCardView chipFilterExpired, @NonNull EditText editSearchReport,
       @NonNull ImageView imgSearchIcon, @NonNull LinearLayout layoutEmptyState,
       @NonNull ProgressBar progressLoadingReport, @NonNull RecyclerView recyclerSubscriptionReport,
+      @NonNull Spinner spinnerMonthFilter, @NonNull Spinner spinnerYearFilter,
       @NonNull TextView textChipActive, @NonNull TextView textChipAll,
       @NonNull TextView textChipExpired, @NonNull TextView textStatActive,
       @NonNull TextView textStatExpired, @NonNull TextView textStatTotal,
@@ -97,6 +105,8 @@ public final class ActivitySubscriptionReportBinding implements ViewBinding {
     this.layoutEmptyState = layoutEmptyState;
     this.progressLoadingReport = progressLoadingReport;
     this.recyclerSubscriptionReport = recyclerSubscriptionReport;
+    this.spinnerMonthFilter = spinnerMonthFilter;
+    this.spinnerYearFilter = spinnerYearFilter;
     this.textChipActive = textChipActive;
     this.textChipAll = textChipAll;
     this.textChipExpired = textChipExpired;
@@ -193,6 +203,18 @@ public final class ActivitySubscriptionReportBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.spinner_month_filter;
+      Spinner spinnerMonthFilter = ViewBindings.findChildViewById(rootView, id);
+      if (spinnerMonthFilter == null) {
+        break missingId;
+      }
+
+      id = R.id.spinner_year_filter;
+      Spinner spinnerYearFilter = ViewBindings.findChildViewById(rootView, id);
+      if (spinnerYearFilter == null) {
+        break missingId;
+      }
+
       id = R.id.text_chip_active;
       TextView textChipActive = ViewBindings.findChildViewById(rootView, id);
       if (textChipActive == null) {
@@ -237,9 +259,9 @@ public final class ActivitySubscriptionReportBinding implements ViewBinding {
 
       return new ActivitySubscriptionReportBinding((RelativeLayout) rootView, btnBack, btnExportPdf,
           chipFilterActive, chipFilterAll, chipFilterExpired, editSearchReport, imgSearchIcon,
-          layoutEmptyState, progressLoadingReport, recyclerSubscriptionReport, textChipActive,
-          textChipAll, textChipExpired, textStatActive, textStatExpired, textStatTotal,
-          toolbarReport);
+          layoutEmptyState, progressLoadingReport, recyclerSubscriptionReport, spinnerMonthFilter,
+          spinnerYearFilter, textChipActive, textChipAll, textChipExpired, textStatActive,
+          textStatExpired, textStatTotal, toolbarReport);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

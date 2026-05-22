@@ -1,3 +1,0 @@
-com.example.messapp.test
-style WhiteBackgroundDialogTheme
-style WhiteBackgroundTheme
