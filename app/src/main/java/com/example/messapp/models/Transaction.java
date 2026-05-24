@@ -8,6 +8,7 @@ public class Transaction {
     private int daysGranted;
     private long timestamp;
     private String subscriptionType; // "LUNCH", "DINNER", "BOTH"
+    private String status = "SUCCESS";
 
     public Transaction() {
     }
@@ -95,5 +96,13 @@ public class Transaction {
 
     public void setSubscriptionType(String subscriptionType) {
         this.subscriptionType = subscriptionType;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

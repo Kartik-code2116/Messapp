@@ -42,10 +42,7 @@ public class SubscriptionManager {
         this.db = FirebaseFirestore.getInstance();
     }
 
-    /**
-     * Create a new subscription for user to a mess
-     */
-    public void createSubscription(String userId, String messId, double monthlyPrice, int durationDays, UpdateCallback callback) {
+    public void createSubscription(String userId, String messId, String subscriptionType, double monthlyPrice, int durationDays, UpdateCallback callback) {
         String subscriptionId = "SUB_" + UUID.randomUUID().toString().substring(0, 8);
         long startDate = System.currentTimeMillis();
         long expiryDate = startDate + (durationDays * 24 * 60 * 60 * 1000L);
@@ -58,12 +55,12 @@ public class SubscriptionManager {
         subscriptionData.put("expiryDate", expiryDate);
         subscriptionData.put("status", "ACTIVE");
         subscriptionData.put("monthlyPrice", monthlyPrice);
+        subscriptionData.put("subscriptionType", subscriptionType);
 
         db.collection("subscriptions").document(subscriptionId).set(subscriptionData)
                 .addOnSuccessListener(aVoid -> {
-                    // Also update user's subscribed messes
-                    updateUserSubscriptions(userId, messId);
-                    callback.onSuccess();
+                    // Update user's subscribed messes and individual expiry dates
+                    updateUserSubscriptions(userId, messId, subscriptionType, expiryDate, callback);
                 })
                 .addOnFailureListener(e -> callback.onFailure(e.getMessage()));
     }
@@ -162,11 +159,44 @@ public class SubscriptionManager {
     }
 
     /**
-     * Update user's subscribed messes list
+     * Update user's subscribed messes list and expiry dates
      */
-    private void updateUserSubscriptions(String userId, String messId) {
-        db.collection("users").document(userId)
-                .update("subscribedMesses", com.google.firebase.firestore.FieldValue.arrayUnion(messId));
+    private void updateUserSubscriptions(String userId, String messId, String subscriptionType, long expiryDate, UpdateCallback callback) {
+        db.collection("users").document(userId).get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        long lunchExpiry = 0;
+                        long dinnerExpiry = 0;
+                        long oneTimeExpiry = 0;
+
+                        if ("LUNCH".equals(subscriptionType)) {
+                            lunchExpiry = expiryDate;
+                        } else if ("DINNER".equals(subscriptionType)) {
+                            dinnerExpiry = expiryDate;
+                        } else if ("BOTH".equals(subscriptionType)) {
+                            lunchExpiry = expiryDate;
+                            dinnerExpiry = expiryDate;
+                        } else if ("ONE_TIME".equals(subscriptionType)) {
+                            oneTimeExpiry = expiryDate;
+                        }
+
+                        Map<String, Object> updates = new HashMap<>();
+                        updates.put("messId", messId);
+                        updates.put("subscriptionExpiry", expiryDate);
+                        updates.put("lunchSubscriptionExpiry", lunchExpiry);
+                        updates.put("dinnerSubscriptionExpiry", dinnerExpiry);
+                        updates.put("oneTimeMealExpiry", oneTimeExpiry);
+                        updates.put("subscriptionType", subscriptionType);
+                        updates.put("subscribedMesses", com.google.firebase.firestore.FieldValue.arrayUnion(messId));
+
+                        db.collection("users").document(userId).update(updates)
+                                .addOnSuccessListener(aVoid -> callback.onSuccess())
+                                .addOnFailureListener(e -> callback.onFailure(e.getMessage()));
+                    } else {
+                        callback.onFailure("User profile not found");
+                    }
+                })
+                .addOnFailureListener(e -> callback.onFailure(e.getMessage()));
     }
 
     /**

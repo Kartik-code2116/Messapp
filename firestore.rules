@@ -73,16 +73,42 @@ service cloud.firestore {
       allow update, delete: if false;
     }
 
-    // Reviews: Students manage their own; mess owners read reviews matching their assigned messId
+    // Reviews: Students manage their own; anyone authenticated can read reviews
     match /reviews/{reviewId} {
-      allow read: if request.auth != null && (
-        resource.data.userId == request.auth.uid ||
-        (getUserData().role == "MESS_OWNER" && getUserData().messId == resource.data.messId)
-      );
+      allow read: if request.auth != null;
       allow create: if request.auth != null 
         && request.resource.data.userId == request.auth.uid;
       allow update, delete: if request.auth != null 
         && resource.data.userId == request.auth.uid;
+    }
+
+    // Offers & Campaigns: Authenticated read; only Mess Owners can manage; students can update usageCount
+    match /offers/{offerId} {
+      allow read: if request.auth != null;
+      allow create, delete: if request.auth != null && getUserData().role == "MESS_OWNER";
+      allow update: if request.auth != null && (
+        getUserData().role == "MESS_OWNER" ||
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['usageCount'])
+      );
+    }
+
+    // Analytics Events: Write-only ledger for user activity tracking
+    match /analytics_events/{eventId} {
+      allow read: if request.auth != null && getUserData().role == "MESS_OWNER";
+      allow create: if request.auth != null;
+      allow update, delete: if false;
+    }
+
+    // Notification Events: Log of pushed notification metrics
+    match /notification_events/{eventId} {
+      allow read: if request.auth != null && getUserData().role == "MESS_OWNER";
+      allow create: if request.auth != null;
+      allow update, delete: if false;
+    }
+
+    // Notification Preferences: Users manage their own preferences
+    match /notification_preferences/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
     }
   }
 }

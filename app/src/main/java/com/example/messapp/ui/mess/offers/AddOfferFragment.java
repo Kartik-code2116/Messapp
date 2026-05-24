@@ -147,12 +147,14 @@ public class AddOfferFragment extends Fragment {
         notification.put("notificationId", notificationId);
         notification.put("messId", offer.getMessId());
         notification.put("offerId", offer.getOfferId());
+        notification.put("senderId", mAuth.getCurrentUser() != null ? mAuth.getCurrentUser().getUid() : "");
+        notification.put("senderName", "Mess Admin");
         notification.put("title", "New Offer: " + offer.getTitle());
-        notification.put("description", offer.getDescription());
-        notification.put("timestamp", new Date());
+        notification.put("message", offer.getDescription());
+        notification.put("createdAt", System.currentTimeMillis());
         notification.put("type", "OFFER");
 
-        db.collection("notifications").document(notificationId).set(notification)
+        db.collection("mess_notifications").document(notificationId).set(notification)
                 .addOnSuccessListener(aVoid -> {
                     // Notification sent
                 })

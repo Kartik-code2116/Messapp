@@ -41,7 +41,7 @@ public class PaymentManager {
      * In production, this would integrate with actual payment gateway (Stripe,
      * PayPal, etc.)
      */
-    public void processPayment(String userId, String messId, double amount, int subscriptionDays,
+    public void processPayment(String userId, String messId, String subscriptionType, double amount, int subscriptionDays,
             PaymentCallback callback) {
         String transactionId = "TXN_" + UUID.randomUUID().toString().substring(0, 8);
         long timestamp = System.currentTimeMillis();
@@ -58,11 +58,13 @@ public class PaymentManager {
             transactionData.put("amount", amount);
             transactionData.put("daysGranted", subscriptionDays);
             transactionData.put("timestamp", timestamp);
+            transactionData.put("subscriptionType", subscriptionType);
+            transactionData.put("status", "SUCCESS");
 
             db.collection("transactions").document(transactionId).set(transactionData)
                     .addOnSuccessListener(aVoid -> {
                         // Create/update subscription
-                        subscriptionManager.createSubscription(userId, messId, (amount / subscriptionDays),
+                        subscriptionManager.createSubscription(userId, messId, subscriptionType, (amount / subscriptionDays),
                                 subscriptionDays,
                                 new SubscriptionManager.UpdateCallback() {
                                     @Override
