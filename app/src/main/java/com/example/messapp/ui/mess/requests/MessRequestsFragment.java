@@ -96,7 +96,7 @@ public class MessRequestsFragment extends Fragment {
         if (progressBar != null) progressBar.setVisibility(View.VISIBLE);
         
         com.google.firebase.firestore.DocumentReference userRef = db.collection("users").document(request.getUserId());
-        String date = request.getDate() != null ? request.getDate() : new java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault()).format(new java.util.Date());
+        String date = request.getDate() != null ? request.getDate() : new java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.US).format(new java.util.Date());
         String mealDocId = currentMessId + "_" + date + "_" + request.getUserId();
         com.google.firebase.firestore.DocumentReference mealRef = db.collection("meal_selections").document(mealDocId);
         com.google.firebase.firestore.DocumentReference reqRef = db.collection("subscriptionRequests").document(request.getId());
@@ -169,7 +169,7 @@ public class MessRequestsFragment extends Fragment {
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     subRequestList.clear();
                     mealRequestList.clear();
-                    String todayDate = new java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault()).format(new java.util.Date());
+                    String todayDate = new java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.US).format(new java.util.Date());
                     for (DocumentSnapshot doc : queryDocumentSnapshots) {
                         SubscriptionRequest req = doc.toObject(SubscriptionRequest.class);
                         if (req != null) {

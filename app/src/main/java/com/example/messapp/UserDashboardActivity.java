@@ -390,12 +390,21 @@ public class UserDashboardActivity extends AppCompatActivity {
                 binding.navView.setSelectedItemId(R.id.navigation_user_home);
             } else if (id == R.id.drawer_user_logout) {
                 binding.container.closeDrawer(androidx.core.view.GravityCompat.END);
-                performLogout();
+                showLogoutConfirmation();
                 return true;
             }
             binding.container.closeDrawer(GravityCompat.END);
             return true;
         });
+    }
+
+    private void showLogoutConfirmation() {
+        new androidx.appcompat.app.AlertDialog.Builder(this)
+                .setTitle("Logout")
+                .setMessage("Are you sure you want to logout?")
+                .setPositiveButton("Logout", (dialog, which) -> performLogout())
+                .setNegativeButton("Cancel", null)
+                .show();
     }
 
     private void performLogout() {

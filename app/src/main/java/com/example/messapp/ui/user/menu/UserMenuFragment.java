@@ -51,7 +51,7 @@ public class UserMenuFragment extends Fragment {
         currentCalendar = Calendar.getInstance();
 
         dayFormat = new SimpleDateFormat("EEE", Locale.getDefault());
-        dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
 
         // Set default day to today
         selectedDayIndex = getDayOfWeekIndex(currentCalendar);
@@ -259,7 +259,7 @@ public class UserMenuFragment extends Fragment {
         if (currentMessId == null) {
             return;
         }
-        String formattedDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(calendar.getTime());
+        String formattedDate = new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(calendar.getTime());
 
         db.collection("menus")
                 .whereEqualTo("messId", currentMessId)

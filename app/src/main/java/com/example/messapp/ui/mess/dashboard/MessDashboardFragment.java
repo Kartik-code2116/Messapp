@@ -516,7 +516,7 @@ public class MessDashboardFragment extends Fragment {
     // snapshot. Previously two identical queries were registered, doubling read
     // costs.
     private void setupRealtimeMealListener(String messId) {
-        String todayDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        String todayDate = new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(new Date());
 
         mealListener = db.collection("meal_selections")
                 .whereEqualTo("messId", messId)
@@ -744,7 +744,7 @@ public class MessDashboardFragment extends Fragment {
         if (currentMessId == null)
             return;
         binding.progressBar.setVisibility(View.VISIBLE);
-        String todayDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        String todayDate = new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(new Date());
 
         db.collection("meal_selections")
                 .whereEqualTo("messId", currentMessId)

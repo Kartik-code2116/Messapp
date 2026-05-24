@@ -66,10 +66,13 @@ public class HistoryAdapter extends ListAdapter<MealSelection, HistoryAdapter.Hi
 
         private void bindMealStatus(TextView view, String mealLabel, String status) {
             String displayStatus = status != null ? status : "Not marked";
+            if ("RESET".equalsIgnoreCase(displayStatus)) {
+                displayStatus = "Not marked";
+            }
             view.setText(mealLabel + ": " + displayStatus);
 
             int colorRes;
-            if ("IN".equalsIgnoreCase(displayStatus)) {
+            if ("IN".equalsIgnoreCase(displayStatus) || "Auto-IN".equalsIgnoreCase(displayStatus)) {
                 colorRes = R.color.state_success;
             } else if ("OUT".equalsIgnoreCase(displayStatus)) {
                 colorRes = R.color.state_error;

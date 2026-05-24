@@ -205,7 +205,7 @@ public class MessStudentsFragment extends Fragment {
         if (binding == null)
             return;
 
-        String todayDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        String todayDate = new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(new Date());
         String selectionDocId = currentMessId + "_" + todayDate + "_" + student.getUserId();
 
         new AlertDialog.Builder(getContext())
@@ -563,7 +563,7 @@ public class MessStudentsFragment extends Fragment {
         if (binding == null || currentMessId == null) return;
         binding.progressBar.setVisibility(View.VISIBLE);
 
-        String todayDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        String todayDate = new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(new Date());
         String selectionDocId = currentMessId + "_" + todayDate + "_" + student.getUserId();
 
         com.google.firebase.firestore.DocumentReference mealRef =
@@ -783,7 +783,7 @@ public class MessStudentsFragment extends Fragment {
     }
 
     private void setupRealtimeMealSelectionsListener(String messId) {
-        String todayDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        String todayDate = new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(new Date());
 
         if (mealSelectionsListener != null) {
             mealSelectionsListener.remove();

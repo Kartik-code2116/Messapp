@@ -43,7 +43,7 @@ public class WeeklyMenuActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
-        dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
 
         // Set week start to Monday of current week
         weekStartCalendar = Calendar.getInstance();

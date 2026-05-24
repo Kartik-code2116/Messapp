@@ -165,51 +165,73 @@ public class UserHistoryFragment extends Fragment {
 
         String userId = mAuth.getCurrentUser().getUid();
 
-        // Single-field query avoids Firestore composite index requirements;
-        // month range is applied on the client for reliability.
-        db.collection("meal_selections")
-                .whereEqualTo("userId", userId)
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    if (binding == null) {
-                        return;
-                    }
+        // Load the student's profile settings first to check auto-select preferences
+        db.collection("users").document(userId).get()
+                .addOnSuccessListener(userDoc -> {
+                    if (binding == null) return;
 
-                    Map<String, MealSelection> dailyMealSelections = new HashMap<>();
+                    String subscriptionType = userDoc.exists() ? userDoc.getString("subscriptionType") : "BOTH";
+                    boolean autoSelectLunch = userDoc.exists() && Boolean.TRUE.equals(userDoc.getBoolean("autoSelectLunch"));
+                    boolean autoSelectDinner = userDoc.exists() && Boolean.TRUE.equals(userDoc.getBoolean("autoSelectDinner"));
+                    String oneTimeAutoSelect = userDoc.exists() ? userDoc.getString("oneTimeAutoSelect") : "NONE";
 
-                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                        String date = document.getString("date");
-                        if (date == null || date.compareTo(startDate) < 0 || date.compareTo(endDate) >= 0) {
-                            continue;
-                        }
+                    // Single-field query avoids Firestore composite index requirements;
+                    // month range is applied on the client for reliability.
+                    db.collection("meal_selections")
+                            .whereEqualTo("userId", userId)
+                            .get()
+                            .addOnSuccessListener(queryDocumentSnapshots -> {
+                                if (binding == null) {
+                                    return;
+                                }
 
-                        String lunchStatus = normalizeStatus(document.getString("lunch"));
-                        String dinnerStatus = normalizeStatus(document.getString("dinner"));
+                                Map<String, MealSelection> dailyMealSelections = new HashMap<>();
 
-                        dailyMealSelections.put(date,
-                                new MealSelection(userId, date, lunchStatus, dinnerStatus));
-                    }
+                                for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                                    String date = document.getString("date");
+                                    if (date == null || date.compareTo(startDate) < 0 || date.compareTo(endDate) >= 0) {
+                                        continue;
+                                    }
 
-                    List<MealSelection> results = new ArrayList<>(dailyMealSelections.values());
-                    Collections.sort(results, (a, b) -> b.getDate().compareTo(a.getDate()));
+                                    String lunchStatus = normalizeStatus(document.getString("lunch"), "LUNCH", subscriptionType, autoSelectLunch, autoSelectDinner, oneTimeAutoSelect);
+                                    String dinnerStatus = normalizeStatus(document.getString("dinner"), "DINNER", subscriptionType, autoSelectLunch, autoSelectDinner, oneTimeAutoSelect);
 
-                    historyAdapter.submitList(results);
-                    updateSummary(results);
-                    showEmptyState(results.isEmpty(), "No meal records for this month");
-                    setLoading(false);
-                    binding.swipeRefresh.setRefreshing(false);
+                                    dailyMealSelections.put(date,
+                                            new MealSelection(userId, date, lunchStatus, dinnerStatus));
+                                }
+
+                                List<MealSelection> results = new ArrayList<>(dailyMealSelections.values());
+                                Collections.sort(results, (a, b) -> b.getDate().compareTo(a.getDate()));
+
+                                historyAdapter.submitList(results);
+                                updateSummary(results);
+                                showEmptyState(results.isEmpty(), "No meal records for this month");
+                                setLoading(false);
+                                binding.swipeRefresh.setRefreshing(false);
+                            })
+                            .addOnFailureListener(e -> {
+                                if (binding == null) {
+                                    return;
+                                }
+                                setLoading(false);
+                                binding.swipeRefresh.setRefreshing(false);
+                                showEmptyState(true, "Could not load history. Pull down to retry.");
+                                historyAdapter.submitList(Collections.emptyList());
+                                resetSummary();
+                                Toast.makeText(getContext(),
+                                        "Error loading meal history: " + e.getMessage(),
+                                        Toast.LENGTH_SHORT).show();
+                            });
                 })
                 .addOnFailureListener(e -> {
-                    if (binding == null) {
-                        return;
-                    }
+                    if (binding == null) return;
                     setLoading(false);
                     binding.swipeRefresh.setRefreshing(false);
-                    showEmptyState(true, "Could not load history. Pull down to retry.");
+                    showEmptyState(true, "Could not load user profile. Pull down to retry.");
                     historyAdapter.submitList(Collections.emptyList());
                     resetSummary();
                     Toast.makeText(getContext(),
-                            "Error loading meal history: " + e.getMessage(),
+                            "Error loading user profile: " + e.getMessage(),
                             Toast.LENGTH_SHORT).show();
                 });
     }
@@ -234,8 +256,23 @@ public class UserHistoryFragment extends Fragment {
         }
     }
 
-    private String normalizeStatus(@Nullable String status) {
-        if (status == null || status.trim().isEmpty()) {
+    private String normalizeStatus(@Nullable String status, String mealType, String subscriptionType,
+                                   boolean autoSelectLunch, boolean autoSelectDinner, String oneTimeAutoSelect) {
+        if (status == null || status.trim().isEmpty() || "RESET".equalsIgnoreCase(status.trim())) {
+            boolean isOneTime = "ONE_TIME".equals(subscriptionType);
+            if (isOneTime) {
+                if (mealType.equals("LUNCH") && "LUNCH".equals(oneTimeAutoSelect)) {
+                    return "Auto-IN";
+                } else if (mealType.equals("DINNER") && "DINNER".equals(oneTimeAutoSelect)) {
+                    return "Auto-IN";
+                }
+            } else {
+                if (mealType.equals("LUNCH") && autoSelectLunch) {
+                    return "Auto-IN";
+                } else if (mealType.equals("DINNER") && autoSelectDinner) {
+                    return "Auto-IN";
+                }
+            }
             return "Not marked";
         }
         return status.trim();
@@ -252,8 +289,8 @@ public class UserHistoryFragment extends Fragment {
         int daysOut = 0;
 
         for (MealSelection selection : mealSelections) {
-            boolean lunchIn = "IN".equalsIgnoreCase(selection.getLunchStatus());
-            boolean dinnerIn = "IN".equalsIgnoreCase(selection.getDinnerStatus());
+            boolean lunchIn = "IN".equalsIgnoreCase(selection.getLunchStatus()) || "Auto-IN".equalsIgnoreCase(selection.getLunchStatus());
+            boolean dinnerIn = "IN".equalsIgnoreCase(selection.getDinnerStatus()) || "Auto-IN".equalsIgnoreCase(selection.getDinnerStatus());
             boolean lunchOut = "OUT".equalsIgnoreCase(selection.getLunchStatus());
             boolean dinnerOut = "OUT".equalsIgnoreCase(selection.getDinnerStatus());
 

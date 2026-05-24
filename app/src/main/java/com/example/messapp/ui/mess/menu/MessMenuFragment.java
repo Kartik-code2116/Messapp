@@ -109,7 +109,7 @@ public class MessMenuFragment extends Fragment {
         if (currentMessId == null) {
             return;
         }
-        String formattedDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        String formattedDate = new SimpleDateFormat("yyyy-MM-dd", Locale.US)
                 .format(selectedDateCalendar.getTime());
 
         db.collection("menus")
@@ -231,7 +231,7 @@ public class MessMenuFragment extends Fragment {
             return;
         }
 
-        String formattedDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        String formattedDate = new SimpleDateFormat("yyyy-MM-dd", Locale.US)
                 .format(selectedDateCalendar.getTime());
         String menuText;
 

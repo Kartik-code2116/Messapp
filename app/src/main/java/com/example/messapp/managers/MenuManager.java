@@ -59,7 +59,7 @@ public class MenuManager {
 
     /** Convenience: get today's date string in the format used by document IDs. */
     public static String todayDateString() {
-        return new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        return new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(new Date());
     }
 
     /** Create or update the menu for a specific date. */

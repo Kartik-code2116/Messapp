@@ -85,7 +85,7 @@ public class UserHomeFragment extends Fragment {
             userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         }
 
-        todayDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        todayDate = new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(new Date());
 
         setupClickListeners();
         animateFoodCards();
@@ -519,7 +519,7 @@ public class UserHomeFragment extends Fragment {
         Calendar today = Calendar.getInstance();
         Calendar selectedDate = Calendar.getInstance();
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
             selectedDate.setTime(sdf.parse(todayDate));
             today.set(Calendar.HOUR_OF_DAY, 0);
             today.set(Calendar.MINUTE, 0);
@@ -917,7 +917,7 @@ public class UserHomeFragment extends Fragment {
 
         binding.btnPlanOutDays.setEnabled(false);
         List<String> dates = new ArrayList<>();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
         Calendar cursor = (Calendar) startDate.clone();
         for (int i = 0; i < days; i++) {
             dates.add(sdf.format(cursor.getTime()));
@@ -1096,7 +1096,7 @@ public class UserHomeFragment extends Fragment {
         String date = doc.getString("date");
         String meal = getPlannedOutMealLabel(doc);
         try {
-            Date parsedDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(date);
+            Date parsedDate = new SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(date);
             if (parsedDate != null) {
                 date = new SimpleDateFormat("EEE, dd MMM", Locale.getDefault()).format(parsedDate);
             }

@@ -164,7 +164,7 @@ public class MessDashboardActivity extends AppCompatActivity {
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             return true;
         } else if (id == R.id.action_logout) {
-            performLogout();
+            showLogoutConfirmation();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -404,7 +404,7 @@ public class MessDashboardActivity extends AppCompatActivity {
             } else if (id == R.id.drawer_admin_notifications) {
                 showAdminNotificationsDialog();
             } else if (id == R.id.drawer_admin_logout) {
-                performLogout();
+                showLogoutConfirmation();
             }
             binding.container.closeDrawer(GravityCompat.END);
             return true;
@@ -500,6 +500,15 @@ public class MessDashboardActivity extends AppCompatActivity {
         });
 
         return row;
+    }
+
+    private void showLogoutConfirmation() {
+        new AlertDialog.Builder(this)
+                .setTitle("Logout")
+                .setMessage("Are you sure you want to logout?")
+                .setPositiveButton("Logout", (dialog, which) -> performLogout())
+                .setNegativeButton("Cancel", null)
+                .show();
     }
 
     private void performLogout() {
