@@ -150,12 +150,34 @@
     <string name="mtrl_picker_toggled_to_year_selection">Beralih kepada paparan tahun</string>
     <string name="mtrl_timepicker_cancel">Batal</string>
     <string name="mtrl_timepicker_confirm">OK</string>
+    <string name="native_body">Kandungan</string>
+    <string name="native_headline">Tajuk</string>
+    <string name="native_media_view">Paparan Media</string>
     <string msgid="6301633601645100427" name="nav_app_bar_navigate_up_description">"Navigasi ke atas"</string>
     <string msgid="7456070600745802113" name="nav_app_bar_open_drawer_description">"Buka laci navigasi"</string>
+    <string name="notifications_permission_confirm">Benarkan</string>
+    <string name="notifications_permission_decline">Jangan benarkan</string>
+    <string name="notifications_permission_title">Benarkan apl menghantar pemberitahuan kepada anda?</string>
+    <string name="offline_dialog_image_description">Ikon</string>
+    <string name="offline_dialog_text">Terima kasih atas minat anda.\nKami akan berkongsi lagi setelah anda kembali dalam talian.</string>
+    <string name="offline_notification_title">Anda sudah kembali dalam talian! Mari menyambung dari tempat kita berhenti</string>
+    <string name="offline_notification_title_with_advertiser">Anda sudah kembali dalam talian! Teruskan pembelajaran tentang %s</string>
+    <string name="offline_opt_in_confirm">OK</string>
+    <string name="offline_opt_in_decline">Tidak</string>
+    <string name="offline_opt_in_message">Kami akan menghantar pemberitahuan dengan pautan ke tapak pengiklan kepada anda.</string>
+    <string name="offline_opt_in_title">Buka iklan apabila anda kembali ke dalam talian.</string>
     <string name="password_toggle_content_description">Tunjukkan kata laluan</string>
+    <string name="s1">Simpan imej</string>
+    <string name="s2">Benarkan Iklan menyimpan imej dalam galeri Gambar?</string>
+    <string name="s3">Terima</string>
+    <string name="s4">Tolak</string>
+    <string name="s5">Buat acara kalendar</string>
+    <string name="s6">Benarkan Iklan membuat acara kalendar?</string>
+    <string name="s7">Iklan Ujian</string>
     <string msgid="6264217191555673260" name="search_menu_title">"Cari"</string>
     <string name="searchview_clear_text_content_description">Kosongkan teks</string>
     <string name="searchview_navigation_content_description">Kembali</string>
     <string name="side_sheet_accessibility_pane_title">Helaian Sisi</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
+    <string name="watermark_label_prefix">AdMob - </string>
 </resources>

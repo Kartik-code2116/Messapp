@@ -150,12 +150,34 @@
     <string name="mtrl_picker_toggled_to_year_selection">Overgeschakeld naar jaarweergave</string>
     <string name="mtrl_timepicker_cancel">Annuleren</string>
     <string name="mtrl_timepicker_confirm">OK</string>
+    <string name="native_body">Tekstgedeelte</string>
+    <string name="native_headline">Kop</string>
+    <string name="native_media_view">Mediacontent</string>
     <string msgid="6301633601645100427" name="nav_app_bar_navigate_up_description">"Omhoog navigeren"</string>
     <string msgid="7456070600745802113" name="nav_app_bar_open_drawer_description">"Zijmenu openen"</string>
+    <string name="notifications_permission_confirm">Toestaan</string>
+    <string name="notifications_permission_decline">Niet toestaan</string>
+    <string name="notifications_permission_title">App toestaan om je meldingen te sturen?</string>
+    <string name="offline_dialog_image_description">Icoon</string>
+    <string name="offline_dialog_text">Bedankt voor je interesse.\nWe delen meer zodra je weer online bent.</string>
+    <string name="offline_notification_title">Je bent weer online. Laten we verder gaan waar we waren gebleven.</string>
+    <string name="offline_notification_title_with_advertiser">Je bent weer online. Ga verder met leren over %s.</string>
+    <string name="offline_opt_in_confirm">OK</string>
+    <string name="offline_opt_in_decline">Nee, bedankt</string>
+    <string name="offline_opt_in_message">We sturen je een melding met een link naar de site van de adverteerder.</string>
+    <string name="offline_opt_in_title">Advertentie openen als je weer online bent</string>
     <string name="password_toggle_content_description">Wachtwoord tonen</string>
+    <string name="s1">Afbeelding opslaan</string>
+    <string name="s2">Advertentie toestaan om afbeelding op te slaan in fotogalerij?</string>
+    <string name="s3">Accepteren</string>
+    <string name="s4">Weigeren</string>
+    <string name="s5">Agenda-afspraak maken</string>
+    <string name="s6">Advertentie toestaan om een agenda-afspraak te maken?</string>
+    <string name="s7">Testadvertentie</string>
     <string msgid="6264217191555673260" name="search_menu_title">"Zoeken"</string>
     <string name="searchview_clear_text_content_description">Tekst wissen</string>
     <string name="searchview_navigation_content_description">Terug</string>
     <string name="side_sheet_accessibility_pane_title">Zijblad</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
+    <string name="watermark_label_prefix">AdMob - </string>
 </resources>

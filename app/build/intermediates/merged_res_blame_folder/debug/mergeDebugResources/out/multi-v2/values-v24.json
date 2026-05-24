@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.messapp-mergeDebugResources-59:/values-v24/values-v24.xml",
+            "outputFile": "com.example.messapp-mergeDebugResources-66:/values-v24/values-v24.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\d543114192116d60513238c0116516d3\\transformed\\appcompat-1.7.1\\res\\values-v24\\values-v24.xml",
+                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\9e30d2cf6ef5a17e94efd86916b17979\\transformed\\appcompat-1.7.1\\res\\values-v24\\values-v24.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\d4991d929a474b6140978cc8284dee1d\\transformed\\material-1.13.0\\res\\values-v24\\values-v24.xml",
+                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\b7cbbb9a7092de09bc34c0941b68ba47\\transformed\\material-1.13.0\\res\\values-v24\\values-v24.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,9,12,15",
                         "startColumns": "4,4,4,4,4,4,4,4",

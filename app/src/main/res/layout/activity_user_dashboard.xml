@@ -24,14 +24,23 @@
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@id/nav_view"
+            android:layout_above="@id/adView"
             android:layout_below="@id/user_top_bar"
             app:defaultNavHost="true"
             app:navGraph="@navigation/mobile_navigation" />
 
+        <!-- Google AdMob Banner Ad -->
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/nav_view"
+            app:adSize="BANNER"
+            app:adUnitId="ca-app-pub-9150541100276802/1165729278" />
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/nav_view"
-            android:layout_width="398dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="@drawable/bg_bottom_nav"

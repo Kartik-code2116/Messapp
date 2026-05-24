@@ -150,12 +150,34 @@
     <string name="mtrl_picker_toggled_to_year_selection">Byttet til årsvisning</string>
     <string name="mtrl_timepicker_cancel">Avbryt</string>
     <string name="mtrl_timepicker_confirm">OK</string>
+    <string name="native_body">Tekst</string>
+    <string name="native_headline">Overskrift</string>
+    <string name="native_media_view">Medieinnhold</string>
     <string msgid="6301633601645100427" name="nav_app_bar_navigate_up_description">"Naviger opp"</string>
     <string msgid="7456070600745802113" name="nav_app_bar_open_drawer_description">"Åpne uttrekksmenyen"</string>
+    <string name="notifications_permission_confirm">Tillat</string>
+    <string name="notifications_permission_decline">Ikke tillat</string>
+    <string name="notifications_permission_title">Vil du la appen sende deg varsler?</string>
+    <string name="offline_dialog_image_description">Ikon</string>
+    <string name="offline_dialog_text">Takk for interessen.\nVi deler mer når du er på nettet igjen.</string>
+    <string name="offline_notification_title">Du er på nettet igjen. La oss fortsette der vi slapp</string>
+    <string name="offline_notification_title_with_advertiser">Du er på nettet igjen. Fortsett å lære om %s</string>
+    <string name="offline_opt_in_confirm">OK</string>
+    <string name="offline_opt_in_decline">Nei takk</string>
+    <string name="offline_opt_in_message">Vi sender deg et varsel med en link til annonsørnettstedet.</string>
+    <string name="offline_opt_in_title">Åpne annonsen når du er på nettet igjen.</string>
     <string name="password_toggle_content_description">Vis passordet</string>
+    <string name="s1">Lagre bilde</string>
+    <string name="s2">Vil du la annonsen lagre bildet i bildegalleriet?</string>
+    <string name="s3">Godta</string>
+    <string name="s4">Avslå</string>
+    <string name="s5">Opprett kalenderaktivitet</string>
+    <string name="s6">Vil du la annonsen opprette en kalenderaktivitet?</string>
+    <string name="s7">Testannonse</string>
     <string msgid="6264217191555673260" name="search_menu_title">"Søk"</string>
     <string name="searchview_clear_text_content_description">Fjern teksten</string>
     <string name="searchview_navigation_content_description">Tilbake</string>
     <string name="side_sheet_accessibility_pane_title">Sideark</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
+    <string name="watermark_label_prefix">AdMob – </string>
 </resources>

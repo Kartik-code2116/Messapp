@@ -151,12 +151,34 @@
     <string name="mtrl_picker_toggled_to_year_selection">בוצע מעבר לתצוגה שנתית</string>
     <string name="mtrl_timepicker_cancel">ביטול</string>
     <string name="mtrl_timepicker_confirm">אישור</string>
+    <string name="native_body">גוף המודעה</string>
+    <string name="native_headline">כותרת</string>
+    <string name="native_media_view">תצוגת המדיה</string>
     <string msgid="6301633601645100427" name="nav_app_bar_navigate_up_description">"ניווט למעלה"</string>
     <string msgid="7456070600745802113" name="nav_app_bar_open_drawer_description">"פתיחת חלונית ההזזה לניווט"</string>
+    <string name="notifications_permission_confirm">אישור</string>
+    <string name="notifications_permission_decline">אין אישור</string>
+    <string name="notifications_permission_title">לאפשר לאפליקציה לשלוח לך התראות?</string>
+    <string name="offline_dialog_image_description">סמל</string>
+    <string name="offline_dialog_text">‏תודה על ההתעניינות.\nנשתף עוד מידע ברגע שיהיה שוב חיבור לאינטרנט.</string>
+    <string name="offline_notification_title">החיבור לאינטרנט חזר. נמשיך בדיוק מאיפה שהפסקנו</string>
+    <string name="offline_notification_title_with_advertiser">החיבור לאינטרנט חזר. עכשיו אפשר להמשיך לקרוא על %s</string>
+    <string name="offline_opt_in_confirm">אישור</string>
+    <string name="offline_opt_in_decline">לא תודה</string>
+    <string name="offline_opt_in_message">נשלח לך התראה עם קישור לאתר המפרסם.</string>
+    <string name="offline_opt_in_title">יש לפתוח את המודעה כשיתחדש החיבור לאינטרנט.</string>
     <string name="password_toggle_content_description">הצגת סיסמה</string>
+    <string name="s1">שמור את התמונה</string>
+    <string name="s2">האם לאפשר למודעה לאחסן תמונה בגלריית התמונות?</string>
+    <string name="s3">קבל</string>
+    <string name="s4">דחה</string>
+    <string name="s5">צור אירוע ביומן</string>
+    <string name="s6">האם לאפשר למודעה ליצור אירוע ביומן?</string>
+    <string name="s7">מודעת בדיקה</string>
     <string msgid="6264217191555673260" name="search_menu_title">"חיפוש"</string>
     <string name="searchview_clear_text_content_description">מחיקת הטקסט</string>
     <string name="searchview_navigation_content_description">חזרה</string>
     <string name="side_sheet_accessibility_pane_title">גיליון צדדי</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
+    <string name="watermark_label_prefix">AdMob – </string>
 </resources>

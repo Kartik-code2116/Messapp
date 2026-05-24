@@ -150,12 +150,34 @@
     <string name="mtrl_picker_toggled_to_year_selection">연도별 보기로 전환됨</string>
     <string name="mtrl_timepicker_cancel">취소</string>
     <string name="mtrl_timepicker_confirm">확인</string>
+    <string name="native_body">본문</string>
+    <string name="native_headline">광고 제목</string>
+    <string name="native_media_view">미디어 보기</string>
     <string msgid="6301633601645100427" name="nav_app_bar_navigate_up_description">"위로 이동"</string>
     <string msgid="7456070600745802113" name="nav_app_bar_open_drawer_description">"탐색 창 열기"</string>
+    <string name="notifications_permission_confirm">허용</string>
+    <string name="notifications_permission_decline">허용 안함</string>
+    <string name="notifications_permission_title">앱에서 알림을 보내도록 허용하시겠습니까?</string>
+    <string name="offline_dialog_image_description">아이콘</string>
+    <string name="offline_dialog_text">관심을 가져 주셔서 감사합니다.\n인터넷에 다시 연결되면 더 많은 내용을 공유해 드리겠습니다.</string>
+    <string name="offline_notification_title">인터넷에 다시 연결되었습니다. 최근 감상한 부분부터 이어서 감상해 보세요</string>
+    <string name="offline_notification_title_with_advertiser">인터넷에 다시 연결되었습니다. %s에 관해 계속 알아보세요</string>
+    <string name="offline_opt_in_confirm">확인</string>
+    <string name="offline_opt_in_decline">나중에</string>
+    <string name="offline_opt_in_message">광고주 사이트로 연결되는 링크와 함께 알림을 보내 드리겠습니다.</string>
+    <string name="offline_opt_in_title">다시 온라인 상태가 될 때 광고 열기</string>
     <string name="password_toggle_content_description">비밀번호 표시</string>
+    <string name="s1">이미지 저장</string>
+    <string name="s2">광고에서 사진 갤러리에 이미지를 저장하도록 허용하시겠습니까?</string>
+    <string name="s3">동의</string>
+    <string name="s4">거부</string>
+    <string name="s5">캘린더 일정 만들기</string>
+    <string name="s6">광고에서 캘린더 일정을 만들도록 허용하시겠습니까?</string>
+    <string name="s7">테스트 광고</string>
     <string msgid="6264217191555673260" name="search_menu_title">"검색"</string>
     <string name="searchview_clear_text_content_description">텍스트 삭제</string>
     <string name="searchview_navigation_content_description">뒤로</string>
     <string name="side_sheet_accessibility_pane_title">사이드 시트</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
+    <string name="watermark_label_prefix">AdMob - </string>
 </resources>

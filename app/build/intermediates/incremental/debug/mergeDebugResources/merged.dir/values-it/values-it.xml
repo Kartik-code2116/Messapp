@@ -150,12 +150,34 @@
     <string name="mtrl_picker_toggled_to_year_selection">Passaggio alla visualizzazione Anno effettuato</string>
     <string name="mtrl_timepicker_cancel">Annulla</string>
     <string name="mtrl_timepicker_confirm">OK</string>
+    <string name="native_body">Corpo</string>
+    <string name="native_headline">Titolo</string>
+    <string name="native_media_view">Pannello multimediale</string>
     <string msgid="6301633601645100427" name="nav_app_bar_navigate_up_description">"Torna indietro"</string>
     <string msgid="7456070600745802113" name="nav_app_bar_open_drawer_description">"Apri riquadro di navigazione"</string>
+    <string name="notifications_permission_confirm">Consenti</string>
+    <string name="notifications_permission_decline">Non consentire</string>
+    <string name="notifications_permission_title">Consentire all\'app di inviarti notifiche?</string>
+    <string name="offline_dialog_image_description">Icona</string>
+    <string name="offline_dialog_text">Grazie per il tuo interesse.\nComunicheremo ulteriori dettagli quando tornerai online.</string>
+    <string name="offline_notification_title">Sei di nuovo online Riprendiamo da dove abbiamo interrotto</string>
+    <string name="offline_notification_title_with_advertiser">Sei di nuovo online Continua a scoprire informazioni su %s</string>
+    <string name="offline_opt_in_confirm">OK</string>
+    <string name="offline_opt_in_decline">No, grazie</string>
+    <string name="offline_opt_in_message">Ti invieremo una notifica con un link che rimanda al sito dell\'inserzionista.</string>
+    <string name="offline_opt_in_title">Apri l\'annuncio quando sarai di nuovo online.</string>
     <string name="password_toggle_content_description">Mostra password</string>
+    <string name="s1">Salva immagine</string>
+    <string name="s2">Consentire ad AdMob di memorizzare l\'immagine nella galleria Immagini?</string>
+    <string name="s3">Accetto</string>
+    <string name="s4">Rifiuto</string>
+    <string name="s5">Crea evento di calendario</string>
+    <string name="s6">Consentire ad AdMob di creare un evento di calendario?</string>
+    <string name="s7">Annuncio di testo</string>
     <string msgid="6264217191555673260" name="search_menu_title">"Cerca"</string>
     <string name="searchview_clear_text_content_description">Cancella testo</string>
     <string name="searchview_navigation_content_description">Indietro</string>
     <string name="side_sheet_accessibility_pane_title">Scheda secondaria</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
+    <string name="watermark_label_prefix">AdMob - </string>
 </resources>

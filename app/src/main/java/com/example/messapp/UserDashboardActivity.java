@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.MenuItem;
@@ -81,6 +83,13 @@ public class UserDashboardActivity extends AppCompatActivity {
         }
 
         isGuestMode = getIntent().getBooleanExtra("IS_GUEST", false);
+
+        // Load AdMob Banner Ad
+        AdView adView = findViewById(R.id.adView);
+        if (adView != null) {
+            AdRequest adRequest = new AdRequest.Builder().build();
+            adView.loadAd(adRequest);
+        }
 
         // NavHost from FragmentContainerView is ready after the first layout pass
         binding.getRoot().post(this::initNavigation);
@@ -499,7 +508,29 @@ public class UserDashboardActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onPause() {
+        AdView adView = findViewById(R.id.adView);
+        if (adView != null) {
+            adView.pause();
+        }
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        AdView adView = findViewById(R.id.adView);
+        if (adView != null) {
+            adView.resume();
+        }
+    }
+
+    @Override
     protected void onDestroy() {
+        AdView adView = findViewById(R.id.adView);
+        if (adView != null) {
+            adView.destroy();
+        }
         super.onDestroy();
         if (profileListener != null)
             profileListener.remove();

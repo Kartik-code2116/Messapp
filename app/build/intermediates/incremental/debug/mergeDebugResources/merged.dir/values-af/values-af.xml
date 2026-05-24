@@ -150,12 +150,34 @@
     <string name="mtrl_picker_toggled_to_year_selection">Oorgeskakel na jaaraansig</string>
     <string name="mtrl_timepicker_cancel">Kanselleer</string>
     <string name="mtrl_timepicker_confirm">OK</string>
+    <string name="native_body">Teksinhoud</string>
+    <string name="native_headline">Opskrif</string>
+    <string name="native_media_view">Media-aansig</string>
     <string msgid="6301633601645100427" name="nav_app_bar_navigate_up_description">"Gaan op"</string>
     <string msgid="7456070600745802113" name="nav_app_bar_open_drawer_description">"Maak navigasielaai oop"</string>
+    <string name="notifications_permission_confirm">Laat toe</string>
+    <string name="notifications_permission_decline">Moenie toelaat nie</string>
+    <string name="notifications_permission_title">Laat app toe om vir jou kennisgewings te stuur?</string>
+    <string name="offline_dialog_image_description">Ikoon</string>
+    <string name="offline_dialog_text">Dankie vir jou belangstelling.\nOns sal meer deel sodra jy weer aanlyn is.</string>
+    <string name="offline_notification_title">Jy is weer aanlyn! Kom ons gaan aan waar ons opgehou het</string>
+    <string name="offline_notification_title_with_advertiser">Jy is weer aanlyn! Hou aan om te leer oor %s</string>
+    <string name="offline_opt_in_confirm">OK</string>
+    <string name="offline_opt_in_decline">Nee, dankie</string>
+    <string name="offline_opt_in_message">Ons sal vir jou \'n kennisgewing stuur met \'n skakel na die adverteerder se werf toe.</string>
+    <string name="offline_opt_in_title">Maak advertensie oop wanneer jy weer aanlyn is.</string>
     <string name="password_toggle_content_description">Wys wagwoord</string>
+    <string name="s1">Stoor prent</string>
+    <string name="s2">Laat advertensie toe om prent in Prentgalery te stoor?</string>
+    <string name="s3">Aanvaar</string>
+    <string name="s4">Wys af</string>
+    <string name="s5">Skep kalendergeleentheid</string>
+    <string name="s6">Laat advertensie toe om \'n kalendergeleentheid te skep?</string>
+    <string name="s7">Toetsadvertensie</string>
     <string msgid="6264217191555673260" name="search_menu_title">"Soek"</string>
     <string name="searchview_clear_text_content_description">Vee teks uit</string>
     <string name="searchview_navigation_content_description">Terug</string>
     <string name="side_sheet_accessibility_pane_title">Kantblad</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
+    <string name="watermark_label_prefix">AdMob - </string>
 </resources>

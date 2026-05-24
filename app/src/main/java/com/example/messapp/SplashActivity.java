@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.android.gms.ads.MobileAds;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -53,6 +54,9 @@ public class SplashActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+
+        // Initialize Google Mobile Ads SDK
+        MobileAds.initialize(this, status -> {});
 
         android.view.View logoCard = findViewById(R.id.logoCard);
         android.view.View textTitle = findViewById(R.id.textTitle);

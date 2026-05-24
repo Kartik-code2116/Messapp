@@ -15,6 +15,7 @@ credentialsPlayServicesAuth = "1.5.0"
 googleid = "1.1.1"
 glide = "4.16.0"
 swiperefreshlayout = "1.2.0"
+playServicesAds = "23.6.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -27,6 +28,7 @@ constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayo
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version = "33.7.0" }
 firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore" }
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
 firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging", version.ref = "firebaseMessaging" }
 navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment", version = "2.8.5" }
 navigation-ui = { group = "androidx.navigation", name = "navigation-ui", version = "2.8.5" }
@@ -38,6 +40,7 @@ glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", versi
 firebase-storage = { group = "com.google.firebase", name = "firebase-storage" }
 swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
 zxing = { group = "com.google.zxing", name = "core", version = "3.5.3" }
+play-services-ads = { group = "com.google.android.gms", name = "play-services-ads", version.ref = "playServicesAds" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

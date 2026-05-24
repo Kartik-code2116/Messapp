@@ -151,6 +151,9 @@ attr activeIndicatorLabelPadding
 attr activityAction
 attr activityChooserViewStyle
 attr activityName
+attr adSize
+attr adSizes
+attr adUnitId
 attr addElevationShadow
 attr alertDialogButtonGroupStyle
 attr alertDialogCenterButtons
@@ -1551,7 +1554,11 @@ attr yearStyle
 attr yearTodayStyle
 bool abc_action_bar_embed_tabs
 bool abc_config_actionMenuItemAllCaps
+bool enable_system_alarm_service_default
+bool enable_system_foreground_service_default
+bool enable_system_job_service_default
 bool mtrl_btn_textappearance_all_caps
+bool workmanager_test_configuration
 color abc_background_cache_hint_selector_material_dark
 color abc_background_cache_hint_selector_material_light
 color abc_btn_colored_borderless_text_material
@@ -3751,6 +3758,9 @@ drawable abc_textfield_search_activated_mtrl_alpha
 drawable abc_textfield_search_default_mtrl_alpha
 drawable abc_textfield_search_material
 drawable abc_vector_test
+drawable admob_close_button_black_circle_white_cross
+drawable admob_close_button_white_circle_black_cross
+drawable admob_close_button_white_cross
 drawable annapurna
 drawable avd_hide_password
 drawable avd_show_password
@@ -4001,6 +4011,8 @@ drawable notification_template_icon_bg
 drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
+drawable offline_dialog_background
+drawable offline_dialog_default_icon_42dp
 drawable ripple_drawer_item
 drawable ripple_effect
 drawable selector_drawer_item
@@ -4093,6 +4105,7 @@ id action_settings
 id action_text
 id actions
 id activity_chooser_view_content
+id adView
 id add
 id addOfferFragment
 id adjust_height
@@ -4620,6 +4633,9 @@ id offerDiscountEditText
 id offerDiscountLayout
 id offerTitleEditText
 id offerTitleLayout
+id offline_dialog_advertiser_name
+id offline_dialog_image
+id offline_dialog_text
 id on
 id onInterceptTouchReturnSwipe
 id open_search_bar_placeholder_text_view
@@ -5139,6 +5155,7 @@ layout activity_splash_screen
 layout activity_subscription_report
 layout activity_user_dashboard
 layout activity_weekly_menu
+layout admob_empty_layout
 layout browser_actions_context_menu_page
 layout browser_actions_context_menu_row
 layout custom_dialog
@@ -5255,6 +5272,7 @@ layout notification_template_custom_big
 layout notification_template_icon_group
 layout notification_template_part_chronometer
 layout notification_template_part_time
+layout offline_ads_dialog
 layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
@@ -5479,19 +5497,40 @@ string mtrl_switch_track_decoration_path
 string mtrl_switch_track_path
 string mtrl_timepicker_cancel
 string mtrl_timepicker_confirm
+string native_body
+string native_headline
+string native_media_view
 string nav_app_bar_navigate_up_description
 string nav_app_bar_open_drawer_description
 string nav_rail_collapsed_a11y_label
 string nav_rail_expanded_a11y_label
+string notifications_permission_confirm
+string notifications_permission_decline
+string notifications_permission_title
 string offer_discount_format
 string offer_expiry_format
 string offer_expiry_not_available
+string offline_dialog_image_description
+string offline_dialog_text
+string offline_notification_title
+string offline_notification_title_with_advertiser
+string offline_opt_in_confirm
+string offline_opt_in_decline
+string offline_opt_in_message
+string offline_opt_in_title
 string password_toggle_content_description
 string path_password_eye
 string path_password_eye_mask_strike_through
 string path_password_eye_mask_visible
 string path_password_strike_through
 string project_id
+string s1
+string s2
+string s3
+string s4
+string s5
+string s6
+string s7
 string search_menu_title
 string searchbar_scrolling_view_behavior
 string searchview_clear_text_content_description
@@ -5501,6 +5540,7 @@ string side_sheet_behavior
 string splash_logo_content_description
 string status_bar_notification_info_overflow
 string total_students_label
+string watermark_label_prefix
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style Animation_AppCompat_Dialog
@@ -6133,6 +6173,7 @@ style Theme_Design_Light_BottomSheetDialog
 style Theme_Design_Light_NoActionBar
 style Theme_Design_NoActionBar
 style Theme_Hidden
+style Theme_IAPTheme
 style Theme_Material3_Dark
 style Theme_Material3_Dark_BottomSheetDialog
 style Theme_Material3_Dark_Dialog
@@ -6758,6 +6799,7 @@ styleable ActivityChooserView expandActivityOverflowButtonDrawable initialActivi
 styleable ActivityFilter activityAction activityName
 styleable ActivityNavigator android_name action data dataPattern targetPackage
 styleable ActivityRule alwaysExpand
+styleable AdsAttrs adSize adSizes adUnitId
 styleable AlertDialog android_layout buttonIconDimen buttonPanelSideLayout listItemLayout listLayout multiChoiceItemLayout showTitle singleChoiceItemLayout
 styleable AnimatedStateListDrawableCompat android_dither android_visible android_variablePadding android_constantSize android_enterFadeDuration android_exitFadeDuration
 styleable AnimatedStateListDrawableItem android_id android_drawable
@@ -6931,6 +6973,7 @@ styleable include constraintSet
 xml backup_rules
 xml data_extraction_rules
 xml file_paths
+xml gma_ad_services_config
 xml image_share_filepaths
 xml m3_button_group_child_size_change
 xml m3_split_button_inner_corner_size_state_list

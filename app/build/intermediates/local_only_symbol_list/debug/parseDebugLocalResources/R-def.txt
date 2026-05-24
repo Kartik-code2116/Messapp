@@ -270,6 +270,7 @@ id action_messProfileFragment_to_messOffersFragment
 id action_messProfileFragment_to_messRevenueFragment
 id action_messProfileFragment_to_navigation_mess_students
 id action_settings
+id adView
 id addOfferFragment
 id admin_top_bar
 id app_logo

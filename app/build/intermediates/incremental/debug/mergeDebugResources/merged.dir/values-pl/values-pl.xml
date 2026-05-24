@@ -152,12 +152,34 @@
     <string name="mtrl_picker_toggled_to_year_selection">Przełączono na widok roku</string>
     <string name="mtrl_timepicker_cancel">Anuluj</string>
     <string name="mtrl_timepicker_confirm">OK</string>
+    <string name="native_body">Treść</string>
+    <string name="native_headline">Nagłówek</string>
+    <string name="native_media_view">Widok multimediów</string>
     <string msgid="6301633601645100427" name="nav_app_bar_navigate_up_description">"Przejdź wyżej"</string>
     <string msgid="7456070600745802113" name="nav_app_bar_open_drawer_description">"Otwórz panel nawigacji"</string>
+    <string name="notifications_permission_confirm">Zezwól</string>
+    <string name="notifications_permission_decline">Nie zezwalaj</string>
+    <string name="notifications_permission_title">Zezwolić aplikacji na wysyłanie powiadomień?</string>
+    <string name="offline_dialog_image_description">Ikona</string>
+    <string name="offline_dialog_text">Dziękujemy za zainteresowanie.\nWięcej informacji otrzymasz, gdy znów będziesz online.</string>
+    <string name="offline_notification_title">Znów jesteś online. Zacznijmy tam, gdzie ostatnio skończyliśmy</string>
+    <string name="offline_notification_title_with_advertiser">Znów jesteś online. Dowiedz się więcej o reklamodawcy %s</string>
+    <string name="offline_opt_in_confirm">OK</string>
+    <string name="offline_opt_in_decline">Nie</string>
+    <string name="offline_opt_in_message">Wyślemy Ci powiadomienie z linkiem do strony reklamodawcy.</string>
+    <string name="offline_opt_in_title">Otwórz reklamę, gdy znów połączysz się z internetem.</string>
     <string name="password_toggle_content_description">Pokaż hasło</string>
+    <string name="s1">Zapisz obraz</string>
+    <string name="s2">Zezwolić reklamie na zapisanie obrazu w galerii zdjęć?</string>
+    <string name="s3">Zaakceptuj</string>
+    <string name="s4">Odrzuć</string>
+    <string name="s5">Utwórz wydarzenie w kalendarzu</string>
+    <string name="s6">Zezwolić reklamie na utworzenie wydarzenia w kalendarzu?</string>
+    <string name="s7">Reklama testowa</string>
     <string msgid="6264217191555673260" name="search_menu_title">"Szukaj"</string>
     <string name="searchview_clear_text_content_description">Wyczyść tekst</string>
     <string name="searchview_navigation_content_description">Wstecz</string>
     <string name="side_sheet_accessibility_pane_title">Arkusz boczny</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
+    <string name="watermark_label_prefix">AdMob - </string>
 </resources>

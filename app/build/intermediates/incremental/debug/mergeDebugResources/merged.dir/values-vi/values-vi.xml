@@ -73,7 +73,7 @@
     <string name="exposed_dropdown_menu_content_description">Hiển thị menu thả xuống</string>
     <string msgid="4566929209979330987" name="fallback_menu_item_copy_link">"Sao chép đường liên kết"</string>
     <string msgid="3413186855122069269" name="fallback_menu_item_open_in_browser">"Mở trong trình duyệt"</string>
-    <string msgid="7145444925855055364" name="fallback_menu_item_share_link">"Chia sẻ liên kết"</string>
+    <string msgid="7145444925855055364" name="fallback_menu_item_share_link">"Chia sẻ đường liên kết"</string>
     <string msgid="1072308044213194243" name="fingerprint_dialog_touch_sensor">"Chạm vào cảm biến vân tay"</string>
     <string msgid="8216738333501875566" name="fingerprint_error_hw_not_available">"Không dùng được phần cứng vân tay."</string>
     <string msgid="6306988885793029438" name="fingerprint_error_hw_not_present">"Thiết bị này không có cảm biến vân tay"</string>
@@ -150,12 +150,34 @@
     <string name="mtrl_picker_toggled_to_year_selection">Đã chuyển sang chế độ xem năm</string>
     <string name="mtrl_timepicker_cancel">Huỷ</string>
     <string name="mtrl_timepicker_confirm">OK</string>
+    <string name="native_body">Nội dung</string>
+    <string name="native_headline">Tiêu đề</string>
+    <string name="native_media_view">Nội dung nghe nhìn</string>
     <string msgid="6301633601645100427" name="nav_app_bar_navigate_up_description">"Di chuyển lên"</string>
     <string msgid="7456070600745802113" name="nav_app_bar_open_drawer_description">"Mở ngăn điều hướng"</string>
+    <string name="notifications_permission_confirm">Cho phép</string>
+    <string name="notifications_permission_decline">Không cho phép</string>
+    <string name="notifications_permission_title">Cho phép ứng dụng gửi thông báo cho bạn?</string>
+    <string name="offline_dialog_image_description">Biểu tượng</string>
+    <string name="offline_dialog_text">Cảm ơn bạn đã quan tâm.\nChúng tôi sẽ chia sẻ nhiều hơn khi bạn kết nối mạng trở lại.</string>
+    <string name="offline_notification_title">Bạn đã kết nối mạng trở lại! Hãy tiếp tục từ thời điểm chúng ta dừng lại lần trước</string>
+    <string name="offline_notification_title_with_advertiser">Bạn đã kết nối mạng trở lại! Tiếp tục tìm hiểu về %s</string>
+    <string name="offline_opt_in_confirm">OK</string>
+    <string name="offline_opt_in_decline">Để sau</string>
+    <string name="offline_opt_in_message">Chúng tôi sẽ gửi thông báo cho bạn kèm theo đường liên kết đến trang web của nhà quảng cáo.</string>
+    <string name="offline_opt_in_title">Mở quảng cáo khi bạn có kết nối mạng trở lại.</string>
     <string name="password_toggle_content_description">Hiện mật khẩu</string>
+    <string name="s1">Lưu hình ảnh</string>
+    <string name="s2">Cho phép Quảng cáo lưu trữ hình ảnh trong thư viện Ảnh?</string>
+    <string name="s3">Chấp nhận</string>
+    <string name="s4">Từ chối</string>
+    <string name="s5">Tạo sự kiện lịch</string>
+    <string name="s6">Cho phép Quảng cáo tạo sự kiện lịch?</string>
+    <string name="s7">Quảng cáo thử nghiệm</string>
     <string msgid="6264217191555673260" name="search_menu_title">"Tìm kiếm"</string>
     <string name="searchview_clear_text_content_description">Xoá văn bản</string>
     <string name="searchview_navigation_content_description">Quay lại</string>
     <string name="side_sheet_accessibility_pane_title">Trang bên</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
+    <string name="watermark_label_prefix">AdMob – </string>
 </resources>

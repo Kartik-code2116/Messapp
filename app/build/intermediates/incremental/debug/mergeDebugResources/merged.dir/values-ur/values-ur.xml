@@ -150,12 +150,34 @@
     <string name="mtrl_picker_toggled_to_year_selection">سال کے لحاظ سے دیکھیں پر سوئچ ہو گیا</string>
     <string name="mtrl_timepicker_cancel">منسوخ کریں</string>
     <string name="mtrl_timepicker_confirm">ٹھیک ہے</string>
+    <string name="native_body">نفسِ مضمون</string>
+    <string name="native_headline">ہیڈ لائن</string>
+    <string name="native_media_view">میڈیا منظر</string>
     <string msgid="6301633601645100427" name="nav_app_bar_navigate_up_description">"اوپر نیویگیٹ کریں"</string>
     <string msgid="7456070600745802113" name="nav_app_bar_open_drawer_description">"نیویگیشن دراز کھولیں"</string>
+    <string name="notifications_permission_confirm">اجازت دیں</string>
+    <string name="notifications_permission_decline">اجازت نہ دیں</string>
+    <string name="notifications_permission_title">آپ کو اطلاعات بھیجنے کیلئے ایپ کو اجازت دیں؟</string>
+    <string name="offline_dialog_image_description">آئیکن</string>
+    <string name="offline_dialog_text">‏آپ کی دلچسپی کا شکریہ۔\nآپ کے واپس آن لائن آنے کے بعد ہم مزید اشتراک کریں گے۔</string>
+    <string name="offline_notification_title">آپ دوبارہ آن لائن ہیں! آئیے، جہاں ہم نے چھوڑا تھا وہیں سے شروع کریں</string>
+    <string name="offline_notification_title_with_advertiser">آپ دوبارہ آن لائن ہیں! %s کے بارے میں جاننا جاری رکھیں</string>
+    <string name="offline_opt_in_confirm">ٹھیک ہے</string>
+    <string name="offline_opt_in_decline">نہیں شکریہ</string>
+    <string name="offline_opt_in_message">ہم آپ کو مشتہر کی سائٹ کے لنک کے ساتھ اطلاع بھیجیں گے۔</string>
+    <string name="offline_opt_in_title">آن لائن واپس آنے پر اشتہار کھولیں۔</string>
     <string name="password_toggle_content_description">پاس ورڈ دکھائیں</string>
+    <string name="s1">تصویر محفوظ کریں</string>
+    <string name="s2">اشتہار کو تصویری گیلری میں تصویر محفوظ کرنے کی اجازت دیں؟</string>
+    <string name="s3">قبول کریں</string>
+    <string name="s4">مسترد کریں</string>
+    <string name="s5">کیلنڈر ایونٹ بنائیں</string>
+    <string name="s6">اشتہار کو ایک کیلنڈر ایونٹ بنانے کی اجازت دیں؟</string>
+    <string name="s7">اشتہار ٹیسٹ کریں</string>
     <string msgid="6264217191555673260" name="search_menu_title">"تلاش کریں"</string>
     <string name="searchview_clear_text_content_description">ٹیکسٹ صاف کریں</string>
     <string name="searchview_navigation_content_description">واپس جائیں</string>
     <string name="side_sheet_accessibility_pane_title">سائیڈ شیٹ</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"+999"</string>
+    <string name="watermark_label_prefix">AdMob - ‎ </string>
 </resources>

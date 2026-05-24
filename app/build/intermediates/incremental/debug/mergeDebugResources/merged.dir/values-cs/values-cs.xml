@@ -152,12 +152,34 @@
     <string name="mtrl_picker_toggled_to_year_selection">Přepnuto na roční zobrazení</string>
     <string name="mtrl_timepicker_cancel">Zrušit</string>
     <string name="mtrl_timepicker_confirm">OK</string>
+    <string name="native_body">Text</string>
+    <string name="native_headline">Nadpis</string>
+    <string name="native_media_view">Zobrazení mediálního souboru</string>
     <string msgid="6301633601645100427" name="nav_app_bar_navigate_up_description">"Přejít nahoru"</string>
     <string msgid="7456070600745802113" name="nav_app_bar_open_drawer_description">"Otevřít vysouvací panel navigace"</string>
+    <string name="notifications_permission_confirm">Povolit</string>
+    <string name="notifications_permission_decline">Nepovolovat</string>
+    <string name="notifications_permission_title">Chcete, aby vám aplikace zasílala oznámení?</string>
+    <string name="offline_dialog_image_description">Ikona</string>
+    <string name="offline_dialog_text">Děkujeme za váš zájem.\nAž budete znovu online, sdělíme vám víc.</string>
+    <string name="offline_notification_title">Jste opět online. Můžete pokračovat tam, kde jste přestali.</string>
+    <string name="offline_notification_title_with_advertiser">Jste opět online. Můžete zjistit další informace na téma %s</string>
+    <string name="offline_opt_in_confirm">OK</string>
+    <string name="offline_opt_in_decline">Ne, díky</string>
+    <string name="offline_opt_in_message">Pošleme vám oznámení s odkazem na web inzerenta.</string>
+    <string name="offline_opt_in_title">Reklama se otevře, až budete znovu online.</string>
     <string name="password_toggle_content_description">Zobrazit heslo</string>
+    <string name="s1">Uložení obrázku</string>
+    <string name="s2">Povolit reklamě, aby uložila obrázek do galerie fotek?</string>
+    <string name="s3">Přijmout</string>
+    <string name="s4">Odmítnout</string>
+    <string name="s5">Vytvoření události kalendáře</string>
+    <string name="s6">Povolit reklamě, aby vytvořila událost kalendáře?</string>
+    <string name="s7">Zkušební reklama</string>
     <string msgid="6264217191555673260" name="search_menu_title">"Hledat"</string>
     <string name="searchview_clear_text_content_description">Vymazat text</string>
     <string name="searchview_navigation_content_description">Zpět</string>
     <string name="side_sheet_accessibility_pane_title">Postranní list</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
+    <string name="watermark_label_prefix">AdMob – </string>
 </resources>

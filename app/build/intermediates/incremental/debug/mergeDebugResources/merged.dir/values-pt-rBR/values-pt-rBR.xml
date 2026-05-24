@@ -150,12 +150,34 @@
     <string name="mtrl_picker_toggled_to_year_selection">Mudou para a visualização de ano</string>
     <string name="mtrl_timepicker_cancel">Cancelar</string>
     <string name="mtrl_timepicker_confirm">OK</string>
+    <string name="native_body">Corpo</string>
+    <string name="native_headline">Título</string>
+    <string name="native_media_view">Visualização de mídia</string>
     <string msgid="6301633601645100427" name="nav_app_bar_navigate_up_description">"Navegar para cima"</string>
     <string msgid="7456070600745802113" name="nav_app_bar_open_drawer_description">"Abrir gaveta de navegação"</string>
+    <string name="notifications_permission_confirm">Permitir</string>
+    <string name="notifications_permission_decline">Não permitir</string>
+    <string name="notifications_permission_title">Permitir que o app envie notificações?</string>
+    <string name="offline_dialog_image_description">Ícone</string>
+    <string name="offline_dialog_text">Agradecemos seu interesse.\nVamos compartilhar mais informações quando você estiver on-line de novo.</string>
+    <string name="offline_notification_title">Você está on-line de novo. Vamos continuar de onde paramos</string>
+    <string name="offline_notification_title_with_advertiser">Você está on-line de novo. Continue aprendendo sobre %s</string>
+    <string name="offline_opt_in_confirm">OK</string>
+    <string name="offline_opt_in_decline">Não</string>
+    <string name="offline_opt_in_message">Enviaremos uma notificação com um link para o site do anunciante.</string>
+    <string name="offline_opt_in_title">Abrir o anúncio quando você ficar on-line novamente.</string>
     <string name="password_toggle_content_description">Exibir senha</string>
+    <string name="s1">Salvar imagem</string>
+    <string name="s2">Permitir que os anúncios armazenem imagens na galeria de imagens?</string>
+    <string name="s3">Aceitar</string>
+    <string name="s4">Recusar</string>
+    <string name="s5">Criar evento na agenda</string>
+    <string name="s6">Permitir que os anúncios criem um evento na agenda?</string>
+    <string name="s7">Anúncio de teste</string>
     <string msgid="6264217191555673260" name="search_menu_title">"Pesquisar"</string>
     <string name="searchview_clear_text_content_description">Limpar texto</string>
     <string name="searchview_navigation_content_description">Voltar</string>
     <string name="side_sheet_accessibility_pane_title">Página lateral</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
+    <string name="watermark_label_prefix">AdMob - </string>
 </resources>

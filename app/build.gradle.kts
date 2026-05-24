@@ -59,4 +59,5 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation(libs.zxing)
+    implementation(libs.play.services.ads)
 }

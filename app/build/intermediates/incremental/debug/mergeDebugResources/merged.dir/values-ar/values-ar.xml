@@ -155,12 +155,34 @@
     <string name="mtrl_picker_toggled_to_year_selection">تم التبديل إلى عرض اختيار السنة</string>
     <string name="mtrl_timepicker_cancel">إلغاء</string>
     <string name="mtrl_timepicker_confirm">حسنًا</string>
+    <string name="native_body">النص</string>
+    <string name="native_headline">العنوان</string>
+    <string name="native_media_view">عرض الوسائط</string>
     <string msgid="6301633601645100427" name="nav_app_bar_navigate_up_description">"التنقل إلى أعلى"</string>
     <string msgid="7456070600745802113" name="nav_app_bar_open_drawer_description">"فتح لائحة التنقل"</string>
+    <string name="notifications_permission_confirm">السماح</string>
+    <string name="notifications_permission_decline">عدم السماح</string>
+    <string name="notifications_permission_title">هل تريد السماح للتطبيق بإرسال إشعارات إليك؟</string>
+    <string name="offline_dialog_image_description">رمز</string>
+    <string name="offline_dialog_text">‏نشكرك على اهتمامك.\nسنشارك المزيد من المعلومات بعد إعادة الاتصال بالإنترنت.</string>
+    <string name="offline_notification_title">تمت إعادة الاتصال بالإنترنت وبإمكانك الآن الاستئناف من حيث توقفت</string>
+    <string name="offline_notification_title_with_advertiser">تمت إعادة الاتصال بالإنترنت وبإمكانك الآن مواصلة التعرّف على \"%s\"</string>
+    <string name="offline_opt_in_confirm">حسنًا</string>
+    <string name="offline_opt_in_decline">لا، شكرًا</string>
+    <string name="offline_opt_in_message">سنرسل إليك إشعارًا يحتوي على رابط إلى الموقع الإلكتروني للمعلِن.</string>
+    <string name="offline_opt_in_title">فتح العنوان عند إعادة الاتصال بالإنترنت</string>
     <string name="password_toggle_content_description">عرض كلمة المرور</string>
+    <string name="s1">حفظ الصورة</string>
+    <string name="s2">هل تريد السماح للإعلان بتخزين الصورة في معرض الصور؟</string>
+    <string name="s3">قبول</string>
+    <string name="s4">رفض</string>
+    <string name="s5">إنشاء حدث تقويم</string>
+    <string name="s6">هل تريد السماح للإعلان بإنشاء حدث تقويم؟</string>
+    <string name="s7">إعلان تجريبي</string>
     <string msgid="6264217191555673260" name="search_menu_title">"البحث"</string>
     <string name="searchview_clear_text_content_description">محو النص</string>
     <string name="searchview_navigation_content_description">رجوع</string>
     <string name="side_sheet_accessibility_pane_title">ورقة جانبية</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
+    <string name="watermark_label_prefix">AdMob - </string>
 </resources>

@@ -152,12 +152,34 @@
     <string name="mtrl_picker_toggled_to_year_selection">Perjungta į metų rodinį</string>
     <string name="mtrl_timepicker_cancel">Atšaukti</string>
     <string name="mtrl_timepicker_confirm">Gerai</string>
+    <string name="native_body">Tekstas</string>
+    <string name="native_headline">Antraštė</string>
+    <string name="native_media_view">Medijos rodinys</string>
     <string msgid="6301633601645100427" name="nav_app_bar_navigate_up_description">"Naršyti aukštyn"</string>
     <string msgid="7456070600745802113" name="nav_app_bar_open_drawer_description">"Atidaryti naršymo juostą"</string>
+    <string name="notifications_permission_confirm">Leisti</string>
+    <string name="notifications_permission_decline">Neleisti</string>
+    <string name="notifications_permission_title">Leisti programai siųsti jums pranešimus?</string>
+    <string name="offline_dialog_image_description">Piktograma</string>
+    <string name="offline_dialog_text">Dėkojame, kad domitės.\nPasidalysime daugiau informacijos, kai vėl prisijungsite.</string>
+    <string name="offline_notification_title">Vėl esate prisijungę! Tęskime nuo ten, kur baigėme</string>
+    <string name="offline_notification_title_with_advertiser">Vėl esate prisijungę! Toliau mokykitės apie „%s“</string>
+    <string name="offline_opt_in_confirm">Gerai</string>
+    <string name="offline_opt_in_decline">Ne, ačiū</string>
+    <string name="offline_opt_in_message">Atsiųsime jums pranešimą su nuoroda į reklamuotojo svetainę.</string>
+    <string name="offline_opt_in_title">Atidarykite skelbimą, kai vėl prisijungsite.</string>
     <string name="password_toggle_content_description">Rodyti slaptažodį</string>
+    <string name="s1">Išsaugoti vaizdą</string>
+    <string name="s2">Leisti skelbimui išsaugoti vaizdą nuotraukų galerijoje?</string>
+    <string name="s3">Sutikti</string>
+    <string name="s4">Atmesti</string>
+    <string name="s5">Sukurti kalendoriaus įvykį</string>
+    <string name="s6">Leisti skelbimui sukurti kalendoriaus įvykį?</string>
+    <string name="s7">Bandomasis skelbimas</string>
     <string msgid="6264217191555673260" name="search_menu_title">"Ieškoti"</string>
     <string name="searchview_clear_text_content_description">Išvalyti tekstą</string>
     <string name="searchview_navigation_content_description">Atgal</string>
     <string name="side_sheet_accessibility_pane_title">Šoninis lapas</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
+    <string name="watermark_label_prefix">„AdMob“ – </string>
 </resources>

@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentContainerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.messapp.R;
+import com.google.android.gms.ads.AdView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import java.lang.NullPointerException;
@@ -20,6 +21,9 @@ import java.lang.String;
 public final class ActivityUserDashboardBinding implements ViewBinding {
   @NonNull
   private final DrawerLayout rootView;
+
+  @NonNull
+  public final AdView adView;
 
   @NonNull
   public final DrawerLayout container;
@@ -36,12 +40,13 @@ public final class ActivityUserDashboardBinding implements ViewBinding {
   @NonNull
   public final IncludeUserTopBarBinding userTopBar;
 
-  private ActivityUserDashboardBinding(@NonNull DrawerLayout rootView,
+  private ActivityUserDashboardBinding(@NonNull DrawerLayout rootView, @NonNull AdView adView,
       @NonNull DrawerLayout container,
       @NonNull FragmentContainerView navHostFragmentActivityUserDashboard,
       @NonNull BottomNavigationView navView, @NonNull NavigationView profileDrawer,
       @NonNull IncludeUserTopBarBinding userTopBar) {
     this.rootView = rootView;
+    this.adView = adView;
     this.container = container;
     this.navHostFragmentActivityUserDashboard = navHostFragmentActivityUserDashboard;
     this.navView = navView;
@@ -76,6 +81,12 @@ public final class ActivityUserDashboardBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.adView;
+      AdView adView = ViewBindings.findChildViewById(rootView, id);
+      if (adView == null) {
+        break missingId;
+      }
+
       DrawerLayout container = (DrawerLayout) rootView;
 
       id = R.id.nav_host_fragment_activity_user_dashboard;
@@ -103,7 +114,7 @@ public final class ActivityUserDashboardBinding implements ViewBinding {
       }
       IncludeUserTopBarBinding binding_userTopBar = IncludeUserTopBarBinding.bind(userTopBar);
 
-      return new ActivityUserDashboardBinding((DrawerLayout) rootView, container,
+      return new ActivityUserDashboardBinding((DrawerLayout) rootView, adView, container,
           navHostFragmentActivityUserDashboard, navView, profileDrawer, binding_userTopBar);
     }
     String missingId = rootView.getResources().getResourceName(id);
