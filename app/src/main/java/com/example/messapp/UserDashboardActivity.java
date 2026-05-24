@@ -215,6 +215,10 @@ public class UserDashboardActivity extends AppCompatActivity {
     }
 
     private boolean isNotificationVisibleForUser(DocumentSnapshot doc, String userId) {
+        String type = doc.getString("type");
+        if (com.example.messapp.managers.MessNotificationManager.TYPE_SUBSCRIPTION_ALERT.equals(type)) {
+            return false;
+        }
         String targetUserId = doc.getString("targetUserId");
         return targetUserId == null || targetUserId.isEmpty() || targetUserId.equals(userId);
     }

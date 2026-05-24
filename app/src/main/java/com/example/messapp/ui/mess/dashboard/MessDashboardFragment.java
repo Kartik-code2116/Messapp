@@ -58,6 +58,7 @@ public class MessDashboardFragment extends Fragment {
     private android.os.CountDownTimer dashboardTimer;
     private Map<String, DocumentSnapshot> userDocs = new HashMap<>();
     private Map<String, DocumentSnapshot> mealDocs = new HashMap<>();
+    private final java.util.Set<String> processedAlerts = new java.util.HashSet<>();
     private int lunchCutoffHour = 10;
     private int lunchCutoffMinute = 30;
     private int dinnerCutoffHour = 16;
@@ -447,6 +448,66 @@ public class MessDashboardFragment extends Fragment {
                             userDocs.put(doc.getId(), doc);
                         }
                         updateDefaultInMealCounts();
+                        checkStudentSubscriptionAlerts(snapshots.getDocuments());
+                    }
+                });
+    }
+
+    private void checkStudentSubscriptionAlerts(List<DocumentSnapshot> students) {
+        if (currentMessId == null) return;
+        long now = System.currentTimeMillis();
+        for (DocumentSnapshot doc : students) {
+            String studentId = doc.getId();
+            String studentName = doc.getString("name");
+            if (studentName == null || studentName.isEmpty()) {
+                studentName = doc.getString("email");
+                if (studentName == null || studentName.isEmpty()) {
+                    studentName = "Student (" + studentId.substring(0, Math.min(studentId.length(), 6)) + ")";
+                }
+            }
+            Long expiry = doc.getLong("subscriptionExpiry");
+            if (expiry != null && expiry > 0) {
+                long diff = expiry - now;
+                if (diff > 0 && diff <= 24 * 60 * 60 * 1000L) {
+                    // One day left
+                    String docId = "ALERT_1DAY_" + studentId + "_" + expiry;
+                    String title = "Subscription Expiring Soon";
+                    String msg = studentName + " has one day left for their subscription.";
+                    createAdminSubscriptionAlert(docId, title, msg, studentId, expiry);
+                } else if (diff <= 0 && diff >= -7 * 24 * 60 * 60 * 1000L) {
+                    // Recently expired (within last 7 days)
+                    String docId = "ALERT_EXPIRED_" + studentId + "_" + expiry;
+                    String title = "Subscription Expired";
+                    String msg = studentName + "'s subscription has expired.";
+                    createAdminSubscriptionAlert(docId, title, msg, studentId, expiry);
+                }
+            }
+        }
+    }
+
+    private void createAdminSubscriptionAlert(String docId, String title, String msg, String studentId, long expiryDate) {
+        if (processedAlerts.contains(docId)) {
+            return;
+        }
+        processedAlerts.add(docId);
+
+        db.collection("mess_notifications").document(docId).get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (binding == null) return;
+                    if (!documentSnapshot.exists()) {
+                        Map<String, Object> data = new HashMap<>();
+                        data.put("messId", currentMessId);
+                        data.put("senderId", "SYSTEM");
+                        data.put("senderName", "System Alert");
+                        data.put("type", com.example.messapp.managers.MessNotificationManager.TYPE_SUBSCRIPTION_ALERT);
+                        data.put("title", title);
+                        data.put("message", msg);
+                        data.put("targetUserId", "ADMIN");
+                        data.put("studentId", studentId);
+                        data.put("expiryDate", expiryDate);
+                        data.put("createdAt", System.currentTimeMillis());
+
+                        db.collection("mess_notifications").document(docId).set(data);
                     }
                 });
     }

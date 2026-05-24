@@ -9,6 +9,7 @@ public class MessNotificationManager {
     public static final String COLLECTION = "mess_notifications";
     public static final String TYPE_ADMIN_MESSAGE = "ADMIN_MESSAGE";
     public static final String TYPE_SUBSCRIPTION_GRANTED = "SUBSCRIPTION_GRANTED";
+    public static final String TYPE_SUBSCRIPTION_ALERT = "SUBSCRIPTION_ALERT";
 
     private MessNotificationManager() {
     }

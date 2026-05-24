@@ -402,13 +402,104 @@ public class MessDashboardActivity extends AppCompatActivity {
                 startActivity(new Intent(this, com.example.messapp.ui.mess.settings.MessSettingsActivity.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             } else if (id == R.id.drawer_admin_notifications) {
-                Toast.makeText(this, "Notification Settings — Coming soon", Toast.LENGTH_SHORT).show();
+                showAdminNotificationsDialog();
             } else if (id == R.id.drawer_admin_logout) {
                 performLogout();
             }
             binding.container.closeDrawer(GravityCompat.END);
             return true;
         });
+    }
+
+    private void showAdminNotificationsDialog() {
+        if (cachedMessId == null || cachedMessId.isEmpty()) {
+            Toast.makeText(this, "Mess ID not available yet.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_notifications, null);
+        LinearLayout listContainer = dialogView.findViewById(R.id.layout_notification_list);
+        TextView emptyText = dialogView.findViewById(R.id.text_empty_notifications);
+
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setView(dialogView)
+                .setPositiveButton("Close", null)
+                .create();
+
+        FirebaseFirestore.getInstance().collection(MessNotificationManager.COLLECTION)
+                .whereEqualTo("messId", cachedMessId)
+                .whereEqualTo("type", MessNotificationManager.TYPE_SUBSCRIPTION_ALERT)
+                .get()
+                .addOnSuccessListener(snapshot -> {
+                    if (isFinishing()) return;
+                    List<DocumentSnapshot> notifications = new ArrayList<>(snapshot.getDocuments());
+                    Collections.sort(notifications, (left, right) -> {
+                        Long leftCreated = left.getLong("createdAt");
+                        Long rightCreated = right.getLong("createdAt");
+                        long leftVal = leftCreated != null ? leftCreated : 0L;
+                        long rightVal = rightCreated != null ? rightCreated : 0L;
+                        return Long.compare(rightVal, leftVal);
+                    });
+
+                    emptyText.setVisibility(notifications.isEmpty() ? View.VISIBLE : View.GONE);
+                    listContainer.removeAllViews();
+                    for (DocumentSnapshot doc : notifications) {
+                        listContainer.addView(createAdminNotificationRow(doc, listContainer, emptyText));
+                    }
+                })
+                .addOnFailureListener(e -> Toast.makeText(this, "Failed to load notifications: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+
+        dialog.show();
+    }
+
+    private View createAdminNotificationRow(DocumentSnapshot doc, LinearLayout listContainer, TextView emptyText) {
+        View row = getLayoutInflater().inflate(R.layout.item_sent_message, null);
+        TextView textTitle = row.findViewById(R.id.text_message_title);
+        TextView textBody = row.findViewById(R.id.text_message_body);
+        TextView textDate = row.findViewById(R.id.text_message_date);
+        View btnDelete = row.findViewById(R.id.btn_delete_message);
+
+        String title = doc.getString("title");
+        String message = doc.getString("message");
+        textTitle.setText(title != null ? title : "Subscription Alert");
+        textBody.setText(message != null ? message : "");
+
+        // Color title based on severity (state_error for Expired, state_warning for Soon)
+        if ("Subscription Expired".equalsIgnoreCase(title)) {
+            textTitle.setTextColor(ContextCompat.getColor(this, R.color.state_error));
+        } else {
+            textTitle.setTextColor(ContextCompat.getColor(this, R.color.state_warning));
+        }
+
+        Long createdAt = doc.getLong("createdAt");
+        if (createdAt != null) {
+            textDate.setText(java.text.DateFormat.getDateTimeInstance(
+                    java.text.DateFormat.MEDIUM, java.text.DateFormat.SHORT)
+                    .format(new Date(createdAt)));
+        } else {
+            textDate.setText("");
+        }
+
+        btnDelete.setOnClickListener(v -> {
+            new AlertDialog.Builder(this)
+                    .setTitle("Dismiss Alert")
+                    .setMessage("Are you sure you want to dismiss this alert?")
+                    .setPositiveButton("Dismiss", (d, w) -> {
+                        doc.getReference().delete()
+                                .addOnSuccessListener(aVoid -> {
+                                    Toast.makeText(this, "Alert dismissed.", Toast.LENGTH_SHORT).show();
+                                    listContainer.removeView(row);
+                                    if (listContainer.getChildCount() == 0) {
+                                        emptyText.setVisibility(View.VISIBLE);
+                                    }
+                                })
+                                .addOnFailureListener(e -> Toast.makeText(this, "Failed to dismiss: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                    })
+                    .setNegativeButton("Cancel", null)
+                    .show();
+        });
+
+        return row;
     }
 
     private void performLogout() {
