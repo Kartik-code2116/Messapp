@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import androidx.credentials.CredentialManager;
 import androidx.credentials.GetCredentialRequest;
@@ -529,6 +530,12 @@ public class LoginActivity extends AppCompatActivity {
         // Cache role in shared prefs so FCM service can route notifications correctly
         getSharedPreferences("user_prefs", MODE_PRIVATE).edit().putString("role", role).apply();
         saveFCMToken();
+
+        // Log Firebase Analytics LOGIN event
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.METHOD, "firebase_auth");
+        FirebaseAnalytics.getInstance(this).logEvent(FirebaseAnalytics.Event.LOGIN, bundle);
+
         Intent intent = "MESS_OWNER".equals(role)
                 ? new Intent(LoginActivity.this, MessDashboardActivity.class)
                 : new Intent(LoginActivity.this, UserDashboardActivity.class);

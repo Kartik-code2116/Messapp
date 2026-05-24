@@ -1,10 +1,61 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.messapp-mergeDebugResources-66:/values-ca/values-ca.xml",
+            "outputFile": "com.example.messapp-mergeDebugResources-67:/values-ca/values-ca.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\38c82d3630d36bbf65facefa7445723b\\transformed\\play-services-ads-23.6.0\\res\\values-ca\\values.xml",
+                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\d16b426e121a8108f83d138acc1095fe\\transformed\\biometric-1.1.0\\res\\values-ca\\values-ca.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,172,265,380,532,677,804,937,1084,1188,1328,1480",
+                        "endColumns": "116,92,114,151,144,126,132,146,103,139,151,126",
+                        "endOffsets": "167,260,375,527,672,799,932,1079,1183,1323,1475,1602"
+                    },
+                    "to": {
+                        "startLines": "67,69,76,77,78,79,80,81,82,83,84,85",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "6917,7147,7786,7901,8053,8198,8325,8458,8605,8709,8849,9001",
+                        "endColumns": "116,92,114,151,144,126,132,146,103,139,151,126",
+                        "endOffsets": "7029,7235,7896,8048,8193,8320,8453,8600,8704,8844,8996,9123"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\9e6c03d07aad8e07f687277bd4a26de8\\transformed\\appcompat-1.7.1\\res\\values-ca\\values-ca.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,228,333,440,523,629,755,839,918,1009,1102,1195,1290,1388,1481,1574,1668,1759,1850,1931,2042,2150,2248,2358,2463,2571,2731,2830",
+                        "endColumns": "122,104,106,82,105,125,83,78,90,92,92,94,97,92,92,93,90,90,80,110,107,97,109,104,107,159,98,81",
+                        "endOffsets": "223,328,435,518,624,750,834,913,1004,1097,1190,1285,1383,1476,1569,1663,1754,1845,1926,2037,2145,2243,2353,2458,2566,2726,2825,2907"
+                    },
+                    "to": {
+                        "startLines": "6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,176",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "324,447,552,659,742,848,974,1058,1137,1228,1321,1414,1509,1607,1700,1793,1887,1978,2069,2150,2261,2369,2467,2577,2682,2790,2950,16522",
+                        "endColumns": "122,104,106,82,105,125,83,78,90,92,92,94,97,92,92,93,90,90,80,110,107,97,109,104,107,159,98,81",
+                        "endOffsets": "442,547,654,737,843,969,1053,1132,1223,1316,1409,1504,1602,1695,1788,1882,1973,2064,2145,2256,2364,2462,2572,2677,2785,2945,3044,16599"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\db2b571cc2e961b01917ea85c5a17dbd\\transformed\\play-services-basement-18.4.0\\res\\values-ca\\values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "195",
+                        "endColumns": "130",
+                        "endOffsets": "325"
+                    },
+                    "to": {
+                        "startLines": "57",
+                        "startColumns": "4",
+                        "startOffsets": "5670",
+                        "endColumns": "134",
+                        "endOffsets": "5800"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\8e3e5fa3d8965254fb76c20dc4a1217f\\transformed\\play-services-ads-23.6.0\\res\\values-ca\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -21,58 +72,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\a874bbb31e7c8f2ae115c241db1627b9\\transformed\\core-1.16.0\\res\\values-ca\\values-ca.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,151,253,352,449,555,660,786",
-                        "endColumns": "95,101,98,96,105,104,125,100",
-                        "endOffsets": "146,248,347,444,550,655,781,882"
-                    },
-                    "to": {
-                        "startLines": "39,40,41,42,43,44,45,180",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "3625,3721,3823,3922,4019,4125,4230,16846",
-                        "endColumns": "95,101,98,96,105,104,125,100",
-                        "endOffsets": "3716,3818,3917,4014,4120,4225,4351,16942"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\ed209c63c7281fb68e68716f69c8d2df\\transformed\\play-services-base-18.5.0\\res\\values-ca\\values.xml",
-                    "from": {
-                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
-                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
-                        "startOffsets": "193,294,442,565,670,816,939,1058,1162,1329,1434,1589,1716,1876,2030,2091,2155",
-                        "endColumns": "100,147,122,104,145,122,118,103,166,104,154,126,159,153,60,63,82",
-                        "endOffsets": "293,441,564,669,815,938,1057,1161,1328,1433,1588,1715,1875,2029,2090,2154,2237"
-                    },
-                    "to": {
-                        "startLines": "49,50,51,52,53,54,55,56,58,59,60,61,62,63,64,65,66",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "4669,4774,4926,5053,5162,5312,5439,5562,5805,5976,6085,6244,6375,6539,6697,6762,6830",
-                        "endColumns": "104,151,126,108,149,126,122,107,170,108,158,130,163,157,64,67,86",
-                        "endOffsets": "4769,4921,5048,5157,5307,5434,5557,5665,5971,6080,6239,6370,6534,6692,6757,6825,6912"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\94485d45d4d11339d288da2a6521b947\\transformed\\browser-1.8.0\\res\\values-ca\\values-ca.xml",
-                    "from": {
-                        "startLines": "2,3,4,5",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,168,271,382",
-                        "endColumns": "112,102,110,108",
-                        "endOffsets": "163,266,377,486"
-                    },
-                    "to": {
-                        "startLines": "68,73,74,75",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "7034,7463,7566,7677",
-                        "endColumns": "112,102,110,108",
-                        "endOffsets": "7142,7561,7672,7781"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\b7cbbb9a7092de09bc34c0941b68ba47\\transformed\\material-1.13.0\\res\\values-ca\\values-ca.xml",
+                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\dbb655d182083521e302188eeb17ce7f\\transformed\\material-1.13.0\\res\\values-ca\\values-ca.xml",
                     "from": {
                         "startLines": "2,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -91,7 +91,41 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\d20ee1e9118a52e6d16262bc0d3a4dbf\\transformed\\credentials-1.5.0\\res\\values-ca\\values-ca.xml",
+                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\330e572731198891fd4e94c9d83129e0\\transformed\\core-1.16.0\\res\\values-ca\\values-ca.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,151,253,352,449,555,660,786",
+                        "endColumns": "95,101,98,96,105,104,125,100",
+                        "endOffsets": "146,248,347,444,550,655,781,882"
+                    },
+                    "to": {
+                        "startLines": "39,40,41,42,43,44,45,180",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "3625,3721,3823,3922,4019,4125,4230,16846",
+                        "endColumns": "95,101,98,96,105,104,125,100",
+                        "endOffsets": "3716,3818,3917,4014,4120,4225,4351,16942"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\269ba6b253245f876e626fd1c46b859b\\transformed\\browser-1.8.0\\res\\values-ca\\values-ca.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,168,271,382",
+                        "endColumns": "112,102,110,108",
+                        "endOffsets": "163,266,377,486"
+                    },
+                    "to": {
+                        "startLines": "68,73,74,75",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "7034,7463,7566,7677",
+                        "endColumns": "112,102,110,108",
+                        "endOffsets": "7142,7561,7672,7781"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\13af9b1081d78f069b0678e921582387\\transformed\\credentials-1.5.0\\res\\values-ca\\values-ca.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",
@@ -108,7 +142,24 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\02fb94708ee2872f6d89444c42aaa24b\\transformed\\navigation-ui-2.8.5\\res\\values-ca\\values-ca.xml",
+                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\fb16ad44dd3b3cc9bf148daa8df179bd\\transformed\\play-services-base-18.5.0\\res\\values-ca\\values.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
+                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+                        "startOffsets": "193,294,442,565,670,816,939,1058,1162,1329,1434,1589,1716,1876,2030,2091,2155",
+                        "endColumns": "100,147,122,104,145,122,118,103,166,104,154,126,159,153,60,63,82",
+                        "endOffsets": "293,441,564,669,815,938,1057,1161,1328,1433,1588,1715,1875,2029,2090,2154,2237"
+                    },
+                    "to": {
+                        "startLines": "49,50,51,52,53,54,55,56,58,59,60,61,62,63,64,65,66",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "4669,4774,4926,5053,5162,5312,5439,5562,5805,5976,6085,6244,6375,6539,6697,6762,6830",
+                        "endColumns": "104,151,126,108,149,126,122,107,170,108,158,130,163,157,64,67,86",
+                        "endOffsets": "4769,4921,5048,5157,5307,5434,5557,5665,5971,6080,6239,6370,6534,6692,6757,6825,6912"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\019872c4f4cb09cb6e29f1e89a41d94a\\transformed\\navigation-ui-2.8.5\\res\\values-ca\\values-ca.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",
@@ -122,57 +173,6 @@
                         "startOffsets": "14732,14843",
                         "endColumns": "110,121",
                         "endOffsets": "14838,14960"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\d582b948ec82d1f806fa3d2953db2b59\\transformed\\biometric-1.1.0\\res\\values-ca\\values-ca.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,172,265,380,532,677,804,937,1084,1188,1328,1480",
-                        "endColumns": "116,92,114,151,144,126,132,146,103,139,151,126",
-                        "endOffsets": "167,260,375,527,672,799,932,1079,1183,1323,1475,1602"
-                    },
-                    "to": {
-                        "startLines": "67,69,76,77,78,79,80,81,82,83,84,85",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "6917,7147,7786,7901,8053,8198,8325,8458,8605,8709,8849,9001",
-                        "endColumns": "116,92,114,151,144,126,132,146,103,139,151,126",
-                        "endOffsets": "7029,7235,7896,8048,8193,8320,8453,8600,8704,8844,8996,9123"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\6a6f6d0aaee7a158f4f7734063cb21b1\\transformed\\play-services-basement-18.4.0\\res\\values-ca\\values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "195",
-                        "endColumns": "130",
-                        "endOffsets": "325"
-                    },
-                    "to": {
-                        "startLines": "57",
-                        "startColumns": "4",
-                        "startOffsets": "5670",
-                        "endColumns": "134",
-                        "endOffsets": "5800"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\9e30d2cf6ef5a17e94efd86916b17979\\transformed\\appcompat-1.7.1\\res\\values-ca\\values-ca.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,228,333,440,523,629,755,839,918,1009,1102,1195,1290,1388,1481,1574,1668,1759,1850,1931,2042,2150,2248,2358,2463,2571,2731,2830",
-                        "endColumns": "122,104,106,82,105,125,83,78,90,92,92,94,97,92,92,93,90,90,80,110,107,97,109,104,107,159,98,81",
-                        "endOffsets": "223,328,435,518,624,750,834,913,1004,1097,1190,1285,1383,1476,1569,1663,1754,1845,1926,2037,2145,2243,2353,2458,2566,2726,2825,2907"
-                    },
-                    "to": {
-                        "startLines": "6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,176",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "324,447,552,659,742,848,974,1058,1137,1228,1321,1414,1509,1607,1700,1793,1887,1978,2069,2150,2261,2369,2467,2577,2682,2790,2950,16522",
-                        "endColumns": "122,104,106,82,105,125,83,78,90,92,92,94,97,92,92,93,90,90,80,110,107,97,109,104,107,159,98,81",
-                        "endOffsets": "442,547,654,737,843,969,1053,1132,1223,1316,1409,1504,1602,1695,1788,1882,1973,2064,2145,2256,2364,2462,2572,2677,2785,2945,3044,16599"
                     }
                 }
             ]

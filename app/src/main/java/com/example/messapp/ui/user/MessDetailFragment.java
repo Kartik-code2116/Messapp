@@ -23,6 +23,7 @@ import com.example.messapp.models.Review;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -182,6 +183,13 @@ public class MessDetailFragment extends Fragment {
                         binding.reviewCommentEditText.setText("");
                         binding.ratingBarUser.setRating(0);
                     binding.btnSubmitReview.setEnabled(true);
+
+                        // Log Firebase Analytics submit_review event
+                        Bundle bundle = new Bundle();
+                        bundle.putString("mess_id", messId);
+                        bundle.putDouble("rating", rating);
+                        FirebaseAnalytics.getInstance(requireContext()).logEvent("submit_review", bundle);
+
                         loadReviews();
                 }
 
@@ -357,6 +365,16 @@ public class MessDetailFragment extends Fragment {
                 }
                 if (binding == null || getContext() == null) return;
                 Toast.makeText(getContext(), "Subscription active! Payment receipt: " + transactionId, Toast.LENGTH_LONG).show();
+
+                // Log Firebase Analytics PURCHASE event
+                Bundle bundle = new Bundle();
+                bundle.putString(FirebaseAnalytics.Param.TRANSACTION_ID, transactionId);
+                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, messId);
+                bundle.putString(FirebaseAnalytics.Param.ITEM_CATEGORY, mealType);
+                bundle.putDouble(FirebaseAnalytics.Param.VALUE, amount);
+                bundle.putString(FirebaseAnalytics.Param.CURRENCY, "INR");
+                FirebaseAnalytics.getInstance(requireContext()).logEvent(FirebaseAnalytics.Event.PURCHASE, bundle);
+
                 loadMessDetails(); // Refresh view
             }
 
