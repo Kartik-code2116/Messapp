@@ -18,7 +18,7 @@ service cloud.firestore {
 
     // Messes: Public read for guest browsing; only Mess Owners can create/edit messes
     match /messes/{messId} {
-      allow read: if true; 
+      allow read: if true;
       allow write: if request.auth != null && getUserData().role == "MESS_OWNER";
     }
 
@@ -34,11 +34,12 @@ service cloud.firestore {
       allow write: if request.auth != null && getUserData().role == "MESS_OWNER";
     }
 
-    // Meal selections: Users can read/write their own; mess owners can read/write all
-    // (Mess owners need write access for "Grant Both Meals Today" feature)
+    // Meal selections: doc id format {messId}_{yyyy-MM-dd}_{userId}
+    // Suffix match lets students read legacy docs missing the userId field (meal history)
     match /meal_selections/{docId} {
       allow read: if request.auth != null && (
-        resource.data.userId == request.auth.uid || 
+        resource.data.userId == request.auth.uid ||
+        docId.matches('.*_' + request.auth.uid + '$') ||
         getUserData().role == "MESS_OWNER"
       );
       allow write: if request.auth != null && (
@@ -49,7 +50,7 @@ service cloud.firestore {
 
     // Subscriptions & Requests: Authenticated access
     match /subscriptions/{subId} {
-      allow read, write: if request.auth != null; 
+      allow read, write: if request.auth != null;
     }
 
     match /subscriptionRequests/{reqId} {
@@ -63,22 +64,24 @@ service cloud.firestore {
     }
 
     // Transactions: Immutable financial ledger — create only, never update/delete
-    // Mess owners create transactions when granting subscriptions (userId = student's ID)
     match /transactions/{txnId} {
       allow read: if request.auth != null && (
-        resource.data.userId == request.auth.uid || 
+        resource.data.userId == request.auth.uid ||
         getUserData().role == "MESS_OWNER"
       );
       allow create: if request.auth != null;
       allow update, delete: if false;
     }
 
-    // Reviews: Students manage their own; anyone authenticated can read reviews
+    // Reviews: Students manage their own; mess owners read reviews for their mess only
     match /reviews/{reviewId} {
-      allow read: if request.auth != null;
-      allow create: if request.auth != null 
+      allow read: if request.auth != null && (
+        resource.data.userId == request.auth.uid ||
+        (getUserData().role == "MESS_OWNER" && getUserData().messId == resource.data.messId)
+      );
+      allow create: if request.auth != null
         && request.resource.data.userId == request.auth.uid;
-      allow update, delete: if request.auth != null 
+      allow update, delete: if request.auth != null
         && resource.data.userId == request.auth.uid;
     }
 

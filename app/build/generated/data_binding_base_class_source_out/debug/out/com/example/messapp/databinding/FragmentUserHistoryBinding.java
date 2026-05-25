@@ -28,6 +28,9 @@ public final class FragmentUserHistoryBinding implements ViewBinding {
   public final MaterialButton btnChangeMonth;
 
   @NonNull
+  public final LinearLayout historyHeaderSection;
+
+  @NonNull
   public final LinearLayout layoutEmptyHistory;
 
   @NonNull
@@ -58,14 +61,15 @@ public final class FragmentUserHistoryBinding implements ViewBinding {
   public final TextView textTotalLunch;
 
   private FragmentUserHistoryBinding(@NonNull SwipeRefreshLayout rootView,
-      @NonNull MaterialButton btnChangeMonth, @NonNull LinearLayout layoutEmptyHistory,
-      @NonNull ProgressBar progressHistory, @NonNull RecyclerView recyclerViewHistory,
-      @NonNull Spinner spinnerMonthYear, @NonNull SwipeRefreshLayout swipeRefresh,
-      @NonNull TextView textDaysIn, @NonNull TextView textDaysOut,
-      @NonNull TextView textEmptyHistory, @NonNull TextView textTotalDinner,
-      @NonNull TextView textTotalLunch) {
+      @NonNull MaterialButton btnChangeMonth, @NonNull LinearLayout historyHeaderSection,
+      @NonNull LinearLayout layoutEmptyHistory, @NonNull ProgressBar progressHistory,
+      @NonNull RecyclerView recyclerViewHistory, @NonNull Spinner spinnerMonthYear,
+      @NonNull SwipeRefreshLayout swipeRefresh, @NonNull TextView textDaysIn,
+      @NonNull TextView textDaysOut, @NonNull TextView textEmptyHistory,
+      @NonNull TextView textTotalDinner, @NonNull TextView textTotalLunch) {
     this.rootView = rootView;
     this.btnChangeMonth = btnChangeMonth;
+    this.historyHeaderSection = historyHeaderSection;
     this.layoutEmptyHistory = layoutEmptyHistory;
     this.progressHistory = progressHistory;
     this.recyclerViewHistory = recyclerViewHistory;
@@ -108,6 +112,12 @@ public final class FragmentUserHistoryBinding implements ViewBinding {
       id = R.id.btn_change_month;
       MaterialButton btnChangeMonth = ViewBindings.findChildViewById(rootView, id);
       if (btnChangeMonth == null) {
+        break missingId;
+      }
+
+      id = R.id.history_header_section;
+      LinearLayout historyHeaderSection = ViewBindings.findChildViewById(rootView, id);
+      if (historyHeaderSection == null) {
         break missingId;
       }
 
@@ -168,8 +178,9 @@ public final class FragmentUserHistoryBinding implements ViewBinding {
       }
 
       return new FragmentUserHistoryBinding((SwipeRefreshLayout) rootView, btnChangeMonth,
-          layoutEmptyHistory, progressHistory, recyclerViewHistory, spinnerMonthYear, swipeRefresh,
-          textDaysIn, textDaysOut, textEmptyHistory, textTotalDinner, textTotalLunch);
+          historyHeaderSection, layoutEmptyHistory, progressHistory, recyclerViewHistory,
+          spinnerMonthYear, swipeRefresh, textDaysIn, textDaysOut, textEmptyHistory,
+          textTotalDinner, textTotalLunch);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

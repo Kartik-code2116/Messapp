@@ -19,7 +19,9 @@ import com.example.messapp.databinding.FragmentUserHistoryBinding;
 import com.example.messapp.models.MealSelection;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -62,10 +64,26 @@ public class UserHistoryFragment extends Fragment {
         db = FirebaseFirestore.getInstance();
 
         historyAdapter = new HistoryAdapter();
-        LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext()) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
         binding.recyclerViewHistory.setLayoutManager(layoutManager);
+        binding.recyclerViewHistory.setNestedScrollingEnabled(false);
         binding.recyclerViewHistory.setAdapter(historyAdapter);
-        binding.recyclerViewHistory.setHasFixedSize(false);
+        historyAdapter.registerAdapterDataObserver(new androidx.recyclerview.widget.RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                if (binding != null) {
+                    binding.recyclerViewHistory.requestLayout();
+                    if (binding.recyclerViewHistory.getParent() instanceof View) {
+                        ((View) binding.recyclerViewHistory.getParent()).requestLayout();
+                    }
+                }
+            }
+        });
 
         binding.swipeRefresh.setColorSchemeColors(
                 ContextCompat.getColor(requireContext(), R.color.brand_primary));
@@ -165,7 +183,7 @@ public class UserHistoryFragment extends Fragment {
 
         String userId = mAuth.getCurrentUser().getUid();
 
-        // Load the student's profile settings first to check auto-select preferences
+        // Load profile (messId + auto-select prefs), then fetch meal_selections for this student
         db.collection("users").document(userId).get()
                 .addOnSuccessListener(userDoc -> {
                     if (binding == null) return;
@@ -174,66 +192,177 @@ public class UserHistoryFragment extends Fragment {
                     boolean autoSelectLunch = userDoc.exists() && Boolean.TRUE.equals(userDoc.getBoolean("autoSelectLunch"));
                     boolean autoSelectDinner = userDoc.exists() && Boolean.TRUE.equals(userDoc.getBoolean("autoSelectDinner"));
                     String oneTimeAutoSelect = userDoc.exists() ? userDoc.getString("oneTimeAutoSelect") : "NONE";
+                    String messId = userDoc.exists() ? userDoc.getString("messId") : null;
 
-                    // Single-field query avoids Firestore composite index requirements;
-                    // month range is applied on the client for reliability.
-                    db.collection("meal_selections")
-                            .whereEqualTo("userId", userId)
-                            .get()
-                            .addOnSuccessListener(queryDocumentSnapshots -> {
-                                if (binding == null) {
-                                    return;
-                                }
-
-                                Map<String, MealSelection> dailyMealSelections = new HashMap<>();
-
-                                for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                                    String date = document.getString("date");
-                                    if (date == null || date.compareTo(startDate) < 0 || date.compareTo(endDate) >= 0) {
-                                        continue;
-                                    }
-
-                                    String lunchStatus = normalizeStatus(document.getString("lunch"), "LUNCH", subscriptionType, autoSelectLunch, autoSelectDinner, oneTimeAutoSelect);
-                                    String dinnerStatus = normalizeStatus(document.getString("dinner"), "DINNER", subscriptionType, autoSelectLunch, autoSelectDinner, oneTimeAutoSelect);
-
-                                    dailyMealSelections.put(date,
-                                            new MealSelection(userId, date, lunchStatus, dinnerStatus));
-                                }
-
-                                List<MealSelection> results = new ArrayList<>(dailyMealSelections.values());
-                                Collections.sort(results, (a, b) -> b.getDate().compareTo(a.getDate()));
-
-                                historyAdapter.submitList(results);
-                                updateSummary(results);
-                                showEmptyState(results.isEmpty(), "No meal records for this month");
-                                setLoading(false);
-                                binding.swipeRefresh.setRefreshing(false);
-                            })
-                            .addOnFailureListener(e -> {
-                                if (binding == null) {
-                                    return;
-                                }
-                                setLoading(false);
-                                binding.swipeRefresh.setRefreshing(false);
-                                showEmptyState(true, "Could not load history. Pull down to retry.");
-                                historyAdapter.submitList(Collections.emptyList());
-                                resetSummary();
-                                Toast.makeText(getContext(),
-                                        "Error loading meal history: " + e.getMessage(),
-                                        Toast.LENGTH_SHORT).show();
-                            });
+                    fetchMealSelectionsForMonth(userId, messId, startDate, endDate,
+                            subscriptionType, autoSelectLunch, autoSelectDinner, oneTimeAutoSelect);
                 })
                 .addOnFailureListener(e -> {
                     if (binding == null) return;
-                    setLoading(false);
-                    binding.swipeRefresh.setRefreshing(false);
-                    showEmptyState(true, "Could not load user profile. Pull down to retry.");
-                    historyAdapter.submitList(Collections.emptyList());
-                    resetSummary();
-                    Toast.makeText(getContext(),
-                            "Error loading user profile: " + e.getMessage(),
-                            Toast.LENGTH_SHORT).show();
+                    finishLoadingWithError("Could not load user profile. Pull down to retry.",
+                            "Error loading user profile: " + e.getMessage());
                 });
+    }
+
+    /**
+     * Loads selections by userId, and by messId when available (covers legacy docs whose id ends with _userId).
+     */
+    private void fetchMealSelectionsForMonth(String userId, @Nullable String messId,
+                                             String startDate, String endDate,
+                                             String subscriptionType,
+                                             boolean autoSelectLunch, boolean autoSelectDinner,
+                                             String oneTimeAutoSelect) {
+        Query byUser = db.collection("meal_selections").whereEqualTo("userId", userId);
+
+        byUser.get().addOnSuccessListener(byUserSnapshot -> {
+            if (binding == null) return;
+
+            if (messId != null && !messId.isEmpty()) {
+                db.collection("meal_selections")
+                        .whereEqualTo("messId", messId)
+                        .get()
+                        .addOnSuccessListener(byMessSnapshot ->
+                                applyMealHistoryResults(userId, startDate, endDate, subscriptionType,
+                                        autoSelectLunch, autoSelectDinner, oneTimeAutoSelect,
+                                        byUserSnapshot, byMessSnapshot))
+                        .addOnFailureListener(e ->
+                                applyMealHistoryResults(userId, startDate, endDate, subscriptionType,
+                                        autoSelectLunch, autoSelectDinner, oneTimeAutoSelect,
+                                        byUserSnapshot, null));
+            } else {
+                applyMealHistoryResults(userId, startDate, endDate, subscriptionType,
+                        autoSelectLunch, autoSelectDinner, oneTimeAutoSelect,
+                        byUserSnapshot, null);
+            }
+        }).addOnFailureListener(e -> {
+            if (messId != null && !messId.isEmpty()) {
+                db.collection("meal_selections")
+                        .whereEqualTo("messId", messId)
+                        .get()
+                        .addOnSuccessListener(byMessSnapshot ->
+                                applyMealHistoryResults(userId, startDate, endDate, subscriptionType,
+                                        autoSelectLunch, autoSelectDinner, oneTimeAutoSelect,
+                                        null, byMessSnapshot))
+                        .addOnFailureListener(e2 -> finishLoadingWithError(
+                                "Could not load history. Pull down to retry.",
+                                "Error loading meal history: " + e2.getMessage()));
+            } else {
+                finishLoadingWithError("Could not load history. Pull down to retry.",
+                        "Error loading meal history: " + e.getMessage());
+            }
+        });
+    }
+
+    private void applyMealHistoryResults(String userId, String startDate, String endDate,
+                                         String subscriptionType,
+                                         boolean autoSelectLunch, boolean autoSelectDinner,
+                                         String oneTimeAutoSelect,
+                                         @Nullable QuerySnapshot byUserSnapshot,
+                                         @Nullable QuerySnapshot byMessSnapshot) {
+        if (binding == null) return;
+
+        Map<String, MealSelection> dailyMealSelections = new HashMap<>();
+
+        if (byUserSnapshot != null) {
+            mergeMealDocuments(byUserSnapshot, userId, startDate, endDate, subscriptionType,
+                    autoSelectLunch, autoSelectDinner, oneTimeAutoSelect, dailyMealSelections);
+        }
+        if (byMessSnapshot != null) {
+            mergeMealDocuments(byMessSnapshot, userId, startDate, endDate, subscriptionType,
+                    autoSelectLunch, autoSelectDinner, oneTimeAutoSelect, dailyMealSelections);
+        }
+
+        List<MealSelection> results = new ArrayList<>(dailyMealSelections.values());
+        Collections.sort(results, (a, b) -> b.getDate().compareTo(a.getDate()));
+
+        historyAdapter.submitList(results);
+        updateSummary(results);
+        showEmptyState(results.isEmpty(), "No meal records for this month");
+        setLoading(false);
+        binding.swipeRefresh.setRefreshing(false);
+    }
+
+    private void mergeMealDocuments(QuerySnapshot snapshot, String userId,
+                                    String startDate, String endDate,
+                                    String subscriptionType,
+                                    boolean autoSelectLunch, boolean autoSelectDinner,
+                                    String oneTimeAutoSelect,
+                                    Map<String, MealSelection> dailyMealSelections) {
+        for (QueryDocumentSnapshot document : snapshot) {
+            if (!belongsToUser(document, userId)) {
+                continue;
+            }
+
+            String date = resolveSelectionDate(document, userId);
+            if (date == null || date.compareTo(startDate) < 0 || date.compareTo(endDate) >= 0) {
+                continue;
+            }
+
+            String lunch = document.getString("lunch");
+            String dinner = document.getString("dinner");
+            if (lunch == null && dinner == null) {
+                continue;
+            }
+
+            String lunchStatus = normalizeStatus(lunch, "LUNCH", subscriptionType,
+                    autoSelectLunch, autoSelectDinner, oneTimeAutoSelect);
+            String dinnerStatus = normalizeStatus(dinner, "DINNER", subscriptionType,
+                    autoSelectLunch, autoSelectDinner, oneTimeAutoSelect);
+
+            MealSelection existing = dailyMealSelections.get(date);
+            if (existing == null) {
+                dailyMealSelections.put(date, new MealSelection(userId, date, lunchStatus, dinnerStatus));
+            } else {
+                if (!"Not marked".equals(lunchStatus)) {
+                    existing.setLunchStatus(lunchStatus);
+                }
+                if (!"Not marked".equals(dinnerStatus)) {
+                    existing.setDinnerStatus(dinnerStatus);
+                }
+            }
+        }
+    }
+
+    private boolean belongsToUser(QueryDocumentSnapshot document, String userId) {
+        String docUserId = document.getString("userId");
+        if (userId.equals(docUserId)) {
+            return true;
+        }
+        return document.getId().endsWith("_" + userId);
+    }
+
+    @Nullable
+    private String resolveSelectionDate(QueryDocumentSnapshot document, String userId) {
+        String date = document.getString("date");
+        if (date != null && !date.isEmpty()) {
+            return date;
+        }
+        String docId = document.getId();
+        if (!docId.endsWith("_" + userId)) {
+            return null;
+        }
+        String prefix = docId.substring(0, docId.length() - userId.length() - 1);
+        int lastSep = prefix.lastIndexOf('_');
+        if (lastSep < 0 || lastSep >= prefix.length() - 1) {
+            return null;
+        }
+        String candidate = prefix.substring(lastSep + 1);
+        if (candidate.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            return candidate;
+        }
+        return null;
+    }
+
+    private void finishLoadingWithError(String emptyMessage, String toastMessage) {
+        if (binding == null) return;
+        setLoading(false);
+        binding.swipeRefresh.setRefreshing(false);
+        showEmptyState(true, emptyMessage);
+        historyAdapter.submitList(Collections.emptyList());
+        resetSummary();
+        if (getContext() != null) {
+            Toast.makeText(getContext(), toastMessage, Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Nullable
@@ -329,11 +458,7 @@ public class UserHistoryFragment extends Fragment {
             return;
         }
         binding.progressHistory.setVisibility(loading ? View.VISIBLE : View.GONE);
-        if (loading) {
-            binding.recyclerViewHistory.setVisibility(View.INVISIBLE);
-        } else {
-            binding.recyclerViewHistory.setVisibility(View.VISIBLE);
-        }
+        binding.recyclerViewHistory.setVisibility(loading ? View.INVISIBLE : View.VISIBLE);
     }
 
     private void showEmptyState(boolean show, @Nullable String message) {
@@ -341,6 +466,7 @@ public class UserHistoryFragment extends Fragment {
             return;
         }
         binding.layoutEmptyHistory.setVisibility(show ? View.VISIBLE : View.GONE);
+        binding.recyclerViewHistory.setVisibility(show ? View.GONE : View.VISIBLE);
         if (message != null) {
             binding.textEmptyHistory.setText(message);
         }

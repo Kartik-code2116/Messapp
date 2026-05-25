@@ -439,6 +439,7 @@ id group_account
 id group_manage
 id group_nav
 id headerBackground
+id history_header_section
 id icon_search
 id imgLogo
 id img_drawer_profile
