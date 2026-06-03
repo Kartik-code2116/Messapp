@@ -1,3 +1,0 @@
-com.kartik.messapp.test
-style WhiteBackgroundDialogTheme
-style WhiteBackgroundTheme

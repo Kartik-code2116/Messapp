@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.activity.OnBackPressedCallback;
 
+import com.kartik.messapp.R;
 import com.kartik.messapp.databinding.ActivityLoginBinding;
 import com.kartik.messapp.utils.ThemeManager;
 import com.google.firebase.auth.AuthCredential;

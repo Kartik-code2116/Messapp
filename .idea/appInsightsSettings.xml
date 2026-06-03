@@ -9,17 +9,11 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="com.example.messapp" />
-                  <option name="mobileSdkAppId" value="1:355370937322:android:119f779d1eaed7b55ba093" />
+                  <option name="appId" value="com.kartik.messapp" />
+                  <option name="mobileSdkAppId" value="1:355370937322:android:5c9875399b55096c5ba093" />
                   <option name="projectId" value="messapp-5275d" />
                   <option name="projectNumber" value="355370937322" />
                 </ConnectionSetting>
-              </option>
-              <option name="failureTypes">
-                <list>
-                  <option value="FATAL" />
-                  <option value="ANR" />
-                </list>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
               <option name="timeIntervalDays" value="THIRTY_DAYS" />

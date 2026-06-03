@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.kartik.messapp.R;
 import com.kartik.messapp.managers.ReviewManager;
 import com.kartik.messapp.models.Review;
 import com.kartik.messapp.ui.user.ReviewAdapter;
