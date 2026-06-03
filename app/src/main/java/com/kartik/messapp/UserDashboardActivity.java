@@ -289,7 +289,7 @@ public class UserDashboardActivity extends AppCompatActivity {
         btnActionPhone.setOnClickListener(v -> {
             try {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:" + textPhone.getText().toString().replaceAll(" ", "")));
+                intent.setData(android.net.Uri.parse("tel:" + textPhone.getText().toString().replaceAll(" ", "")));
                 startActivity(intent);
             } catch (Exception ex) {
                 Toast.makeText(this, "Unable to open dialer", Toast.LENGTH_SHORT).show();
@@ -306,12 +306,12 @@ public class UserDashboardActivity extends AppCompatActivity {
         btnActionInsta.setOnClickListener(v -> {
             try {
                 String handle = textInsta.getText().toString();
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://instagram.com/_u/" + handle));
+                Intent intent = new Intent(Intent.ACTION_VIEW, android.net.Uri.parse("https://instagram.com/_u/" + handle));
                 intent.setPackage("com.instagram.android");
                 try {
                     startActivity(intent);
                 } catch (android.content.ActivityNotFoundException e) {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://instagram.com/" + handle)));
+                    startActivity(new Intent(Intent.ACTION_VIEW, android.net.Uri.parse("https://instagram.com/" + handle)));
                 }
             } catch (Exception ex) {
                 Toast.makeText(this, "Unable to open Instagram", Toast.LENGTH_SHORT).show();
@@ -328,7 +328,7 @@ public class UserDashboardActivity extends AppCompatActivity {
         btnActionEmail.setOnClickListener(v -> {
             try {
                 Intent intent = new Intent(Intent.ACTION_SENDTO);
-                intent.setData(Uri.parse("mailto:"));
+                intent.setData(android.net.Uri.parse("mailto:"));
                 intent.putExtra(Intent.EXTRA_EMAIL, new String[]{textEmail.getText().toString()});
                 intent.putExtra(Intent.EXTRA_SUBJECT, "MessApp Support Request");
                 startActivity(intent);

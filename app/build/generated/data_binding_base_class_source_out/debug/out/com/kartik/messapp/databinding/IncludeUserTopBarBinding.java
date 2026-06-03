@@ -22,7 +22,7 @@ public final class IncludeUserTopBarBinding implements ViewBinding {
   private final ConstraintLayout rootView;
 
   @NonNull
-  public final MaterialCardView btnMenuMore;
+  public final ImageView btnMenuMore;
 
   @NonNull
   public final MaterialCardView btnNotification;
@@ -46,7 +46,7 @@ public final class IncludeUserTopBarBinding implements ViewBinding {
   public final ConstraintLayout topHeader;
 
   private IncludeUserTopBarBinding(@NonNull ConstraintLayout rootView,
-      @NonNull MaterialCardView btnMenuMore, @NonNull MaterialCardView btnNotification,
+      @NonNull ImageView btnMenuMore, @NonNull MaterialCardView btnNotification,
       @NonNull ImageView imgProfile, @NonNull MaterialCardView profileContainer,
       @NonNull TextView textDate, @NonNull TextView textGreeting,
       @NonNull TextView textNotificationBadge, @NonNull ConstraintLayout topHeader) {
@@ -89,7 +89,7 @@ public final class IncludeUserTopBarBinding implements ViewBinding {
     int id;
     missingId: {
       id = R.id.btn_menu_more;
-      MaterialCardView btnMenuMore = ViewBindings.findChildViewById(rootView, id);
+      ImageView btnMenuMore = ViewBindings.findChildViewById(rootView, id);
       if (btnMenuMore == null) {
         break missingId;
       }
