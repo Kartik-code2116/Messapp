@@ -22,6 +22,15 @@
     </style><style name="DialogAnimation">
         <item name="android:windowEnterAnimation">@anim/dialog_enter</item>
         <item name="android:windowExitAnimation">@anim/dialog_exit</item>
+    </style><style name="CustomActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:height">28dp</item>
+    </style><style name="BottomNavTextInactive">
+        <item name="android:textSize">10sp</item>
+        <item name="android:fontFamily">@font/inter</item>
+    </style><style name="BottomNavTextActive">
+        <item name="android:textSize">11sp</item>
+        <item name="android:fontFamily">@font/inter</item>
+        <item name="android:textStyle">bold</item>
     </style></file><file path="D:\8)Android Development\messapp\app\src\main\res\values\themes.xml" qualifiers=""><style name="Base.Theme.Messapp" parent="Theme.Material3.DayNight.NoActionBar">
         
         <item name="colorPrimary">@color/brand_primary</item>

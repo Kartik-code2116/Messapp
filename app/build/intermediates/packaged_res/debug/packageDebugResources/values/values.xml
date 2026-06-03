@@ -176,6 +176,15 @@
         
         <item name="android:fontFamily">@font/inter</item>
     </style>
+    <style name="BottomNavTextActive">
+        <item name="android:textSize">11sp</item>
+        <item name="android:fontFamily">@font/inter</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="BottomNavTextInactive">
+        <item name="android:textSize">10sp</item>
+        <item name="android:fontFamily">@font/inter</item>
+    </style>
     <style name="CircleImageStyle">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
@@ -183,6 +192,9 @@
     <style name="CircularImageView">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
+    </style>
+    <style name="CustomActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:height">28dp</item>
     </style>
     <style name="DialogAnimation">
         <item name="android:windowEnterAnimation">@anim/dialog_enter</item>

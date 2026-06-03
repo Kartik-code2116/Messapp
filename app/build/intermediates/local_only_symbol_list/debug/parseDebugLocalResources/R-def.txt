@@ -791,8 +791,11 @@ string project_id
 string splash_logo_content_description
 string total_students_label
 style Base.Theme.Messapp
+style BottomNavTextActive
+style BottomNavTextInactive
 style CircleImageStyle
 style CircularImageView
+style CustomActiveIndicator
 style DialogAnimation
 style NumberPickerTheme
 style ProfileCard

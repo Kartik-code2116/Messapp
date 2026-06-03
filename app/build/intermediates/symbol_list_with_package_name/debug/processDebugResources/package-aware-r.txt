@@ -5836,11 +5836,14 @@ style Base_Widget_MaterialComponents_Snackbar
 style Base_Widget_MaterialComponents_TextInputEditText
 style Base_Widget_MaterialComponents_TextInputLayout
 style Base_Widget_MaterialComponents_TextView
+style BottomNavTextActive
+style BottomNavTextInactive
 style CardView
 style CardView_Dark
 style CardView_Light
 style CircleImageStyle
 style CircularImageView
+style CustomActiveIndicator
 style DialogAnimation
 style MaterialAlertDialog_Material3
 style MaterialAlertDialog_Material3_Animation

@@ -454,7 +454,68 @@ public class UserHomeFragment extends Fragment {
                         updateButtonUI("LUNCH", lunchStatus);
                         updateButtonUI("DINNER", dinnerStatus);
                     }
+
+                    checkAndApplyAutoSelect(lunchStatus, dinnerStatus);
                 });
+    }
+
+    private void checkAndApplyAutoSelect(String lunchStatus, String dinnerStatus) {
+        if (userId == null || messId == null) return;
+
+        boolean needLunchAuto = false;
+        boolean needDinnerAuto = false;
+
+        if (isOneTimeSubscribed) {
+            if (!oneTimeMealUsedToday) {
+                if ("LUNCH".equals(currentUserOneTimeAutoSelect) && (lunchStatus == null || lunchStatus.isEmpty() || "RESET".equals(lunchStatus))) {
+                    needLunchAuto = true;
+                } else if ("DINNER".equals(currentUserOneTimeAutoSelect) && (dinnerStatus == null || dinnerStatus.isEmpty() || "RESET".equals(dinnerStatus))) {
+                    needDinnerAuto = true;
+                }
+            }
+        } else {
+            if (autoSelectLunch && isLunchSubscribed && (lunchStatus == null || lunchStatus.isEmpty() || "RESET".equals(lunchStatus))) {
+                needLunchAuto = true;
+            }
+            if (autoSelectDinner && isDinnerSubscribed && (dinnerStatus == null || dinnerStatus.isEmpty() || "RESET".equals(dinnerStatus))) {
+                needDinnerAuto = true;
+            }
+        }
+
+        if (needLunchAuto || needDinnerAuto) {
+            String docId = messId + "_" + todayDate + "_" + userId;
+            com.google.firebase.firestore.DocumentReference mealRef = db.collection("meal_selections").document(docId);
+
+            final boolean finalLunchAuto = needLunchAuto;
+            final boolean finalDinnerAuto = needDinnerAuto;
+
+            db.runTransaction(transaction -> {
+                com.google.firebase.firestore.DocumentSnapshot mealSnapshot = transaction.get(mealRef);
+                Map<String, Object> mealData = new HashMap<>();
+                if (finalLunchAuto) {
+                    String currentLunch = mealSnapshot.exists() ? mealSnapshot.getString("lunch") : null;
+                    if (currentLunch == null || currentLunch.isEmpty() || "RESET".equals(currentLunch)) {
+                        mealData.put("lunch", "Auto-IN");
+                    }
+                }
+                if (finalDinnerAuto) {
+                    String currentDinner = mealSnapshot.exists() ? mealSnapshot.getString("dinner") : null;
+                    if (currentDinner == null || currentDinner.isEmpty() || "RESET".equals(currentDinner)) {
+                        mealData.put("dinner", "Auto-IN");
+                    }
+                }
+                if (!mealData.isEmpty()) {
+                    mealData.put("userId", userId);
+                    mealData.put("date", todayDate);
+                    mealData.put("messId", messId);
+                    mealData.put("timestamp", System.currentTimeMillis());
+                    transaction.set(mealRef, mealData, com.google.firebase.firestore.SetOptions.merge());
+                }
+                return null;
+            }).addOnFailureListener(e -> {
+                android.util.Log.e("UserHomeFragment", "Failed to apply auto-select transaction", e);
+            });
+        }
     }
 
     private void setupClickListeners() {
