@@ -266,6 +266,10 @@ public class LoginActivity extends AppCompatActivity {
                 binding.studentPhoneEditText.setError("Invalid phone number");
                 return;
             }
+            if (!studentPhone.matches("[6-9]\\d{9}")) {
+                binding.studentPhoneEditText.setError("Enter a valid 10-digit mobile number");
+                return;
+            }
         }
 
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password))

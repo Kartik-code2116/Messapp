@@ -1,6 +1,7 @@
 package com.kartik.messapp;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -81,6 +82,15 @@ public class RoleSelectionActivity extends AppCompatActivity {
             });
             if (guestCard != null) {
                 guestCard.setOnClickListener(v -> guestBtn.performClick());
+            }
+
+            // Privacy Policy link
+            View privacyPolicy = findViewById(R.id.tv_privacy_policy);
+            if (privacyPolicy != null) {
+                privacyPolicy.setOnClickListener(v -> {
+                    String url = getString(R.string.privacy_policy_url);
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+                });
             }
         } catch (Exception e) {
             Log.e(TAG, "Error in onCreate", e);

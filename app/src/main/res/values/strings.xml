@@ -1,5 +1,8 @@
 <resources>
-    <string name="app_name">messapp</string>
+    <string name="app_name">MessApp</string>
+    <string name="privacy_policy_url" translatable="false">https://www.termsfeed.com/live/dbeb49d4-8c78-48c9-b052-4767a924f9d0</string>
+    <string name="privacy_policy_text">By using MessApp you agree to our Privacy Policy</string>
+    <string name="privacy_policy_link">Privacy Policy</string>
     <string name="splash_logo_content_description">App Logo</string>
     <string name="mess_id_label">Mess ID: %s</string>
     <string name="location_label">Location: %s</string>

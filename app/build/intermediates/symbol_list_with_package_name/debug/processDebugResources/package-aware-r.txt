@@ -5000,6 +5000,7 @@ id transition_position
 id transition_scene_layoutid_cache
 id transition_transform
 id triangle
+id tv_privacy_policy
 id unchecked
 id uniform
 id unlabeled
@@ -5527,6 +5528,9 @@ string path_password_eye
 string path_password_eye_mask_strike_through
 string path_password_eye_mask_visible
 string path_password_strike_through
+string privacy_policy_link
+string privacy_policy_text
+string privacy_policy_url
 string project_id
 string s1
 string s2

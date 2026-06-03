@@ -398,5 +398,21 @@
             android:text="You can switch or sign out anytime from your profile."
             android:textColor="@color/text_caption"
             android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_privacy_policy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="4dp"
+            android:fontFamily="@font/inter"
+            android:gravity="center"
+            android:text="@string/privacy_policy_link"
+            android:textColor="@color/brand_primary"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless" />
     </LinearLayout>
 </ScrollView>

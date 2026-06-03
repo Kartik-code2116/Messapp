@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
@@ -38,10 +39,14 @@ public final class ActivityRoleSelectionBinding implements ViewBinding {
   @NonNull
   public final MaterialCardView cardUser;
 
+  @NonNull
+  public final TextView tvPrivacyPolicy;
+
   private ActivityRoleSelectionBinding(@NonNull ScrollView rootView,
       @NonNull MaterialButton btnGuest, @NonNull MaterialButton btnMessUncal,
       @NonNull MaterialButton btnUser, @NonNull MaterialCardView cardGuest,
-      @NonNull MaterialCardView cardMessOwner, @NonNull MaterialCardView cardUser) {
+      @NonNull MaterialCardView cardMessOwner, @NonNull MaterialCardView cardUser,
+      @NonNull TextView tvPrivacyPolicy) {
     this.rootView = rootView;
     this.btnGuest = btnGuest;
     this.btnMessUncal = btnMessUncal;
@@ -49,6 +54,7 @@ public final class ActivityRoleSelectionBinding implements ViewBinding {
     this.cardGuest = cardGuest;
     this.cardMessOwner = cardMessOwner;
     this.cardUser = cardUser;
+    this.tvPrivacyPolicy = tvPrivacyPolicy;
   }
 
   @Override
@@ -114,8 +120,14 @@ public final class ActivityRoleSelectionBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.tv_privacy_policy;
+      TextView tvPrivacyPolicy = ViewBindings.findChildViewById(rootView, id);
+      if (tvPrivacyPolicy == null) {
+        break missingId;
+      }
+
       return new ActivityRoleSelectionBinding((ScrollView) rootView, btnGuest, btnMessUncal,
-          btnUser, cardGuest, cardMessOwner, cardUser);
+          btnUser, cardGuest, cardMessOwner, cardUser, tvPrivacyPolicy);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

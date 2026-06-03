@@ -4999,6 +4999,7 @@ int id transition_position 0x7f0a03c7
 int id transition_scene_layoutid_cache 0x7f0a03c8
 int id transition_transform 0x7f0a03c9
 int id triangle 0x7f0a03ca
+int id tv_privacy_policy 0x7f0a03e7
 int id unchecked 0x7f0a03cb
 int id uniform 0x7f0a03cc
 int id unlabeled 0x7f0a03cd
@@ -5526,6 +5527,9 @@ int string path_password_eye 0x7f1400e5
 int string path_password_eye_mask_strike_through 0x7f1400e6
 int string path_password_eye_mask_visible 0x7f1400e7
 int string path_password_strike_through 0x7f1400e8
+int string privacy_policy_link 0x7f1400fb
+int string privacy_policy_text 0x7f1400fc
+int string privacy_policy_url 0x7f1400fd
 int string project_id 0x7f1400e9
 int string s1 0x7f1400ea
 int string s2 0x7f1400eb

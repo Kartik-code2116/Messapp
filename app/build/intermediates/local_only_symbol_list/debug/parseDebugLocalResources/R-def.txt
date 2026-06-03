@@ -713,6 +713,7 @@ id text_week_range
 id toolbar
 id toolbar_report
 id top_header
+id tv_privacy_policy
 id user_top_bar
 layout activity_edit_mess_profile
 layout activity_edit_user_profile
@@ -787,6 +788,9 @@ string mess_id_label
 string offer_discount_format
 string offer_expiry_format
 string offer_expiry_not_available
+string privacy_policy_link
+string privacy_policy_text
+string privacy_policy_url
 string project_id
 string splash_logo_content_description
 string total_students_label
