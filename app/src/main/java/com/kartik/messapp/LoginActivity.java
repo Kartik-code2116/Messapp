@@ -262,6 +262,10 @@ public class LoginActivity extends AppCompatActivity {
                 binding.studentPhoneEditText.setError("Required");
                 return;
             }
+            if (studentPhone.length() < 10) {
+                binding.studentPhoneEditText.setError("Invalid phone number");
+                return;
+            }
         }
 
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password))
@@ -414,6 +418,14 @@ public class LoginActivity extends AppCompatActivity {
                                         .show();
                                 return;
                             }
+                            if (studentPhone.length() < 10) {
+                                binding.progressBar.setVisibility(View.GONE);
+                                binding.studentPhoneLayout.setVisibility(View.VISIBLE);
+                                binding.studentPhoneEditText.setError("Invalid phone number");
+                                Toast.makeText(this, "Please enter a valid phone number and click Google again", Toast.LENGTH_LONG)
+                                        .show();
+                                return;
+                            }
                         }
                         // Capture as final for lambda
                         final String finalExtraData = extraData;
@@ -494,9 +506,7 @@ public class LoginActivity extends AppCompatActivity {
                     binding.progressBar.setVisibility(View.GONE);
                     Log.e("Login", "Firestore mess save failed", e);
                     Toast.makeText(LoginActivity.this, "Error creating mess: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                    // Still navigate to dashboard even if mess creation fails
-                    // The user can retry later or contact support
-                    navigateToDashboard(role);
+                    // Do not navigate to dashboard on failure, to prevent broken state
                 });
     }
 
@@ -573,11 +583,11 @@ public class LoginActivity extends AppCompatActivity {
                                         // Token saved successfully
                                     })
                                     .addOnFailureListener(e -> {
-                                        // Log error or handle failure
+                                        Log.e("LoginActivity", "Failed to save FCM token to Firestore", e);
                                     });
                         }
                     } else {
-                        // Handle the error of not getting FCM token
+                        Log.e("LoginActivity", "Failed to get FCM token", task.getException());
                     }
                 });
     }

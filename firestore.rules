@@ -7,12 +7,12 @@ service cloud.firestore {
       return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
     }
 
-    // Users: Only the owner can write their own doc; mess owners can update roles/subscriptions
+    // Users: Only the owner can write their own doc; mess owners can update roles/subscriptions for users in their mess
     match /users/{userId} {
       allow read: if request.auth != null;
       allow write: if request.auth != null && (
         request.auth.uid == userId ||
-        getUserData().role == "MESS_OWNER"
+        (getUserData().role == "MESS_OWNER" && getUserData().messId == resource.data.messId)
       );
     }
 
@@ -50,7 +50,13 @@ service cloud.firestore {
 
     // Subscriptions & Requests: Authenticated access
     match /subscriptions/{subId} {
-      allow read, write: if request.auth != null;
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && (
+        resource.data.userId == request.auth.uid ||
+        request.resource.data.userId == request.auth.uid ||
+        (getUserData().role == "MESS_OWNER" && getUserData().messId == resource.data.messId) ||
+        (getUserData().role == "MESS_OWNER" && getUserData().messId == request.resource.data.messId)
+      );
     }
 
     match /subscriptionRequests/{reqId} {

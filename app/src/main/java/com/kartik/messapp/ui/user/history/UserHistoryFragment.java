@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.ParseException;
@@ -183,7 +184,7 @@ public class UserHistoryFragment extends Fragment {
 
         String userId = mAuth.getCurrentUser().getUid();
 
-        // Load profile (messId + auto-select prefs), then fetch meal_selections for this student
+        // Load profile (messId + auto-select prefs + expiries), then fetch meal_selections for this student
         db.collection("users").document(userId).get()
                 .addOnSuccessListener(userDoc -> {
                     if (binding == null) return;
@@ -194,8 +195,21 @@ public class UserHistoryFragment extends Fragment {
                     String oneTimeAutoSelect = userDoc.exists() ? userDoc.getString("oneTimeAutoSelect") : "NONE";
                     String messId = userDoc.exists() ? userDoc.getString("messId") : null;
 
+                    Long lunchExpiry = userDoc.exists() ? userDoc.getLong("lunchSubscriptionExpiry") : null;
+                    Long dinnerExpiry = userDoc.exists() ? userDoc.getLong("dinnerSubscriptionExpiry") : null;
+                    Long generalExpiry = userDoc.exists() ? userDoc.getLong("subscriptionExpiry") : null;
+                    Long oneTimeExpiry = userDoc.exists() ? userDoc.getLong("oneTimeMealExpiry") : null;
+
+                    long lExp = (lunchExpiry != null && lunchExpiry > 0) ? lunchExpiry
+                            : (generalExpiry != null && generalExpiry > 0 ? generalExpiry : 0);
+                    long dExp = (dinnerExpiry != null && dinnerExpiry > 0) ? dinnerExpiry
+                            : (generalExpiry != null && generalExpiry > 0 ? generalExpiry : 0);
+                    long oExp = (oneTimeExpiry != null && oneTimeExpiry > 0) ? oneTimeExpiry
+                            : (generalExpiry != null && generalExpiry > 0 ? generalExpiry : 0);
+
                     fetchMealSelectionsForMonth(userId, messId, startDate, endDate,
-                            subscriptionType, autoSelectLunch, autoSelectDinner, oneTimeAutoSelect);
+                            subscriptionType, autoSelectLunch, autoSelectDinner, oneTimeAutoSelect,
+                            lExp, dExp, oExp);
                 })
                 .addOnFailureListener(e -> {
                     if (binding == null) return;
@@ -211,54 +225,70 @@ public class UserHistoryFragment extends Fragment {
                                              String startDate, String endDate,
                                              String subscriptionType,
                                              boolean autoSelectLunch, boolean autoSelectDinner,
-                                             String oneTimeAutoSelect) {
-        Query byUser = db.collection("meal_selections").whereEqualTo("userId", userId);
+                                             String oneTimeAutoSelect,
+                                             long lExp, long dExp, long oExp) {
+        List<com.google.android.gms.tasks.Task<?>> allTasks = new ArrayList<>();
 
-        byUser.get().addOnSuccessListener(byUserSnapshot -> {
-            if (binding == null) return;
+        // Task 1: Fetch by userId (covers all modern documents)
+        com.google.android.gms.tasks.Task<QuerySnapshot> queryTask = db.collection("meal_selections")
+                .whereEqualTo("userId", userId)
+                .get();
+        allTasks.add(queryTask);
 
-            if (messId != null && !messId.isEmpty()) {
-                db.collection("meal_selections")
-                        .whereEqualTo("messId", messId)
-                        .get()
-                        .addOnSuccessListener(byMessSnapshot ->
-                                applyMealHistoryResults(userId, startDate, endDate, subscriptionType,
-                                        autoSelectLunch, autoSelectDinner, oneTimeAutoSelect,
-                                        byUserSnapshot, byMessSnapshot))
-                        .addOnFailureListener(e ->
-                                applyMealHistoryResults(userId, startDate, endDate, subscriptionType,
-                                        autoSelectLunch, autoSelectDinner, oneTimeAutoSelect,
-                                        byUserSnapshot, null));
-            } else {
-                applyMealHistoryResults(userId, startDate, endDate, subscriptionType,
-                        autoSelectLunch, autoSelectDinner, oneTimeAutoSelect,
-                        byUserSnapshot, null);
+        // Tasks 2..N: Fetch by exact docIds for the month (covers legacy documents missing userId field)
+        Calendar cal = parseMonthStart(selectedMonthYear);
+        if (cal != null && messId != null && !messId.isEmpty()) {
+            Calendar endCal = (Calendar) cal.clone();
+            endCal.add(Calendar.MONTH, 1);
+            while (cal.before(endCal)) {
+                String dateStr = DATE_KEY_FORMAT.format(cal.getTime());
+                String docId = messId + "_" + dateStr + "_" + userId;
+                allTasks.add(db.collection("meal_selections").document(docId).get());
+                cal.add(Calendar.DAY_OF_MONTH, 1);
             }
-        }).addOnFailureListener(e -> {
-            if (messId != null && !messId.isEmpty()) {
-                db.collection("meal_selections")
-                        .whereEqualTo("messId", messId)
-                        .get()
-                        .addOnSuccessListener(byMessSnapshot ->
-                                applyMealHistoryResults(userId, startDate, endDate, subscriptionType,
-                                        autoSelectLunch, autoSelectDinner, oneTimeAutoSelect,
-                                        null, byMessSnapshot))
-                        .addOnFailureListener(e2 -> finishLoadingWithError(
-                                "Could not load history. Pull down to retry.",
-                                "Error loading meal history: " + e2.getMessage()));
-            } else {
-                finishLoadingWithError("Could not load history. Pull down to retry.",
-                        "Error loading meal history: " + e.getMessage());
-            }
-        });
+        }
+
+        com.google.android.gms.tasks.Tasks.whenAllComplete(allTasks)
+                .addOnSuccessListener(taskList -> {
+                    if (binding == null) return;
+
+                    QuerySnapshot byUserSnapshot = null;
+                    List<DocumentSnapshot> directDocs = new ArrayList<>();
+
+                    // Task 0 is the query
+                    if (taskList.get(0).isSuccessful()) {
+                        byUserSnapshot = (QuerySnapshot) taskList.get(0).getResult();
+                    }
+
+                    for (int i = 1; i < taskList.size(); i++) {
+                        com.google.android.gms.tasks.Task<?> t = taskList.get(i);
+                        if (t.isSuccessful() && t.getResult() instanceof DocumentSnapshot) {
+                            DocumentSnapshot snap = (DocumentSnapshot) t.getResult();
+                            if (snap.exists()) {
+                                directDocs.add(snap);
+                            }
+                        }
+                    }
+
+                    applyMealHistoryResults(userId, startDate, endDate, subscriptionType,
+                            autoSelectLunch, autoSelectDinner, oneTimeAutoSelect,
+                            lExp, dExp, oExp,
+                            byUserSnapshot, directDocs);
+                })
+                .addOnFailureListener(e -> {
+                    if (binding == null) return;
+                    finishLoadingWithError("Could not load history. Pull down to retry.",
+                            "Error loading meal history: " + e.getMessage());
+                });
     }
 
     private void applyMealHistoryResults(String userId, String startDate, String endDate,
                                          String subscriptionType,
                                          boolean autoSelectLunch, boolean autoSelectDinner,
                                          String oneTimeAutoSelect,
+                                         long lExp, long dExp, long oExp,
                                          @Nullable QuerySnapshot byUserSnapshot,
-                                         @Nullable QuerySnapshot byMessSnapshot) {
+                                         @Nullable List<DocumentSnapshot> directDocs) {
         if (binding == null) return;
 
         Map<String, MealSelection> dailyMealSelections = new HashMap<>();
@@ -280,11 +310,25 @@ public class UserHistoryFragment extends Fragment {
 
                 while (current.before(endCal)) {
                     if (current.after(today)) {
-                        break;
+                        current.add(Calendar.DAY_OF_MONTH, 1);
+                        continue;
                     }
                     String dateStr = DATE_KEY_FORMAT.format(current.getTime());
-                    String defaultLunch = normalizeStatus(null, "LUNCH", subscriptionType, autoSelectLunch, autoSelectDinner, oneTimeAutoSelect);
-                    String defaultDinner = normalizeStatus(null, "DINNER", subscriptionType, autoSelectLunch, autoSelectDinner, oneTimeAutoSelect);
+                    long dayTime = current.getTimeInMillis();
+
+                    boolean isLunchSubscribed = false;
+                    boolean isDinnerSubscribed = false;
+
+                    if ("ONE_TIME".equals(subscriptionType)) {
+                        isLunchSubscribed = oExp >= dayTime;
+                        isDinnerSubscribed = oExp >= dayTime;
+                    } else {
+                        isLunchSubscribed = lExp >= dayTime;
+                        isDinnerSubscribed = dExp >= dayTime;
+                    }
+
+                    String defaultLunch = normalizeStatus(null, "LUNCH", subscriptionType, autoSelectLunch, autoSelectDinner, oneTimeAutoSelect, isLunchSubscribed);
+                    String defaultDinner = normalizeStatus(null, "DINNER", subscriptionType, autoSelectLunch, autoSelectDinner, oneTimeAutoSelect, isDinnerSubscribed);
                     dailyMealSelections.put(dateStr, new MealSelection(userId, dateStr, defaultLunch, defaultDinner));
                     
                     current.add(Calendar.DAY_OF_MONTH, 1);
@@ -293,12 +337,12 @@ public class UserHistoryFragment extends Fragment {
         } catch (ParseException ignored) {}
 
         if (byUserSnapshot != null) {
-            mergeMealDocuments(byUserSnapshot, userId, startDate, endDate, subscriptionType,
-                    autoSelectLunch, autoSelectDinner, oneTimeAutoSelect, dailyMealSelections);
+            mergeMealDocuments(byUserSnapshot.getDocuments(), userId, startDate, endDate, subscriptionType,
+                    autoSelectLunch, autoSelectDinner, oneTimeAutoSelect, lExp, dExp, oExp, dailyMealSelections);
         }
-        if (byMessSnapshot != null) {
-            mergeMealDocuments(byMessSnapshot, userId, startDate, endDate, subscriptionType,
-                    autoSelectLunch, autoSelectDinner, oneTimeAutoSelect, dailyMealSelections);
+        if (directDocs != null) {
+            mergeMealDocuments(directDocs, userId, startDate, endDate, subscriptionType,
+                    autoSelectLunch, autoSelectDinner, oneTimeAutoSelect, lExp, dExp, oExp, dailyMealSelections);
         }
 
         List<MealSelection> results = new ArrayList<>(dailyMealSelections.values());
@@ -311,13 +355,14 @@ public class UserHistoryFragment extends Fragment {
         binding.swipeRefresh.setRefreshing(false);
     }
 
-    private void mergeMealDocuments(QuerySnapshot snapshot, String userId,
+    private void mergeMealDocuments(List<? extends DocumentSnapshot> snapshot, String userId,
                                     String startDate, String endDate,
                                     String subscriptionType,
                                     boolean autoSelectLunch, boolean autoSelectDinner,
                                     String oneTimeAutoSelect,
+                                    long lExp, long dExp, long oExp,
                                     Map<String, MealSelection> dailyMealSelections) {
-        for (QueryDocumentSnapshot document : snapshot) {
+        for (DocumentSnapshot document : snapshot) {
             if (!belongsToUser(document, userId)) {
                 continue;
             }
@@ -333,10 +378,26 @@ public class UserHistoryFragment extends Fragment {
                 continue;
             }
 
+            boolean isLunchSubscribed = false;
+            boolean isDinnerSubscribed = false;
+            try {
+                Date parsedDate = DATE_KEY_FORMAT.parse(date);
+                if (parsedDate != null) {
+                    long dayTime = parsedDate.getTime();
+                    if ("ONE_TIME".equals(subscriptionType)) {
+                        isLunchSubscribed = oExp >= dayTime;
+                        isDinnerSubscribed = oExp >= dayTime;
+                    } else {
+                        isLunchSubscribed = lExp >= dayTime;
+                        isDinnerSubscribed = dExp >= dayTime;
+                    }
+                }
+            } catch (ParseException ignored) {}
+
             String lunchStatus = normalizeStatus(lunch, "LUNCH", subscriptionType,
-                    autoSelectLunch, autoSelectDinner, oneTimeAutoSelect);
+                    autoSelectLunch, autoSelectDinner, oneTimeAutoSelect, isLunchSubscribed);
             String dinnerStatus = normalizeStatus(dinner, "DINNER", subscriptionType,
-                    autoSelectLunch, autoSelectDinner, oneTimeAutoSelect);
+                    autoSelectLunch, autoSelectDinner, oneTimeAutoSelect, isDinnerSubscribed);
 
             MealSelection existing = dailyMealSelections.get(date);
             if (existing == null) {
@@ -352,7 +413,7 @@ public class UserHistoryFragment extends Fragment {
         }
     }
 
-    private boolean belongsToUser(QueryDocumentSnapshot document, String userId) {
+    private boolean belongsToUser(DocumentSnapshot document, String userId) {
         String docUserId = document.getString("userId");
         if (userId.equals(docUserId)) {
             return true;
@@ -361,7 +422,7 @@ public class UserHistoryFragment extends Fragment {
     }
 
     @Nullable
-    private String resolveSelectionDate(QueryDocumentSnapshot document, String userId) {
+    private String resolveSelectionDate(DocumentSnapshot document, String userId) {
         String date = document.getString("date");
         if (date != null && !date.isEmpty()) {
             return date;
@@ -415,7 +476,11 @@ public class UserHistoryFragment extends Fragment {
     }
 
     private String normalizeStatus(@Nullable String status, String mealType, String subscriptionType,
-                                   boolean autoSelectLunch, boolean autoSelectDinner, String oneTimeAutoSelect) {
+                                   boolean autoSelectLunch, boolean autoSelectDinner, String oneTimeAutoSelect,
+                                   boolean isMealSubscribed) {
+        if (!isMealSubscribed) {
+            return "No Subscription";
+        }
         if (status == null || status.trim().isEmpty() || "RESET".equalsIgnoreCase(status.trim())) {
             boolean isOneTime = "ONE_TIME".equals(subscriptionType);
             if (isOneTime) {

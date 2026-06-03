@@ -165,9 +165,13 @@ public class SubscriptionManager {
         db.collection("users").document(userId).get()
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
-                        long lunchExpiry = 0;
-                        long dinnerExpiry = 0;
-                        long oneTimeExpiry = 0;
+                        Long existingLunch = documentSnapshot.getLong("lunchSubscriptionExpiry");
+                        Long existingDinner = documentSnapshot.getLong("dinnerSubscriptionExpiry");
+                        Long existingOneTime = documentSnapshot.getLong("oneTimeMealExpiry");
+
+                        long lunchExpiry = existingLunch != null ? existingLunch : 0;
+                        long dinnerExpiry = existingDinner != null ? existingDinner : 0;
+                        long oneTimeExpiry = existingOneTime != null ? existingOneTime : 0;
 
                         if ("LUNCH".equals(subscriptionType)) {
                             lunchExpiry = expiryDate;

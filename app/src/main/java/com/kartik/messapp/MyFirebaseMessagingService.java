@@ -19,6 +19,8 @@ import com.google.firebase.messaging.RemoteMessage;
 import java.util.HashMap;
 import java.util.Map;
 
+import android.util.Log;
+
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private static final String TAG = "MyFirebaseMsgService";
@@ -56,7 +58,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                         // Token saved successfully
                     })
                     .addOnFailureListener(e -> {
-                        // Error saving token
+                        Log.e(TAG, "Failed to save FCM token", e);
                     });
         }
     }
@@ -77,10 +79,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_IMMUTABLE);
 
-        String channelId = "DefaultChannelId";
+        String channelId = "MessUpdatesChannel";
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, channelId)
-                .setSmallIcon(R.mipmap.ic_launcher) // Replace with your app icon
+                .setSmallIcon(R.drawable.ic_notification) // Use monochrome notification icon
                 .setContentTitle(title)
                 .setContentText(messageBody)
                 .setAutoCancel(true)
@@ -92,7 +94,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         // Since Android 8.0 (API level 26) and above, notification channels are required.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(channelId,
-                    "Default Channel",
+                    "Mess Updates",
                     NotificationManager.IMPORTANCE_DEFAULT);
             notificationManager.createNotificationChannel(channel);
         }

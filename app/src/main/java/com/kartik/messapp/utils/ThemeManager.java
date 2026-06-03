@@ -26,7 +26,12 @@ public class ThemeManager {
             window.clearFlags(android.view.WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.setStatusBarColor(android.graphics.Color.BLACK);
 
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+                android.view.WindowInsetsController insetsController = window.getInsetsController();
+                if (insetsController != null) {
+                    insetsController.setSystemBarsAppearance(0, android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS);
+                }
+            } else if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
                 android.view.View decor = window.getDecorView();
                 int flags = decor.getSystemUiVisibility();
                 flags &= ~android.view.View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR; // Ensure status bar icons are white
