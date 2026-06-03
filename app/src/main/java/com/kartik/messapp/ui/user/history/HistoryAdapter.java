@@ -69,10 +69,20 @@ public class HistoryAdapter extends ListAdapter<MealSelection, HistoryAdapter.Hi
             if ("RESET".equalsIgnoreCase(displayStatus)) {
                 displayStatus = "Not marked";
             }
-            view.setText(mealLabel + ": " + displayStatus);
+            
+            // Format presentation status
+            String presentationStatus = displayStatus;
+            if ("Auto-IN".equalsIgnoreCase(displayStatus) || "Auto IN".equalsIgnoreCase(displayStatus)) {
+                presentationStatus = "Auto-selected IN";
+            }
+            
+            view.setText(mealLabel + ": " + presentationStatus);
 
             int colorRes;
-            if ("IN".equalsIgnoreCase(displayStatus) || "Auto-IN".equalsIgnoreCase(displayStatus)) {
+            if ("IN".equalsIgnoreCase(displayStatus) 
+                    || "Auto-IN".equalsIgnoreCase(displayStatus)
+                    || "Auto-selected IN".equalsIgnoreCase(displayStatus)
+                    || "Auto IN".equalsIgnoreCase(displayStatus)) {
                 colorRes = R.color.state_success;
             } else if ("OUT".equalsIgnoreCase(displayStatus)) {
                 colorRes = R.color.state_error;

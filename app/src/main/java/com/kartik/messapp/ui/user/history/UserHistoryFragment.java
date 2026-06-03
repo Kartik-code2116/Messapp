@@ -512,10 +512,21 @@ public class UserHistoryFragment extends Fragment {
         int daysOut = 0;
 
         for (MealSelection selection : mealSelections) {
-            boolean lunchIn = "IN".equalsIgnoreCase(selection.getLunchStatus()) || "Auto-IN".equalsIgnoreCase(selection.getLunchStatus());
-            boolean dinnerIn = "IN".equalsIgnoreCase(selection.getDinnerStatus()) || "Auto-IN".equalsIgnoreCase(selection.getDinnerStatus());
-            boolean lunchOut = "OUT".equalsIgnoreCase(selection.getLunchStatus());
-            boolean dinnerOut = "OUT".equalsIgnoreCase(selection.getDinnerStatus());
+            String lStatus = selection.getLunchStatus();
+            String dStatus = selection.getDinnerStatus();
+            
+            boolean lunchIn = "IN".equalsIgnoreCase(lStatus) 
+                    || "Auto-IN".equalsIgnoreCase(lStatus)
+                    || "Auto-selected IN".equalsIgnoreCase(lStatus)
+                    || "Auto IN".equalsIgnoreCase(lStatus);
+            
+            boolean dinnerIn = "IN".equalsIgnoreCase(dStatus) 
+                    || "Auto-IN".equalsIgnoreCase(dStatus)
+                    || "Auto-selected IN".equalsIgnoreCase(dStatus)
+                    || "Auto IN".equalsIgnoreCase(dStatus);
+            
+            boolean lunchOut = "OUT".equalsIgnoreCase(lStatus);
+            boolean dinnerOut = "OUT".equalsIgnoreCase(dStatus);
 
             if (lunchIn) {
                 totalLunch++;
