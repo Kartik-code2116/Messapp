@@ -1,0 +1,7 @@
+com.kartik.messapp.test.app-core-1.7.0-0 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\42bd4505013e37ae85c05ee0cdfdfc59\transformed\core-1.7.0\res
+com.kartik.messapp.test.app-tracing-1.2.0-1 C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\d8d3c670f7885aaf29c28ac84d2ff3e3\transformed\tracing-1.2.0\res
+com.kartik.messapp.test.app-androidTest-2 D:\8)Android Development\messapp\app\build\generated\res\resValues\androidTest\debug
+com.kartik.messapp.test.app-updated_navigation_xml-3 D:\8)Android Development\messapp\app\build\generated\updated_navigation_xml\debugAndroidTest
+com.kartik.messapp.test.app-mergeDebugAndroidTestResources-4 D:\8)Android Development\messapp\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
+com.kartik.messapp.test.app-mergeDebugAndroidTestResources-5 D:\8)Android Development\messapp\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
+com.kartik.messapp.test.app-debugAndroidTest-6 D:\8)Android Development\messapp\app\build\intermediates\merged_res\debugAndroidTest\mergeDebugAndroidTestResources

@@ -375,6 +375,10 @@ public class MessProfileFragment extends Fragment {
         android.widget.TextView textInsta = dialogView.findViewById(R.id.support_instagram);
         android.widget.TextView textEmail = dialogView.findViewById(R.id.support_email);
 
+        android.widget.TextView labelPhone = dialogView.findViewById(R.id.label_support_phone);
+        android.widget.TextView labelInsta = dialogView.findViewById(R.id.label_support_instagram);
+        android.widget.TextView labelEmail = dialogView.findViewById(R.id.label_support_email);
+
         android.view.View btnCopyPhone = dialogView.findViewById(R.id.btn_copy_phone);
         android.view.View btnActionPhone = dialogView.findViewById(R.id.btn_action_phone);
 
@@ -385,6 +389,15 @@ public class MessProfileFragment extends Fragment {
         android.view.View btnActionEmail = dialogView.findViewById(R.id.btn_action_email);
 
         android.view.View btnClose = dialogView.findViewById(R.id.btn_dialog_close);
+
+        // Default static data for app-level support
+        textPhone.setText("+91 98765 43210");
+        textInsta.setText("messapp_support");
+        textEmail.setText("support@messapp.com");
+
+        if (labelPhone != null) labelPhone.setText("App Support Phone");
+        if (labelInsta != null) labelInsta.setText("App Instagram");
+        if (labelEmail != null) labelEmail.setText("App Support Email");
 
         btnCopyPhone.setOnClickListener(v -> {
             ClipboardManager clipboard = (ClipboardManager) requireContext().getSystemService(Context.CLIPBOARD_SERVICE);

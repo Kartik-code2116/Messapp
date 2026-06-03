@@ -22,7 +22,7 @@ public final class IncludeAdminTopBarBinding implements ViewBinding {
   private final ConstraintLayout rootView;
 
   @NonNull
-  public final ImageView btnMenuMore;
+  public final MaterialCardView btnMenuMore;
 
   @NonNull
   public final MaterialCardView btnSendMessage;
@@ -43,7 +43,7 @@ public final class IncludeAdminTopBarBinding implements ViewBinding {
   public final ConstraintLayout topHeader;
 
   private IncludeAdminTopBarBinding(@NonNull ConstraintLayout rootView,
-      @NonNull ImageView btnMenuMore, @NonNull MaterialCardView btnSendMessage,
+      @NonNull MaterialCardView btnMenuMore, @NonNull MaterialCardView btnSendMessage,
       @NonNull ImageView imgProfile, @NonNull MaterialCardView profileContainer,
       @NonNull TextView textDate, @NonNull TextView textGreeting,
       @NonNull ConstraintLayout topHeader) {
@@ -85,7 +85,7 @@ public final class IncludeAdminTopBarBinding implements ViewBinding {
     int id;
     missingId: {
       id = R.id.btn_menu_more;
-      ImageView btnMenuMore = ViewBindings.findChildViewById(rootView, id);
+      MaterialCardView btnMenuMore = ViewBindings.findChildViewById(rootView, id);
       if (btnMenuMore == null) {
         break missingId;
       }

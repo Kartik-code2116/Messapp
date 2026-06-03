@@ -461,6 +461,9 @@ id items_toolbar
 id iv_delete_offer
 id label_active_students
 id label_mess_details
+id label_support_email
+id label_support_instagram
+id label_support_phone
 id layout_date_row
 id layout_deadline_container
 id layout_empty_history

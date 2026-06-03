@@ -43,6 +43,15 @@ public final class DialogHelpSupportBinding implements ViewBinding {
   public final MaterialButton btnDialogClose;
 
   @NonNull
+  public final TextView labelSupportEmail;
+
+  @NonNull
+  public final TextView labelSupportInstagram;
+
+  @NonNull
+  public final TextView labelSupportPhone;
+
+  @NonNull
   public final TextView supportEmail;
 
   @NonNull
@@ -55,8 +64,10 @@ public final class DialogHelpSupportBinding implements ViewBinding {
       @NonNull ImageView btnActionEmail, @NonNull ImageView btnActionInstagram,
       @NonNull ImageView btnActionPhone, @NonNull ImageView btnCopyEmail,
       @NonNull ImageView btnCopyInstagram, @NonNull ImageView btnCopyPhone,
-      @NonNull MaterialButton btnDialogClose, @NonNull TextView supportEmail,
-      @NonNull TextView supportInstagram, @NonNull TextView supportPhone) {
+      @NonNull MaterialButton btnDialogClose, @NonNull TextView labelSupportEmail,
+      @NonNull TextView labelSupportInstagram, @NonNull TextView labelSupportPhone,
+      @NonNull TextView supportEmail, @NonNull TextView supportInstagram,
+      @NonNull TextView supportPhone) {
     this.rootView = rootView;
     this.btnActionEmail = btnActionEmail;
     this.btnActionInstagram = btnActionInstagram;
@@ -65,6 +76,9 @@ public final class DialogHelpSupportBinding implements ViewBinding {
     this.btnCopyInstagram = btnCopyInstagram;
     this.btnCopyPhone = btnCopyPhone;
     this.btnDialogClose = btnDialogClose;
+    this.labelSupportEmail = labelSupportEmail;
+    this.labelSupportInstagram = labelSupportInstagram;
+    this.labelSupportPhone = labelSupportPhone;
     this.supportEmail = supportEmail;
     this.supportInstagram = supportInstagram;
     this.supportPhone = supportPhone;
@@ -139,6 +153,24 @@ public final class DialogHelpSupportBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.label_support_email;
+      TextView labelSupportEmail = ViewBindings.findChildViewById(rootView, id);
+      if (labelSupportEmail == null) {
+        break missingId;
+      }
+
+      id = R.id.label_support_instagram;
+      TextView labelSupportInstagram = ViewBindings.findChildViewById(rootView, id);
+      if (labelSupportInstagram == null) {
+        break missingId;
+      }
+
+      id = R.id.label_support_phone;
+      TextView labelSupportPhone = ViewBindings.findChildViewById(rootView, id);
+      if (labelSupportPhone == null) {
+        break missingId;
+      }
+
       id = R.id.support_email;
       TextView supportEmail = ViewBindings.findChildViewById(rootView, id);
       if (supportEmail == null) {
@@ -159,7 +191,8 @@ public final class DialogHelpSupportBinding implements ViewBinding {
 
       return new DialogHelpSupportBinding((MaterialCardView) rootView, btnActionEmail,
           btnActionInstagram, btnActionPhone, btnCopyEmail, btnCopyInstagram, btnCopyPhone,
-          btnDialogClose, supportEmail, supportInstagram, supportPhone);
+          btnDialogClose, labelSupportEmail, labelSupportInstagram, labelSupportPhone, supportEmail,
+          supportInstagram, supportPhone);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

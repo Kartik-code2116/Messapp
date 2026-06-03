@@ -251,6 +251,10 @@ public class MessDashboardActivity extends AppCompatActivity {
         TextView textInsta = dialogView.findViewById(R.id.support_instagram);
         TextView textEmail = dialogView.findViewById(R.id.support_email);
 
+        TextView labelPhone = dialogView.findViewById(R.id.label_support_phone);
+        TextView labelInsta = dialogView.findViewById(R.id.label_support_instagram);
+        TextView labelEmail = dialogView.findViewById(R.id.label_support_email);
+
         View btnCopyPhone = dialogView.findViewById(R.id.btn_copy_phone);
         View btnActionPhone = dialogView.findViewById(R.id.btn_action_phone);
 
@@ -267,38 +271,9 @@ public class MessDashboardActivity extends AppCompatActivity {
         textInsta.setText("messapp_support");
         textEmail.setText("support@messapp.com");
 
-        if (cachedMessId != null && !cachedMessId.isEmpty()) {
-            db.collection("messes").document(cachedMessId).get().addOnSuccessListener(doc -> {
-                if (isFinishing()) return;
-                if (doc.exists()) {
-                    String contact = doc.getString("contact");
-                    if (contact != null && !contact.isEmpty()) {
-                        textPhone.setText(contact);
-                    }
-                    String messName = doc.getString("name");
-                    if (messName != null && !messName.isEmpty()) {
-                        textInsta.setText(messName.toLowerCase().replaceAll("\\s+", "_"));
-                    }
-
-                    String ownerId = doc.getString("ownerId");
-                    if (ownerId != null && !ownerId.isEmpty()) {
-                        db.collection("users").document(ownerId).get().addOnSuccessListener(userDoc -> {
-                            if (isFinishing()) return;
-                            if (userDoc.exists()) {
-                                String email = userDoc.getString("email");
-                                if (email != null && !email.isEmpty()) {
-                                    textEmail.setText(email);
-                                }
-                                String phone = userDoc.getString("phone");
-                                if ((contact == null || contact.isEmpty()) && phone != null && !phone.isEmpty()) {
-                                    textPhone.setText(phone);
-                                }
-                            }
-                        });
-                    }
-                }
-            });
-        }
+        if (labelPhone != null) labelPhone.setText("App Support Phone");
+        if (labelInsta != null) labelInsta.setText("App Instagram");
+        if (labelEmail != null) labelEmail.setText("App Support Email");
 
         btnCopyPhone.setOnClickListener(v -> {
             android.content.ClipboardManager clipboard = (android.content.ClipboardManager) getSystemService(android.content.Context.CLIPBOARD_SERVICE);

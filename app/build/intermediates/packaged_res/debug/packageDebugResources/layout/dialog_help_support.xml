@@ -88,6 +88,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/label_support_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/inter"
@@ -160,6 +161,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/label_support_instagram"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/inter"
@@ -232,6 +234,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/label_support_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/inter"

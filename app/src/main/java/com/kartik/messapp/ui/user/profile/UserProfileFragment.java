@@ -242,6 +242,10 @@ public class UserProfileFragment extends Fragment {
         android.widget.TextView textInsta = dialogView.findViewById(R.id.support_instagram);
         android.widget.TextView textEmail = dialogView.findViewById(R.id.support_email);
 
+        android.widget.TextView labelPhone = dialogView.findViewById(R.id.label_support_phone);
+        android.widget.TextView labelInsta = dialogView.findViewById(R.id.label_support_instagram);
+        android.widget.TextView labelEmail = dialogView.findViewById(R.id.label_support_email);
+
         android.view.View btnCopyPhone = dialogView.findViewById(R.id.btn_copy_phone);
         android.view.View btnActionPhone = dialogView.findViewById(R.id.btn_action_phone);
 
@@ -257,6 +261,10 @@ public class UserProfileFragment extends Fragment {
         String defaultPhone = "+91 98765 43210";
         String defaultInsta = "messapp_support";
         String defaultEmail = "support@messapp.com";
+
+        if (labelPhone != null) labelPhone.setText("Call / WhatsApp");
+        if (labelInsta != null) labelInsta.setText("Instagram Support");
+        if (labelEmail != null) labelEmail.setText("Email Support");
         
         if (currentUserMessId != null && !currentUserMessId.isEmpty()) {
             db.collection("messes").document(currentUserMessId).get().addOnSuccessListener(doc -> {
@@ -267,7 +275,14 @@ public class UserProfileFragment extends Fragment {
                     }
                     String messName = doc.getString("name");
                     if (messName != null && !messName.isEmpty()) {
-                        textInsta.setText(messName.toLowerCase().replaceAll("\\s+", "_"));
+                        textInsta.setText(messName);
+                    }
+
+                    if (labelPhone != null) {
+                        labelPhone.setText("Mess Owner Phone");
+                    }
+                    if (labelInsta != null) {
+                        labelInsta.setText("Mess Name");
                     }
                     
                     String ownerId = doc.getString("ownerId");
@@ -277,6 +292,9 @@ public class UserProfileFragment extends Fragment {
                                 String email = userDoc.getString("email");
                                 if (email != null && !email.isEmpty()) {
                                     textEmail.setText(email);
+                                }
+                                if (labelEmail != null) {
+                                    labelEmail.setText("Mess Owner Email");
                                 }
                                 String phone = userDoc.getString("phone");
                                 if ((contact == null || contact.isEmpty()) && phone != null && !phone.isEmpty()) {

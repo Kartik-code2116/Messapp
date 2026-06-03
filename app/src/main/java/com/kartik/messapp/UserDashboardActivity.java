@@ -230,6 +230,10 @@ public class UserDashboardActivity extends AppCompatActivity {
         TextView textInsta = dialogView.findViewById(R.id.support_instagram);
         TextView textEmail = dialogView.findViewById(R.id.support_email);
 
+        TextView labelPhone = dialogView.findViewById(R.id.label_support_phone);
+        TextView labelInsta = dialogView.findViewById(R.id.label_support_instagram);
+        TextView labelEmail = dialogView.findViewById(R.id.label_support_email);
+
         View btnCopyPhone = dialogView.findViewById(R.id.btn_copy_phone);
         View btnActionPhone = dialogView.findViewById(R.id.btn_action_phone);
 
@@ -246,6 +250,10 @@ public class UserDashboardActivity extends AppCompatActivity {
         textInsta.setText("messapp_support");
         textEmail.setText("support@messapp.com");
 
+        if (labelPhone != null) labelPhone.setText("Call / WhatsApp");
+        if (labelInsta != null) labelInsta.setText("Instagram Support");
+        if (labelEmail != null) labelEmail.setText("Email Support");
+
         if (cachedMessId != null && !cachedMessId.isEmpty()) {
             db.collection("messes").document(cachedMessId).get().addOnSuccessListener(doc -> {
                 if (isFinishing()) return;
@@ -256,7 +264,14 @@ public class UserDashboardActivity extends AppCompatActivity {
                     }
                     String messName = doc.getString("name");
                     if (messName != null && !messName.isEmpty()) {
-                        textInsta.setText(messName.toLowerCase().replaceAll("\\s+", "_"));
+                        textInsta.setText(messName);
+                    }
+
+                    if (labelPhone != null) {
+                        labelPhone.setText("Mess Owner Phone");
+                    }
+                    if (labelInsta != null) {
+                        labelInsta.setText("Mess Name");
                     }
 
                     String ownerId = doc.getString("ownerId");
@@ -267,6 +282,9 @@ public class UserDashboardActivity extends AppCompatActivity {
                                 String email = userDoc.getString("email");
                                 if (email != null && !email.isEmpty()) {
                                     textEmail.setText(email);
+                                }
+                                if (labelEmail != null) {
+                                    labelEmail.setText("Mess Owner Email");
                                 }
                                 String phone = userDoc.getString("phone");
                                 if ((contact == null || contact.isEmpty()) && phone != null && !phone.isEmpty()) {
