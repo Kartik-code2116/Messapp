@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.messapp"
+    package="com.kartik.messapp"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -59,10 +59,10 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <permission
-        android:name="com.example.messapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+        android:name="com.kartik.messapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
         android:protectionLevel="signature" />
 
-    <uses-permission android:name="com.example.messapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+    <uses-permission android:name="com.kartik.messapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
 
     <application
         android:allowBackup="true"
@@ -79,7 +79,7 @@
         android:testOnly="true"
         android:theme="@style/Theme.Messapp" >
         <activity
-            android:name="com.example.messapp.SplashActivity"
+            android:name="com.kartik.messapp.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.Messapp.NoActionBar" >
             <intent-filter>
@@ -89,42 +89,42 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.messapp.RoleSelectionActivity"
+            android:name="com.kartik.messapp.RoleSelectionActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.messapp.LoginActivity"
+            android:name="com.kartik.messapp.LoginActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.messapp.UserDashboardActivity"
+            android:name="com.kartik.messapp.UserDashboardActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.messapp.MessDashboardActivity"
+            android:name="com.kartik.messapp.MessDashboardActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.messapp.EditMessProfileActivity"
+            android:name="com.kartik.messapp.EditMessProfileActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.messapp.ui.user.profile.EditUserProfileActivity"
+            android:name="com.kartik.messapp.ui.user.profile.EditUserProfileActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.messapp.ui.mess.settings.MessSettingsActivity"
+            android:name="com.kartik.messapp.ui.mess.settings.MessSettingsActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.messapp.ui.mess.weeklymenu.WeeklyMenuActivity"
+            android:name="com.kartik.messapp.ui.mess.weeklymenu.WeeklyMenuActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.messapp.MessReviewsActivity"
+            android:name="com.kartik.messapp.MessReviewsActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.messapp.MyReviewsActivity"
+            android:name="com.kartik.messapp.MyReviewsActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.messapp.ui.mess.reports.SubscriptionReportActivity"
+            android:name="com.kartik.messapp.ui.mess.reports.SubscriptionReportActivity"
             android:exported="false" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.example.messapp.fileprovider"
+            android:authorities="com.kartik.messapp.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true" >
             <meta-data
@@ -133,7 +133,7 @@
         </provider>
 
         <service
-            android:name="com.example.messapp.MyFirebaseMessagingService"
+            android:name="com.kartik.messapp.MyFirebaseMessagingService"
             android:exported="false" >
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -314,7 +314,7 @@
 
         <provider
             android:name="com.google.firebase.provider.FirebaseInitProvider"
-            android:authorities="com.example.messapp.firebaseinitprovider"
+            android:authorities="com.kartik.messapp.firebaseinitprovider"
             android:directBootAware="true"
             android:exported="false"
             android:initOrder="100" />
@@ -341,7 +341,7 @@
 
         <provider
             android:name="androidx.startup.InitializationProvider"
-            android:authorities="com.example.messapp.androidx-startup"
+            android:authorities="com.kartik.messapp.androidx-startup"
             android:exported="false" >
             <meta-data
                 android:name="androidx.emoji2.text.EmojiCompatInitializer"
@@ -364,7 +364,7 @@
 
         <provider
             android:name="com.google.android.gms.ads.MobileAdsInitProvider"
-            android:authorities="com.example.messapp.mobileadsinitprovider"
+            android:authorities="com.kartik.messapp.mobileadsinitprovider"
             android:exported="false"
             android:initOrder="100" />
 

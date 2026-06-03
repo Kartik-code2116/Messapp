@@ -329,7 +329,7 @@ MERGED from [com.google.android.play:core-common:2.0.3] C:\Users\KARTIK DILIP TH
 		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:18:9-45
 	android:dataExtractionRules
 		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:11:9-65
-activity#com.example.messapp.SplashActivity
+activity#com.kartik.messapp.SplashActivity
 ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:20:9-28:20
 	android:exported
 		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:22:13-36
@@ -347,67 +347,67 @@ category#android.intent.category.LAUNCHER
 ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:26:17-77
 	android:name
 		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:26:27-74
-activity#com.example.messapp.RoleSelectionActivity
+activity#com.kartik.messapp.RoleSelectionActivity
 ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:29:9-31:39
 	android:exported
 		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:31:13-37
 	android:name
 		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:30:13-50
-activity#com.example.messapp.LoginActivity
+activity#com.kartik.messapp.LoginActivity
 ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:32:9-76
 	android:exported
 		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:32:49-73
 	android:name
 		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:32:19-48
-activity#com.example.messapp.UserDashboardActivity
+activity#com.kartik.messapp.UserDashboardActivity
 ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:33:9-84
 	android:exported
 		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:33:57-81
 	android:name
 		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:33:19-56
-activity#com.example.messapp.MessDashboardActivity
+activity#com.kartik.messapp.MessDashboardActivity
 ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:34:9-84
 	android:exported
 		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:34:57-81
 	android:name
 		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:34:19-56
-activity#com.example.messapp.EditMessProfileActivity
+activity#com.kartik.messapp.EditMessProfileActivity
 ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:35:9-86
 	android:exported
 		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:35:59-83
 	android:name
 		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:35:19-58
-activity#com.example.messapp.ui.user.profile.EditUserProfileActivity
+activity#com.kartik.messapp.ui.user.profile.EditUserProfileActivity
 ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:36:9-102
 	android:exported
 		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:36:75-99
 	android:name
 		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:36:19-74
-activity#com.example.messapp.ui.mess.settings.MessSettingsActivity
+activity#com.kartik.messapp.ui.mess.settings.MessSettingsActivity
 ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:37:9-100
 	android:exported
 		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:37:73-97
 	android:name
 		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:37:19-72
-activity#com.example.messapp.ui.mess.weeklymenu.WeeklyMenuActivity
+activity#com.kartik.messapp.ui.mess.weeklymenu.WeeklyMenuActivity
 ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:38:9-100
 	android:exported
 		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:38:73-97
 	android:name
 		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:38:19-72
-activity#com.example.messapp.MessReviewsActivity
+activity#com.kartik.messapp.MessReviewsActivity
 ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:39:9-82
 	android:exported
 		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:39:55-79
 	android:name
 		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:39:19-54
-activity#com.example.messapp.MyReviewsActivity
+activity#com.kartik.messapp.MyReviewsActivity
 ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:40:9-80
 	android:exported
 		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:40:53-77
 	android:name
 		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:40:19-52
-activity#com.example.messapp.ui.mess.reports.SubscriptionReportActivity
+activity#com.kartik.messapp.ui.mess.reports.SubscriptionReportActivity
 ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:41:9-105
 	android:exported
 		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:41:78-102
@@ -418,7 +418,7 @@ ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:43:
 	android:grantUriPermissions
 		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:47:13-47
 	android:authorities
-		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:45:13-67
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:45:13-66
 	android:exported
 		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:46:13-37
 	android:name
@@ -429,7 +429,7 @@ ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:48:
 		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:50:17-51
 	android:name
 		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:49:17-67
-service#com.example.messapp.MyFirebaseMessagingService
+service#com.kartik.messapp.MyFirebaseMessagingService
 ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:53:9-59:19
 	android:exported
 		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:55:13-37
@@ -1452,7 +1452,7 @@ ADDED from [androidx.core:core:1.16.0] C:\Users\KARTIK DILIP THORAT\.gradle\cach
 		ADDED from [androidx.core:core:1.16.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\330e572731198891fd4e94c9d83129e0\transformed\core-1.16.0\AndroidManifest.xml:24:9-44
 	android:name
 		ADDED from [androidx.core:core:1.16.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\330e572731198891fd4e94c9d83129e0\transformed\core-1.16.0\AndroidManifest.xml:23:9-81
-permission#com.example.messapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+permission#com.kartik.messapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
 ADDED from [androidx.core:core:1.16.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\330e572731198891fd4e94c9d83129e0\transformed\core-1.16.0\AndroidManifest.xml:22:5-24:47
 	android:protectionLevel
 		ADDED from [androidx.core:core:1.16.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\330e572731198891fd4e94c9d83129e0\transformed\core-1.16.0\AndroidManifest.xml:24:9-44
@@ -1462,7 +1462,7 @@ uses-permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
 ADDED from [androidx.core:core:1.16.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\330e572731198891fd4e94c9d83129e0\transformed\core-1.16.0\AndroidManifest.xml:26:5-97
 	android:name
 		ADDED from [androidx.core:core:1.16.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\330e572731198891fd4e94c9d83129e0\transformed\core-1.16.0\AndroidManifest.xml:26:22-94
-uses-permission#com.example.messapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+uses-permission#com.kartik.messapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
 ADDED from [androidx.core:core:1.16.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\330e572731198891fd4e94c9d83129e0\transformed\core-1.16.0\AndroidManifest.xml:26:5-97
 	android:name
 		ADDED from [androidx.core:core:1.16.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\330e572731198891fd4e94c9d83129e0\transformed\core-1.16.0\AndroidManifest.xml:26:22-94

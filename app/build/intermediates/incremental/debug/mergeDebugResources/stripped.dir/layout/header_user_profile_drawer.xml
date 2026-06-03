@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_drawer_header"
+    android:paddingStart="24dp"
+    android:paddingTop="48dp"
+    android:paddingEnd="24dp"
+    android:paddingBottom="28dp">
+
+    <!-- Avatar — plain ImageView with circular background, no ShapeableImageView -->
+    <ImageView
+        android:id="@+id/img_drawer_profile"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_student_profile"
+        android:background="@drawable/bg_circle_avatar_drawer"
+        android:padding="2dp"
+        android:contentDescription="@null" />
+
+    <TextView
+        android:id="@+id/text_drawer_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/poppins"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:maxLines="1"
+        android:ellipsize="end"
+        tools:text="Kartik Thorat" />
+
+    <TextView
+        android:id="@+id/text_drawer_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:fontFamily="@font/inter"
+        android:textColor="#CCffffff"
+        android:textSize="13sp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        tools:text="student@messapp.com" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="12dp"
+        android:background="#30FFFFFF" />
+
+    <TextView
+        android:id="@+id/text_drawer_mess"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter"
+        android:textColor="#CCffffff"
+        android:textSize="12sp"
+        tools:text="Not Joined" />
+
+    <TextView
+        android:id="@+id/text_drawer_subscription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/inter"
+        android:textColor="#CCffffff"
+        android:textSize="12sp"
+        tools:text="Not Active" />
+
+</LinearLayout>

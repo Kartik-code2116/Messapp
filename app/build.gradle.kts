@@ -1,16 +1,16 @@
-plugins {
+﻿plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.google.gms.google.services)
 }
 
 android {
-    namespace = "com.example.messapp"
+    namespace = "com.kartik.messapp"
     compileSdk {
         version = release(36)
     }
 
     defaultConfig {
-        applicationId = "com.example.messapp"
+        applicationId = "com.kartik.messapp"
         minSdk = 24
         targetSdk = 36
         versionCode = 1

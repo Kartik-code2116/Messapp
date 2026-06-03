@@ -6,22 +6,22 @@ android:id="@+id/mobile_navigation"
 app:startDestination="@id/navigation_user_home" >
 <fragment
     android:id="@+id/navigation_user_home"
-    android:name="com.example.messapp.ui.user.home.UserHomeFragment"
+    android:name="com.kartik.messapp.ui.user.home.UserHomeFragment"
     android:label="Home"
     tools:layout="@layout/fragment_user_home" />
 <fragment
     android:id="@+id/navigation_user_menu"
-    android:name="com.example.messapp.ui.user.menu.UserMenuFragment"
+    android:name="com.kartik.messapp.ui.user.menu.UserMenuFragment"
     android:label="Menu"
     tools:layout="@layout/fragment_user_menu" />
 <fragment
     android:id="@+id/navigation_user_history"
-    android:name="com.example.messapp.ui.user.history.UserHistoryFragment"
+    android:name="com.kartik.messapp.ui.user.history.UserHistoryFragment"
     android:label="History"
     tools:layout="@layout/fragment_user_history" />
 <fragment
     android:id="@+id/navigation_user_profile"
-    android:name="com.example.messapp.ui.user.profile.UserProfileFragment"
+    android:name="com.kartik.messapp.ui.user.profile.UserProfileFragment"
     android:label="Profile"
     tools:layout="@layout/fragment_user_profile" />
 </navigation>

@@ -1,0 +1,1626 @@
+package com.kartik.messapp.ui.user.home;
+
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.text.InputType;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.widget.DatePicker;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.ColorRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+
+import com.kartik.messapp.R;
+import com.kartik.messapp.databinding.FragmentUserHomeBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.ListenerRegistration;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
+public class UserHomeFragment extends Fragment {
+
+    private static final long MILLIS_PER_DAY = 24 * 60 * 60 * 1000L;
+
+    private FragmentUserHomeBinding binding;
+    private FirebaseFirestore db;
+    private String userId;
+    private String messId;
+    private String todayDate;
+    private boolean isLunchSubscribed = false;
+    private boolean isDinnerSubscribed = false;
+    private boolean isOneTimeSubscribed = false; // ONE_TIME subscription active
+    private boolean oneTimeMealUsedToday = false; // student already used their one meal today
+    private boolean allowMultipleChanges = false;
+    private boolean autoSelectLunch = false; // daily auto-IN for lunch
+    private boolean autoSelectDinner = false; // daily auto-IN for dinner
+    private CountDownTimer timer;
+    private ListenerRegistration plannedOutListener;
+    private ListenerRegistration userListener;
+    private ListenerRegistration mealSelectionListener;
+    private ListenerRegistration messSettingsListener;
+    private String currentUserOneTimeAutoSelect;
+    private String todayBreakfastMenu = "";
+    private String selectedBreakfastItem = "";
+    private boolean profileLoaded = false;
+
+    // Cutoff times (defaults)
+    private int lunchCutoffHour = 10;
+    private int lunchCutoffMinute = 30;
+    private int dinnerCutoffHour = 16;
+    private int dinnerCutoffMinute = 30;
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentUserHomeBinding.inflate(inflater, container, false);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        db = FirebaseFirestore.getInstance();
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        }
+
+        todayDate = new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(new Date());
+
+        setupClickListeners();
+        animateFoodCards();
+        fetchUserDetails();
+        
+        binding.swipeRefreshUserHome.setOnRefreshListener(() -> {
+            fetchUserDetails();
+            binding.swipeRefreshUserHome.setRefreshing(false);
+        });
+    }
+
+    private void animateFoodCards() {
+        binding.cardBreakfast.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.card_fade_slide_up));
+
+        binding.cardLunch.setTranslationY(18f);
+        binding.cardLunch.setAlpha(0f);
+        binding.cardLunch.animate().alpha(1f).translationY(0f).setStartDelay(90).setDuration(360).start();
+
+        binding.cardDinner.setTranslationY(18f);
+        binding.cardDinner.setAlpha(0f);
+        binding.cardDinner.animate().alpha(1f).translationY(0f).setStartDelay(170).setDuration(360).start();
+    }
+
+    private void fetchUserDetails() {
+        if (userId == null) {
+            showProfileError("You are not signed in. Please log in to continue.");
+            return;
+        }
+
+        if (userListener != null) {
+            userListener.remove();
+        }
+
+        userListener = db.collection("users").document(userId).addSnapshotListener((documentSnapshot, e) -> {
+            if (binding == null)
+                return;
+            if (e != null) {
+                android.util.Log.e("UserHomeFragment", "Error fetching user details", e);
+                if (!profileLoaded) {
+                    showProfileError("Failed to load profile. Tap to retry.");
+                }
+                return;
+            }
+            if (documentSnapshot != null && documentSnapshot.exists()) {
+                profileLoaded = true;
+                hideProfileError();
+                messId = documentSnapshot.getString("messId");
+                Long lunchExpiry = documentSnapshot.getLong("lunchSubscriptionExpiry");
+                Long dinnerExpiry = documentSnapshot.getLong("dinnerSubscriptionExpiry");
+                Long generalExpiry = documentSnapshot.getLong("subscriptionExpiry");
+                Long oneTimeExpiry = documentSnapshot.getLong("oneTimeMealExpiry");
+                String subscriptionType = documentSnapshot.getString("subscriptionType");
+                String oneTimeAutoSelect = documentSnapshot.getString("oneTimeAutoSelect");
+                currentUserOneTimeAutoSelect = oneTimeAutoSelect;
+
+                String preference = documentSnapshot.getString("dietaryPreference");
+                if (preference != null && !preference.isEmpty()) {
+                    binding.textLunchPreference.setText(preference.toUpperCase());
+                    binding.textLunchPreference.setVisibility(View.VISIBLE);
+                    binding.textDinnerPreference.setText(preference.toUpperCase());
+                    binding.textDinnerPreference.setVisibility(View.VISIBLE);
+                    int color = preference.equalsIgnoreCase("Veg")
+                            ? themeColor(R.color.state_success)
+                            : themeColor(R.color.state_error);
+                    binding.textLunchPreference.setTextColor(color);
+                    binding.textDinnerPreference.setTextColor(color);
+                } else {
+                    binding.textLunchPreference.setVisibility(View.GONE);
+                    binding.textDinnerPreference.setVisibility(View.GONE);
+                }
+
+                // Read daily auto-select preferences first so checkSubscription has the correct flags
+                Boolean autoL = documentSnapshot.getBoolean("autoSelectLunch");
+                Boolean autoD = documentSnapshot.getBoolean("autoSelectDinner");
+                autoSelectLunch = Boolean.TRUE.equals(autoL);
+                autoSelectDinner = Boolean.TRUE.equals(autoD);
+
+                checkSubscription(lunchExpiry, dinnerExpiry, generalExpiry, oneTimeExpiry, subscriptionType,
+                        oneTimeAutoSelect);
+
+                fetchMessSettings();
+                loadMenu();
+                listenToMySelection();
+                listenToPlannedOutDays();
+                listenToMessCondition();
+            } else {
+                if (!profileLoaded) {
+                    showProfileError("User profile not found. Please complete your registration.");
+                }
+            }
+        });
+    }
+
+    private void showProfileError(String message) {
+        if (binding == null) return;
+        // Disable meal buttons and show a clear error message via the status bars
+        binding.textLunchStatusBar.setText(message);
+        binding.textLunchStatusBar.setBackgroundColor(themeColor(R.color.state_error));
+        binding.textLunchStatusBar.setTextColor(android.graphics.Color.WHITE);
+        binding.btnLunchInNew.setEnabled(false);
+        binding.btnLunchOutNew.setEnabled(false);
+
+        binding.textDinnerStatusBar.setText(message);
+        binding.textDinnerStatusBar.setBackgroundColor(themeColor(R.color.state_error));
+        binding.textDinnerStatusBar.setTextColor(android.graphics.Color.WHITE);
+        binding.btnDinnerInNew.setEnabled(false);
+        binding.btnDinnerOutNew.setEnabled(false);
+
+        // Make cards tappable to retry
+        View.OnClickListener retryListener = v -> {
+            if (userId == null && FirebaseAuth.getInstance().getCurrentUser() != null) {
+                userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            }
+            fetchUserDetails();
+            Toast.makeText(getContext(), "Retrying...", Toast.LENGTH_SHORT).show();
+        };
+        binding.cardLunch.setOnClickListener(retryListener);
+        binding.cardDinner.setOnClickListener(retryListener);
+    }
+
+    private void hideProfileError() {
+        if (binding == null) return;
+        // Remove retry listeners from cards (they don't normally have one)
+        binding.cardLunch.setOnClickListener(null);
+        binding.cardDinner.setOnClickListener(null);
+        // Re-enable buttons — the updateButtonUI / updateOneTimeButtonUI calls
+        // that follow will set the correct enabled states
+        binding.btnLunchInNew.setEnabled(true);
+        binding.btnLunchOutNew.setEnabled(true);
+        binding.btnDinnerInNew.setEnabled(true);
+        binding.btnDinnerOutNew.setEnabled(true);
+    }
+
+    private void checkSubscription(Long lunchExpiry, Long dinnerExpiry, Long generalExpiry,
+            Long oneTimeExpiry, String subscriptionType, String oneTimeAutoSelect) {
+        long now = System.currentTimeMillis();
+
+        // Check ONE_TIME first
+        isOneTimeSubscribed = "ONE_TIME".equals(subscriptionType)
+                && oneTimeExpiry != null && oneTimeExpiry > now;
+
+        if (isOneTimeSubscribed) {
+            // ONE_TIME: both cards render, but the standard lunch/dinner flags stay false
+            isLunchSubscribed = false;
+            isDinnerSubscribed = false;
+            binding.cardOneTimeAutoSelect.setVisibility(View.VISIBLE);
+
+            // Set the radio button without triggering the listener
+            binding.radioGroupAutoSelect.setOnCheckedChangeListener(null);
+            if ("LUNCH".equals(oneTimeAutoSelect)) {
+                binding.radioAutoLunch.setChecked(true);
+            } else if ("DINNER".equals(oneTimeAutoSelect)) {
+                binding.radioAutoDinner.setChecked(true);
+            } else {
+                binding.radioAutoNone.setChecked(true);
+            }
+            setupAutoSelectListener();
+        } else {
+            binding.cardOneTimeAutoSelect.setVisibility(View.GONE);
+            long lExp = (lunchExpiry != null && lunchExpiry > 0) ? lunchExpiry
+                    : (generalExpiry != null && generalExpiry > 0 ? generalExpiry : 0);
+            long dExp = (dinnerExpiry != null && dinnerExpiry > 0) ? dinnerExpiry
+                    : (generalExpiry != null && generalExpiry > 0 ? generalExpiry : 0);
+            isLunchSubscribed = lExp > now;
+            isDinnerSubscribed = dExp > now;
+            // Show daily auto-select card only when at least one meal is active
+            if (isLunchSubscribed || isDinnerSubscribed) {
+                setupDailyAutoSelectCard();
+            } else {
+                binding.cardDailyAutoSelect.setVisibility(View.GONE);
+            }
+        }
+    }
+
+    private void setupAutoSelectListener() {
+        binding.radioGroupAutoSelect.setOnCheckedChangeListener((group, checkedId) -> {
+            String selection = "NONE";
+            if (checkedId == R.id.radio_auto_lunch)
+                selection = "LUNCH";
+            else if (checkedId == R.id.radio_auto_dinner)
+                selection = "DINNER";
+
+            boolean block = false;
+            if ("LUNCH".equals(currentUserOneTimeAutoSelect) && isCutoffPassed("LUNCH"))
+                block = true;
+            if ("DINNER".equals(currentUserOneTimeAutoSelect) && isCutoffPassed("DINNER"))
+                block = true;
+            if ("LUNCH".equals(selection) && isCutoffPassed("LUNCH"))
+                block = true;
+            if ("DINNER".equals(selection) && isCutoffPassed("DINNER"))
+                block = true;
+            if (oneTimeMealUsedToday)
+                block = true;
+
+            if (block) {
+                Toast.makeText(getContext(), "Cannot change preference at this time.", Toast.LENGTH_SHORT).show();
+                binding.radioGroupAutoSelect.setOnCheckedChangeListener(null);
+                if ("LUNCH".equals(currentUserOneTimeAutoSelect)) {
+                    binding.radioAutoLunch.setChecked(true);
+                } else if ("DINNER".equals(currentUserOneTimeAutoSelect)) {
+                    binding.radioAutoDinner.setChecked(true);
+                } else {
+                    binding.radioAutoNone.setChecked(true);
+                }
+                setupAutoSelectListener();
+                return;
+            }
+
+            updateAutoSelectPreference(selection);
+        });
+    }
+
+    private void updateAutoSelectPreference(String selection) {
+        if (userId == null)
+            return;
+        db.collection("users").document(userId)
+                .update("oneTimeAutoSelect", selection)
+                .addOnSuccessListener(aVoid -> {
+                    if (binding != null) {
+                        Toast.makeText(getContext(), "Auto-select preference saved", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void setupDailyAutoSelectCard() {
+        if (binding == null)
+            return;
+        binding.cardDailyAutoSelect.setVisibility(View.VISIBLE);
+
+        // Set switch states without triggering listeners
+        binding.switchAutoLunch.setOnCheckedChangeListener(null);
+        binding.switchAutoDinner.setOnCheckedChangeListener(null);
+        binding.switchAutoLunch.setChecked(autoSelectLunch);
+        binding.switchAutoDinner.setChecked(autoSelectDinner);
+        updateDailyAutoSelectSubtext();
+
+        binding.switchAutoLunch.setEnabled(isLunchSubscribed);
+        binding.switchAutoDinner.setEnabled(isDinnerSubscribed);
+
+        binding.switchAutoLunch.setOnCheckedChangeListener((btn, checked) -> {
+            autoSelectLunch = checked;
+            saveDailyAutoSelect();
+            updateDailyAutoSelectSubtext();
+        });
+        binding.switchAutoDinner.setOnCheckedChangeListener((btn, checked) -> {
+            autoSelectDinner = checked;
+            saveDailyAutoSelect();
+            updateDailyAutoSelectSubtext();
+        });
+    }
+
+    private void updateDailyAutoSelectSubtext() {
+        if (binding == null)
+            return;
+        binding.textAutoLunchStatus.setText(autoSelectLunch
+                ? "Auto-select ON — you'll be counted IN daily"
+                : "Auto-select off — select manually each day");
+        binding.textAutoLunchStatus.setTextColor(themeColor(
+                autoSelectLunch ? R.color.state_success : R.color.text_caption));
+        binding.textAutoDinnerStatus.setText(autoSelectDinner
+                ? "Auto-select ON — you'll be counted IN daily"
+                : "Auto-select off — select manually each day");
+        binding.textAutoDinnerStatus.setTextColor(themeColor(
+                autoSelectDinner ? R.color.state_success : R.color.text_caption));
+    }
+
+    private void saveDailyAutoSelect() {
+        if (userId == null)
+            return;
+        Map<String, Object> updates = new HashMap<>();
+        updates.put("autoSelectLunch", autoSelectLunch);
+        updates.put("autoSelectDinner", autoSelectDinner);
+        db.collection("users").document(userId).update(updates)
+                .addOnFailureListener(e -> {
+                    if (getContext() != null)
+                        Toast.makeText(getContext(), "Failed to save setting", Toast.LENGTH_SHORT).show();
+                });
+    }
+
+    private void fetchMessSettings() {
+        if (messId == null)
+            return;
+
+        db.collection("mess_settings").document(messId).get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (binding == null)
+                        return;
+                    if (documentSnapshot.exists()) {
+                        Long lunchHour = documentSnapshot.getLong("lunchCutoffHour");
+                        Long lunchMinute = documentSnapshot.getLong("lunchCutoffMinute");
+                        Long dinnerHour = documentSnapshot.getLong("dinnerCutoffHour");
+                        Long dinnerMinute = documentSnapshot.getLong("dinnerCutoffMinute");
+
+                        if (lunchHour != null)
+                            lunchCutoffHour = lunchHour.intValue();
+                        if (lunchMinute != null)
+                            lunchCutoffMinute = lunchMinute.intValue();
+                        if (dinnerHour != null)
+                            dinnerCutoffHour = dinnerHour.intValue();
+                        if (dinnerMinute != null)
+                            dinnerCutoffMinute = dinnerMinute.intValue();
+
+                        Boolean amc = documentSnapshot.getBoolean("allowMultipleChanges");
+                        allowMultipleChanges = (amc != null && amc);
+                    }
+                    startDeadlineTimer();
+                });
+    }
+
+    private void loadMenu() {
+        if (messId == null)
+            return;
+
+        db.collection("menus").document(messId + "_" + todayDate).get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (binding == null)
+                        return;
+                    if (documentSnapshot.exists()) {
+                        String breakfast = documentSnapshot.getString("breakfast");
+                        String lunch = documentSnapshot.getString("lunch");
+                        String dinner = documentSnapshot.getString("dinner");
+
+                        todayBreakfastMenu = (breakfast != null && !breakfast.isEmpty()) ? breakfast : "";
+                        binding.textBreakfastMenu.setText(!todayBreakfastMenu.isEmpty() ? todayBreakfastMenu : "menu is not set");
+                        binding.textLunchMenuNew.setText(lunch != null && !lunch.isEmpty() ? lunch : "menu is not set");
+                        binding.textDinnerMenuNew
+                                .setText(dinner != null && !dinner.isEmpty() ? dinner : "menu is not set");
+                    } else {
+                        todayBreakfastMenu = "";
+                        binding.textBreakfastMenu.setText("menu is not set");
+                        binding.textLunchMenuNew.setText("menu is not set");
+                        binding.textDinnerMenuNew.setText("menu is not set");
+                    }
+                });
+    }
+
+    private void listenToMySelection() {
+        if (messId == null || userId == null)
+            return;
+
+        mealSelectionListener = db.collection("meal_selections").document(messId + "_" + todayDate + "_" + userId)
+                .addSnapshotListener((documentSnapshot, e) -> {
+                    if (binding == null)
+                        return;
+                    String breakfastStatus = null;
+                    String breakfastItem = null;
+                    String lunchStatus = null;
+                    String dinnerStatus = null;
+                    if (documentSnapshot != null && documentSnapshot.exists()) {
+                        breakfastStatus = documentSnapshot.getString("breakfast");
+                        breakfastItem = documentSnapshot.getString("breakfast_item");
+                        lunchStatus = documentSnapshot.getString("lunch");
+                        dinnerStatus = documentSnapshot.getString("dinner");
+                    }
+
+                    updateBreakfastCardUI(breakfastStatus, breakfastItem);
+
+                    if (isOneTimeSubscribed) {
+                        // Track whether any meal is already claimed today
+                        boolean adminAllowedBoth = documentSnapshot != null && Boolean.TRUE.equals(documentSnapshot.getBoolean("adminAllowedBoth"));
+                        boolean bothIn = "IN".equals(lunchStatus) && "IN".equals(dinnerStatus);
+                        boolean eitherIn = "IN".equals(lunchStatus) || "IN".equals(dinnerStatus);
+                        oneTimeMealUsedToday = adminAllowedBoth ? bothIn : eitherIn;
+                        updateOneTimeButtonUI(lunchStatus, dinnerStatus, currentUserOneTimeAutoSelect, adminAllowedBoth);
+                    } else {
+                        updateButtonUI("LUNCH", lunchStatus);
+                        updateButtonUI("DINNER", dinnerStatus);
+                    }
+                });
+    }
+
+    private void setupClickListeners() {
+        binding.cardBreakfast.setOnClickListener(v -> showBreakfastOptionsDialog());
+        binding.btnLunchInNew.setOnClickListener(v -> markAttendance("LUNCH", "IN"));
+        binding.btnLunchOutNew.setOnClickListener(v -> markAttendance("LUNCH", "OUT"));
+        binding.btnDinnerInNew.setOnClickListener(v -> markAttendance("DINNER", "IN"));
+        binding.btnDinnerOutNew.setOnClickListener(v -> markAttendance("DINNER", "OUT"));
+        binding.btnPlanOutDays.setOnClickListener(v -> showOutPlanDialog());
+        binding.textViewWeek.setOnClickListener(v -> {
+            // Switch the bottom nav tab — this avoids stacking Menu on the back stack
+            com.google.android.material.bottomnavigation.BottomNavigationView navView = requireActivity()
+                    .findViewById(R.id.nav_view);
+            if (navView != null) {
+                navView.setSelectedItemId(R.id.navigation_user_menu);
+            }
+        });
+    }
+
+    private void markAttendance(String mealType, String status) {
+        if (binding == null)
+            return;
+
+        if (messId == null || userId == null) {
+            Toast.makeText(getContext(), "Still loading your profile, please wait...", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // ---- ONE_TIME subscription gate ----
+        if (isOneTimeSubscribed) {
+            if (!"IN".equals(status)) {
+                // OUT is not applicable for ONE_TIME — guard anyway
+                Toast.makeText(getContext(),
+                        "One Time a Day: only mark IN for one meal per day.",
+                        Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (oneTimeMealUsedToday) {
+                showExtraMealRequestDialog(mealType);
+                return;
+            }
+        } else {
+            // Normal subscription gate
+            boolean active = mealType.equals("LUNCH") ? isLunchSubscribed : isDinnerSubscribed;
+            if (!active) {
+                Toast.makeText(getContext(), mealType + " Subscription Expired! Please renew.",
+                        Toast.LENGTH_LONG).show();
+                return;
+            }
+        }
+
+        if (isCutoffPassed(mealType)) {
+            String cutoffTime = mealType.equals("LUNCH")
+                    ? String.format(Locale.getDefault(), "%02d:%02d", lunchCutoffHour, lunchCutoffMinute)
+                    : String.format(Locale.getDefault(), "%02d:%02d", dinnerCutoffHour, dinnerCutoffMinute);
+            Toast.makeText(getContext(),
+                    "Cutoff time (" + cutoffTime + ") has passed for " + mealType + ".",
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        Calendar today = Calendar.getInstance();
+        Calendar selectedDate = Calendar.getInstance();
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+            selectedDate.setTime(sdf.parse(todayDate));
+            today.set(Calendar.HOUR_OF_DAY, 0);
+            today.set(Calendar.MINUTE, 0);
+            today.set(Calendar.SECOND, 0);
+            today.set(Calendar.MILLISECOND, 0);
+            selectedDate.set(Calendar.HOUR_OF_DAY, 0);
+            selectedDate.set(Calendar.MINUTE, 0);
+            selectedDate.set(Calendar.SECOND, 0);
+            selectedDate.set(Calendar.MILLISECOND, 0);
+            if (selectedDate.before(today)) {
+                Toast.makeText(getContext(), "Cannot mark attendance for past dates",
+                        Toast.LENGTH_SHORT).show();
+                return;
+            }
+        } catch (Exception ex) {
+            /* continue */ }
+
+        updateAttendanceAndSubscription(todayDate, mealType, status)
+                .addOnSuccessListener(aVoid -> {
+                    if (binding == null)
+                        return;
+                    // No day-credit for OUT on ONE_TIME (the unused meal simply doesn't count)
+                    String suffix = !isOneTimeSubscribed && "OUT".equals(status)
+                            ? " Subscription day credited."
+                            : "";
+                    Toast.makeText(getContext(), mealType + " marked as " + status + "!" + suffix,
+                            Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(ex -> {
+                    if (binding == null)
+                        return;
+                    Toast.makeText(getContext(), "Error: " + ex.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+    }
+
+    private com.google.android.gms.tasks.Task<Void> updateAttendanceAndSubscription(
+            String date, String mealType, String status) {
+        String docId = messId + "_" + date + "_" + userId;
+        com.google.firebase.firestore.DocumentReference mealRef = db.collection("meal_selections").document(docId);
+        com.google.firebase.firestore.DocumentReference userRef = db.collection("users").document(userId);
+        String statusKey = mealType.equals("LUNCH") ? "lunch" : "dinner";
+
+        return db.runTransaction(transaction -> {
+            com.google.firebase.firestore.DocumentSnapshot mealSnapshot = transaction.get(mealRef);
+            com.google.firebase.firestore.DocumentSnapshot userSnapshot = transaction.get(userRef);
+            String previousStatus = mealSnapshot.exists() ? mealSnapshot.getString(statusKey) : null;
+
+            Map<String, Object> mealData = new HashMap<>();
+            mealData.put(statusKey, status);
+            mealData.put("userId", userId);
+            mealData.put("date", date);
+            mealData.put("messId", messId);
+            mealData.put("timestamp", System.currentTimeMillis());
+            transaction.set(mealRef, mealData, com.google.firebase.firestore.SetOptions.merge());
+
+            // Only adjust subscription expiry for non-ONE_TIME users
+            if (!isOneTimeSubscribed) {
+                long currentExpiry = getExpiryForMeal(userSnapshot, mealType);
+                long updatedExpiry = currentExpiry;
+                if ("OUT".equals(status) && !"OUT".equals(previousStatus)) {
+                    updatedExpiry += MILLIS_PER_DAY;
+                } else if ("IN".equals(status) && "OUT".equals(previousStatus)) {
+                    updatedExpiry = Math.max(System.currentTimeMillis(), currentExpiry - MILLIS_PER_DAY);
+                }
+                if (updatedExpiry != currentExpiry) {
+                    updateExpiryFields(transaction, userRef, userSnapshot, mealType, updatedExpiry);
+                }
+            }
+            return null;
+        });
+    }
+
+    private void showExtraMealRequestDialog(String mealType) {
+        new androidx.appcompat.app.AlertDialog.Builder(requireContext())
+                .setTitle("Extra Meal Request")
+                .setMessage("You have already used your one meal for today. Would you like to request an extra meal? This will deduct 1 day from your subscription.")
+                .setPositiveButton("Request", (dialog, which) -> sendExtraMealRequest(mealType))
+                .setNegativeButton("Cancel", null)
+                .show();
+    }
+
+    private void sendExtraMealRequest(String mealType) {
+        if (userId == null || messId == null) return;
+        db.collection("users").document(userId).get().addOnSuccessListener(doc -> {
+            String studentName = doc.getString("name");
+            if (studentName == null || studentName.isEmpty()) studentName = "Student";
+
+            String requestId = db.collection("subscriptionRequests").document().getId();
+            String email = doc.getString("email");
+            if (email == null) email = "";
+            com.kartik.messapp.models.SubscriptionRequest request = new com.kartik.messapp.models.SubscriptionRequest(
+                    requestId, userId, studentName, email, messId, System.currentTimeMillis(), "PENDING", "EXTRA_" + mealType
+            );
+
+            db.collection("subscriptionRequests").document(requestId).set(request)
+                    .addOnSuccessListener(aVoid -> {
+                        if (getContext() != null) Toast.makeText(getContext(), "Extra meal requested successfully!", Toast.LENGTH_SHORT).show();
+                    })
+                    .addOnFailureListener(e -> {
+                        if (getContext() != null) Toast.makeText(getContext(), "Failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    });
+        }).addOnFailureListener(e -> {
+            if (getContext() != null) Toast.makeText(getContext(), "Failed to fetch user: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        });
+    }
+
+    // ────────────────────────────────────────────────────────────
+    // ONE_TIME UI: renders both cards, but once one is chosen
+    // the IN button on the other card is locked for the rest of
+    // the day.
+    // ────────────────────────────────────────────────────────────
+    private void updateOneTimeButtonUI(String lunchStatus, String dinnerStatus, String autoSelect, boolean adminAllowedBoth) {
+        if (binding == null)
+            return;
+
+        boolean cutoffLunch = isCutoffPassed("LUNCH");
+        boolean cutoffDinner = isCutoffPassed("DINNER");
+
+        int colorPrimary = themeColor(R.color.brand_primary);
+        int colorTextOnPrimary = themeColor(R.color.text_on_brand);
+        int colorTextNormal = themeColor(R.color.text_heading);
+        int colorTextMuted = themeColor(R.color.text_caption);
+        int colorGray = themeColor(R.color.neutral_300);
+        int colorGreen = themeColor(R.color.state_success);
+        int colorDisabled = themeColor(R.color.text_disabled);
+        int colorAmber = themeColor(R.color.state_warning);
+
+        boolean lunchExplicitIn = "IN".equals(lunchStatus);
+        boolean dinnerExplicitIn = "IN".equals(dinnerStatus);
+
+        boolean isReset = "RESET".equals(lunchStatus) || "RESET".equals(dinnerStatus);
+        boolean isLunchOut = "OUT".equals(lunchStatus);
+        boolean isDinnerOut = "OUT".equals(dinnerStatus);
+
+        boolean lunchChosen = lunchExplicitIn
+                || (!isReset && !isLunchOut && !dinnerExplicitIn && "LUNCH".equals(autoSelect) && !adminAllowedBoth);
+        boolean dinnerChosen = dinnerExplicitIn
+                || (!isReset && !isDinnerOut && !lunchExplicitIn && "DINNER".equals(autoSelect) && !adminAllowedBoth);
+
+        binding.btnLunchInNew.setText("IN");
+        binding.btnDinnerInNew.setText("IN");
+
+        // ---- Lunch card ----
+        if (lunchChosen) {
+            // This meal was chosen — show as selected IN, lock both buttons
+            binding.btnLunchInNew.setBackgroundTintList(ColorStateList.valueOf(colorPrimary));
+            binding.btnLunchInNew.setTextColor(colorTextOnPrimary);
+            binding.btnLunchInNew.setEnabled(false);
+            binding.btnLunchOutNew.setVisibility(View.GONE); // OUT not applicable for ONE_TIME
+            binding.textLunchStatus.setText("Today's meal selected");
+            binding.textLunchStatusBar.setText(lunchExplicitIn ? (adminAllowedBoth ? "ONE TIME - Granted (Used)" : "ONE TIME - Used") : "ONE TIME - Auto Selected");
+            binding.textLunchStatusBar.setBackgroundColor(colorGreen);
+            binding.textLunchStatusBar.setTextColor(Color.WHITE);
+        } else if (dinnerChosen && !adminAllowedBoth) {
+            // Dinner was already chosen today — lock lunch card entirely
+            if (cutoffLunch) {
+                binding.btnLunchInNew.setEnabled(false);
+                binding.btnLunchInNew.setBackgroundTintList(ColorStateList.valueOf(colorDisabled));
+                binding.btnLunchInNew.setTextColor(Color.WHITE);
+                binding.textLunchStatusBar.setText("ONE TIME - Cutoff Passed");
+                binding.textLunchStatusBar.setBackgroundColor(colorDisabled);
+                binding.textLunchStatus.setText("Dinner already selected today");
+            } else {
+                binding.btnLunchInNew.setEnabled(true);
+                binding.btnLunchInNew.setBackgroundTintList(ColorStateList.valueOf(colorAmber));
+                binding.btnLunchInNew.setTextColor(Color.WHITE);
+                binding.btnLunchInNew.setText("Request Extra");
+                binding.textLunchStatusBar.setText("ONE TIME - Locked (Tap to request)");
+                binding.textLunchStatusBar.setBackgroundColor(colorDisabled);
+                binding.textLunchStatus.setText("Dinner already selected today");
+            }
+            binding.btnLunchOutNew.setVisibility(View.GONE);
+            binding.textLunchStatusBar.setTextColor(Color.WHITE);
+        } else if (isLunchOut && isDinnerOut) {
+            // Both marked OUT via Plan OUT Days
+            binding.btnLunchInNew.setEnabled(false);
+            binding.btnLunchInNew.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
+            binding.btnLunchInNew.setTextColor(colorTextMuted);
+            binding.btnLunchOutNew.setVisibility(View.VISIBLE);
+            binding.btnLunchOutNew.setEnabled(false);
+            binding.btnLunchOutNew.setBackgroundTintList(ColorStateList.valueOf(colorGray));
+            binding.btnLunchOutNew.setTextColor(colorTextNormal);
+            binding.textLunchStatus.setText("Planned OUT");
+            binding.textLunchStatus.setTextColor(Color.GRAY);
+            binding.textLunchStatusBar.setText("ONE TIME - OUT");
+            binding.textLunchStatusBar.setBackgroundColor(colorAmber);
+            binding.textLunchStatusBar.setTextColor(Color.WHITE);
+        } else {
+            // Nothing chosen yet — lunch is available if cutoff hasn't passed
+            binding.btnLunchOutNew.setVisibility(View.GONE); // OUT hidden for ONE_TIME
+            if (cutoffLunch) {
+                binding.btnLunchInNew.setEnabled(false);
+                binding.btnLunchInNew.setBackgroundTintList(ColorStateList.valueOf(colorDisabled));
+                binding.textLunchStatusBar.setText("ONE TIME - Cutoff Passed");
+                binding.textLunchStatusBar.setBackgroundColor(colorDisabled);
+            } else {
+                binding.btnLunchInNew.setEnabled(true);
+                binding.btnLunchInNew.setBackgroundTintList(ColorStateList.valueOf(colorPrimary));
+                binding.btnLunchInNew.setTextColor(colorTextOnPrimary);
+                if (adminAllowedBoth) {
+                    binding.textLunchStatusBar.setText("ONE TIME - Granted (Tap IN for Lunch)");
+                } else {
+                    binding.textLunchStatusBar.setText("ONE TIME - Tap IN to select Lunch");
+                }
+                binding.textLunchStatusBar.setBackgroundColor(colorAmber);
+            }
+            binding.textLunchStatus.setText("");
+            binding.textLunchStatusBar.setTextColor(Color.WHITE);
+        }
+
+        // ---- Dinner card ----
+        if (dinnerChosen) {
+            binding.btnDinnerInNew.setBackgroundTintList(ColorStateList.valueOf(colorPrimary));
+            binding.btnDinnerInNew.setTextColor(colorTextOnPrimary);
+            binding.btnDinnerInNew.setEnabled(false);
+            binding.btnDinnerOutNew.setVisibility(View.GONE);
+            binding.textDinnerStatus.setText("Today's meal selected");
+            binding.textDinnerStatusBar.setText(dinnerExplicitIn ? (adminAllowedBoth ? "ONE TIME - Granted (Used)" : "ONE TIME - Used") : "ONE TIME - Auto Selected");
+            binding.textDinnerStatusBar.setBackgroundColor(colorGreen);
+            binding.textDinnerStatusBar.setTextColor(Color.WHITE);
+        } else if (lunchChosen && !adminAllowedBoth) {
+            // Lunch was chosen — lock dinner card
+            if (cutoffDinner) {
+                binding.btnDinnerInNew.setEnabled(false);
+                binding.btnDinnerInNew.setBackgroundTintList(ColorStateList.valueOf(colorDisabled));
+                binding.btnDinnerInNew.setTextColor(Color.WHITE);
+                binding.textDinnerStatusBar.setText("ONE TIME - Cutoff Passed");
+                binding.textDinnerStatusBar.setBackgroundColor(colorDisabled);
+                binding.textDinnerStatus.setText("Lunch already selected today");
+            } else {
+                binding.btnDinnerInNew.setEnabled(true);
+                binding.btnDinnerInNew.setBackgroundTintList(ColorStateList.valueOf(colorAmber));
+                binding.btnDinnerInNew.setTextColor(Color.WHITE);
+                binding.btnDinnerInNew.setText("Request Extra");
+                binding.textDinnerStatusBar.setText("ONE TIME - Locked (Tap to request)");
+                binding.textDinnerStatusBar.setBackgroundColor(colorDisabled);
+                binding.textDinnerStatus.setText("Lunch already selected today");
+            }
+            binding.btnDinnerOutNew.setVisibility(View.GONE);
+            binding.textDinnerStatusBar.setTextColor(Color.WHITE);
+        } else if (isLunchOut && isDinnerOut) {
+            // Dinner card also Planned OUT
+            binding.btnDinnerInNew.setEnabled(false);
+            binding.btnDinnerInNew.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
+            binding.btnDinnerInNew.setTextColor(colorTextMuted);
+            binding.btnDinnerOutNew.setVisibility(View.VISIBLE);
+            binding.btnDinnerOutNew.setEnabled(false);
+            binding.btnDinnerOutNew.setBackgroundTintList(ColorStateList.valueOf(colorGray));
+            binding.btnDinnerOutNew.setTextColor(colorTextNormal);
+            binding.textDinnerStatus.setText("Planned OUT");
+            binding.textDinnerStatus.setTextColor(Color.GRAY);
+            binding.textDinnerStatusBar.setText("ONE TIME - OUT");
+            binding.textDinnerStatusBar.setBackgroundColor(colorAmber);
+            binding.textDinnerStatusBar.setTextColor(Color.WHITE);
+        } else {
+            binding.btnDinnerOutNew.setVisibility(View.GONE);
+            if (cutoffDinner) {
+                binding.btnDinnerInNew.setEnabled(false);
+                binding.btnDinnerInNew.setBackgroundTintList(ColorStateList.valueOf(colorDisabled));
+                binding.textDinnerStatusBar.setText("ONE TIME - Cutoff Passed");
+                binding.textDinnerStatusBar.setBackgroundColor(colorDisabled);
+            } else {
+                binding.btnDinnerInNew.setEnabled(true);
+                binding.btnDinnerInNew.setBackgroundTintList(ColorStateList.valueOf(colorPrimary));
+                binding.btnDinnerInNew.setTextColor(colorTextOnPrimary);
+                if (adminAllowedBoth) {
+                    binding.textDinnerStatusBar.setText("ONE TIME - Granted (Tap IN for Dinner)");
+                } else {
+                    binding.textDinnerStatusBar.setText("ONE TIME - Tap IN to select Dinner");
+                }
+                binding.textDinnerStatusBar.setBackgroundColor(colorAmber);
+            }
+            binding.textDinnerStatus.setText("");
+            binding.textDinnerStatusBar.setTextColor(Color.WHITE);
+        }
+
+        boolean disableAutoSelect = false;
+        if ("LUNCH".equals(autoSelect) && cutoffLunch)
+            disableAutoSelect = true;
+        if ("DINNER".equals(autoSelect) && cutoffDinner)
+            disableAutoSelect = true;
+        if (lunchExplicitIn || dinnerExplicitIn)
+            disableAutoSelect = true;
+
+        binding.radioAutoLunch.setEnabled(!disableAutoSelect);
+        binding.radioAutoDinner.setEnabled(!disableAutoSelect);
+        binding.radioAutoNone.setEnabled(!disableAutoSelect);
+    }
+
+    private void showOutPlanDialog() {
+        if (binding == null)
+            return;
+        if (messId == null || userId == null) {
+            Toast.makeText(getContext(), "Still loading your profile, please wait...", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        LinearLayout container = new LinearLayout(requireContext());
+        container.setOrientation(LinearLayout.VERTICAL);
+        int padding = dp(20);
+        container.setPadding(padding, padding, padding, 0);
+
+        DatePicker datePicker = new DatePicker(requireContext());
+        datePicker.setMinDate(startOfToday().getTimeInMillis());
+        container.addView(datePicker);
+
+        com.google.android.material.textfield.TextInputLayout daysLayout = new com.google.android.material.textfield.TextInputLayout(
+                requireContext());
+        daysLayout.setHint("How many days?");
+        daysLayout.setPadding(0, dp(12), 0, 0);
+        com.google.android.material.textfield.TextInputEditText daysInput = new com.google.android.material.textfield.TextInputEditText(
+                requireContext());
+        daysInput.setInputType(InputType.TYPE_CLASS_NUMBER);
+        daysLayout.addView(daysInput);
+        container.addView(daysLayout);
+
+        RadioGroup mealGroup = new RadioGroup(requireContext());
+        mealGroup.setOrientation(RadioGroup.HORIZONTAL);
+        mealGroup.setPadding(0, dp(12), 0, 0);
+        int lunchId = View.generateViewId();
+        int dinnerId = View.generateViewId();
+        int bothId = View.generateViewId();
+        RadioButton lunch = createMealRadioButton(lunchId, "Lunch");
+        RadioButton dinner = createMealRadioButton(dinnerId, "Dinner");
+        RadioButton both = createMealRadioButton(bothId, "Both");
+        mealGroup.addView(lunch);
+        mealGroup.addView(dinner);
+        mealGroup.addView(both);
+        mealGroup.check(bothId);
+
+        if (isOneTimeSubscribed) {
+            // For One Time subscriptions, they only get 1 meal a day, so planning OUT
+            // applies to the whole day.
+            mealGroup.setVisibility(View.GONE);
+        }
+        container.addView(mealGroup);
+
+        new androidx.appcompat.app.AlertDialog.Builder(requireContext())
+                .setTitle("Plan OUT Days")
+                .setView(container)
+                .setPositiveButton("Save", (dialog, which) -> {
+                    String daysText = daysInput.getText() != null ? daysInput.getText().toString().trim() : "";
+                    if (daysText.isEmpty()) {
+                        Toast.makeText(getContext(), "Please enter number of days", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    int days = Integer.parseInt(daysText);
+                    if (days <= 0) {
+                        Toast.makeText(getContext(), "Days must be greater than 0", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    Calendar startDate = Calendar.getInstance();
+                    startDate.set(datePicker.getYear(), datePicker.getMonth(),
+                            datePicker.getDayOfMonth(), 0, 0, 0);
+                    startDate.set(Calendar.MILLISECOND, 0);
+
+                    String mealType = "BOTH";
+                    int selectedId = mealGroup.getCheckedRadioButtonId();
+                    if (selectedId == lunchId)
+                        mealType = "LUNCH";
+                    else if (selectedId == dinnerId)
+                        mealType = "DINNER";
+
+                    applyOutPlan(startDate, days, mealType);
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
+    }
+
+    private RadioButton createMealRadioButton(int id, String label) {
+        RadioButton radioButton = new RadioButton(requireContext());
+        radioButton.setId(id);
+        radioButton.setText(label);
+        radioButton.setLayoutParams(
+                new RadioGroup.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
+        return radioButton;
+    }
+
+    private void applyOutPlan(Calendar startDate, int days, String mealType) {
+        if (binding == null)
+            return;
+        if (!isOneTimeSubscribed) {
+            if ((mealType.equals("LUNCH") || mealType.equals("BOTH")) && !isLunchSubscribed) {
+                Toast.makeText(getContext(), "Lunch subscription is expired. Please renew first.",
+                        Toast.LENGTH_LONG).show();
+                return;
+            }
+            if ((mealType.equals("DINNER") || mealType.equals("BOTH")) && !isDinnerSubscribed) {
+                Toast.makeText(getContext(), "Dinner subscription is expired. Please renew first.",
+                        Toast.LENGTH_LONG).show();
+                return;
+            }
+        }
+
+        binding.btnPlanOutDays.setEnabled(false);
+        List<String> dates = new ArrayList<>();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+        Calendar cursor = (Calendar) startDate.clone();
+        for (int i = 0; i < days; i++) {
+            dates.add(sdf.format(cursor.getTime()));
+            cursor.add(Calendar.DAY_OF_YEAR, 1);
+        }
+
+        com.google.firebase.firestore.DocumentReference userRef = db.collection("users").document(userId);
+
+        db.runTransaction(transaction -> {
+            com.google.firebase.firestore.DocumentSnapshot userSnapshot = transaction.get(userRef);
+            List<com.google.firebase.firestore.DocumentReference> mealRefs = new ArrayList<>();
+            List<com.google.firebase.firestore.DocumentSnapshot> mealSnapshots = new ArrayList<>();
+
+            for (String date : dates) {
+                com.google.firebase.firestore.DocumentReference ref = db.collection("meal_selections")
+                        .document(messId + "_" + date + "_" + userId);
+                mealRefs.add(ref);
+                mealSnapshots.add(transaction.get(ref));
+            }
+
+            int lunchCredits = 0;
+            int dinnerCredits = 0;
+            long timestamp = System.currentTimeMillis();
+            for (int i = 0; i < dates.size(); i++) {
+                Map<String, Object> mealData = new HashMap<>();
+                mealData.put("userId", userId);
+                mealData.put("date", dates.get(i));
+                mealData.put("messId", messId);
+                mealData.put("timestamp", timestamp);
+                mealData.put("plannedOut", true);
+
+                com.google.firebase.firestore.DocumentSnapshot snapshot = mealSnapshots.get(i);
+                if (mealType.equals("LUNCH") || mealType.equals("BOTH")) {
+                    String previousLunch = snapshot.exists() ? snapshot.getString("lunch") : null;
+                    if (!"OUT".equals(previousLunch))
+                        lunchCredits++;
+                    mealData.put("lunch", "OUT");
+                    mealData.put("plannedOutLunch", true);
+                }
+                if (mealType.equals("DINNER") || mealType.equals("BOTH")) {
+                    String previousDinner = snapshot.exists() ? snapshot.getString("dinner") : null;
+                    if (!"OUT".equals(previousDinner))
+                        dinnerCredits++;
+                    mealData.put("dinner", "OUT");
+                    mealData.put("plannedOutDinner", true);
+                }
+                transaction.set(mealRefs.get(i), mealData, com.google.firebase.firestore.SetOptions.merge());
+            }
+
+            if (isOneTimeSubscribed) {
+                int oneTimeCredits = 0;
+                for (int i = 0; i < dates.size(); i++) {
+                    com.google.firebase.firestore.DocumentSnapshot snapshot = mealSnapshots.get(i);
+                    boolean previouslyPlannedOut = snapshot.exists()
+                            && Boolean.TRUE.equals(snapshot.getBoolean("plannedOut"));
+                    if (!previouslyPlannedOut) {
+                        oneTimeCredits++;
+                    }
+                }
+                if (oneTimeCredits > 0) {
+                    long currentOneTimeExpiry = userSnapshot.getLong("oneTimeMealExpiry") != null
+                            ? userSnapshot.getLong("oneTimeMealExpiry")
+                            : 0L;
+                    long updatedOneTimeExpiry = currentOneTimeExpiry + (oneTimeCredits * MILLIS_PER_DAY);
+                    Map<String, Object> updates = new HashMap<>();
+                    updates.put("oneTimeMealExpiry", updatedOneTimeExpiry);
+                    updates.put("subscriptionExpiry", updatedOneTimeExpiry);
+                    transaction.update(userRef, updates);
+                }
+            } else {
+                long updatedLunchExpiry = getExpiryForMeal(userSnapshot, "LUNCH") + (lunchCredits * MILLIS_PER_DAY);
+                long updatedDinnerExpiry = getExpiryForMeal(userSnapshot, "DINNER") + (dinnerCredits * MILLIS_PER_DAY);
+                if (lunchCredits > 0 || dinnerCredits > 0) {
+                    Map<String, Object> updates = new HashMap<>();
+                    if (lunchCredits > 0)
+                        updates.put("lunchSubscriptionExpiry", updatedLunchExpiry);
+                    if (dinnerCredits > 0)
+                        updates.put("dinnerSubscriptionExpiry", updatedDinnerExpiry);
+                    updates.put("subscriptionExpiry", Math.max(updatedLunchExpiry, updatedDinnerExpiry));
+                    transaction.update(userRef, updates);
+                }
+            }
+            return null;
+        }).addOnSuccessListener(aVoid -> {
+            if (binding == null)
+                return;
+            binding.btnPlanOutDays.setEnabled(true);
+            Toast.makeText(getContext(), "OUT days saved. Subscription credited.", Toast.LENGTH_SHORT).show();
+        }).addOnFailureListener(e -> {
+            if (binding == null)
+                return;
+            binding.btnPlanOutDays.setEnabled(true);
+            Toast.makeText(getContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        });
+    }
+
+    private void listenToPlannedOutDays() {
+        if (messId == null || userId == null)
+            return;
+        if (plannedOutListener != null)
+            plannedOutListener.remove();
+
+        plannedOutListener = db.collection("meal_selections")
+                .whereEqualTo("messId", messId)
+                .whereEqualTo("userId", userId)
+                .whereEqualTo("plannedOut", true)
+                .addSnapshotListener((snapshots, e) -> {
+                    if (binding == null || e != null)
+                        return;
+                    binding.containerPlannedOutDays.removeAllViews();
+                    if (snapshots == null || snapshots.isEmpty()) {
+                        binding.cardPlannedOutDays.setVisibility(View.GONE);
+                        return;
+                    }
+
+                    List<com.google.firebase.firestore.DocumentSnapshot> plannedDocs = new ArrayList<>();
+                    for (com.google.firebase.firestore.DocumentSnapshot doc : snapshots.getDocuments()) {
+                        String date = doc.getString("date");
+                        if (date != null && date.compareTo(todayDate) >= 0 && hasPlannedOutMeal(doc)) {
+                            plannedDocs.add(doc);
+                        }
+                    }
+
+                    plannedDocs.sort((left, right) -> {
+                        String leftDate = left.getString("date");
+                        String rightDate = right.getString("date");
+                        if (leftDate == null)
+                            return 1;
+                        if (rightDate == null)
+                            return -1;
+                        return leftDate.compareTo(rightDate);
+                    });
+
+                    if (plannedDocs.isEmpty()) {
+                        binding.cardPlannedOutDays.setVisibility(View.GONE);
+                        return;
+                    }
+
+                    binding.cardPlannedOutDays.setVisibility(View.VISIBLE);
+                    for (com.google.firebase.firestore.DocumentSnapshot doc : plannedDocs) {
+                        binding.containerPlannedOutDays.addView(createPlannedOutRow(doc));
+                    }
+                });
+    }
+
+    // BUG FIX: only the specific flags, not the catch-all plannedOut==true
+    private boolean hasPlannedOutMeal(com.google.firebase.firestore.DocumentSnapshot doc) {
+        return (Boolean.TRUE.equals(doc.getBoolean("plannedOutLunch")) && "OUT".equals(doc.getString("lunch")))
+                || (Boolean.TRUE.equals(doc.getBoolean("plannedOutDinner")) && "OUT".equals(doc.getString("dinner")));
+    }
+
+    private View createPlannedOutRow(com.google.firebase.firestore.DocumentSnapshot doc) {
+        LinearLayout row = new LinearLayout(requireContext());
+        row.setOrientation(LinearLayout.HORIZONTAL);
+        row.setGravity(android.view.Gravity.CENTER_VERTICAL);
+        row.setPadding(0, dp(8), 0, dp(8));
+
+        TextView text = new TextView(requireContext());
+        text.setText(formatPlannedOutLabel(doc));
+        text.setTextSize(14);
+        text.setTextColor(themeColor(R.color.text_body));
+        text.setLayoutParams(new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
+
+        com.google.android.material.button.MaterialButton cancelButton = new com.google.android.material.button.MaterialButton(
+                requireContext());
+        cancelButton.setText("Cancel");
+        cancelButton.setTextSize(12);
+        cancelButton.setOnClickListener(v -> confirmCancelPlannedOut(doc));
+
+        row.addView(text);
+        row.addView(cancelButton);
+        return row;
+    }
+
+    private String formatPlannedOutLabel(com.google.firebase.firestore.DocumentSnapshot doc) {
+        String date = doc.getString("date");
+        String meal = getPlannedOutMealLabel(doc);
+        try {
+            Date parsedDate = new SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(date);
+            if (parsedDate != null) {
+                date = new SimpleDateFormat("EEE, dd MMM", Locale.getDefault()).format(parsedDate);
+            }
+        } catch (Exception ignored) {
+        }
+        return date + " - " + meal;
+    }
+
+    private String getPlannedOutMealLabel(com.google.firebase.firestore.DocumentSnapshot doc) {
+        boolean lunch = "OUT".equals(doc.getString("lunch"));
+        boolean dinner = "OUT".equals(doc.getString("dinner"));
+        if (lunch && dinner)
+            return "Lunch & Dinner";
+        if (lunch)
+            return "Lunch";
+        if (dinner)
+            return "Dinner";
+        return "OUT";
+    }
+
+    private void confirmCancelPlannedOut(com.google.firebase.firestore.DocumentSnapshot doc) {
+        new androidx.appcompat.app.AlertDialog.Builder(requireContext())
+                .setTitle("Cancel OUT Plan")
+                .setMessage("Cancel planned OUT for " + formatPlannedOutLabel(doc) + "?")
+                .setPositiveButton("Cancel Plan", (dialog, which) -> cancelPlannedOut(doc.getId()))
+                .setNegativeButton("Keep", null)
+                .show();
+    }
+
+    private void cancelPlannedOut(String documentId) {
+        if (binding == null || userId == null)
+            return;
+        binding.btnPlanOutDays.setEnabled(false);
+
+        com.google.firebase.firestore.DocumentReference mealRef = db.collection("meal_selections").document(documentId);
+        com.google.firebase.firestore.DocumentReference userRef = db.collection("users").document(userId);
+
+        db.runTransaction(transaction -> {
+            com.google.firebase.firestore.DocumentSnapshot mealSnapshot = transaction.get(mealRef);
+            com.google.firebase.firestore.DocumentSnapshot userSnapshot = transaction.get(userRef);
+            if (!mealSnapshot.exists())
+                return null;
+
+            if (isOneTimeSubscribed) {
+                boolean cancelOneTime = "OUT".equals(mealSnapshot.getString("lunch"))
+                        && "OUT".equals(mealSnapshot.getString("dinner"))
+                        && Boolean.TRUE.equals(mealSnapshot.getBoolean("plannedOut"));
+                if (cancelOneTime) {
+                    transaction.delete(mealRef);
+
+                    long currentExpiry = userSnapshot.getLong("oneTimeMealExpiry") != null
+                            ? userSnapshot.getLong("oneTimeMealExpiry")
+                            : 0L;
+                    long revertedExpiry = Math.max(System.currentTimeMillis(), currentExpiry - MILLIS_PER_DAY);
+                    Map<String, Object> userUpdates = new HashMap<>();
+                    userUpdates.put("oneTimeMealExpiry", revertedExpiry);
+                    userUpdates.put("subscriptionExpiry", revertedExpiry);
+                    transaction.update(userRef, userUpdates);
+                }
+            } else {
+                boolean cancelLunch = "OUT".equals(mealSnapshot.getString("lunch"))
+                        && (Boolean.TRUE.equals(mealSnapshot.getBoolean("plannedOutLunch"))
+                                || Boolean.TRUE.equals(mealSnapshot.getBoolean("plannedOut")));
+                boolean cancelDinner = "OUT".equals(mealSnapshot.getString("dinner"))
+                        && (Boolean.TRUE.equals(mealSnapshot.getBoolean("plannedOutDinner"))
+                                || Boolean.TRUE.equals(mealSnapshot.getBoolean("plannedOut")));
+
+                Map<String, Object> mealUpdates = new HashMap<>();
+                if (cancelLunch) {
+                    mealUpdates.put("lunch", "IN");
+                    mealUpdates.put("plannedOutLunch", false);
+                }
+                if (cancelDinner) {
+                    mealUpdates.put("dinner", "IN");
+                    mealUpdates.put("plannedOutDinner", false);
+                }
+                mealUpdates.put("plannedOut", false);
+                mealUpdates.put("timestamp", System.currentTimeMillis());
+                transaction.update(mealRef, mealUpdates);
+
+                long lunchExpiry = getExpiryForMeal(userSnapshot, "LUNCH");
+                long dinnerExpiry = getExpiryForMeal(userSnapshot, "DINNER");
+                if (cancelLunch)
+                    lunchExpiry = Math.max(System.currentTimeMillis(), lunchExpiry - MILLIS_PER_DAY);
+                if (cancelDinner)
+                    dinnerExpiry = Math.max(System.currentTimeMillis(), dinnerExpiry - MILLIS_PER_DAY);
+
+                Map<String, Object> userUpdates = new HashMap<>();
+                if (cancelLunch)
+                    userUpdates.put("lunchSubscriptionExpiry", lunchExpiry);
+                if (cancelDinner)
+                    userUpdates.put("dinnerSubscriptionExpiry", dinnerExpiry);
+                if (cancelLunch || cancelDinner) {
+                    userUpdates.put("subscriptionExpiry", Math.max(lunchExpiry, dinnerExpiry));
+                    transaction.update(userRef, userUpdates);
+                }
+            }
+            return null;
+        }).addOnSuccessListener(aVoid -> {
+            if (binding == null)
+                return;
+            binding.btnPlanOutDays.setEnabled(true);
+            Toast.makeText(getContext(), "OUT plan cancelled.", Toast.LENGTH_SHORT).show();
+        }).addOnFailureListener(e -> {
+            if (binding == null)
+                return;
+            binding.btnPlanOutDays.setEnabled(true);
+            Toast.makeText(getContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        });
+    }
+
+    private long getExpiryForMeal(com.google.firebase.firestore.DocumentSnapshot userSnapshot, String mealType) {
+        String expiryKey = mealType.equals("LUNCH") ? "lunchSubscriptionExpiry" : "dinnerSubscriptionExpiry";
+        Long specificExpiry = userSnapshot.getLong(expiryKey);
+        Long generalExpiry = userSnapshot.getLong("subscriptionExpiry");
+        if (specificExpiry != null && specificExpiry > 0)
+            return specificExpiry;
+        return generalExpiry != null ? generalExpiry : System.currentTimeMillis();
+    }
+
+    private void updateExpiryFields(com.google.firebase.firestore.Transaction transaction,
+            com.google.firebase.firestore.DocumentReference userRef,
+            com.google.firebase.firestore.DocumentSnapshot userSnapshot,
+            String mealType, long updatedExpiry) {
+        String expiryKey = mealType.equals("LUNCH") ? "lunchSubscriptionExpiry" : "dinnerSubscriptionExpiry";
+        long otherExpiry = getExpiryForMeal(userSnapshot, mealType.equals("LUNCH") ? "DINNER" : "LUNCH");
+        long overallExpiry = Math.max(updatedExpiry, otherExpiry);
+        transaction.update(userRef, expiryKey, updatedExpiry, "subscriptionExpiry", overallExpiry);
+    }
+
+    private Calendar startOfToday() {
+        Calendar today = Calendar.getInstance();
+        today.set(Calendar.HOUR_OF_DAY, 0);
+        today.set(Calendar.MINUTE, 0);
+        today.set(Calendar.SECOND, 0);
+        today.set(Calendar.MILLISECOND, 0);
+        return today;
+    }
+
+    private int dp(int value) {
+        return Math.round(value * getResources().getDisplayMetrics().density);
+    }
+
+    private int themeColor(@ColorRes int colorRes) {
+        return ContextCompat.getColor(requireContext(), colorRes);
+    }
+
+    private void updateButtonUI(String mealType, String status) {
+        if (binding == null)
+            return;
+
+        int colorPrimary = themeColor(R.color.brand_primary);
+        int colorTextOnPrimary = themeColor(R.color.text_on_brand);
+        int colorTextNormal = themeColor(R.color.text_heading);
+        int colorTextMuted = themeColor(R.color.text_caption);
+        int colorGray = themeColor(R.color.neutral_300);
+        int colorGreen = themeColor(R.color.state_success);
+        int colorYellow = themeColor(R.color.state_warning);
+        int colorDisabled = themeColor(R.color.text_disabled);
+
+        boolean isSubscribed = mealType.equals("LUNCH") ? isLunchSubscribed : isDinnerSubscribed;
+        boolean cutoffPassed = isCutoffPassed(mealType);
+        boolean canMark = isSubscribed && !cutoffPassed;
+
+        if (mealType.equals("LUNCH")) {
+            binding.btnLunchOutNew.setVisibility(View.VISIBLE); // restore for normal subs
+            if (status == null || "RESET".equals(status)) {
+                binding.textLunchStatusBar.setTextColor(Color.WHITE);
+                if (!canMark) {
+                    binding.textLunchStatusBar.setText(!isSubscribed
+                            ? "Status: Subscription Expired"
+                            : "Status: Cutoff Time Passed");
+                    binding.textLunchStatusBar.setBackgroundColor(colorDisabled);
+                } else if (autoSelectLunch) {
+                    // Auto-select is ON — show as Auto IN
+                    binding.btnLunchInNew.setBackgroundTintList(ColorStateList.valueOf(colorGreen));
+                    binding.btnLunchInNew.setTextColor(Color.WHITE);
+                    binding.btnLunchOutNew.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
+                    binding.btnLunchOutNew.setTextColor(colorTextMuted);
+                    binding.textLunchStatus.setText("Auto-selected IN");
+                    binding.textLunchStatus.setTextColor(colorGreen);
+                    binding.textLunchStatusBar.setText("Status: Auto IN ✓");
+                    binding.textLunchStatusBar.setBackgroundColor(colorGreen);
+                } else {
+                    binding.btnLunchInNew.setBackgroundTintList(ColorStateList.valueOf(colorPrimary));
+                    binding.btnLunchInNew.setTextColor(colorTextOnPrimary);
+                    binding.btnLunchOutNew.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
+                    binding.btnLunchOutNew.setTextColor(colorTextMuted);
+                    binding.textLunchStatus.setText("");
+                    binding.textLunchStatusBar.setText("Status: Not selected");
+                    binding.textLunchStatusBar.setBackgroundColor(colorYellow);
+                }
+                binding.btnLunchInNew.setEnabled(!autoSelectLunch && canMark);
+                binding.btnLunchOutNew.setEnabled(canMark);
+                return;
+            }
+            if ("IN".equals(status)) {
+                binding.btnLunchInNew.setBackgroundTintList(ColorStateList.valueOf(colorPrimary));
+                binding.btnLunchInNew.setTextColor(colorTextOnPrimary);
+                binding.btnLunchOutNew.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
+                binding.btnLunchOutNew.setTextColor(colorTextMuted);
+                binding.btnLunchInNew.setEnabled(false);
+                binding.btnLunchOutNew.setEnabled(canMark && allowMultipleChanges);
+                binding.textLunchStatus.setText("");
+                binding.textLunchStatusBar.setText("Status: IN");
+                binding.textLunchStatusBar.setBackgroundColor(colorGreen);
+                binding.textLunchStatusBar.setTextColor(Color.WHITE);
+            } else if ("OUT".equals(status)) {
+                binding.btnLunchInNew.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
+                binding.btnLunchInNew.setTextColor(colorTextMuted);
+                binding.btnLunchOutNew.setBackgroundTintList(ColorStateList.valueOf(colorGray));
+                binding.btnLunchOutNew.setTextColor(colorTextNormal);
+                binding.btnLunchInNew.setEnabled(canMark && allowMultipleChanges);
+                binding.btnLunchOutNew.setEnabled(false);
+                binding.textLunchStatus.setText("Marked OUT");
+                binding.textLunchStatus.setTextColor(Color.GRAY);
+                binding.textLunchStatusBar.setText("Status: OUT");
+                binding.textLunchStatusBar.setBackgroundColor(colorYellow);
+                binding.textLunchStatusBar.setTextColor(Color.WHITE);
+            }
+        } else {
+            binding.btnDinnerOutNew.setVisibility(View.VISIBLE);
+            if (status == null || "RESET".equals(status)) {
+                binding.textDinnerStatusBar.setTextColor(Color.WHITE);
+                if (!canMark) {
+                    binding.textDinnerStatusBar.setText(!isSubscribed
+                            ? "Status: Subscription Expired"
+                            : "Status: Cutoff Time Passed");
+                    binding.textDinnerStatusBar.setBackgroundColor(colorDisabled);
+                } else if (autoSelectDinner) {
+                    // Auto-select is ON — show as Auto IN
+                    binding.btnDinnerInNew.setBackgroundTintList(ColorStateList.valueOf(colorGreen));
+                    binding.btnDinnerInNew.setTextColor(Color.WHITE);
+                    binding.btnDinnerOutNew.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
+                    binding.btnDinnerOutNew.setTextColor(colorTextMuted);
+                    binding.textDinnerStatus.setText("Auto-selected IN");
+                    binding.textDinnerStatus.setTextColor(colorGreen);
+                    binding.textDinnerStatusBar.setText("Status: Auto IN ✓");
+                    binding.textDinnerStatusBar.setBackgroundColor(colorGreen);
+                } else {
+                    binding.btnDinnerInNew.setBackgroundTintList(ColorStateList.valueOf(colorPrimary));
+                    binding.btnDinnerInNew.setTextColor(colorTextOnPrimary);
+                    binding.btnDinnerOutNew.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
+                    binding.btnDinnerOutNew.setTextColor(colorTextMuted);
+                    binding.textDinnerStatus.setText("");
+                    binding.textDinnerStatusBar.setText("Status: Not selected");
+                    binding.textDinnerStatusBar.setBackgroundColor(colorYellow);
+                }
+                binding.btnDinnerInNew.setEnabled(!autoSelectDinner && canMark);
+                binding.btnDinnerOutNew.setEnabled(canMark);
+                return;
+            }
+            if ("IN".equals(status)) {
+                binding.btnDinnerInNew.setBackgroundTintList(ColorStateList.valueOf(colorPrimary));
+                binding.btnDinnerInNew.setTextColor(colorTextOnPrimary);
+                binding.btnDinnerOutNew.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
+                binding.btnDinnerOutNew.setTextColor(colorTextMuted);
+                binding.btnDinnerInNew.setEnabled(false);
+                binding.btnDinnerOutNew.setEnabled(canMark && allowMultipleChanges);
+                binding.textDinnerStatus.setText("");
+                binding.textDinnerStatusBar.setText("Status: IN");
+                binding.textDinnerStatusBar.setBackgroundColor(colorGreen);
+                binding.textDinnerStatusBar.setTextColor(Color.WHITE);
+            } else if ("OUT".equals(status)) {
+                binding.btnDinnerInNew.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
+                binding.btnDinnerInNew.setTextColor(colorTextMuted);
+                binding.btnDinnerOutNew.setBackgroundTintList(ColorStateList.valueOf(colorGray));
+                binding.btnDinnerOutNew.setTextColor(colorTextNormal);
+                binding.btnDinnerInNew.setEnabled(canMark && allowMultipleChanges);
+                binding.btnDinnerOutNew.setEnabled(false);
+                binding.textDinnerStatus.setText("Marked OUT");
+                binding.textDinnerStatus.setTextColor(Color.GRAY);
+                binding.textDinnerStatusBar.setText("Status: OUT");
+                binding.textDinnerStatusBar.setBackgroundColor(colorYellow);
+                binding.textDinnerStatusBar.setTextColor(Color.WHITE);
+            }
+        }
+    }
+
+    private void startDeadlineTimer() {
+        if (timer != null)
+            timer.cancel();
+
+        timer = new CountDownTimer(Long.MAX_VALUE, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                if (binding == null)
+                    return;
+
+                Calendar now = Calendar.getInstance();
+                long nowMs = now.getTimeInMillis();
+
+                Calendar lunchTarget = (Calendar) now.clone();
+                lunchTarget.set(Calendar.HOUR_OF_DAY, lunchCutoffHour);
+                lunchTarget.set(Calendar.MINUTE, lunchCutoffMinute);
+                lunchTarget.set(Calendar.SECOND, 0);
+                updateCardTimer(binding.textLunchCardTimer, lunchTarget.getTimeInMillis() - nowMs);
+
+                Calendar dinnerTarget = (Calendar) now.clone();
+                dinnerTarget.set(Calendar.HOUR_OF_DAY, dinnerCutoffHour);
+                dinnerTarget.set(Calendar.MINUTE, dinnerCutoffMinute);
+                dinnerTarget.set(Calendar.SECOND, 0);
+                updateCardTimer(binding.textDinnerCardTimer, dinnerTarget.getTimeInMillis() - nowMs);
+            }
+
+            @Override
+            public void onFinish() {
+            }
+        };
+        timer.start();
+    }
+
+    private void updateCardTimer(TextView timerView, long diff) {
+        if (timerView == null)
+            return;
+        timerView.setVisibility(View.VISIBLE);
+        if (diff > 0) {
+            long hours = TimeUnit.MILLISECONDS.toHours(diff);
+            long minutes = TimeUnit.MILLISECONDS.toMinutes(diff) % 60;
+            long seconds = TimeUnit.MILLISECONDS.toSeconds(diff) % 60;
+            timerView.setText(hours > 0
+                    ? String.format(Locale.getDefault(), "%dh %02dm left", hours, minutes)
+                    : String.format(Locale.getDefault(), "%02d:%02d left", minutes, seconds));
+            timerView.setTextColor(themeColor(R.color.state_error));
+            timerView.setBackgroundTintList(ColorStateList.valueOf(themeColor(R.color.semantic_error_bg)));
+        } else {
+            timerView.setText("LOCKED");
+            timerView.setTextColor(themeColor(R.color.text_disabled));
+            timerView.setBackgroundTintList(ColorStateList.valueOf(themeColor(R.color.neutral_100)));
+        }
+    }
+
+    private boolean isCutoffPassed(String mealType) {
+        Calendar now = Calendar.getInstance();
+        int hour = now.get(Calendar.HOUR_OF_DAY);
+        int minute = now.get(Calendar.MINUTE);
+        if (mealType.equals("LUNCH")) {
+            return (hour > lunchCutoffHour) || (hour == lunchCutoffHour && minute >= lunchCutoffMinute);
+        } else {
+            return (hour > dinnerCutoffHour) || (hour == dinnerCutoffHour && minute >= dinnerCutoffMinute);
+        }
+    }
+
+    private void listenToMessCondition() {
+        if (messId == null)
+            return;
+
+        messSettingsListener = db.collection("mess_settings").document(messId)
+                .addSnapshotListener((documentSnapshot, e) -> {
+                    if (binding == null)
+                        return;
+                    if (e != null)
+                        return;
+                    if (documentSnapshot != null && documentSnapshot.exists()) {
+                        String condition = documentSnapshot.getString("messCondition");
+                        if (condition != null)
+                            updateMessConditionDisplay(condition);
+                        else
+                            hideMessConditionCard();
+                    } else {
+                        hideMessConditionCard();
+                    }
+                });
+    }
+
+    private void updateMessConditionDisplay(String condition) {
+        if (binding == null)
+            return;
+        binding.cardMessCondition.setVisibility(View.VISIBLE);
+        View indicator = binding.indicatorMessCondition;
+        switch (condition) {
+            case "FULL":
+                binding.textMessCondition.setText("Mess is FULL");
+                binding.textMessCondition.setTextColor(themeColor(R.color.state_error));
+                indicator.setBackgroundTintList(ColorStateList.valueOf(themeColor(R.color.state_error)));
+                break;
+            case "HALF":
+                binding.textMessCondition.setText("Mess is HALF FULL");
+                binding.textMessCondition.setTextColor(themeColor(R.color.state_warning));
+                indicator.setBackgroundTintList(ColorStateList.valueOf(themeColor(R.color.state_warning)));
+                break;
+            case "EMPTY":
+                binding.textMessCondition.setText("Mess is EMPTY");
+                binding.textMessCondition.setTextColor(themeColor(R.color.state_success));
+                indicator.setBackgroundTintList(ColorStateList.valueOf(themeColor(R.color.state_success)));
+                break;
+            default:
+                hideMessConditionCard();
+        }
+    }
+
+    private void hideMessConditionCard() {
+        if (binding != null)
+            binding.cardMessCondition.setVisibility(View.GONE);
+    }
+
+    private void updateBreakfastCardUI(String status, String item) {
+        if (binding == null) return;
+        if ("IN".equals(status)) {
+            selectedBreakfastItem = item != null ? item : "";
+            binding.textBreakfastStatusBar.setText("Status: IN" + (!selectedBreakfastItem.isEmpty() ? " (" + selectedBreakfastItem + ")" : ""));
+            binding.textBreakfastStatusBar.setBackgroundColor(themeColor(R.color.state_success));
+            binding.textBreakfastStatusBar.setTextColor(Color.WHITE);
+            binding.textBreakfastBadge.setText("IN");
+            binding.textBreakfastBadge.setTextColor(Color.WHITE);
+            binding.textBreakfastBadge.setBackgroundTintList(ColorStateList.valueOf(themeColor(R.color.state_success)));
+        } else {
+            selectedBreakfastItem = "";
+            binding.textBreakfastStatusBar.setText("Status: Not Selected");
+            binding.textBreakfastStatusBar.setBackgroundColor(themeColor(R.color.neutral_100));
+            binding.textBreakfastStatusBar.setTextColor(themeColor(R.color.text_sub));
+            binding.textBreakfastBadge.setText("AVAILABLE");
+            binding.textBreakfastBadge.setTextColor(themeColor(R.color.brand_primary));
+            binding.textBreakfastBadge.setBackgroundTintList(ColorStateList.valueOf(themeColor(R.color.brand_primary_light)));
+        }
+    }
+
+    private void showBreakfastOptionsDialog() {
+        if (todayBreakfastMenu == null || todayBreakfastMenu.trim().isEmpty() || todayBreakfastMenu.equals("menu is not set")) {
+            Toast.makeText(getContext(), "Breakfast menu is not set by admin today.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Split breakfast by comma
+        String[] options = todayBreakfastMenu.split(",");
+        for (int i = 0; i < options.length; i++) {
+            options[i] = options[i].trim();
+        }
+
+        // Find selected index if any
+        int selectedIndex = -1;
+        for (int i = 0; i < options.length; i++) {
+            if (options[i].equalsIgnoreCase(selectedBreakfastItem)) {
+                selectedIndex = i;
+                break;
+            }
+        }
+
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(requireContext())
+                .setTitle("Select Breakfast Option")
+                .setSingleChoiceItems(options, selectedIndex, (dialog, which) -> {
+                    String selectedOption = options[which];
+                    saveBreakfastSelection(selectedOption);
+                    dialog.dismiss();
+                })
+                .setNegativeButton("Cancel", null);
+
+        if (selectedBreakfastItem != null && !selectedBreakfastItem.isEmpty()) {
+            builder.setNeutralButton("Clear Selection", (dialog, which) -> {
+                clearBreakfastSelection();
+            });
+        }
+
+        builder.show();
+    }
+
+    private void saveBreakfastSelection(String selectedOption) {
+        if (messId == null || userId == null) {
+            Toast.makeText(getContext(), "Profile data still loading, please wait...", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String docId = messId + "_" + todayDate + "_" + userId;
+        com.google.firebase.firestore.DocumentReference mealRef = db.collection("meal_selections").document(docId);
+
+        Map<String, Object> mealData = new HashMap<>();
+        mealData.put("breakfast", "IN");
+        mealData.put("breakfast_item", selectedOption);
+        mealData.put("userId", userId);
+        mealData.put("date", todayDate);
+        mealData.put("messId", messId);
+        mealData.put("timestamp", System.currentTimeMillis());
+
+        mealRef.set(mealData, com.google.firebase.firestore.SetOptions.merge())
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(getContext(), "Breakfast selection saved: " + selectedOption, Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(getContext(), "Failed to save selection: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+    }
+
+    private void clearBreakfastSelection() {
+        if (messId == null || userId == null) {
+            Toast.makeText(getContext(), "Profile data still loading, please wait...", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String docId = messId + "_" + todayDate + "_" + userId;
+        com.google.firebase.firestore.DocumentReference mealRef = db.collection("meal_selections").document(docId);
+
+        Map<String, Object> mealData = new HashMap<>();
+        mealData.put("breakfast", "OUT");
+        mealData.put("breakfast_item", com.google.firebase.firestore.FieldValue.delete());
+
+        mealRef.update(mealData)
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(getContext(), "Breakfast selection removed.", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    // Fallback to set with merge if document is not created yet
+                    mealRef.set(mealData, com.google.firebase.firestore.SetOptions.merge())
+                            .addOnSuccessListener(aVoid2 -> {
+                                Toast.makeText(getContext(), "Breakfast selection removed.", Toast.LENGTH_SHORT).show();
+                            })
+                            .addOnFailureListener(ex -> {
+                                Toast.makeText(getContext(), "Failed to remove selection: " + ex.getMessage(), Toast.LENGTH_SHORT).show();
+                            });
+                });
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (timer != null)
+            timer.cancel();
+        if (plannedOutListener != null)
+            plannedOutListener.remove();
+        if (userListener != null)
+            userListener.remove();
+        if (mealSelectionListener != null)
+            mealSelectionListener.remove();
+        if (messSettingsListener != null)
+            messSettingsListener.remove();
+        binding = null;
+    }
+}

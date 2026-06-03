@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.messapp-mergeDebugResources-67:/values-lv/values-lv.xml",
+            "outputFile": "com.kartik.messapp-mergeDebugResources-67:/values-lv/values-lv.xml",
             "map": [
                 {
                     "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\269ba6b253245f876e626fd1c46b859b\\transformed\\browser-1.8.0\\res\\values-lv\\values-lv.xml",

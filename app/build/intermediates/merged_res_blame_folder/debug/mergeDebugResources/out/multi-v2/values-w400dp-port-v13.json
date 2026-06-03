@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.messapp-mergeDebugResources-67:/values-w400dp-port-v13/values-w400dp-port-v13.xml",
+            "outputFile": "com.kartik.messapp-mergeDebugResources-67:/values-w400dp-port-v13/values-w400dp-port-v13.xml",
             "map": [
                 {
                     "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\dbb655d182083521e302188eeb17ce7f\\transformed\\material-1.13.0\\res\\values-w400dp-port-v13\\values-w400dp-port-v13.xml",

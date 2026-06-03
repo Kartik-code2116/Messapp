@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.messapp-mergeDebugResources-67:/values/values.xml",
+            "outputFile": "com.kartik.messapp-mergeDebugResources-67:/values/values.xml",
             "map": [
                 {
                     "source": "D:\\8)Android Development\\messapp\\app\\src\\main\\res\\values\\font_certs.xml",

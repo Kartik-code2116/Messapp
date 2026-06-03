@@ -1,0 +1,461 @@
+package com.kartik.messapp.ui.mess.profile;
+
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
+
+import com.kartik.messapp.EditMessProfileActivity;
+import com.kartik.messapp.LoginActivity;
+import com.kartik.messapp.MessReviewsActivity;
+import com.kartik.messapp.R;
+import com.kartik.messapp.databinding.FragmentMessProfileBinding;
+import com.kartik.messapp.models.Mess;
+import com.kartik.messapp.ui.mess.settings.MessSettingsActivity;
+import com.kartik.messapp.ui.mess.weeklymenu.WeeklyMenuActivity;
+import com.kartik.messapp.ui.mess.reports.SubscriptionReportActivity;
+import com.kartik.messapp.utils.ThemeManager;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.ListenerRegistration;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
+
+public class MessProfileFragment extends Fragment {
+
+    private FragmentMessProfileBinding binding;
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
+    private String currentMessId;
+    private Bitmap qrCodeBitmap = null;
+    private ListenerRegistration studentsListener;
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater,
+            ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentMessProfileBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
+
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+
+        binding.containerMessId.setOnClickListener(v -> showQrCodeDialog());
+        binding.btnNavEditProfile.setOnClickListener(v -> handleEditProfile());
+        binding.btnEditProfileImage.setOnClickListener(v -> handleEditProfile());
+        binding.btnNavOffers.setOnClickListener(v -> handleOffers());
+        binding.btnNavRevenue.setOnClickListener(v -> handleRevenue());
+        binding.btnNavSubscriptionReport.setOnClickListener(v -> handleSubscriptionReport());
+        binding.btnNavWeeklyMenu.setOnClickListener(v -> handleWeeklyMenu());
+        binding.btnSeeReviews.setOnClickListener(v -> openMessReviews(false));
+        binding.btnWriteReview.setVisibility(View.GONE);
+        binding.btnMessLogout.setOnClickListener(v -> handleLogout());
+        binding.btnLogoutTop.setOnClickListener(v -> handleLogout());
+
+        binding.btnViewStudents.setOnClickListener(v -> handleViewStudents());
+        binding.btnHelpSupport.setOnClickListener(v -> showHelpSupportDialog());
+
+        setupThemeToggle();
+
+        return root;
+    }
+
+    private void setupThemeToggle() {
+        if (binding.switchDarkMode != null) {
+            binding.switchDarkMode.setChecked(ThemeManager.isDarkMode(requireContext()));
+            binding.switchDarkMode.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                if (isChecked != ThemeManager.isDarkMode(requireContext())) {
+                    ThemeManager.setDarkMode(requireContext(), isChecked);
+                    requireActivity().recreate();
+                }
+            });
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        fetchMessOwnerData();
+    }
+
+    private void fetchMessOwnerData() {
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            if (binding != null) {
+                binding.textOwnerEmail.setText(currentUser.getEmail());
+            }
+            db.collection("users").document(currentUser.getUid()).get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        if (binding == null)
+                            return;
+                        if (documentSnapshot.exists()) {
+                            String newMessId = documentSnapshot.getString("messId");
+                            if (newMessId != null) {
+                                if (!newMessId.equals(currentMessId)) {
+                                    currentMessId = newMessId;
+                                    qrCodeBitmap = null; // reset cache
+                                    preGenerateQrCode(currentMessId);
+                                } else if (qrCodeBitmap == null) {
+                                    preGenerateQrCode(currentMessId);
+                                }
+                                fetchMessDetails(currentMessId);
+                                setupRealtimeStudentsCount(currentMessId);
+                            } else {
+                                Toast.makeText(requireContext(), "Mess ID not found for this owner.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(requireContext(), "Mess owner data not found.", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(e -> {
+                        if (getContext() != null) {
+                            Toast.makeText(requireContext(), "Error fetching mess owner data: " + e.getMessage(),
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        } else {
+            if (getContext() != null) {
+                Toast.makeText(requireContext(), "User not logged in.", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private void fetchMessDetails(String messId) {
+        db.collection("messes").document(messId).get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (binding == null)
+                        return;
+                    if (documentSnapshot.exists()) {
+                        Mess mess = documentSnapshot.toObject(Mess.class);
+                        if (mess != null) {
+                            binding.textMessProfileName.setText(mess.getName());
+                            binding.textMessProfileId.setText(messId);
+                            binding.textMessProfileLocation.setText(mess.getLocation());
+                            binding.textMessProfileContact.setText(mess.getContact());
+                            binding.textMessProfileDescription.setText(mess.getDescription());
+                        }
+                    } else {
+                        Toast.makeText(requireContext(), "Mess details not found.", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    if (getContext() != null) {
+                        Toast.makeText(requireContext(), "Error fetching mess details: " + e.getMessage(),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void setupRealtimeStudentsCount(String messId) {
+        if (studentsListener != null) {
+            studentsListener.remove();
+        }
+        studentsListener = db.collection("users")
+                .whereEqualTo("role", "USER")
+                .whereEqualTo("messId", messId)
+                .addSnapshotListener((snapshots, e) -> {
+                    if (binding == null)
+                        return;
+                    if (e != null) {
+                        return;
+                    }
+                    if (snapshots != null) {
+                        int activeCount = 0;
+                        long currentTime = System.currentTimeMillis();
+                        for (com.google.firebase.firestore.DocumentSnapshot doc : snapshots.getDocuments()) {
+                            Long lunchExp = doc.getLong("lunchSubscriptionExpiry");
+                            Long dinnerExp = doc.getLong("dinnerSubscriptionExpiry");
+                            Long subExp = doc.getLong("subscriptionExpiry");
+
+                            long lExp = lunchExp != null ? lunchExp : 0L;
+                            long dExp = dinnerExp != null ? dinnerExp : 0L;
+                            long sExp = subExp != null ? subExp : 0L;
+
+                            long activeLunch = lExp > 0 ? lExp : sExp;
+                            long activeDinner = dExp > 0 ? dExp : sExp;
+
+                            if (activeLunch > currentTime || activeDinner > currentTime) {
+                                activeCount++;
+                            }
+                        }
+                        binding.textActiveStudentsCount.setText(String.valueOf(activeCount));
+                    }
+                });
+    }
+
+    private void showQrCodeDialog() {
+        if (currentMessId == null) {
+            Toast.makeText(requireContext(), "Mess ID not available.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        View dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_qr_code, null);
+        AlertDialog dialog = new AlertDialog.Builder(requireContext())
+                .setView(dialogView)
+                .create();
+
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+            dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        }
+
+        android.widget.ImageView imgQrCode = dialogView.findViewById(R.id.img_qr_code);
+        android.view.View btnClose = dialogView.findViewById(R.id.btn_close_qr);
+
+        if (qrCodeBitmap != null) {
+            imgQrCode.setImageBitmap(qrCodeBitmap);
+        } else {
+            // Generate in background thread and set it dynamically to keep the click event perfectly smooth
+            new Thread(() -> {
+                String qrText = "Mess ID: " + currentMessId + "\nDownload App: https://play.google.com/store/apps/details?id=com.kartik.messapp";
+                try {
+                    QRCodeWriter writer = new QRCodeWriter();
+                    BitMatrix bitMatrix = writer.encode(qrText, BarcodeFormat.QR_CODE, 512, 512);
+                    int width = bitMatrix.getWidth();
+                    int height = bitMatrix.getHeight();
+                    int[] pixels = new int[width * height];
+                    for (int y = 0; y < height; y++) {
+                        int offset = y * width;
+                        for (int x = 0; x < width; x++) {
+                            pixels[offset + x] = bitMatrix.get(x, y) ? Color.BLACK : Color.WHITE;
+                        }
+                    }
+                    Bitmap bmp = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+                    bmp.setPixels(pixels, 0, width, 0, 0, width, height);
+                    qrCodeBitmap = bmp;
+
+                    if (getActivity() != null) {
+                        getActivity().runOnUiThread(() -> {
+                            if (imgQrCode != null) {
+                                imgQrCode.setImageBitmap(bmp);
+                            }
+                        });
+                    }
+                } catch (WriterException e) {
+                    e.printStackTrace();
+                    if (getActivity() != null) {
+                        getActivity().runOnUiThread(() -> {
+                            Toast.makeText(requireContext(), "Failed to generate QR code", Toast.LENGTH_SHORT).show();
+                        });
+                    }
+                }
+            }).start();
+        }
+
+        btnClose.setOnClickListener(v -> dialog.dismiss());
+        dialog.show();
+    }
+
+    private void preGenerateQrCode(String messId) {
+        if (messId == null || messId.isEmpty()) return;
+        new Thread(() -> {
+            String qrText = "Mess ID: " + messId + "\nDownload App: https://play.google.com/store/apps/details?id=com.kartik.messapp";
+            try {
+                QRCodeWriter writer = new QRCodeWriter();
+                BitMatrix bitMatrix = writer.encode(qrText, BarcodeFormat.QR_CODE, 512, 512);
+                int width = bitMatrix.getWidth();
+                int height = bitMatrix.getHeight();
+                int[] pixels = new int[width * height];
+                for (int y = 0; y < height; y++) {
+                    int offset = y * width;
+                    for (int x = 0; x < width; x++) {
+                        pixels[offset + x] = bitMatrix.get(x, y) ? Color.BLACK : Color.WHITE;
+                    }
+                }
+                Bitmap bmp = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+                bmp.setPixels(pixels, 0, width, 0, 0, width, height);
+                qrCodeBitmap = bmp;
+            } catch (WriterException e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+
+    private void handleEditProfile() {
+        if (currentMessId != null) {
+            Intent intent = new Intent(requireActivity(), EditMessProfileActivity.class);
+            intent.putExtra(EditMessProfileActivity.EXTRA_MESS_ID, currentMessId);
+            startActivity(intent);
+        } else {
+            Toast.makeText(requireContext(), "Mess ID not available for editing.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void handleOffers() {
+        NavHostFragment.findNavController(this).navigate(R.id.action_messProfileFragment_to_messOffersFragment);
+    }
+
+    private void handleRevenue() {
+        NavHostFragment.findNavController(this).navigate(R.id.action_messProfileFragment_to_messRevenueFragment);
+    }
+
+    private void handleSubscriptionReport() {
+        if (currentMessId != null) {
+            Intent intent = new Intent(requireActivity(), SubscriptionReportActivity.class);
+            intent.putExtra("EXTRA_MESS_ID", currentMessId);
+            startActivity(intent);
+        } else {
+            Toast.makeText(requireContext(), "Mess ID not available.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void handleViewStudents() {
+        NavHostFragment.findNavController(this).navigate(R.id.action_messProfileFragment_to_navigation_mess_students);
+    }
+
+    private void handleWeeklyMenu() {
+        Intent intent = new Intent(requireActivity(), WeeklyMenuActivity.class);
+        startActivity(intent);
+    }
+
+    private void handleSettings() {
+        Intent intent = new Intent(requireActivity(), MessSettingsActivity.class);
+        startActivity(intent);
+    }
+
+    private void openMessReviews(boolean openReviewDialog) {
+        if (currentMessId == null || currentMessId.isEmpty()) {
+            Toast.makeText(requireContext(), "Mess ID not available yet.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Intent intent = new Intent(requireActivity(), MessReviewsActivity.class);
+        intent.putExtra(MessReviewsActivity.EXTRA_MESS_ID, currentMessId);
+        intent.putExtra(MessReviewsActivity.EXTRA_OPEN_REVIEW_DIALOG, openReviewDialog);
+        startActivity(intent);
+    }
+
+    private void handleLogout() {
+        new AlertDialog.Builder(requireContext())
+                .setTitle("Logout")
+                .setMessage("Are you sure you want to log out?")
+                .setPositiveButton("Yes", (dialog, which) -> {
+                    mAuth.signOut();
+                    Intent intent = new Intent(requireActivity(), LoginActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    requireActivity().finish();
+                })
+                .setNegativeButton("No", null)
+                .show();
+    }
+
+
+    private void showHelpSupportDialog() {
+        if (getContext() == null) return;
+
+        android.view.View dialogView = LayoutInflater.from(requireContext())
+                .inflate(R.layout.dialog_help_support, null);
+
+        AlertDialog dialog = new AlertDialog.Builder(requireContext())
+                .setView(dialogView)
+                .create();
+
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        }
+
+        android.widget.TextView textPhone = dialogView.findViewById(R.id.support_phone);
+        android.widget.TextView textInsta = dialogView.findViewById(R.id.support_instagram);
+        android.widget.TextView textEmail = dialogView.findViewById(R.id.support_email);
+
+        android.view.View btnCopyPhone = dialogView.findViewById(R.id.btn_copy_phone);
+        android.view.View btnActionPhone = dialogView.findViewById(R.id.btn_action_phone);
+
+        android.view.View btnCopyInsta = dialogView.findViewById(R.id.btn_copy_instagram);
+        android.view.View btnActionInsta = dialogView.findViewById(R.id.btn_action_instagram);
+
+        android.view.View btnCopyEmail = dialogView.findViewById(R.id.btn_copy_email);
+        android.view.View btnActionEmail = dialogView.findViewById(R.id.btn_action_email);
+
+        android.view.View btnClose = dialogView.findViewById(R.id.btn_dialog_close);
+
+        btnCopyPhone.setOnClickListener(v -> {
+            ClipboardManager clipboard = (ClipboardManager) requireContext().getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData clip = ClipData.newPlainText("Phone Number", textPhone.getText().toString());
+            clipboard.setPrimaryClip(clip);
+            Toast.makeText(getContext(), "Phone number copied!", Toast.LENGTH_SHORT).show();
+        });
+
+        btnActionPhone.setOnClickListener(v -> {
+            try {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:" + textPhone.getText().toString().replaceAll(" ", "")));
+                startActivity(intent);
+            } catch (Exception ex) {
+                Toast.makeText(getContext(), "Unable to open dialer", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnCopyInsta.setOnClickListener(v -> {
+            ClipboardManager clipboard = (ClipboardManager) requireContext().getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData clip = ClipData.newPlainText("Instagram Handle", textInsta.getText().toString());
+            clipboard.setPrimaryClip(clip);
+            Toast.makeText(getContext(), "Instagram handle copied!", Toast.LENGTH_SHORT).show();
+        });
+
+        btnActionInsta.setOnClickListener(v -> {
+            try {
+                String handle = textInsta.getText().toString();
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://instagram.com/_u/" + handle));
+                intent.setPackage("com.instagram.android");
+                try {
+                    startActivity(intent);
+                } catch (android.content.ActivityNotFoundException e) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://instagram.com/" + handle)));
+                }
+            } catch (Exception ex) {
+                Toast.makeText(getContext(), "Unable to open Instagram", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnCopyEmail.setOnClickListener(v -> {
+            ClipboardManager clipboard = (ClipboardManager) requireContext().getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData clip = ClipData.newPlainText("Email Address", textEmail.getText().toString());
+            clipboard.setPrimaryClip(clip);
+            Toast.makeText(getContext(), "Email copied!", Toast.LENGTH_SHORT).show();
+        });
+
+        btnActionEmail.setOnClickListener(v -> {
+            try {
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse("mailto:"));
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{textEmail.getText().toString()});
+                intent.putExtra(Intent.EXTRA_SUBJECT, "MessApp Support Request");
+                startActivity(intent);
+            } catch (Exception ex) {
+                Toast.makeText(getContext(), "Unable to open Email client", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnClose.setOnClickListener(v -> dialog.dismiss());
+
+        dialog.show();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (studentsListener != null) {
+            studentsListener.remove();
+        }
+        binding = null;
+    }
+}
+

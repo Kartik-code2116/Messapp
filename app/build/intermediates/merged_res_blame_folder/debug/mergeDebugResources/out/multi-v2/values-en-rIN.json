@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.messapp-mergeDebugResources-67:/values-en-rIN/values-en-rIN.xml",
+            "outputFile": "com.kartik.messapp-mergeDebugResources-67:/values-en-rIN/values-en-rIN.xml",
             "map": [
                 {
                     "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\d16b426e121a8108f83d138acc1095fe\\transformed\\biometric-1.1.0\\res\\values-en-rIN\\values-en-rIN.xml",

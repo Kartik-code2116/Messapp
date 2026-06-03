@@ -1,6 +1,6 @@
 1<?xml version="1.0" encoding="utf-8"?>
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-3    package="com.example.messapp"
+3    package="com.kartik.messapp"
 4    android:versionCode="1"
 5    android:versionName="1.0" >
 6
@@ -113,12 +113,12 @@
 60
 61    <permission
 61-->[androidx.core:core:1.16.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\330e572731198891fd4e94c9d83129e0\transformed\core-1.16.0\AndroidManifest.xml:22:5-24:47
-62        android:name="com.example.messapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+62        android:name="com.kartik.messapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
 62-->[androidx.core:core:1.16.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\330e572731198891fd4e94c9d83129e0\transformed\core-1.16.0\AndroidManifest.xml:23:9-81
 63        android:protectionLevel="signature" />
 63-->[androidx.core:core:1.16.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\330e572731198891fd4e94c9d83129e0\transformed\core-1.16.0\AndroidManifest.xml:24:9-44
 64
-65    <uses-permission android:name="com.example.messapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+65    <uses-permission android:name="com.kartik.messapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
 65-->[androidx.core:core:1.16.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\330e572731198891fd4e94c9d83129e0\transformed\core-1.16.0\AndroidManifest.xml:26:5-97
 65-->[androidx.core:core:1.16.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\330e572731198891fd4e94c9d83129e0\transformed\core-1.16.0\AndroidManifest.xml:26:22-94
 66
@@ -149,7 +149,7 @@
 80-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:18:9-45
 81        <activity
 81-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:20:9-28:20
-82            android:name="com.example.messapp.SplashActivity"
+82            android:name="com.kartik.messapp.SplashActivity"
 82-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:21:13-43
 83            android:exported="true"
 83-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:22:13-36
@@ -168,67 +168,67 @@
 90        </activity>
 91        <activity
 91-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:29:9-31:39
-92            android:name="com.example.messapp.RoleSelectionActivity"
+92            android:name="com.kartik.messapp.RoleSelectionActivity"
 92-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:30:13-50
 93            android:exported="false" />
 93-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:31:13-37
 94        <activity
 94-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:32:9-76
-95            android:name="com.example.messapp.LoginActivity"
+95            android:name="com.kartik.messapp.LoginActivity"
 95-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:32:19-48
 96            android:exported="false" />
 96-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:32:49-73
 97        <activity
 97-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:33:9-84
-98            android:name="com.example.messapp.UserDashboardActivity"
+98            android:name="com.kartik.messapp.UserDashboardActivity"
 98-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:33:19-56
 99            android:exported="false" />
 99-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:33:57-81
 100        <activity
 100-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:34:9-84
-101            android:name="com.example.messapp.MessDashboardActivity"
+101            android:name="com.kartik.messapp.MessDashboardActivity"
 101-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:34:19-56
 102            android:exported="false" />
 102-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:34:57-81
 103        <activity
 103-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:35:9-86
-104            android:name="com.example.messapp.EditMessProfileActivity"
+104            android:name="com.kartik.messapp.EditMessProfileActivity"
 104-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:35:19-58
 105            android:exported="false" />
 105-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:35:59-83
 106        <activity
 106-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:36:9-102
-107            android:name="com.example.messapp.ui.user.profile.EditUserProfileActivity"
+107            android:name="com.kartik.messapp.ui.user.profile.EditUserProfileActivity"
 107-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:36:19-74
 108            android:exported="false" />
 108-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:36:75-99
 109        <activity
 109-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:37:9-100
-110            android:name="com.example.messapp.ui.mess.settings.MessSettingsActivity"
+110            android:name="com.kartik.messapp.ui.mess.settings.MessSettingsActivity"
 110-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:37:19-72
 111            android:exported="false" />
 111-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:37:73-97
 112        <activity
 112-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:38:9-100
-113            android:name="com.example.messapp.ui.mess.weeklymenu.WeeklyMenuActivity"
+113            android:name="com.kartik.messapp.ui.mess.weeklymenu.WeeklyMenuActivity"
 113-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:38:19-72
 114            android:exported="false" />
 114-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:38:73-97
 115        <activity
 115-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:39:9-82
-116            android:name="com.example.messapp.MessReviewsActivity"
+116            android:name="com.kartik.messapp.MessReviewsActivity"
 116-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:39:19-54
 117            android:exported="false" />
 117-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:39:55-79
 118        <activity
 118-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:40:9-80
-119            android:name="com.example.messapp.MyReviewsActivity"
+119            android:name="com.kartik.messapp.MyReviewsActivity"
 119-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:40:19-52
 120            android:exported="false" />
 120-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:40:53-77
 121        <activity
 121-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:41:9-105
-122            android:name="com.example.messapp.ui.mess.reports.SubscriptionReportActivity"
+122            android:name="com.kartik.messapp.ui.mess.reports.SubscriptionReportActivity"
 122-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:41:19-77
 123            android:exported="false" />
 123-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:41:78-102
@@ -237,8 +237,8 @@
 125-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:43:9-51:20
 126            android:name="androidx.core.content.FileProvider"
 126-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:44:13-62
-127            android:authorities="com.example.messapp.fileprovider"
-127-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:45:13-67
+127            android:authorities="com.kartik.messapp.fileprovider"
+127-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:45:13-66
 128            android:exported="false"
 128-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:46:13-37
 129            android:grantUriPermissions="true" >
@@ -253,7 +253,7 @@
 134
 135        <service
 135-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:53:9-59:19
-136            android:name="com.example.messapp.MyFirebaseMessagingService"
+136            android:name="com.kartik.messapp.MyFirebaseMessagingService"
 136-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:54:13-55
 137            android:exported="false" >
 137-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:55:13-37
@@ -585,7 +585,7 @@
 315-->[com.google.firebase:firebase-common:21.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\2faf9fd536f749d73603d6a89d6b6fb3\transformed\firebase-common-21.0.0\AndroidManifest.xml:23:9-28:39
 316            android:name="com.google.firebase.provider.FirebaseInitProvider"
 316-->[com.google.firebase:firebase-common:21.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\2faf9fd536f749d73603d6a89d6b6fb3\transformed\firebase-common-21.0.0\AndroidManifest.xml:24:13-77
-317            android:authorities="com.example.messapp.firebaseinitprovider"
+317            android:authorities="com.kartik.messapp.firebaseinitprovider"
 317-->[com.google.firebase:firebase-common:21.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\2faf9fd536f749d73603d6a89d6b6fb3\transformed\firebase-common-21.0.0\AndroidManifest.xml:25:13-72
 318            android:directBootAware="true"
 318-->[com.google.firebase:firebase-common:21.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\2faf9fd536f749d73603d6a89d6b6fb3\transformed\firebase-common-21.0.0\AndroidManifest.xml:26:13-43
@@ -634,7 +634,7 @@
 342-->[androidx.emoji2:emoji2:1.3.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\6352eb0d336e7ef7883ccddf58e90c5d\transformed\emoji2-1.3.0\AndroidManifest.xml:24:9-32:20
 343            android:name="androidx.startup.InitializationProvider"
 343-->[androidx.emoji2:emoji2:1.3.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\6352eb0d336e7ef7883ccddf58e90c5d\transformed\emoji2-1.3.0\AndroidManifest.xml:25:13-67
-344            android:authorities="com.example.messapp.androidx-startup"
+344            android:authorities="com.kartik.messapp.androidx-startup"
 344-->[androidx.emoji2:emoji2:1.3.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\6352eb0d336e7ef7883ccddf58e90c5d\transformed\emoji2-1.3.0\AndroidManifest.xml:26:13-68
 345            android:exported="false" >
 345-->[androidx.emoji2:emoji2:1.3.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\6352eb0d336e7ef7883ccddf58e90c5d\transformed\emoji2-1.3.0\AndroidManifest.xml:27:13-37
@@ -678,7 +678,7 @@
 365-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:80:9-85:43
 366            android:name="com.google.android.gms.ads.MobileAdsInitProvider"
 366-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:81:13-76
-367            android:authorities="com.example.messapp.mobileadsinitprovider"
+367            android:authorities="com.kartik.messapp.mobileadsinitprovider"
 367-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:82:13-73
 368            android:exported="false"
 368-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:83:13-37

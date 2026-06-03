@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.messapp-mergeDebugResources-67:/values-watch-v20/values-watch-v20.xml",
+            "outputFile": "com.kartik.messapp-mergeDebugResources-67:/values-watch-v20/values-watch-v20.xml",
             "map": [
                 {
                     "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\fc0f05a0b711a0b12a997fad3bce951b\\transformed\\play-services-auth-21.1.1\\res\\values-watch-v20\\values.xml",
