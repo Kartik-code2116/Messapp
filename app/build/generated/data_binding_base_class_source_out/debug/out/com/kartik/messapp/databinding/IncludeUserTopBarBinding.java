@@ -22,6 +22,9 @@ public final class IncludeUserTopBarBinding implements ViewBinding {
   private final ConstraintLayout rootView;
 
   @NonNull
+  public final MaterialCardView btnMenuMore;
+
+  @NonNull
   public final MaterialCardView btnNotification;
 
   @NonNull
@@ -43,11 +46,12 @@ public final class IncludeUserTopBarBinding implements ViewBinding {
   public final ConstraintLayout topHeader;
 
   private IncludeUserTopBarBinding(@NonNull ConstraintLayout rootView,
-      @NonNull MaterialCardView btnNotification, @NonNull ImageView imgProfile,
-      @NonNull MaterialCardView profileContainer, @NonNull TextView textDate,
-      @NonNull TextView textGreeting, @NonNull TextView textNotificationBadge,
-      @NonNull ConstraintLayout topHeader) {
+      @NonNull MaterialCardView btnMenuMore, @NonNull MaterialCardView btnNotification,
+      @NonNull ImageView imgProfile, @NonNull MaterialCardView profileContainer,
+      @NonNull TextView textDate, @NonNull TextView textGreeting,
+      @NonNull TextView textNotificationBadge, @NonNull ConstraintLayout topHeader) {
     this.rootView = rootView;
+    this.btnMenuMore = btnMenuMore;
     this.btnNotification = btnNotification;
     this.imgProfile = imgProfile;
     this.profileContainer = profileContainer;
@@ -84,6 +88,12 @@ public final class IncludeUserTopBarBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.btn_menu_more;
+      MaterialCardView btnMenuMore = ViewBindings.findChildViewById(rootView, id);
+      if (btnMenuMore == null) {
+        break missingId;
+      }
+
       id = R.id.btn_notification;
       MaterialCardView btnNotification = ViewBindings.findChildViewById(rootView, id);
       if (btnNotification == null) {
@@ -122,8 +132,8 @@ public final class IncludeUserTopBarBinding implements ViewBinding {
 
       ConstraintLayout topHeader = (ConstraintLayout) rootView;
 
-      return new IncludeUserTopBarBinding((ConstraintLayout) rootView, btnNotification, imgProfile,
-          profileContainer, textDate, textGreeting, textNotificationBadge, topHeader);
+      return new IncludeUserTopBarBinding((ConstraintLayout) rootView, btnMenuMore, btnNotification,
+          imgProfile, profileContainer, textDate, textGreeting, textNotificationBadge, topHeader);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -12,6 +12,28 @@
     android:paddingBottom="12dp">
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/btn_menu_more"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        app:cardBackgroundColor="@color/surface_card"
+        app:cardCornerRadius="14dp"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/neutral_200"
+        app:strokeWidth="1dp">
+
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_gravity="center"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_more_vert"
+            app:tint="@color/text_heading" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/btn_send_message"
         android:layout_width="48dp"
         android:layout_height="48dp"
@@ -42,7 +64,7 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btn_send_message"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_menu_more"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView

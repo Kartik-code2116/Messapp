@@ -3907,6 +3907,7 @@ drawable ic_m3_chip_check
 drawable ic_m3_chip_checked_circle
 drawable ic_m3_chip_close
 drawable ic_menu_book_black_24dp
+drawable ic_more_vert
 drawable ic_mtrl_arrow_circle
 drawable ic_mtrl_checked_circle
 drawable ic_mtrl_chip_checked_black
@@ -4204,6 +4205,7 @@ id btn_logout
 id btn_logout_top
 id btn_lunch_in_new
 id btn_lunch_out_new
+id btn_menu_more
 id btn_mess_logout
 id btn_mess_uncal
 id btn_my_reviews

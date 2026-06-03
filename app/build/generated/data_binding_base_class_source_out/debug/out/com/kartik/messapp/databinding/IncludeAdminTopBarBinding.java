@@ -22,6 +22,9 @@ public final class IncludeAdminTopBarBinding implements ViewBinding {
   private final ConstraintLayout rootView;
 
   @NonNull
+  public final MaterialCardView btnMenuMore;
+
+  @NonNull
   public final MaterialCardView btnSendMessage;
 
   @NonNull
@@ -40,10 +43,12 @@ public final class IncludeAdminTopBarBinding implements ViewBinding {
   public final ConstraintLayout topHeader;
 
   private IncludeAdminTopBarBinding(@NonNull ConstraintLayout rootView,
-      @NonNull MaterialCardView btnSendMessage, @NonNull ImageView imgProfile,
-      @NonNull MaterialCardView profileContainer, @NonNull TextView textDate,
-      @NonNull TextView textGreeting, @NonNull ConstraintLayout topHeader) {
+      @NonNull MaterialCardView btnMenuMore, @NonNull MaterialCardView btnSendMessage,
+      @NonNull ImageView imgProfile, @NonNull MaterialCardView profileContainer,
+      @NonNull TextView textDate, @NonNull TextView textGreeting,
+      @NonNull ConstraintLayout topHeader) {
     this.rootView = rootView;
+    this.btnMenuMore = btnMenuMore;
     this.btnSendMessage = btnSendMessage;
     this.imgProfile = imgProfile;
     this.profileContainer = profileContainer;
@@ -79,6 +84,12 @@ public final class IncludeAdminTopBarBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.btn_menu_more;
+      MaterialCardView btnMenuMore = ViewBindings.findChildViewById(rootView, id);
+      if (btnMenuMore == null) {
+        break missingId;
+      }
+
       id = R.id.btn_send_message;
       MaterialCardView btnSendMessage = ViewBindings.findChildViewById(rootView, id);
       if (btnSendMessage == null) {
@@ -111,8 +122,8 @@ public final class IncludeAdminTopBarBinding implements ViewBinding {
 
       ConstraintLayout topHeader = (ConstraintLayout) rootView;
 
-      return new IncludeAdminTopBarBinding((ConstraintLayout) rootView, btnSendMessage, imgProfile,
-          profileContainer, textDate, textGreeting, topHeader);
+      return new IncludeAdminTopBarBinding((ConstraintLayout) rootView, btnMenuMore, btnSendMessage,
+          imgProfile, profileContainer, textDate, textGreeting, topHeader);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

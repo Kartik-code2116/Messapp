@@ -53,6 +53,7 @@ public class MessDashboardActivity extends AppCompatActivity {
     private boolean isGuestMode = false;
     private NavController navController;
     private ListenerRegistration profileListener;
+    private com.google.firebase.firestore.FirebaseFirestore db;
     // Cached values — updated by the real-time listener
     private String cachedName;
     private String cachedProfileImageUrl;
@@ -65,6 +66,7 @@ public class MessDashboardActivity extends AppCompatActivity {
 
         binding = ActivityMessDashboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        db = com.google.firebase.firestore.FirebaseFirestore.getInstance();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS)
@@ -177,6 +179,187 @@ public class MessDashboardActivity extends AppCompatActivity {
         binding.adminTopBar.profileContainer.setOnClickListener(v -> openProfileDrawer());
 
         binding.adminTopBar.btnSendMessage.setOnClickListener(v -> showSendMessageDialog());
+
+        binding.adminTopBar.btnMenuMore.setOnClickListener(v -> showMoreOptionsMenu(v));
+    }
+
+    private void showMoreOptionsMenu(View anchorView) {
+        androidx.appcompat.widget.PopupMenu popup = new androidx.appcompat.widget.PopupMenu(this, anchorView);
+        popup.getMenu().add("About Developer");
+        popup.getMenu().add("About This App");
+        popup.getMenu().add("Privacy Policy");
+        popup.getMenu().add("Help & Support");
+
+        popup.setOnMenuItemClickListener(item -> {
+            String title = item.getTitle().toString();
+            if ("About Developer".equals(title)) {
+                showAboutDeveloperDialog();
+            } else if ("About This App".equals(title)) {
+                showAboutAppDialog();
+            } else if ("Privacy Policy".equals(title)) {
+                showPrivacyPolicyDialog();
+            } else if ("Help & Support".equals(title)) {
+                showHelpSupportDialog();
+            }
+            return true;
+        });
+        popup.show();
+    }
+
+    private void showAboutDeveloperDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle("About Developer")
+                .setMessage("Developer: Kartik Thorat\n" +
+                        "Email: kartikthorat2116@gmail.com\n\n" +
+                        "Crafted with ❤️ for Mess Owners and Students.")
+                .setPositiveButton("OK", null)
+                .show();
+    }
+
+    private void showAboutAppDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle("About This App")
+                .setMessage("MessApp v1.1\n\n" +
+                        "A premium, feature-rich platform to manage mess subscriptions, daily meal choices (IN/OUT marking), notifications, and revenue analytics.")
+                .setPositiveButton("OK", null)
+                .show();
+    }
+
+    private void showPrivacyPolicyDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle("Privacy Policy Summary")
+                .setMessage("MessApp collects user names, email addresses, phone numbers, and Firebase Cloud Messaging (FCM) tokens to provide account management and notify you of menu and subscription updates.\n\n" +
+                        "All payments inside this application are simulated for testing and demonstration purposes. No real money or card data is processed or stored.\n\n" +
+                        "For details, you may view our online policy page.")
+                .setPositiveButton("OK", null)
+                .show();
+    }
+
+    private void showHelpSupportDialog() {
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_help_support, null);
+
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setView(dialogView)
+                .create();
+
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        }
+
+        TextView textPhone = dialogView.findViewById(R.id.support_phone);
+        TextView textInsta = dialogView.findViewById(R.id.support_instagram);
+        TextView textEmail = dialogView.findViewById(R.id.support_email);
+
+        View btnCopyPhone = dialogView.findViewById(R.id.btn_copy_phone);
+        View btnActionPhone = dialogView.findViewById(R.id.btn_action_phone);
+
+        View btnCopyInsta = dialogView.findViewById(R.id.btn_copy_instagram);
+        View btnActionInsta = dialogView.findViewById(R.id.btn_action_instagram);
+
+        View btnCopyEmail = dialogView.findViewById(R.id.btn_copy_email);
+        View btnActionEmail = dialogView.findViewById(R.id.btn_action_email);
+
+        View btnClose = dialogView.findViewById(R.id.btn_dialog_close);
+
+        // Default static data for app-level support
+        textPhone.setText("+91 98765 43210");
+        textInsta.setText("messapp_support");
+        textEmail.setText("support@messapp.com");
+
+        if (cachedMessId != null && !cachedMessId.isEmpty()) {
+            db.collection("messes").document(cachedMessId).get().addOnSuccessListener(doc -> {
+                if (isFinishing()) return;
+                if (doc.exists()) {
+                    String contact = doc.getString("contact");
+                    if (contact != null && !contact.isEmpty()) {
+                        textPhone.setText(contact);
+                    }
+                    String messName = doc.getString("name");
+                    if (messName != null && !messName.isEmpty()) {
+                        textInsta.setText(messName.toLowerCase().replaceAll("\\s+", "_"));
+                    }
+
+                    String ownerId = doc.getString("ownerId");
+                    if (ownerId != null && !ownerId.isEmpty()) {
+                        db.collection("users").document(ownerId).get().addOnSuccessListener(userDoc -> {
+                            if (isFinishing()) return;
+                            if (userDoc.exists()) {
+                                String email = userDoc.getString("email");
+                                if (email != null && !email.isEmpty()) {
+                                    textEmail.setText(email);
+                                }
+                                String phone = userDoc.getString("phone");
+                                if ((contact == null || contact.isEmpty()) && phone != null && !phone.isEmpty()) {
+                                    textPhone.setText(phone);
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        }
+
+        btnCopyPhone.setOnClickListener(v -> {
+            android.content.ClipboardManager clipboard = (android.content.ClipboardManager) getSystemService(android.content.Context.CLIPBOARD_SERVICE);
+            android.content.ClipData clip = android.content.ClipData.newPlainText("Phone Number", textPhone.getText().toString());
+            clipboard.setPrimaryClip(clip);
+            Toast.makeText(this, "Phone number copied!", Toast.LENGTH_SHORT).show();
+        });
+
+        btnActionPhone.setOnClickListener(v -> {
+            try {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:" + textPhone.getText().toString().replaceAll(" ", "")));
+                startActivity(intent);
+            } catch (Exception ex) {
+                Toast.makeText(this, "Unable to open dialer", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnCopyInsta.setOnClickListener(v -> {
+            android.content.ClipboardManager clipboard = (android.content.ClipboardManager) getSystemService(android.content.Context.CLIPBOARD_SERVICE);
+            android.content.ClipData clip = android.content.ClipData.newPlainText("Instagram Handle", textInsta.getText().toString());
+            clipboard.setPrimaryClip(clip);
+            Toast.makeText(this, "Instagram handle copied!", Toast.LENGTH_SHORT).show();
+        });
+
+        btnActionInsta.setOnClickListener(v -> {
+            try {
+                String handle = textInsta.getText().toString();
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://instagram.com/_u/" + handle));
+                intent.setPackage("com.instagram.android");
+                try {
+                    startActivity(intent);
+                } catch (android.content.ActivityNotFoundException e) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://instagram.com/" + handle)));
+                }
+            } catch (Exception ex) {
+                Toast.makeText(this, "Unable to open Instagram", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnCopyEmail.setOnClickListener(v -> {
+            android.content.ClipboardManager clipboard = (android.content.ClipboardManager) getSystemService(android.content.Context.CLIPBOARD_SERVICE);
+            android.content.ClipData clip = android.content.ClipData.newPlainText("Email Address", textEmail.getText().toString());
+            clipboard.setPrimaryClip(clip);
+            Toast.makeText(this, "Email copied!", Toast.LENGTH_SHORT).show();
+        });
+
+        btnActionEmail.setOnClickListener(v -> {
+            try {
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse("mailto:"));
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{textEmail.getText().toString()});
+                intent.putExtra(Intent.EXTRA_SUBJECT, "MessApp Support Request");
+                startActivity(intent);
+            } catch (Exception ex) {
+                Toast.makeText(this, "Unable to open Email client", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnClose.setOnClickListener(v -> dialog.dismiss());
+
+        dialog.show();
     }
 
     private void showSendMessageDialog() {
