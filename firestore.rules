@@ -38,8 +38,8 @@ service cloud.firestore {
     // Suffix match lets students read legacy docs missing the userId field (meal history)
     match /meal_selections/{docId} {
       allow read: if request.auth != null && (
-        resource.data.userId == request.auth.uid ||
         docId.matches('.*_' + request.auth.uid + '$') ||
+        (resource != null && resource.data.userId == request.auth.uid) ||
         getUserData().role == "MESS_OWNER"
       );
       allow write: if request.auth != null && (
@@ -51,16 +51,23 @@ service cloud.firestore {
     // Subscriptions & Requests: Authenticated access
     match /subscriptions/{subId} {
       allow read: if request.auth != null;
-      allow write: if request.auth != null && (
-        resource.data.userId == request.auth.uid ||
+      allow create: if request.auth != null && (
         request.resource.data.userId == request.auth.uid ||
-        (getUserData().role == "MESS_OWNER" && getUserData().messId == resource.data.messId) ||
         (getUserData().role == "MESS_OWNER" && getUserData().messId == request.resource.data.messId)
+      );
+      allow update, delete: if request.auth != null && (
+        (resource != null && resource.data.userId == request.auth.uid) ||
+        (getUserData().role == "MESS_OWNER" && resource != null && getUserData().messId == resource.data.messId)
       );
     }
 
     match /subscriptionRequests/{reqId} {
-      allow read, write: if request.auth != null;
+      allow read: if request.auth != null;
+      allow create: if request.auth != null && request.resource.data.studentId == request.auth.uid;
+      allow update, delete: if request.auth != null && (
+        (resource != null && resource.data.studentId == request.auth.uid) ||
+        (getUserData().role == "MESS_OWNER" && resource != null && getUserData().messId == resource.data.messId)
+      );
     }
 
     // Mess notifications: Authenticated users can read; only Mess Owners publish notifications

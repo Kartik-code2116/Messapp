@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.kartik.messapp.Mess;
+import com.kartik.messapp.models.Mess;
 import com.kartik.messapp.R;
 
 public class MessAdapter extends ListAdapter<Mess, MessAdapter.MessViewHolder> {

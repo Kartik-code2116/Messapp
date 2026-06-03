@@ -46,11 +46,15 @@ public final class DialogGrantSubscriptionBinding implements ViewBinding {
   @NonNull
   public final TextView textOneTimeInfo;
 
+  @NonNull
+  public final TextView textPaymentSimulationNote;
+
   private DialogGrantSubscriptionBinding(@NonNull ScrollView rootView,
       @NonNull TextInputEditText etAmount, @NonNull TextInputEditText etDays,
       @NonNull RadioButton radioBoth, @NonNull RadioButton radioDinner,
       @NonNull RadioGroup radioGroupMealType, @NonNull RadioButton radioLunch,
-      @NonNull RadioButton radioOneTime, @NonNull TextView textOneTimeInfo) {
+      @NonNull RadioButton radioOneTime, @NonNull TextView textOneTimeInfo,
+      @NonNull TextView textPaymentSimulationNote) {
     this.rootView = rootView;
     this.etAmount = etAmount;
     this.etDays = etDays;
@@ -60,6 +64,7 @@ public final class DialogGrantSubscriptionBinding implements ViewBinding {
     this.radioLunch = radioLunch;
     this.radioOneTime = radioOneTime;
     this.textOneTimeInfo = textOneTimeInfo;
+    this.textPaymentSimulationNote = textPaymentSimulationNote;
   }
 
   @Override
@@ -137,8 +142,15 @@ public final class DialogGrantSubscriptionBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.text_payment_simulation_note;
+      TextView textPaymentSimulationNote = ViewBindings.findChildViewById(rootView, id);
+      if (textPaymentSimulationNote == null) {
+        break missingId;
+      }
+
       return new DialogGrantSubscriptionBinding((ScrollView) rootView, etAmount, etDays, radioBoth,
-          radioDinner, radioGroupMealType, radioLunch, radioOneTime, textOneTimeInfo);
+          radioDinner, radioGroupMealType, radioLunch, radioOneTime, textOneTimeInfo,
+          textPaymentSimulationNote);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

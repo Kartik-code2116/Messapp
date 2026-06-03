@@ -120,7 +120,13 @@ public class SubscriptionRequestAdapter
         }
         holder.binding.textInfo.setText(info);
         if ("PENDING".equals(request.getStatus())) {
-            holder.binding.textInfo.setTextColor(android.graphics.Color.parseColor("#FFA000"));
+            holder.binding.textInfo.setTextColor(
+                    androidx.core.content.ContextCompat.getColor(holder.itemView.getContext(), R.color.state_warning)
+            );
+        } else {
+            holder.binding.textInfo.setTextColor(
+                    androidx.core.content.ContextCompat.getColor(holder.itemView.getContext(), R.color.text_body)
+            );
         }
 
         holder.binding.btnConfirm.setText("Confirm");

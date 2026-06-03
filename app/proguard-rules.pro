@@ -42,3 +42,7 @@
 # ZXing (Barcode scanner)
 -keep class com.google.zxing.** { *; }
 -dontwarn com.google.zxing.**
+
+# Model Classes (keep for Firestore toObject deserialization)
+-keep class com.kartik.messapp.models.** { *; }
+-keepclassmembers class com.kartik.messapp.models.** { *; }

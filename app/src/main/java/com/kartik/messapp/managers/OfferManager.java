@@ -153,15 +153,9 @@ public class OfferManager {
      * Track offer usage
      */
     public void trackOfferUsage(String offerId, UpdateCallback callback) {
-        db.collection("offers").document(offerId).get()
-                .addOnSuccessListener(documentSnapshot -> {
-                    if (documentSnapshot.exists()) {
-                        long usageCount = documentSnapshot.getLong("usageCount");
-                        db.collection("offers").document(offerId).update("usageCount", usageCount + 1)
-                                .addOnSuccessListener(aVoid -> callback.onSuccess())
-                                .addOnFailureListener(e -> callback.onFailure(e.getMessage()));
-                    }
-                })
+        db.collection("offers").document(offerId)
+                .update("usageCount", com.google.firebase.firestore.FieldValue.increment(1))
+                .addOnSuccessListener(aVoid -> callback.onSuccess())
                 .addOnFailureListener(e -> callback.onFailure(e.getMessage()));
     }
 

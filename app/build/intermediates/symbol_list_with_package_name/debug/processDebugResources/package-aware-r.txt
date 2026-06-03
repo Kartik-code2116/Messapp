@@ -4925,6 +4925,7 @@ id text_offer_title
 id text_one_time_expiry
 id text_one_time_info
 id text_owner_email
+id text_payment_simulation_note
 id text_profile_email
 id text_profile_email_card
 id text_profile_mess_id

@@ -11,7 +11,6 @@ public class Offer {
     private String title;
     private String description;
     private double discountPercentage;
-    @ServerTimestamp
     private Date expiryDate;
     private boolean active;
     private long usageCount;

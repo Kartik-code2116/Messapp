@@ -26,17 +26,10 @@ public class ThemeManager {
             window.clearFlags(android.view.WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.setStatusBarColor(android.graphics.Color.BLACK);
 
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
-                android.view.WindowInsetsController insetsController = window.getInsetsController();
-                if (insetsController != null) {
-                    insetsController.setSystemBarsAppearance(0, android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS);
-                }
-            } else if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                android.view.View decor = window.getDecorView();
-                int flags = decor.getSystemUiVisibility();
-                flags &= ~android.view.View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR; // Ensure status bar icons are white
-                flags &= ~android.view.View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN; // Reset fullscreen to align content below
-                decor.setSystemUiVisibility(flags);
+            androidx.core.view.WindowInsetsControllerCompat controller =
+                    androidx.core.view.WindowCompat.getInsetsController(window, window.getDecorView());
+            if (controller != null) {
+                controller.setAppearanceLightStatusBars(false); // White icons on black status bar
             }
         }
     }

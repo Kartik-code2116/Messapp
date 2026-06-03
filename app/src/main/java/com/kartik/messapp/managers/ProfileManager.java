@@ -1,7 +1,7 @@
 package com.kartik.messapp.managers;
 
 import androidx.annotation.NonNull;
-import com.kartik.messapp.Mess;
+import com.kartik.messapp.models.Mess;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;

@@ -110,5 +110,18 @@
             android:layout_marginBottom="12dp"
             android:visibility="visible"/>
 
+        <!-- Payment Simulation Warning/Note -->
+        <TextView
+            android:id="@+id/text_payment_simulation_note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📝 Simulated Payment: This app uses simulated payments. All subscriptions are free, or payment is settled offline directly with the mess owner."
+            android:textSize="12sp"
+            android:textColor="@color/neutral_600"
+            android:background="@drawable/bg_rounded_card_surface"
+            android:backgroundTint="@color/neutral_100"
+            android:padding="12dp"
+            android:layout_marginBottom="12dp"/>
+
     </LinearLayout>
 </ScrollView>

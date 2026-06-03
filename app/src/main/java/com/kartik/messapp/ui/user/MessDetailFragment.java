@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.kartik.messapp.Mess;
+import com.kartik.messapp.models.Mess;
 import com.kartik.messapp.MessReviewsActivity;
 import com.kartik.messapp.R;
 import com.kartik.messapp.managers.PaymentManager;
@@ -256,7 +256,7 @@ public class MessDetailFragment extends Fragment {
         tvTitle.setText("Subscribe to " + mess.getName());
 
         android.widget.TextView tvDescription = (android.widget.TextView) container.getChildAt(1);
-        tvDescription.setText("Select your preferred meal type and duration to subscribe.");
+        tvDescription.setText("All subscriptions are free/simulated. Select your preferred meal type and duration. Offline payments (if any) are managed directly by the mess owner.");
 
         com.google.android.material.textfield.TextInputEditText etAmount = dialogView.findViewById(R.id.etAmount);
         com.google.android.material.textfield.TextInputEditText etDays = dialogView.findViewById(R.id.etDays);
@@ -289,7 +289,7 @@ public class MessDetailFragment extends Fragment {
 
         new androidx.appcompat.app.AlertDialog.Builder(getContext())
                 .setView(dialogView)
-                .setPositiveButton("Proceed to Payment", (dialog, which) -> {
+                .setPositiveButton("Confirm (Simulated)", (dialog, which) -> {
                     String daysStr = etDays.getText().toString().trim();
                     if (android.text.TextUtils.isEmpty(daysStr)) {
                         Toast.makeText(getContext(), "Please enter subscription days", Toast.LENGTH_SHORT).show();
@@ -352,7 +352,7 @@ public class MessDetailFragment extends Fragment {
         if (getContext() == null || binding == null) return;
 
         android.app.ProgressDialog progressDialog = new android.app.ProgressDialog(getContext());
-        progressDialog.setMessage("Processing payment... Please do not close the app.");
+        progressDialog.setMessage("Processing simulated subscription... Please do not close the app.");
         progressDialog.setCancelable(false);
         progressDialog.show();
 
@@ -364,7 +364,7 @@ public class MessDetailFragment extends Fragment {
                     progressDialog.dismiss();
                 }
                 if (binding == null || getContext() == null) return;
-                Toast.makeText(getContext(), "Subscription active! Payment receipt: " + transactionId, Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Subscription active! (Simulated payment receipt: " + transactionId + ")", Toast.LENGTH_LONG).show();
 
                 // Log Firebase Analytics PURCHASE event
                 Bundle bundle = new Bundle();

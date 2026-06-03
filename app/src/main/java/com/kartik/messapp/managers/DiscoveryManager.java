@@ -1,6 +1,6 @@
 package com.kartik.messapp.managers;
 
-import com.kartik.messapp.Mess;
+import com.kartik.messapp.models.Mess;
 import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.List;
@@ -57,9 +57,9 @@ public class DiscoveryManager {
                     for (int i = 0; i < querySnapshot.getDocuments().size(); i++) {
                         Mess mess = querySnapshot.getDocuments().get(i).toObject(Mess.class);
                         if (mess != null && (
-                                mess.getName().toLowerCase().contains(lowerQuery) ||
-                                mess.getLocation().toLowerCase().contains(lowerQuery) ||
-                                mess.getDescription().toLowerCase().contains(lowerQuery)
+                                (mess.getName() != null && mess.getName().toLowerCase().contains(lowerQuery)) ||
+                                (mess.getLocation() != null && mess.getLocation().toLowerCase().contains(lowerQuery)) ||
+                                (mess.getDescription() != null && mess.getDescription().toLowerCase().contains(lowerQuery))
                         )) {
                             messes.add(mess);
                         }
@@ -74,14 +74,13 @@ public class DiscoveryManager {
      */
     public void getMessesByLocation(String location, MessListCallback callback) {
         db.collection("messes")
+                .whereEqualTo("location", location)
                 .get()
                 .addOnSuccessListener(querySnapshot -> {
                     List<Mess> messes = new ArrayList<>();
-                    String lowerLocation = location.toLowerCase();
-
                     for (int i = 0; i < querySnapshot.getDocuments().size(); i++) {
                         Mess mess = querySnapshot.getDocuments().get(i).toObject(Mess.class);
-                        if (mess != null && mess.getLocation().toLowerCase().contains(lowerLocation)) {
+                        if (mess != null) {
                             messes.add(mess);
                         }
                     }
@@ -95,15 +94,14 @@ public class DiscoveryManager {
      */
     public void getTopRatedMesses(MessListCallback callback) {
         db.collection("messes")
-                .orderBy("avgRating")
+                .orderBy("avgRating", com.google.firebase.firestore.Query.Direction.DESCENDING)
+                .limit(10)
                 .get()
                 .addOnSuccessListener(querySnapshot -> {
                     List<Mess> messes = new ArrayList<>();
-
-                    // Reverse to get highest first
-                    for (int i = querySnapshot.getDocuments().size() - 1; i >= 0 && i >= querySnapshot.getDocuments().size() - 10; i--) {
+                    for (int i = 0; i < querySnapshot.getDocuments().size(); i++) {
                         Mess mess = querySnapshot.getDocuments().get(i).toObject(Mess.class);
-                        if (mess != null && mess.getAvgRating() > 0) {
+                        if (mess != null) {
                             messes.add(mess);
                         }
                     }
@@ -117,13 +115,14 @@ public class DiscoveryManager {
      */
     public void getMessesByPriceRange(double minPrice, double maxPrice, MessListCallback callback) {
         db.collection("messes")
+                .whereGreaterThanOrEqualTo("monthlyPrice", minPrice)
+                .whereLessThanOrEqualTo("monthlyPrice", maxPrice)
                 .get()
                 .addOnSuccessListener(querySnapshot -> {
                     List<Mess> messes = new ArrayList<>();
-
                     for (int i = 0; i < querySnapshot.getDocuments().size(); i++) {
                         Mess mess = querySnapshot.getDocuments().get(i).toObject(Mess.class);
-                        if (mess != null && mess.getMonthlyPrice() >= minPrice && mess.getMonthlyPrice() <= maxPrice) {
+                        if (mess != null) {
                             messes.add(mess);
                         }
                     }
@@ -137,13 +136,12 @@ public class DiscoveryManager {
      */
     public void getPopularMesses(MessListCallback callback) {
         db.collection("messes")
-                .orderBy("studentCount")
+                .orderBy("studentCount", com.google.firebase.firestore.Query.Direction.DESCENDING)
+                .limit(10)
                 .get()
                 .addOnSuccessListener(querySnapshot -> {
                     List<Mess> messes = new ArrayList<>();
-
-                    // Reverse to get highest first
-                    for (int i = querySnapshot.getDocuments().size() - 1; i >= 0 && i >= querySnapshot.getDocuments().size() - 10; i--) {
+                    for (int i = 0; i < querySnapshot.getDocuments().size(); i++) {
                         Mess mess = querySnapshot.getDocuments().get(i).toObject(Mess.class);
                         if (mess != null) {
                             messes.add(mess);
@@ -159,13 +157,13 @@ public class DiscoveryManager {
      */
     public void getHighRatedMesses(double minRating, MessListCallback callback) {
         db.collection("messes")
+                .whereGreaterThanOrEqualTo("avgRating", minRating)
                 .get()
                 .addOnSuccessListener(querySnapshot -> {
                     List<Mess> messes = new ArrayList<>();
-
                     for (int i = 0; i < querySnapshot.getDocuments().size(); i++) {
                         Mess mess = querySnapshot.getDocuments().get(i).toObject(Mess.class);
-                        if (mess != null && mess.getAvgRating() >= minRating) {
+                        if (mess != null) {
                             messes.add(mess);
                         }
                     }
@@ -197,35 +195,34 @@ public class DiscoveryManager {
      * Advanced filter: Search by multiple criteria
      */
     public void advancedSearch(String searchQuery, String location, double minRating, double minPrice, double maxPrice, MessListCallback callback) {
-        getAllMesses(new MessListCallback() {
-            @Override
-            public void onSuccess(List<Mess> messes) {
-                List<Mess> filtered = new ArrayList<>();
-                String lowerQuery = searchQuery != null ? searchQuery.toLowerCase() : "";
+        db.collection("messes")
+                .whereGreaterThanOrEqualTo("monthlyPrice", minPrice)
+                .whereLessThanOrEqualTo("monthlyPrice", maxPrice)
+                .get()
+                .addOnSuccessListener(querySnapshot -> {
+                    List<Mess> filtered = new ArrayList<>();
+                    String lowerQuery = searchQuery != null ? searchQuery.toLowerCase() : "";
+                    String lowerLocation = location != null ? location.toLowerCase() : "";
 
-                for (Mess mess : messes) {
-                    boolean matchesQuery = searchQuery == null || searchQuery.isEmpty() ||
-                            mess.getName().toLowerCase().contains(lowerQuery) ||
-                            mess.getLocation().toLowerCase().contains(lowerQuery);
+                    for (int i = 0; i < querySnapshot.getDocuments().size(); i++) {
+                        Mess mess = querySnapshot.getDocuments().get(i).toObject(Mess.class);
+                        if (mess != null) {
+                            boolean matchesQuery = searchQuery == null || searchQuery.isEmpty() ||
+                                    (mess.getName() != null && mess.getName().toLowerCase().contains(lowerQuery)) ||
+                                    (mess.getLocation() != null && mess.getLocation().toLowerCase().contains(lowerQuery));
 
-                    boolean matchesLocation = location == null || location.isEmpty() ||
-                            mess.getLocation().toLowerCase().contains(location.toLowerCase());
+                            boolean matchesLocation = location == null || location.isEmpty() ||
+                                    (mess.getLocation() != null && mess.getLocation().toLowerCase().contains(lowerLocation));
 
-                    boolean matchesRating = mess.getAvgRating() >= minRating;
+                            boolean matchesRating = mess.getAvgRating() >= minRating;
 
-                    boolean matchesPrice = mess.getMonthlyPrice() >= minPrice && mess.getMonthlyPrice() <= maxPrice;
-
-                    if (matchesQuery && matchesLocation && matchesRating && matchesPrice) {
-                        filtered.add(mess);
+                            if (matchesQuery && matchesLocation && matchesRating) {
+                                filtered.add(mess);
+                            }
+                        }
                     }
-                }
-                callback.onSuccess(filtered);
-            }
-
-            @Override
-            public void onFailure(String errorMessage) {
-                callback.onFailure(errorMessage);
-            }
-        });
+                    callback.onSuccess(filtered);
+                })
+                .addOnFailureListener(e -> callback.onFailure(e.getMessage()));
     }
 }

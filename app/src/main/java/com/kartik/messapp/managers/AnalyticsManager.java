@@ -256,22 +256,30 @@ public class AnalyticsManager {
                 .whereEqualTo("messId", messId)
                 .get()
                 .addOnSuccessListener(querySnapshot -> {
-                    int totalSubscriptions = querySnapshot.getDocuments().size();
-                    int renewedSubscriptions = 0;
+                    java.util.Set<String> uniqueUsers = new java.util.HashSet<>();
+                    java.util.Map<String, Integer> userSubCounts = new java.util.HashMap<>();
 
-                    if (totalSubscriptions == 0) {
-                        callback.onSuccess(0);
+                    for (int i = 0; i < querySnapshot.getDocuments().size(); i++) {
+                        String userId = querySnapshot.getDocuments().get(i).getString("userId");
+                        if (userId != null) {
+                            uniqueUsers.add(userId);
+                            userSubCounts.put(userId, userSubCounts.getOrDefault(userId, 0) + 1);
+                        }
+                    }
+
+                    if (uniqueUsers.isEmpty()) {
+                        callback.onSuccess(0.0);
                         return;
                     }
 
-                    for (int i = 0; i < querySnapshot.getDocuments().size(); i++) {
-                        // Count subscriptions that have been renewed (we can check if there are multiple transactions for same user)
-                        String userId = querySnapshot.getDocuments().get(i).getString("userId");
-                        // This is a simplified version; in production, you'd track actual renewals
+                    int repeatCustomers = 0;
+                    for (int count : userSubCounts.values()) {
+                        if (count > 1) {
+                            repeatCustomers++;
+                        }
                     }
 
-                    // Simplified calculation
-                    double retentionRate = (totalSubscriptions > 0) ? 75.0 : 0; // Placeholder value
+                    double retentionRate = ((double) repeatCustomers / uniqueUsers.size()) * 100.0;
                     callback.onSuccess(retentionRate);
                 })
                 .addOnFailureListener(e -> callback.onFailure(e.getMessage()));
