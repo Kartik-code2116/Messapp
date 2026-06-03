@@ -21,7 +21,7 @@ public class SplashActivity extends AppCompatActivity {
     private static final String TAG = "SplashActivity";
     private static final String PREFS_USER = "user_prefs";
     private static final String KEY_ROLE = "role";
-    private static final int SPLASH_DELAY_MS = 1500;
+    private static final int SPLASH_DELAY_MS = 800;
     /** Never block on Firestore longer than this after the splash delay. */
     private static final int ROLE_FETCH_TIMEOUT_MS = 2500;
 
@@ -76,15 +76,15 @@ public class SplashActivity extends AppCompatActivity {
                     .alpha(1f)
                     .scaleX(1f)
                     .scaleY(1f)
-                    .setDuration(900)
+                    .setDuration(600)
                     .setInterpolator(new android.view.animation.OvershootInterpolator(1.2f))
                     .start();
 
             textTitle.animate()
                     .alpha(1f)
                     .translationY(0f)
-                    .setStartDelay(250)
-                    .setDuration(700)
+                    .setStartDelay(150)
+                    .setDuration(500)
                     .setInterpolator(new android.view.animation.DecelerateInterpolator())
                     .start();
         }
