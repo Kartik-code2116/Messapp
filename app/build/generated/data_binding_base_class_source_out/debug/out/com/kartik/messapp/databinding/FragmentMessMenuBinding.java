@@ -5,15 +5,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
-import com.google.android.material.button.MaterialButton;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
+import com.google.android.material.chip.ChipGroup;
 import com.kartik.messapp.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -24,61 +26,52 @@ public final class FragmentMessMenuBinding implements ViewBinding {
   private final FrameLayout rootView;
 
   @NonNull
-  public final TextInputEditText breakfastEditText;
+  public final ImageView btnNextWeek;
 
   @NonNull
-  public final TextInputLayout breakfastInputLayout;
+  public final ImageView btnPrevWeek;
 
   @NonNull
-  public final MaterialButton btnSaveBreakfast;
+  public final ChipGroup chipGroupDays;
 
   @NonNull
-  public final MaterialButton btnSaveDinner;
-
-  @NonNull
-  public final MaterialButton btnSaveLunch;
-
-  @NonNull
-  public final MaterialButton btnSelectDate;
-
-  @NonNull
-  public final TextInputEditText dinnerEditText;
-
-  @NonNull
-  public final TextInputLayout dinnerInputLayout;
-
-  @NonNull
-  public final TextInputEditText lunchEditText;
-
-  @NonNull
-  public final TextInputLayout lunchInputLayout;
+  public final LinearLayout containerDayCards;
 
   @NonNull
   public final ProgressBar progressBar;
 
   @NonNull
-  public final TextView textSelectedDate;
+  public final NestedScrollView scrollView;
 
-  private FragmentMessMenuBinding(@NonNull FrameLayout rootView,
-      @NonNull TextInputEditText breakfastEditText, @NonNull TextInputLayout breakfastInputLayout,
-      @NonNull MaterialButton btnSaveBreakfast, @NonNull MaterialButton btnSaveDinner,
-      @NonNull MaterialButton btnSaveLunch, @NonNull MaterialButton btnSelectDate,
-      @NonNull TextInputEditText dinnerEditText, @NonNull TextInputLayout dinnerInputLayout,
-      @NonNull TextInputEditText lunchEditText, @NonNull TextInputLayout lunchInputLayout,
-      @NonNull ProgressBar progressBar, @NonNull TextView textSelectedDate) {
+  @NonNull
+  public final SwipeRefreshLayout swipeRefreshMenu;
+
+  @NonNull
+  public final TextView textMenuSummary;
+
+  @NonNull
+  public final TextView textWeekLabel;
+
+  @NonNull
+  public final TextView textWeekRange;
+
+  private FragmentMessMenuBinding(@NonNull FrameLayout rootView, @NonNull ImageView btnNextWeek,
+      @NonNull ImageView btnPrevWeek, @NonNull ChipGroup chipGroupDays,
+      @NonNull LinearLayout containerDayCards, @NonNull ProgressBar progressBar,
+      @NonNull NestedScrollView scrollView, @NonNull SwipeRefreshLayout swipeRefreshMenu,
+      @NonNull TextView textMenuSummary, @NonNull TextView textWeekLabel,
+      @NonNull TextView textWeekRange) {
     this.rootView = rootView;
-    this.breakfastEditText = breakfastEditText;
-    this.breakfastInputLayout = breakfastInputLayout;
-    this.btnSaveBreakfast = btnSaveBreakfast;
-    this.btnSaveDinner = btnSaveDinner;
-    this.btnSaveLunch = btnSaveLunch;
-    this.btnSelectDate = btnSelectDate;
-    this.dinnerEditText = dinnerEditText;
-    this.dinnerInputLayout = dinnerInputLayout;
-    this.lunchEditText = lunchEditText;
-    this.lunchInputLayout = lunchInputLayout;
+    this.btnNextWeek = btnNextWeek;
+    this.btnPrevWeek = btnPrevWeek;
+    this.chipGroupDays = chipGroupDays;
+    this.containerDayCards = containerDayCards;
     this.progressBar = progressBar;
-    this.textSelectedDate = textSelectedDate;
+    this.scrollView = scrollView;
+    this.swipeRefreshMenu = swipeRefreshMenu;
+    this.textMenuSummary = textMenuSummary;
+    this.textWeekLabel = textWeekLabel;
+    this.textWeekRange = textWeekRange;
   }
 
   @Override
@@ -108,63 +101,27 @@ public final class FragmentMessMenuBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.breakfast_edit_text;
-      TextInputEditText breakfastEditText = ViewBindings.findChildViewById(rootView, id);
-      if (breakfastEditText == null) {
+      id = R.id.btn_next_week;
+      ImageView btnNextWeek = ViewBindings.findChildViewById(rootView, id);
+      if (btnNextWeek == null) {
         break missingId;
       }
 
-      id = R.id.breakfast_input_layout;
-      TextInputLayout breakfastInputLayout = ViewBindings.findChildViewById(rootView, id);
-      if (breakfastInputLayout == null) {
+      id = R.id.btn_prev_week;
+      ImageView btnPrevWeek = ViewBindings.findChildViewById(rootView, id);
+      if (btnPrevWeek == null) {
         break missingId;
       }
 
-      id = R.id.btn_save_breakfast;
-      MaterialButton btnSaveBreakfast = ViewBindings.findChildViewById(rootView, id);
-      if (btnSaveBreakfast == null) {
+      id = R.id.chip_group_days;
+      ChipGroup chipGroupDays = ViewBindings.findChildViewById(rootView, id);
+      if (chipGroupDays == null) {
         break missingId;
       }
 
-      id = R.id.btn_save_dinner;
-      MaterialButton btnSaveDinner = ViewBindings.findChildViewById(rootView, id);
-      if (btnSaveDinner == null) {
-        break missingId;
-      }
-
-      id = R.id.btn_save_lunch;
-      MaterialButton btnSaveLunch = ViewBindings.findChildViewById(rootView, id);
-      if (btnSaveLunch == null) {
-        break missingId;
-      }
-
-      id = R.id.btn_select_date;
-      MaterialButton btnSelectDate = ViewBindings.findChildViewById(rootView, id);
-      if (btnSelectDate == null) {
-        break missingId;
-      }
-
-      id = R.id.dinner_edit_text;
-      TextInputEditText dinnerEditText = ViewBindings.findChildViewById(rootView, id);
-      if (dinnerEditText == null) {
-        break missingId;
-      }
-
-      id = R.id.dinner_input_layout;
-      TextInputLayout dinnerInputLayout = ViewBindings.findChildViewById(rootView, id);
-      if (dinnerInputLayout == null) {
-        break missingId;
-      }
-
-      id = R.id.lunch_edit_text;
-      TextInputEditText lunchEditText = ViewBindings.findChildViewById(rootView, id);
-      if (lunchEditText == null) {
-        break missingId;
-      }
-
-      id = R.id.lunch_input_layout;
-      TextInputLayout lunchInputLayout = ViewBindings.findChildViewById(rootView, id);
-      if (lunchInputLayout == null) {
+      id = R.id.container_day_cards;
+      LinearLayout containerDayCards = ViewBindings.findChildViewById(rootView, id);
+      if (containerDayCards == null) {
         break missingId;
       }
 
@@ -174,16 +131,39 @@ public final class FragmentMessMenuBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.text_selected_date;
-      TextView textSelectedDate = ViewBindings.findChildViewById(rootView, id);
-      if (textSelectedDate == null) {
+      id = R.id.scroll_view;
+      NestedScrollView scrollView = ViewBindings.findChildViewById(rootView, id);
+      if (scrollView == null) {
         break missingId;
       }
 
-      return new FragmentMessMenuBinding((FrameLayout) rootView, breakfastEditText,
-          breakfastInputLayout, btnSaveBreakfast, btnSaveDinner, btnSaveLunch, btnSelectDate,
-          dinnerEditText, dinnerInputLayout, lunchEditText, lunchInputLayout, progressBar,
-          textSelectedDate);
+      id = R.id.swipe_refresh_menu;
+      SwipeRefreshLayout swipeRefreshMenu = ViewBindings.findChildViewById(rootView, id);
+      if (swipeRefreshMenu == null) {
+        break missingId;
+      }
+
+      id = R.id.text_menu_summary;
+      TextView textMenuSummary = ViewBindings.findChildViewById(rootView, id);
+      if (textMenuSummary == null) {
+        break missingId;
+      }
+
+      id = R.id.text_week_label;
+      TextView textWeekLabel = ViewBindings.findChildViewById(rootView, id);
+      if (textWeekLabel == null) {
+        break missingId;
+      }
+
+      id = R.id.text_week_range;
+      TextView textWeekRange = ViewBindings.findChildViewById(rootView, id);
+      if (textWeekRange == null) {
+        break missingId;
+      }
+
+      return new FragmentMessMenuBinding((FrameLayout) rootView, btnNextWeek, btnPrevWeek,
+          chipGroupDays, containerDayCards, progressBar, scrollView, swipeRefreshMenu,
+          textMenuSummary, textWeekLabel, textWeekRange);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

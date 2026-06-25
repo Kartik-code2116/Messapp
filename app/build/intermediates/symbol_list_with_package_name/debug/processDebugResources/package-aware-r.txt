@@ -4137,6 +4137,7 @@ id autoHide
 id autoLimit
 id availableSpace
 id axisRelative
+id badge_today
 id barrier
 id baseline
 id beginOnFirstDraw
@@ -4149,8 +4150,6 @@ id bounce
 id bounceBoth
 id bounceEnd
 id bounceStart
-id breakfast_edit_text
-id breakfast_input_layout
 id browser_actions_header_text
 id browser_actions_menu_item_icon
 id browser_actions_menu_item_text
@@ -4229,7 +4228,6 @@ id btn_save_profile
 id btn_save_settings
 id btn_save_weekly_menu
 id btn_see_reviews
-id btn_select_date
 id btn_select_expiry_date
 id btn_send_message
 id btn_submit_review
@@ -4246,6 +4244,7 @@ id cardForm
 id card_add_review
 id card_breakfast
 id card_daily_auto_select
+id card_day
 id card_dinner
 id card_empty_state
 id card_guest
@@ -4272,6 +4271,7 @@ id chip_female
 id chip_filter_active
 id chip_filter_all
 id chip_filter_expired
+id chip_group_days
 id chip_group_diet
 id chip_group_gender
 id chip_male
@@ -4291,6 +4291,7 @@ id confirm_button
 id constraint
 id container
 id container_avatar
+id container_day_cards
 id container_dinner
 id container_lunch
 id container_mess_id
@@ -4309,9 +4310,6 @@ id customPanel
 id cut
 id dark
 id date_picker_actions
-id day_selector_container
-id day_selector_expandable_container
-id day_selector_header
 id days_container
 id decelerate
 id decelerateAndComplete
@@ -4326,9 +4324,7 @@ id design_menu_item_text
 id design_navigation_view
 id dialog_button
 id dimensions
-id dinner_edit_text
 id dinner_hour_picker
-id dinner_input_layout
 id dinner_minute_picker
 id direct
 id disableHome
@@ -4375,11 +4371,14 @@ id escape
 id etAmount
 id etDays
 id et_amount
+id et_breakfast
 id et_comment
 id et_days
+id et_dinner
 id et_freeze_days
 id et_friday_dinner
 id et_friday_lunch
+id et_lunch
 id et_monday_dinner
 id et_monday_lunch
 id et_name
@@ -4400,7 +4399,6 @@ id expand_activities_button
 id expanded_menu
 id fab_add_offer
 id fab_add_review
-id fab_day_selector
 id fade
 id fill
 id fill_horizontal
@@ -4446,7 +4444,9 @@ id honorRequest
 id horizontal
 id horizontal_only
 id icon
+id icon_expand
 id icon_group
+id icon_menu_status
 id icon_only
 id icon_search
 id ifRoom
@@ -4487,9 +4487,11 @@ id label_support_phone
 id labeled
 id layout
 id layout_date_row
+id layout_day_header
 id layout_deadline_container
 id layout_empty_history
 id layout_empty_state
+id layout_meal_content
 id layout_meal_requests
 id layout_notification_list
 id layout_pending_subs
@@ -4507,9 +4509,7 @@ id list_item
 id locale
 id logoCard
 id ltr
-id lunch_edit_text
 id lunch_hour_picker
-id lunch_input_layout
 id lunch_minute_picker
 id m3_side_sheet
 id marquee
@@ -4739,6 +4739,7 @@ id scroll
 id scrollIndicatorDown
 id scrollIndicatorUp
 id scrollView
+id scroll_view
 id scrollable
 id search_badge
 id search_bar
@@ -4751,6 +4752,7 @@ id search_mag_icon
 id search_plate
 id search_src_text
 id search_voice_btn
+id section_breakfast
 id select_dialog_listview
 id selected
 id selection_type
@@ -4808,6 +4810,7 @@ id support_phone
 id swipe_refresh
 id swipe_refresh_dashboard
 id swipe_refresh_layout
+id swipe_refresh_menu
 id swipe_refresh_requests
 id swipe_refresh_user_home
 id swipe_refresh_user_menu
@@ -4849,6 +4852,7 @@ id text_avatar_initial
 id text_avg_rating
 id text_breakfast_badge
 id text_breakfast_counts_breakdown
+id text_breakfast_display
 id text_breakfast_menu
 id text_breakfast_status_bar
 id text_chip_active
@@ -4858,12 +4862,14 @@ id text_current_condition
 id text_current_expiry
 id text_dashboard_timer
 id text_date
+id text_day_date
+id text_day_name
 id text_days_in
 id text_days_out
 id text_dinner_card_timer
+id text_dinner_display
 id text_dinner_expiry
 id text_dinner_in_count
-id text_dinner_menu_display
 id text_dinner_menu_new
 id text_dinner_out_count
 id text_dinner_preference
@@ -4889,14 +4895,15 @@ id text_input_error_icon
 id text_input_start_icon
 id text_join_date
 id text_lunch_card_timer
+id text_lunch_display
 id text_lunch_expiry
 id text_lunch_in_count
-id text_lunch_menu_display
 id text_lunch_menu_new
 id text_lunch_out_count
 id text_lunch_preference
 id text_lunch_status
 id text_lunch_status_bar
+id text_menu_summary
 id text_mess_card_location
 id text_mess_card_name
 id text_mess_card_students
@@ -4946,8 +4953,6 @@ id text_revenue_title
 id text_review_comment
 id text_review_date
 id text_reviewer_name
-id text_selected_date
-id text_selected_day
 id text_stat_active
 id text_stat_expired
 id text_stat_total
@@ -4973,6 +4978,7 @@ id text_trans_student_name
 id text_trans_type_badge
 id text_transaction_count
 id text_view_week
+id text_week_label
 id text_week_range
 id textinput_counter
 id textinput_error
@@ -4980,6 +4986,9 @@ id textinput_helper_text
 id textinput_placeholder
 id textinput_prefix_text
 id textinput_suffix_text
+id til_breakfast
+id til_dinner
+id til_lunch
 id time
 id title
 id titleDividerNoCustom
@@ -5012,6 +5021,7 @@ id useLogo
 id user_top_bar
 id vertical
 id vertical_only
+id view_accent_bar
 id view_offset_helper
 id view_transition
 id view_tree_disjoint_parent
@@ -5212,6 +5222,7 @@ layout ime_secondary_split_test_activity
 layout include_admin_top_bar
 layout include_user_top_bar
 layout item_history
+layout item_menu_day_card
 layout item_mess_card
 layout item_offer
 layout item_profile_info_row
@@ -5221,6 +5232,7 @@ layout item_student
 layout item_student_request
 layout item_subscription_report_row
 layout item_transaction
+layout item_user_menu_day_card
 layout m3_alert_dialog
 layout m3_alert_dialog_actions
 layout m3_alert_dialog_title

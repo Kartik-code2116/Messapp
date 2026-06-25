@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/ios_background"
+    android:background="@color/background_page"
     tools:context=".ui.mess.menu.MessMenuFragment">
 
     <ProgressBar
@@ -15,336 +15,183 @@
         android:elevation="10dp"
         android:visibility="gone" />
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_menu"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:layout_height="match_parent">
 
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scroll_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="80dp">
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:fillViewport="true">
 
-            <!-- Header Section -->
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="16dp" android:paddingEnd="16dp"
-                android:paddingTop="24dp"
-                android:paddingBottom="8dp">
+                android:orientation="vertical"
+                android:paddingBottom="96dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Manage Daily Menu"
-                    android:textColor="#121617"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
-
-            <!-- Date Selector Card -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="20dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="2dp"
-                app:strokeWidth="0dp">
-
+                <!-- ═══════════════ PAGE HEADER ═══════════════ -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="20dp"
-                    android:background="@color/ios_surface">
+                    android:paddingStart="20dp"
+                    android:paddingTop="20dp"
+                    android:paddingEnd="20dp"
+                    android:paddingBottom="4dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins"
+                        android:text="Weekly Menu"
+                        android:textColor="@color/text_heading"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/inter"
+                        android:text="Manage breakfast, lunch &amp; dinner for each day"
+                        android:textColor="@color/text_caption"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <!-- ═══════════════ WEEK NAVIGATION ═══════════════ -->
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/Profound.Card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="6dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:gravity="center_vertical"
-                        android:layout_marginBottom="12dp">
+                        android:orientation="horizontal"
+                        android:paddingStart="6dp"
+                        android:paddingTop="10dp"
+                        android:paddingEnd="6dp"
+                        android:paddingBottom="10dp">
 
                         <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@drawable/ic_dashboard_black_24dp"
-                            app:tint="@color/ios_primary" />
+                            android:id="@+id/btn_prev_week"
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:contentDescription="Previous week"
+                            android:padding="10dp"
+                            android:src="@drawable/ic_arrow_back_black_24dp"
+                            app:tint="@color/brand_primary" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="12dp"
-                            android:text="SELECT DATE"
-                            android:textSize="11sp"
-                            android:textStyle="bold"
-                            android:textColor="#6B7280"
-                            android:letterSpacing="0.1" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
-
-                        <TextView
-                            android:id="@+id/text_selected_date"
+                        <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Today: DD MMMM YYYY"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:textColor="#111827" />
+                            android:gravity="center"
+                            android:orientation="vertical">
 
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btn_select_date"
-                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Change Date"
-                            android:textColor="@color/ios_primary"
-                            app:strokeColor="@color/ios_primary"
-                            app:cornerRadius="12dp"
-                            app:icon="@drawable/ic_edit"
-                            app:iconTint="@color/ios_primary" />
+                            <TextView
+                                android:id="@+id/text_week_range"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins"
+                                android:gravity="center"
+                                android:text="Jun 23 – Jun 29"
+                                android:textColor="@color/text_heading"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/text_week_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="1dp"
+                                android:fontFamily="@font/inter"
+                                android:gravity="center"
+                                android:text="This Week"
+                                android:textColor="@color/text_caption"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/btn_next_week"
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:contentDescription="Next week"
+                            android:padding="10dp"
+                            android:src="@drawable/ic_arrow_forward"
+                            app:tint="@color/brand_primary" />
                     </LinearLayout>
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                </com.google.android.material.card.MaterialCardView>
 
-            <!-- Breakfast Menu Card -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
-                android:layout_marginBottom="20dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="2dp"
-                app:strokeWidth="0dp">
+                <!-- ═══════════════ DAY CHIP STRIP ═══════════════ -->
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="16dp"
+                    android:clipToPadding="false"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:scrollbars="none">
 
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/chip_group_days"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:selectionRequired="true"
+                        app:singleSelection="true"
+                        app:singleLine="true" />
+                </HorizontalScrollView>
+
+                <!-- ═══════════════ MENU STATS SUMMARY ═══════════════ -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="20dp"
-                    android:background="@color/ios_surface">
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:paddingBottom="12dp">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:contentDescription="Info"
+                        android:src="@drawable/ic_info"
+                        app:tint="@color/text_caption" />
+
+                    <TextView
+                        android:id="@+id/text_menu_summary"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:layout_marginBottom="16dp">
-
-                        <View
-                            android:layout_width="4dp"
-                            android:layout_height="40dp"
-                            android:background="#3B82F6" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:text="BREAKFAST OPTIONS (COMMA SEPARATED)"
-                            android:textSize="11sp"
-                            android:textStyle="bold"
-                            android:textColor="#6B7280"
-                            android:letterSpacing="0.1" />
-                    </LinearLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/breakfast_input_layout"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="e.g. Poha, Idli, Dosa, Bread Butter"
-                        android:layout_marginBottom="16dp"
-                        app:boxCornerRadiusTopStart="12dp"
-                        app:boxCornerRadiusTopEnd="12dp"
-                        app:boxCornerRadiusBottomStart="12dp"
-                        app:boxCornerRadiusBottomEnd="12dp">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/breakfast_edit_text"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="textMultiLine"
-                            android:minLines="2"
-                            android:maxLines="5"
-                            android:gravity="top|start"
-                            android:textColor="#000000" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btn_save_breakfast"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Save Breakfast Menu"
-                        android:textColor="@color/white"
-                        app:backgroundTint="#3B82F6"
-                        app:cornerRadius="12dp"
-                        app:icon="@drawable/ic_check_circle"
-                        app:iconTint="@color/white" />
+                        android:layout_marginStart="8dp"
+                        android:fontFamily="@font/inter"
+                        android:text="Loading menu status..."
+                        android:textColor="@color/text_caption"
+                        android:textSize="13sp" />
                 </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
 
-            <!-- Lunch Menu Card -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
-                android:layout_marginBottom="20dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="2dp"
-                app:strokeWidth="0dp">
-
+                <!-- ═══════════════ DAY CARDS CONTAINER ═══════════════ -->
                 <LinearLayout
+                    android:id="@+id/container_day_cards"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="20dp"
-                    android:background="@color/ios_surface">
+                    android:orientation="vertical" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:layout_marginBottom="16dp">
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
 
-                        <View
-                            android:layout_width="4dp"
-                            android:layout_height="40dp"
-                            android:background="#4CAF50" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:text="LUNCH MENU"
-                            android:textSize="11sp"
-                            android:textStyle="bold"
-                            android:textColor="#6B7280"
-                            android:letterSpacing="0.1" />
-                    </LinearLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/lunch_input_layout"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Enter lunch menu items..."
-                        android:layout_marginBottom="16dp"
-                        app:boxCornerRadiusTopStart="12dp"
-                        app:boxCornerRadiusTopEnd="12dp"
-                        app:boxCornerRadiusBottomStart="12dp"
-                        app:boxCornerRadiusBottomEnd="12dp">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/lunch_edit_text"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="textMultiLine"
-                            android:minLines="4"
-                            android:maxLines="8"
-                            android:gravity="top|start"
-                            android:textColor="#000000" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btn_save_lunch"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Save Lunch Menu"
-                        android:textColor="@color/white"
-                        app:backgroundTint="#4CAF50"
-                        app:cornerRadius="12dp"
-                        app:icon="@drawable/ic_check_circle"
-                        app:iconTint="@color/white" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Dinner Menu Card -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
-                android:layout_marginBottom="20dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="2dp"
-                app:strokeWidth="0dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="20dp"
-                    android:background="@color/ios_surface">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:layout_marginBottom="16dp">
-
-                        <View
-                            android:layout_width="4dp"
-                            android:layout_height="40dp"
-                            android:background="#F97316" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:text="DINNER MENU"
-                            android:textSize="11sp"
-                            android:textStyle="bold"
-                            android:textColor="#6B7280"
-                            android:letterSpacing="0.1" />
-                    </LinearLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/dinner_input_layout"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Enter dinner menu items..."
-                        android:layout_marginBottom="16dp"
-                        app:boxCornerRadiusTopStart="12dp"
-                        app:boxCornerRadiusTopEnd="12dp"
-                        app:boxCornerRadiusBottomStart="12dp"
-                        app:boxCornerRadiusBottomEnd="12dp">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/dinner_edit_text"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="textMultiLine"
-                            android:minLines="4"
-                            android:maxLines="8"
-                            android:gravity="top|start"
-                            android:textColor="#111827" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btn_save_dinner"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Save Dinner Menu"
-                        android:textColor="@color/white"
-                        app:backgroundTint="#F97316"
-                        app:cornerRadius="12dp"
-                        app:icon="@drawable/ic_check_circle"
-                        app:iconTint="@color/white" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </FrameLayout>

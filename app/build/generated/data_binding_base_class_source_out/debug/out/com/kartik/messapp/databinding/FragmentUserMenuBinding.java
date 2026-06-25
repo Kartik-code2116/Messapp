@@ -5,14 +5,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.chip.ChipGroup;
 import com.kartik.messapp.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -23,44 +26,47 @@ public final class FragmentUserMenuBinding implements ViewBinding {
   private final FrameLayout rootView;
 
   @NonNull
-  public final LinearLayout daySelectorContainer;
+  public final ImageView btnNextWeek;
 
   @NonNull
-  public final LinearLayout daySelectorExpandableContainer;
+  public final ImageView btnPrevWeek;
 
   @NonNull
-  public final LinearLayout daySelectorHeader;
+  public final ChipGroup chipGroupDays;
 
   @NonNull
-  public final FloatingActionButton fabDaySelector;
+  public final LinearLayout containerDayCards;
+
+  @NonNull
+  public final ProgressBar progressBar;
+
+  @NonNull
+  public final NestedScrollView scrollView;
 
   @NonNull
   public final SwipeRefreshLayout swipeRefreshUserMenu;
 
   @NonNull
-  public final TextView textDinnerMenuDisplay;
+  public final TextView textWeekLabel;
 
   @NonNull
-  public final TextView textLunchMenuDisplay;
+  public final TextView textWeekRange;
 
-  @NonNull
-  public final TextView textSelectedDay;
-
-  private FragmentUserMenuBinding(@NonNull FrameLayout rootView,
-      @NonNull LinearLayout daySelectorContainer,
-      @NonNull LinearLayout daySelectorExpandableContainer, @NonNull LinearLayout daySelectorHeader,
-      @NonNull FloatingActionButton fabDaySelector,
-      @NonNull SwipeRefreshLayout swipeRefreshUserMenu, @NonNull TextView textDinnerMenuDisplay,
-      @NonNull TextView textLunchMenuDisplay, @NonNull TextView textSelectedDay) {
+  private FragmentUserMenuBinding(@NonNull FrameLayout rootView, @NonNull ImageView btnNextWeek,
+      @NonNull ImageView btnPrevWeek, @NonNull ChipGroup chipGroupDays,
+      @NonNull LinearLayout containerDayCards, @NonNull ProgressBar progressBar,
+      @NonNull NestedScrollView scrollView, @NonNull SwipeRefreshLayout swipeRefreshUserMenu,
+      @NonNull TextView textWeekLabel, @NonNull TextView textWeekRange) {
     this.rootView = rootView;
-    this.daySelectorContainer = daySelectorContainer;
-    this.daySelectorExpandableContainer = daySelectorExpandableContainer;
-    this.daySelectorHeader = daySelectorHeader;
-    this.fabDaySelector = fabDaySelector;
+    this.btnNextWeek = btnNextWeek;
+    this.btnPrevWeek = btnPrevWeek;
+    this.chipGroupDays = chipGroupDays;
+    this.containerDayCards = containerDayCards;
+    this.progressBar = progressBar;
+    this.scrollView = scrollView;
     this.swipeRefreshUserMenu = swipeRefreshUserMenu;
-    this.textDinnerMenuDisplay = textDinnerMenuDisplay;
-    this.textLunchMenuDisplay = textLunchMenuDisplay;
-    this.textSelectedDay = textSelectedDay;
+    this.textWeekLabel = textWeekLabel;
+    this.textWeekRange = textWeekRange;
   }
 
   @Override
@@ -90,27 +96,39 @@ public final class FragmentUserMenuBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.day_selector_container;
-      LinearLayout daySelectorContainer = ViewBindings.findChildViewById(rootView, id);
-      if (daySelectorContainer == null) {
+      id = R.id.btn_next_week;
+      ImageView btnNextWeek = ViewBindings.findChildViewById(rootView, id);
+      if (btnNextWeek == null) {
         break missingId;
       }
 
-      id = R.id.day_selector_expandable_container;
-      LinearLayout daySelectorExpandableContainer = ViewBindings.findChildViewById(rootView, id);
-      if (daySelectorExpandableContainer == null) {
+      id = R.id.btn_prev_week;
+      ImageView btnPrevWeek = ViewBindings.findChildViewById(rootView, id);
+      if (btnPrevWeek == null) {
         break missingId;
       }
 
-      id = R.id.day_selector_header;
-      LinearLayout daySelectorHeader = ViewBindings.findChildViewById(rootView, id);
-      if (daySelectorHeader == null) {
+      id = R.id.chip_group_days;
+      ChipGroup chipGroupDays = ViewBindings.findChildViewById(rootView, id);
+      if (chipGroupDays == null) {
         break missingId;
       }
 
-      id = R.id.fab_day_selector;
-      FloatingActionButton fabDaySelector = ViewBindings.findChildViewById(rootView, id);
-      if (fabDaySelector == null) {
+      id = R.id.container_day_cards;
+      LinearLayout containerDayCards = ViewBindings.findChildViewById(rootView, id);
+      if (containerDayCards == null) {
+        break missingId;
+      }
+
+      id = R.id.progress_bar;
+      ProgressBar progressBar = ViewBindings.findChildViewById(rootView, id);
+      if (progressBar == null) {
+        break missingId;
+      }
+
+      id = R.id.scroll_view;
+      NestedScrollView scrollView = ViewBindings.findChildViewById(rootView, id);
+      if (scrollView == null) {
         break missingId;
       }
 
@@ -120,27 +138,21 @@ public final class FragmentUserMenuBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.text_dinner_menu_display;
-      TextView textDinnerMenuDisplay = ViewBindings.findChildViewById(rootView, id);
-      if (textDinnerMenuDisplay == null) {
+      id = R.id.text_week_label;
+      TextView textWeekLabel = ViewBindings.findChildViewById(rootView, id);
+      if (textWeekLabel == null) {
         break missingId;
       }
 
-      id = R.id.text_lunch_menu_display;
-      TextView textLunchMenuDisplay = ViewBindings.findChildViewById(rootView, id);
-      if (textLunchMenuDisplay == null) {
+      id = R.id.text_week_range;
+      TextView textWeekRange = ViewBindings.findChildViewById(rootView, id);
+      if (textWeekRange == null) {
         break missingId;
       }
 
-      id = R.id.text_selected_day;
-      TextView textSelectedDay = ViewBindings.findChildViewById(rootView, id);
-      if (textSelectedDay == null) {
-        break missingId;
-      }
-
-      return new FragmentUserMenuBinding((FrameLayout) rootView, daySelectorContainer,
-          daySelectorExpandableContainer, daySelectorHeader, fabDaySelector, swipeRefreshUserMenu,
-          textDinnerMenuDisplay, textLunchMenuDisplay, textSelectedDay);
+      return new FragmentUserMenuBinding((FrameLayout) rootView, btnNextWeek, btnPrevWeek,
+          chipGroupDays, containerDayCards, progressBar, scrollView, swipeRefreshUserMenu,
+          textWeekLabel, textWeekRange);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
