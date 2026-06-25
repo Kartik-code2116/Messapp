@@ -3889,6 +3889,7 @@ drawable ic_expand_more_22px
 drawable ic_facebook
 drawable ic_google
 drawable ic_group
+drawable ic_half_filled
 drawable ic_history
 drawable ic_history_black_24dp
 drawable ic_home
@@ -3937,6 +3938,7 @@ drawable ic_star
 drawable ic_star_rate
 drawable ic_steam_subtle
 drawable ic_student_profile
+drawable ic_warning
 drawable line_dashed
 drawable m3_avd_hide_password
 drawable m3_avd_show_password
