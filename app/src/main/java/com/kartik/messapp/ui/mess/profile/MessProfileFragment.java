@@ -265,7 +265,10 @@ public class MessProfileFragment extends Fragment {
     private void preGenerateQrCode(String messId) {
         if (messId == null || messId.isEmpty()) return;
         new Thread(() -> {
-            String qrText = "Mess ID: " + messId + "\nDownload App: https://play.google.com/store/apps/details?id=com.kartik.messapp";
+            // Encode the mess ID into an Android intent URI
+            String packageName = requireContext().getPackageName();
+            String qrText = "intent://join?code=" + messId + "#Intent;scheme=messapp;package=" + packageName + ";end";
+            
             try {
                 QRCodeWriter writer = new QRCodeWriter();
                 BitMatrix bitMatrix = writer.encode(qrText, BarcodeFormat.QR_CODE, 512, 512);

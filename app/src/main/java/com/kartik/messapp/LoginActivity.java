@@ -63,6 +63,10 @@ public class LoginActivity extends AppCompatActivity {
             if (currentRole == null)
                 currentRole = "USER"; // default role to avoid NPE
 
+            if (getIntent().hasExtra("IS_SIGNUP_MODE") && getIntent().getBooleanExtra("IS_SIGNUP_MODE", false)) {
+                isLoginMode = false;
+            }
+
             // Check if guest mode
             boolean isGuest = getIntent().getBooleanExtra("IS_GUEST", false);
             if (isGuest) {
@@ -73,6 +77,13 @@ public class LoginActivity extends AppCompatActivity {
 
             Log.d("LoginActivity", "User role: " + currentRole);
             updateUI();
+            
+            // Prefill mess ID if it came from a deep link
+            String prefillMessId = getIntent().getStringExtra("PREFILL_MESS_ID");
+            if (prefillMessId != null && !prefillMessId.isEmpty() && binding.messIdEditText != null) {
+                binding.messIdEditText.setText(prefillMessId);
+            }
+
             setupBackNavigation();
 
             // Set click listeners with null checks

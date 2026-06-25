@@ -86,6 +86,17 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <!-- Intent filter for deep linking from QR code -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="join"
+                    android:scheme="messapp" />
+            </intent-filter>
         </activity>
         <activity
             android:name="com.kartik.messapp.RoleSelectionActivity"

@@ -96,6 +96,29 @@ public class SplashActivity extends AppCompatActivity {
     private void decideDestination() {
         if (hasNavigated || isFinishing()) return;
 
+        // Check for deep link first
+        Intent intent = getIntent();
+        android.net.Uri data = intent.getData();
+        if (data != null && "messapp".equals(data.getScheme()) && "join".equals(data.getHost())) {
+            String messCode = data.getQueryParameter("code");
+            if (messCode != null && !messCode.isEmpty()) {
+                FirebaseUser currentUser = mAuth.getCurrentUser();
+                if (currentUser == null) {
+                    // Not logged in: go straight to signup with the code
+                    Intent loginIntent = new Intent(this, LoginActivity.class);
+                    loginIntent.putExtra("ROLE", "USER"); // Force Student role
+                    loginIntent.putExtra("IS_SIGNUP_MODE", true);
+                    loginIntent.putExtra("PREFILL_MESS_ID", messCode);
+                    navigateOnce(loginIntent);
+                    return;
+                } else {
+                    // If already logged in, we shouldn't force them to sign up.
+                    // We just let them proceed to their dashboard, but let's notify them.
+                    android.widget.Toast.makeText(this, "You are already logged in.", android.widget.Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser == null) {
             goToRoleSelection();
