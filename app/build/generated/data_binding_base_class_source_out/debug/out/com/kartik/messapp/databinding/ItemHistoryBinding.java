@@ -4,6 +4,8 @@ package com.kartik.messapp.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +22,18 @@ public final class ItemHistoryBinding implements ViewBinding {
   private final MaterialCardView rootView;
 
   @NonNull
+  public final ImageView iconDinner;
+
+  @NonNull
+  public final ImageView iconLunch;
+
+  @NonNull
+  public final LinearLayout layoutDinnerPill;
+
+  @NonNull
+  public final LinearLayout layoutLunchPill;
+
+  @NonNull
   public final TextView textDinnerStatus;
 
   @NonNull
@@ -28,9 +42,15 @@ public final class ItemHistoryBinding implements ViewBinding {
   @NonNull
   public final TextView textLunchStatus;
 
-  private ItemHistoryBinding(@NonNull MaterialCardView rootView, @NonNull TextView textDinnerStatus,
+  private ItemHistoryBinding(@NonNull MaterialCardView rootView, @NonNull ImageView iconDinner,
+      @NonNull ImageView iconLunch, @NonNull LinearLayout layoutDinnerPill,
+      @NonNull LinearLayout layoutLunchPill, @NonNull TextView textDinnerStatus,
       @NonNull TextView textHistoryDate, @NonNull TextView textLunchStatus) {
     this.rootView = rootView;
+    this.iconDinner = iconDinner;
+    this.iconLunch = iconLunch;
+    this.layoutDinnerPill = layoutDinnerPill;
+    this.layoutLunchPill = layoutLunchPill;
     this.textDinnerStatus = textDinnerStatus;
     this.textHistoryDate = textHistoryDate;
     this.textLunchStatus = textLunchStatus;
@@ -63,6 +83,30 @@ public final class ItemHistoryBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.icon_dinner;
+      ImageView iconDinner = ViewBindings.findChildViewById(rootView, id);
+      if (iconDinner == null) {
+        break missingId;
+      }
+
+      id = R.id.icon_lunch;
+      ImageView iconLunch = ViewBindings.findChildViewById(rootView, id);
+      if (iconLunch == null) {
+        break missingId;
+      }
+
+      id = R.id.layout_dinner_pill;
+      LinearLayout layoutDinnerPill = ViewBindings.findChildViewById(rootView, id);
+      if (layoutDinnerPill == null) {
+        break missingId;
+      }
+
+      id = R.id.layout_lunch_pill;
+      LinearLayout layoutLunchPill = ViewBindings.findChildViewById(rootView, id);
+      if (layoutLunchPill == null) {
+        break missingId;
+      }
+
       id = R.id.text_dinner_status;
       TextView textDinnerStatus = ViewBindings.findChildViewById(rootView, id);
       if (textDinnerStatus == null) {
@@ -81,8 +125,8 @@ public final class ItemHistoryBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ItemHistoryBinding((MaterialCardView) rootView, textDinnerStatus, textHistoryDate,
-          textLunchStatus);
+      return new ItemHistoryBinding((MaterialCardView) rootView, iconDinner, iconLunch,
+          layoutDinnerPill, layoutLunchPill, textDinnerStatus, textHistoryDate, textLunchStatus);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

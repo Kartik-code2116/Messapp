@@ -37,6 +37,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/layout_lunch_pill"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -48,11 +49,12 @@
                 android:paddingTop="10dp" android:paddingBottom="10dp">
 
                 <ImageView
+                    android:id="@+id/icon_lunch"
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:contentDescription="@null"
                     android:src="@drawable/ic_lunch_dining"
-                    app:tint="@color/brand_primary" />
+                    app:tint="@color/text_caption" />
 
                 <TextView
                     android:id="@+id/text_lunch_status"
@@ -71,6 +73,7 @@
                 android:layout_height="1dp" />
 
             <LinearLayout
+                android:id="@+id/layout_dinner_pill"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -82,11 +85,12 @@
                 android:paddingTop="10dp" android:paddingBottom="10dp">
 
                 <ImageView
+                    android:id="@+id/icon_dinner"
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:contentDescription="@null"
                     android:src="@drawable/ic_dinner_dining"
-                    app:tint="@color/brand_secondary" />
+                    app:tint="@color/text_caption" />
 
                 <TextView
                     android:id="@+id/text_dinner_status"

@@ -46,51 +46,72 @@ public class HistoryAdapter extends ListAdapter<MealSelection, HistoryAdapter.Hi
         }
     }
 
-    static class HistoryViewHolder extends RecyclerView.ViewHolder {
-        private final TextView textHistoryDate;
-        private final TextView textLunchStatus;
-        private final TextView textDinnerStatus;
+        static class HistoryViewHolder extends RecyclerView.ViewHolder {
+            private final TextView textHistoryDate;
+            private final TextView textLunchStatus;
+            private final TextView textDinnerStatus;
+            private final View layoutLunchPill;
+            private final View layoutDinnerPill;
+            private final android.widget.ImageView iconLunch;
+            private final android.widget.ImageView iconDinner;
 
-        HistoryViewHolder(@NonNull View itemView) {
-            super(itemView);
-            textHistoryDate = itemView.findViewById(R.id.text_history_date);
-            textLunchStatus = itemView.findViewById(R.id.text_lunch_status);
-            textDinnerStatus = itemView.findViewById(R.id.text_dinner_status);
-        }
-
-        void bind(MealSelection mealSelection) {
-            textHistoryDate.setText(formatDate(mealSelection.getDate()));
-            bindMealStatus(textLunchStatus, "Lunch", mealSelection.getLunchStatus());
-            bindMealStatus(textDinnerStatus, "Dinner", mealSelection.getDinnerStatus());
-        }
-
-        private void bindMealStatus(TextView view, String mealLabel, String status) {
-            String displayStatus = status != null ? status : "Not marked";
-            if ("RESET".equalsIgnoreCase(displayStatus)) {
-                displayStatus = "Not marked";
+            HistoryViewHolder(@NonNull View itemView) {
+                super(itemView);
+                textHistoryDate = itemView.findViewById(R.id.text_history_date);
+                textLunchStatus = itemView.findViewById(R.id.text_lunch_status);
+                textDinnerStatus = itemView.findViewById(R.id.text_dinner_status);
+                layoutLunchPill = itemView.findViewById(R.id.layout_lunch_pill);
+                layoutDinnerPill = itemView.findViewById(R.id.layout_dinner_pill);
+                iconLunch = itemView.findViewById(R.id.icon_lunch);
+                iconDinner = itemView.findViewById(R.id.icon_dinner);
             }
-            
-            // Format presentation status
-            String presentationStatus = displayStatus;
-            if ("Auto-IN".equalsIgnoreCase(displayStatus) || "Auto IN".equalsIgnoreCase(displayStatus)) {
-                presentationStatus = "Auto-selected IN";
-            }
-            
-            view.setText(mealLabel + ": " + presentationStatus);
 
-            int colorRes;
-            if ("IN".equalsIgnoreCase(displayStatus) 
-                    || "Auto-IN".equalsIgnoreCase(displayStatus)
-                    || "Auto-selected IN".equalsIgnoreCase(displayStatus)
-                    || "Auto IN".equalsIgnoreCase(displayStatus)) {
-                colorRes = R.color.state_success;
-            } else if ("OUT".equalsIgnoreCase(displayStatus)) {
-                colorRes = R.color.state_error;
-            } else {
-                colorRes = R.color.text_caption;
+            void bind(MealSelection mealSelection) {
+                textHistoryDate.setText(formatDate(mealSelection.getDate()));
+                bindMealStatus(textLunchStatus, layoutLunchPill, iconLunch, "Lunch", mealSelection.getLunchStatus());
+                bindMealStatus(textDinnerStatus, layoutDinnerPill, iconDinner, "Dinner", mealSelection.getDinnerStatus());
             }
-            view.setTextColor(ContextCompat.getColor(view.getContext(), colorRes));
-        }
+
+            private void bindMealStatus(TextView textView, View layoutPill, android.widget.ImageView iconView, String mealLabel, String status) {
+                String displayStatus = status != null ? status : "Not marked";
+                if ("RESET".equalsIgnoreCase(displayStatus)) {
+                    displayStatus = "Not marked";
+                }
+                
+                // Format presentation status
+                String presentationStatus = displayStatus;
+                if ("Auto-IN".equalsIgnoreCase(displayStatus) || "Auto IN".equalsIgnoreCase(displayStatus)) {
+                    presentationStatus = "Auto-selected IN";
+                }
+                
+                textView.setText(mealLabel + ": " + presentationStatus);
+
+                int textColorRes;
+                int bgColorRes;
+
+                if ("IN".equalsIgnoreCase(displayStatus) 
+                        || "Auto-IN".equalsIgnoreCase(displayStatus)
+                        || "Auto-selected IN".equalsIgnoreCase(displayStatus)
+                        || "Auto IN".equalsIgnoreCase(displayStatus)) {
+                    textColorRes = R.color.state_success;
+                    bgColorRes = R.color.semantic_success_bg;
+                } else if ("OUT".equalsIgnoreCase(displayStatus)) {
+                    textColorRes = R.color.state_error;
+                    bgColorRes = R.color.ios_danger_light;
+                } else {
+                    textColorRes = R.color.text_caption;
+                    bgColorRes = R.color.neutral_50;
+                }
+
+                int colorVal = ContextCompat.getColor(textView.getContext(), textColorRes);
+                int bgColorVal = ContextCompat.getColor(textView.getContext(), bgColorRes);
+                
+                textView.setTextColor(colorVal);
+                layoutPill.setBackgroundTintList(android.content.res.ColorStateList.valueOf(bgColorVal));
+                if (iconView != null) {
+                    iconView.setImageTintList(android.content.res.ColorStateList.valueOf(colorVal));
+                }
+            }
 
         private String formatDate(String rawDate) {
             if (rawDate == null || rawDate.isEmpty()) {

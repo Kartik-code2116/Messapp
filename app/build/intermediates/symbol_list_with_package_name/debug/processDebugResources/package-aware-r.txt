@@ -4446,8 +4446,10 @@ id honorRequest
 id horizontal
 id horizontal_only
 id icon
+id icon_dinner
 id icon_expand
 id icon_group
+id icon_lunch
 id icon_menu_status
 id icon_only
 id icon_search
@@ -4491,8 +4493,10 @@ id layout
 id layout_date_row
 id layout_day_header
 id layout_deadline_container
+id layout_dinner_pill
 id layout_empty_history
 id layout_empty_state
+id layout_lunch_pill
 id layout_meal_content
 id layout_meal_requests
 id layout_notification_list
