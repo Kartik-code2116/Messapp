@@ -522,11 +522,16 @@ public class MessMenuFragment extends Fragment {
             if (dinnerInputs[i]   != null) dinnerInputs[i].setText("");
         }
 
-        // === SINGLE query for the whole week ===
+        java.util.List<String> docIds = new java.util.ArrayList<>();
+        Calendar dayCalBuilder = (Calendar) weekStartCalendar.clone();
+        for (int i = 0; i < 7; i++) {
+            docIds.add(currentMessId + "_" + dateFormat.format(dayCalBuilder.getTime()));
+            dayCalBuilder.add(Calendar.DAY_OF_YEAR, 1);
+        }
+
+        // === SINGLE query for the whole week using document IDs ===
         db.collection("menus")
-                .whereEqualTo("messId", currentMessId)
-                .whereGreaterThanOrEqualTo("date", startDate)
-                .whereLessThanOrEqualTo("date", endDate)
+                .whereIn(com.google.firebase.firestore.FieldPath.documentId(), docIds)
                 .get()
                 .addOnSuccessListener(querySnapshot -> {
                     if (binding == null) return;
@@ -761,7 +766,7 @@ public class MessMenuFragment extends Fragment {
             menuData.put("date", formattedDate);
             menuData.put(mealType, menuText);
 
-            menuRef.set(menuData)
+            menuRef.set(menuData, com.google.firebase.firestore.SetOptions.merge())
                     .addOnSuccessListener(aVoid -> {
                         if (binding == null) return;
                         String label = mealType.substring(0, 1).toUpperCase() + mealType.substring(1);

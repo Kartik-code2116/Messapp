@@ -330,7 +330,7 @@ public class MessStudentsFragment extends Fragment {
 
         binding.btnFilterOutTodayCard.setCardBackgroundColor(getResources().getColor(R.color.ios_surface));
         binding.btnFilterOutTodayCard.setStrokeColor(getResources().getColor(R.color.divider));
-        ((android.widget.TextView) binding.btnFilterOutToday.getChildAt(0))
+        ((android.widget.TextView) binding.btnFilterOutToday.getChildAt(1))
                 .setTextColor(getResources().getColor(R.color.ios_grey_400));
 
         // Highlight selected
@@ -356,7 +356,7 @@ public class MessStudentsFragment extends Fragment {
             case "OUT Today":
                 binding.btnFilterOutTodayCard.setCardBackgroundColor(getResources().getColor(R.color.ios_danger_light));
                 binding.btnFilterOutTodayCard.setStrokeColor(getResources().getColor(R.color.ios_danger));
-                ((android.widget.TextView) binding.btnFilterOutToday.getChildAt(0))
+                ((android.widget.TextView) binding.btnFilterOutToday.getChildAt(1))
                         .setTextColor(getResources().getColor(R.color.ios_danger));
                 break;
         }

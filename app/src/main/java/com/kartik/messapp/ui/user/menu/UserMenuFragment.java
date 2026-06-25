@@ -392,11 +392,16 @@ public class UserMenuFragment extends Fragment {
             if (breakfastSections[i] != null) breakfastSections[i].setVisibility(View.GONE);
         }
 
-        // === SINGLE query for all 7 days ===
+        java.util.List<String> docIds = new java.util.ArrayList<>();
+        Calendar dayCalBuilder = (Calendar) weekStartCalendar.clone();
+        for (int i = 0; i < 7; i++) {
+            docIds.add(currentMessId + "_" + dateFmt.format(dayCalBuilder.getTime()));
+            dayCalBuilder.add(Calendar.DAY_OF_YEAR, 1);
+        }
+
+        // === SINGLE query for all 7 days using document IDs ===
         db.collection("menus")
-                .whereEqualTo("messId", currentMessId)
-                .whereGreaterThanOrEqualTo("date", startDate)
-                .whereLessThanOrEqualTo("date", endDate)
+                .whereIn(com.google.firebase.firestore.FieldPath.documentId(), docIds)
                 .get()
                 .addOnSuccessListener(snap -> {
                     if (binding == null) return;
