@@ -34,6 +34,10 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".OnboardingActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Messapp.NoActionBar" />
+        <activity
             android:name=".RoleSelectionActivity"
             android:exported="false"/>
         <activity android:name=".LoginActivity" android:exported="false" />

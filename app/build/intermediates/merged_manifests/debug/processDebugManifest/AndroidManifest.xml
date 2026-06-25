@@ -76,6 +76,7 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/messapp"
         android:supportsRtl="true"
+        android:testOnly="true"
         android:theme="@style/Theme.Messapp" >
         <activity
             android:name="com.kartik.messapp.SplashActivity"
@@ -98,6 +99,10 @@
                     android:scheme="messapp" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.kartik.messapp.OnboardingActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Messapp.NoActionBar" />
         <activity
             android:name="com.kartik.messapp.RoleSelectionActivity"
             android:exported="false" />

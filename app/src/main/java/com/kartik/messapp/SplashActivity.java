@@ -167,7 +167,14 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void goToRoleSelection() {
-        navigateOnce(new Intent(SplashActivity.this, RoleSelectionActivity.class));
+        android.content.SharedPreferences prefs = getSharedPreferences("user_prefs", MODE_PRIVATE);
+        boolean isFirstLaunch = prefs.getBoolean("is_first_launch", true);
+        
+        if (isFirstLaunch) {
+            navigateOnce(new Intent(SplashActivity.this, OnboardingActivity.class));
+        } else {
+            navigateOnce(new Intent(SplashActivity.this, RoleSelectionActivity.class));
+        }
     }
 
     private void goToDashboard(String role) {

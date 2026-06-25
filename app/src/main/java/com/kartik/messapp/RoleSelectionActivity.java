@@ -30,7 +30,6 @@ public class RoleSelectionActivity extends AppCompatActivity {
             View guestBtn = findViewById(R.id.btn_guest);
             View messOwnerCard = findViewById(R.id.card_mess_owner);
             View userCard = findViewById(R.id.card_user);
-            View guestCard = findViewById(R.id.card_guest);
 
             if (messOwnerBtn == null) {
                 Log.e(TAG, "btn_mess_uncal button not found in layout");
@@ -80,9 +79,6 @@ public class RoleSelectionActivity extends AppCompatActivity {
                     showError("Error: " + e.getMessage());
                 }
             });
-            if (guestCard != null) {
-                guestCard.setOnClickListener(v -> guestBtn.performClick());
-            }
 
             // Privacy Policy link
             View privacyPolicy = findViewById(R.id.tv_privacy_policy);

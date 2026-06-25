@@ -154,6 +154,7 @@ drawable bg_chip_unselected
 drawable bg_circle_avatar_drawer
 drawable bg_circle_light_green
 drawable bg_circle_primary_border
+drawable bg_circle_primary_light
 drawable bg_circle_surface
 drawable bg_deadline_pill
 drawable bg_drawer_avatar_ring
@@ -165,6 +166,8 @@ drawable bg_gradient
 drawable bg_gradient_primary
 drawable bg_input_field
 drawable bg_login_header
+drawable bg_onboarding_dot_selected
+drawable bg_onboarding_dot_unselected
 drawable bg_profile_badge
 drawable bg_profile_header
 drawable bg_profile_icon_circle
@@ -337,6 +340,7 @@ id btn_nav_offers
 id btn_nav_revenue
 id btn_nav_subscription_report
 id btn_nav_weekly_menu
+id btn_next
 id btn_next_week
 id btn_notification
 id btn_plan_out_days
@@ -354,6 +358,7 @@ id btn_save_weekly_menu
 id btn_see_reviews
 id btn_select_expiry_date
 id btn_send_message
+id btn_skip
 id btn_submit_review
 id btn_subscribe_mess
 id btn_user
@@ -367,7 +372,6 @@ id card_daily_auto_select
 id card_day
 id card_dinner
 id card_empty_state
-id card_guest
 id card_lunch
 id card_mess_condition
 id card_mess_owner
@@ -447,6 +451,7 @@ id icon_expand
 id icon_lunch
 id icon_menu_status
 id icon_search
+id image_onboarding
 id imgLogo
 id img_drawer_profile
 id img_mess_banner
@@ -468,12 +473,15 @@ id label_mess_details
 id label_support_email
 id label_support_instagram
 id label_support_phone
+id layout_bottom
+id layout_bottom_controls
 id layout_date_row
 id layout_day_header
 id layout_deadline_container
 id layout_dinner_pill
 id layout_empty_history
 id layout_empty_state
+id layout_indicators
 id layout_lunch_pill
 id layout_meal_content
 id layout_meal_requests
@@ -615,6 +623,7 @@ id text_day_date
 id text_day_name
 id text_days_in
 id text_days_out
+id text_description
 id text_dinner_card_timer
 id text_dinner_display
 id text_dinner_expiry
@@ -711,6 +720,7 @@ id text_student_phone
 id text_student_status
 id text_subscription_expiry
 id text_subscription_type
+id text_title
 id text_total_dinner
 id text_total_lunch
 id text_total_revenue_all_time
@@ -732,8 +742,11 @@ id til_lunch
 id toolbar
 id toolbar_report
 id top_header
+id tv_header
 id tv_privacy_policy
+id tv_subheader
 id user_top_bar
+id viewPager
 id view_accent_bar
 layout activity_edit_mess_profile
 layout activity_edit_user_profile
@@ -742,6 +755,7 @@ layout activity_mess_dashboard
 layout activity_mess_reviews
 layout activity_mess_settings
 layout activity_my_reviews
+layout activity_onboarding
 layout activity_role_selection
 layout activity_splash_screen
 layout activity_subscription_report
@@ -777,6 +791,7 @@ layout item_history
 layout item_menu_day_card
 layout item_mess_card
 layout item_offer
+layout item_onboarding_slide
 layout item_profile_info_row
 layout item_review
 layout item_sent_message

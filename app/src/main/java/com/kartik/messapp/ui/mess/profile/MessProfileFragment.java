@@ -265,9 +265,8 @@ public class MessProfileFragment extends Fragment {
     private void preGenerateQrCode(String messId) {
         if (messId == null || messId.isEmpty()) return;
         new Thread(() -> {
-            // Encode the mess ID into an Android intent URI
-            String packageName = requireContext().getPackageName();
-            String qrText = "intent://join?code=" + messId + "#Intent;scheme=messapp;package=" + packageName + ";end";
+            // Encode the mess ID into the Firebase Hosting URL
+            String qrText = "https://messapp-5275d.web.app/join.html?code=" + messId;
             
             try {
                 QRCodeWriter writer = new QRCodeWriter();

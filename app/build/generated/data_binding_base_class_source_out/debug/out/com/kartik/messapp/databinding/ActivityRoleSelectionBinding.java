@@ -4,13 +4,13 @@ package com.kartik.messapp.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ScrollView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
-import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.kartik.messapp.R;
 import java.lang.NullPointerException;
@@ -19,19 +19,16 @@ import java.lang.String;
 
 public final class ActivityRoleSelectionBinding implements ViewBinding {
   @NonNull
-  private final ScrollView rootView;
+  private final ConstraintLayout rootView;
 
   @NonNull
-  public final MaterialButton btnGuest;
+  public final TextView btnGuest;
 
   @NonNull
-  public final MaterialButton btnMessUncal;
+  public final View btnMessUncal;
 
   @NonNull
-  public final MaterialButton btnUser;
-
-  @NonNull
-  public final MaterialCardView cardGuest;
+  public final View btnUser;
 
   @NonNull
   public final MaterialCardView cardMessOwner;
@@ -40,26 +37,37 @@ public final class ActivityRoleSelectionBinding implements ViewBinding {
   public final MaterialCardView cardUser;
 
   @NonNull
+  public final LinearLayout layoutBottom;
+
+  @NonNull
+  public final TextView tvHeader;
+
+  @NonNull
   public final TextView tvPrivacyPolicy;
 
-  private ActivityRoleSelectionBinding(@NonNull ScrollView rootView,
-      @NonNull MaterialButton btnGuest, @NonNull MaterialButton btnMessUncal,
-      @NonNull MaterialButton btnUser, @NonNull MaterialCardView cardGuest,
+  @NonNull
+  public final TextView tvSubheader;
+
+  private ActivityRoleSelectionBinding(@NonNull ConstraintLayout rootView,
+      @NonNull TextView btnGuest, @NonNull View btnMessUncal, @NonNull View btnUser,
       @NonNull MaterialCardView cardMessOwner, @NonNull MaterialCardView cardUser,
-      @NonNull TextView tvPrivacyPolicy) {
+      @NonNull LinearLayout layoutBottom, @NonNull TextView tvHeader,
+      @NonNull TextView tvPrivacyPolicy, @NonNull TextView tvSubheader) {
     this.rootView = rootView;
     this.btnGuest = btnGuest;
     this.btnMessUncal = btnMessUncal;
     this.btnUser = btnUser;
-    this.cardGuest = cardGuest;
     this.cardMessOwner = cardMessOwner;
     this.cardUser = cardUser;
+    this.layoutBottom = layoutBottom;
+    this.tvHeader = tvHeader;
     this.tvPrivacyPolicy = tvPrivacyPolicy;
+    this.tvSubheader = tvSubheader;
   }
 
   @Override
   @NonNull
-  public ScrollView getRoot() {
+  public ConstraintLayout getRoot() {
     return rootView;
   }
 
@@ -85,26 +93,20 @@ public final class ActivityRoleSelectionBinding implements ViewBinding {
     int id;
     missingId: {
       id = R.id.btn_guest;
-      MaterialButton btnGuest = ViewBindings.findChildViewById(rootView, id);
+      TextView btnGuest = ViewBindings.findChildViewById(rootView, id);
       if (btnGuest == null) {
         break missingId;
       }
 
       id = R.id.btn_mess_uncal;
-      MaterialButton btnMessUncal = ViewBindings.findChildViewById(rootView, id);
+      View btnMessUncal = ViewBindings.findChildViewById(rootView, id);
       if (btnMessUncal == null) {
         break missingId;
       }
 
       id = R.id.btn_user;
-      MaterialButton btnUser = ViewBindings.findChildViewById(rootView, id);
+      View btnUser = ViewBindings.findChildViewById(rootView, id);
       if (btnUser == null) {
-        break missingId;
-      }
-
-      id = R.id.card_guest;
-      MaterialCardView cardGuest = ViewBindings.findChildViewById(rootView, id);
-      if (cardGuest == null) {
         break missingId;
       }
 
@@ -120,14 +122,32 @@ public final class ActivityRoleSelectionBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.layout_bottom;
+      LinearLayout layoutBottom = ViewBindings.findChildViewById(rootView, id);
+      if (layoutBottom == null) {
+        break missingId;
+      }
+
+      id = R.id.tv_header;
+      TextView tvHeader = ViewBindings.findChildViewById(rootView, id);
+      if (tvHeader == null) {
+        break missingId;
+      }
+
       id = R.id.tv_privacy_policy;
       TextView tvPrivacyPolicy = ViewBindings.findChildViewById(rootView, id);
       if (tvPrivacyPolicy == null) {
         break missingId;
       }
 
-      return new ActivityRoleSelectionBinding((ScrollView) rootView, btnGuest, btnMessUncal,
-          btnUser, cardGuest, cardMessOwner, cardUser, tvPrivacyPolicy);
+      id = R.id.tv_subheader;
+      TextView tvSubheader = ViewBindings.findChildViewById(rootView, id);
+      if (tvSubheader == null) {
+        break missingId;
+      }
+
+      return new ActivityRoleSelectionBinding((ConstraintLayout) rootView, btnGuest, btnMessUncal,
+          btnUser, cardMessOwner, cardUser, layoutBottom, tvHeader, tvPrivacyPolicy, tvSubheader);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
