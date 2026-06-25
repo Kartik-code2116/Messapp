@@ -38,6 +38,9 @@ public final class FragmentMessMenuBinding implements ViewBinding {
   public final LinearLayout containerDayCards;
 
   @NonNull
+  public final LinearLayout layoutWeekSelector;
+
+  @NonNull
   public final ProgressBar progressBar;
 
   @NonNull
@@ -57,15 +60,16 @@ public final class FragmentMessMenuBinding implements ViewBinding {
 
   private FragmentMessMenuBinding(@NonNull FrameLayout rootView, @NonNull ImageView btnNextWeek,
       @NonNull ImageView btnPrevWeek, @NonNull ChipGroup chipGroupDays,
-      @NonNull LinearLayout containerDayCards, @NonNull ProgressBar progressBar,
-      @NonNull NestedScrollView scrollView, @NonNull SwipeRefreshLayout swipeRefreshMenu,
-      @NonNull TextView textMenuSummary, @NonNull TextView textWeekLabel,
-      @NonNull TextView textWeekRange) {
+      @NonNull LinearLayout containerDayCards, @NonNull LinearLayout layoutWeekSelector,
+      @NonNull ProgressBar progressBar, @NonNull NestedScrollView scrollView,
+      @NonNull SwipeRefreshLayout swipeRefreshMenu, @NonNull TextView textMenuSummary,
+      @NonNull TextView textWeekLabel, @NonNull TextView textWeekRange) {
     this.rootView = rootView;
     this.btnNextWeek = btnNextWeek;
     this.btnPrevWeek = btnPrevWeek;
     this.chipGroupDays = chipGroupDays;
     this.containerDayCards = containerDayCards;
+    this.layoutWeekSelector = layoutWeekSelector;
     this.progressBar = progressBar;
     this.scrollView = scrollView;
     this.swipeRefreshMenu = swipeRefreshMenu;
@@ -125,6 +129,12 @@ public final class FragmentMessMenuBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.layout_week_selector;
+      LinearLayout layoutWeekSelector = ViewBindings.findChildViewById(rootView, id);
+      if (layoutWeekSelector == null) {
+        break missingId;
+      }
+
       id = R.id.progressBar;
       ProgressBar progressBar = ViewBindings.findChildViewById(rootView, id);
       if (progressBar == null) {
@@ -162,8 +172,8 @@ public final class FragmentMessMenuBinding implements ViewBinding {
       }
 
       return new FragmentMessMenuBinding((FrameLayout) rootView, btnNextWeek, btnPrevWeek,
-          chipGroupDays, containerDayCards, progressBar, scrollView, swipeRefreshMenu,
-          textMenuSummary, textWeekLabel, textWeekRange);
+          chipGroupDays, containerDayCards, layoutWeekSelector, progressBar, scrollView,
+          swipeRefreshMenu, textMenuSummary, textWeekLabel, textWeekRange);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -477,6 +477,7 @@ id layout_notification_list
 id layout_pending_subs
 id layout_sent_messages_list
 id layout_status_badge
+id layout_week_selector
 id logoCard
 id lunch_hour_picker
 id lunch_minute_picker

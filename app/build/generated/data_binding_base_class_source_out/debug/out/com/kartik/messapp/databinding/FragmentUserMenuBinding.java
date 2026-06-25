@@ -38,6 +38,9 @@ public final class FragmentUserMenuBinding implements ViewBinding {
   public final LinearLayout containerDayCards;
 
   @NonNull
+  public final LinearLayout layoutWeekSelector;
+
+  @NonNull
   public final ProgressBar progressBar;
 
   @NonNull
@@ -54,14 +57,16 @@ public final class FragmentUserMenuBinding implements ViewBinding {
 
   private FragmentUserMenuBinding(@NonNull FrameLayout rootView, @NonNull ImageView btnNextWeek,
       @NonNull ImageView btnPrevWeek, @NonNull ChipGroup chipGroupDays,
-      @NonNull LinearLayout containerDayCards, @NonNull ProgressBar progressBar,
-      @NonNull NestedScrollView scrollView, @NonNull SwipeRefreshLayout swipeRefreshUserMenu,
-      @NonNull TextView textWeekLabel, @NonNull TextView textWeekRange) {
+      @NonNull LinearLayout containerDayCards, @NonNull LinearLayout layoutWeekSelector,
+      @NonNull ProgressBar progressBar, @NonNull NestedScrollView scrollView,
+      @NonNull SwipeRefreshLayout swipeRefreshUserMenu, @NonNull TextView textWeekLabel,
+      @NonNull TextView textWeekRange) {
     this.rootView = rootView;
     this.btnNextWeek = btnNextWeek;
     this.btnPrevWeek = btnPrevWeek;
     this.chipGroupDays = chipGroupDays;
     this.containerDayCards = containerDayCards;
+    this.layoutWeekSelector = layoutWeekSelector;
     this.progressBar = progressBar;
     this.scrollView = scrollView;
     this.swipeRefreshUserMenu = swipeRefreshUserMenu;
@@ -120,6 +125,12 @@ public final class FragmentUserMenuBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.layout_week_selector;
+      LinearLayout layoutWeekSelector = ViewBindings.findChildViewById(rootView, id);
+      if (layoutWeekSelector == null) {
+        break missingId;
+      }
+
       id = R.id.progress_bar;
       ProgressBar progressBar = ViewBindings.findChildViewById(rootView, id);
       if (progressBar == null) {
@@ -151,8 +162,8 @@ public final class FragmentUserMenuBinding implements ViewBinding {
       }
 
       return new FragmentUserMenuBinding((FrameLayout) rootView, btnNextWeek, btnPrevWeek,
-          chipGroupDays, containerDayCards, progressBar, scrollView, swipeRefreshUserMenu,
-          textWeekLabel, textWeekRange);
+          chipGroupDays, containerDayCards, layoutWeekSelector, progressBar, scrollView,
+          swipeRefreshUserMenu, textWeekLabel, textWeekRange);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

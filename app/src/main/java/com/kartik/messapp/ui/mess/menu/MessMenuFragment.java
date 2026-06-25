@@ -106,6 +106,27 @@ public class MessMenuFragment extends Fragment {
             updateDayChips();
             loadMenuForCurrentWeek();
         });
+
+        if (binding.layoutWeekSelector != null) {
+            binding.layoutWeekSelector.setOnClickListener(v -> {
+                android.app.DatePickerDialog datePickerDialog = new android.app.DatePickerDialog(
+                        requireContext(),
+                        (view, year, month, dayOfMonth) -> {
+                            Calendar selectedDate = Calendar.getInstance();
+                            selectedDate.set(year, month, dayOfMonth);
+                            selectedDate.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+                            weekStartCalendar = selectedDate;
+                            updateWeekDisplay();
+                            updateDayChips();
+                            loadMenuForCurrentWeek();
+                        },
+                        weekStartCalendar.get(Calendar.YEAR),
+                        weekStartCalendar.get(Calendar.MONTH),
+                        weekStartCalendar.get(Calendar.DAY_OF_MONTH)
+                );
+                datePickerDialog.show();
+            });
+        }
     }
 
     private void updateWeekDisplay() {
