@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -94,7 +94,7 @@
                     android:textStyle="bold"
                     android:visibility="gone"
                     tools:visibility="visible"
-                    tools:text="BOTH • 15 days left (Expires 12 Oct 2024)" />
+                    tools:text="BOTH • 15 days left" />
 
             </LinearLayout>
 
@@ -130,7 +130,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/neutral_200"
-            android:layout_marginTop="12dp" android:layout_marginBottom="12dp"/>
+            android:layout_marginTop="16dp" android:layout_marginBottom="16dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -180,8 +180,6 @@
                     android:visibility="gone" />
 
             </LinearLayout>
-            
-            <!-- Legacy view removed to be repositioned above -->
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_reset_status"
@@ -202,17 +200,19 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="16dp"
             android:orientation="horizontal">
 
+            <!-- Lunch IN/OUT indicator -->
+            <!-- We assume the Java code might colorize the text based on status. We will provide a clean default base. -->
             <LinearLayout
                 android:id="@+id/container_lunch"
                 android:layout_width="0dp"
-                android:layout_height="36dp"
+                android:layout_height="40dp"
                 android:layout_weight="1"
                 android:layout_marginEnd="6dp"
                 android:background="@drawable/bg_rounded_card_surface"
-                android:backgroundTint="@color/neutral_200"
+                android:backgroundTint="@color/neutral_100"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -238,14 +238,15 @@
 
             </LinearLayout>
 
+            <!-- Dinner IN/OUT indicator -->
             <LinearLayout
                 android:id="@+id/container_dinner"
                 android:layout_width="0dp"
-                android:layout_height="36dp"
+                android:layout_height="40dp"
                 android:layout_weight="1"
                 android:layout_marginStart="6dp"
                 android:background="@drawable/bg_rounded_card_surface"
-                android:backgroundTint="@color/neutral_200"
+                android:backgroundTint="@color/neutral_100"
                 android:gravity="center"
                 android:orientation="horizontal">
 
