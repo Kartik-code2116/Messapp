@@ -140,7 +140,7 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(LoginActivity.this, RoleSelectionActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                // overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 finish();
             }
         });
@@ -566,7 +566,7 @@ public class LoginActivity extends AppCompatActivity {
                 ? new Intent(LoginActivity.this, MessDashboardActivity.class)
                 : new Intent(LoginActivity.this, UserDashboardActivity.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        // overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         finishAffinity();
     }
 
@@ -580,7 +580,7 @@ public class LoginActivity extends AppCompatActivity {
         intent.putExtra("IS_GUEST", true);
         Log.d("LoginActivity", "Navigating to dashboard as guest, role: " + role);
         startActivity(intent);
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        // overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         finishAffinity();
     }
 

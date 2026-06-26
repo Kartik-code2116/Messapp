@@ -189,7 +189,7 @@ public class SplashActivity extends AppCompatActivity {
         hasNavigated = true;
         handler.removeCallbacksAndMessages(null);
         startActivity(intent);
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        // overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         finish();
     }
 

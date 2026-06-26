@@ -837,6 +837,7 @@ style BottomNavTextInactive
 style CircleImageStyle
 style CircularImageView
 style CustomActiveIndicator
+style CustomActivityAnimation
 style DialogAnimation
 style NumberPickerTheme
 style ProfileCard

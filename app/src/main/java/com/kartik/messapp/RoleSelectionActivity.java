@@ -100,7 +100,7 @@ public class RoleSelectionActivity extends AppCompatActivity {
             intent.putExtra("ROLE", role);
             Log.d(TAG, "Starting LoginActivity with role: " + role);
             startActivity(intent);
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            // overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         } catch (Exception e) {
             Log.e(TAG, "Error starting LoginActivity", e);
             Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();

@@ -5885,6 +5885,7 @@ style CardView_Light
 style CircleImageStyle
 style CircularImageView
 style CustomActiveIndicator
+style CustomActivityAnimation
 style DialogAnimation
 style MaterialAlertDialog_Material3
 style MaterialAlertDialog_Material3_Animation

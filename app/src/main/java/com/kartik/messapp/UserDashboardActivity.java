@@ -29,6 +29,10 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.view.GestureDetector;
+import android.view.Menu;
+import com.kartik.messapp.utils.SwipeGestureListener;
+
 import com.bumptech.glide.Glide;
 import com.kartik.messapp.databinding.ActivityUserDashboardBinding;
 import com.kartik.messapp.managers.MessNotificationManager;
@@ -65,6 +69,7 @@ public class UserDashboardActivity extends AppCompatActivity {
     private String cachedMessId;
     private long cachedNotificationSeenAt;
     private String activeNotificationMessId;
+    private GestureDetector gestureDetector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +99,49 @@ public class UserDashboardActivity extends AppCompatActivity {
         }
 
         // NavHost from FragmentContainerView is ready after the first layout pass
+        setupSwipeGestures();
         binding.getRoot().post(this::initNavigation);
+    }
+
+    private void setupSwipeGestures() {
+        gestureDetector = new GestureDetector(this, new SwipeGestureListener() {
+            @Override
+            public void onSwipeRight() {
+                shiftTab(-1);
+            }
+
+            @Override
+            public void onSwipeLeft() {
+                shiftTab(1);
+            }
+        });
+    }
+
+    private void shiftTab(int offset) {
+        if (binding == null || binding.navView == null) return;
+        Menu menu = binding.navView.getMenu();
+        int currentId = binding.navView.getSelectedItemId();
+        int currentIndex = -1;
+        for (int i = 0; i < menu.size(); i++) {
+            if (menu.getItem(i).getItemId() == currentId) {
+                currentIndex = i;
+                break;
+            }
+        }
+        if (currentIndex != -1) {
+            int newIndex = currentIndex + offset;
+            if (newIndex >= 0 && newIndex < menu.size()) {
+                binding.navView.setSelectedItemId(menu.getItem(newIndex).getItemId());
+            }
+        }
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(android.view.MotionEvent ev) {
+        if (gestureDetector != null) {
+            gestureDetector.onTouchEvent(ev);
+        }
+        return super.dispatchTouchEvent(ev);
     }
 
     private void initNavigation() {
@@ -616,7 +663,7 @@ public class UserDashboardActivity extends AppCompatActivity {
         Intent intent = new Intent(this, RoleSelectionActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        // overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         finish();
     }
 
