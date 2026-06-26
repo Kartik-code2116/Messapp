@@ -384,6 +384,10 @@
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-main-71:\\anim\\slide_in_right.xml"
     },
     {
+        "merged": "com.kartik.messapp-debug-69:/layout_activity_subscription_report.xml.flat",
+        "source": "com.kartik.messapp-main-71:/layout/activity_subscription_report.xml"
+    },
+    {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-debug-69:\\anim_card_fade_slide_up.xml.flat",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-main-71:\\anim\\card_fade_slide_up.xml"
     },
@@ -470,10 +474,6 @@
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-debug-69:\\drawable_ic_refresh.xml.flat",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-main-71:\\drawable\\ic_refresh.xml"
-    },
-    {
-        "merged": "com.kartik.messapp-debug-69:/layout_fragment_mess_revenue.xml.flat",
-        "source": "com.kartik.messapp-main-71:/layout/fragment_mess_revenue.xml"
     },
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-debug-69:\\layout_dialog_manage_subscription.xml.flat",

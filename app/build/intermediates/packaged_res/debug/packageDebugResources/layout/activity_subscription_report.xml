@@ -16,76 +16,44 @@
         android:paddingStart="16dp"
         android:paddingEnd="16dp">
 
-        <com.google.android.material.card.MaterialCardView
+        <ImageButton
             android:id="@+id/btn_back"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            app:cardBackgroundColor="@color/surface_card"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="0dp"
-            app:strokeColor="@color/neutral_200"
-            app:strokeWidth="1dp">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center"
-                android:contentDescription="Back"
-                android:src="@drawable/ic_arrow_back_black_24dp"
-                app:tint="@color/text_heading" />
-        </com.google.android.material.card.MaterialCardView>
+            android:background="@drawable/bg_rounded_card_surface"
+            android:backgroundTint="@color/surface_card"
+            android:src="@drawable/ic_arrow_back_black_24dp"
+            app:tint="@color/text_heading" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="184dp"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
             android:layout_marginStart="14dp"
             android:layout_toEndOf="@id/btn_back"
             android:fontFamily="@font/poppins"
             android:text="Subscription Reports"
             android:textColor="@color/text_heading"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
-        <com.google.android.material.card.MaterialCardView
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_export_pdf"
+            style="@style/Profound.Button"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:clickable="true"
-            android:focusable="true"
-            app:cardBackgroundColor="@color/brand_primary"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="2dp"
-            app:strokeWidth="0dp">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp">
-
-                <ImageView
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:src="@drawable/ic_download"
-                    app:tint="@color/text_on_brand" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="Export PDF"
-                    android:textColor="@color/text_on_brand"
-                    android:textSize="13sp" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+            android:fontFamily="@font/poppins_medium"
+            android:text="Downlode"
+            android:textAllCaps="false"
+            android:textSize="9sp"
+            app:backgroundTint="@color/brand_primary"
+            app:cornerRadius="12dp"
+            app:icon="@drawable/ic_download"
+            app:iconTint="@color/white" />
     </RelativeLayout>
 
     <!-- Content Container -->
@@ -109,15 +77,13 @@
 
             <!-- Total Card -->
             <com.google.android.material.card.MaterialCardView
+                style="@style/Profound.Card"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="6dp"
                 android:layout_weight="1"
                 app:cardBackgroundColor="@color/surface_card"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="0dp"
-                app:strokeColor="@color/neutral_200"
-                app:strokeWidth="1dp">
+                app:strokeWidth="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -149,16 +115,14 @@
 
             <!-- Active Card -->
             <com.google.android.material.card.MaterialCardView
+                style="@style/Profound.Card"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="3dp"
                 android:layout_marginEnd="3dp"
                 android:layout_weight="1"
-                app:cardBackgroundColor="@color/surface_card"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="0dp"
-                app:strokeColor="@color/state_success"
-                app:strokeWidth="1dp">
+                app:cardBackgroundColor="@color/semantic_success_bg"
+                app:strokeWidth="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -190,15 +154,13 @@
 
             <!-- Expired Card -->
             <com.google.android.material.card.MaterialCardView
+                style="@style/Profound.Card"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="6dp"
                 android:layout_weight="1"
-                app:cardBackgroundColor="@color/surface_card"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="0dp"
-                app:strokeColor="@color/state_error"
-                app:strokeWidth="1dp">
+                app:cardBackgroundColor="@color/semantic_error_bg"
+                app:strokeWidth="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"

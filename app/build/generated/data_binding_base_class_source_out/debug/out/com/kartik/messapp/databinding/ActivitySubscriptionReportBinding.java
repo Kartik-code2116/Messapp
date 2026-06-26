@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -16,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.kartik.messapp.R;
 import java.lang.NullPointerException;
@@ -27,10 +29,10 @@ public final class ActivitySubscriptionReportBinding implements ViewBinding {
   private final RelativeLayout rootView;
 
   @NonNull
-  public final MaterialCardView btnBack;
+  public final ImageButton btnBack;
 
   @NonNull
-  public final MaterialCardView btnExportPdf;
+  public final MaterialButton btnExportPdf;
 
   @NonNull
   public final MaterialCardView chipFilterActive;
@@ -84,7 +86,7 @@ public final class ActivitySubscriptionReportBinding implements ViewBinding {
   public final RelativeLayout toolbarReport;
 
   private ActivitySubscriptionReportBinding(@NonNull RelativeLayout rootView,
-      @NonNull MaterialCardView btnBack, @NonNull MaterialCardView btnExportPdf,
+      @NonNull ImageButton btnBack, @NonNull MaterialButton btnExportPdf,
       @NonNull MaterialCardView chipFilterActive, @NonNull MaterialCardView chipFilterAll,
       @NonNull MaterialCardView chipFilterExpired, @NonNull EditText editSearchReport,
       @NonNull ImageView imgSearchIcon, @NonNull LinearLayout layoutEmptyState,
@@ -144,13 +146,13 @@ public final class ActivitySubscriptionReportBinding implements ViewBinding {
     int id;
     missingId: {
       id = R.id.btn_back;
-      MaterialCardView btnBack = ViewBindings.findChildViewById(rootView, id);
+      ImageButton btnBack = ViewBindings.findChildViewById(rootView, id);
       if (btnBack == null) {
         break missingId;
       }
 
       id = R.id.btn_export_pdf;
-      MaterialCardView btnExportPdf = ViewBindings.findChildViewById(rootView, id);
+      MaterialButton btnExportPdf = ViewBindings.findChildViewById(rootView, id);
       if (btnExportPdf == null) {
         break missingId;
       }
