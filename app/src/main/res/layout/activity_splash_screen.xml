@@ -79,7 +79,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
-        android:text="Designed for Students  Mess Owners"
+        android:text="Crafted with ❤️ for Mess Owners"
         android:textColor="@color/text_on_primary_muted"
         android:textSize="12sp"
         android:fontFamily="@font/inter"

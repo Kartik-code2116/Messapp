@@ -101,6 +101,7 @@ color selector_nav_admin
 color selector_nav_user
 color semantic_error
 color semantic_error_bg
+color semantic_info_bg
 color semantic_success
 color semantic_success_bg
 color semantic_warning
@@ -280,6 +281,7 @@ id action_settings
 id adView
 id addOfferFragment
 id admin_top_bar
+id appBar
 id app_logo
 id appbar_dashboard
 id badge_today

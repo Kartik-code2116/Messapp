@@ -40,7 +40,7 @@ public class MessSettingsActivity extends AppCompatActivity {
     }
 
     private void setupToolbar() {
-        binding.toolbar.setNavigationOnClickListener(v -> finish());
+        binding.btnBack.setOnClickListener(v -> finish());
     }
 
     private void setupNumberPickers() {
@@ -112,6 +112,7 @@ public class MessSettingsActivity extends AppCompatActivity {
                         Boolean allowMultiple = documentSnapshot.getBoolean("allowMultipleChanges");
                         if (allowMultiple != null) {
                             binding.switchAllowMultipleChanges.setChecked(allowMultiple);
+                            updateSwitchText(allowMultiple);
                         }
                     }
                 });
@@ -119,6 +120,20 @@ public class MessSettingsActivity extends AppCompatActivity {
 
     private void setupClickListeners() {
         binding.btnSaveSettings.setOnClickListener(v -> saveSettings());
+        
+        // Ensure switch text matches state dynamically
+        updateSwitchText(binding.switchAllowMultipleChanges.isChecked());
+        binding.switchAllowMultipleChanges.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            updateSwitchText(isChecked);
+        });
+    }
+
+    private void updateSwitchText(boolean isChecked) {
+        if (isChecked) {
+            binding.switchAllowMultipleChanges.setText("Allow multiple status changes until deadline (ON)");
+        } else {
+            binding.switchAllowMultipleChanges.setText("Allow multiple status changes until deadline (OFF)");
+        }
     }
 
     private void saveSettings() {

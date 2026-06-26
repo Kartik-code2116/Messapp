@@ -73,6 +73,7 @@
 
     <color name="semantic_success_bg">#ECFDF5</color> <!-- Emerald 50 -->
     <color name="semantic_error_bg">#FEE2E2</color>   <!-- Red 100 -->
+    <color name="semantic_info_bg">#EFF6FF</color>    <!-- Blue 50 -->
     <color name="brand_secondary_light">@color/neutral_100</color>
     
     <!-- Legacy Role Selection Colors -->

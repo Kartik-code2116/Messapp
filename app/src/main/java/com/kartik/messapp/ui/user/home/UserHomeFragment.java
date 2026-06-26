@@ -369,11 +369,14 @@ public class UserHomeFragment extends Fragment {
         if (messId == null)
             return;
 
-        db.collection("mess_settings").document(messId).get()
-                .addOnSuccessListener(documentSnapshot -> {
+        messSettingsListener = db.collection("mess_settings").document(messId)
+                .addSnapshotListener((documentSnapshot, e) -> {
                     if (binding == null)
                         return;
-                    if (documentSnapshot.exists()) {
+                    if (e != null) {
+                        return;
+                    }
+                    if (documentSnapshot != null && documentSnapshot.exists()) {
                         Long lunchHour = documentSnapshot.getLong("lunchCutoffHour");
                         Long lunchMinute = documentSnapshot.getLong("lunchCutoffMinute");
                         Long dinnerHour = documentSnapshot.getLong("dinnerCutoffHour");
@@ -390,6 +393,11 @@ public class UserHomeFragment extends Fragment {
 
                         Boolean amc = documentSnapshot.getBoolean("allowMultipleChanges");
                         allowMultipleChanges = (amc != null && amc);
+
+                        // If user status listener is already active, force a UI update
+                        if (userListener != null) {
+                            listenToMySelection(); // Refresh UI with new settings
+                        }
                     }
                     startDeadlineTimer();
                 });
@@ -425,6 +433,10 @@ public class UserHomeFragment extends Fragment {
     private void listenToMySelection() {
         if (messId == null || userId == null)
             return;
+
+        if (mealSelectionListener != null) {
+            mealSelectionListener.remove();
+        }
 
         mealSelectionListener = db.collection("meal_selections").document(messId + "_" + todayDate + "_" + userId)
                 .addSnapshotListener((documentSnapshot, e) -> {
@@ -627,6 +639,19 @@ public class UserHomeFragment extends Fragment {
             com.google.firebase.firestore.DocumentSnapshot mealSnapshot = transaction.get(mealRef);
             com.google.firebase.firestore.DocumentSnapshot userSnapshot = transaction.get(userRef);
             String previousStatus = mealSnapshot.exists() ? mealSnapshot.getString(statusKey) : null;
+
+            // Security check: enforce allowMultipleChanges in the backend transaction
+            com.google.firebase.firestore.DocumentSnapshot settingsSnapshot = transaction.get(db.collection("mess_settings").document(messId));
+            boolean amc = false;
+            if (settingsSnapshot.exists()) {
+                Boolean val = settingsSnapshot.getBoolean("allowMultipleChanges");
+                amc = (val != null && val);
+            }
+            if (!amc && previousStatus != null && !"RESET".equals(previousStatus) && !"Auto-IN".equals(previousStatus)) {
+                if (!previousStatus.equals(status)) {
+                    throw new com.google.firebase.firestore.FirebaseFirestoreException("Multiple status changes are not allowed.", com.google.firebase.firestore.FirebaseFirestoreException.Code.ABORTED);
+                }
+            }
 
             Map<String, Object> mealData = new HashMap<>();
             mealData.put(statusKey, status);
@@ -1329,7 +1354,7 @@ public class UserHomeFragment extends Fragment {
 
         if (mealType.equals("LUNCH")) {
             binding.btnLunchOutNew.setVisibility(View.VISIBLE); // restore for normal subs
-            if (status == null || "RESET".equals(status)) {
+            if (status == null || "RESET".equals(status) || "Auto-IN".equals(status)) {
                 binding.textLunchStatusBar.setTextColor(Color.WHITE);
                 if (!canMark) {
                     binding.textLunchStatusBar.setText(!isSubscribed
@@ -1385,7 +1410,7 @@ public class UserHomeFragment extends Fragment {
             }
         } else {
             binding.btnDinnerOutNew.setVisibility(View.VISIBLE);
-            if (status == null || "RESET".equals(status)) {
+            if (status == null || "RESET".equals(status) || "Auto-IN".equals(status)) {
                 binding.textDinnerStatusBar.setTextColor(Color.WHITE);
                 if (!canMark) {
                     binding.textDinnerStatusBar.setText(!isSubscribed

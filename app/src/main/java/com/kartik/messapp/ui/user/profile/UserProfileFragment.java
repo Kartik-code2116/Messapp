@@ -377,6 +377,7 @@ public class UserProfileFragment extends Fragment {
             return;
         }
 
+        binding.btnRenewSubscription.setEnabled(false);
         binding.progressBar.setVisibility(View.VISIBLE);
         // Check pending requests count first
         db.collection("subscriptionRequests")
@@ -387,6 +388,7 @@ public class UserProfileFragment extends Fragment {
                     if (binding == null) return;
                     if (querySnapshot.size() >= 3) {
                         binding.progressBar.setVisibility(View.GONE);
+                        binding.btnRenewSubscription.setEnabled(true);
                         new AlertDialog.Builder(requireContext())
                                 .setTitle("Limit Reached")
                                 .setMessage("You already have " + querySnapshot.size() + " pending requests. Please wait for the Mess Owner to review them before sending more.")
@@ -406,6 +408,7 @@ public class UserProfileFragment extends Fragment {
 
                                     if (messId == null) {
                                         binding.progressBar.setVisibility(View.GONE);
+                                        binding.btnRenewSubscription.setEnabled(true);
                                         Toast.makeText(getContext(), "Not joined any mess.", Toast.LENGTH_SHORT).show();
                                         return;
                                     }
@@ -421,6 +424,7 @@ public class UserProfileFragment extends Fragment {
                                             .addOnSuccessListener(aVoid -> {
                                                 if (binding == null) return;
                                                 binding.progressBar.setVisibility(View.GONE);
+                                                binding.btnRenewSubscription.setEnabled(true);
                                                 new AlertDialog.Builder(requireContext())
                                                         .setTitle("Request Sent")
                                                         .setMessage("Your renewal request has been sent to the Mess Owner.")
@@ -430,20 +434,27 @@ public class UserProfileFragment extends Fragment {
                                             .addOnFailureListener(e -> {
                                                 if (binding == null) return;
                                                 binding.progressBar.setVisibility(View.GONE);
-                                                Toast.makeText(getContext(), "Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                binding.btnRenewSubscription.setEnabled(true);
+                                                Toast.makeText(getContext(), "Failed to send request: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                                             });
+                                } else {
+                                    binding.progressBar.setVisibility(View.GONE);
+                                    binding.btnRenewSubscription.setEnabled(true);
+                                    Toast.makeText(getContext(), "User data not found.", Toast.LENGTH_SHORT).show();
                                 }
                             })
                             .addOnFailureListener(e -> {
                                 if (binding == null) return;
                                 binding.progressBar.setVisibility(View.GONE);
-                                Toast.makeText(getContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                binding.btnRenewSubscription.setEnabled(true);
+                                Toast.makeText(getContext(), "Failed to fetch user data: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                             });
                 })
                 .addOnFailureListener(e -> {
                     if (binding == null) return;
                     binding.progressBar.setVisibility(View.GONE);
-                    Toast.makeText(getContext(), "Error checking requests: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    binding.btnRenewSubscription.setEnabled(true);
+                    Toast.makeText(getContext(), "Failed to check existing requests: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }
 

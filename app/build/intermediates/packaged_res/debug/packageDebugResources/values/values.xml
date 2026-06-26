@@ -100,6 +100,7 @@
     <color name="secondary_light">@color/neutral_200</color>
     <color name="semantic_error">@color/state_error</color>
     <color name="semantic_error_bg">#FEE2E2</color>
+    <color name="semantic_info_bg">#EFF6FF</color>
     <color name="semantic_success">@color/state_success</color>
     <color name="semantic_success_bg">#ECFDF5</color>
     <color name="semantic_warning">@color/state_warning</color>

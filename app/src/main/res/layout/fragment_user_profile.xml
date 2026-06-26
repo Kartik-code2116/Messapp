@@ -479,12 +479,13 @@
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btn_renew_subscription"
-                            style="@style/Profound.Button.Outlined"
+                            style="@style/Profound.Button"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="18dp"
-                            android:text="Renew subscription"
-                            app:strokeColor="@color/brand_primary" />
+                            android:layout_marginTop="24dp"
+                            android:text="Renew Subscription"
+                            app:icon="@drawable/ic_refresh"
+                            app:iconGravity="textStart" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -494,11 +495,12 @@
 
                             <com.google.android.material.button.MaterialButton
                                 android:id="@+id/btn_see_reviews"
-                                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                                style="@style/Profound.Button.Outlined"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="See Reviews" />
+                                android:text="See Reviews"
+                                android:layout_marginEnd="8dp" />
 
                             <com.google.android.material.button.MaterialButton
                                 android:id="@+id/btn_write_review"

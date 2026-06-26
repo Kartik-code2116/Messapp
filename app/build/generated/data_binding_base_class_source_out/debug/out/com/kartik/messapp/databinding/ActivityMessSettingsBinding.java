@@ -4,15 +4,16 @@ package com.kartik.messapp.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
-import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.switchmaterial.SwitchMaterial;
+import com.google.android.material.materialswitch.MaterialSwitch;
 import com.kartik.messapp.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -21,6 +22,12 @@ import java.lang.String;
 public final class ActivityMessSettingsBinding implements ViewBinding {
   @NonNull
   private final ConstraintLayout rootView;
+
+  @NonNull
+  public final LinearLayout appBar;
+
+  @NonNull
+  public final ImageButton btnBack;
 
   @NonNull
   public final MaterialButton btnSaveSettings;
@@ -38,24 +45,22 @@ public final class ActivityMessSettingsBinding implements ViewBinding {
   public final NumberPicker lunchMinutePicker;
 
   @NonNull
-  public final SwitchMaterial switchAllowMultipleChanges;
-
-  @NonNull
-  public final MaterialToolbar toolbar;
+  public final MaterialSwitch switchAllowMultipleChanges;
 
   private ActivityMessSettingsBinding(@NonNull ConstraintLayout rootView,
+      @NonNull LinearLayout appBar, @NonNull ImageButton btnBack,
       @NonNull MaterialButton btnSaveSettings, @NonNull NumberPicker dinnerHourPicker,
       @NonNull NumberPicker dinnerMinutePicker, @NonNull NumberPicker lunchHourPicker,
-      @NonNull NumberPicker lunchMinutePicker, @NonNull SwitchMaterial switchAllowMultipleChanges,
-      @NonNull MaterialToolbar toolbar) {
+      @NonNull NumberPicker lunchMinutePicker, @NonNull MaterialSwitch switchAllowMultipleChanges) {
     this.rootView = rootView;
+    this.appBar = appBar;
+    this.btnBack = btnBack;
     this.btnSaveSettings = btnSaveSettings;
     this.dinnerHourPicker = dinnerHourPicker;
     this.dinnerMinutePicker = dinnerMinutePicker;
     this.lunchHourPicker = lunchHourPicker;
     this.lunchMinutePicker = lunchMinutePicker;
     this.switchAllowMultipleChanges = switchAllowMultipleChanges;
-    this.toolbar = toolbar;
   }
 
   @Override
@@ -85,6 +90,18 @@ public final class ActivityMessSettingsBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.appBar;
+      LinearLayout appBar = ViewBindings.findChildViewById(rootView, id);
+      if (appBar == null) {
+        break missingId;
+      }
+
+      id = R.id.btn_back;
+      ImageButton btnBack = ViewBindings.findChildViewById(rootView, id);
+      if (btnBack == null) {
+        break missingId;
+      }
+
       id = R.id.btn_save_settings;
       MaterialButton btnSaveSettings = ViewBindings.findChildViewById(rootView, id);
       if (btnSaveSettings == null) {
@@ -116,20 +133,14 @@ public final class ActivityMessSettingsBinding implements ViewBinding {
       }
 
       id = R.id.switch_allow_multiple_changes;
-      SwitchMaterial switchAllowMultipleChanges = ViewBindings.findChildViewById(rootView, id);
+      MaterialSwitch switchAllowMultipleChanges = ViewBindings.findChildViewById(rootView, id);
       if (switchAllowMultipleChanges == null) {
         break missingId;
       }
 
-      id = R.id.toolbar;
-      MaterialToolbar toolbar = ViewBindings.findChildViewById(rootView, id);
-      if (toolbar == null) {
-        break missingId;
-      }
-
-      return new ActivityMessSettingsBinding((ConstraintLayout) rootView, btnSaveSettings,
-          dinnerHourPicker, dinnerMinutePicker, lunchHourPicker, lunchMinutePicker,
-          switchAllowMultipleChanges, toolbar);
+      return new ActivityMessSettingsBinding((ConstraintLayout) rootView, appBar, btnBack,
+          btnSaveSettings, dinnerHourPicker, dinnerMinutePicker, lunchHourPicker, lunchMinutePicker,
+          switchAllowMultipleChanges);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
