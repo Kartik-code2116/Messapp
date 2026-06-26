@@ -28,13 +28,7 @@ public final class ItemMenuDayCardBinding implements ViewBinding {
   public final TextView badgeToday;
 
   @NonNull
-  public final MaterialButton btnSaveBreakfast;
-
-  @NonNull
-  public final MaterialButton btnSaveDinner;
-
-  @NonNull
-  public final MaterialButton btnSaveLunch;
+  public final MaterialButton btnSaveDay;
 
   @NonNull
   public final MaterialCardView cardDay;
@@ -79,8 +73,7 @@ public final class ItemMenuDayCardBinding implements ViewBinding {
   public final View viewAccentBar;
 
   private ItemMenuDayCardBinding(@NonNull MaterialCardView rootView, @NonNull TextView badgeToday,
-      @NonNull MaterialButton btnSaveBreakfast, @NonNull MaterialButton btnSaveDinner,
-      @NonNull MaterialButton btnSaveLunch, @NonNull MaterialCardView cardDay,
+      @NonNull MaterialButton btnSaveDay, @NonNull MaterialCardView cardDay,
       @NonNull TextInputEditText etBreakfast, @NonNull TextInputEditText etDinner,
       @NonNull TextInputEditText etLunch, @NonNull ImageView iconExpand,
       @NonNull ImageView iconMenuStatus, @NonNull LinearLayout layoutDayHeader,
@@ -90,9 +83,7 @@ public final class ItemMenuDayCardBinding implements ViewBinding {
       @NonNull View viewAccentBar) {
     this.rootView = rootView;
     this.badgeToday = badgeToday;
-    this.btnSaveBreakfast = btnSaveBreakfast;
-    this.btnSaveDinner = btnSaveDinner;
-    this.btnSaveLunch = btnSaveLunch;
+    this.btnSaveDay = btnSaveDay;
     this.cardDay = cardDay;
     this.etBreakfast = etBreakfast;
     this.etDinner = etDinner;
@@ -142,21 +133,9 @@ public final class ItemMenuDayCardBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.btn_save_breakfast;
-      MaterialButton btnSaveBreakfast = ViewBindings.findChildViewById(rootView, id);
-      if (btnSaveBreakfast == null) {
-        break missingId;
-      }
-
-      id = R.id.btn_save_dinner;
-      MaterialButton btnSaveDinner = ViewBindings.findChildViewById(rootView, id);
-      if (btnSaveDinner == null) {
-        break missingId;
-      }
-
-      id = R.id.btn_save_lunch;
-      MaterialButton btnSaveLunch = ViewBindings.findChildViewById(rootView, id);
-      if (btnSaveLunch == null) {
+      id = R.id.btn_save_day;
+      MaterialButton btnSaveDay = ViewBindings.findChildViewById(rootView, id);
+      if (btnSaveDay == null) {
         break missingId;
       }
 
@@ -240,10 +219,10 @@ public final class ItemMenuDayCardBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ItemMenuDayCardBinding((MaterialCardView) rootView, badgeToday, btnSaveBreakfast,
-          btnSaveDinner, btnSaveLunch, cardDay, etBreakfast, etDinner, etLunch, iconExpand,
-          iconMenuStatus, layoutDayHeader, layoutMealContent, textDayDate, textDayName,
-          tilBreakfast, tilDinner, tilLunch, viewAccentBar);
+      return new ItemMenuDayCardBinding((MaterialCardView) rootView, badgeToday, btnSaveDay,
+          cardDay, etBreakfast, etDinner, etLunch, iconExpand, iconMenuStatus, layoutDayHeader,
+          layoutMealContent, textDayDate, textDayName, tilBreakfast, tilDinner, tilLunch,
+          viewAccentBar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

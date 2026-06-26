@@ -174,23 +174,6 @@
                     android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_save_breakfast"
-                style="@style/Profound.Button"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginBottom="20dp"
-                android:fontFamily="@font/poppins_medium"
-                android:text="Save Breakfast"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="13sp"
-                app:backgroundTint="#1E293B"
-                app:cornerRadius="12dp"
-                app:icon="@drawable/ic_check_circle"
-                app:iconSize="18dp"
-                app:iconTint="@color/white" />
-
             <!-- ═══ LUNCH ═══ -->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -245,23 +228,6 @@
                     android:textColor="@color/text_body"
                     android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_save_lunch"
-                style="@style/Profound.Button"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginBottom="20dp"
-                android:fontFamily="@font/poppins_medium"
-                android:text="Save Lunch"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="13sp"
-                app:backgroundTint="#1E293B"
-                app:cornerRadius="12dp"
-                app:icon="@drawable/ic_check_circle"
-                app:iconSize="18dp"
-                app:iconTint="@color/white" />
 
             <!-- ═══ DINNER ═══ -->
             <LinearLayout
@@ -319,19 +285,21 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_save_dinner"
+                android:id="@+id/btn_save_day"
                 style="@style/Profound.Button"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:fontFamily="@font/poppins_medium"
-                android:text="Save Dinner"
+                android:layout_height="52dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/poppins"
+                android:text="Save Day Menu"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="13sp"
-                app:backgroundTint="#1E293B"
-                app:cornerRadius="12dp"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:backgroundTint="@color/brand_primary"
+                app:cornerRadius="14dp"
                 app:icon="@drawable/ic_check_circle"
-                app:iconSize="18dp"
+                app:iconSize="20dp"
                 app:iconTint="@color/white" />
 
         </LinearLayout>

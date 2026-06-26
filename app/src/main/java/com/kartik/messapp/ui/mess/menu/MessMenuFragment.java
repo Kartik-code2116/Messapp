@@ -296,10 +296,8 @@ public class MessMenuFragment extends Fragment {
             TextInputEditText etLunch = cardView.findViewById(R.id.et_lunch);
             TextInputEditText etDinner = cardView.findViewById(R.id.et_dinner);
 
-            // Save buttons
-            View btnSaveBreakfast = cardView.findViewById(R.id.btn_save_breakfast);
-            View btnSaveLunch = cardView.findViewById(R.id.btn_save_lunch);
-            View btnSaveDinner = cardView.findViewById(R.id.btn_save_dinner);
+            // Save button
+            View btnSaveDay = cardView.findViewById(R.id.btn_save_day);
 
             // Set day info
             dayNameTv.setText(DAY_NAMES[i]);
@@ -346,10 +344,8 @@ public class MessMenuFragment extends Fragment {
             final int dayIndex = i;
             header.setOnClickListener(v -> toggleDayCard(dayIndex));
 
-            // Save button click listeners
-            btnSaveBreakfast.setOnClickListener(v -> saveMenu(dayIndex, "breakfast"));
-            btnSaveLunch.setOnClickListener(v -> saveMenu(dayIndex, "lunch"));
-            btnSaveDinner.setOnClickListener(v -> saveMenu(dayIndex, "dinner"));
+            // Save button click listener
+            btnSaveDay.setOnClickListener(v -> saveDayMenu(dayIndex));
 
             binding.containerDayCards.addView(cardView);
             dayCal.add(Calendar.DAY_OF_YEAR, 1);
@@ -655,17 +651,13 @@ public class MessMenuFragment extends Fragment {
         boolean isToday = today.equals(normalizedDay);
         boolean isPast = normalizedDay.before(today);
 
-        View btnBreakfast = dayCardViews[dayIndex].findViewById(R.id.btn_save_breakfast);
-        View btnLunch = dayCardViews[dayIndex].findViewById(R.id.btn_save_lunch);
-        View btnDinner = dayCardViews[dayIndex].findViewById(R.id.btn_save_dinner);
+        View btnSaveDay = dayCardViews[dayIndex].findViewById(R.id.btn_save_day);
 
         if (isPast) {
             breakfastInputs[dayIndex].setEnabled(false);
-            btnBreakfast.setEnabled(false);
             lunchInputs[dayIndex].setEnabled(false);
-            btnLunch.setEnabled(false);
             dinnerInputs[dayIndex].setEnabled(false);
-            btnDinner.setEnabled(false);
+            btnSaveDay.setEnabled(false);
         } else if (isToday) {
             int currentHour = now.get(Calendar.HOUR_OF_DAY);
             int currentMinute = now.get(Calendar.MINUTE);
@@ -676,20 +668,14 @@ public class MessMenuFragment extends Fragment {
                     (currentHour == dinnerCutoffHour && currentMinute >= dinnerCutoffMinute);
 
             breakfastInputs[dayIndex].setEnabled(true);
-            btnBreakfast.setEnabled(true);
-
             lunchInputs[dayIndex].setEnabled(!lunchCutoffPassed);
-            btnLunch.setEnabled(!lunchCutoffPassed);
-
             dinnerInputs[dayIndex].setEnabled(!dinnerCutoffPassed);
-            btnDinner.setEnabled(!dinnerCutoffPassed);
+            btnSaveDay.setEnabled(true);
         } else {
             breakfastInputs[dayIndex].setEnabled(true);
-            btnBreakfast.setEnabled(true);
             lunchInputs[dayIndex].setEnabled(true);
-            btnLunch.setEnabled(true);
             dinnerInputs[dayIndex].setEnabled(true);
-            btnDinner.setEnabled(true);
+            btnSaveDay.setEnabled(true);
         }
     }
 
@@ -697,7 +683,7 @@ public class MessMenuFragment extends Fragment {
     // Save Menu
     // ════════════════════════════════════════════════════════
 
-    private void saveMenu(int dayIndex, String mealType) {
+    private void saveDayMenu(int dayIndex) {
         if (binding == null || currentMessId == null) {
             Toast.makeText(getContext(), "Mess ID not available.", Toast.LENGTH_SHORT).show();
             return;
@@ -709,21 +695,12 @@ public class MessMenuFragment extends Fragment {
         String formattedDate = new SimpleDateFormat("yyyy-MM-dd", Locale.US)
                 .format(dayDate.getTime());
 
-        String menuText;
-        switch (mealType) {
-            case "breakfast":
-                menuText = breakfastInputs[dayIndex].getText() != null
-                        ? breakfastInputs[dayIndex].getText().toString().trim() : "";
-                break;
-            case "lunch":
-                menuText = lunchInputs[dayIndex].getText() != null
-                        ? lunchInputs[dayIndex].getText().toString().trim() : "";
-                break;
-            default:
-                menuText = dinnerInputs[dayIndex].getText() != null
-                        ? dinnerInputs[dayIndex].getText().toString().trim() : "";
-                break;
-        }
+        String breakfastText = breakfastInputs[dayIndex].getText() != null
+                ? breakfastInputs[dayIndex].getText().toString().trim() : "";
+        String lunchText = lunchInputs[dayIndex].getText() != null
+                ? lunchInputs[dayIndex].getText().toString().trim() : "";
+        String dinnerText = dinnerInputs[dayIndex].getText() != null
+                ? dinnerInputs[dayIndex].getText().toString().trim() : "";
 
         // Check time restrictions
         Calendar now = Calendar.getInstance();
@@ -751,26 +728,22 @@ public class MessMenuFragment extends Fragment {
             int currentHour = now.get(Calendar.HOUR_OF_DAY);
             int currentMinute = now.get(Calendar.MINUTE);
 
-            if (mealType.equals("lunch")) {
-                boolean cutoffPassed = (currentHour > lunchCutoffHour) ||
-                        (currentHour == lunchCutoffHour && currentMinute >= lunchCutoffMinute);
-                if (cutoffPassed) {
-                    String cutoffTime = String.format(Locale.getDefault(), "%02d:%02d", lunchCutoffHour, lunchCutoffMinute);
-                    Toast.makeText(getContext(),
-                            "Lunch cutoff (" + cutoffTime + ") has passed.",
-                            Toast.LENGTH_LONG).show();
-                    return;
-                }
-            } else if (mealType.equals("dinner")) {
-                boolean cutoffPassed = (currentHour > dinnerCutoffHour) ||
-                        (currentHour == dinnerCutoffHour && currentMinute >= dinnerCutoffMinute);
-                if (cutoffPassed) {
-                    String cutoffTime = String.format(Locale.getDefault(), "%02d:%02d", dinnerCutoffHour, dinnerCutoffMinute);
-                    Toast.makeText(getContext(),
-                            "Dinner cutoff (" + cutoffTime + ") has passed.",
-                            Toast.LENGTH_LONG).show();
-                    return;
-                }
+            boolean lunchCutoffPassed = (currentHour > lunchCutoffHour) ||
+                    (currentHour == lunchCutoffHour && currentMinute >= lunchCutoffMinute);
+            boolean dinnerCutoffPassed = (currentHour > dinnerCutoffHour) ||
+                    (currentHour == dinnerCutoffHour && currentMinute >= dinnerCutoffMinute);
+
+            if (lunchCutoffPassed && !lunchText.isEmpty()) {
+                String cutoffTime = String.format(Locale.getDefault(), "%02d:%02d", lunchCutoffHour, lunchCutoffMinute);
+                Toast.makeText(getContext(),
+                        "Lunch cutoff (" + cutoffTime + ") has passed. You cannot modify it today.",
+                        Toast.LENGTH_LONG).show();
+            }
+            if (dinnerCutoffPassed && !dinnerText.isEmpty()) {
+                String cutoffTime = String.format(Locale.getDefault(), "%02d:%02d", dinnerCutoffHour, dinnerCutoffMinute);
+                Toast.makeText(getContext(),
+                        "Dinner cutoff (" + cutoffTime + ") has passed. You cannot modify it today.",
+                        Toast.LENGTH_LONG).show();
             }
         }
 
@@ -785,16 +758,14 @@ public class MessMenuFragment extends Fragment {
 
             menuData.put("messId", currentMessId);
             menuData.put("date", formattedDate);
-            menuData.put(mealType, menuText);
+            menuData.put("breakfast", breakfastText);
+            menuData.put("lunch", lunchText);
+            menuData.put("dinner", dinnerText);
 
             menuRef.set(menuData, com.google.firebase.firestore.SetOptions.merge())
                     .addOnSuccessListener(aVoid -> {
                         if (binding == null) return;
-                        String label = mealType.substring(0, 1).toUpperCase() + mealType.substring(1);
-                        String message = menuText.isEmpty()
-                                ? label + " menu removed for " + DAY_NAMES[dayIndex]
-                                : label + " menu saved for " + DAY_NAMES[dayIndex];
-                        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Menu saved for " + DAY_NAMES[dayIndex], Toast.LENGTH_SHORT).show();
 
                         // Update status
                         checkAndUpdateDayStatus(dayIndex);

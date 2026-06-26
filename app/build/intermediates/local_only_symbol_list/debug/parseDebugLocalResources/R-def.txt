@@ -349,9 +349,7 @@ id btn_prev_week
 id btn_renew_subscription
 id btn_reset_all_attendance
 id btn_reset_status
-id btn_save_breakfast
-id btn_save_dinner
-id btn_save_lunch
+id btn_save_day
 id btn_save_offer
 id btn_save_profile
 id btn_save_settings
