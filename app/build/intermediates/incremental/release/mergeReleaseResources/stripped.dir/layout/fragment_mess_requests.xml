@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_page"
+    tools:context=".ui.mess.requests.MessRequestsFragment">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:elevation="10dp"
+        android:visibility="gone" />
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_requests"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="88dp">
+
+                <!-- ════════════ HEADER BANNER ════════════ -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/bg_admin_header_banner"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:paddingTop="32dp"
+                    android:paddingBottom="42dp"> <!-- extra padding bottom for overlap -->
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <FrameLayout
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
+                            android:background="@drawable/bg_circle_surface"
+                            android:backgroundTint="#33FFFFFF">
+                            <ImageView
+                                android:layout_width="22dp"
+                                android:layout_height="22dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_notification"
+                                app:tint="#FFFFFF" />
+                        </FrameLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:layout_marginStart="12dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="ADMIN PANEL"
+                                android:textSize="9sp"
+                                android:fontFamily="@font/inter"
+                                android:textStyle="bold"
+                                android:letterSpacing="0.12"
+                                android:textColor="#99FFFFFF" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Requests Centre"
+                                android:textSize="22sp"
+                                android:fontFamily="@font/poppins"
+                                android:textStyle="bold"
+                                android:textColor="#FFFFFF"
+                                android:maxLines="1"
+                                android:ellipsize="end"
+                                android:layout_marginTop="2dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Manage student subscriptions and meal adjustment requests"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/inter"
+                        android:textColor="#CCFFFFFF"
+                        android:layout_marginTop="12dp" />
+                </LinearLayout>
+
+                <!-- ════════════ MAIN CONTENT OVERLAP ════════════ -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-24dp"
+                    android:orientation="vertical"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp">
+
+                    <!-- Empty State Container -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/card_empty_state"
+                        style="@style/Profound.Card"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="24dp"
+                        android:visibility="gone"
+                        tools:visibility="visible">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:padding="40dp">
+
+                            <FrameLayout
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:background="@drawable/bg_circle_surface"
+                                android:backgroundTint="@color/brand_primary_light"
+                                android:layout_marginBottom="20dp">
+                                <ImageView
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/ic_check_circle"
+                                    app:tint="@color/brand_primary" />
+                            </FrameLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="All Caught Up!"
+                                android:fontFamily="@font/poppins"
+                                android:textColor="@color/text_heading"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:gravity="center"
+                                android:text="There are no pending subscription or meal requests right now."
+                                android:fontFamily="@font/inter"
+                                android:textColor="@color/text_sub"
+                                android:lineSpacingMultiplier="1.3"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- ════════════ SUBSCRIPTION REQUESTS ════════════ -->
+                    <LinearLayout
+                        android:id="@+id/layout_pending_subs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="24dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="12dp">
+
+                            <View
+                                android:layout_width="4dp"
+                                android:layout_height="22dp"
+                                android:background="@drawable/bg_rounded_card_surface"
+                                android:backgroundTint="@color/brand_primary"
+                                android:layout_marginEnd="10dp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="PENDING SUBSCRIPTIONS"
+                                android:fontFamily="@font/inter"
+                                android:textSize="11sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/text_caption"
+                                android:letterSpacing="0.08" />
+                        </LinearLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recycler_pending"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:nestedScrollingEnabled="false"
+                            android:clipToPadding="false"
+                            tools:listitem="@layout/item_student_request" />
+                    </LinearLayout>
+
+                    <!-- ════════════ MEAL ADJUSTMENT REQUESTS ════════════ -->
+                    <LinearLayout
+                        android:id="@+id/layout_meal_requests"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="12dp">
+
+                            <View
+                                android:layout_width="4dp"
+                                android:layout_height="22dp"
+                                android:background="@drawable/bg_rounded_card_surface"
+                                android:backgroundTint="#0A7A4A"
+                                android:layout_marginEnd="10dp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="MEAL ADJUSTMENT REQUESTS"
+                                android:fontFamily="@font/inter"
+                                android:textSize="11sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/text_caption"
+                                android:letterSpacing="0.08" />
+                        </LinearLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recycler_view_requests"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:nestedScrollingEnabled="false"
+                            android:clipToPadding="false"
+                            tools:listitem="@layout/item_student_request" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</FrameLayout>

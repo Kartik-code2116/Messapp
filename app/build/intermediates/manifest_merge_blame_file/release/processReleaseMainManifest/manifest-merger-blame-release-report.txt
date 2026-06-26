@@ -1,0 +1,1025 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.kartik.messapp"
+4    android:versionCode="2"
+5    android:versionName="1.1" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="24"
+9        android:targetSdkVersion="36" />
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:5:5-67
+11-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:5:22-64
+12    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+12-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:6:5-79
+12-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:6:22-76
+13    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+13-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:7:5-77
+13-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:7:22-74
+14    <uses-permission android:name="android.permission.USE_BIOMETRIC" /> <!-- suppress DeprecatedClassUsageInspection -->
+14-->[androidx.biometric:biometric:1.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\d16b426e121a8108f83d138acc1095fe\transformed\biometric-1.1.0\AndroidManifest.xml:24:5-72
+14-->[androidx.biometric:biometric:1.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\d16b426e121a8108f83d138acc1095fe\transformed\biometric-1.1.0\AndroidManifest.xml:24:22-69
+15    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+15-->[androidx.biometric:biometric:1.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\d16b426e121a8108f83d138acc1095fe\transformed\biometric-1.1.0\AndroidManifest.xml:27:5-74
+15-->[androidx.biometric:biometric:1.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\d16b426e121a8108f83d138acc1095fe\transformed\biometric-1.1.0\AndroidManifest.xml:27:22-71
+16    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- Required by older versions of Google Play services to create IID tokens -->
+16-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\cde535c4f26b667ffef8d29baa659280\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:24:5-68
+16-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\cde535c4f26b667ffef8d29baa659280\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:24:22-65
+17    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+17-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\cde535c4f26b667ffef8d29baa659280\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:26:5-82
+17-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\cde535c4f26b667ffef8d29baa659280\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:26:22-79
+18    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+18-->[com.google.android.recaptcha:recaptcha:18.6.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\6c2599e1aac3fbd851df82d08056fcf4\transformed\recaptcha-18.6.1\AndroidManifest.xml:9:5-98
+18-->[com.google.android.recaptcha:recaptcha:18.6.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\6c2599e1aac3fbd851df82d08056fcf4\transformed\recaptcha-18.6.1\AndroidManifest.xml:9:22-95
+19    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
+19-->[com.google.android.gms:play-services-measurement-api:22.1.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\889a10eefe40f329c69140f78e88a851\transformed\play-services-measurement-api-22.1.2\AndroidManifest.xml:25:5-79
+19-->[com.google.android.gms:play-services-measurement-api:22.1.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\889a10eefe40f329c69140f78e88a851\transformed\play-services-measurement-api-22.1.2\AndroidManifest.xml:25:22-76
+20    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_ATTRIBUTION" />
+20-->[com.google.android.gms:play-services-measurement-api:22.1.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\889a10eefe40f329c69140f78e88a851\transformed\play-services-measurement-api-22.1.2\AndroidManifest.xml:26:5-88
+20-->[com.google.android.gms:play-services-measurement-api:22.1.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\889a10eefe40f329c69140f78e88a851\transformed\play-services-measurement-api-22.1.2\AndroidManifest.xml:26:22-85
+21    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_AD_ID" />
+21-->[com.google.android.gms:play-services-measurement-api:22.1.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\889a10eefe40f329c69140f78e88a851\transformed\play-services-measurement-api-22.1.2\AndroidManifest.xml:27:5-82
+21-->[com.google.android.gms:play-services-measurement-api:22.1.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\889a10eefe40f329c69140f78e88a851\transformed\play-services-measurement-api-22.1.2\AndroidManifest.xml:27:22-79
+22    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
+22-->[com.google.android.gms:play-services-measurement:22.1.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\60b8003dee7fe3a4552dd8b4b81f881f\transformed\play-services-measurement-22.1.2\AndroidManifest.xml:26:5-110
+22-->[com.google.android.gms:play-services-measurement:22.1.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\60b8003dee7fe3a4552dd8b4b81f881f\transformed\play-services-measurement-22.1.2\AndroidManifest.xml:26:22-107
+23    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_TOPICS" /> <!-- Android package visibility setting -->
+23-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:29:5-83
+23-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:29:22-80
+24    <queries>
+24-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:35:5-68:15
+25
+26        <!-- For browser content -->
+27        <intent>
+27-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:38:9-44:18
+28            <action android:name="android.intent.action.VIEW" />
+28-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:30:17-69
+28-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:30:25-66
+29
+30            <category android:name="android.intent.category.BROWSABLE" />
+30-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:32:17-78
+30-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:32:27-75
+31
+32            <data android:scheme="https" />
+32-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:33:17-70
+32-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:33:23-47
+33        </intent>
+34        <!-- End of browser content -->
+35        <!-- For CustomTabsService -->
+36        <intent>
+36-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:47:9-49:18
+37            <action android:name="android.support.customtabs.action.CustomTabsService" />
+37-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:48:13-90
+37-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:48:21-87
+38        </intent>
+39        <!-- End of CustomTabsService -->
+40        <!-- For MRAID capabilities -->
+41        <intent>
+41-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:52:9-56:18
+42            <action android:name="android.intent.action.INSERT" />
+42-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:53:13-67
+42-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:53:21-64
+43
+44            <data android:mimeType="vnd.android.cursor.dir/event" />
+44-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:33:17-70
+45        </intent>
+46        <intent>
+46-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:57:9-61:18
+47            <action android:name="android.intent.action.VIEW" />
+47-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:30:17-69
+47-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:30:25-66
+48
+49            <data android:scheme="sms" />
+49-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:33:17-70
+49-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:33:23-47
+50        </intent>
+51        <intent>
+51-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:62:9-66:18
+52            <action android:name="android.intent.action.DIAL" />
+52-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:63:13-65
+52-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:63:21-62
+53
+54            <data android:path="tel:" />
+54-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:33:17-70
+55        </intent>
+56        <!-- End of MRAID capabilities -->
+57    </queries>
+58
+59    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+59-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:28:5-77
+59-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:28:22-74
+60
+61    <permission
+61-->[androidx.core:core:1.16.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\330e572731198891fd4e94c9d83129e0\transformed\core-1.16.0\AndroidManifest.xml:22:5-24:47
+62        android:name="com.kartik.messapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+62-->[androidx.core:core:1.16.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\330e572731198891fd4e94c9d83129e0\transformed\core-1.16.0\AndroidManifest.xml:23:9-81
+63        android:protectionLevel="signature" />
+63-->[androidx.core:core:1.16.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\330e572731198891fd4e94c9d83129e0\transformed\core-1.16.0\AndroidManifest.xml:24:9-44
+64
+65    <uses-permission android:name="com.kartik.messapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+65-->[androidx.core:core:1.16.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\330e572731198891fd4e94c9d83129e0\transformed\core-1.16.0\AndroidManifest.xml:26:5-97
+65-->[androidx.core:core:1.16.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\330e572731198891fd4e94c9d83129e0\transformed\core-1.16.0\AndroidManifest.xml:26:22-94
+66
+67    <application
+67-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:9:5-91:19
+68        android:allowBackup="true"
+68-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:10:9-35
+69        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+69-->[androidx.core:core:1.16.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\330e572731198891fd4e94c9d83129e0\transformed\core-1.16.0\AndroidManifest.xml:28:18-86
+70        android:dataExtractionRules="@xml/data_extraction_rules"
+70-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:11:9-65
+71        android:extractNativeLibs="false"
+72        android:fullBackupContent="@xml/backup_rules"
+72-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:12:9-54
+73        android:hardwareAccelerated="true"
+73-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:13:9-43
+74        android:icon="@drawable/messapplogo"
+74-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:14:9-45
+75        android:label="@string/app_name"
+75-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:15:9-41
+76        android:roundIcon="@drawable/messapplogo"
+76-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:16:9-50
+77        android:supportsRtl="true"
+77-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:17:9-35
+78        android:theme="@style/Theme.Messapp" >
+78-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:18:9-45
+79        <activity
+79-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:20:9-35:20
+80            android:name="com.kartik.messapp.SplashActivity"
+80-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:21:13-43
+81            android:exported="true"
+81-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:22:13-36
+82            android:theme="@style/Theme.Messapp.NoActionBar" >
+82-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:23:13-61
+83            <intent-filter>
+83-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:24:13-27:29
+84                <action android:name="android.intent.action.MAIN" />
+84-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:25:17-69
+84-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:25:25-66
+85
+86                <category android:name="android.intent.category.LAUNCHER" />
+86-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:26:17-77
+86-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:26:27-74
+87            </intent-filter>
+88            <!-- Intent filter for deep linking from QR code -->
+89            <intent-filter>
+89-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:29:13-34:29
+90                <action android:name="android.intent.action.VIEW" />
+90-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:30:17-69
+90-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:30:25-66
+91
+92                <category android:name="android.intent.category.DEFAULT" />
+92-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:31:17-76
+92-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:31:27-73
+93                <category android:name="android.intent.category.BROWSABLE" />
+93-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:32:17-78
+93-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:32:27-75
+94
+95                <data
+95-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:33:17-70
+96                    android:host="join"
+96-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:33:48-67
+97                    android:scheme="messapp" />
+97-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:33:23-47
+98            </intent-filter>
+99        </activity>
+100        <activity
+100-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:36:9-39:64
+101            android:name="com.kartik.messapp.OnboardingActivity"
+101-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:37:13-47
+102            android:exported="false"
+102-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:38:13-37
+103            android:theme="@style/Theme.Messapp.NoActionBar" />
+103-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:39:13-61
+104        <activity
+104-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:40:9-42:39
+105            android:name="com.kartik.messapp.RoleSelectionActivity"
+105-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:41:13-50
+106            android:exported="false" />
+106-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:42:13-37
+107        <activity
+107-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:43:9-76
+108            android:name="com.kartik.messapp.LoginActivity"
+108-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:43:19-48
+109            android:exported="false" />
+109-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:43:49-73
+110        <activity
+110-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:44:9-84
+111            android:name="com.kartik.messapp.UserDashboardActivity"
+111-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:44:19-56
+112            android:exported="false" />
+112-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:44:57-81
+113        <activity
+113-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:45:9-84
+114            android:name="com.kartik.messapp.MessDashboardActivity"
+114-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:45:19-56
+115            android:exported="false" />
+115-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:45:57-81
+116        <activity
+116-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:46:9-86
+117            android:name="com.kartik.messapp.EditMessProfileActivity"
+117-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:46:19-58
+118            android:exported="false" />
+118-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:46:59-83
+119        <activity
+119-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:47:9-102
+120            android:name="com.kartik.messapp.ui.user.profile.EditUserProfileActivity"
+120-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:47:19-74
+121            android:exported="false" />
+121-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:47:75-99
+122        <activity
+122-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:48:9-100
+123            android:name="com.kartik.messapp.ui.mess.settings.MessSettingsActivity"
+123-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:48:19-72
+124            android:exported="false" />
+124-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:48:73-97
+125        <activity
+125-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:49:9-100
+126            android:name="com.kartik.messapp.ui.mess.weeklymenu.WeeklyMenuActivity"
+126-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:49:19-72
+127            android:exported="false" />
+127-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:49:73-97
+128        <activity
+128-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:50:9-82
+129            android:name="com.kartik.messapp.MessReviewsActivity"
+129-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:50:19-54
+130            android:exported="false" />
+130-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:50:55-79
+131        <activity
+131-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:51:9-80
+132            android:name="com.kartik.messapp.MyReviewsActivity"
+132-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:51:19-52
+133            android:exported="false" />
+133-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:51:53-77
+134        <activity
+134-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:52:9-105
+135            android:name="com.kartik.messapp.ui.mess.reports.SubscriptionReportActivity"
+135-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:52:19-77
+136            android:exported="false" />
+136-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:52:78-102
+137
+138        <provider
+138-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:54:9-62:20
+139            android:name="androidx.core.content.FileProvider"
+139-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:55:13-62
+140            android:authorities="com.kartik.messapp.fileprovider"
+140-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:56:13-66
+141            android:exported="false"
+141-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:57:13-37
+142            android:grantUriPermissions="true" >
+142-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:58:13-47
+143            <meta-data
+143-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:59:13-61:54
+144                android:name="android.support.FILE_PROVIDER_PATHS"
+144-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:60:17-67
+145                android:resource="@xml/file_paths" />
+145-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:61:17-51
+146        </provider>
+147
+148        <service
+148-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:64:9-70:19
+149            android:name="com.kartik.messapp.MyFirebaseMessagingService"
+149-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:65:13-55
+150            android:exported="false" >
+150-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:66:13-37
+151            <intent-filter>
+151-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:67:13-69:29
+152                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+152-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:68:17-78
+152-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:68:25-75
+153            </intent-filter>
+154        </service>
+155
+156        <activity
+156-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:72:9-75:75
+157            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+157-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:73:13-79
+158            android:exported="false"
+158-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:74:13-37
+159            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+159-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:75:13-72
+160
+161        <meta-data
+161-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:77:9-79:69
+162            android:name="com.google.android.gms.version"
+162-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:78:13-58
+163            android:value="@integer/google_play_services_version" />
+163-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:79:13-66
+164
+165        <!-- Google AdMob App ID -->
+166        <meta-data
+166-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:82:9-84:69
+167            android:name="com.google.android.gms.ads.APPLICATION_ID"
+167-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:83:13-69
+168            android:value="ca-app-pub-9150541100276802~4206375871" />
+168-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:84:13-67
+169
+170        <!-- Resolve AdServices conflict between AdMob and Firebase Analytics -->
+171        <property
+171-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:87:9-90:48
+172            android:name="android.adservices.AD_SERVICES_CONFIG"
+172-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:88:13-65
+173            android:resource="@xml/gma_ad_services_config" />
+173-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:89:13-59
+174
+175        <activity
+175-->[com.google.firebase:firebase-auth:24.0.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\c7d13dd18b2f8b79bea2f7a8f7464730\transformed\firebase-auth-24.0.1\AndroidManifest.xml:29:9-46:20
+176            android:name="com.google.firebase.auth.internal.GenericIdpActivity"
+176-->[com.google.firebase:firebase-auth:24.0.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\c7d13dd18b2f8b79bea2f7a8f7464730\transformed\firebase-auth-24.0.1\AndroidManifest.xml:30:13-80
+177            android:excludeFromRecents="true"
+177-->[com.google.firebase:firebase-auth:24.0.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\c7d13dd18b2f8b79bea2f7a8f7464730\transformed\firebase-auth-24.0.1\AndroidManifest.xml:31:13-46
+178            android:exported="true"
+178-->[com.google.firebase:firebase-auth:24.0.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\c7d13dd18b2f8b79bea2f7a8f7464730\transformed\firebase-auth-24.0.1\AndroidManifest.xml:32:13-36
+179            android:launchMode="singleTask"
+179-->[com.google.firebase:firebase-auth:24.0.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\c7d13dd18b2f8b79bea2f7a8f7464730\transformed\firebase-auth-24.0.1\AndroidManifest.xml:33:13-44
+180            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+180-->[com.google.firebase:firebase-auth:24.0.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\c7d13dd18b2f8b79bea2f7a8f7464730\transformed\firebase-auth-24.0.1\AndroidManifest.xml:34:13-72
+181            <intent-filter>
+181-->[com.google.firebase:firebase-auth:24.0.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\c7d13dd18b2f8b79bea2f7a8f7464730\transformed\firebase-auth-24.0.1\AndroidManifest.xml:35:13-45:29
+182                <action android:name="android.intent.action.VIEW" />
+182-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:30:17-69
+182-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:30:25-66
+183
+184                <category android:name="android.intent.category.DEFAULT" />
+184-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:31:17-76
+184-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:31:27-73
+185                <category android:name="android.intent.category.BROWSABLE" />
+185-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:32:17-78
+185-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:32:27-75
+186
+187                <data
+187-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:33:17-70
+188                    android:host="firebase.auth"
+188-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:33:48-67
+189                    android:path="/"
+190                    android:scheme="genericidp" />
+190-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:33:23-47
+191            </intent-filter>
+192        </activity>
+193        <activity
+193-->[com.google.firebase:firebase-auth:24.0.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\c7d13dd18b2f8b79bea2f7a8f7464730\transformed\firebase-auth-24.0.1\AndroidManifest.xml:47:9-64:20
+194            android:name="com.google.firebase.auth.internal.RecaptchaActivity"
+194-->[com.google.firebase:firebase-auth:24.0.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\c7d13dd18b2f8b79bea2f7a8f7464730\transformed\firebase-auth-24.0.1\AndroidManifest.xml:48:13-79
+195            android:excludeFromRecents="true"
+195-->[com.google.firebase:firebase-auth:24.0.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\c7d13dd18b2f8b79bea2f7a8f7464730\transformed\firebase-auth-24.0.1\AndroidManifest.xml:49:13-46
+196            android:exported="true"
+196-->[com.google.firebase:firebase-auth:24.0.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\c7d13dd18b2f8b79bea2f7a8f7464730\transformed\firebase-auth-24.0.1\AndroidManifest.xml:50:13-36
+197            android:launchMode="singleTask"
+197-->[com.google.firebase:firebase-auth:24.0.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\c7d13dd18b2f8b79bea2f7a8f7464730\transformed\firebase-auth-24.0.1\AndroidManifest.xml:51:13-44
+198            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+198-->[com.google.firebase:firebase-auth:24.0.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\c7d13dd18b2f8b79bea2f7a8f7464730\transformed\firebase-auth-24.0.1\AndroidManifest.xml:52:13-72
+199            <intent-filter>
+199-->[com.google.firebase:firebase-auth:24.0.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\c7d13dd18b2f8b79bea2f7a8f7464730\transformed\firebase-auth-24.0.1\AndroidManifest.xml:53:13-63:29
+200                <action android:name="android.intent.action.VIEW" />
+200-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:30:17-69
+200-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:30:25-66
+201
+202                <category android:name="android.intent.category.DEFAULT" />
+202-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:31:17-76
+202-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:31:27-73
+203                <category android:name="android.intent.category.BROWSABLE" />
+203-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:32:17-78
+203-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:32:27-75
+204
+205                <data
+205-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:33:17-70
+206                    android:host="firebase.auth"
+206-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:33:48-67
+207                    android:path="/"
+208                    android:scheme="recaptcha" />
+208-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:33:23-47
+209            </intent-filter>
+210        </activity>
+211
+212        <service
+212-->[com.google.firebase:firebase-auth:24.0.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\c7d13dd18b2f8b79bea2f7a8f7464730\transformed\firebase-auth-24.0.1\AndroidManifest.xml:66:9-72:19
+213            android:name="com.google.firebase.components.ComponentDiscoveryService"
+213-->[com.google.firebase:firebase-auth:24.0.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\c7d13dd18b2f8b79bea2f7a8f7464730\transformed\firebase-auth-24.0.1\AndroidManifest.xml:67:13-84
+214            android:directBootAware="true"
+214-->[com.google.firebase:firebase-common:21.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\2faf9fd536f749d73603d6a89d6b6fb3\transformed\firebase-common-21.0.0\AndroidManifest.xml:32:13-43
+215            android:exported="false" >
+215-->[com.google.firebase:firebase-auth:24.0.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\c7d13dd18b2f8b79bea2f7a8f7464730\transformed\firebase-auth-24.0.1\AndroidManifest.xml:68:13-37
+216            <meta-data
+216-->[com.google.firebase:firebase-auth:24.0.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\c7d13dd18b2f8b79bea2f7a8f7464730\transformed\firebase-auth-24.0.1\AndroidManifest.xml:69:13-71:85
+217                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
+217-->[com.google.firebase:firebase-auth:24.0.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\c7d13dd18b2f8b79bea2f7a8f7464730\transformed\firebase-auth-24.0.1\AndroidManifest.xml:70:17-109
+218                android:value="com.google.firebase.components.ComponentRegistrar" />
+218-->[com.google.firebase:firebase-auth:24.0.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\c7d13dd18b2f8b79bea2f7a8f7464730\transformed\firebase-auth-24.0.1\AndroidManifest.xml:71:17-82
+219            <meta-data
+219-->[com.google.firebase:firebase-firestore:25.1.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\fd7eec7325dfe8eac58579f9e6b4d04e\transformed\firebase-firestore-25.1.1\AndroidManifest.xml:17:13-19:85
+220                android:name="com.google.firebase.components:com.google.firebase.firestore.FirebaseFirestoreKtxRegistrar"
+220-->[com.google.firebase:firebase-firestore:25.1.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\fd7eec7325dfe8eac58579f9e6b4d04e\transformed\firebase-firestore-25.1.1\AndroidManifest.xml:18:17-122
+221                android:value="com.google.firebase.components.ComponentRegistrar" />
+221-->[com.google.firebase:firebase-firestore:25.1.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\fd7eec7325dfe8eac58579f9e6b4d04e\transformed\firebase-firestore-25.1.1\AndroidManifest.xml:19:17-82
+222            <meta-data
+222-->[com.google.firebase:firebase-firestore:25.1.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\fd7eec7325dfe8eac58579f9e6b4d04e\transformed\firebase-firestore-25.1.1\AndroidManifest.xml:20:13-22:85
+223                android:name="com.google.firebase.components:com.google.firebase.firestore.FirestoreRegistrar"
+223-->[com.google.firebase:firebase-firestore:25.1.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\fd7eec7325dfe8eac58579f9e6b4d04e\transformed\firebase-firestore-25.1.1\AndroidManifest.xml:21:17-111
+224                android:value="com.google.firebase.components.ComponentRegistrar" />
+224-->[com.google.firebase:firebase-firestore:25.1.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\fd7eec7325dfe8eac58579f9e6b4d04e\transformed\firebase-firestore-25.1.1\AndroidManifest.xml:22:17-82
+225            <meta-data
+225-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\cde535c4f26b667ffef8d29baa659280\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:57:13-59:85
+226                android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingKtxRegistrar"
+226-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\cde535c4f26b667ffef8d29baa659280\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:58:17-122
+227                android:value="com.google.firebase.components.ComponentRegistrar" />
+227-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\cde535c4f26b667ffef8d29baa659280\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:59:17-82
+228            <meta-data
+228-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\cde535c4f26b667ffef8d29baa659280\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:60:13-62:85
+229                android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingRegistrar"
+229-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\cde535c4f26b667ffef8d29baa659280\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:61:17-119
+230                android:value="com.google.firebase.components.ComponentRegistrar" />
+230-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\cde535c4f26b667ffef8d29baa659280\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:62:17-82
+231            <meta-data
+231-->[com.google.firebase:firebase-storage:21.0.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\cb9fdea16ed7a3eba049b77760bb3e91\transformed\firebase-storage-21.0.1\AndroidManifest.xml:30:13-32:85
+232                android:name="com.google.firebase.components:com.google.firebase.storage.FirebaseStorageKtxRegistrar"
+232-->[com.google.firebase:firebase-storage:21.0.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\cb9fdea16ed7a3eba049b77760bb3e91\transformed\firebase-storage-21.0.1\AndroidManifest.xml:31:17-118
+233                android:value="com.google.firebase.components.ComponentRegistrar" />
+233-->[com.google.firebase:firebase-storage:21.0.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\cb9fdea16ed7a3eba049b77760bb3e91\transformed\firebase-storage-21.0.1\AndroidManifest.xml:32:17-82
+234            <meta-data
+234-->[com.google.firebase:firebase-storage:21.0.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\cb9fdea16ed7a3eba049b77760bb3e91\transformed\firebase-storage-21.0.1\AndroidManifest.xml:33:13-35:85
+235                android:name="com.google.firebase.components:com.google.firebase.storage.StorageRegistrar"
+235-->[com.google.firebase:firebase-storage:21.0.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\cb9fdea16ed7a3eba049b77760bb3e91\transformed\firebase-storage-21.0.1\AndroidManifest.xml:34:17-107
+236                android:value="com.google.firebase.components.ComponentRegistrar" />
+236-->[com.google.firebase:firebase-storage:21.0.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\cb9fdea16ed7a3eba049b77760bb3e91\transformed\firebase-storage-21.0.1\AndroidManifest.xml:35:17-82
+237            <meta-data
+237-->[com.google.android.gms:play-services-measurement-api:22.1.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\889a10eefe40f329c69140f78e88a851\transformed\play-services-measurement-api-22.1.2\AndroidManifest.xml:37:13-39:85
+238                android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar"
+238-->[com.google.android.gms:play-services-measurement-api:22.1.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\889a10eefe40f329c69140f78e88a851\transformed\play-services-measurement-api-22.1.2\AndroidManifest.xml:38:17-139
+239                android:value="com.google.firebase.components.ComponentRegistrar" />
+239-->[com.google.android.gms:play-services-measurement-api:22.1.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\889a10eefe40f329c69140f78e88a851\transformed\play-services-measurement-api-22.1.2\AndroidManifest.xml:39:17-82
+240            <meta-data
+240-->[com.google.firebase:firebase-installations:18.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\32e2e9f7afc9a3d973f9b02a6a6f1d42\transformed\firebase-installations-18.0.0\AndroidManifest.xml:15:13-17:85
+241                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsKtxRegistrar"
+241-->[com.google.firebase:firebase-installations:18.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\32e2e9f7afc9a3d973f9b02a6a6f1d42\transformed\firebase-installations-18.0.0\AndroidManifest.xml:16:17-130
+242                android:value="com.google.firebase.components.ComponentRegistrar" />
+242-->[com.google.firebase:firebase-installations:18.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\32e2e9f7afc9a3d973f9b02a6a6f1d42\transformed\firebase-installations-18.0.0\AndroidManifest.xml:17:17-82
+243            <meta-data
+243-->[com.google.firebase:firebase-installations:18.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\32e2e9f7afc9a3d973f9b02a6a6f1d42\transformed\firebase-installations-18.0.0\AndroidManifest.xml:18:13-20:85
+244                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
+244-->[com.google.firebase:firebase-installations:18.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\32e2e9f7afc9a3d973f9b02a6a6f1d42\transformed\firebase-installations-18.0.0\AndroidManifest.xml:19:17-127
+245                android:value="com.google.firebase.components.ComponentRegistrar" />
+245-->[com.google.firebase:firebase-installations:18.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\32e2e9f7afc9a3d973f9b02a6a6f1d42\transformed\firebase-installations-18.0.0\AndroidManifest.xml:20:17-82
+246            <meta-data
+246-->[com.google.firebase:firebase-appcheck:18.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\52855561568242250c91bfcecff9333f\transformed\firebase-appcheck-18.0.0\AndroidManifest.xml:25:13-27:85
+247                android:name="com.google.firebase.components:com.google.firebase.appcheck.FirebaseAppCheckKtxRegistrar"
+247-->[com.google.firebase:firebase-appcheck:18.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\52855561568242250c91bfcecff9333f\transformed\firebase-appcheck-18.0.0\AndroidManifest.xml:26:17-120
+248                android:value="com.google.firebase.components.ComponentRegistrar" />
+248-->[com.google.firebase:firebase-appcheck:18.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\52855561568242250c91bfcecff9333f\transformed\firebase-appcheck-18.0.0\AndroidManifest.xml:27:17-82
+249            <meta-data
+249-->[com.google.firebase:firebase-appcheck:18.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\52855561568242250c91bfcecff9333f\transformed\firebase-appcheck-18.0.0\AndroidManifest.xml:28:13-30:85
+250                android:name="com.google.firebase.components:com.google.firebase.appcheck.FirebaseAppCheckRegistrar"
+250-->[com.google.firebase:firebase-appcheck:18.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\52855561568242250c91bfcecff9333f\transformed\firebase-appcheck-18.0.0\AndroidManifest.xml:29:17-117
+251                android:value="com.google.firebase.components.ComponentRegistrar" />
+251-->[com.google.firebase:firebase-appcheck:18.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\52855561568242250c91bfcecff9333f\transformed\firebase-appcheck-18.0.0\AndroidManifest.xml:30:17-82
+252            <meta-data
+252-->[com.google.firebase:firebase-common-ktx:21.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\acef31d2e12fd6e4f7ac4f515f85f490\transformed\firebase-common-ktx-21.0.0\AndroidManifest.xml:12:13-14:85
+253                android:name="com.google.firebase.components:com.google.firebase.ktx.FirebaseCommonLegacyRegistrar"
+253-->[com.google.firebase:firebase-common-ktx:21.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\acef31d2e12fd6e4f7ac4f515f85f490\transformed\firebase-common-ktx-21.0.0\AndroidManifest.xml:13:17-116
+254                android:value="com.google.firebase.components.ComponentRegistrar" />
+254-->[com.google.firebase:firebase-common-ktx:21.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\acef31d2e12fd6e4f7ac4f515f85f490\transformed\firebase-common-ktx-21.0.0\AndroidManifest.xml:14:17-82
+255            <meta-data
+255-->[com.google.firebase:firebase-common:21.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\2faf9fd536f749d73603d6a89d6b6fb3\transformed\firebase-common-21.0.0\AndroidManifest.xml:35:13-37:85
+256                android:name="com.google.firebase.components:com.google.firebase.FirebaseCommonKtxRegistrar"
+256-->[com.google.firebase:firebase-common:21.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\2faf9fd536f749d73603d6a89d6b6fb3\transformed\firebase-common-21.0.0\AndroidManifest.xml:36:17-109
+257                android:value="com.google.firebase.components.ComponentRegistrar" />
+257-->[com.google.firebase:firebase-common:21.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\2faf9fd536f749d73603d6a89d6b6fb3\transformed\firebase-common-21.0.0\AndroidManifest.xml:37:17-82
+258            <meta-data
+258-->[com.google.firebase:firebase-datatransport:18.2.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\1a0d0912ea5fd69e1482a6b12231bd1f\transformed\firebase-datatransport-18.2.0\AndroidManifest.xml:25:13-27:85
+259                android:name="com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar"
+259-->[com.google.firebase:firebase-datatransport:18.2.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\1a0d0912ea5fd69e1482a6b12231bd1f\transformed\firebase-datatransport-18.2.0\AndroidManifest.xml:26:17-115
+260                android:value="com.google.firebase.components.ComponentRegistrar" />
+260-->[com.google.firebase:firebase-datatransport:18.2.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\1a0d0912ea5fd69e1482a6b12231bd1f\transformed\firebase-datatransport-18.2.0\AndroidManifest.xml:27:17-82
+261        </service>
+262        <service
+262-->[androidx.credentials:credentials-play-services-auth:1.5.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\a4d5803ffcf79c791248875932b02a66\transformed\credentials-play-services-auth-1.5.0\AndroidManifest.xml:24:9-32:19
+263            android:name="androidx.credentials.playservices.CredentialProviderMetadataHolder"
+263-->[androidx.credentials:credentials-play-services-auth:1.5.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\a4d5803ffcf79c791248875932b02a66\transformed\credentials-play-services-auth-1.5.0\AndroidManifest.xml:25:13-94
+264            android:enabled="true"
+264-->[androidx.credentials:credentials-play-services-auth:1.5.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\a4d5803ffcf79c791248875932b02a66\transformed\credentials-play-services-auth-1.5.0\AndroidManifest.xml:26:13-35
+265            android:exported="false" >
+265-->[androidx.credentials:credentials-play-services-auth:1.5.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\a4d5803ffcf79c791248875932b02a66\transformed\credentials-play-services-auth-1.5.0\AndroidManifest.xml:27:13-37
+266            <meta-data
+266-->[androidx.credentials:credentials-play-services-auth:1.5.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\a4d5803ffcf79c791248875932b02a66\transformed\credentials-play-services-auth-1.5.0\AndroidManifest.xml:29:13-31:104
+267                android:name="androidx.credentials.CREDENTIAL_PROVIDER_KEY"
+267-->[androidx.credentials:credentials-play-services-auth:1.5.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\a4d5803ffcf79c791248875932b02a66\transformed\credentials-play-services-auth-1.5.0\AndroidManifest.xml:30:17-76
+268                android:value="androidx.credentials.playservices.CredentialProviderPlayServicesImpl" />
+268-->[androidx.credentials:credentials-play-services-auth:1.5.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\a4d5803ffcf79c791248875932b02a66\transformed\credentials-play-services-auth-1.5.0\AndroidManifest.xml:31:17-101
+269        </service>
+270
+271        <activity
+271-->[androidx.credentials:credentials-play-services-auth:1.5.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\a4d5803ffcf79c791248875932b02a66\transformed\credentials-play-services-auth-1.5.0\AndroidManifest.xml:34:9-41:20
+272            android:name="androidx.credentials.playservices.HiddenActivity"
+272-->[androidx.credentials:credentials-play-services-auth:1.5.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\a4d5803ffcf79c791248875932b02a66\transformed\credentials-play-services-auth-1.5.0\AndroidManifest.xml:35:13-76
+273            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+273-->[androidx.credentials:credentials-play-services-auth:1.5.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\a4d5803ffcf79c791248875932b02a66\transformed\credentials-play-services-auth-1.5.0\AndroidManifest.xml:36:13-87
+274            android:enabled="true"
+274-->[androidx.credentials:credentials-play-services-auth:1.5.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\a4d5803ffcf79c791248875932b02a66\transformed\credentials-play-services-auth-1.5.0\AndroidManifest.xml:37:13-35
+275            android:exported="false"
+275-->[androidx.credentials:credentials-play-services-auth:1.5.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\a4d5803ffcf79c791248875932b02a66\transformed\credentials-play-services-auth-1.5.0\AndroidManifest.xml:38:13-37
+276            android:fitsSystemWindows="true"
+276-->[androidx.credentials:credentials-play-services-auth:1.5.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\a4d5803ffcf79c791248875932b02a66\transformed\credentials-play-services-auth-1.5.0\AndroidManifest.xml:39:13-45
+277            android:theme="@style/Theme.Hidden" >
+277-->[androidx.credentials:credentials-play-services-auth:1.5.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\a4d5803ffcf79c791248875932b02a66\transformed\credentials-play-services-auth-1.5.0\AndroidManifest.xml:40:13-48
+278        </activity>
+279        <activity
+279-->[androidx.credentials:credentials-play-services-auth:1.5.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\a4d5803ffcf79c791248875932b02a66\transformed\credentials-play-services-auth-1.5.0\AndroidManifest.xml:42:9-49:20
+280            android:name="androidx.credentials.playservices.IdentityCredentialApiHiddenActivity"
+280-->[androidx.credentials:credentials-play-services-auth:1.5.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\a4d5803ffcf79c791248875932b02a66\transformed\credentials-play-services-auth-1.5.0\AndroidManifest.xml:43:13-97
+281            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+281-->[androidx.credentials:credentials-play-services-auth:1.5.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\a4d5803ffcf79c791248875932b02a66\transformed\credentials-play-services-auth-1.5.0\AndroidManifest.xml:44:13-87
+282            android:enabled="true"
+282-->[androidx.credentials:credentials-play-services-auth:1.5.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\a4d5803ffcf79c791248875932b02a66\transformed\credentials-play-services-auth-1.5.0\AndroidManifest.xml:45:13-35
+283            android:exported="false"
+283-->[androidx.credentials:credentials-play-services-auth:1.5.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\a4d5803ffcf79c791248875932b02a66\transformed\credentials-play-services-auth-1.5.0\AndroidManifest.xml:46:13-37
+284            android:fitsSystemWindows="true"
+284-->[androidx.credentials:credentials-play-services-auth:1.5.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\a4d5803ffcf79c791248875932b02a66\transformed\credentials-play-services-auth-1.5.0\AndroidManifest.xml:47:13-45
+285            android:theme="@style/Theme.Hidden" >
+285-->[androidx.credentials:credentials-play-services-auth:1.5.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\a4d5803ffcf79c791248875932b02a66\transformed\credentials-play-services-auth-1.5.0\AndroidManifest.xml:48:13-48
+286        </activity>
+287
+288        <receiver
+288-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\cde535c4f26b667ffef8d29baa659280\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:29:9-40:20
+289            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
+289-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\cde535c4f26b667ffef8d29baa659280\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:30:13-78
+290            android:exported="true"
+290-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\cde535c4f26b667ffef8d29baa659280\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:31:13-36
+291            android:permission="com.google.android.c2dm.permission.SEND" >
+291-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\cde535c4f26b667ffef8d29baa659280\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:32:13-73
+292            <intent-filter>
+292-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\cde535c4f26b667ffef8d29baa659280\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:33:13-35:29
+293                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+293-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\cde535c4f26b667ffef8d29baa659280\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:34:17-81
+293-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\cde535c4f26b667ffef8d29baa659280\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:34:25-78
+294            </intent-filter>
+295
+296            <meta-data
+296-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\cde535c4f26b667ffef8d29baa659280\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:37:13-39:40
+297                android:name="com.google.android.gms.cloudmessaging.FINISHED_AFTER_HANDLED"
+297-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\cde535c4f26b667ffef8d29baa659280\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:38:17-92
+298                android:value="true" />
+298-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\cde535c4f26b667ffef8d29baa659280\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:39:17-37
+299        </receiver>
+300        <!--
+301             FirebaseMessagingService performs security checks at runtime,
+302             but set to not exported to explicitly avoid allowing another app to call it.
+303        -->
+304        <service
+304-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\cde535c4f26b667ffef8d29baa659280\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:46:9-53:19
+305            android:name="com.google.firebase.messaging.FirebaseMessagingService"
+305-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\cde535c4f26b667ffef8d29baa659280\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:47:13-82
+306            android:directBootAware="true"
+306-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\cde535c4f26b667ffef8d29baa659280\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:48:13-43
+307            android:exported="false" >
+307-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\cde535c4f26b667ffef8d29baa659280\transformed\firebase-messaging-24.1.0\AndroidManifest.xml:49:13-37
+308            <intent-filter android:priority="-500" >
+308-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:67:13-69:29
+309                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+309-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:68:17-78
+309-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:68:25-75
+310            </intent-filter>
+311        </service>
+312
+313        <activity
+313-->[com.google.android.gms:play-services-auth:21.1.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\fc0f05a0b711a0b12a997fad3bce951b\transformed\play-services-auth-21.1.1\AndroidManifest.xml:23:9-27:75
+314            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
+314-->[com.google.android.gms:play-services-auth:21.1.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\fc0f05a0b711a0b12a997fad3bce951b\transformed\play-services-auth-21.1.1\AndroidManifest.xml:24:13-93
+315            android:excludeFromRecents="true"
+315-->[com.google.android.gms:play-services-auth:21.1.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\fc0f05a0b711a0b12a997fad3bce951b\transformed\play-services-auth-21.1.1\AndroidManifest.xml:25:13-46
+316            android:exported="false"
+316-->[com.google.android.gms:play-services-auth:21.1.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\fc0f05a0b711a0b12a997fad3bce951b\transformed\play-services-auth-21.1.1\AndroidManifest.xml:26:13-37
+317            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+317-->[com.google.android.gms:play-services-auth:21.1.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\fc0f05a0b711a0b12a997fad3bce951b\transformed\play-services-auth-21.1.1\AndroidManifest.xml:27:13-72
+318        <!--
+319            Service handling Google Sign-In user revocation. For apps that do not integrate with
+320            Google Sign-In, this service will never be started.
+321        -->
+322        <service
+322-->[com.google.android.gms:play-services-auth:21.1.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\fc0f05a0b711a0b12a997fad3bce951b\transformed\play-services-auth-21.1.1\AndroidManifest.xml:33:9-37:51
+323            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
+323-->[com.google.android.gms:play-services-auth:21.1.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\fc0f05a0b711a0b12a997fad3bce951b\transformed\play-services-auth-21.1.1\AndroidManifest.xml:34:13-89
+324            android:exported="true"
+324-->[com.google.android.gms:play-services-auth:21.1.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\fc0f05a0b711a0b12a997fad3bce951b\transformed\play-services-auth-21.1.1\AndroidManifest.xml:35:13-36
+325            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION"
+325-->[com.google.android.gms:play-services-auth:21.1.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\fc0f05a0b711a0b12a997fad3bce951b\transformed\play-services-auth-21.1.1\AndroidManifest.xml:36:13-107
+326            android:visibleToInstantApps="true" />
+326-->[com.google.android.gms:play-services-auth:21.1.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\fc0f05a0b711a0b12a997fad3bce951b\transformed\play-services-auth-21.1.1\AndroidManifest.xml:37:13-48
+327
+328        <provider
+328-->[com.google.firebase:firebase-common:21.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\2faf9fd536f749d73603d6a89d6b6fb3\transformed\firebase-common-21.0.0\AndroidManifest.xml:23:9-28:39
+329            android:name="com.google.firebase.provider.FirebaseInitProvider"
+329-->[com.google.firebase:firebase-common:21.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\2faf9fd536f749d73603d6a89d6b6fb3\transformed\firebase-common-21.0.0\AndroidManifest.xml:24:13-77
+330            android:authorities="com.kartik.messapp.firebaseinitprovider"
+330-->[com.google.firebase:firebase-common:21.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\2faf9fd536f749d73603d6a89d6b6fb3\transformed\firebase-common-21.0.0\AndroidManifest.xml:25:13-72
+331            android:directBootAware="true"
+331-->[com.google.firebase:firebase-common:21.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\2faf9fd536f749d73603d6a89d6b6fb3\transformed\firebase-common-21.0.0\AndroidManifest.xml:26:13-43
+332            android:exported="false"
+332-->[com.google.firebase:firebase-common:21.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\2faf9fd536f749d73603d6a89d6b6fb3\transformed\firebase-common-21.0.0\AndroidManifest.xml:27:13-37
+333            android:initOrder="100" />
+333-->[com.google.firebase:firebase-common:21.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\2faf9fd536f749d73603d6a89d6b6fb3\transformed\firebase-common-21.0.0\AndroidManifest.xml:28:13-36
+334
+335        <receiver
+335-->[com.google.android.gms:play-services-measurement:22.1.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\60b8003dee7fe3a4552dd8b4b81f881f\transformed\play-services-measurement-22.1.2\AndroidManifest.xml:29:9-33:20
+336            android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
+336-->[com.google.android.gms:play-services-measurement:22.1.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\60b8003dee7fe3a4552dd8b4b81f881f\transformed\play-services-measurement-22.1.2\AndroidManifest.xml:30:13-85
+337            android:enabled="true"
+337-->[com.google.android.gms:play-services-measurement:22.1.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\60b8003dee7fe3a4552dd8b4b81f881f\transformed\play-services-measurement-22.1.2\AndroidManifest.xml:31:13-35
+338            android:exported="false" >
+338-->[com.google.android.gms:play-services-measurement:22.1.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\60b8003dee7fe3a4552dd8b4b81f881f\transformed\play-services-measurement-22.1.2\AndroidManifest.xml:32:13-37
+339        </receiver>
+340
+341        <service
+341-->[com.google.android.gms:play-services-measurement:22.1.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\60b8003dee7fe3a4552dd8b4b81f881f\transformed\play-services-measurement-22.1.2\AndroidManifest.xml:35:9-38:40
+342            android:name="com.google.android.gms.measurement.AppMeasurementService"
+342-->[com.google.android.gms:play-services-measurement:22.1.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\60b8003dee7fe3a4552dd8b4b81f881f\transformed\play-services-measurement-22.1.2\AndroidManifest.xml:36:13-84
+343            android:enabled="true"
+343-->[com.google.android.gms:play-services-measurement:22.1.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\60b8003dee7fe3a4552dd8b4b81f881f\transformed\play-services-measurement-22.1.2\AndroidManifest.xml:37:13-35
+344            android:exported="false" />
+344-->[com.google.android.gms:play-services-measurement:22.1.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\60b8003dee7fe3a4552dd8b4b81f881f\transformed\play-services-measurement-22.1.2\AndroidManifest.xml:38:13-37
+345        <service
+345-->[com.google.android.gms:play-services-measurement:22.1.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\60b8003dee7fe3a4552dd8b4b81f881f\transformed\play-services-measurement-22.1.2\AndroidManifest.xml:39:9-43:72
+346            android:name="com.google.android.gms.measurement.AppMeasurementJobService"
+346-->[com.google.android.gms:play-services-measurement:22.1.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\60b8003dee7fe3a4552dd8b4b81f881f\transformed\play-services-measurement-22.1.2\AndroidManifest.xml:40:13-87
+347            android:enabled="true"
+347-->[com.google.android.gms:play-services-measurement:22.1.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\60b8003dee7fe3a4552dd8b4b81f881f\transformed\play-services-measurement-22.1.2\AndroidManifest.xml:41:13-35
+348            android:exported="false"
+348-->[com.google.android.gms:play-services-measurement:22.1.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\60b8003dee7fe3a4552dd8b4b81f881f\transformed\play-services-measurement-22.1.2\AndroidManifest.xml:42:13-37
+349            android:permission="android.permission.BIND_JOB_SERVICE" />
+349-->[com.google.android.gms:play-services-measurement:22.1.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\60b8003dee7fe3a4552dd8b4b81f881f\transformed\play-services-measurement-22.1.2\AndroidManifest.xml:43:13-69
+350
+351        <uses-library
+351-->[androidx.privacysandbox.ads:ads-adservices:1.0.0-beta05] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\b23056d96e2029dd8d7e9c9a7cb8f431\transformed\ads-adservices-1.0.0-beta05\AndroidManifest.xml:23:9-25:40
+352            android:name="android.ext.adservices"
+352-->[androidx.privacysandbox.ads:ads-adservices:1.0.0-beta05] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\b23056d96e2029dd8d7e9c9a7cb8f431\transformed\ads-adservices-1.0.0-beta05\AndroidManifest.xml:24:13-50
+353            android:required="false" />
+353-->[androidx.privacysandbox.ads:ads-adservices:1.0.0-beta05] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\b23056d96e2029dd8d7e9c9a7cb8f431\transformed\ads-adservices-1.0.0-beta05\AndroidManifest.xml:25:13-37
+354
+355        <provider
+355-->[androidx.emoji2:emoji2:1.3.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\6352eb0d336e7ef7883ccddf58e90c5d\transformed\emoji2-1.3.0\AndroidManifest.xml:24:9-32:20
+356            android:name="androidx.startup.InitializationProvider"
+356-->[androidx.emoji2:emoji2:1.3.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\6352eb0d336e7ef7883ccddf58e90c5d\transformed\emoji2-1.3.0\AndroidManifest.xml:25:13-67
+357            android:authorities="com.kartik.messapp.androidx-startup"
+357-->[androidx.emoji2:emoji2:1.3.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\6352eb0d336e7ef7883ccddf58e90c5d\transformed\emoji2-1.3.0\AndroidManifest.xml:26:13-68
+358            android:exported="false" >
+358-->[androidx.emoji2:emoji2:1.3.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\6352eb0d336e7ef7883ccddf58e90c5d\transformed\emoji2-1.3.0\AndroidManifest.xml:27:13-37
+359            <meta-data
+359-->[androidx.emoji2:emoji2:1.3.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\6352eb0d336e7ef7883ccddf58e90c5d\transformed\emoji2-1.3.0\AndroidManifest.xml:29:13-31:52
+360                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+360-->[androidx.emoji2:emoji2:1.3.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\6352eb0d336e7ef7883ccddf58e90c5d\transformed\emoji2-1.3.0\AndroidManifest.xml:30:17-75
+361                android:value="androidx.startup" />
+361-->[androidx.emoji2:emoji2:1.3.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\6352eb0d336e7ef7883ccddf58e90c5d\transformed\emoji2-1.3.0\AndroidManifest.xml:31:17-49
+362            <meta-data
+362-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:36:13-38:52
+363                android:name="androidx.work.WorkManagerInitializer"
+363-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:37:17-68
+364                android:value="androidx.startup" />
+364-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:38:17-49
+365            <meta-data
+365-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\6c123a5b0a85793f7a2146fa8dcbb5cf\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:29:13-31:52
+366                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+366-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\6c123a5b0a85793f7a2146fa8dcbb5cf\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:30:17-78
+367                android:value="androidx.startup" />
+367-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\6c123a5b0a85793f7a2146fa8dcbb5cf\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:31:17-49
+368            <meta-data
+368-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\86547a80d8b5cc3f00bc9b10b3fbd436\transformed\profileinstaller-1.4.0\AndroidManifest.xml:29:13-31:52
+369                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+369-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\86547a80d8b5cc3f00bc9b10b3fbd436\transformed\profileinstaller-1.4.0\AndroidManifest.xml:30:17-85
+370                android:value="androidx.startup" />
+370-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\86547a80d8b5cc3f00bc9b10b3fbd436\transformed\profileinstaller-1.4.0\AndroidManifest.xml:31:17-49
+371        </provider> <!-- Include the AdActivity and InAppPurchaseActivity configChanges and themes. -->
+372        <activity
+372-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:73:9-78:43
+373            android:name="com.google.android.gms.ads.AdActivity"
+373-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:74:13-65
+374            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+374-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:75:13-122
+375            android:exported="false"
+375-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:76:13-37
+376            android:theme="@android:style/Theme.Translucent" />
+376-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:77:13-61
+377
+378        <provider
+378-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:80:9-85:43
+379            android:name="com.google.android.gms.ads.MobileAdsInitProvider"
+379-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:81:13-76
+380            android:authorities="com.kartik.messapp.mobileadsinitprovider"
+380-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:82:13-73
+381            android:exported="false"
+381-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:83:13-37
+382            android:initOrder="100" />
+382-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:84:13-36
+383
+384        <service
+384-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:87:9-91:43
+385            android:name="com.google.android.gms.ads.AdService"
+385-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:88:13-64
+386            android:enabled="true"
+386-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:89:13-35
+387            android:exported="false" />
+387-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:90:13-37
+388
+389        <activity
+389-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:93:9-97:43
+390            android:name="com.google.android.gms.ads.OutOfContextTestingActivity"
+390-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:94:13-82
+391            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+391-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:95:13-122
+392            android:exported="false" />
+392-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:96:13-37
+393        <activity
+393-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:98:9-105:43
+394            android:name="com.google.android.gms.ads.NotificationHandlerActivity"
+394-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:99:13-82
+395            android:excludeFromRecents="true"
+395-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:100:13-46
+396            android:exported="false"
+396-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:101:13-37
+397            android:launchMode="singleTask"
+397-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:102:13-44
+398            android:taskAffinity=""
+398-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:103:13-36
+399            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+399-->[com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ec9e83fdb58c7f20f25557507086f2ab\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:104:13-72
+400
+401        <service
+401-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:41:9-46:35
+402            android:name="androidx.work.impl.background.systemalarm.SystemAlarmService"
+402-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:42:13-88
+403            android:directBootAware="false"
+403-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:43:13-44
+404            android:enabled="@bool/enable_system_alarm_service_default"
+404-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:44:13-72
+405            android:exported="false" />
+405-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:45:13-37
+406        <service
+406-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:47:9-53:35
+407            android:name="androidx.work.impl.background.systemjob.SystemJobService"
+407-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:48:13-84
+408            android:directBootAware="false"
+408-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:49:13-44
+409            android:enabled="@bool/enable_system_job_service_default"
+409-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:50:13-70
+410            android:exported="true"
+410-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:51:13-36
+411            android:permission="android.permission.BIND_JOB_SERVICE" />
+411-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:52:13-69
+412        <service
+412-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:54:9-59:35
+413            android:name="androidx.work.impl.foreground.SystemForegroundService"
+413-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:55:13-81
+414            android:directBootAware="false"
+414-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:56:13-44
+415            android:enabled="@bool/enable_system_foreground_service_default"
+415-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:57:13-77
+416            android:exported="false" />
+416-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:58:13-37
+417
+418        <receiver
+418-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:61:9-66:35
+419            android:name="androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver"
+419-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:62:13-88
+420            android:directBootAware="false"
+420-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:63:13-44
+421            android:enabled="true"
+421-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:64:13-35
+422            android:exported="false" />
+422-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:65:13-37
+423        <receiver
+423-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:67:9-77:20
+424            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy"
+424-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:68:13-106
+425            android:directBootAware="false"
+425-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:69:13-44
+426            android:enabled="false"
+426-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:70:13-36
+427            android:exported="false" >
+427-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:71:13-37
+428            <intent-filter>
+428-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:73:13-76:29
+429                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+429-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:74:17-87
+429-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:74:25-84
+430                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+430-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:75:17-90
+430-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:75:25-87
+431            </intent-filter>
+432        </receiver>
+433        <receiver
+433-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:78:9-88:20
+434            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy"
+434-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:79:13-104
+435            android:directBootAware="false"
+435-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:80:13-44
+436            android:enabled="false"
+436-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:81:13-36
+437            android:exported="false" >
+437-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:82:13-37
+438            <intent-filter>
+438-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:84:13-87:29
+439                <action android:name="android.intent.action.BATTERY_OKAY" />
+439-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:85:17-77
+439-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:85:25-74
+440                <action android:name="android.intent.action.BATTERY_LOW" />
+440-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:86:17-76
+440-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:86:25-73
+441            </intent-filter>
+442        </receiver>
+443        <receiver
+443-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:89:9-99:20
+444            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy"
+444-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:90:13-104
+445            android:directBootAware="false"
+445-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:91:13-44
+446            android:enabled="false"
+446-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:92:13-36
+447            android:exported="false" >
+447-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:93:13-37
+448            <intent-filter>
+448-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:95:13-98:29
+449                <action android:name="android.intent.action.DEVICE_STORAGE_LOW" />
+449-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:96:17-83
+449-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:96:25-80
+450                <action android:name="android.intent.action.DEVICE_STORAGE_OK" />
+450-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:97:17-82
+450-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:97:25-79
+451            </intent-filter>
+452        </receiver>
+453        <receiver
+453-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:100:9-109:20
+454            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy"
+454-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:101:13-103
+455            android:directBootAware="false"
+455-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:102:13-44
+456            android:enabled="false"
+456-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:103:13-36
+457            android:exported="false" >
+457-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:104:13-37
+458            <intent-filter>
+458-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:106:13-108:29
+459                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+459-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:107:17-79
+459-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:107:25-76
+460            </intent-filter>
+461        </receiver>
+462        <receiver
+462-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:110:9-121:20
+463            android:name="androidx.work.impl.background.systemalarm.RescheduleReceiver"
+463-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:111:13-88
+464            android:directBootAware="false"
+464-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:112:13-44
+465            android:enabled="false"
+465-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:113:13-36
+466            android:exported="false" >
+466-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:114:13-37
+467            <intent-filter>
+467-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:116:13-120:29
+468                <action android:name="android.intent.action.BOOT_COMPLETED" />
+468-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:117:17-79
+468-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:117:25-76
+469                <action android:name="android.intent.action.TIME_SET" />
+469-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:118:17-73
+469-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:118:25-70
+470                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+470-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:119:17-81
+470-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:119:25-78
+471            </intent-filter>
+472        </receiver>
+473        <receiver
+473-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:122:9-131:20
+474            android:name="androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver"
+474-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:123:13-99
+475            android:directBootAware="false"
+475-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:124:13-44
+476            android:enabled="@bool/enable_system_alarm_service_default"
+476-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:125:13-72
+477            android:exported="false" >
+477-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:126:13-37
+478            <intent-filter>
+478-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:128:13-130:29
+479                <action android:name="androidx.work.impl.background.systemalarm.UpdateProxies" />
+479-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:129:17-98
+479-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:129:25-95
+480            </intent-filter>
+481        </receiver>
+482        <receiver
+482-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:132:9-142:20
+483            android:name="androidx.work.impl.diagnostics.DiagnosticsReceiver"
+483-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:133:13-78
+484            android:directBootAware="false"
+484-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:134:13-44
+485            android:enabled="true"
+485-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:135:13-35
+486            android:exported="true"
+486-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:136:13-36
+487            android:permission="android.permission.DUMP" >
+487-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:137:13-57
+488            <intent-filter>
+488-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:139:13-141:29
+489                <action android:name="androidx.work.diagnostics.REQUEST_DIAGNOSTICS" />
+489-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:140:17-88
+489-->[androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\83dc368a98256eba7b39340c0769b4e7\transformed\work-runtime-2.7.0\AndroidManifest.xml:140:25-85
+490            </intent-filter>
+491        </receiver>
+492
+493        <uses-library
+493-->[androidx.window:window:1.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\a2b9ef94cbb5a762e88d4f9d46b6d7b6\transformed\window-1.0.0\AndroidManifest.xml:25:9-27:40
+494            android:name="androidx.window.extensions"
+494-->[androidx.window:window:1.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\a2b9ef94cbb5a762e88d4f9d46b6d7b6\transformed\window-1.0.0\AndroidManifest.xml:26:13-54
+495            android:required="false" />
+495-->[androidx.window:window:1.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\a2b9ef94cbb5a762e88d4f9d46b6d7b6\transformed\window-1.0.0\AndroidManifest.xml:27:13-37
+496        <uses-library
+496-->[androidx.window:window:1.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\a2b9ef94cbb5a762e88d4f9d46b6d7b6\transformed\window-1.0.0\AndroidManifest.xml:28:9-30:40
+497            android:name="androidx.window.sidecar"
+497-->[androidx.window:window:1.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\a2b9ef94cbb5a762e88d4f9d46b6d7b6\transformed\window-1.0.0\AndroidManifest.xml:29:13-51
+498            android:required="false" />
+498-->[androidx.window:window:1.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\a2b9ef94cbb5a762e88d4f9d46b6d7b6\transformed\window-1.0.0\AndroidManifest.xml:30:13-37
+499
+500        <receiver
+500-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\86547a80d8b5cc3f00bc9b10b3fbd436\transformed\profileinstaller-1.4.0\AndroidManifest.xml:34:9-52:20
+501            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+501-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\86547a80d8b5cc3f00bc9b10b3fbd436\transformed\profileinstaller-1.4.0\AndroidManifest.xml:35:13-76
+502            android:directBootAware="false"
+502-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\86547a80d8b5cc3f00bc9b10b3fbd436\transformed\profileinstaller-1.4.0\AndroidManifest.xml:36:13-44
+503            android:enabled="true"
+503-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\86547a80d8b5cc3f00bc9b10b3fbd436\transformed\profileinstaller-1.4.0\AndroidManifest.xml:37:13-35
+504            android:exported="true"
+504-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\86547a80d8b5cc3f00bc9b10b3fbd436\transformed\profileinstaller-1.4.0\AndroidManifest.xml:38:13-36
+505            android:permission="android.permission.DUMP" >
+505-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\86547a80d8b5cc3f00bc9b10b3fbd436\transformed\profileinstaller-1.4.0\AndroidManifest.xml:39:13-57
+506            <intent-filter>
+506-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\86547a80d8b5cc3f00bc9b10b3fbd436\transformed\profileinstaller-1.4.0\AndroidManifest.xml:40:13-42:29
+507                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+507-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\86547a80d8b5cc3f00bc9b10b3fbd436\transformed\profileinstaller-1.4.0\AndroidManifest.xml:41:17-91
+507-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\86547a80d8b5cc3f00bc9b10b3fbd436\transformed\profileinstaller-1.4.0\AndroidManifest.xml:41:25-88
+508            </intent-filter>
+509            <intent-filter>
+509-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\86547a80d8b5cc3f00bc9b10b3fbd436\transformed\profileinstaller-1.4.0\AndroidManifest.xml:43:13-45:29
+510                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+510-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\86547a80d8b5cc3f00bc9b10b3fbd436\transformed\profileinstaller-1.4.0\AndroidManifest.xml:44:17-85
+510-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\86547a80d8b5cc3f00bc9b10b3fbd436\transformed\profileinstaller-1.4.0\AndroidManifest.xml:44:25-82
+511            </intent-filter>
+512            <intent-filter>
+512-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\86547a80d8b5cc3f00bc9b10b3fbd436\transformed\profileinstaller-1.4.0\AndroidManifest.xml:46:13-48:29
+513                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+513-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\86547a80d8b5cc3f00bc9b10b3fbd436\transformed\profileinstaller-1.4.0\AndroidManifest.xml:47:17-88
+513-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\86547a80d8b5cc3f00bc9b10b3fbd436\transformed\profileinstaller-1.4.0\AndroidManifest.xml:47:25-85
+514            </intent-filter>
+515            <intent-filter>
+515-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\86547a80d8b5cc3f00bc9b10b3fbd436\transformed\profileinstaller-1.4.0\AndroidManifest.xml:49:13-51:29
+516                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+516-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\86547a80d8b5cc3f00bc9b10b3fbd436\transformed\profileinstaller-1.4.0\AndroidManifest.xml:50:17-95
+516-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\86547a80d8b5cc3f00bc9b10b3fbd436\transformed\profileinstaller-1.4.0\AndroidManifest.xml:50:25-92
+517            </intent-filter>
+518        </receiver>
+519
+520        <service
+520-->[com.google.android.datatransport:transport-backend-cct:3.1.9] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\0a46fa1c11b24e4d97848ee6a2a7e344\transformed\transport-backend-cct-3.1.9\AndroidManifest.xml:28:9-34:19
+521            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
+521-->[com.google.android.datatransport:transport-backend-cct:3.1.9] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\0a46fa1c11b24e4d97848ee6a2a7e344\transformed\transport-backend-cct-3.1.9\AndroidManifest.xml:29:13-103
+522            android:exported="false" >
+522-->[com.google.android.datatransport:transport-backend-cct:3.1.9] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\0a46fa1c11b24e4d97848ee6a2a7e344\transformed\transport-backend-cct-3.1.9\AndroidManifest.xml:30:13-37
+523            <meta-data
+523-->[com.google.android.datatransport:transport-backend-cct:3.1.9] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\0a46fa1c11b24e4d97848ee6a2a7e344\transformed\transport-backend-cct-3.1.9\AndroidManifest.xml:31:13-33:39
+524                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
+524-->[com.google.android.datatransport:transport-backend-cct:3.1.9] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\0a46fa1c11b24e4d97848ee6a2a7e344\transformed\transport-backend-cct-3.1.9\AndroidManifest.xml:32:17-94
+525                android:value="cct" />
+525-->[com.google.android.datatransport:transport-backend-cct:3.1.9] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\0a46fa1c11b24e4d97848ee6a2a7e344\transformed\transport-backend-cct-3.1.9\AndroidManifest.xml:33:17-36
+526        </service>
+527        <service
+527-->[com.google.android.datatransport:transport-runtime:3.1.9] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\fe7bfbd5dd0c3405e87ea27d7191b39b\transformed\transport-runtime-3.1.9\AndroidManifest.xml:26:9-30:19
+528            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
+528-->[com.google.android.datatransport:transport-runtime:3.1.9] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\fe7bfbd5dd0c3405e87ea27d7191b39b\transformed\transport-runtime-3.1.9\AndroidManifest.xml:27:13-117
+529            android:exported="false"
+529-->[com.google.android.datatransport:transport-runtime:3.1.9] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\fe7bfbd5dd0c3405e87ea27d7191b39b\transformed\transport-runtime-3.1.9\AndroidManifest.xml:28:13-37
+530            android:permission="android.permission.BIND_JOB_SERVICE" >
+530-->[com.google.android.datatransport:transport-runtime:3.1.9] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\fe7bfbd5dd0c3405e87ea27d7191b39b\transformed\transport-runtime-3.1.9\AndroidManifest.xml:29:13-69
+531        </service>
+532
+533        <receiver
+533-->[com.google.android.datatransport:transport-runtime:3.1.9] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\fe7bfbd5dd0c3405e87ea27d7191b39b\transformed\transport-runtime-3.1.9\AndroidManifest.xml:32:9-34:40
+534            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
+534-->[com.google.android.datatransport:transport-runtime:3.1.9] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\fe7bfbd5dd0c3405e87ea27d7191b39b\transformed\transport-runtime-3.1.9\AndroidManifest.xml:33:13-132
+535            android:exported="false" />
+535-->[com.google.android.datatransport:transport-runtime:3.1.9] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\fe7bfbd5dd0c3405e87ea27d7191b39b\transformed\transport-runtime-3.1.9\AndroidManifest.xml:34:13-37
+536
+537        <service
+537-->[androidx.room:room-runtime:2.2.5] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\7a85cd19e5355dc357d6b3263e974960\transformed\room-runtime-2.2.5\AndroidManifest.xml:25:9-28:40
+538            android:name="androidx.room.MultiInstanceInvalidationService"
+538-->[androidx.room:room-runtime:2.2.5] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\7a85cd19e5355dc357d6b3263e974960\transformed\room-runtime-2.2.5\AndroidManifest.xml:26:13-74
+539            android:directBootAware="true"
+539-->[androidx.room:room-runtime:2.2.5] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\7a85cd19e5355dc357d6b3263e974960\transformed\room-runtime-2.2.5\AndroidManifest.xml:27:13-43
+540            android:exported="false" /> <!-- The activities will be merged into the manifest of the hosting app. -->
+540-->[androidx.room:room-runtime:2.2.5] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\7a85cd19e5355dc357d6b3263e974960\transformed\room-runtime-2.2.5\AndroidManifest.xml:28:13-37
+541        <activity
+541-->[com.google.android.play:core-common:2.0.3] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\87a8becc9a66343eaa820fc4f0859aa7\transformed\core-common-2.0.3\AndroidManifest.xml:14:9-18:65
+542            android:name="com.google.android.play.core.common.PlayCoreDialogWrapperActivity"
+542-->[com.google.android.play:core-common:2.0.3] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\87a8becc9a66343eaa820fc4f0859aa7\transformed\core-common-2.0.3\AndroidManifest.xml:15:13-93
+543            android:exported="false"
+543-->[com.google.android.play:core-common:2.0.3] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\87a8becc9a66343eaa820fc4f0859aa7\transformed\core-common-2.0.3\AndroidManifest.xml:16:13-37
+544            android:stateNotNeeded="true"
+544-->[com.google.android.play:core-common:2.0.3] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\87a8becc9a66343eaa820fc4f0859aa7\transformed\core-common-2.0.3\AndroidManifest.xml:17:13-42
+545            android:theme="@style/Theme.PlayCore.Transparent" />
+545-->[com.google.android.play:core-common:2.0.3] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\87a8becc9a66343eaa820fc4f0859aa7\transformed\core-common-2.0.3\AndroidManifest.xml:18:13-62
+546    </application>
+547
+548</manifest>

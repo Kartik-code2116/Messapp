@@ -231,16 +231,13 @@ public class MessDashboardActivity extends AppCompatActivity {
 
     private void showMoreOptionsMenu(View anchorView) {
         androidx.appcompat.widget.PopupMenu popup = new androidx.appcompat.widget.PopupMenu(this, anchorView);
-        popup.getMenu().add("About Developer");
         popup.getMenu().add("About This App");
         popup.getMenu().add("Privacy Policy");
         popup.getMenu().add("Help & Support");
 
         popup.setOnMenuItemClickListener(item -> {
             String title = item.getTitle().toString();
-            if ("About Developer".equals(title)) {
-                showAboutDeveloperDialog();
-            } else if ("About This App".equals(title)) {
+            if ("About This App".equals(title)) {
                 showAboutAppDialog();
             } else if ("Privacy Policy".equals(title)) {
                 showPrivacyPolicyDialog();

@@ -32,6 +32,7 @@ public class UserProfileFragment extends Fragment {
     private FirebaseFirestore db;
     private String currentUserMessId;
     private ListenerRegistration profileListener;
+    private long lastRenewClickTime = 0;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
             ViewGroup container, Bundle savedInstanceState) {
@@ -371,6 +372,11 @@ public class UserProfileFragment extends Fragment {
     }
 
     private void handleRenewSubscription() {
+        if (System.currentTimeMillis() - lastRenewClickTime < 2000) {
+            return; // Prevent rapid double-clicks
+        }
+        lastRenewClickTime = System.currentTimeMillis();
+
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser == null) {
             Toast.makeText(getContext(), "User not logged in.", Toast.LENGTH_SHORT).show();
@@ -381,17 +387,24 @@ public class UserProfileFragment extends Fragment {
         binding.progressBar.setVisibility(View.VISIBLE);
         // Check pending requests count first
         db.collection("subscriptionRequests")
-                .whereEqualTo("userId", currentUser.getUid())
+                .whereEqualTo("studentId", currentUser.getUid())
                 .whereEqualTo("status", "PENDING")
                 .get()
                 .addOnSuccessListener(querySnapshot -> {
                     if (binding == null) return;
-                    if (querySnapshot.size() >= 3) {
+                    int renewalCount = 0;
+                    for (com.google.firebase.firestore.DocumentSnapshot reqDoc : querySnapshot.getDocuments()) {
+                        String type = reqDoc.getString("type");
+                        if (type == null || !type.startsWith("EXTRA_")) {
+                            renewalCount++;
+                        }
+                    }
+                    if (renewalCount >= 1) {
                         binding.progressBar.setVisibility(View.GONE);
                         binding.btnRenewSubscription.setEnabled(true);
                         new AlertDialog.Builder(requireContext())
                                 .setTitle("Limit Reached")
-                                .setMessage("You already have " + querySnapshot.size() + " pending requests. Please wait for the Mess Owner to review them before sending more.")
+                                .setMessage("You already have a pending renewal request. Please wait for the Mess Admin to review it before sending another.")
                                 .setPositiveButton("OK", null)
                                 .show();
                         return;

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <!-- Base Elegant Dark Gradient -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="135"
+                android:startColor="#262626"
+                android:endColor="#141414"
+                android:type="linear" />
+            <corners
+                android:bottomLeftRadius="28dp"
+                android:bottomRightRadius="28dp" />
+        </shape>
+    </item>
+
+    <!-- Subtle Orange Glow in Dark Mode (mesh-like texture) -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="45"
+                android:startColor="#20F97316"
+                android:centerColor="#0DF97316"
+                android:endColor="#00000000"
+                android:type="linear" />
+            <corners
+                android:bottomLeftRadius="28dp"
+                android:bottomRightRadius="28dp" />
+        </shape>
+    </item>
+
+    <!-- Translucent Overlay for Dark-mode Glassmorphism -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="225"
+                android:startColor="#0DFFFFFF"
+                android:endColor="#1A000000"
+                android:type="linear" />
+            <corners
+                android:bottomLeftRadius="28dp"
+                android:bottomRightRadius="28dp" />
+        </shape>
+    </item>
+
+</layer-list>

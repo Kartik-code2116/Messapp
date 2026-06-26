@@ -754,7 +754,11 @@ public class UserHomeFragment extends Fragment {
             binding.btnLunchInNew.setBackgroundTintList(ColorStateList.valueOf(colorPrimary));
             binding.btnLunchInNew.setTextColor(colorTextOnPrimary);
             binding.btnLunchInNew.setEnabled(false);
-            binding.btnLunchOutNew.setVisibility(View.GONE); // OUT not applicable for ONE_TIME
+            binding.btnLunchOutNew.setVisibility(View.VISIBLE);
+            binding.btnLunchOutNew.setEnabled(false);
+            binding.btnLunchOutNew.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
+            binding.btnLunchOutNew.setTextColor(colorTextMuted);
+            binding.btnLunchOutNew.setStrokeColor(ColorStateList.valueOf(colorGray));
             binding.textLunchStatus.setText("Today's meal selected");
             binding.textLunchStatusBar.setText(lunchExplicitIn ? (adminAllowedBoth ? "ONE TIME - Granted (Used)" : "ONE TIME - Used") : "ONE TIME - Auto Selected");
             binding.textLunchStatusBar.setBackgroundColor(colorGreen);
@@ -777,7 +781,11 @@ public class UserHomeFragment extends Fragment {
                 binding.textLunchStatusBar.setBackgroundColor(colorDisabled);
                 binding.textLunchStatus.setText("Dinner already selected today");
             }
-            binding.btnLunchOutNew.setVisibility(View.GONE);
+            binding.btnLunchOutNew.setVisibility(View.VISIBLE);
+            binding.btnLunchOutNew.setEnabled(false);
+            binding.btnLunchOutNew.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
+            binding.btnLunchOutNew.setTextColor(colorTextMuted);
+            binding.btnLunchOutNew.setStrokeColor(ColorStateList.valueOf(colorGray));
             binding.textLunchStatusBar.setTextColor(Color.WHITE);
         } else if (isLunchOut && isDinnerOut) {
             // Both marked OUT via Plan OUT Days
@@ -795,7 +803,11 @@ public class UserHomeFragment extends Fragment {
             binding.textLunchStatusBar.setTextColor(Color.WHITE);
         } else {
             // Nothing chosen yet — lunch is available if cutoff hasn't passed
-            binding.btnLunchOutNew.setVisibility(View.GONE); // OUT hidden for ONE_TIME
+            binding.btnLunchOutNew.setVisibility(View.VISIBLE);
+            binding.btnLunchOutNew.setEnabled(false);
+            binding.btnLunchOutNew.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
+            binding.btnLunchOutNew.setTextColor(colorTextMuted);
+            binding.btnLunchOutNew.setStrokeColor(ColorStateList.valueOf(colorGray));
             if (cutoffLunch) {
                 binding.btnLunchInNew.setEnabled(false);
                 binding.btnLunchInNew.setBackgroundTintList(ColorStateList.valueOf(colorDisabled));
@@ -821,7 +833,11 @@ public class UserHomeFragment extends Fragment {
             binding.btnDinnerInNew.setBackgroundTintList(ColorStateList.valueOf(colorPrimary));
             binding.btnDinnerInNew.setTextColor(colorTextOnPrimary);
             binding.btnDinnerInNew.setEnabled(false);
-            binding.btnDinnerOutNew.setVisibility(View.GONE);
+            binding.btnDinnerOutNew.setVisibility(View.VISIBLE);
+            binding.btnDinnerOutNew.setEnabled(false);
+            binding.btnDinnerOutNew.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
+            binding.btnDinnerOutNew.setTextColor(colorTextMuted);
+            binding.btnDinnerOutNew.setStrokeColor(ColorStateList.valueOf(colorGray));
             binding.textDinnerStatus.setText("Today's meal selected");
             binding.textDinnerStatusBar.setText(dinnerExplicitIn ? (adminAllowedBoth ? "ONE TIME - Granted (Used)" : "ONE TIME - Used") : "ONE TIME - Auto Selected");
             binding.textDinnerStatusBar.setBackgroundColor(colorGreen);
@@ -844,7 +860,11 @@ public class UserHomeFragment extends Fragment {
                 binding.textDinnerStatusBar.setBackgroundColor(colorDisabled);
                 binding.textDinnerStatus.setText("Lunch already selected today");
             }
-            binding.btnDinnerOutNew.setVisibility(View.GONE);
+            binding.btnDinnerOutNew.setVisibility(View.VISIBLE);
+            binding.btnDinnerOutNew.setEnabled(false);
+            binding.btnDinnerOutNew.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
+            binding.btnDinnerOutNew.setTextColor(colorTextMuted);
+            binding.btnDinnerOutNew.setStrokeColor(ColorStateList.valueOf(colorGray));
             binding.textDinnerStatusBar.setTextColor(Color.WHITE);
         } else if (isLunchOut && isDinnerOut) {
             // Dinner card also Planned OUT
@@ -861,7 +881,11 @@ public class UserHomeFragment extends Fragment {
             binding.textDinnerStatusBar.setBackgroundColor(colorAmber);
             binding.textDinnerStatusBar.setTextColor(Color.WHITE);
         } else {
-            binding.btnDinnerOutNew.setVisibility(View.GONE);
+            binding.btnDinnerOutNew.setVisibility(View.VISIBLE);
+            binding.btnDinnerOutNew.setEnabled(false);
+            binding.btnDinnerOutNew.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
+            binding.btnDinnerOutNew.setTextColor(colorTextMuted);
+            binding.btnDinnerOutNew.setStrokeColor(ColorStateList.valueOf(colorGray));
             if (cutoffDinner) {
                 binding.btnDinnerInNew.setEnabled(false);
                 binding.btnDinnerInNew.setBackgroundTintList(ColorStateList.valueOf(colorDisabled));
@@ -1372,10 +1396,13 @@ public class UserHomeFragment extends Fragment {
                     binding.textLunchStatusBar.setText("Status: Auto IN ✓");
                     binding.textLunchStatusBar.setBackgroundColor(colorGreen);
                 } else {
-                    binding.btnLunchInNew.setBackgroundTintList(ColorStateList.valueOf(colorPrimary));
-                    binding.btnLunchInNew.setTextColor(colorTextOnPrimary);
+                    binding.btnLunchInNew.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
+                    binding.btnLunchInNew.setTextColor(colorTextMuted);
+                    binding.btnLunchInNew.setIconTint(ColorStateList.valueOf(colorTextMuted));
+                    binding.btnLunchInNew.setStrokeColor(ColorStateList.valueOf(colorGray));
                     binding.btnLunchOutNew.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
                     binding.btnLunchOutNew.setTextColor(colorTextMuted);
+                    binding.btnLunchOutNew.setStrokeColor(ColorStateList.valueOf(colorGray));
                     binding.textLunchStatus.setText("");
                     binding.textLunchStatusBar.setText("Status: Not selected");
                     binding.textLunchStatusBar.setBackgroundColor(colorYellow);
@@ -1387,8 +1414,11 @@ public class UserHomeFragment extends Fragment {
             if ("IN".equals(status)) {
                 binding.btnLunchInNew.setBackgroundTintList(ColorStateList.valueOf(colorPrimary));
                 binding.btnLunchInNew.setTextColor(colorTextOnPrimary);
+                binding.btnLunchInNew.setIconTint(ColorStateList.valueOf(colorTextOnPrimary));
+                binding.btnLunchInNew.setStrokeColor(ColorStateList.valueOf(colorPrimary));
                 binding.btnLunchOutNew.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
                 binding.btnLunchOutNew.setTextColor(colorTextMuted);
+                binding.btnLunchOutNew.setStrokeColor(ColorStateList.valueOf(colorGray));
                 binding.btnLunchInNew.setEnabled(false);
                 binding.btnLunchOutNew.setEnabled(canMark && allowMultipleChanges);
                 binding.textLunchStatus.setText("");
@@ -1398,8 +1428,11 @@ public class UserHomeFragment extends Fragment {
             } else if ("OUT".equals(status)) {
                 binding.btnLunchInNew.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
                 binding.btnLunchInNew.setTextColor(colorTextMuted);
+                binding.btnLunchInNew.setIconTint(ColorStateList.valueOf(colorTextMuted));
+                binding.btnLunchInNew.setStrokeColor(ColorStateList.valueOf(colorGray));
                 binding.btnLunchOutNew.setBackgroundTintList(ColorStateList.valueOf(colorGray));
                 binding.btnLunchOutNew.setTextColor(colorTextNormal);
+                binding.btnLunchOutNew.setStrokeColor(ColorStateList.valueOf(colorGray));
                 binding.btnLunchInNew.setEnabled(canMark && allowMultipleChanges);
                 binding.btnLunchOutNew.setEnabled(false);
                 binding.textLunchStatus.setText("Marked OUT");
@@ -1428,10 +1461,13 @@ public class UserHomeFragment extends Fragment {
                     binding.textDinnerStatusBar.setText("Status: Auto IN ✓");
                     binding.textDinnerStatusBar.setBackgroundColor(colorGreen);
                 } else {
-                    binding.btnDinnerInNew.setBackgroundTintList(ColorStateList.valueOf(colorPrimary));
-                    binding.btnDinnerInNew.setTextColor(colorTextOnPrimary);
+                    binding.btnDinnerInNew.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
+                    binding.btnDinnerInNew.setTextColor(colorTextMuted);
+                    binding.btnDinnerInNew.setIconTint(ColorStateList.valueOf(colorTextMuted));
+                    binding.btnDinnerInNew.setStrokeColor(ColorStateList.valueOf(colorGray));
                     binding.btnDinnerOutNew.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
                     binding.btnDinnerOutNew.setTextColor(colorTextMuted);
+                    binding.btnDinnerOutNew.setStrokeColor(ColorStateList.valueOf(colorGray));
                     binding.textDinnerStatus.setText("");
                     binding.textDinnerStatusBar.setText("Status: Not selected");
                     binding.textDinnerStatusBar.setBackgroundColor(colorYellow);
@@ -1443,8 +1479,11 @@ public class UserHomeFragment extends Fragment {
             if ("IN".equals(status)) {
                 binding.btnDinnerInNew.setBackgroundTintList(ColorStateList.valueOf(colorPrimary));
                 binding.btnDinnerInNew.setTextColor(colorTextOnPrimary);
+                binding.btnDinnerInNew.setIconTint(ColorStateList.valueOf(colorTextOnPrimary));
+                binding.btnDinnerInNew.setStrokeColor(ColorStateList.valueOf(colorPrimary));
                 binding.btnDinnerOutNew.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
                 binding.btnDinnerOutNew.setTextColor(colorTextMuted);
+                binding.btnDinnerOutNew.setStrokeColor(ColorStateList.valueOf(colorGray));
                 binding.btnDinnerInNew.setEnabled(false);
                 binding.btnDinnerOutNew.setEnabled(canMark && allowMultipleChanges);
                 binding.textDinnerStatus.setText("");
@@ -1454,8 +1493,11 @@ public class UserHomeFragment extends Fragment {
             } else if ("OUT".equals(status)) {
                 binding.btnDinnerInNew.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
                 binding.btnDinnerInNew.setTextColor(colorTextMuted);
+                binding.btnDinnerInNew.setIconTint(ColorStateList.valueOf(colorTextMuted));
+                binding.btnDinnerInNew.setStrokeColor(ColorStateList.valueOf(colorGray));
                 binding.btnDinnerOutNew.setBackgroundTintList(ColorStateList.valueOf(colorGray));
                 binding.btnDinnerOutNew.setTextColor(colorTextNormal);
+                binding.btnDinnerOutNew.setStrokeColor(ColorStateList.valueOf(colorGray));
                 binding.btnDinnerInNew.setEnabled(canMark && allowMultipleChanges);
                 binding.btnDinnerOutNew.setEnabled(false);
                 binding.textDinnerStatus.setText("Marked OUT");

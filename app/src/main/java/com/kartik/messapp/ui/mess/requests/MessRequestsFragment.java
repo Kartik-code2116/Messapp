@@ -169,22 +169,29 @@ public class MessRequestsFragment extends Fragment {
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     subRequestList.clear();
                     mealRequestList.clear();
-                    String todayDate = new java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.US).format(new java.util.Date());
-                    for (DocumentSnapshot doc : queryDocumentSnapshots) {
-                        SubscriptionRequest req = doc.toObject(SubscriptionRequest.class);
-                        if (req != null) {
-                            if (req.getType() != null && req.getType().startsWith("EXTRA_")) {
-                                String mealType = req.getType().replace("EXTRA_", "");
-                                MealRequest mealReq = new MealRequest(
-                                    req.getId(), req.getStudentId(), req.getStudentName(),
-                                    req.getMessId(), todayDate, mealType
-                                );
-                                mealRequestList.add(mealReq);
-                            } else {
-                                subRequestList.add(req);
-                            }
-                        }
-                    }
+                      String todayDate = new java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.US).format(new java.util.Date());
+                      java.util.Set<String> seenStudentIds = new java.util.HashSet<>();
+                      for (DocumentSnapshot doc : queryDocumentSnapshots) {
+                          SubscriptionRequest req = doc.toObject(SubscriptionRequest.class);
+                          if (req != null) {
+                              if (req.getType() != null && req.getType().startsWith("EXTRA_")) {
+                                  String mealType = req.getType().replace("EXTRA_", "");
+                                  MealRequest mealReq = new MealRequest(
+                                      req.getId(), req.getStudentId(), req.getStudentName(),
+                                      req.getMessId(), todayDate, mealType
+                                  );
+                                  mealRequestList.add(mealReq);
+                              } else {
+                                  if (seenStudentIds.contains(req.getStudentId())) {
+                                      // Auto-delete duplicate renewal request
+                                      db.collection("subscriptionRequests").document(req.getId()).delete();
+                                  } else {
+                                      seenStudentIds.add(req.getStudentId());
+                                      subRequestList.add(req);
+                                  }
+                              }
+                          }
+                      }
                     subRequestAdapter.setRequests(subRequestList);
                     mealRequestAdapter.setRequests(mealRequestList);
                     updateUIState();

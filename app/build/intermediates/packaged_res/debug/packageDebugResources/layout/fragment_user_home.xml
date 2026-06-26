@@ -693,7 +693,7 @@
 
                                     <com.google.android.material.button.MaterialButton
                                         android:id="@+id/btn_lunch_in_new"
-                                        style="@style/Profound.Button"
+                                        style="@style/Profound.Button.Outlined"
                                         android:layout_width="0dp"
                                         android:layout_weight="1"
                                         android:layout_height="46dp"
@@ -701,6 +701,8 @@
                                         android:textStyle="bold"
                                         app:icon="@drawable/ic_check_circle"
                                         app:cornerRadius="12dp"
+                                        app:strokeColor="@color/neutral_300"
+                                        android:textColor="@color/text_body"
                                         android:layout_marginEnd="8dp" />
 
                                     <com.google.android.material.button.MaterialButton
@@ -887,7 +889,7 @@
 
                                     <com.google.android.material.button.MaterialButton
                                         android:id="@+id/btn_dinner_in_new"
-                                        style="@style/Profound.Button"
+                                        style="@style/Profound.Button.Outlined"
                                         android:layout_width="0dp"
                                         android:layout_weight="1"
                                         android:layout_height="46dp"
@@ -895,6 +897,8 @@
                                         android:textStyle="bold"
                                         app:icon="@drawable/ic_check_circle"
                                         app:cornerRadius="12dp"
+                                        app:strokeColor="@color/neutral_300"
+                                        android:textColor="@color/text_body"
                                         android:layout_marginEnd="8dp" />
 
                                     <com.google.android.material.button.MaterialButton

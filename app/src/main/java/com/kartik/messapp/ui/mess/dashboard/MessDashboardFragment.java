@@ -405,15 +405,27 @@ public class MessDashboardFragment extends Fragment {
                 .addSnapshotListener((snapshots, e) -> {
                     if (binding == null || e != null)
                         return;
-                    if (snapshots != null) {
-                        pendingRequests.clear();
-                        for (DocumentSnapshot doc : snapshots.getDocuments()) {
-                            SubscriptionRequest req = doc.toObject(SubscriptionRequest.class);
-                            if (req != null)
-                                pendingRequests.add(req);
-                        }
-                        requestAdapter.setRequests(pendingRequests);
-                    }
+                      if (snapshots != null) {
+                          pendingRequests.clear();
+                          java.util.Set<String> seenStudentIds = new java.util.HashSet<>();
+                          for (DocumentSnapshot doc : snapshots.getDocuments()) {
+                              SubscriptionRequest req = doc.toObject(SubscriptionRequest.class);
+                              if (req != null) {
+                                  if (req.getType() != null && req.getType().startsWith("EXTRA_")) {
+                                      pendingRequests.add(req);
+                                  } else {
+                                      if (seenStudentIds.contains(req.getStudentId())) {
+                                          // Auto-delete duplicate renewal request
+                                          db.collection("subscriptionRequests").document(req.getId()).delete();
+                                      } else {
+                                          seenStudentIds.add(req.getStudentId());
+                                          pendingRequests.add(req);
+                                      }
+                                  }
+                              }
+                          }
+                          requestAdapter.setRequests(pendingRequests);
+                      }
                 });
     }
 

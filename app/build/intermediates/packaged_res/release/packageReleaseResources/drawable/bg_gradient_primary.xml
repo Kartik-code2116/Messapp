@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <!-- linear-gradient(135deg, hsl(24 95% 53%) 0%, hsl(35 95% 55%) 50%, hsl(24 90% 48%) 100%) 
+         Approximated to: Orange -> Amber -> Dark Orange -->
+    <gradient
+        android:angle="315"
+        android:startColor="#FD7E14"
+        android:centerColor="#FFC107"
+        android:endColor="#E65100"
+        android:type="linear" />
+</shape>
