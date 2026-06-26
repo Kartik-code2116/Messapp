@@ -257,9 +257,26 @@
         <item name="boxStrokeColor">@color/brand_primary</item>
         <item name="hintTextColor">@color/text_caption</item>
     </style>
+    <style name="Profound.NavigationView" parent="Widget.Material3.NavigationView">
+        <item name="itemTextAppearance">@style/TextAppearance.Messapp.DrawerItem</item>
+        <item name="itemShapeAppearanceOverlay">@style/ShapeAppearance.Messapp.DrawerItem</item>
+        <item name="itemIconSize">24dp</item>
+        <item name="itemIconPadding">16dp</item>
+        <item name="itemVerticalPadding">12dp</item>
+        
+        <item name="android:background">@drawable/bg_drawer_floating</item>
+    </style>
     <style name="RatingBar" parent="Theme.AppCompat">
         <item name="colorControlNormal">@color/grey_400</item>
         <item name="colorControlActivated">@color/green_500</item>
+    </style>
+    <style name="ShapeAppearance.Messapp.DrawerItem" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+    <style name="TextAppearance.Messapp.DrawerItem" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:fontFamily">@font/poppins_medium</item>
+        <item name="android:textSize">15sp</item>
     </style>
     <style name="Theme.Messapp" parent="Base.Theme.Messapp"/>
     <style name="Theme.Messapp.NoActionBar" parent="Base.Theme.Messapp">

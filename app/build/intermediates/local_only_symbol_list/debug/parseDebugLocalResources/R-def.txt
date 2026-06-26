@@ -158,6 +158,7 @@ drawable bg_circle_primary_light
 drawable bg_circle_surface
 drawable bg_deadline_pill
 drawable bg_drawer_avatar_ring
+drawable bg_drawer_floating
 drawable bg_drawer_header
 drawable bg_drawer_menu_item
 drawable bg_drawer_stat_pill
@@ -846,7 +847,10 @@ style Profound.Button
 style Profound.Button.Outlined
 style Profound.Card
 style Profound.InputLayout
+style Profound.NavigationView
 style RatingBar
+style ShapeAppearance.Messapp.DrawerItem
+style TextAppearance.Messapp.DrawerItem
 style Theme.Messapp
 style Theme.Messapp.NoActionBar
 style UserPageTitle

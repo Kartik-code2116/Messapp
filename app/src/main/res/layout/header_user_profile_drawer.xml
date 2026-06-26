@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -10,25 +11,28 @@
     android:paddingEnd="24dp"
     android:paddingBottom="28dp">
 
-    <!-- Avatar — plain ImageView with circular background, no ShapeableImageView -->
-    <ImageView
+    <!-- Avatar with ShapeableImageView -->
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/img_drawer_profile"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="84dp"
+        android:layout_height="84dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_student_profile"
-        android:background="@drawable/bg_circle_avatar_drawer"
-        android:padding="2dp"
-        android:contentDescription="@null" />
+        android:padding="3dp"
+        app:strokeColor="#FFFFFF"
+        app:strokeWidth="2dp"
+        app:shapeAppearanceOverlay="@style/CircleImageStyle"
+        android:contentDescription="@null"
+        android:elevation="4dp" />
 
     <TextView
         android:id="@+id/text_drawer_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/poppins"
         android:textColor="#FFFFFF"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:maxLines="1"
         android:ellipsize="end"
@@ -40,8 +44,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:fontFamily="@font/inter"
-        android:textColor="#CCffffff"
-        android:textSize="13sp"
+        android:textColor="#E6FFFFFF"
+        android:textSize="14sp"
         android:maxLines="1"
         android:ellipsize="end"
         tools:text="student@messapp.com" />
@@ -49,17 +53,29 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="12dp"
-        android:background="#30FFFFFF" />
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="16dp"
+        android:background="#33FFFFFF" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter"
+        android:text="CURRENT MESS"
+        android:textColor="#B3FFFFFF"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        android:letterSpacing="0.05"
+        android:layout_marginBottom="4dp"/>
+        
     <TextView
         android:id="@+id/text_drawer_mess"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/inter"
-        android:textColor="#CCffffff"
-        android:textSize="12sp"
+        android:fontFamily="@font/poppins"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
         tools:text="Not Joined" />
 
     <TextView
@@ -69,7 +85,7 @@
         android:layout_marginTop="4dp"
         android:fontFamily="@font/inter"
         android:textColor="#CCffffff"
-        android:textSize="12sp"
-        tools:text="Not Active" />
+        android:textSize="13sp"
+        tools:text="Status: Not Active" />
 
 </LinearLayout>

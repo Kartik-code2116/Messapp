@@ -212,10 +212,6 @@
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-main-71:\\anim\\slide_out_left.xml"
     },
     {
-        "merged": "com.kartik.messapp-debug-69:/anim_slide_out_right.xml.flat",
-        "source": "com.kartik.messapp-main-71:/anim/slide_out_right.xml"
-    },
-    {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-debug-69:\\drawable_bg_status_pill_neutral.xml.flat",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-main-71:\\drawable\\bg_status_pill_neutral.xml"
     },
@@ -240,16 +236,16 @@
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-main-71:\\layout\\fragment_mess_students.xml"
     },
     {
-        "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-debug-69:\\drawable_bg_gradient.xml.flat",
-        "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-main-71:\\drawable\\bg_gradient.xml"
+        "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-debug-69:\\anim_dialog_exit.xml.flat",
+        "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-main-71:\\anim\\dialog_exit.xml"
     },
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-debug-69:\\drawable_bg_circle_primary_border.xml.flat",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-main-71:\\drawable\\bg_circle_primary_border.xml"
     },
     {
-        "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-debug-69:\\anim_dialog_exit.xml.flat",
-        "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-main-71:\\anim\\dialog_exit.xml"
+        "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-debug-69:\\drawable_bg_gradient.xml.flat",
+        "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-main-71:\\drawable\\bg_gradient.xml"
     },
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-debug-69:\\layout_activity_mess_reviews.xml.flat",
@@ -360,10 +356,6 @@
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-main-71:\\drawable\\ic_add_black_24dp.xml"
     },
     {
-        "merged": "com.kartik.messapp-debug-69:/anim_slide_in_left.xml.flat",
-        "source": "com.kartik.messapp-main-71:/anim/slide_in_left.xml"
-    },
-    {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-debug-69:\\font_poppins_regular.xml.flat",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-main-71:\\font\\poppins_regular.xml"
     },
@@ -388,10 +380,6 @@
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-main-71:\\drawable\\bg_circle_avatar_drawer.xml"
     },
     {
-        "merged": "com.kartik.messapp-debug-69:/anim_slide_out_left.xml.flat",
-        "source": "com.kartik.messapp-main-71:/anim/slide_out_left.xml"
-    },
-    {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-debug-69:\\anim_slide_in_right.xml.flat",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-main-71:\\anim\\slide_in_right.xml"
     },
@@ -414,6 +402,10 @@
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-debug-69:\\mipmap-xxhdpi_ic_launcher.webp.flat",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-main-71:\\mipmap-xxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-debug-69:\\drawable_bg_drawer_floating.xml.flat",
+        "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-main-71:\\drawable\\bg_drawer_floating.xml"
     },
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-debug-69:\\drawable_ic_calendar.xml.flat",
@@ -788,6 +780,10 @@
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-main-71:\\layout\\fragment_mess_dashboard.xml"
     },
     {
+        "merged": "com.kartik.messapp-debug-69:/layout_activity_splash_screen.xml.flat",
+        "source": "com.kartik.messapp-main-71:/layout/activity_splash_screen.xml"
+    },
+    {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-debug-69:\\drawable_ic_dashboard_black_24dp.xml.flat",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-main-71:\\drawable\\ic_dashboard_black_24dp.xml"
     },
@@ -870,10 +866,6 @@
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-debug-69:\\drawable_ic_person.xml.flat",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-main-71:\\drawable\\ic_person.xml"
-    },
-    {
-        "merged": "com.kartik.messapp-debug-69:/anim_slide_in_right.xml.flat",
-        "source": "com.kartik.messapp-main-71:/anim/slide_in_right.xml"
     },
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-debug-69:\\layout_fragment_user_home.xml.flat",

@@ -4,13 +4,13 @@ package com.kartik.messapp.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.kartik.messapp.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -21,7 +21,7 @@ public final class HeaderAdminProfileDrawerBinding implements ViewBinding {
   private final LinearLayout rootView;
 
   @NonNull
-  public final ImageView imgDrawerProfile;
+  public final ShapeableImageView imgDrawerProfile;
 
   @NonNull
   public final TextView textDrawerEmail;
@@ -42,7 +42,7 @@ public final class HeaderAdminProfileDrawerBinding implements ViewBinding {
   public final TextView textDrawerRevenue;
 
   private HeaderAdminProfileDrawerBinding(@NonNull LinearLayout rootView,
-      @NonNull ImageView imgDrawerProfile, @NonNull TextView textDrawerEmail,
+      @NonNull ShapeableImageView imgDrawerProfile, @NonNull TextView textDrawerEmail,
       @NonNull TextView textDrawerMembers, @NonNull TextView textDrawerMessName,
       @NonNull TextView textDrawerName, @NonNull TextView textDrawerRating,
       @NonNull TextView textDrawerRevenue) {
@@ -84,7 +84,7 @@ public final class HeaderAdminProfileDrawerBinding implements ViewBinding {
     int id;
     missingId: {
       id = R.id.img_drawer_profile;
-      ImageView imgDrawerProfile = ViewBindings.findChildViewById(rootView, id);
+      ShapeableImageView imgDrawerProfile = ViewBindings.findChildViewById(rootView, id);
       if (imgDrawerProfile == null) {
         break missingId;
       }

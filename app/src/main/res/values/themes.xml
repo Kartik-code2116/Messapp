@@ -117,4 +117,25 @@
         <item name="android:textColor">@color/text_heading</item>
     </style>
 
+    <!-- DRAWER STYLING -->
+    <style name="TextAppearance.Messapp.DrawerItem" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:fontFamily">@font/poppins_medium</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="ShapeAppearance.Messapp.DrawerItem" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="Profound.NavigationView" parent="Widget.Material3.NavigationView">
+        <item name="itemTextAppearance">@style/TextAppearance.Messapp.DrawerItem</item>
+        <item name="itemShapeAppearanceOverlay">@style/ShapeAppearance.Messapp.DrawerItem</item>
+        <item name="itemIconSize">24dp</item>
+        <item name="itemIconPadding">16dp</item>
+        <item name="itemVerticalPadding">12dp</item>
+        <!-- Adding custom top-left & bottom-left corners for a floating look when opened from Right -->
+        <item name="android:background">@drawable/bg_drawer_floating</item>
+    </style>
+
 </resources>

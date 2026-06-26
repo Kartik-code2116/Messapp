@@ -871,10 +871,47 @@ public class UserHomeFragment extends Fragment {
     }
 
     private void showOutPlanDialog() {
-        if (binding == null)
-            return;
+        if (binding == null) return;
         if (messId == null || userId == null) {
             Toast.makeText(getContext(), "Still loading your profile, please wait...", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        com.google.android.material.datepicker.CalendarConstraints.Builder constraintsBuilder =
+                new com.google.android.material.datepicker.CalendarConstraints.Builder()
+                        .setValidator(com.google.android.material.datepicker.DateValidatorPointForward.now());
+
+        com.google.android.material.datepicker.MaterialDatePicker<androidx.core.util.Pair<Long, Long>> datePicker =
+                com.google.android.material.datepicker.MaterialDatePicker.Builder.dateRangePicker()
+                        .setTitleText("Select Plan OUT Dates")
+                        .setTheme(com.google.android.material.R.style.ThemeOverlay_Material3_MaterialCalendar)
+                        .setCalendarConstraints(constraintsBuilder.build())
+                        .build();
+
+        datePicker.addOnPositiveButtonClickListener(selection -> {
+            if (selection == null || selection.first == null || selection.second == null) return;
+            
+            // Calculate number of days (inclusive)
+            long diffMillis = selection.second - selection.first;
+            int days = (int) (diffMillis / (1000 * 60 * 60 * 24)) + 1;
+
+            Calendar startDate = Calendar.getInstance();
+            startDate.setTimeInMillis(selection.first);
+            // Ensure no offset issues by clearing time
+            startDate.set(Calendar.HOUR_OF_DAY, 0);
+            startDate.set(Calendar.MINUTE, 0);
+            startDate.set(Calendar.SECOND, 0);
+            startDate.set(Calendar.MILLISECOND, 0);
+
+            showMealSelectionDialog(startDate, days);
+        });
+
+        datePicker.show(getParentFragmentManager(), "DATE_RANGE_PICKER");
+    }
+
+    private void showMealSelectionDialog(Calendar startDate, int days) {
+        if (isOneTimeSubscribed) {
+            applyOutPlan(startDate, days, "BOTH");
             return;
         }
 
@@ -883,19 +920,12 @@ public class UserHomeFragment extends Fragment {
         int padding = dp(20);
         container.setPadding(padding, padding, padding, 0);
 
-        DatePicker datePicker = new DatePicker(requireContext());
-        datePicker.setMinDate(startOfToday().getTimeInMillis());
-        container.addView(datePicker);
-
-        com.google.android.material.textfield.TextInputLayout daysLayout = new com.google.android.material.textfield.TextInputLayout(
-                requireContext());
-        daysLayout.setHint("How many days?");
-        daysLayout.setPadding(0, dp(12), 0, 0);
-        com.google.android.material.textfield.TextInputEditText daysInput = new com.google.android.material.textfield.TextInputEditText(
-                requireContext());
-        daysInput.setInputType(InputType.TYPE_CLASS_NUMBER);
-        daysLayout.addView(daysInput);
-        container.addView(daysLayout);
+        TextView tvInfo = new TextView(requireContext());
+        tvInfo.setText("Planning OUT for " + days + " day(s).\nWhich meal(s) will you miss?");
+        tvInfo.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_heading));
+        tvInfo.setTextSize(16f);
+        tvInfo.setTypeface(null, android.graphics.Typeface.BOLD);
+        container.addView(tvInfo);
 
         RadioGroup mealGroup = new RadioGroup(requireContext());
         mealGroup.setOrientation(RadioGroup.HORIZONTAL);
@@ -910,41 +940,16 @@ public class UserHomeFragment extends Fragment {
         mealGroup.addView(dinner);
         mealGroup.addView(both);
         mealGroup.check(bothId);
-
-        if (isOneTimeSubscribed) {
-            // For One Time subscriptions, they only get 1 meal a day, so planning OUT
-            // applies to the whole day.
-            mealGroup.setVisibility(View.GONE);
-        }
         container.addView(mealGroup);
 
         new androidx.appcompat.app.AlertDialog.Builder(requireContext())
-                .setTitle("Plan OUT Days")
+                .setTitle("Select Meal")
                 .setView(container)
                 .setPositiveButton("Save", (dialog, which) -> {
-                    String daysText = daysInput.getText() != null ? daysInput.getText().toString().trim() : "";
-                    if (daysText.isEmpty()) {
-                        Toast.makeText(getContext(), "Please enter number of days", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    int days = Integer.parseInt(daysText);
-                    if (days <= 0) {
-                        Toast.makeText(getContext(), "Days must be greater than 0", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-
-                    Calendar startDate = Calendar.getInstance();
-                    startDate.set(datePicker.getYear(), datePicker.getMonth(),
-                            datePicker.getDayOfMonth(), 0, 0, 0);
-                    startDate.set(Calendar.MILLISECOND, 0);
-
                     String mealType = "BOTH";
                     int selectedId = mealGroup.getCheckedRadioButtonId();
-                    if (selectedId == lunchId)
-                        mealType = "LUNCH";
-                    else if (selectedId == dinnerId)
-                        mealType = "DINNER";
-
+                    if (selectedId == lunchId) mealType = "LUNCH";
+                    else if (selectedId == dinnerId) mealType = "DINNER";
                     applyOutPlan(startDate, days, mealType);
                 })
                 .setNegativeButton("Cancel", null)

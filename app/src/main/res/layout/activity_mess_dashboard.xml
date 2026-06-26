@@ -59,15 +59,14 @@
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/profile_drawer"
-        android:layout_width="300dp"
+        style="@style/Profound.NavigationView"
+        android:layout_width="320dp"
         android:layout_height="match_parent"
         android:layout_gravity="end"
-        android:background="@color/surface_card"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/header_admin_profile_drawer"
-        app:itemIconTint="@color/brand_primary"
+        app:itemIconTint="@color/selector_nav_admin"
         app:itemTextColor="@color/text_heading"
-        app:itemBackground="@drawable/selector_drawer_item"
         app:menu="@menu/menu_admin_profile_drawer" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
