@@ -341,8 +341,9 @@ public class MessDashboardFragment extends Fragment {
                 binding.btnConditionNotConform
                         .setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xFF6B7280));
                 binding.btnConditionNotConform.setTextColor(0xFFFFFFFF);
+                binding.btnConditionNotConform.setIconTint(android.content.res.ColorStateList.valueOf(0xFFFFFFFF));
                 binding.btnConditionNotConform.setStrokeWidth(0);
-                binding.textCurrentCondition.setText("Current: Not Conform");
+                binding.textCurrentCondition.setText("Current: Not Confirmed");
                 break;
         }
     }
@@ -361,6 +362,7 @@ public class MessDashboardFragment extends Fragment {
         binding.btnConditionEmpty.setStrokeWidth(2);
         binding.btnConditionNotConform.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xFFFFFFFF));
         binding.btnConditionNotConform.setTextColor(0xFF6B7280);
+        binding.btnConditionNotConform.setIconTint(android.content.res.ColorStateList.valueOf(0xFF6B7280));
         binding.btnConditionNotConform.setStrokeWidth(2);
     }
 

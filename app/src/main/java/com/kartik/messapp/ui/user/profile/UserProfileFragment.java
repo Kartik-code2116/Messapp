@@ -378,48 +378,72 @@ public class UserProfileFragment extends Fragment {
         }
 
         binding.progressBar.setVisibility(View.VISIBLE);
-        db.collection("users").document(currentUser.getUid()).get()
-                .addOnSuccessListener(doc -> {
+        // Check pending requests count first
+        db.collection("subscriptionRequests")
+                .whereEqualTo("userId", currentUser.getUid())
+                .whereEqualTo("status", "PENDING")
+                .get()
+                .addOnSuccessListener(querySnapshot -> {
                     if (binding == null) return;
-                    if (doc.exists()) {
-                        String messId = doc.getString("messId");
-                        String name   = doc.getString("name");
-                        String email  = currentUser.getEmail();
-
-                        if (messId == null) {
-                            binding.progressBar.setVisibility(View.GONE);
-                            Toast.makeText(getContext(), "Not joined any mess.", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-
-                        String requestId = db.collection("subscriptionRequests").document().getId();
-                        com.kartik.messapp.models.SubscriptionRequest request =
-                                new com.kartik.messapp.models.SubscriptionRequest(
-                                        requestId, currentUser.getUid(),
-                                        name != null ? name : "Student",
-                                        email, messId, System.currentTimeMillis(), "PENDING", "BOTH");
-
-                        db.collection("subscriptionRequests").document(requestId).set(request)
-                                .addOnSuccessListener(aVoid -> {
-                                    if (binding == null) return;
-                                    binding.progressBar.setVisibility(View.GONE);
-                                    new AlertDialog.Builder(requireContext())
-                                            .setTitle("Request Sent")
-                                            .setMessage("Your renewal request has been sent to the Mess Owner.")
-                                            .setPositiveButton("OK", null)
-                                            .show();
-                                })
-                                .addOnFailureListener(e -> {
-                                    if (binding == null) return;
-                                    binding.progressBar.setVisibility(View.GONE);
-                                    Toast.makeText(getContext(), "Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                });
+                    if (querySnapshot.size() >= 3) {
+                        binding.progressBar.setVisibility(View.GONE);
+                        new AlertDialog.Builder(requireContext())
+                                .setTitle("Limit Reached")
+                                .setMessage("You already have " + querySnapshot.size() + " pending requests. Please wait for the Mess Owner to review them before sending more.")
+                                .setPositiveButton("OK", null)
+                                .show();
+                        return;
                     }
+                    
+                    // If less than 3, proceed with fetching user data and sending request
+                    db.collection("users").document(currentUser.getUid()).get()
+                            .addOnSuccessListener(doc -> {
+                                if (binding == null) return;
+                                if (doc.exists()) {
+                                    String messId = doc.getString("messId");
+                                    String name   = doc.getString("name");
+                                    String email  = currentUser.getEmail();
+
+                                    if (messId == null) {
+                                        binding.progressBar.setVisibility(View.GONE);
+                                        Toast.makeText(getContext(), "Not joined any mess.", Toast.LENGTH_SHORT).show();
+                                        return;
+                                    }
+
+                                    String requestId = db.collection("subscriptionRequests").document().getId();
+                                    com.kartik.messapp.models.SubscriptionRequest request =
+                                            new com.kartik.messapp.models.SubscriptionRequest(
+                                                    requestId, currentUser.getUid(),
+                                                    name != null ? name : "Student",
+                                                    email, messId, System.currentTimeMillis(), "PENDING", "BOTH");
+
+                                    db.collection("subscriptionRequests").document(requestId).set(request)
+                                            .addOnSuccessListener(aVoid -> {
+                                                if (binding == null) return;
+                                                binding.progressBar.setVisibility(View.GONE);
+                                                new AlertDialog.Builder(requireContext())
+                                                        .setTitle("Request Sent")
+                                                        .setMessage("Your renewal request has been sent to the Mess Owner.")
+                                                        .setPositiveButton("OK", null)
+                                                        .show();
+                                            })
+                                            .addOnFailureListener(e -> {
+                                                if (binding == null) return;
+                                                binding.progressBar.setVisibility(View.GONE);
+                                                Toast.makeText(getContext(), "Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                            });
+                                }
+                            })
+                            .addOnFailureListener(e -> {
+                                if (binding == null) return;
+                                binding.progressBar.setVisibility(View.GONE);
+                                Toast.makeText(getContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            });
                 })
                 .addOnFailureListener(e -> {
                     if (binding == null) return;
                     binding.progressBar.setVisibility(View.GONE);
-                    Toast.makeText(getContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Error checking requests: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }
 
