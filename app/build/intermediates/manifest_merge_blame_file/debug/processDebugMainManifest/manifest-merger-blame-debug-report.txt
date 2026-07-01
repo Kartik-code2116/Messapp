@@ -1,8 +1,8 @@
 1<?xml version="1.0" encoding="utf-8"?>
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
 3    package="com.kartik.messapp"
-4    android:versionCode="2"
-5    android:versionName="1.1" >
+4    android:versionCode="3"
+5    android:versionName="1.2" >
 6
 7    <uses-sdk
 8        android:minSdkVersion="24"
@@ -314,7 +314,7 @@
 168-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:82:9-84:69
 169            android:name="com.google.android.gms.ads.APPLICATION_ID"
 169-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:83:13-69
-170            android:value="ca-app-pub-9150541100276802~4206375871" />
+170            android:value="ca-app-pub-9150541100276802~8902865444" />
 170-->D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:84:13-67
 171
 172        <!-- Resolve AdServices conflict between AdMob and Firebase Analytics -->

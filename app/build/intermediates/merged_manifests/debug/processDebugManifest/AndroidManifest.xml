@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.kartik.messapp"
-    android:versionCode="2"
-    android:versionName="1.1" >
+    android:versionCode="3"
+    android:versionName="1.2" >
 
     <uses-sdk
         android:minSdkVersion="24"
@@ -167,7 +167,7 @@
         <!-- Google AdMob App ID -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-9150541100276802~4206375871" />
+            android:value="ca-app-pub-9150541100276802~8902865444" />
 
         <!-- Resolve AdServices conflict between AdMob and Firebase Analytics -->
         <property

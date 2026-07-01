@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_above="@id/nav_view"
             app:adSize="BANNER"
-            app:adUnitId="ca-app-pub-9150541100276802/1165729278" />
+            app:adUnitId="ca-app-pub-9150541100276802/2324637356" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/nav_view"

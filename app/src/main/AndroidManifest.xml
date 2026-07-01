@@ -81,7 +81,7 @@
         <!-- Google AdMob App ID -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-9150541100276802~4206375871"/>
+            android:value="ca-app-pub-9150541100276802~8902865444"/>
 
         <!-- Resolve AdServices conflict between AdMob and Firebase Analytics -->
         <property
