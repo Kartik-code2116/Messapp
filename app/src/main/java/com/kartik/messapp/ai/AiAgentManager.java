@@ -54,7 +54,7 @@ public class AiAgentManager {
         // System instruction is available in newer SDKs, but we can also just prepend it if needed.
         // For generativeai 0.9.0, we construct it:
         GenerativeModel gm = new GenerativeModel(
-                "gemini-1.5-flash-latest",
+                "gemini-2.5-flash",
                 BuildConfig.GEMINI_API_KEY,
                 configBuilder.build(),
                 Collections.singletonList(new SafetySetting(HarmCategory.HARASSMENT, BlockThreshold.ONLY_HIGH))
