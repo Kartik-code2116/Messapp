@@ -75,15 +75,42 @@ public class AiAgentManager {
             return;
         }
 
-        String prompt = isFirstMessage ? APP_CONTEXT + "\n\nUser Question: " + userMessage : userMessage;
-        isFirstMessage = false;
+        if (isFirstMessage) {
+            isFirstMessage = false;
+            com.google.firebase.auth.FirebaseUser user = com.google.firebase.auth.FirebaseAuth.getInstance().getCurrentUser();
+            if (user != null) {
+                com.google.firebase.firestore.FirebaseFirestore.getInstance()
+                        .collection("users").document(user.getUid()).get()
+                        .addOnSuccessListener(document -> {
+                            String name = document.getString("name");
+                            String role = document.getString("role");
+                            if (name == null) name = "Unknown";
+                            if (role == null) role = "Student";
+                            String userContext = "User Details: [ID=" + user.getUid() + ", Name=" + name + ", Role=" + role + "]";
+                            String prompt = APP_CONTEXT + "\n\n" + userContext + "\n\nUser Question: " + userMessage;
+                            sendContent(prompt, callback);
+                        })
+                        .addOnFailureListener(e -> {
+                            String prompt = APP_CONTEXT + "\n\nUser Question: " + userMessage;
+                            sendContent(prompt, callback);
+                        });
+            } else {
+                String prompt = APP_CONTEXT + "\n\nUser Question: " + userMessage;
+                sendContent(prompt, callback);
+            }
+        } else {
+            sendContent(userMessage, callback);
+        }
+    }
 
+    private void sendContent(String prompt, ChatCallback callback) {
         Content content = new Content.Builder().addText(prompt).build();
         ListenableFuture<GenerateContentResponse> future = chatFutures.sendMessage(content);
 
         Futures.addCallback(future, new FutureCallback<GenerateContentResponse>() {
             @Override
             public void onSuccess(GenerateContentResponse result) {
+                // Here we will eventually intercept function calls before returning text.
                 if (result != null && result.getText() != null) {
                     callback.onSuccess(result.getText());
                 } else {
