@@ -150,6 +150,9 @@ drawable bg_admin_stat_card
 drawable bg_bottom_nav
 drawable bg_button_gradient
 drawable bg_capsule_accent
+drawable bg_chat_ai
+drawable bg_chat_input
+drawable bg_chat_user
 drawable bg_chip_selected
 drawable bg_chip_unselected
 drawable bg_circle_avatar_drawer
@@ -282,6 +285,8 @@ id action_settings
 id adView
 id addOfferFragment
 id admin_top_bar
+id aiMessageContainer
+id aiMessageText
 id appBar
 id app_logo
 id appbar_dashboard
@@ -381,6 +386,7 @@ id card_one_time_auto_select
 id card_planned_out_days
 id card_user
 id centerContainer
+id chatRecyclerView
 id chip_both
 id chip_female
 id chip_filter_active
@@ -441,11 +447,14 @@ id et_tuesday_dinner
 id et_tuesday_lunch
 id et_wednesday_dinner
 id et_wednesday_lunch
+id fabAiAssistant
 id fab_add_offer
 id fab_add_review
 id group_account
 id group_manage
 id group_nav
+id guideline
+id guideline2
 id headerBackground
 id history_header_section
 id icon_dinner
@@ -466,6 +475,7 @@ id indicator_mess_condition
 id info_row_icon
 id info_row_label
 id info_row_value
+id inputLayout
 id input_message_body
 id input_message_title
 id items_toolbar
@@ -510,6 +520,7 @@ id messNameEditText
 id messNameLayout
 id mess_navigation
 id mess_profile_image
+id messageEditText
 id mobile_navigation
 id nav_host_fragment_activity_mess_dashboard
 id nav_host_fragment_activity_user_dashboard
@@ -579,6 +590,7 @@ id reviews_recycler_view
 id scroll_view
 id search_layout
 id section_breakfast
+id sendButton
 id spinner_month_filter
 id spinner_month_year
 id spinner_year_filter
@@ -747,9 +759,12 @@ id top_header
 id tv_header
 id tv_privacy_policy
 id tv_subheader
+id userMessageContainer
+id userMessageText
 id user_top_bar
 id viewPager
 id view_accent_bar
+layout activity_ai_assistant
 layout activity_edit_mess_profile
 layout activity_edit_user_profile
 layout activity_login
@@ -789,6 +804,7 @@ layout header_admin_profile_drawer
 layout header_user_profile_drawer
 layout include_admin_top_bar
 layout include_user_top_bar
+layout item_chat_message
 layout item_history
 layout item_menu_day_card
 layout item_mess_card

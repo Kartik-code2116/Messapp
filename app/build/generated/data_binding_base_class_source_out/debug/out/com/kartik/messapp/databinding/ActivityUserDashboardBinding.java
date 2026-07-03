@@ -12,6 +12,7 @@ import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.google.android.gms.ads.AdView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.kartik.messapp.R;
 import java.lang.NullPointerException;
@@ -29,6 +30,9 @@ public final class ActivityUserDashboardBinding implements ViewBinding {
   public final DrawerLayout container;
 
   @NonNull
+  public final FloatingActionButton fabAiAssistant;
+
+  @NonNull
   public final FragmentContainerView navHostFragmentActivityUserDashboard;
 
   @NonNull
@@ -41,13 +45,14 @@ public final class ActivityUserDashboardBinding implements ViewBinding {
   public final IncludeUserTopBarBinding userTopBar;
 
   private ActivityUserDashboardBinding(@NonNull DrawerLayout rootView, @NonNull AdView adView,
-      @NonNull DrawerLayout container,
+      @NonNull DrawerLayout container, @NonNull FloatingActionButton fabAiAssistant,
       @NonNull FragmentContainerView navHostFragmentActivityUserDashboard,
       @NonNull BottomNavigationView navView, @NonNull NavigationView profileDrawer,
       @NonNull IncludeUserTopBarBinding userTopBar) {
     this.rootView = rootView;
     this.adView = adView;
     this.container = container;
+    this.fabAiAssistant = fabAiAssistant;
     this.navHostFragmentActivityUserDashboard = navHostFragmentActivityUserDashboard;
     this.navView = navView;
     this.profileDrawer = profileDrawer;
@@ -89,6 +94,12 @@ public final class ActivityUserDashboardBinding implements ViewBinding {
 
       DrawerLayout container = (DrawerLayout) rootView;
 
+      id = R.id.fabAiAssistant;
+      FloatingActionButton fabAiAssistant = ViewBindings.findChildViewById(rootView, id);
+      if (fabAiAssistant == null) {
+        break missingId;
+      }
+
       id = R.id.nav_host_fragment_activity_user_dashboard;
       FragmentContainerView navHostFragmentActivityUserDashboard = ViewBindings.findChildViewById(rootView, id);
       if (navHostFragmentActivityUserDashboard == null) {
@@ -115,7 +126,8 @@ public final class ActivityUserDashboardBinding implements ViewBinding {
       IncludeUserTopBarBinding binding_userTopBar = IncludeUserTopBarBinding.bind(userTopBar);
 
       return new ActivityUserDashboardBinding((DrawerLayout) rootView, adView, container,
-          navHostFragmentActivityUserDashboard, navView, profileDrawer, binding_userTopBar);
+          fabAiAssistant, navHostFragmentActivityUserDashboard, navView, profileDrawer,
+          binding_userTopBar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

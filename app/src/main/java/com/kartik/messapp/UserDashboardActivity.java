@@ -100,6 +100,14 @@ public class UserDashboardActivity extends AppCompatActivity {
 
         // NavHost from FragmentContainerView is ready after the first layout pass
         setupSwipeGestures();
+        
+        com.google.android.material.floatingactionbutton.FloatingActionButton fabAi = findViewById(R.id.fabAiAssistant);
+        if (fabAi != null) {
+            fabAi.setOnClickListener(v -> {
+                startActivity(new Intent(this, AiAssistantActivity.class));
+            });
+        }
+
         binding.getRoot().post(this::initNavigation);
     }
 
