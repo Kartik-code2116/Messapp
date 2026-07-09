@@ -585,12 +585,49 @@ public class MessMenuFragment extends Fragment {
                         }
                     }
 
-                    updateMenuSummary();
-                    applyAllRestrictions();
+                    // Now check default_menus for any missing days
+                    db.collection("default_menus").document(currentMessId).get()
+                            .addOnSuccessListener(defaultDoc -> {
+                                if (binding == null) return;
+                                if (defaultDoc.exists()) {
+                                    for (int i = 0; i < 7; i++) {
+                                        // If the day does not have an explicit menu, apply fallback
+                                        if (!hasMenu[i]) {
+                                            java.util.Map<String, String> mealMap = (java.util.Map<String, String>) defaultDoc.get(String.valueOf(i));
+                                            if (mealMap != null) {
+                                                String lunch = mealMap.get("lunch");
+                                                String dinner = mealMap.get("dinner");
+                                                String breakfast = mealMap.get("breakfast");
+                                                
+                                                if (lunch == null) lunch = "";
+                                                if (dinner == null) dinner = "";
+                                                if (breakfast == null) breakfast = "";
+                                                
+                                                if (lunchInputs[i] != null) lunchInputs[i].setText(lunch);
+                                                if (dinnerInputs[i] != null) dinnerInputs[i].setText(dinner);
+                                                if (breakfastInputs[i] != null) breakfastInputs[i].setText(breakfast);
+
+                                                boolean hasAny = !breakfast.isEmpty() || !lunch.isEmpty() || !dinner.isEmpty();
+                                                hasMenu[i] = hasAny;
+                                                if (statusIcons[i] != null) {
+                                                    statusIcons[i].setVisibility(hasAny ? View.VISIBLE : View.GONE);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                updateMenuSummary();
+                                applyAllRestrictions();
+                            })
+                            .addOnFailureListener(e -> {
+                                if (binding == null) return;
+                                updateMenuSummary();
+                                applyAllRestrictions();
+                            });
                 })
                 .addOnFailureListener(e -> {
                     if (binding == null) return;
-            if (getContext() != null) {
+                    if (getContext() != null) {
                         Toast.makeText(getContext(), "Error loading menu: " + e.getMessage(),
                                 Toast.LENGTH_SHORT).show();
                     }

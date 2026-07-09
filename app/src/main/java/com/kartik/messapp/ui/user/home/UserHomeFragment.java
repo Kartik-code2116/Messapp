@@ -422,11 +422,42 @@ public class UserHomeFragment extends Fragment {
                         binding.textDinnerMenuNew
                                 .setText(dinner != null && !dinner.isEmpty() ? dinner : "menu is not set");
                     } else {
-                        todayBreakfastMenu = "";
-                        binding.textBreakfastMenu.setText("menu is not set");
-                        binding.textLunchMenuNew.setText("menu is not set");
-                        binding.textDinnerMenuNew.setText("menu is not set");
+                        fetchDefaultMenu();
                     }
+                });
+    }
+
+    private void fetchDefaultMenu() {
+        if (messId == null) return;
+        
+        db.collection("default_menus").document(messId).get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (binding == null) return;
+                    if (documentSnapshot.exists()) {
+                        Calendar c = Calendar.getInstance();
+                        int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+                        // Convert Calendar day (Sunday=1, Monday=2) to our index (Monday=0, Sunday=6)
+                        int dayIndex = (dayOfWeek == Calendar.SUNDAY) ? 6 : dayOfWeek - 2;
+                        
+                        Map<String, String> mealMap = (Map<String, String>) documentSnapshot.get(String.valueOf(dayIndex));
+                        if (mealMap != null) {
+                            String lunch = mealMap.get("lunch");
+                            String dinner = mealMap.get("dinner");
+                            String breakfast = mealMap.get("breakfast"); // default menus don't have breakfast right now, but just in case
+                            
+                            todayBreakfastMenu = (breakfast != null && !breakfast.isEmpty()) ? breakfast : "";
+                            binding.textBreakfastMenu.setText(!todayBreakfastMenu.isEmpty() ? todayBreakfastMenu : "menu is not set");
+                            binding.textLunchMenuNew.setText(lunch != null && !lunch.isEmpty() ? lunch : "menu is not set");
+                            binding.textDinnerMenuNew.setText(dinner != null && !dinner.isEmpty() ? dinner : "menu is not set");
+                            return;
+                        }
+                    }
+                    
+                    // Total fallback
+                    todayBreakfastMenu = "";
+                    binding.textBreakfastMenu.setText("menu is not set");
+                    binding.textLunchMenuNew.setText("menu is not set");
+                    binding.textDinnerMenuNew.setText("menu is not set");
                 });
     }
 

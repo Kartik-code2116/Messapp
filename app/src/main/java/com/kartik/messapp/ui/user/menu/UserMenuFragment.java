@@ -463,6 +463,38 @@ public class UserMenuFragment extends Fragment {
                             dayCal.add(Calendar.DAY_OF_YEAR, 1);
                         }
                     }
+
+                    // Now check default_menus for any missing days
+                    db.collection("default_menus").document(currentMessId).get()
+                            .addOnSuccessListener(defaultDoc -> {
+                                if (binding == null) return;
+                                if (defaultDoc.exists()) {
+                                    for (int i = 0; i < 7; i++) {
+                                        // If the lunch text is still the default missing text, apply fallback
+                                        if (lunchTvs[i] != null && "No lunch menu set".equals(lunchTvs[i].getText().toString())) {
+                                            java.util.Map<String, String> mealMap = (java.util.Map<String, String>) defaultDoc.get(String.valueOf(i));
+                                            if (mealMap != null) {
+                                                String lunch = mealMap.get("lunch");
+                                                String dinner = mealMap.get("dinner");
+                                                String breakfast = mealMap.get("breakfast");
+                                                
+                                                if (lunch != null && !lunch.isEmpty()) {
+                                                    lunchTvs[i].setText(lunch);
+                                                }
+                                                if (dinner != null && !dinner.isEmpty() && dinnerTvs[i] != null) {
+                                                    dinnerTvs[i].setText(dinner);
+                                                }
+                                                if (breakfast != null && !breakfast.isEmpty() && breakfastTvs[i] != null) {
+                                                    breakfastTvs[i].setText(breakfast);
+                                                    if (breakfastSections[i] != null) {
+                                                        breakfastSections[i].setVisibility(View.VISIBLE);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            });
                 })
                 .addOnFailureListener(e -> {
                     if (binding == null) return;

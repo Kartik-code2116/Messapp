@@ -20,6 +20,8 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.List;
+import java.util.ArrayList;
 
 public class WeeklyMenuActivity extends AppCompatActivity {
 
@@ -137,6 +139,8 @@ public class WeeklyMenuActivity extends AppCompatActivity {
             dinnerInputs[i].setText("");
         }
 
+        binding.switchRepeatingMenu.setChecked(false); // Reset switch
+
         // Load menu for each day of the week
         Calendar dayCal = (Calendar) weekStartCalendar.clone();
         
@@ -189,31 +193,52 @@ public class WeeklyMenuActivity extends AppCompatActivity {
             return;
         }
 
-        // Save all menus using batch write
+        boolean isRepeating = binding.switchRepeatingMenu.isChecked();
+
         WriteBatch batch = db.batch();
         Calendar dayCal = (Calendar) weekStartCalendar.clone();
 
-        for (int i = 0; i < 7; i++) {
-            String dateStr = dateFormat.format(dayCal.getTime());
-            String lunch = lunchInputs[i].getText().toString().trim();
-            String dinner = dinnerInputs[i].getText().toString().trim();
+        if (isRepeating) {
+            // Save as default menu in 'default_menus' collection
+            Map<String, Object> defaultMenuMap = new HashMap<>();
+            defaultMenuMap.put("messId", currentMessId);
+            defaultMenuMap.put("updatedAt", System.currentTimeMillis());
 
-            Map<String, Object> menuData = new HashMap<>();
-            menuData.put("messId", currentMessId);
-            menuData.put("date", dateStr);
-            menuData.put("lunch", lunch);
-            menuData.put("dinner", dinner);
-            menuData.put("updatedAt", System.currentTimeMillis());
+            for (int i = 0; i < 7; i++) {
+                String lunch = lunchInputs[i].getText().toString().trim();
+                String dinner = dinnerInputs[i].getText().toString().trim();
+                Map<String, String> mealMap = new HashMap<>();
+                mealMap.put("lunch", lunch);
+                mealMap.put("dinner", dinner);
+                defaultMenuMap.put(String.valueOf(i), mealMap);
+            }
 
-            String docId = currentMessId + "_" + dateStr;
-            batch.set(db.collection("menus").document(docId), menuData, SetOptions.merge());
+            batch.set(db.collection("default_menus").document(currentMessId), defaultMenuMap, SetOptions.merge());
+            
+        } else {
+            // Save normally to 'menus' collection for specific dates
+            for (int i = 0; i < 7; i++) {
+                String dateStr = dateFormat.format(dayCal.getTime());
+                String lunch = lunchInputs[i].getText().toString().trim();
+                String dinner = dinnerInputs[i].getText().toString().trim();
 
-            dayCal.add(Calendar.DAY_OF_YEAR, 1);
+                Map<String, Object> menuData = new HashMap<>();
+                menuData.put("messId", currentMessId);
+                menuData.put("date", dateStr);
+                menuData.put("lunch", lunch);
+                menuData.put("dinner", dinner);
+                menuData.put("updatedAt", System.currentTimeMillis());
+
+                String docId = currentMessId + "_" + dateStr;
+                batch.set(db.collection("menus").document(docId), menuData, SetOptions.merge());
+
+                dayCal.add(Calendar.DAY_OF_YEAR, 1);
+            }
         }
 
         batch.commit()
                 .addOnSuccessListener(aVoid -> {
-                    Toast.makeText(this, "Weekly menu saved successfully!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, isRepeating ? "Default Repeating Menu saved successfully!" : "Weekly menu saved successfully!", Toast.LENGTH_SHORT).show();
                     finish();
                 })
                 .addOnFailureListener(e -> {

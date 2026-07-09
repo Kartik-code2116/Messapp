@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.android.material.textfield.TextInputEditText;
 import com.kartik.messapp.R;
 import java.lang.NullPointerException;
@@ -78,6 +79,9 @@ public final class ActivityWeeklyMenuBinding implements ViewBinding {
   public final TextInputEditText etWednesdayLunch;
 
   @NonNull
+  public final MaterialSwitch switchRepeatingMenu;
+
+  @NonNull
   public final TextView textWeekRange;
 
   private ActivityWeeklyMenuBinding(@NonNull ScrollView rootView, @NonNull ImageView btnNextWeek,
@@ -89,7 +93,8 @@ public final class ActivityWeeklyMenuBinding implements ViewBinding {
       @NonNull TextInputEditText etSundayLunch, @NonNull TextInputEditText etThursdayDinner,
       @NonNull TextInputEditText etThursdayLunch, @NonNull TextInputEditText etTuesdayDinner,
       @NonNull TextInputEditText etTuesdayLunch, @NonNull TextInputEditText etWednesdayDinner,
-      @NonNull TextInputEditText etWednesdayLunch, @NonNull TextView textWeekRange) {
+      @NonNull TextInputEditText etWednesdayLunch, @NonNull MaterialSwitch switchRepeatingMenu,
+      @NonNull TextView textWeekRange) {
     this.rootView = rootView;
     this.btnNextWeek = btnNextWeek;
     this.btnPrevWeek = btnPrevWeek;
@@ -109,6 +114,7 @@ public final class ActivityWeeklyMenuBinding implements ViewBinding {
     this.etTuesdayLunch = etTuesdayLunch;
     this.etWednesdayDinner = etWednesdayDinner;
     this.etWednesdayLunch = etWednesdayLunch;
+    this.switchRepeatingMenu = switchRepeatingMenu;
     this.textWeekRange = textWeekRange;
   }
 
@@ -247,6 +253,12 @@ public final class ActivityWeeklyMenuBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.switch_repeating_menu;
+      MaterialSwitch switchRepeatingMenu = ViewBindings.findChildViewById(rootView, id);
+      if (switchRepeatingMenu == null) {
+        break missingId;
+      }
+
       id = R.id.text_week_range;
       TextView textWeekRange = ViewBindings.findChildViewById(rootView, id);
       if (textWeekRange == null) {
@@ -257,7 +269,7 @@ public final class ActivityWeeklyMenuBinding implements ViewBinding {
           btnSaveWeeklyMenu, daysContainer, etFridayDinner, etFridayLunch, etMondayDinner,
           etMondayLunch, etSaturdayDinner, etSaturdayLunch, etSundayDinner, etSundayLunch,
           etThursdayDinner, etThursdayLunch, etTuesdayDinner, etTuesdayLunch, etWednesdayDinner,
-          etWednesdayLunch, textWeekRange);
+          etWednesdayLunch, switchRepeatingMenu, textWeekRange);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

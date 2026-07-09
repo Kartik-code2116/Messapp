@@ -612,6 +612,7 @@ id switch_allow_multiple_changes
 id switch_auto_dinner
 id switch_auto_lunch
 id switch_dark_mode
+id switch_repeating_menu
 id textSubtitle
 id textTitle
 id text_active_filter

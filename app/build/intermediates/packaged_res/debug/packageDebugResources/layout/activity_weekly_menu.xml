@@ -478,13 +478,31 @@
 
         </LinearLayout>
 
+        <!-- Switch for Default Repeating Menu -->
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/switch_repeating_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/poppins"
+            android:text="Set as Default Weekly Menu"
+            android:textSize="16sp" />
+            
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="If turned ON, this menu will automatically repeat every week unless you override a specific week."
+            android:fontFamily="@font/inter"
+            android:textColor="@color/text_caption"
+            android:textSize="12sp"
+            android:layout_marginBottom="16dp" />
+
         <!-- Save Button -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_save_weekly_menu"
             style="@style/Profound.Button"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:layout_marginTop="24dp"
             android:layout_marginBottom="80dp"
             android:text="Save Weekly Menu"
             android:textAllCaps="false"
