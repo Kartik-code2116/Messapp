@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.kartik.messapp-mergeDebugResources-67:/values-watch-v21/values-watch-v21.xml",
+            "outputFile": "com.kartik.messapp-mergeDebugResources-68:/values-watch-v21/values-watch-v21.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\e6d0975b5f4dbbf62ab0e0e3eb98e864\\transformed\\appcompat-1.7.1\\res\\values-watch-v21\\values-watch-v21.xml",
+                    "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\caches\\8.13\\transforms\\b277fede8a11070463472d3c6ddd90ab\\transformed\\appcompat-1.7.1\\res\\values-watch-v21\\values-watch-v21.xml",
                     "from": {
                         "startLines": "2,6,10",
                         "startColumns": "4,4,4",

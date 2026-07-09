@@ -7,13 +7,6 @@ plugins {
 
 android {
     namespace = "com.kartik.messapp"
-    
-    val properties = Properties()
-    val localPropertiesFile = rootProject.file("local.properties")
-    if (localPropertiesFile.exists()) {
-        properties.load(localPropertiesFile.inputStream())
-    }
-    val geminiApiKey = properties.getProperty("GEMINI_API_KEY") ?: ""
 
     compileSdk {
         version = release(36)
@@ -25,8 +18,6 @@ android {
         targetSdk = 36
         versionCode = 3
         versionName = "1.2"
-
-        buildConfigField("String", "GEMINI_API_KEY", "\"$geminiApiKey\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }   
@@ -73,7 +64,7 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation(libs.zxing)
+    implementation(libs.zxing.android.embedded)
     implementation(libs.play.services.ads)
-    implementation(libs.generativeai)
     implementation(libs.guava)
 }

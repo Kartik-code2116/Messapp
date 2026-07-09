@@ -26,6 +26,9 @@ import androidx.credentials.GetCredentialResponse;
 import androidx.credentials.exceptions.GetCredentialException;
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption;
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential;
+import com.journeyapps.barcodescanner.ScanContract;
+import com.journeyapps.barcodescanner.ScanOptions;
+import androidx.activity.result.ActivityResultLauncher;
 
 import androidx.core.content.ContextCompat;
 import android.util.Log;
@@ -40,7 +43,33 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private String currentRole;
-    private boolean isLoginMode = true;
+    private boolean isLoginMode = false;
+    
+    private final ActivityResultLauncher<ScanOptions> barcodeLauncher = registerForActivityResult(new ScanContract(),
+            result -> {
+                if(result.getContents() == null) {
+                    Toast.makeText(LoginActivity.this, "Cancelled QR Scan", Toast.LENGTH_LONG).show();
+                } else {
+                    String scannedData = result.getContents();
+                    String extractedMessId = scannedData;
+                    try {
+                        android.net.Uri uri = android.net.Uri.parse(scannedData);
+                        if (uri.getQueryParameter("code") != null) {
+                            extractedMessId = uri.getQueryParameter("code");
+                        } else if (uri.getQueryParameter("messId") != null) {
+                            extractedMessId = uri.getQueryParameter("messId");
+                        } else if (uri.getLastPathSegment() != null && !uri.getLastPathSegment().endsWith(".html")) {
+                            extractedMessId = uri.getLastPathSegment();
+                        }
+                    } catch (Exception e) {
+                        // Ignore parsing errors and fallback to the raw scanned data
+                    }
+                    if (binding != null && binding.messIdEditText != null) {
+                        binding.messIdEditText.setText(extractedMessId);
+                    }
+                    Toast.makeText(LoginActivity.this, "Scanned: " + extractedMessId, Toast.LENGTH_SHORT).show();
+                }
+            });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +111,18 @@ public class LoginActivity extends AppCompatActivity {
             String prefillMessId = getIntent().getStringExtra("PREFILL_MESS_ID");
             if (prefillMessId != null && !prefillMessId.isEmpty() && binding.messIdEditText != null) {
                 binding.messIdEditText.setText(prefillMessId);
+            }
+            
+            if (binding.messIdLayout != null) {
+                binding.messIdLayout.setEndIconOnClickListener(v -> {
+                    ScanOptions options = new ScanOptions();
+                    options.setDesiredBarcodeFormats(ScanOptions.QR_CODE);
+                    options.setPrompt("Scan Mess Owner's QR Code");
+                    options.setCameraId(0); 
+                    options.setBeepEnabled(true);
+                    options.setBarcodeImageEnabled(true);
+                    barcodeLauncher.launch(options);
+                });
             }
 
             setupBackNavigation();
@@ -305,24 +346,43 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void performForgotPassword() {
-        String email = binding.emailEditText.getText().toString().trim();
-        if (TextUtils.isEmpty(email)) {
-            Toast.makeText(this, "Please enter your email to reset password", Toast.LENGTH_SHORT).show();
-            return;
+        String currentEmail = binding.emailEditText.getText().toString().trim();
+        
+        android.widget.EditText emailInput = new android.widget.EditText(this);
+        emailInput.setHint("Enter your email address");
+        emailInput.setInputType(android.text.InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+        if (!TextUtils.isEmpty(currentEmail)) {
+            emailInput.setText(currentEmail);
         }
 
-        binding.progressBar.setVisibility(View.VISIBLE);
-        mAuth.sendPasswordResetEmail(email)
-                .addOnCompleteListener(task -> {
-                    binding.progressBar.setVisibility(View.GONE);
-                    if (task.isSuccessful()) {
-                        Toast.makeText(LoginActivity.this, "Password reset email sent", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(LoginActivity.this,
-                                "Error sending reset email: " + task.getException().getMessage(), Toast.LENGTH_SHORT)
-                                .show();
+        int padding = (int) (24 * getResources().getDisplayMetrics().density);
+        emailInput.setPadding(padding, padding, padding, padding);
+
+        new androidx.appcompat.app.AlertDialog.Builder(this, R.style.Theme_Messapp)
+                .setTitle("Reset Password")
+                .setMessage("Enter the email address associated with your account. We will send you a password reset link.")
+                .setView(emailInput)
+                .setPositiveButton("Send", (dialog, which) -> {
+                    String email = emailInput.getText().toString().trim();
+                    if (TextUtils.isEmpty(email)) {
+                        Toast.makeText(LoginActivity.this, "Email is required", Toast.LENGTH_SHORT).show();
+                        return;
                     }
-                });
+                    binding.progressBar.setVisibility(View.VISIBLE);
+                    mAuth.sendPasswordResetEmail(email)
+                            .addOnCompleteListener(task -> {
+                                binding.progressBar.setVisibility(View.GONE);
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(LoginActivity.this, "Password reset email sent. Please check your inbox.", Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(LoginActivity.this,
+                                            "Error sending reset email: " + task.getException().getMessage(), Toast.LENGTH_LONG)
+                                            .show();
+                                }
+                            });
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
     }
 
     private void handleGoogleSignIn() {
@@ -368,7 +428,19 @@ public class LoginActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
-                        checkUserExists(user);
+                        boolean isNewUser = false;
+                        if (task.getResult() != null && task.getResult().getAdditionalUserInfo() != null) {
+                            isNewUser = task.getResult().getAdditionalUserInfo().isNewUser();
+                        }
+                        
+                        if (isNewUser) {
+                            binding.progressBar.setVisibility(View.GONE);
+                            Intent intent = new Intent(LoginActivity.this, CompleteProfileActivity.class);
+                            intent.putExtra("ROLE", currentRole);
+                            startActivity(intent);
+                        } else {
+                            checkUserExists(user);
+                        }
                     } else {
                         binding.progressBar.setVisibility(View.GONE);
                         Exception e = task.getException();
@@ -391,63 +463,11 @@ public class LoginActivity extends AppCompatActivity {
                         String role = documentSnapshot.getString("role");
                         navigateToDashboard(role);
                     } else {
-                        // New user from Google, need to sign them up with current role
-                        String extraData = "";
-                        String studentName = "";
-                        String studentPhone = "";
-                        if ("MESS_OWNER".equals(currentRole)) {
-                            extraData = binding.messNameEditText.getText().toString().trim();
-                            if (TextUtils.isEmpty(extraData)) {
-                                binding.progressBar.setVisibility(View.GONE);
-                                binding.messNameLayout.setVisibility(View.VISIBLE);
-                                binding.messNameEditText.setError("Please enter Mess Name first");
-                                Toast.makeText(this, "Please enter Mess Name and click Google again", Toast.LENGTH_LONG)
-                                        .show();
-                                return;
-                            }
-                        } else {
-                            extraData = binding.messIdEditText.getText().toString().trim();
-                            if (TextUtils.isEmpty(extraData)) {
-                                binding.progressBar.setVisibility(View.GONE);
-                                binding.messIdLayout.setVisibility(View.VISIBLE);
-                                binding.messIdEditText.setError("Please enter Mess ID first");
-                                Toast.makeText(this, "Please enter Mess ID and click Google again", Toast.LENGTH_LONG)
-                                        .show();
-                                return;
-                            }
-                            // Get student name and phone for Google sign-in
-                            studentName = binding.studentNameEditText.getText().toString().trim();
-                            studentPhone = binding.studentPhoneEditText.getText().toString().trim();
-                            if (TextUtils.isEmpty(studentName)) {
-                                binding.progressBar.setVisibility(View.GONE);
-                                binding.studentNameLayout.setVisibility(View.VISIBLE);
-                                binding.studentNameEditText.setError("Please enter your name");
-                                Toast.makeText(this, "Please enter your name and click Google again", Toast.LENGTH_LONG)
-                                        .show();
-                                return;
-                            }
-                            if (TextUtils.isEmpty(studentPhone)) {
-                                binding.progressBar.setVisibility(View.GONE);
-                                binding.studentPhoneLayout.setVisibility(View.VISIBLE);
-                                binding.studentPhoneEditText.setError("Please enter your phone");
-                                Toast.makeText(this, "Please enter your phone and click Google again", Toast.LENGTH_LONG)
-                                        .show();
-                                return;
-                            }
-                            if (studentPhone.length() < 10) {
-                                binding.progressBar.setVisibility(View.GONE);
-                                binding.studentPhoneLayout.setVisibility(View.VISIBLE);
-                                binding.studentPhoneEditText.setError("Invalid phone number");
-                                Toast.makeText(this, "Please enter a valid phone number and click Google again", Toast.LENGTH_LONG)
-                                        .show();
-                                return;
-                            }
-                        }
-                        // Capture as final for lambda
-                        final String finalExtraData = extraData;
-                        final String finalStudentName = studentName;
-                        final String finalStudentPhone = studentPhone;
-                        saveUserToFirestore(user, currentRole, finalExtraData, finalStudentName, finalStudentPhone);
+                        // Edge case: if user document doesn't exist but isNewUser was false
+                        binding.progressBar.setVisibility(View.GONE);
+                        Intent intent = new Intent(LoginActivity.this, CompleteProfileActivity.class);
+                        intent.putExtra("ROLE", currentRole);
+                        startActivity(intent);
                     }
                 })
                 .addOnFailureListener(e -> {

@@ -54,17 +54,7 @@
             app:labelVisibilityMode="labeled"
             app:menu="@menu/bottom_nav_menu" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabAiAssistant"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/adView"
-            android:layout_alignParentEnd="true"
-            android:layout_margin="16dp"
-            android:contentDescription="AI Assistant"
-            android:src="@android:drawable/ic_dialog_info"
-            app:backgroundTint="?attr/colorPrimary"
-            app:tint="@android:color/white" />
+
 
     </RelativeLayout>
 

@@ -522,6 +522,8 @@ id mess_navigation
 id mess_profile_image
 id messageEditText
 id mobile_navigation
+id nameEditText
+id nameLayout
 id nav_host_fragment_activity_mess_dashboard
 id nav_host_fragment_activity_user_dashboard
 id nav_mess_dashboard
@@ -552,6 +554,8 @@ id offerDiscountLayout
 id offerTitleEditText
 id offerTitleLayout
 id passwordEditText
+id phoneEditText
+id phoneLayout
 id profile_container
 id profile_drawer
 id profile_image
@@ -559,6 +563,7 @@ id progressBar
 id progress_bar
 id progress_history
 id progress_loading_report
+id qrHintText
 id radio_auto_dinner
 id radio_auto_lunch
 id radio_auto_none
@@ -765,6 +770,7 @@ id user_top_bar
 id viewPager
 id view_accent_bar
 layout activity_ai_assistant
+layout activity_complete_profile
 layout activity_edit_mess_profile
 layout activity_edit_user_profile
 layout activity_login
