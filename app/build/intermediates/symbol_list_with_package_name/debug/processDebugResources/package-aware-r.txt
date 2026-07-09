@@ -4297,7 +4297,6 @@ id center_vertical
 id chain
 id chain2
 id chains
-id chatRecyclerView
 id checkbox
 id checked
 id chip_both
@@ -4431,7 +4430,6 @@ id et_wednesday_lunch
 id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
-id fabAiAssistant
 id fab_add_offer
 id fab_add_review
 id fade
@@ -4509,7 +4507,6 @@ id info
 id info_row_icon
 id info_row_label
 id info_row_value
-id inputLayout
 id input_message_body
 id input_message_title
 id invisible
@@ -4600,7 +4597,6 @@ id messNameLayout
 id mess_navigation
 id mess_profile_image
 id message
-id messageEditText
 id middle
 id mini
 id mobile_navigation
@@ -4809,7 +4805,6 @@ id section_breakfast
 id select_dialog_listview
 id selected
 id selection_type
-id sendButton
 id sharedValueSet
 id sharedValueUnset
 id shortcut
@@ -5235,7 +5230,6 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
-layout activity_ai_assistant
 layout activity_complete_profile
 layout activity_edit_mess_profile
 layout activity_edit_user_profile

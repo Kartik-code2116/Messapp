@@ -268,10 +268,6 @@
         "source": "com.kartik.messapp-main-72:/layout/activity_splash_screen.xml"
     },
     {
-        "merged": "com.kartik.messapp-debug-70:/layout_activity_ai_assistant.xml.flat",
-        "source": "com.kartik.messapp-main-72:/layout/activity_ai_assistant.xml"
-    },
-    {
         "merged": "com.kartik.messapp-debug-70:/drawable_ic_person_black_24dp.xml.flat",
         "source": "com.kartik.messapp-main-72:/drawable/ic_person_black_24dp.xml"
     },

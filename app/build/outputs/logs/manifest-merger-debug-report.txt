@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:2:1-95:12
-INJECTED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:2:1-95:12
-INJECTED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:2:1-95:12
-INJECTED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:2:1-95:12
+ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:2:1-100:12
+INJECTED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:2:1-100:12
+INJECTED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:2:1-100:12
+INJECTED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:2:1-100:12
 MERGED from [androidx.databinding:viewbinding:8.13.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\811c437e8a28157ec10d97f614285473\transformed\viewbinding-8.13.2\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.navigation:navigation-common:2.8.5] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\64d84b40b7cfb2f91261a3c36b54057f\transformed\navigation-common-2.8.5\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.navigation:navigation-runtime:2.8.5] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\931180f34644ff988ec7102037838ef4\transformed\navigation-runtime-2.8.5\AndroidManifest.xml:17:1-22:12
@@ -49,8 +49,8 @@ MERGED from [com.google.android.gms:play-services-measurement-sdk:22.1.2] C:\Use
 MERGED from [com.google.android.gms:play-services-measurement-impl:22.1.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\6613c70734ac5b7201227b9aa52fefc1\transformed\play-services-measurement-impl-22.1.2\AndroidManifest.xml:17:1-32:12
 MERGED from [com.google.android.gms:play-services-base:18.5.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\858a53309a4ab7fed7e21f8a21e2ce70\transformed\play-services-base-18.5.0\AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.firebase:firebase-installations-interop:17.1.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\7318dbf62835d1110ed77a6ba3994280\transformed\firebase-installations-interop-17.1.1\AndroidManifest.xml:15:1-19:12
-MERGED from [com.google.ai.client.generativeai:generativeai:0.9.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\b3655483c8ab60fdb2a5b35b554ca0b6\transformed\generativeai-0.9.0\AndroidManifest.xml:17:1-24:12
-MERGED from [com.google.ai.client.generativeai:common:0.8.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\b049a070fe8e5dd333afc3d15cda2e48\transformed\common-0.8.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.privacysandbox.ads:ads-adservices-java:1.0.0-beta05] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\80a6155e4b6ff3f9f4ba9acaa21607f1\transformed\ads-adservices-java-1.0.0-beta05\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.privacysandbox.ads:ads-adservices:1.0.0-beta05] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\588a68c1437d1650fe314c442c45b247\transformed\ads-adservices-1.0.0-beta05\AndroidManifest.xml:17:1-28:12
 MERGED from [androidx.navigationevent:navigationevent-android:1.0.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\5952921b021430debef19daaadaf2016\transformed\navigationevent\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.fragment:fragment-ktx:1.6.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\eb8117aa8bbec8f6a6ed9dabe273b8ac\transformed\fragment-ktx-1.6.2\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.activity:activity-ktx:1.12.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\ea55dab7e040fe60c5a1b8ef108ad21c\transformed\activity-ktx-1.12.1\AndroidManifest.xml:2:1-7:12
@@ -65,8 +65,6 @@ MERGED from [androidx.dynamicanimation:dynamicanimation:1.1.0] C:\Users\KARTIK D
 MERGED from [androidx.recyclerview:recyclerview:1.2.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\50b9e2b029dd4e0e602f0b9b735130d4\transformed\recyclerview-1.2.1\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\bff0a0ae16180e5d97805feab32319be\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\e7dd9601f12c2e407ebb402d4452bf29\transformed\vectordrawable-1.1.0\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.privacysandbox.ads:ads-adservices-java:1.0.0-beta05] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\80a6155e4b6ff3f9f4ba9acaa21607f1\transformed\ads-adservices-java-1.0.0-beta05\AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.privacysandbox.ads:ads-adservices:1.0.0-beta05] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\588a68c1437d1650fe314c442c45b247\transformed\ads-adservices-1.0.0-beta05\AndroidManifest.xml:17:1-28:12
 MERGED from [androidx.graphics:graphics-shapes-android:1.0.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\c29a1de82d2f35489fcc5be1c7f552ab\transformed\graphics-shapes-release\AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.android.gms:play-services-stats:17.0.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\56a763a691c6977f8d1175b4a887e191\transformed\play-services-stats-17.0.2\AndroidManifest.xml:2:1-9:12
 MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\a33a291c5030761d4c97d174cefe9ee1\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:17:1-22:12
@@ -92,7 +90,6 @@ MERGED from [androidx.core:core:1.16.0] C:\Users\KARTIK DILIP THORAT\.gradle\cac
 MERGED from [androidx.lifecycle:lifecycle-runtime:2.6.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\eff540c5e7031a6ab2d7ee3172808c54\transformed\lifecycle-runtime-2.6.2\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.6.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\8290848b10203ca0bf62dddbe6c3dcea\transformed\lifecycle-runtime-ktx-2.6.2\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\eb49b1cdcdfeb6ebfad325d512bcb455\transformed\lifecycle-viewmodel-ktx-2.6.2\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:17:1-55:12
 MERGED from [com.google.android.gms:play-services-tasks:18.2.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\e1b3684f3e28d815abc3319654e444e8\transformed\play-services-tasks-18.2.0\AndroidManifest.xml:2:1-5:12
 MERGED from [com.google.android.gms:play-services-ads-base:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\384743e3de1273740c5ba5d2e84dcdb8\transformed\play-services-ads-base-23.6.0\AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.android.gms:play-services-ads-identifier:18.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\456121b0beea0aab6d040411030faca8\transformed\play-services-ads-identifier-18.0.0\AndroidManifest.xml:17:1-27:12
@@ -107,6 +104,7 @@ MERGED from [com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\KARTIK DILIP
 MERGED from [io.grpc:grpc-android:1.62.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\dc300b6c54cd5ea6454fc0ce140fdbf7\transformed\grpc-android-1.62.2\AndroidManifest.xml:2:1-9:12
 MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\19ee3b6075922189703a847577bacc60\transformed\cursoradapter-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\3ea07335daa008033200768c220245ec\transformed\cardview-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:17:1-55:12
 MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\58ff68e9714cf135e56a367f3e845677\transformed\interpolator-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\e6ed76dd22dcd1b3dff360bb8eecebc7\transformed\localbroadcastmanager-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.firebase:firebase-components:18.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\5adf6161e763e4bfe4bdb77b91d005aa\transformed\firebase-components-18.0.0\AndroidManifest.xml:15:1-20:12
@@ -161,10 +159,6 @@ MERGED from [com.google.android.gms:play-services-measurement:22.1.2] C:\Users\K
 MERGED from [com.google.android.gms:play-services-measurement:22.1.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\f1501d4890cc59fcade8ab46e41e6df1\transformed\play-services-measurement-22.1.2\AndroidManifest.xml:23:5-67
 MERGED from [com.google.android.gms:play-services-measurement-impl:22.1.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\6613c70734ac5b7201227b9aa52fefc1\transformed\play-services-measurement-impl-22.1.2\AndroidManifest.xml:23:5-67
 MERGED from [com.google.android.gms:play-services-measurement-impl:22.1.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\6613c70734ac5b7201227b9aa52fefc1\transformed\play-services-measurement-impl-22.1.2\AndroidManifest.xml:23:5-67
-MERGED from [com.google.ai.client.generativeai:generativeai:0.9.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\b3655483c8ab60fdb2a5b35b554ca0b6\transformed\generativeai-0.9.0\AndroidManifest.xml:22:5-67
-MERGED from [com.google.ai.client.generativeai:generativeai:0.9.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\b3655483c8ab60fdb2a5b35b554ca0b6\transformed\generativeai-0.9.0\AndroidManifest.xml:22:5-67
-MERGED from [com.google.ai.client.generativeai:common:0.8.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\b049a070fe8e5dd333afc3d15cda2e48\transformed\common-0.8.0\AndroidManifest.xml:22:5-67
-MERGED from [com.google.ai.client.generativeai:common:0.8.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\b049a070fe8e5dd333afc3d15cda2e48\transformed\common-0.8.0\AndroidManifest.xml:22:5-67
 MERGED from [com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\3e72f7a937c7f12c5112eb32db4f270f\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:24:5-67
 MERGED from [com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\3e72f7a937c7f12c5112eb32db4f270f\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:24:5-67
 MERGED from [com.google.android.gms:play-services-measurement-sdk-api:22.1.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\b95aaeeddcea16aa49cb56fe1960c723\transformed\play-services-measurement-sdk-api-22.1.2\AndroidManifest.xml:23:5-67
@@ -216,8 +210,8 @@ MERGED from [com.google.firebase:firebase-messaging:24.1.0] C:\Users\KARTIK DILI
 	android:name
 		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:7:22-74
 application
-ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:9:5-93:19
-INJECTED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:9:5-93:19
+ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:9:5-98:19
+INJECTED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:9:5-98:19
 MERGED from [com.google.android.material:material:1.13.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\e1366c66f053d302f0790a680c73f6c3\transformed\material-1.13.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.13.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\e1366c66f053d302f0790a680c73f6c3\transformed\material-1.13.0\AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.2.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\428213cb97ba794df640e7417d7997ce\transformed\constraintlayout-2.2.1\AndroidManifest.xml:7:5-20
@@ -268,10 +262,10 @@ MERGED from [com.google.android.gms:play-services-measurement-impl:22.1.2] C:\Us
 MERGED from [com.google.android.gms:play-services-measurement-impl:22.1.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\6613c70734ac5b7201227b9aa52fefc1\transformed\play-services-measurement-impl-22.1.2\AndroidManifest.xml:29:5-30:19
 MERGED from [com.google.android.gms:play-services-base:18.5.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\858a53309a4ab7fed7e21f8a21e2ce70\transformed\play-services-base-18.5.0\AndroidManifest.xml:4:5-6:19
 MERGED from [com.google.android.gms:play-services-base:18.5.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\858a53309a4ab7fed7e21f8a21e2ce70\transformed\play-services-base-18.5.0\AndroidManifest.xml:4:5-6:19
-MERGED from [androidx.emoji2:emoji2:1.3.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\70d64add1d9bd9ae0a3216844b84ec19\transformed\emoji2-1.3.0\AndroidManifest.xml:23:5-33:19
-MERGED from [androidx.emoji2:emoji2:1.3.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\70d64add1d9bd9ae0a3216844b84ec19\transformed\emoji2-1.3.0\AndroidManifest.xml:23:5-33:19
 MERGED from [androidx.privacysandbox.ads:ads-adservices:1.0.0-beta05] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\588a68c1437d1650fe314c442c45b247\transformed\ads-adservices-1.0.0-beta05\AndroidManifest.xml:22:5-26:19
 MERGED from [androidx.privacysandbox.ads:ads-adservices:1.0.0-beta05] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\588a68c1437d1650fe314c442c45b247\transformed\ads-adservices-1.0.0-beta05\AndroidManifest.xml:22:5-26:19
+MERGED from [androidx.emoji2:emoji2:1.3.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\70d64add1d9bd9ae0a3216844b84ec19\transformed\emoji2-1.3.0\AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.emoji2:emoji2:1.3.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\70d64add1d9bd9ae0a3216844b84ec19\transformed\emoji2-1.3.0\AndroidManifest.xml:23:5-33:19
 MERGED from [com.google.android.gms:play-services-stats:17.0.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\56a763a691c6977f8d1175b4a887e191\transformed\play-services-stats-17.0.2\AndroidManifest.xml:7:5-20
 MERGED from [com.google.android.gms:play-services-stats:17.0.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\56a763a691c6977f8d1175b4a887e191\transformed\play-services-stats-17.0.2\AndroidManifest.xml:7:5-20
 MERGED from [com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\3e72f7a937c7f12c5112eb32db4f270f\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:70:5-110:19
@@ -284,8 +278,6 @@ MERGED from [androidx.window:window:1.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\
 MERGED from [androidx.window:window:1.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\86242c9fbae2a04646aa59458c17c3b2\transformed\window-1.0.0\AndroidManifest.xml:24:5-31:19
 MERGED from [androidx.core:core:1.16.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\d57ec7e197fb052eb7c21a825e7d55c7\transformed\core-1.16.0\AndroidManifest.xml:28:5-89
 MERGED from [androidx.core:core:1.16.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\d57ec7e197fb052eb7c21a825e7d55c7\transformed\core-1.16.0\AndroidManifest.xml:28:5-89
-MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:23:5-53:19
-MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:23:5-53:19
 MERGED from [com.google.android.gms:play-services-tasks:18.2.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\e1b3684f3e28d815abc3319654e444e8\transformed\play-services-tasks-18.2.0\AndroidManifest.xml:4:5-20
 MERGED from [com.google.android.gms:play-services-tasks:18.2.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\e1b3684f3e28d815abc3319654e444e8\transformed\play-services-tasks-18.2.0\AndroidManifest.xml:4:5-20
 MERGED from [com.google.android.gms:play-services-ads-base:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\384743e3de1273740c5ba5d2e84dcdb8\transformed\play-services-ads-base-23.6.0\AndroidManifest.xml:7:5-20
@@ -300,6 +292,8 @@ MERGED from [com.google.android.gms:play-services-basement:18.4.0] C:\Users\KART
 MERGED from [com.google.android.gms:play-services-basement:18.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\10267b8f1abfb866afbbb26f3e4cd37e\transformed\play-services-basement-18.4.0\AndroidManifest.xml:5:5-7:19
 MERGED from [com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\7804a07b3b11be103c70b67f8f34f4f7\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:46:5-54:19
 MERGED from [com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\7804a07b3b11be103c70b67f8f34f4f7\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:46:5-54:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:23:5-53:19
 MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\530fc56968fbede0d2c3520fa4814e8b\transformed\startup-runtime-1.1.1\AndroidManifest.xml:25:5-31:19
 MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\530fc56968fbede0d2c3520fa4814e8b\transformed\startup-runtime-1.1.1\AndroidManifest.xml:25:5-31:19
 MERGED from [com.google.firebase:firebase-datatransport:18.2.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\f66f8b31a2810729c5d6c5d46920e882\transformed\firebase-datatransport-18.2.0\AndroidManifest.xml:21:5-29:19
@@ -456,78 +450,82 @@ ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:53:
 		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:53:78-102
 	android:name
 		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:53:19-77
-activity#com.kartik.messapp.AiAssistantActivity
-ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:54:9-82
-	android:exported
-		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:54:55-79
-	android:name
-		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:54:19-54
-provider#androidx.core.content.FileProvider
-ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:56:9-64:20
-	android:grantUriPermissions
-		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:60:13-47
-	android:authorities
-		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:58:13-66
-	android:exported
-		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:59:13-37
-	android:name
-		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:57:13-62
-meta-data#android.support.FILE_PROVIDER_PATHS
-ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:61:13-63:54
-	android:resource
-		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:63:17-51
-	android:name
-		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:62:17-67
-service#com.kartik.messapp.MyFirebaseMessagingService
-ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:66:9-72:19
-	android:exported
-		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:68:13-37
-	android:name
-		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:67:13-55
-intent-filter#action:name:com.google.firebase.MESSAGING_EVENT
-ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:69:13-71:29
-action#com.google.firebase.MESSAGING_EVENT
-ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:70:17-78
-	android:name
-		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:70:25-75
-activity#com.google.android.gms.common.api.GoogleApiActivity
-ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:74:9-77:75
-MERGED from [com.google.android.gms:play-services-base:18.5.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\858a53309a4ab7fed7e21f8a21e2ce70\transformed\play-services-base-18.5.0\AndroidManifest.xml:5:9-173
-MERGED from [com.google.android.gms:play-services-base:18.5.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\858a53309a4ab7fed7e21f8a21e2ce70\transformed\play-services-base-18.5.0\AndroidManifest.xml:5:9-173
-	android:exported
-		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:76:13-37
+activity#com.kartik.messapp.CustomCaptureActivity
+ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:54:9-58:57
+	android:screenOrientation
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:56:13-49
+	android:stateNotNeeded
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:57:13-42
 	android:theme
-		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:77:13-72
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:58:13-54
 	android:name
-		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:75:13-79
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:55:13-50
+provider#androidx.core.content.FileProvider
+ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:61:9-69:20
+	android:grantUriPermissions
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:65:13-47
+	android:authorities
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:63:13-66
+	android:exported
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:64:13-37
+	android:name
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:62:13-62
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:66:13-68:54
+	android:resource
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:68:17-51
+	android:name
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:67:17-67
+service#com.kartik.messapp.MyFirebaseMessagingService
+ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:71:9-77:19
+	android:exported
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:73:13-37
+	android:name
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:72:13-55
+intent-filter#action:name:com.google.firebase.MESSAGING_EVENT
+ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:74:13-76:29
+action#com.google.firebase.MESSAGING_EVENT
+ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:75:17-78
+	android:name
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:75:25-75
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:79:9-82:75
+MERGED from [com.google.android.gms:play-services-base:18.5.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\858a53309a4ab7fed7e21f8a21e2ce70\transformed\play-services-base-18.5.0\AndroidManifest.xml:5:9-173
+MERGED from [com.google.android.gms:play-services-base:18.5.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\858a53309a4ab7fed7e21f8a21e2ce70\transformed\play-services-base-18.5.0\AndroidManifest.xml:5:9-173
+	android:exported
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:81:13-37
+	android:theme
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:82:13-72
+	android:name
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:80:13-79
 meta-data#com.google.android.gms.version
-ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:79:9-81:69
-MERGED from [com.google.android.gms:play-services-basement:18.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\10267b8f1abfb866afbbb26f3e4cd37e\transformed\play-services-basement-18.4.0\AndroidManifest.xml:6:9-122
-MERGED from [com.google.android.gms:play-services-basement:18.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\10267b8f1abfb866afbbb26f3e4cd37e\transformed\play-services-basement-18.4.0\AndroidManifest.xml:6:9-122
-	android:value
-		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:81:13-66
-	android:name
-		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:80:13-58
-meta-data#com.google.android.gms.ads.APPLICATION_ID
 ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:84:9-86:69
+MERGED from [com.google.android.gms:play-services-basement:18.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\10267b8f1abfb866afbbb26f3e4cd37e\transformed\play-services-basement-18.4.0\AndroidManifest.xml:6:9-122
+MERGED from [com.google.android.gms:play-services-basement:18.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\10267b8f1abfb866afbbb26f3e4cd37e\transformed\play-services-basement-18.4.0\AndroidManifest.xml:6:9-122
 	android:value
-		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:86:13-67
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:86:13-66
 	android:name
-		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:85:13-69
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:85:13-58
+meta-data#com.google.android.gms.ads.APPLICATION_ID
+ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:89:9-91:69
+	android:value
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:91:13-67
+	android:name
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:90:13-69
 property#android.adservices.AD_SERVICES_CONFIG
-ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:89:9-92:48
+ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:94:9-97:48
 MERGED from [com.google.android.gms:play-services-measurement-api:22.1.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\66ddd95c5b2107efcbef998be4758709\transformed\play-services-measurement-api-22.1.2\AndroidManifest.xml:30:9-32:61
 MERGED from [com.google.android.gms:play-services-measurement-api:22.1.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\66ddd95c5b2107efcbef998be4758709\transformed\play-services-measurement-api-22.1.2\AndroidManifest.xml:30:9-32:61
 MERGED from [com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\3e72f7a937c7f12c5112eb32db4f270f\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:107:9-109:62
 MERGED from [com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\3e72f7a937c7f12c5112eb32db4f270f\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:107:9-109:62
 	android:resource
-		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:91:13-59
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:96:13-59
 		REJECTED from [com.google.android.gms:play-services-measurement-api:22.1.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\66ddd95c5b2107efcbef998be4758709\transformed\play-services-measurement-api-22.1.2\AndroidManifest.xml:32:13-58
 		REJECTED from [com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\3e72f7a937c7f12c5112eb32db4f270f\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:109:13-59
 	tools:replace
-		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:92:13-45
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:97:13-45
 	android:name
-		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:90:13-65
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:95:13-65
 uses-sdk
 INJECTED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml
@@ -622,10 +620,10 @@ MERGED from [com.google.android.gms:play-services-base:18.5.0] C:\Users\KARTIK D
 MERGED from [com.google.android.gms:play-services-base:18.5.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\858a53309a4ab7fed7e21f8a21e2ce70\transformed\play-services-base-18.5.0\AndroidManifest.xml:3:5-44
 MERGED from [com.google.firebase:firebase-installations-interop:17.1.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\7318dbf62835d1110ed77a6ba3994280\transformed\firebase-installations-interop-17.1.1\AndroidManifest.xml:17:5-44
 MERGED from [com.google.firebase:firebase-installations-interop:17.1.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\7318dbf62835d1110ed77a6ba3994280\transformed\firebase-installations-interop-17.1.1\AndroidManifest.xml:17:5-44
-MERGED from [com.google.ai.client.generativeai:generativeai:0.9.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\b3655483c8ab60fdb2a5b35b554ca0b6\transformed\generativeai-0.9.0\AndroidManifest.xml:20:5-44
-MERGED from [com.google.ai.client.generativeai:generativeai:0.9.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\b3655483c8ab60fdb2a5b35b554ca0b6\transformed\generativeai-0.9.0\AndroidManifest.xml:20:5-44
-MERGED from [com.google.ai.client.generativeai:common:0.8.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\b049a070fe8e5dd333afc3d15cda2e48\transformed\common-0.8.0\AndroidManifest.xml:20:5-44
-MERGED from [com.google.ai.client.generativeai:common:0.8.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\b049a070fe8e5dd333afc3d15cda2e48\transformed\common-0.8.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.privacysandbox.ads:ads-adservices-java:1.0.0-beta05] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\80a6155e4b6ff3f9f4ba9acaa21607f1\transformed\ads-adservices-java-1.0.0-beta05\AndroidManifest.xml:5:5-44
+MERGED from [androidx.privacysandbox.ads:ads-adservices-java:1.0.0-beta05] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\80a6155e4b6ff3f9f4ba9acaa21607f1\transformed\ads-adservices-java-1.0.0-beta05\AndroidManifest.xml:5:5-44
+MERGED from [androidx.privacysandbox.ads:ads-adservices:1.0.0-beta05] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\588a68c1437d1650fe314c442c45b247\transformed\ads-adservices-1.0.0-beta05\AndroidManifest.xml:20:5-44
+MERGED from [androidx.privacysandbox.ads:ads-adservices:1.0.0-beta05] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\588a68c1437d1650fe314c442c45b247\transformed\ads-adservices-1.0.0-beta05\AndroidManifest.xml:20:5-44
 MERGED from [androidx.navigationevent:navigationevent-android:1.0.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\5952921b021430debef19daaadaf2016\transformed\navigationevent\AndroidManifest.xml:5:5-44
 MERGED from [androidx.navigationevent:navigationevent-android:1.0.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\5952921b021430debef19daaadaf2016\transformed\navigationevent\AndroidManifest.xml:5:5-44
 MERGED from [androidx.fragment:fragment-ktx:1.6.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\eb8117aa8bbec8f6a6ed9dabe273b8ac\transformed\fragment-ktx-1.6.2\AndroidManifest.xml:20:5-44
@@ -654,10 +652,6 @@ MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\KAR
 MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\bff0a0ae16180e5d97805feab32319be\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\e7dd9601f12c2e407ebb402d4452bf29\transformed\vectordrawable-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\e7dd9601f12c2e407ebb402d4452bf29\transformed\vectordrawable-1.1.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.privacysandbox.ads:ads-adservices-java:1.0.0-beta05] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\80a6155e4b6ff3f9f4ba9acaa21607f1\transformed\ads-adservices-java-1.0.0-beta05\AndroidManifest.xml:5:5-44
-MERGED from [androidx.privacysandbox.ads:ads-adservices-java:1.0.0-beta05] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\80a6155e4b6ff3f9f4ba9acaa21607f1\transformed\ads-adservices-java-1.0.0-beta05\AndroidManifest.xml:5:5-44
-MERGED from [androidx.privacysandbox.ads:ads-adservices:1.0.0-beta05] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\588a68c1437d1650fe314c442c45b247\transformed\ads-adservices-1.0.0-beta05\AndroidManifest.xml:20:5-44
-MERGED from [androidx.privacysandbox.ads:ads-adservices:1.0.0-beta05] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\588a68c1437d1650fe314c442c45b247\transformed\ads-adservices-1.0.0-beta05\AndroidManifest.xml:20:5-44
 MERGED from [androidx.graphics:graphics-shapes-android:1.0.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\c29a1de82d2f35489fcc5be1c7f552ab\transformed\graphics-shapes-release\AndroidManifest.xml:5:5-44
 MERGED from [androidx.graphics:graphics-shapes-android:1.0.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\c29a1de82d2f35489fcc5be1c7f552ab\transformed\graphics-shapes-release\AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-stats:17.0.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\56a763a691c6977f8d1175b4a887e191\transformed\play-services-stats-17.0.2\AndroidManifest.xml:5:5-44
@@ -708,8 +702,6 @@ MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.6.2] C:\Users\KARTIK DIL
 MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.6.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\8290848b10203ca0bf62dddbe6c3dcea\transformed\lifecycle-runtime-ktx-2.6.2\AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\eb49b1cdcdfeb6ebfad325d512bcb455\transformed\lifecycle-viewmodel-ktx-2.6.2\AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\eb49b1cdcdfeb6ebfad325d512bcb455\transformed\lifecycle-viewmodel-ktx-2.6.2\AndroidManifest.xml:20:5-44
-MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:21:5-44
-MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:21:5-44
 MERGED from [com.google.android.gms:play-services-tasks:18.2.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\e1b3684f3e28d815abc3319654e444e8\transformed\play-services-tasks-18.2.0\AndroidManifest.xml:3:5-44
 MERGED from [com.google.android.gms:play-services-tasks:18.2.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\e1b3684f3e28d815abc3319654e444e8\transformed\play-services-tasks-18.2.0\AndroidManifest.xml:3:5-44
 MERGED from [com.google.android.gms:play-services-ads-base:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\384743e3de1273740c5ba5d2e84dcdb8\transformed\play-services-ads-base-23.6.0\AndroidManifest.xml:5:5-44
@@ -738,6 +730,8 @@ MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\KARTIK DILIP T
 MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\19ee3b6075922189703a847577bacc60\transformed\cursoradapter-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\3ea07335daa008033200768c220245ec\transformed\cardview-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\3ea07335daa008033200768c220245ec\transformed\cardview-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:21:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:21:5-44
 MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\58ff68e9714cf135e56a367f3e845677\transformed\interpolator-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\58ff68e9714cf135e56a367f3e845677\transformed\interpolator-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\e6ed76dd22dcd1b3dff360bb8eecebc7\transformed\localbroadcastmanager-1.0.0\AndroidManifest.xml:20:5-44
@@ -1130,6 +1124,12 @@ ADDED from [com.google.android.gms:play-services-measurement:22.1.2] C:\Users\KA
 		ADDED from [com.google.android.gms:play-services-measurement:22.1.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\f1501d4890cc59fcade8ab46e41e6df1\transformed\play-services-measurement-22.1.2\AndroidManifest.xml:43:13-69
 	android:name
 		ADDED from [com.google.android.gms:play-services-measurement:22.1.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\f1501d4890cc59fcade8ab46e41e6df1\transformed\play-services-measurement-22.1.2\AndroidManifest.xml:40:13-87
+uses-library#android.ext.adservices
+ADDED from [androidx.privacysandbox.ads:ads-adservices:1.0.0-beta05] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\588a68c1437d1650fe314c442c45b247\transformed\ads-adservices-1.0.0-beta05\AndroidManifest.xml:23:9-25:40
+	android:required
+		ADDED from [androidx.privacysandbox.ads:ads-adservices:1.0.0-beta05] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\588a68c1437d1650fe314c442c45b247\transformed\ads-adservices-1.0.0-beta05\AndroidManifest.xml:25:13-37
+	android:name
+		ADDED from [androidx.privacysandbox.ads:ads-adservices:1.0.0-beta05] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\588a68c1437d1650fe314c442c45b247\transformed\ads-adservices-1.0.0-beta05\AndroidManifest.xml:24:13-50
 provider#androidx.startup.InitializationProvider
 ADDED from [androidx.emoji2:emoji2:1.3.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\70d64add1d9bd9ae0a3216844b84ec19\transformed\emoji2-1.3.0\AndroidManifest.xml:24:9-32:20
 MERGED from [androidx.work:work-runtime:2.7.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\b5a211a254c9b4db86315d357e62e764\transformed\work-runtime-2.7.0\AndroidManifest.xml:31:9-39:20
@@ -1154,12 +1154,6 @@ ADDED from [androidx.emoji2:emoji2:1.3.0] C:\Users\KARTIK DILIP THORAT\.gradle\c
 		ADDED from [androidx.emoji2:emoji2:1.3.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\70d64add1d9bd9ae0a3216844b84ec19\transformed\emoji2-1.3.0\AndroidManifest.xml:31:17-49
 	android:name
 		ADDED from [androidx.emoji2:emoji2:1.3.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\70d64add1d9bd9ae0a3216844b84ec19\transformed\emoji2-1.3.0\AndroidManifest.xml:30:17-75
-uses-library#android.ext.adservices
-ADDED from [androidx.privacysandbox.ads:ads-adservices:1.0.0-beta05] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\588a68c1437d1650fe314c442c45b247\transformed\ads-adservices-1.0.0-beta05\AndroidManifest.xml:23:9-25:40
-	android:required
-		ADDED from [androidx.privacysandbox.ads:ads-adservices:1.0.0-beta05] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\588a68c1437d1650fe314c442c45b247\transformed\ads-adservices-1.0.0-beta05\AndroidManifest.xml:25:13-37
-	android:name
-		ADDED from [androidx.privacysandbox.ads:ads-adservices:1.0.0-beta05] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\588a68c1437d1650fe314c442c45b247\transformed\ads-adservices-1.0.0-beta05\AndroidManifest.xml:24:13-50
 uses-permission#android.permission.ACCESS_ADSERVICES_TOPICS
 ADDED from [com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\3e72f7a937c7f12c5112eb32db4f270f\transformed\play-services-ads-lite-23.6.0\AndroidManifest.xml:29:5-83
 	android:name
@@ -1501,48 +1495,6 @@ uses-permission#com.kartik.messapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
 ADDED from [androidx.core:core:1.16.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\d57ec7e197fb052eb7c21a825e7d55c7\transformed\core-1.16.0\AndroidManifest.xml:26:5-97
 	android:name
 		ADDED from [androidx.core:core:1.16.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\d57ec7e197fb052eb7c21a825e7d55c7\transformed\core-1.16.0\AndroidManifest.xml:26:22-94
-meta-data#androidx.profileinstaller.ProfileInstallerInitializer
-ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:29:13-31:52
-	android:value
-		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:31:17-49
-	android:name
-		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:30:17-85
-receiver#androidx.profileinstaller.ProfileInstallReceiver
-ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:34:9-52:20
-	android:enabled
-		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:37:13-35
-	android:exported
-		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:38:13-36
-	android:permission
-		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:39:13-57
-	android:directBootAware
-		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:36:13-44
-	android:name
-		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:35:13-76
-intent-filter#action:name:androidx.profileinstaller.action.INSTALL_PROFILE
-ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:40:13-42:29
-action#androidx.profileinstaller.action.INSTALL_PROFILE
-ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:41:17-91
-	android:name
-		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:41:25-88
-intent-filter#action:name:androidx.profileinstaller.action.SKIP_FILE
-ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:43:13-45:29
-action#androidx.profileinstaller.action.SKIP_FILE
-ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:44:17-85
-	android:name
-		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:44:25-82
-intent-filter#action:name:androidx.profileinstaller.action.SAVE_PROFILE
-ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:46:13-48:29
-action#androidx.profileinstaller.action.SAVE_PROFILE
-ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:47:17-88
-	android:name
-		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:47:25-85
-intent-filter#action:name:androidx.profileinstaller.action.BENCHMARK_OPERATION
-ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:49:13-51:29
-action#androidx.profileinstaller.action.BENCHMARK_OPERATION
-ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:50:17-95
-	android:name
-		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:50:25-92
 uses-permission#android.permission.CAMERA
 ADDED from [com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\7804a07b3b11be103c70b67f8f34f4f7\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:22:5-65
 	android:name
@@ -1597,6 +1549,48 @@ ADDED from [com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\KARTIK DILIP 
 		ADDED from [com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\7804a07b3b11be103c70b67f8f34f4f7\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:52:13-54
 	android:name
 		ADDED from [com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\7804a07b3b11be103c70b67f8f34f4f7\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:48:13-74
+meta-data#androidx.profileinstaller.ProfileInstallerInitializer
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:30:17-85
+receiver#androidx.profileinstaller.ProfileInstallReceiver
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:34:9-52:20
+	android:enabled
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:37:13-35
+	android:exported
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:38:13-36
+	android:permission
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:39:13-57
+	android:directBootAware
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:36:13-44
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:35:13-76
+intent-filter#action:name:androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:40:13-42:29
+action#androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:41:17-91
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:41:25-88
+intent-filter#action:name:androidx.profileinstaller.action.SKIP_FILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:43:13-45:29
+action#androidx.profileinstaller.action.SKIP_FILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:44:17-85
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:44:25-82
+intent-filter#action:name:androidx.profileinstaller.action.SAVE_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:46:13-48:29
+action#androidx.profileinstaller.action.SAVE_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:47:17-88
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:47:25-85
+intent-filter#action:name:androidx.profileinstaller.action.BENCHMARK_OPERATION
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:49:13-51:29
+action#androidx.profileinstaller.action.BENCHMARK_OPERATION
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:50:17-95
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\718cbb640dd8654a28b703e201f33b21\transformed\profileinstaller-1.4.0\AndroidManifest.xml:50:25-92
 meta-data#com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar
 ADDED from [com.google.firebase:firebase-datatransport:18.2.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\f66f8b31a2810729c5d6c5d46920e882\transformed\firebase-datatransport-18.2.0\AndroidManifest.xml:25:13-27:85
 	android:value

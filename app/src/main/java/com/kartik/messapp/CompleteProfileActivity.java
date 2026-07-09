@@ -78,6 +78,8 @@ public class CompleteProfileActivity extends AppCompatActivity {
             options.setCameraId(0);
             options.setBeepEnabled(true);
             options.setBarcodeImageEnabled(true);
+            options.setCaptureActivity(CustomCaptureActivity.class);
+            options.setOrientationLocked(true);
             barcodeLauncher.launch(options);
         });
 

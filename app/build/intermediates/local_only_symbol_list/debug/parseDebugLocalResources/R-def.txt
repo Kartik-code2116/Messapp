@@ -386,7 +386,6 @@ id card_one_time_auto_select
 id card_planned_out_days
 id card_user
 id centerContainer
-id chatRecyclerView
 id chip_both
 id chip_female
 id chip_filter_active
@@ -447,7 +446,6 @@ id et_tuesday_dinner
 id et_tuesday_lunch
 id et_wednesday_dinner
 id et_wednesday_lunch
-id fabAiAssistant
 id fab_add_offer
 id fab_add_review
 id group_account
@@ -475,7 +473,6 @@ id indicator_mess_condition
 id info_row_icon
 id info_row_label
 id info_row_value
-id inputLayout
 id input_message_body
 id input_message_title
 id items_toolbar
@@ -520,7 +517,6 @@ id messNameEditText
 id messNameLayout
 id mess_navigation
 id mess_profile_image
-id messageEditText
 id mobile_navigation
 id nameEditText
 id nameLayout
@@ -595,7 +591,6 @@ id reviews_recycler_view
 id scroll_view
 id search_layout
 id section_breakfast
-id sendButton
 id spinner_month_filter
 id spinner_month_year
 id spinner_year_filter
@@ -769,7 +764,6 @@ id userMessageText
 id user_top_bar
 id viewPager
 id view_accent_bar
-layout activity_ai_assistant
 layout activity_complete_profile
 layout activity_edit_mess_profile
 layout activity_edit_user_profile

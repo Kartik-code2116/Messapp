@@ -9,6 +9,4 @@ public final class BuildConfig {
   public static final String BUILD_TYPE = "debug";
   public static final int VERSION_CODE = 3;
   public static final String VERSION_NAME = "1.2";
-  // Field from default config.
-  public static final String GEMINI_API_KEY = "AQ.Ab8RN6Ksij2Wue9xpP4RZrVJPuUo4uelTH0jSLhcEvg8nN_tMA";
 }

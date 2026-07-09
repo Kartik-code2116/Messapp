@@ -136,7 +136,9 @@
                     android:hint="Mess ID"
                     android:visibility="gone"
                     app:startIconDrawable="@drawable/ic_group"
-                    app:startIconTint="@color/brand_primary">
+                    app:startIconTint="@color/brand_primary"
+                    app:endIconMode="custom"
+                    app:endIconDrawable="@android:drawable/ic_menu_camera">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/messIdEditText"
                         android:layout_width="match_parent"
