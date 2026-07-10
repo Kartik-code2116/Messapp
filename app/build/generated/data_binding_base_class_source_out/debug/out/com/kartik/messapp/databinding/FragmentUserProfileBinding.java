@@ -62,6 +62,9 @@ public final class FragmentUserProfileBinding implements ViewBinding {
   public final MaterialSwitch switchDarkMode;
 
   @NonNull
+  public final TextView textChangeMessLabel;
+
+  @NonNull
   public final TextView textDinnerExpiry;
 
   @NonNull
@@ -101,12 +104,12 @@ public final class FragmentUserProfileBinding implements ViewBinding {
       @NonNull MaterialButton btnRenewSubscription, @NonNull MaterialButton btnSeeReviews,
       @NonNull MaterialButton btnWriteReview, @NonNull ShapeableImageView profileImage,
       @NonNull ProgressBar progressBar, @NonNull MaterialSwitch switchDarkMode,
-      @NonNull TextView textDinnerExpiry, @NonNull TextView textLunchExpiry,
-      @NonNull TextView textOneTimeExpiry, @NonNull TextView textProfileEmail,
-      @NonNull TextView textProfileEmailCard, @NonNull TextView textProfileMessId,
-      @NonNull TextView textProfileMessName, @NonNull TextView textProfileName,
-      @NonNull TextView textProfileNameCard, @NonNull TextView textProfilePhone,
-      @NonNull TextView textSubscriptionExpiry) {
+      @NonNull TextView textChangeMessLabel, @NonNull TextView textDinnerExpiry,
+      @NonNull TextView textLunchExpiry, @NonNull TextView textOneTimeExpiry,
+      @NonNull TextView textProfileEmail, @NonNull TextView textProfileEmailCard,
+      @NonNull TextView textProfileMessId, @NonNull TextView textProfileMessName,
+      @NonNull TextView textProfileName, @NonNull TextView textProfileNameCard,
+      @NonNull TextView textProfilePhone, @NonNull TextView textSubscriptionExpiry) {
     this.rootView = rootView;
     this.btnChangeMess = btnChangeMess;
     this.btnChangePassword = btnChangePassword;
@@ -120,6 +123,7 @@ public final class FragmentUserProfileBinding implements ViewBinding {
     this.profileImage = profileImage;
     this.progressBar = progressBar;
     this.switchDarkMode = switchDarkMode;
+    this.textChangeMessLabel = textChangeMessLabel;
     this.textDinnerExpiry = textDinnerExpiry;
     this.textLunchExpiry = textLunchExpiry;
     this.textOneTimeExpiry = textOneTimeExpiry;
@@ -232,6 +236,12 @@ public final class FragmentUserProfileBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.text_change_mess_label;
+      TextView textChangeMessLabel = ViewBindings.findChildViewById(rootView, id);
+      if (textChangeMessLabel == null) {
+        break missingId;
+      }
+
       id = R.id.text_dinner_expiry;
       TextView textDinnerExpiry = ViewBindings.findChildViewById(rootView, id);
       if (textDinnerExpiry == null) {
@@ -301,9 +311,9 @@ public final class FragmentUserProfileBinding implements ViewBinding {
       return new FragmentUserProfileBinding((FrameLayout) rootView, btnChangeMess,
           btnChangePassword, btnEditProfileImage, btnHelpSupport, btnLogout, btnMyReviews,
           btnRenewSubscription, btnSeeReviews, btnWriteReview, profileImage, progressBar,
-          switchDarkMode, textDinnerExpiry, textLunchExpiry, textOneTimeExpiry, textProfileEmail,
-          textProfileEmailCard, textProfileMessId, textProfileMessName, textProfileName,
-          textProfileNameCard, textProfilePhone, textSubscriptionExpiry);
+          switchDarkMode, textChangeMessLabel, textDinnerExpiry, textLunchExpiry, textOneTimeExpiry,
+          textProfileEmail, textProfileEmailCard, textProfileMessId, textProfileMessName,
+          textProfileName, textProfileNameCard, textProfilePhone, textSubscriptionExpiry);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

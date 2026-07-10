@@ -121,6 +121,16 @@ public class MessSettingsActivity extends AppCompatActivity {
     private void setupClickListeners() {
         binding.btnSaveSettings.setOnClickListener(v -> saveSettings());
         
+        binding.btnViewPastMembers.setOnClickListener(v -> {
+            if (messId == null) {
+                Toast.makeText(this, "Mess ID not loaded yet", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            android.content.Intent intent = new android.content.Intent(this, com.kartik.messapp.ui.mess.students.PastMembersActivity.class);
+            intent.putExtra(com.kartik.messapp.ui.mess.students.PastMembersActivity.EXTRA_MESS_ID, messId);
+            startActivity(intent);
+        });
+        
         // Ensure switch text matches state dynamically
         updateSwitchText(binding.switchAllowMultipleChanges.isChecked());
         binding.switchAllowMultipleChanges.setOnCheckedChangeListener((buttonView, isChecked) -> {

@@ -128,6 +128,16 @@ service cloud.firestore {
       allow update, delete: if false;
     }
 
+    // Mess Leavers: Track students who leave a mess
+    match /mess_leavers/{docId} {
+      allow read: if request.auth != null && (
+        resource.data.userId == request.auth.uid ||
+        (getUserData().role == "MESS_OWNER" && getUserData().messId == resource.data.messId)
+      );
+      allow create: if request.auth != null && request.resource.data.userId == request.auth.uid;
+      allow delete: if request.auth != null && resource.data.userId == request.auth.uid;
+    }
+
     // Notification Preferences: Users manage their own preferences
     match /notification_preferences/{userId} {
       allow read, write: if request.auth != null && request.auth.uid == userId;

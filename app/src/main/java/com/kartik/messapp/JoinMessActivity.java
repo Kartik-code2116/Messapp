@@ -102,21 +102,45 @@ public class JoinMessActivity extends AppCompatActivity {
         db.collection("messes").document(messId).get()
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
-                        // Mess exists, update user
-                        Map<String, Object> updates = new HashMap<>();
-                        updates.put("messId", messId);
-                        
-                        db.collection("users").document(user.getUid())
-                                .update(updates)
-                                .addOnSuccessListener(aVoid -> {
-                                    binding.progressBar.setVisibility(View.GONE);
-                                    Toast.makeText(this, "Successfully joined mess!", Toast.LENGTH_SHORT).show();
-                                    finish();
+                        // First, delete from mess_leavers if it exists
+                        db.collection("mess_leavers")
+                                .whereEqualTo("userId", user.getUid())
+                                .whereEqualTo("messId", messId)
+                                .get()
+                                .addOnSuccessListener(queryDocumentSnapshots -> {
+                                    com.google.firebase.firestore.WriteBatch batch = db.batch();
+                                    for (com.google.firebase.firestore.DocumentSnapshot doc : queryDocumentSnapshots) {
+                                        batch.delete(doc.getReference());
+                                    }
+                                    
+                                    // Mess exists, update user
+                                    Map<String, Object> updates = new HashMap<>();
+                                    updates.put("messId", messId);
+                                    
+                                    batch.update(db.collection("users").document(user.getUid()), updates);
+                                    
+                                    batch.commit().addOnSuccessListener(aVoid -> {
+                                        binding.progressBar.setVisibility(View.GONE);
+                                        Toast.makeText(this, "Successfully joined mess!", Toast.LENGTH_SHORT).show();
+                                        finish();
+                                    }).addOnFailureListener(e -> {
+                                        binding.progressBar.setVisibility(View.GONE);
+                                        binding.btnJoinMess.setEnabled(true);
+                                        Toast.makeText(this, "Failed to join: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    });
                                 })
                                 .addOnFailureListener(e -> {
-                                    binding.progressBar.setVisibility(View.GONE);
-                                    binding.btnJoinMess.setEnabled(true);
-                                    Toast.makeText(this, "Failed to join: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    // If deletion fails, we still want to join the mess. 
+                                    // Just fallback to old logic.
+                                    Map<String, Object> updates = new HashMap<>();
+                                    updates.put("messId", messId);
+                                    db.collection("users").document(user.getUid())
+                                        .update(updates)
+                                        .addOnSuccessListener(aVoid -> {
+                                            binding.progressBar.setVisibility(View.GONE);
+                                            Toast.makeText(this, "Successfully joined mess!", Toast.LENGTH_SHORT).show();
+                                            finish();
+                                        });
                                 });
                     } else {
                         binding.progressBar.setVisibility(View.GONE);

@@ -19,6 +19,11 @@
             android:id="@+id/drawer_admin_notifications"
             android:icon="@drawable/ic_notifications_outline"
             android:title="Notifications" />
+
+        <item
+            android:id="@+id/drawer_admin_past_members"
+            android:icon="@drawable/ic_history"
+            android:title="Past Members" />
     </group>
 
     <group

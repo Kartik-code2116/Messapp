@@ -604,6 +604,10 @@ public class MessDashboardActivity extends AppCompatActivity {
                 // overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             } else if (id == R.id.drawer_admin_notifications) {
                 showAdminNotificationsDialog();
+            } else if (id == R.id.drawer_admin_past_members) {
+                Intent intent = new Intent(this, com.kartik.messapp.ui.mess.students.PastMembersActivity.class);
+                intent.putExtra(com.kartik.messapp.ui.mess.students.PastMembersActivity.EXTRA_MESS_ID, cachedMessId);
+                startActivity(intent);
             } else if (id == R.id.drawer_admin_logout) {
                 showLogoutConfirmation();
             }

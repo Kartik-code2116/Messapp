@@ -372,6 +372,7 @@ id btn_skip
 id btn_submit_review
 id btn_subscribe_mess
 id btn_user
+id btn_view_past_members
 id btn_view_sent_messages
 id btn_view_students
 id btn_write_review
@@ -413,6 +414,7 @@ id dinner_hour_picker
 id dinner_minute_picker
 id drawer_admin_logout
 id drawer_admin_notifications
+id drawer_admin_past_members
 id drawer_admin_profile
 id drawer_admin_settings
 id drawer_user_history
@@ -579,9 +581,11 @@ id rating_bar
 id rating_bar_avg
 id rating_bar_item
 id rating_bar_user
+id recycler_past_members
 id recycler_pending
 id recycler_reviews
 id recycler_subscription_report
+id recycler_transactions
 id recycler_view_history
 id recycler_view_offers
 id recycler_view_requests
@@ -630,6 +634,7 @@ id text_breakfast_counts_breakdown
 id text_breakfast_display
 id text_breakfast_menu
 id text_breakfast_status_bar
+id text_change_mess_label
 id text_chip_active
 id text_chip_all
 id text_chip_expired
@@ -659,6 +664,7 @@ id text_drawer_name
 id text_drawer_rating
 id text_drawer_revenue
 id text_drawer_subscription
+id text_empty
 id text_empty_history
 id text_empty_notifications
 id text_empty_sent_messages
@@ -667,6 +673,7 @@ id text_greeting
 id text_history_date
 id text_info
 id text_join_date
+id text_left_at
 id text_lunch_card_timer
 id text_lunch_display
 id text_lunch_expiry
@@ -676,6 +683,9 @@ id text_lunch_out_count
 id text_lunch_preference
 id text_lunch_status
 id text_lunch_status_bar
+id text_member_email
+id text_member_name
+id text_member_phone
 id text_menu_summary
 id text_mess_card_location
 id text_mess_card_name
@@ -701,6 +711,7 @@ id text_message_date
 id text_message_title
 id text_monthly_revenue_actual
 id text_monthly_revenue_expected
+id text_name
 id text_no_reviews
 id text_notification_badge
 id text_offer_description
@@ -779,6 +790,8 @@ layout activity_mess_reviews
 layout activity_mess_settings
 layout activity_my_reviews
 layout activity_onboarding
+layout activity_past_member_details
+layout activity_past_members
 layout activity_role_selection
 layout activity_splash_screen
 layout activity_subscription_report
@@ -816,6 +829,7 @@ layout item_menu_day_card
 layout item_mess_card
 layout item_offer
 layout item_onboarding_slide
+layout item_past_member
 layout item_profile_info_row
 layout item_review
 layout item_sent_message

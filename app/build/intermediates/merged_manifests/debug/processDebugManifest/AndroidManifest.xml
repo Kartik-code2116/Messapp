@@ -206,6 +206,14 @@
             android:resource="@xml/gma_ad_services_config" />
 
         <activity
+            android:name="com.kartik.messapp.ui.mess.students.PastMembersActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.kartik.messapp.ui.mess.students.PastMemberDetailsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.google.firebase.auth.internal.GenericIdpActivity"
             android:excludeFromRecents="true"
             android:exported="true"

@@ -33,6 +33,9 @@ public final class ActivityMessSettingsBinding implements ViewBinding {
   public final MaterialButton btnSaveSettings;
 
   @NonNull
+  public final MaterialButton btnViewPastMembers;
+
+  @NonNull
   public final NumberPicker dinnerHourPicker;
 
   @NonNull
@@ -49,13 +52,15 @@ public final class ActivityMessSettingsBinding implements ViewBinding {
 
   private ActivityMessSettingsBinding(@NonNull ConstraintLayout rootView,
       @NonNull LinearLayout appBar, @NonNull ImageButton btnBack,
-      @NonNull MaterialButton btnSaveSettings, @NonNull NumberPicker dinnerHourPicker,
-      @NonNull NumberPicker dinnerMinutePicker, @NonNull NumberPicker lunchHourPicker,
-      @NonNull NumberPicker lunchMinutePicker, @NonNull MaterialSwitch switchAllowMultipleChanges) {
+      @NonNull MaterialButton btnSaveSettings, @NonNull MaterialButton btnViewPastMembers,
+      @NonNull NumberPicker dinnerHourPicker, @NonNull NumberPicker dinnerMinutePicker,
+      @NonNull NumberPicker lunchHourPicker, @NonNull NumberPicker lunchMinutePicker,
+      @NonNull MaterialSwitch switchAllowMultipleChanges) {
     this.rootView = rootView;
     this.appBar = appBar;
     this.btnBack = btnBack;
     this.btnSaveSettings = btnSaveSettings;
+    this.btnViewPastMembers = btnViewPastMembers;
     this.dinnerHourPicker = dinnerHourPicker;
     this.dinnerMinutePicker = dinnerMinutePicker;
     this.lunchHourPicker = lunchHourPicker;
@@ -108,6 +113,12 @@ public final class ActivityMessSettingsBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.btn_view_past_members;
+      MaterialButton btnViewPastMembers = ViewBindings.findChildViewById(rootView, id);
+      if (btnViewPastMembers == null) {
+        break missingId;
+      }
+
       id = R.id.dinner_hour_picker;
       NumberPicker dinnerHourPicker = ViewBindings.findChildViewById(rootView, id);
       if (dinnerHourPicker == null) {
@@ -139,8 +150,8 @@ public final class ActivityMessSettingsBinding implements ViewBinding {
       }
 
       return new ActivityMessSettingsBinding((ConstraintLayout) rootView, appBar, btnBack,
-          btnSaveSettings, dinnerHourPicker, dinnerMinutePicker, lunchHourPicker, lunchMinutePicker,
-          switchAllowMultipleChanges);
+          btnSaveSettings, btnViewPastMembers, dinnerHourPicker, dinnerMinutePicker,
+          lunchHourPicker, lunchMinutePicker, switchAllowMultipleChanges);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

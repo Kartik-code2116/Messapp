@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
+    android:layout_marginTop="8dp" android:layout_marginBottom="8dp"
+    style="@style/Profound.Card"
+    android:clickable="true"
+    android:focusable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_student_profile"
+                app:shapeAppearanceOverlay="@style/CircleImageStyle"
+                android:background="@color/neutral_100"
+                app:strokeWidth="0dp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/text_member_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="John Doe"
+                    android:textColor="@color/text_heading"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/poppins"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/text_member_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="johndoe@university.edu"
+                    android:textColor="@color/text_sub"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/inter"
+                    android:ellipsize="end"
+                    android:singleLine="true" />
+
+                <TextView
+                    android:id="@+id/text_member_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="+91 9876543210"
+                    android:textColor="@color/text_sub"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/inter"
+                    android:ellipsize="end"
+                    android:singleLine="true" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/neutral_200"
+            android:layout_marginTop="16dp" android:layout_marginBottom="16dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_history"
+                app:tint="@color/text_caption" />
+
+            <TextView
+                android:id="@+id/text_left_at"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                tools:text="Left on 12 Oct 2024"
+                android:textColor="@color/text_body"
+                android:textSize="12sp"
+                android:fontFamily="@font/inter" />
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

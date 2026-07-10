@@ -108,6 +108,10 @@
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-main-72:\\drawable\\bg_circle_light_green.xml"
     },
     {
+        "merged": "com.kartik.messapp-debug-70:/layout_item_past_member.xml.flat",
+        "source": "com.kartik.messapp-main-72:/layout/item_past_member.xml"
+    },
+    {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-debug-70:\\drawable_ic_edit.xml.flat",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-main-72:\\drawable\\ic_edit.xml"
     },
@@ -444,10 +448,6 @@
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-main-72:\\drawable\\bg_rounded_card_primary_light.xml"
     },
     {
-        "merged": "com.kartik.messapp-debug-70:/layout_activity_join_mess.xml.flat",
-        "source": "com.kartik.messapp-main-72:/layout/activity_join_mess.xml"
-    },
-    {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-debug-70:\\drawable_bg_food_image_warm_overlay.xml.flat",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-main-72:\\drawable\\bg_food_image_warm_overlay.xml"
     },
@@ -556,12 +556,20 @@
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-main-72:\\mipmap-xxxhdpi\\ic_launcher.webp"
     },
     {
+        "merged": "com.kartik.messapp-debug-70:/layout_activity_past_member_details.xml.flat",
+        "source": "com.kartik.messapp-main-72:/layout/activity_past_member_details.xml"
+    },
+    {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-debug-70:\\drawable_ic_breakfast_dining.xml.flat",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-main-72:\\drawable\\ic_breakfast_dining.xml"
     },
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-debug-70:\\drawable_bg_chat_input.xml.flat",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-main-72:\\drawable\\bg_chat_input.xml"
+    },
+    {
+        "merged": "com.kartik.messapp-debug-70:/layout_activity_mess_settings.xml.flat",
+        "source": "com.kartik.messapp-main-72:/layout/activity_mess_settings.xml"
     },
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-debug-70:\\drawable_ic_chevron_right.xml.flat",
@@ -844,6 +852,10 @@
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-main-72:\\drawable\\bg_rounded_input.xml"
     },
     {
+        "merged": "com.kartik.messapp-debug-70:/layout_activity_past_members.xml.flat",
+        "source": "com.kartik.messapp-main-72:/layout/activity_past_members.xml"
+    },
+    {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-debug-70:\\color_selector_nav_user.xml.flat",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-main-72:\\color\\selector_nav_user.xml"
     },
@@ -874,6 +886,10 @@
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-debug-70:\\layout_dialog_notifications.xml.flat",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-main-72:\\layout\\dialog_notifications.xml"
+    },
+    {
+        "merged": "com.kartik.messapp-debug-70:/menu_menu_admin_profile_drawer.xml.flat",
+        "source": "com.kartik.messapp-main-72:/menu/menu_admin_profile_drawer.xml"
     },
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-debug-70:\\layout_item_history.xml.flat",

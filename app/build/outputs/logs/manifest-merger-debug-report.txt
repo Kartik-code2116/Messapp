@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:2:1-101:12
-INJECTED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:2:1-101:12
-INJECTED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:2:1-101:12
-INJECTED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:2:1-101:12
+ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:2:1-110:12
+INJECTED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:2:1-110:12
+INJECTED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:2:1-110:12
+INJECTED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:2:1-110:12
 MERGED from [androidx.databinding:viewbinding:8.13.2] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\811c437e8a28157ec10d97f614285473\transformed\viewbinding-8.13.2\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.navigation:navigation-common:2.8.5] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\64d84b40b7cfb2f91261a3c36b54057f\transformed\navigation-common-2.8.5\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.navigation:navigation-runtime:2.8.5] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\931180f34644ff988ec7102037838ef4\transformed\navigation-runtime-2.8.5\AndroidManifest.xml:17:1-22:12
@@ -210,8 +210,8 @@ MERGED from [com.google.firebase:firebase-messaging:24.1.0] C:\Users\KARTIK DILI
 	android:name
 		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:7:22-74
 application
-ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:9:5-99:19
-INJECTED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:9:5-99:19
+ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:9:5-108:19
+INJECTED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:9:5-108:19
 MERGED from [com.google.android.material:material:1.13.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\e1366c66f053d302f0790a680c73f6c3\transformed\material-1.13.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.13.0] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\e1366c66f053d302f0790a680c73f6c3\transformed\material-1.13.0\AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.2.1] C:\Users\KARTIK DILIP THORAT\.gradle\caches\8.13\transforms\428213cb97ba794df640e7417d7997ce\transformed\constraintlayout-2.2.1\AndroidManifest.xml:7:5-20
@@ -532,6 +532,22 @@ MERGED from [com.google.android.gms:play-services-ads-lite:23.6.0] C:\Users\KART
 		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:98:13-45
 	android:name
 		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:96:13-65
+activity#com.kartik.messapp.ui.mess.students.PastMembersActivity
+ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:99:9-102:52
+	android:screenOrientation
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:102:13-49
+	android:exported
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:101:13-37
+	android:name
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:100:13-65
+activity#com.kartik.messapp.ui.mess.students.PastMemberDetailsActivity
+ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:103:9-106:52
+	android:screenOrientation
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:106:13-49
+	android:exported
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:105:13-37
+	android:name
+		ADDED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml:104:13-71
 uses-sdk
 INJECTED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from D:\8)Android Development\messapp\app\src\main\AndroidManifest.xml

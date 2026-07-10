@@ -668,12 +668,13 @@
                             </FrameLayout>
 
                             <TextView
+                                android:id="@+id/text_change_mess_label"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="14dp"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/inter"
-                                android:text="Change mess"
+                                android:text="Join / Change mess"
                                 android:textColor="@color/text_heading"
                                 android:textSize="15sp" />
 

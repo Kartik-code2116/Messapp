@@ -35,6 +35,8 @@ public class UserProfileFragment extends Fragment {
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private String currentUserMessId;
+    private String currentUserName;
+    private String currentUserPhone;
     private ListenerRegistration profileListener;
     private long lastRenewClickTime = 0;
 
@@ -110,20 +112,23 @@ public class UserProfileFragment extends Fragment {
                     String messId = doc.getString("messId");
                     currentUserMessId = messId;
                     String name = doc.getString("name");
-
+                    currentUserName = name;
                     String displayName = name != null && !name.isEmpty() ? name : "Student";
                     binding.textProfileName.setText(displayName);
                     binding.textProfileNameCard.setText(displayName);
 
                     String phone = doc.getString("phone");
+                    currentUserPhone = phone;
                     binding.textProfilePhone.setText(phone != null && !phone.isEmpty() ? phone : "Not set");
 
                     if (messId != null) {
                         binding.textProfileMessId.setText("Mess ID: " + messId);
                         fetchMessName(messId);
+                        binding.textChangeMessLabel.setText("Change mess");
                     } else {
                         binding.textProfileMessId.setVisibility(View.GONE);
                         binding.textProfileMessName.setText("Not Joined");
+                        binding.textChangeMessLabel.setText("Join mess");
                     }
 
                     Long lunchExpiry   = doc.getLong("lunchSubscriptionExpiry");
@@ -192,7 +197,8 @@ public class UserProfileFragment extends Fragment {
 
     private void handleChangeMess() {
         if (currentUserMessId == null || currentUserMessId.isEmpty()) {
-            Toast.makeText(getContext(), "You are not joined to any mess.", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getContext(), JoinMessActivity.class);
+            startActivity(intent);
             return;
         }
 
@@ -212,8 +218,19 @@ public class UserProfileFragment extends Fragment {
                         updates.put("autoSelectLunch", false);
                         updates.put("autoSelectDinner", false);
 
-                        db.collection("users").document(user.getUid())
-                                .update(updates)
+                        Map<String, Object> leaverData = new HashMap<>();
+                        leaverData.put("userId", user.getUid());
+                        leaverData.put("messId", currentUserMessId);
+                        leaverData.put("name", currentUserName != null ? currentUserName : "Unknown");
+                        leaverData.put("phone", currentUserPhone != null ? currentUserPhone : "");
+                        leaverData.put("email", user.getEmail() != null ? user.getEmail() : "");
+                        leaverData.put("leftAt", System.currentTimeMillis());
+
+                        com.google.firebase.firestore.WriteBatch batch = db.batch();
+                        batch.update(db.collection("users").document(user.getUid()), updates);
+                        batch.set(db.collection("mess_leavers").document(), leaverData);
+
+                        batch.commit()
                                 .addOnSuccessListener(aVoid -> {
                                     if (getContext() != null) {
                                         Toast.makeText(getContext(), "Successfully left the mess.", Toast.LENGTH_SHORT).show();
