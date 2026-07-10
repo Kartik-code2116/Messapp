@@ -20,8 +20,11 @@ import com.kartik.messapp.RoleSelectionActivity;
 import com.kartik.messapp.databinding.FragmentUserProfileBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.kartik.messapp.utils.ThemeManager;
 
@@ -44,6 +47,7 @@ public class UserProfileFragment extends Fragment {
 
         loadUserProfile();
 
+        binding.btnChangeMess.setOnClickListener(v -> handleChangeMess());
         binding.btnChangePassword.setOnClickListener(v -> handleChangePassword());
         binding.btnLogout.setOnClickListener(v -> handleLogout());
         binding.btnHelpSupport.setOnClickListener(v -> handleHelpSupport());
@@ -183,6 +187,46 @@ public class UserProfileFragment extends Fragment {
         intent.putExtra(com.kartik.messapp.MessReviewsActivity.EXTRA_MESS_ID, currentUserMessId);
         intent.putExtra(com.kartik.messapp.MessReviewsActivity.EXTRA_OPEN_REVIEW_DIALOG, openReviewDialog);
         startActivity(intent);
+    }
+
+    private void handleChangeMess() {
+        if (currentUserMessId == null || currentUserMessId.isEmpty()) {
+            Toast.makeText(getContext(), "You are not joined to any mess.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        new AlertDialog.Builder(requireContext())
+                .setTitle("Change Mess")
+                .setMessage("Are you sure you want to leave your current mess? Your active subscription will be cleared and you will have to join a new mess.")
+                .setPositiveButton("Yes, leave mess", (dialog, which) -> {
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    if (user != null) {
+                        Map<String, Object> updates = new HashMap<>();
+                        updates.put("messId", FieldValue.delete());
+                        updates.put("subscriptionExpiry", 0);
+                        updates.put("lunchSubscriptionExpiry", 0);
+                        updates.put("dinnerSubscriptionExpiry", 0);
+                        updates.put("oneTimeMealExpiry", 0);
+                        updates.put("subscriptionType", "NONE");
+                        updates.put("autoSelectLunch", false);
+                        updates.put("autoSelectDinner", false);
+
+                        db.collection("users").document(user.getUid())
+                                .update(updates)
+                                .addOnSuccessListener(aVoid -> {
+                                    if (getContext() != null) {
+                                        Toast.makeText(getContext(), "Successfully left the mess.", Toast.LENGTH_SHORT).show();
+                                    }
+                                })
+                                .addOnFailureListener(e -> {
+                                    if (getContext() != null) {
+                                        Toast.makeText(getContext(), "Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                    }
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
     }
 
     private void handleChangePassword() {

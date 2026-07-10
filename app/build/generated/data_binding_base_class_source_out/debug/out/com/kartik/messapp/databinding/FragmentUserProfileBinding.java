@@ -26,6 +26,9 @@ public final class FragmentUserProfileBinding implements ViewBinding {
   private final FrameLayout rootView;
 
   @NonNull
+  public final LinearLayout btnChangeMess;
+
+  @NonNull
   public final LinearLayout btnChangePassword;
 
   @NonNull
@@ -92,18 +95,20 @@ public final class FragmentUserProfileBinding implements ViewBinding {
   public final TextView textSubscriptionExpiry;
 
   private FragmentUserProfileBinding(@NonNull FrameLayout rootView,
-      @NonNull LinearLayout btnChangePassword, @NonNull FloatingActionButton btnEditProfileImage,
-      @NonNull LinearLayout btnHelpSupport, @NonNull LinearLayout btnLogout,
-      @NonNull LinearLayout btnMyReviews, @NonNull MaterialButton btnRenewSubscription,
-      @NonNull MaterialButton btnSeeReviews, @NonNull MaterialButton btnWriteReview,
-      @NonNull ShapeableImageView profileImage, @NonNull ProgressBar progressBar,
-      @NonNull MaterialSwitch switchDarkMode, @NonNull TextView textDinnerExpiry,
-      @NonNull TextView textLunchExpiry, @NonNull TextView textOneTimeExpiry,
-      @NonNull TextView textProfileEmail, @NonNull TextView textProfileEmailCard,
-      @NonNull TextView textProfileMessId, @NonNull TextView textProfileMessName,
-      @NonNull TextView textProfileName, @NonNull TextView textProfileNameCard,
-      @NonNull TextView textProfilePhone, @NonNull TextView textSubscriptionExpiry) {
+      @NonNull LinearLayout btnChangeMess, @NonNull LinearLayout btnChangePassword,
+      @NonNull FloatingActionButton btnEditProfileImage, @NonNull LinearLayout btnHelpSupport,
+      @NonNull LinearLayout btnLogout, @NonNull LinearLayout btnMyReviews,
+      @NonNull MaterialButton btnRenewSubscription, @NonNull MaterialButton btnSeeReviews,
+      @NonNull MaterialButton btnWriteReview, @NonNull ShapeableImageView profileImage,
+      @NonNull ProgressBar progressBar, @NonNull MaterialSwitch switchDarkMode,
+      @NonNull TextView textDinnerExpiry, @NonNull TextView textLunchExpiry,
+      @NonNull TextView textOneTimeExpiry, @NonNull TextView textProfileEmail,
+      @NonNull TextView textProfileEmailCard, @NonNull TextView textProfileMessId,
+      @NonNull TextView textProfileMessName, @NonNull TextView textProfileName,
+      @NonNull TextView textProfileNameCard, @NonNull TextView textProfilePhone,
+      @NonNull TextView textSubscriptionExpiry) {
     this.rootView = rootView;
+    this.btnChangeMess = btnChangeMess;
     this.btnChangePassword = btnChangePassword;
     this.btnEditProfileImage = btnEditProfileImage;
     this.btnHelpSupport = btnHelpSupport;
@@ -155,6 +160,12 @@ public final class FragmentUserProfileBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.btn_change_mess;
+      LinearLayout btnChangeMess = ViewBindings.findChildViewById(rootView, id);
+      if (btnChangeMess == null) {
+        break missingId;
+      }
+
       id = R.id.btn_change_password;
       LinearLayout btnChangePassword = ViewBindings.findChildViewById(rootView, id);
       if (btnChangePassword == null) {
@@ -287,10 +298,10 @@ public final class FragmentUserProfileBinding implements ViewBinding {
         break missingId;
       }
 
-      return new FragmentUserProfileBinding((FrameLayout) rootView, btnChangePassword,
-          btnEditProfileImage, btnHelpSupport, btnLogout, btnMyReviews, btnRenewSubscription,
-          btnSeeReviews, btnWriteReview, profileImage, progressBar, switchDarkMode,
-          textDinnerExpiry, textLunchExpiry, textOneTimeExpiry, textProfileEmail,
+      return new FragmentUserProfileBinding((FrameLayout) rootView, btnChangeMess,
+          btnChangePassword, btnEditProfileImage, btnHelpSupport, btnLogout, btnMyReviews,
+          btnRenewSubscription, btnSeeReviews, btnWriteReview, profileImage, progressBar,
+          switchDarkMode, textDinnerExpiry, textLunchExpiry, textOneTimeExpiry, textProfileEmail,
           textProfileEmailCard, textProfileMessId, textProfileMessName, textProfileName,
           textProfileNameCard, textProfilePhone, textSubscriptionExpiry);
     }

@@ -292,6 +292,7 @@ public class UserHistoryFragment extends Fragment {
         if (binding == null) return;
 
         Map<String, MealSelection> dailyMealSelections = new HashMap<>();
+        String todayStr = DATE_KEY_FORMAT.format(new Date());
 
         try {
             Date start = DATE_KEY_FORMAT.parse(startDate);
@@ -327,8 +328,9 @@ public class UserHistoryFragment extends Fragment {
                         isDinnerSubscribed = dExp >= dayTime;
                     }
 
-                    String defaultLunch = normalizeStatus(null, "LUNCH", subscriptionType, autoSelectLunch, autoSelectDinner, oneTimeAutoSelect, isLunchSubscribed);
-                    String defaultDinner = normalizeStatus(null, "DINNER", subscriptionType, autoSelectLunch, autoSelectDinner, oneTimeAutoSelect, isDinnerSubscribed);
+                    boolean isPastDate = dateStr.compareTo(todayStr) < 0;
+                    String defaultLunch = normalizeStatus(null, "LUNCH", subscriptionType, autoSelectLunch, autoSelectDinner, oneTimeAutoSelect, isLunchSubscribed, isPastDate);
+                    String defaultDinner = normalizeStatus(null, "DINNER", subscriptionType, autoSelectLunch, autoSelectDinner, oneTimeAutoSelect, isDinnerSubscribed, isPastDate);
                     dailyMealSelections.put(dateStr, new MealSelection(userId, dateStr, defaultLunch, defaultDinner));
                     
                     current.add(Calendar.DAY_OF_MONTH, 1);
@@ -338,11 +340,11 @@ public class UserHistoryFragment extends Fragment {
 
         if (byUserSnapshot != null) {
             mergeMealDocuments(byUserSnapshot.getDocuments(), userId, startDate, endDate, subscriptionType,
-                    autoSelectLunch, autoSelectDinner, oneTimeAutoSelect, lExp, dExp, oExp, dailyMealSelections);
+                    autoSelectLunch, autoSelectDinner, oneTimeAutoSelect, lExp, dExp, oExp, dailyMealSelections, todayStr);
         }
         if (directDocs != null) {
             mergeMealDocuments(directDocs, userId, startDate, endDate, subscriptionType,
-                    autoSelectLunch, autoSelectDinner, oneTimeAutoSelect, lExp, dExp, oExp, dailyMealSelections);
+                    autoSelectLunch, autoSelectDinner, oneTimeAutoSelect, lExp, dExp, oExp, dailyMealSelections, todayStr);
         }
 
         List<MealSelection> results = new ArrayList<>(dailyMealSelections.values());
@@ -361,7 +363,7 @@ public class UserHistoryFragment extends Fragment {
                                     boolean autoSelectLunch, boolean autoSelectDinner,
                                     String oneTimeAutoSelect,
                                     long lExp, long dExp, long oExp,
-                                    Map<String, MealSelection> dailyMealSelections) {
+                                    Map<String, MealSelection> dailyMealSelections, String todayStr) {
         for (DocumentSnapshot document : snapshot) {
             if (!belongsToUser(document, userId)) {
                 continue;
@@ -394,10 +396,11 @@ public class UserHistoryFragment extends Fragment {
                 }
             } catch (ParseException ignored) {}
 
+            boolean isPastDate = date.compareTo(todayStr) < 0;
             String lunchStatus = normalizeStatus(lunch, "LUNCH", subscriptionType,
-                    autoSelectLunch, autoSelectDinner, oneTimeAutoSelect, isLunchSubscribed);
+                    autoSelectLunch, autoSelectDinner, oneTimeAutoSelect, isLunchSubscribed, isPastDate);
             String dinnerStatus = normalizeStatus(dinner, "DINNER", subscriptionType,
-                    autoSelectLunch, autoSelectDinner, oneTimeAutoSelect, isDinnerSubscribed);
+                    autoSelectLunch, autoSelectDinner, oneTimeAutoSelect, isDinnerSubscribed, isPastDate);
 
             MealSelection existing = dailyMealSelections.get(date);
             if (existing == null) {
@@ -477,11 +480,14 @@ public class UserHistoryFragment extends Fragment {
 
     private String normalizeStatus(@Nullable String status, String mealType, String subscriptionType,
                                    boolean autoSelectLunch, boolean autoSelectDinner, String oneTimeAutoSelect,
-                                   boolean isMealSubscribed) {
+                                   boolean isMealSubscribed, boolean isPastDate) {
         if (!isMealSubscribed) {
             return "No Subscription";
         }
         if (status == null || status.trim().isEmpty() || "RESET".equalsIgnoreCase(status.trim())) {
+            if (isPastDate) {
+                return "Not marked";
+            }
             boolean isOneTime = "ONE_TIME".equals(subscriptionType);
             if (isOneTime) {
                 if (mealType.equals("LUNCH") && "LUNCH".equals(oneTimeAutoSelect)) {
