@@ -291,8 +291,10 @@ id appBar
 id app_logo
 id appbar_dashboard
 id badge_today
+id btnBack
 id btnForgotPassword
 id btnGoogleLogin
+id btnJoinMess
 id btnMainAction
 id btnSaveProfile
 id btnSwitchMode
@@ -757,6 +759,7 @@ id til_dinner
 id til_lunch
 id toolbar
 id toolbar_report
+id topBar
 id top_header
 id tv_header
 id tv_privacy_policy
@@ -769,6 +772,7 @@ id view_accent_bar
 layout activity_complete_profile
 layout activity_edit_mess_profile
 layout activity_edit_user_profile
+layout activity_join_mess
 layout activity_login
 layout activity_mess_dashboard
 layout activity_mess_reviews

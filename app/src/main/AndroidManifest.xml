@@ -40,6 +40,7 @@
         <activity
             android:name=".RoleSelectionActivity"
             android:exported="false"/>
+        <activity android:name=".JoinMessActivity" android:exported="false" />
         <activity android:name=".LoginActivity" android:exported="false" />
         <activity android:name=".CompleteProfileActivity" android:exported="false" />
         <activity android:name=".UserDashboardActivity" android:exported="false" />

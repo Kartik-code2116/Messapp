@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
+import com.kartik.messapp.JoinMessActivity;
 import com.kartik.messapp.R;
 import com.kartik.messapp.RoleSelectionActivity;
 import com.kartik.messapp.databinding.FragmentUserProfileBinding;
@@ -216,6 +217,8 @@ public class UserProfileFragment extends Fragment {
                                 .addOnSuccessListener(aVoid -> {
                                     if (getContext() != null) {
                                         Toast.makeText(getContext(), "Successfully left the mess.", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(getContext(), JoinMessActivity.class);
+                                        startActivity(intent);
                                     }
                                 })
                                 .addOnFailureListener(e -> {

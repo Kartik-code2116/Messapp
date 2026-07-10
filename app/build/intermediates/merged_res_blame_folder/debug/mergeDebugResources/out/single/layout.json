@@ -40,6 +40,10 @@
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-main-72:\\layout\\dialog_sent_messages.xml"
     },
     {
+        "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-mergeDebugResources-69:\\layout\\activity_join_mess.xml",
+        "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-main-72:\\layout\\activity_join_mess.xml"
+    },
+    {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-mergeDebugResources-69:\\layout\\dialog_add_review.xml",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-main-72:\\layout\\dialog_add_review.xml"
     },
@@ -144,10 +148,6 @@
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-main-72:\\layout\\fragment_mess_revenue.xml"
     },
     {
-        "merged": "com.kartik.messapp-mergeDebugResources-69:/layout/fragment_user_profile.xml",
-        "source": "com.kartik.messapp-main-72:/layout/fragment_user_profile.xml"
-    },
-    {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-mergeDebugResources-69:\\layout\\activity_edit_user_profile.xml",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-main-72:\\layout\\activity_edit_user_profile.xml"
     },
@@ -218,5 +218,9 @@
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-mergeDebugResources-69:\\layout\\activity_subscription_report.xml",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-main-72:\\layout\\activity_subscription_report.xml"
+    },
+    {
+        "merged": "com.kartik.messapp-mergeDebugResources-69:/layout/activity_join_mess.xml",
+        "source": "com.kartik.messapp-main-72:/layout/activity_join_mess.xml"
     }
 ]

@@ -127,6 +127,9 @@
             android:name="com.kartik.messapp.RoleSelectionActivity"
             android:exported="false" />
         <activity
+            android:name="com.kartik.messapp.JoinMessActivity"
+            android:exported="false" />
+        <activity
             android:name="com.kartik.messapp.LoginActivity"
             android:exported="false" />
         <activity

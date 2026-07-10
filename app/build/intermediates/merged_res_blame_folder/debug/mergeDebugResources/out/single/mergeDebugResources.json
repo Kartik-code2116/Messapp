@@ -444,6 +444,10 @@
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-main-72:\\drawable\\bg_rounded_card_primary_light.xml"
     },
     {
+        "merged": "com.kartik.messapp-debug-70:/layout_activity_join_mess.xml.flat",
+        "source": "com.kartik.messapp-main-72:/layout/activity_join_mess.xml"
+    },
+    {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-debug-70:\\drawable_bg_food_image_warm_overlay.xml.flat",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-main-72:\\drawable\\bg_food_image_warm_overlay.xml"
     },
@@ -652,10 +656,6 @@
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-main-72:\\drawable\\bg_rounded_top_sheet.xml"
     },
     {
-        "merged": "com.kartik.messapp-debug-70:/layout_fragment_user_profile.xml.flat",
-        "source": "com.kartik.messapp-main-72:/layout/fragment_user_profile.xml"
-    },
-    {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-debug-70:\\layout_dialog_sent_messages.xml.flat",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-main-72:\\layout\\dialog_sent_messages.xml"
     },
@@ -830,6 +830,10 @@
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-debug-70:\\drawable_circle_border_white.xml.flat",
         "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-main-72:\\drawable\\circle_border_white.xml"
+    },
+    {
+        "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-debug-70:\\layout_activity_join_mess.xml.flat",
+        "source": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-main-72:\\layout\\activity_join_mess.xml"
     },
     {
         "merged": "C:\\Users\\KARTIK DILIP THORAT\\.gradle\\daemon\\8.13\\com.kartik.messapp-debug-70:\\drawable_ic_location_on.xml.flat",
