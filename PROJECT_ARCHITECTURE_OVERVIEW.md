@@ -1,1096 +1,580 @@
-# MessApp Project Architecture Overview
+# MessApp Project Architecture & Structural Overview
+
+This document provides a complete, accurate, and structured blueprint of the **MessApp** Android Application. It serves as an exact reference guide for rebuilding or scaling this application architecture.
+
+---
 
 ## 1. HIGH-LEVEL SYSTEM ARCHITECTURE
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                    MESSAPP ANDROID APPLICATION                  │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                 │
-│  ┌──────────────────────────────────────────────────────────┐   │
-│  │              USER INTERFACE LAYER                        │   │
-│  │  ┌─────────────────────────────────────────────────────┐ │   │
-│  │  │           Activities (Entry Points)                 │ │   │
-│  │  │  • SplashActivity → LoginActivity → RoleSelection   │ │   │
-│  │  │  • MainActivity (Router)                            │ │   │
-│  │  │  • UserDashboardActivity                            │ │   │
-│  │  │  • MessDashboardActivity                            │ │   │
-│  │  │  • EditMessProfileActivity                          │ │   │
-│  │  └─────────────────────────────────────────────────────┘ │   │
-│  │                           ↓                              │   │
-│  │  ┌─────────────────────────────────────────────────────┐ │   │
-│  │  │         Fragments (UI Components)                   │ │   │
-│  │  │  User Side:                                         │ │   │
-│  │  │  • UserHomeFragment (Mess Discovery)                │ │   │
-│  │  │  • MessDetailFragment (View Details/Reviews)        │ │   │
-│  │  │  • UserMenuFragment (Menu View)                     │ │   │
-│  │  │  • UserHistoryFragment (Subscription History)       │ │   │
-│  │  │  • UserProfileFragment (User Profile)               │ │   │
-│  │  │  • EditUserProfileActivity (Profile Editor)         │ │   │
-│  │  │                                                     │ │   │
-│  │  │  Mess Owner Side:                                   │ │   │
-│  │  │  • MessProfileFragment (Edit Profile)               │ │   │
-│  │  │  • MessMenuFragment (Manage Menu)                   │ │   │
-│  │  │  • MessStudentsFragment (View Subscribers)          │ │   │
-│  │  │  • MessDashboardFragment (Overview & Analytics)     │ │   │
-│  │  │  • MessRevenueFragment (Revenue Tracking)           │ │   │
-│  │  │  • MessRequestsFragment (Subscription Requests)     │ │   │
-│  │  │  • MessOffersFragment (Manage Offers)               │ │   │
-│  │  │  • AddOfferFragment (Create Offers)                 │ │   │
-│  │  └─────────────────────────────────────────────────────┘ │   │
-│  └──────────────────────────────────────────────────────────┘   │
-│                           ↓                                     │
-│  ┌──────────────────────────────────────────────────────────┐   │
-│  │          BUSINESS LOGIC LAYER (Manager Classes)          │   │
-│  │  ┌─────────────────────────────────────────────────────┐ │   │
-│  │  │  Profile    Menu       Subscription   Payment       │ │   │
-│  │  │  Manager    Manager    Manager        Manager       │ │   │
-│  │  │     ↓         ↓           ↓              ↓          │ │   │
-│  │  │  Review     Offer      Discovery   Analytics        │ │   │
-│  │  │  Manager    Manager    Manager      Manager         │ │   │
-│  │  │     ↓         ↓           ↓              ↓          │ │   │
-│  │  │         FirebaseNotificationManager                 │ │   │
-│  │  └─────────────────────────────────────────────────────┘ │   │
-│  └──────────────────────────────────────────────────────────┘   │
-│                           ↓                                     │
-│  ┌──────────────────────────────────────────────────────────┐   │
-│  │          DATA LAYER (Models & Firebase)                  │   │
-│  │  ┌─────────────────────────────────────────────────────┐ │   │
-│  │  │   Models              Firestore Collections         │ │   │
-│  │  │   --------            ---------------------         │ │   │
-│  │  │  • Mess               • messes/                     │ │   │
-│  │  │  • Menu               • menus/                      │ │   │
-│  │  │  • Subscription       • subscriptions/              │ │   │
-│  │  │  • Review             • reviews/                    │ │   │
-│  │  │  • Offer              • offers/                     │ │   │
-│  │  │  • Student            • users/                      │ │   │
-│  │  │  • Transaction        • transactions/               │ │   │
-│  │  │                       • notification_events/        │ │   │
-│  │  │                       • notification_preferences/   │ │   │
-│  │  └─────────────────────────────────────────────────────┘ │   │
-│  └──────────────────────────────────────────────────────────┘   │
-│                           ↓                                     │
-│  ┌──────────────────────────────────────────────────────────┐   │
-│  │              EXTERNAL SERVICES                           │   │
-│  │  • Firebase Authentication (Email/Password + Google)     │   │
-│  │  • Firebase Firestore (NoSQL Database)                   │   │
-│  │  • Firebase Cloud Messaging (Push Notifications)         │   │
-│  │  • Firebase Storage (Optional for images)                │   │
-│  └──────────────────────────────────────────────────────────┘   │
-│                                                                 │
-└─────────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────────────────────────┐
+│                               MESSAPP SYSTEM ARCHITECTURE                               │
+├─────────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                         │
+│  ┌───────────────────────────────────────────────────────────────────────────────────┐  │
+│  │                              PRESENTATION LAYER (UI)                              │  │
+│  │                                                                                   │  │
+│  │  ENTRY & AUTHENTICATION ACTIVITIES                                                │  │
+│  │  • SplashActivity (App Entry / Deep Link Router)                                  │  │
+│  │  • OnboardingActivity (App Walkthrough)                                           │  │
+│  │  • LoginActivity (Email/Password + Google Sign-In)                                │  │
+│  │  • RoleSelectionActivity (Student USER vs MESS_OWNER Role Selection)              │  │
+│  │  • CompleteProfileActivity (Initial Profile Setup)                                │  │
+│  │  • JoinMessActivity (Mess Invitation / QR Code Join)                              │  │
+│  │  • CustomCaptureActivity (ZXing QR Scanner)                                       │  │
+│  │                                                                                   │  │
+│  │  MAIN DASHBOARD CONTAINERS                                                        │  │
+│  │  • UserDashboardActivity (Student App Container)                                  │  │
+│  │  • MessDashboardActivity (Mess Owner App Container)                               │  │
+│  │                                                                                   │  │
+│  │  SECONDARY & MANAGEMENT ACTIVITIES                                                │  │
+│  │  • EditMessProfileActivity   • EditUserProfileActivity   • MessSettingsActivity     │  │
+│  │  • MessReviewsActivity       • MyReviewsActivity         • WeeklyMenuActivity       │  │
+│  │  • SubscriptionReportActivity• PastMembersActivity      • PastMemberDetailsActivity│  │
+│  │                                                                                   │  │
+│  │  UI FRAGMENTS                                                                     │  │
+│  │  ┌────────────────────────────────────────┬────────────────────────────────────┐  │
+│  │  │ Student / User Side                    │ Mess Owner Side                    │  │
+│  │  │ • UserHomeFragment (Discovery/Search)    │ • MessDashboardFragment (Analytics)│  │
+│  │  │ • MessDetailFragment (Profile/Subscribe) │ • MessProfileFragment (Edit Info)  │  │
+│  │  │ • UserMenuFragment (Daily Menu View)    │ • MessMenuFragment (Menu Management│  │
+│  │  │ • UserHistoryFragment (Sub History)    │ • MessStudentsFragment (Students)  │  │
+│  │  │ • UserProfileFragment (Student Profile)│ • MessRevenueFragment (Earnings)   │  │
+│  │  │                                        │ • MessRequestsFragment (Requests)  │  │
+│  │  │                                        │ • MessOffersFragment (Promotions)  │  │
+│  │  │                                        │ • AddOfferFragment (Create Offer)  │  │
+│  │  └────────────────────────────────────────┴────────────────────────────────────┘  │
+│  └───────────────────────────────────────────────────────────────────────────────────┘  │
+│                                           ↓                                             │
+│  ┌───────────────────────────────────────────────────────────────────────────────────┐  │
+│  │                        BUSINESS LOGIC & MANAGER LAYER                             │  │
+│  │  • ProfileManager       • MenuManager              • SubscriptionManager          │  │
+│  │  • PaymentManager       • ReviewManager            • OfferManager                 │  │
+│  │  • DiscoveryManager     • AnalyticsManager         • FirebaseNotificationManager  │  │
+│  │  • MessNotificationManager                         • GuestModeManager             │  │
+│  └───────────────────────────────────────────────────────────────────────────────────┘  │
+│                                           ↓                                             │
+│  ┌───────────────────────────────────────────────────────────────────────────────────┐  │
+│  │                             DATA & MODEL LAYER                                    │  │
+│  │  MODELS                                                                           │  │
+│  │  • Mess             • Menu            • Subscription    • SubscriptionRequest     │  │
+│  │  • Student          • Review          • Offer           • Transaction             │  │
+│  │  • MealRequest      • MealSelection   • PastMember      • OnboardingItem          │  │
+│  │                                                                                   │  │
+│  │  FIRESTORE COLLECTIONS                                                            │  │
+│  │  • users            • messes          • menus           • default_menus           │  │
+│  │  • mess_settings    • meal_selections • subscriptions   • subscriptionRequests    │  │
+│  │  • mess_notifications • transactions  • reviews         • offers                  │  │
+│  │  • analytics_events • notification_events • mess_leavers • notification_preferences│  │
+│  └───────────────────────────────────────────────────────────────────────────────────┘  │
+│                                           ↓                                             │
+│  ┌───────────────────────────────────────────────────────────────────────────────────┐  │
+│  │                         EXTERNAL SERVICES & PLATFORM                              │  │
+│  │  • Firebase Authentication (Email/Password + Google OAuth)                        │  │
+│  │  • Firebase Cloud Firestore (NoSQL Database with Realtime Listeners)              │  │
+│  │  • Firebase Cloud Messaging / FCM (Push Notifications & Topics)                   │  │
+│  │  • ZXing Embedded Library (QR Code Generation & Scanning)                          │  │
+│  │  • Google AdMob (Monetization Ads Integration)                                    │  │
+│  └───────────────────────────────────────────────────────────────────────────────────┘  │
+│                                                                                         │
+└─────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 2. ACTIVITY FLOW DIAGRAM
+## 2. COMPLETE PROJECT DIRECTORY & PACKAGE STRUCTURE
 
 ```
-┌─────────────────┐
-│  SplashActivity │ (Shows for 2-3 seconds)
-│   (Intro)       │
-└────────┬────────┘
-         │
-         ↓
-┌─────────────────────────────────────────────┐
-│        LoginActivity                        │
-│  • Email & Password Input                   │
-│  • Google Sign-in Authentication            │
-│  • Firebase Authentication                  │
-│  • Role Check (User/Mess Owner)             │
-└────────┬────────────────────────────────────┘
-         │
-         ↓
-┌────────────────────────────────────────────────┐
-│     RoleSelectionActivity                      │
-│  • Select Role: User OR Mess Owner             │
-│  • Store role in Firebase User Document        │
-└────────┬───────────────────────────────────────┘
-         │
-         ├─────── USER ────────┬───────── MESS OWNER ────────┐
-         │                     │                             │
-         ↓                     ↓                             ↓
-    ┌────────────┐    ┌──────────────────┐    ┌──────────────────────┐
-    │ UserDash   │    │ MessDashboard    │    │ MessDashboardActivity│
-    │ Activity   │    │ Activity         │    │ (Owner Dashboard)    │
-    │            │    │                  │    │                      │
-    │ Contains:  │    │ Contains:        │    │ Contains:            │
-    │ • Home     │    │ • Profile        │    │ • Profile            │
-    │ • Menu     │    │ • Menu           │    │ • Menu               │
-    │ • History  │    │ • Students       │    │ • Students           │
-    │ • Profile  │    │ • Revenue        │    │ • Revenue            │
-    │ • Discover │    │ • Requests       │    │ • Requests           │
-    │            │    │ • Offers         │    │ • Offers             │
-    │            │    │ • Analytics      │    │ • Analytics          │
-    └────────────┘    └──────────────────┘    └──────────────────────┘
-         │                    │                             │
-         └────────┬───────────┴─────────────────────────────┘
-                  │
-         ┌────────┴───────────────┐
-         │                        │
-         ↓                        ↓
-    ┌──────────────────┐   ┌──────────────────────────────┐
-    │ EditMessProfile  │   │ MyFirebaseMessagingService   │
-    │ Activity (Opt)   │   │ (FCM Service)                │
-    │                  │   │ • Receives Push Notifications│
-    │ • Detailed edit  │   │ • Topic Subscriptions        │
-    │ • Photos/Images  │   │ • Message Handling           │
-    └──────────────────┘   └──────────────────────────────┘
-```
-
----
-
-## 3. MANAGER CLASSES & THEIR RELATIONSHIPS
-
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                    MANAGER CLASSES INTERACTION DIAGRAM                  │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                         │
-│  ┌──────────────────┐                                                   
-│  │ ProfileManager   │                                                   
-│  │──────────────────┤                                                   
-│  │ • fetchMessProf  │───────┐                                           
-│  │ • updateProfile  │       │                                           
-│  │ • getCurrentUser │       │ Reads/Writes                              
-│  │ • isComplete     │       │ Firestore                                 
-│  └──────────────────┘       │ "messes"                                  
-│                             │ collection                                
-│                             │                                           
-│  ┌──────────────────┐       │                                           
-│  │ MenuManager      │       │                                           
-│  │──────────────────┤       │                                           
-│  │ • createMenu     │───────┼──→ ┌─────────────────┐                    
-│  │ • getWeeklyMenu  │       │    │   FireStore     │                    
-│  │ • updateAvail    │       │    │                 │                    
-│  │ • addMealItems   │       │    │ Collections:    │                    
-│  └──────────────────┘       │    │ • messes        │                    
-│                             │    │ • menus         │                    
-│  ┌──────────────────┐       │    │ • subscriptions │                    
-│  │SubscriptionMngr  │       │    │ • reviews       │                    
-│  │──────────────────┤       │    │ • offers        │                    
-│  │ • createSub      │───────┤    │ • users         │                    
-│  │ • hasActiveSub   │       │    │ • transactions  │                    
-│  │ • renewSub       │       │    │ • events        │                    
-│  │ • cancelSub      │       │    └─────────────────┘                    
-│  └──────────────────┘       │                                           
-│                             │                                           
-│  ┌──────────────────┐       │                                           
-│  │ PaymentManager   │       │                                           
-│  │──────────────────┤       │                                           
-│  │ • processPayment │───────┤ (95% success rate)                        
-│  │ • getTransact    │       │ Creates subscription                      
-│  │ • calcRevenue    │       │ on success                                
-│  │ • getSubCount    │       │                                           
-│  └──────────────────┘       │                                           
-│         ↑                   │                                           
-│         │ Uses              │                                           
-│         │                   │                                           
-│  ┌──────────────────┐       │                                           
-│  │ ReviewManager    │       │                                           
-│  │──────────────────┤       │                                           
-│  │ • createReview   │───────┤ (Updates avg rating)                      
-│  │ • getReviews     │       │                                           
-│  │ • getAvgRating   │       │                                           
-│  │ • likeReview     │       │                                           
-│  │ • updateAvgRating│       │                                           
-│  └──────────────────┘       │                                           
-│                             │                                           
-│  ┌──────────────────┐       │                                           
-│  │ OfferManager     │       │                                           
-│  │──────────────────┤       │                                           
-│  │ • createOffer    │───────┤                                           
-│  │ • getOffers      │       │                                           
-│  │ • trackUsage     │       │                                           
-│  │ • isOfferValid   │       │                                           
-│  └──────────────────┘       │                                           
-│                             │                                           
-│  ┌──────────────────┐       │                                           
-│  │ DiscoveryManager │       │                                           
-│  │──────────────────┤       │                                           
-│  │ • searchMesses   │───────┤ (Client-side search)                      
-│  │ • advancedSearch │       │                                           
-│  │ • getTopRated    │       │                                           
-│  │ • getByPrice     │       │                                           
-│  │ • getPopular     │       │                                           
-│  └──────────────────┘       │                                           
-│                             │                                           
-│  ┌──────────────────┐       │                                           
-│  │ AnalyticsManager │       │                                           
-│  │──────────────────┤       │                                           
-│  │ • getDashboard   │───────┤ (Aggregates data)                         
-│  │ • getTotalSubs   │       │                                           
-│  │ • getRevenue     │       │                                           
-│  │ • trackPageView  │       │                                           
-│  └──────────────────┘       │                                           
-│                             │                                           
-│  ┌─────────────────────────┐│                                           
-│  │ FirebaseNotification    ││                                           
-│  │ Manager (Backbone)      ││                                           
-│  │─────────────────────────┤│                                           
-│  │ • createNotifChannel    ││                                           
-│  │ • getFCMToken           ││                                           
-│  │ • subscribeToTopic      ││─────┬─ All Managers                       
-│  │ • saveDeviceToken       ││     │ use FCM for                         
-│  │ • sendTestNotif         ││     │ notifications                       
-│  │ • logEvent              ││─────┘                                     
-│  │ • getNotifPreferences   ││                                           
-│  └─────────────────────────┘│                                           
-│                             │                                           
-└─────────────────────────────────────────────────────────────────────────┘
+d:\8)Android Development\messapp\
+├── app/
+│   ├── src/
+│   │   ├── main/
+│   │   │   ├── java/com/kartik/messapp/
+│   │   │   │   ├── Root Package Files (Activities & Service):
+│   │   │   │   │   ├── SplashActivity.java                (Launcher / Entry point router)
+│   │   │   │   │   ├── OnboardingActivity.java            (App intro carousel walkthrough)
+│   │   │   │   │   ├── LoginActivity.java                 (Auth: Email/Pass + Google Sign-In)
+│   │   │   │   │   ├── RoleSelectionActivity.java         (Role selector: User vs Mess Owner)
+│   │   │   │   │   ├── CompleteProfileActivity.java       (Mandatory profile completion setup)
+│   │   │   │   │   ├── JoinMessActivity.java              (Join mess via code or QR link)
+│   │   │   │   │   ├── UserDashboardActivity.java         (Main container for Student UI)
+│   │   │   │   │   ├── MessDashboardActivity.java         (Main container for Owner UI)
+│   │   │   │   │   ├── EditMessProfileActivity.java       (Detailed Mess Info editor)
+│   │   │   │   │   ├── MessReviewsActivity.java           (Mess Reviews viewer)
+│   │   │   │   │   ├── MyReviewsActivity.java             (User's submitted reviews)
+│   │   │   │   │   ├── CustomCaptureActivity.java         (Custom QR Code scanner activity)
+│   │   │   │   │   └── MyFirebaseMessagingService.java    (FCM Service for Push notifications)
+│   │   │   │   │
+│   │   │   │   ├── adapters/                              (General Adapters)
+│   │   │   │   │   ├── OnboardingAdapter.java             (Onboarding ViewPager2 adapter)
+│   │   │   │   │   ├── RequestAdapter.java                (Meal request items adapter)
+│   │   │   │   │   └── SubscriptionRequestAdapter.java    (Subscription approval adapter)
+│   │   │   │   │
+│   │   │   │   ├── managers/                              (Business Logic Services)
+│   │   │   │   │   ├── AnalyticsManager.java              (Dashboard metrics & event logging)
+│   │   │   │   │   ├── DiscoveryManager.java              (Mess search, filter & fetch)
+│   │   │   │   │   ├── FirebaseNotificationManager.java   (FCM tokens, channels & logs)
+│   │   │   │   │   ├── MenuManager.java                   (Menu creation & daily selection)
+│   │   │   │   │   ├── MessNotificationManager.java       (Admin alerts & grant broadcasts)
+│   │   │   │   │   ├── OfferManager.java                  (Discounts & campaign management)
+│   │   │   │   │   ├── PaymentManager.java                (Transactions & payment processing)
+│   │   │   │   │   ├── ProfileManager.java                (User & Mess profile management)
+│   │   │   │   │   ├── ReviewManager.java                 (Ratings, comments & calculations)
+│   │   │   │   │   └── SubscriptionManager.java           (Subscriptions & request workflows)
+│   │   │   │   │
+│   │   │   │   ├── models/                                (Data Models / DTOs)
+│   │   │   │   │   ├── MealRequest.java                   (Extra meal request data model)
+│   │   │   │   │   ├── MealSelection.java                 (Daily meal selection model)
+│   │   │   │   │   ├── Menu.java                          (Mess menu data model)
+│   │   │   │   │   ├── Mess.java                          (Mess details data model)
+│   │   │   │   │   ├── Offer.java                         (Discount offer model)
+│   │   │   │   │   ├── OnboardingItem.java                (Onboarding slide model)
+│   │   │   │   │   ├── PastMember.java                    (Historical subscriber model)
+│   │   │   │   │   ├── Review.java                        (User review & rating model)
+│   │   │   │   │   ├── Student.java                       (User / Student profile model)
+│   │   │   │   │   ├── Subscription.java                  (Active subscription model)
+│   │   │   │   │   ├── SubscriptionRequest.java           (Subscription request model)
+│   │   │   │   │   └── Transaction.java                   (Payment transaction log model)
+│   │   │   │   │
+│   │   │   │   ├── ui/                                    (UI Components by Role)
+│   │   │   │   │   ├── mess/                              (Mess Owner Features)
+│   │   │   │   │   │   ├── dashboard/
+│   │   │   │   │   │   │   └── MessDashboardFragment.java (Owner overview analytics)
+│   │   │   │   │   │   ├── menu/
+│   │   │   │   │   │   │   └── MessMenuFragment.java      (Daily/Weekly menu manager)
+│   │   │   │   │   │   ├── offers/
+│   │   │   │   │   │   │   ├── MessOffersFragment.java    (Active promotional offers)
+│   │   │   │   │   │   │   └── AddOfferFragment.java       (Create new offer fragment)
+│   │   │   │   │   │   ├── profile/
+│   │   │   │   │   │   │   └── MessProfileFragment.java   (Owner profile fragment)
+│   │   │   │   │   │   ├── reports/
+│   │   │   │   │   │   │   └── SubscriptionReportActivity.java (Exportable subscription reports)
+│   │   │   │   │   │   ├── requests/
+│   │   │   │   │   │   │   └── MessRequestsFragment.java  (Pending student sub requests)
+│   │   │   │   │   │   ├── revenue/
+│   │   │   │   │   │   │   ├── MessRevenueFragment.java   (Earnings & income analysis)
+│   │   │   │   │   │   │   └── TransactionsAdapter.java   (Payment transactions list adapter)
+│   │   │   │   │   │   ├── settings/
+│   │   │   │   │   │   │   └── MessSettingsActivity.java  (Mess operating configuration)
+│   │   │   │   │   │   ├── students/
+│   │   │   │   │   │   │   ├── MessStudentsFragment.java (Active student subscribers list)
+│   │   │   │   │   │   │   ├── StudentsAdapter.java       (Active students adapter)
+│   │   │   │   │   │   │   ├── PastMembersActivity.java   (Past subscriber history activity)
+│   │   │   │   │   │   │   ├── PastMemberDetailsActivity.java (Past subscriber detail activity)
+│   │   │   │   │   │   │   └── PastMembersAdapter.java    (Past members adapter)
+│   │   │   │   │   │   └── weeklymenu/
+│   │   │   │   │   │       └── WeeklyMenuActivity.java    (7-day weekly schedule editor)
+│   │   │   │   │   │
+│   │   │   │   │   └── user/                              (Student User Features)
+│   │   │   │   │       ├── MessDetailFragment.java        (Mess detailed view & subscribe)
+│   │   │   │   │       ├── OfferAdapter.java              (Offers list view adapter)
+│   │   │   │   │       ├── ReviewAdapter.java             (Reviews list view adapter)
+│   │   │   │   │       ├── history/
+│   │   │   │   │       │   ├── UserHistoryFragment.java   (User subscription history)
+│   │   │   │   │       │   └── HistoryAdapter.java        (History list adapter)
+│   │   │   │   │       ├── home/
+│   │   │   │   │       │   ├── UserHomeFragment.java      (Mess discovery & search)
+│   │   │   │   │       │   └── MessAdapter.java           (Mess card list adapter)
+│   │   │   │   │       ├── menu/
+│   │   │   │   │       │   └── UserMenuFragment.java      (User meal selection view)
+│   │   │   │   │       └── profile/
+│   │   │   │   │           ├── UserProfileFragment.java   (Student user profile)
+│   │   │   │   │           └── EditUserProfileActivity.java (Edit user details activity)
+│   │   │   │   │
+│   │   │   │   └── utils/                                 (Helper Utilities)
+│   │   │   │       ├── GuestModeManager.java              (Guest browsing session manager)
+│   │   │   │       ├── NetworkUtils.java                  (Connectivity checker)
+│   │   │   │       ├── SwipeGestureListener.java          (Touch swipe event handler)
+│   │   │   │       └── ThemeManager.java                  (Dark/Light theme switcher)
+│   │   │   │
+│   │   │   ├── res/                                       (Resources & Layouts)
+│   │   │   └── AndroidManifest.xml                        (Manifest declarations & intents)
+│   │   └── build.gradle.kts                               (App-level Gradle dependencies)
+├── web/                                                   (Web Deep-Link Redirect Host)
+│   └── public/join.html                                   (Redirect page for QR deep link)
+├── firestore.rules                                        (Firestore Security Rules)
+└── PROJECT_ARCHITECTURE_OVERVIEW.md                       (Architecture Document)
 ```
 
 ---
 
-## 4. USER FLOW - DISCOVER & SUBSCRIBE
+## 3. ENTRY & NAVIGATION FLOW
 
 ```
-┌──────────────────────┐
-│  User Opens App      │
-└──────────┬───────────┘
-           │
-           ↓
-┌──────────────────────────────────────────┐
-│  UserHomeFragment                        │
-│  ┌────────────────────────────────────┐  │
-│  │ 1. DiscoveryManager.searchMesses() │  │
-│  │    (or getAllMesses)               │  │
-│  └────────────────────────────────────┘  │
-└──────────┬───────────────────────────────┘
-           │
-           ↓
-    ┌──────────────────┐
-    │  RecyclerView    │
-    │  displays messes │
-    │  (item_mess_     │
-    │   card.xml)      │
-    └──────────┬───────┘
-               │
-               ↓ (User clicks on mess)
-┌──────────────────────────────────────────┐
-│  MessDetailFragment                      │
-│  ┌────────────────────────────────────┐  │
-│  │ 1. ProfileManager.fetchMessProfile │  │
-│  │    (Mess name, location, etc)      │  │
-│  │                                    │  │
-│  │ 2. MenuManager.getWeeklyMenu()     │  │
-│  │    (Lunch & dinner items)          │  │
-│  │                                    │  │
-│  │ 3. ReviewManager.getMessReviews()  │  │
-│  │    (All reviews for this mess)     │  │
-│  │                                    │  │
-│  │ 4. SubscriptionManager             │  │
-│  │    .hasActiveSubscription()        │  │
-│  │    (Check if already subscribed)   │  │
-│  └────────────────────────────────────┘  │
-└──────────┬───────────────────────────────┘
-           │
-           ├─────── User Already Subscribed ─────┐
-           │                                     │
-           ↓                                     │
-┌────────────────────────────────────┐           │
-│ Show:                              │           │
-│ ✓ "Unsubscribe" Button             │          │
-│ ✓ Menu items                       │          │
-│ ✓ All reviews                      │          │
-│ ✓ Rating bar (for new review)      │          │
-└────────────────────────────────────┘           │
-           │                                     │
-           │                    ┌────────────────┴─────────┐
-           │                    │                          │
-           │                    ↓                          │
-           │        ┌──────────────────────────────────┐   │
-           │        │ Show:                            │   │
-           │        │ "Subscribe" Button               │   │
-           │        │ (Locked) Menu items              │   │
-           │        │ (Locked) Reviews                 │   │
-           │        └──────────────────────────────────┘   │
-           │                    │                          │
-           │                    ↓ (User clicks Subscribe)  │
-           │        ┌──────────────────────────────────┐   │
-           │        │ PaymentManager.processPayment()  │   │
-           │        │ (Simulated 95% success)          │   │
-           │        └──────────────────────────────────┘   │
-           │                    │                          │
-           │                    ├─ SUCCESS ────┐           │
-           │                    │              │           │
-           │                    ↓              ↓           │
-           │        ┌──────────────────┐ ┌──────────────┐  │
-           │        │ SubscriptionMngr │ │ Analytics    │  │
-           │        │ .createSub()     │ │ .getDashboard│  │
-           │        └──────────────────┘ └──────────────┘  │
-           │                    │                          │
-           │                    ↓                          │
-           │        ┌──────────────────────────────────┐   │
-           │        │ FCM Topic Subscribe              │   │
-           │        │ mess_{messId}                    │   │
-           │        └──────────────────────────────────┘   │
-           │                    │                          │
-           │                    ↓                          │
-           │        ┌──────────────────────────────────┐   │
-           │        │ UI Updates:                      │   │
-           │        │ ✓ Button → "Unsubscribe"         │   │
-           │        │ ✓ Unlock menu items              │   │
-           │        │ ✓ Show all reviews               │   │
-           │        │ ✓ Allow review submission        │   │
-           │        └──────────────────────────────────┘   │
-           │                                                │
-           └────────────────────────────────────────────────┘
+                                  ┌───────────────────────────┐
+                                  │      App Launch           │
+                                  └─────────────┬─────────────┘
+                                                │
+                                                ↓
+                                  ┌───────────────────────────┐
+                                  │      SplashActivity       │
+                                  │  • Check Deep Link        │
+                                  │  • Check Auth Session     │
+                                  │  • Check Guest Mode       │
+                                  └─────────────┬─────────────┘
+                                                │
+                 ┌──────────────────────────────┼──────────────────────────────┐
+                 │ (Deep Link: messapp://join)  │ (First Time Launch)          │ (Already Logged In)
+                 ↓                              ↓                              ↓
+    ┌──────────────────────────┐   ┌──────────────────────────┐   ┌──────────────────────────┐
+    │     JoinMessActivity     │   │    OnboardingActivity    │   │  Check User Account Role │
+    │  • Join mess via code    │   │  • Intro Walkthrough     │   │  in Firestore "users"    │
+    │  • Scan QR via           │   └────────────┬─────────────┘   └────────────┬─────────────┘
+    │    CustomCaptureActivity │                │                              │
+    └──────────────────────────┘                ↓                              │
+                                   ┌──────────────────────────┐                │
+                                   │      LoginActivity       │                │
+                                   │  • Email & Password      │                │
+                                   │  • Google Sign-In        │                │
+                                   │  • Guest Mode Option     │                │
+                                   └────────────┬─────────────┘                │
+                                                │                              │
+                                                ↓                              │
+                                   ┌──────────────────────────┐                │
+                                   │  RoleSelectionActivity   │                │
+                                   │  Select: USER / OWNER    │                │
+                                   └────────────┬─────────────┘                │
+                                                │                              │
+                                                ↓                              │
+                                   ┌──────────────────────────┐                │
+                                   │ CompleteProfileActivity  │                │
+                                   │ Fill initial info        │                │
+                                   └────────────┬─────────────┘                │
+                                                │                              │
+                 ┌──────────────────────────────┴──────────────────────────────┘
+                 │
+                 ├─────────────────────────────────────────┐
+                 │                                         │
+                 ↓ (Role: USER / Guest)                    ↓ (Role: MESS_OWNER)
+    ┌─────────────────────────────────────────┐  ┌─────────────────────────────────────────┐
+    │          UserDashboardActivity          │  │          MessDashboardActivity          │
+    │  (Bottom Navigation Fragments)          │  │  (Bottom Navigation Fragments)          │
+    │                                         │  │                                         │
+    │  • UserHomeFragment (Discover Messes)   │  │  • MessDashboardFragment (Analytics)   │
+    │  • UserMenuFragment (Daily Selection)   │  │  • MessMenuFragment (Manage Menus)     │
+    │  • UserHistoryFragment (Sub History)    │  │  • MessStudentsFragment (Subscribers)   │
+    │  • UserProfileFragment (User Profile)   │  │  • MessRevenueFragment (Earnings)       │
+    │                                         │  │  • MessRequestsFragment (Sub Requests)  │
+    │  Secondary Views:                       │  │  • MessOffersFragment (Discounts)       │
+    │  • MessDetailFragment                   │  │  • MessProfileFragment (Mess Details)   │
+    │  • EditUserProfileActivity              │  │                                         │
+    │  • MyReviewsActivity                    │  │  Secondary Views:                       │
+    │                                         │  │  • EditMessProfileActivity            │
+    │                                         │  │  • WeeklyMenuActivity                   │
+    │                                         │  │  • MessSettingsActivity                 │
+    │                                         │  │  • SubscriptionReportActivity           │
+    │                                         │  │  • PastMembersActivity / Details        │
+    └─────────────────────────────────────────┘  └─────────────────────────────────────────┘
 ```
 
 ---
 
-## 5. MESS OWNER FLOW - CREATE MENU & VIEW ANALYTICS
+## 4. MANAGER & BUSINESS LOGIC ARCHITECTURE
+
+The application business logic is fully encapsulated in **10 Manager Classes** and **1 Guest Utility Manager**.
 
 ```
-┌──────────────────────────────────┐
-│  Mess Owner Opens App            │
-│  (Select Role: Mess Owner)       │
-└──────────────┬───────────────────┘
-               │
-               ↓
-┌──────────────────────────────────────────────┐
-│  MessDashboardActivity                       │
-│  (Container with multiple fragments)         │
-└──────────────┬───────────────────────────────┘
-               │
-    ┌──────────┴──────────┬──────────────┬──────────────┐
-    │                     │              │              │
-    ↓                     ↓              ↓              ↓
-┌──────────┐   ┌────────────┐   ┌─────────────┐   ┌──────────┐
-│ Profile  │   │    Menu    │   │  Students   │   │Analytics │
-│Fragment  │   │  Fragment  │   │  Fragment   │   │Fragment  │
-└────┬─────┘   └─────┬──────┘   └──────┬──────┘   └────┬─────┘
-     │               │                 │               │
-     │               ↓                 │               ↓
-     │      ┌────────────────────┐     │    ┌────────────────────┐
-     │      │ MenuManager        │     │    │ AnalyticsManager   │
-     │      │ .createMenu()      │     │    │ .getDashboard()    │
-     │      │ .updateMenuAvail() │     │    │ .getTotalSubs()    │
-     │      │ .getWeeklyMenu()   │     │    │ .getMonthlyRev()   │
-     │      │ .addMealItems()    │     │    │ .trackPageView()   │
-     │      └────────────────────┘     │    └────────────────────┘
-     │               │                 │              │
-     │               ↓                 │              ↓
-     │      ┌────────────────────┐     │    ┌────────────────────┐
-     │      │ Firestore Update   │     │    │ Firestore Query    │
-     │      │ menus/ collection  │     │    │ • subscriptions/   │
-     │      └────────────────────┘     │    │ • transactions/    │
-     │                                 │    │ • analytics_events/│
-     │               ┌─────────────────┘    └────────────────────┘
-     │               │
-     ├──────────────────────────────────────────────┐
-     │                                              │
-     ↓                                              ↓
-┌──────────────────────┐                ┌─────────────────────┐
-│ ProfileManager       │                │ StudentAdapter      │
-│ .updateProfile()     │                │ • Shows subscribers │
-│                      │                │ • Query from        │
-│ Updates:             │                │   subscriptions/    │
-│ • Name               │                │   collection        │
-│ • Location           │                └─────────────────────┘
-│ • Contact            │                        │
-│ • Description        │                        ↓
-│ • Price              │                ┌─────────────────────┐
-└──────────────────────┘                │ SubscriptionManager │
-         │                              │ .getUserSubs()      │
-         ↓                              │ .renewSubscription()│
-┌──────────────────────┐                │ .cancelSub()        │
-│ ProfileManager       │                └─────────────────────┘
-│ .isComplete()        │
-│                      │
-│ Validates if owner   │
-│ completed setup      │
-└──────────────────────┘
-
-     ┌────────────────────────────────────────────────────────┐
-     │         EditMessProfileActivity (Optional)             │
-     │  (More detailed profile editing interface)             │
-     │  • Upload mess photos                                  │
-     │  • Edit detailed description                           │
-     │  • Set operating hours                                 │
-     └────────────────────────────────────────────────────────┘
+┌───────────────────────────────────────────────────────────────────────────────────────────┐
+│                                   MANAGER ARCHITECTURE                                    │
+├───────────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                           │
+│  1. ProfileManager                                                                        │
+│     • Manages Student & Mess Owner profile creation, reading, and updates.                 │
+│     • Operates on Firestore collections: `users`, `messes`.                               │
+│                                                                                           │
+│  2. DiscoveryManager                                                                      │
+│     • Handles mess discovery, searching by name/location, filtering by rating/price.      │
+│     • Operates on Firestore collection: `messes`.                                         │
+│                                                                                           │
+│  3. MenuManager                                                                           │
+│     • Handles daily menu updates, weekly schedules, default menus & student meal selections.│
+│     • Operates on Firestore collections: `menus`, `default_menus`, `meal_selections`.     │
+│                                                                                           │
+│  4. SubscriptionManager                                                                   │
+│     • Manages active subscriptions, subscription requests, renewals & student dropouts.   │
+│     • Operates on Firestore collections: `subscriptions`, `subscriptionRequests`,         │
+│       `mess_leavers`.                                                                     │
+│                                                                                           │
+│  5. PaymentManager                                                                        │
+│     • Processes payment transactions, creates financial ledger entries & tracks revenue.  │
+│     • Operates on Firestore collection: `transactions`.                                   │
+│                                                                                           │
+│  6. ReviewManager                                                                         │
+│     • Manages student reviews, star ratings, and automatically updates average ratings.   │
+│     • Operates on Firestore collections: `reviews`, `messes`.                             │
+│                                                                                           │
+│  7. OfferManager                                                                          │
+│     • Creates, lists, and tracks discount offers and usage counts for promotional deals.  │
+│     • Operates on Firestore collection: `offers`.                                         │
+│                                                                                           │
+│  8. AnalyticsManager                                                                      │
+│     • Aggregates mess metrics (total revenue, active subscribers, views) & logs events.   │
+│     • Operates on Firestore collections: `analytics_events`, `subscriptions`,             │
+│       `transactions`.                                                                     │
+│                                                                                           │
+│  9. FirebaseNotificationManager                                                           │
+│     • Configures Android Notification Channels, manages FCM device tokens & logs events.  │
+│     • Operates on Firestore collections: `users`, `notification_events`,                  │
+│       `notification_preferences`.                                                         │
+│                                                                                           │
+│  10. MessNotificationManager                                                              │
+│      • Sends mess-wide administrative broadcasts & subscription grant notifications.       │
+│      • Operates on Firestore collection: `mess_notifications`.                            │
+│                                                                                           │
+│  11. GuestModeManager (Utility)                                                           │
+│      • Manages unauthenticated guest sessions for limited app discovery.                  │
+│                                                                                           │
+└───────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 6. REVIEW & RATING SYSTEM FLOW
+## 5. FIRESTORE DATABASE ARCHITECTURE & SCHEMA
+
+The database comprises **15 Firestore Collections** with full schema definition:
 
 ```
-┌─────────────────────────────────────────┐
-│  User viewing MessDetailFragment        │
-│  (Already subscribed to mess)           │
-└──────────────────┬──────────────────────┘
-                   │
-                   ↓
-       ┌──────────────────────────────┐
-       │ ReviewManager                │
-       │ .getMessReviews(messId)      │
-       │                              │
-       │ Fetches all reviews in       │
-       │ Firestore for this mess      │
-       └──────────────┬───────────────┘
-                      │
-                      ↓
-        ┌──────────────────────────────┐
-        │ RecyclerView(item_review.xml)|
-        │                              │
-        │ Each review shows:           │
-        │ • User name                  │
-        │ • Rating (stars)             │
-        │ • Comment                    │
-        │ • Timestamp                  │
-        │ • Like count (with like btn) │
-        └──────────────┬───────────────┘
-                       │
-                       ↓
-       ┌──────────────────────────────┐
-       │ User submits new review:     │
-       │ 1. Select rating (1-5 stars) │
-       │ 2. Enter comment             │
-       │ 3. Click "Submit Review"     │
-       └──────────────┬───────────────┘
-                      │
-                      ↓
-       ┌──────────────────────────────────────┐
-       │ ReviewManager                        │
-       │ .createReview()                      │
-       │                                      │
-       │ ┌────────────────────────────────┐   │
-       │ │ Inside createReview:           │   │
-       │ │ 1. Create Review object        │   │
-       │ │ 2. Set messId, userId, rating, │   │
-       │ │    comment, timestamp          │   │
-       │ │ 3. Save to Firestore reviews/  │   │
-       │ │ 4. Call updateMessAvgRating()  │   │
-       │ └────────────────────────────────┘   │
-       └──────────────┬─────────────────────-─┘
-                      │
-                      ↓
-       ┌─────────────────────────────────────┐
-       │ ReviewManager                       │
-       │ .updateMessAvgRating(messId)        │
-       │                                     │
-       │ ┌────────────────────────────────┐  │
-       │ │ 1. Get all reviews for mess    │  │
-       │ │ 2. Calculate average rating    │  │
-       │ │ 3. Count total reviews         │  │
-       │ │ 4. Update Firestore:           │  │
-       │ │    messes/{messId}             │  │
-       │ │    ├─ avgRating = 4.5          │  │
-       │ │    └─ numReviews = 15          │  │
-       │ └────────────────────────────────┘  │
-       └──────────────┬──────────────────────┘
-                      │
-                      ↓
-       ┌───────────────────────────────-───┐
-       │ Firestore Collections Updated:    │
-       │                                   │
-       │ reviews/ (new review added)       │
-       │ messes/ (avgRating updated)       │
-       └──────────────┬────────────────────┘
-                      │
-                      ↓
-       ┌──────────────────────────────────┐
-       │ UI Updates:                      │
-       │ ✓ New review appears in list     │
-       │ ✓ Average rating recalculates    │
-       │ ✓ Review form clears             │
-       │ ✓ Toast: "Review submitted!"     │
-       └──────────────────────────────────┘
-```
-
----
-
-## 7. PAYMENT & SUBSCRIPTION FLOW
-
-```
-┌─────────────────────────────────────┐
-│  User clicks "Subscribe" button     │
-│  (From MessDetailFragment)          │
-└──────────────┬──────────────────────┘
-               │
-               ↓
-┌─────────────────────────────────────┐
-│ PaymentManager                      │
-│ .processPayment(userId, messId,     │
-│                 amount, days)       │
-│                                     │
-│ ┌────────────────────────────────┐  │
-│ │ Random Success Check:          │  │
-│ │ if (Math.random() < 0.95)      │  │
-│ │    → SUCCESS (95% chance)      │  │
-│ │ else                           │  │
-│ │    → FAILURE (5% chance)       │  │
-│ └────────────────────────────────┘  │
-└──────────────┬──────────────────────┘
-               │
-        ┌──────┴─────────┐
-        │                │
-        ↓                ↓
-   ┌─────────┐      ┌─────────┐
-   │ SUCCESS │      │ FAILURE │
-   └────┬────┘      └────┬────┘
-        │                │
-        ↓                ↓
-   ┌──────────────┐  ┌──────────────┐
-   │ Create:      │  │ Toast:       │
-   │ Transaction  │  │ "Payment     │
-   │ object       │  │ failed,      │
-   │ • txnId      │  │ try again"   │
-   │ • userId     │  │              │
-   │ • messId     │  │ Return       │
-   │ • amount     │  │ failure msg  │
-   │ • status     │  └──────────────┘
-   │ • timestamp  │
-   └────┬────────┘
-        │
-        ↓
-   ┌────────────────────────────┐
-   │ SubscriptionManager        │
-   │ .createSubscription()      │
-   │                            │
-   │ Create Subscription:       │
-   │ • subscriptionId (UUID)    │
-   │ • userId                   │
-   │ • messId                   │
-   │ • startDate = today        │
-   │ • expiryDate = today + day │
-   │ • status = "ACTIVE"        │
-   │ • monthlyPrice             │
-   └────┬───────────────────────┘
-        │
-        ↓
-   ┌──────────────────────────────┐
-   │ Save to Firestore:           │
-   │                              │
-   │ transactions/                │
-   │ └─ {txnId}: Transaction      │
-   │                              │
-   │ subscriptions/               │
-   │ └─ {subId}: Subscription     │
-   │                              │
-   │ users/{userId}               │
-   │ ├─ messId: update to current │
-   │ └─ subscriptions: add subId  │
-   │                              │
-   │ messes/{messId}              │
-   │ └─ studentCount: increment   │
-   └────┬──────────────────────--─┘
-        │
-        ↓
-   ┌──────────────────────────────┐
-   │ FirebaseNotificationManager  │
-   │ .subscribeToTopic(messId)    │
-   │                              │
-   │ Topic: "mess_{messId}"       │
-   │ (FCM subscription)           │
-   └────┬────────────────────--───┘
-        │
-        ↓
-   ┌──────────────────────────────┐
-   │ AnalyticsManager             │
-   │ .trackPageView()             │
-   │                              │
-   │ Log analytics event:         │
-   │ • userId                     │
-   │ • messId                     │
-   │ • action: "subscription"     │
-   │ • timestamp                  │
-   └────┬──────────────────────--─┘
-        │
-        ↓
-   ┌──────────────────────────────┐
-   │ UI Updates:                  │
-   │ ✓ Button: "Subscribed"       │
-   │ ✓ Unlock menu items          │
-   │ ✓ Show all reviews           │
-   │ ✓ Enable review submission   │
-   │ ✓ Toast: "Subscribed!"       │
-   └──────────────────────────────┘
+┌───────────────────────────────────────────────────────────────────────────────────────────┐
+│                                FIRESTORE SCHEMA SUMMARY                                   │
+├───────────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                           │
+│  1. `users` /{userId}                                                                     │
+│     ├─ email: String              ├─ role: String ("USER" | "MESS_OWNER")                 │
+│     ├─ name: String               ├─ phone: String                                        │
+│     ├─ messId: String             ├─ fcmToken: String                                     │
+│     └─ createdAt: Long            └─ updatedAt: Long                                      │
+│                                                                                           │
+│  2. `messes` /{messId}                                                                    │
+│     ├─ name: String               ├─ location: String                                     │
+│     ├─ contact: String            ├─ description: String                                  │
+│     ├─ monthlyPrice: Double       ├─ ownerId: String                                      │
+│     ├─ avgRating: Double          ├─ numReviews: Integer                                  │
+│     ├─ studentCount: Integer      ├─ inviteCode: String                                   │
+│     └─ createdAt: Long            └─ updatedAt: Long                                      │
+│                                                                                           │
+│  3. `menus` /{menuId}                                                                     │
+│     ├─ messId: String             ├─ date: String ("yyyy-MM-dd")                          │
+│     ├─ dayOfWeek: String          ├─ lunchItems: List<String>                             │
+│     ├─ dinnerItems: List<String>  ├─ available: Boolean                                   │
+│     └─ updatedAt: Long                                                                    │
+│                                                                                           │
+│  4. `default_menus` /{docId}                                                              │
+│     ├─ messId: String             ├─ dayOfWeek: String ("MONDAY", etc.)                   │
+│     ├─ lunchItems: List<String>   ├─ dinnerItems: List<String>                            │
+│     └─ updatedAt: Long                                                                    │
+│                                                                                           │
+│  5. `mess_settings` /{messId}                                                             │
+│     ├─ autoAcceptRequests: Boolean├─ cutoffHourLunch: Integer                             │
+│     ├─ cutoffHourDinner: Integer  ├─ notificationEnabled: Boolean                         │
+│     └─ updatedAt: Long                                                                    │
+│                                                                                           │
+│  6. `meal_selections` /{messId}_{date}_{userId}                                           │
+│     ├─ userId: String             ├─ messId: String                                       │
+│     ├─ date: String               ├─ mealType: String ("LUNCH" | "DINNER")                │
+│     ├─ selected: Boolean          └─ timestamp: Long                                      │
+│                                                                                           │
+│  7. `subscriptions` /{subscriptionId}                                                     │
+│     ├─ userId: String             ├─ messId: String                                       │
+│     ├─ startDate: Long            ├─ expiryDate: Long                                     │
+│     ├─ status: String ("ACTIVE" | "EXPIRED" | "CANCELLED")                                │
+│     ├─ mealPlanType: String       └─ monthlyPrice: Double                                 │
+│                                                                                           │
+│  8. `subscriptionRequests` /{reqId}                                                       │
+│     ├─ studentId: String          ├─ studentName: String                                  │
+│     ├─ messId: String             ├─ requestedDays: Integer                               │
+│     ├─ mealType: String           ├─ status: String ("PENDING" | "APPROVED" | "REJECTED") │
+│     └─ timestamp: Long                                                                    │
+│                                                                                           │
+│  9. `mess_notifications` /{notificationId}                                                │
+│     ├─ messId: String             ├─ senderId: String                                     │
+│     ├─ senderName: String         ├─ type: String ("ADMIN_MESSAGE" | "GRANT")             │
+│     ├─ title: String              ├─ message: String                                      │
+│     └─ createdAt: Long                                                                    │
+│                                                                                           │
+│  10. `transactions` /{transactionId}                                                      │
+│      ├─ userId: String            ├─ messId: String                                       │
+│      ├─ amount: Double            ├─ status: String ("SUCCESS" | "FAILED")                │
+│      ├─ paymentMethod: String     └─ timestamp: Long                                      │
+│                                                                                           │
+│  11. `reviews` /{reviewId}                                                                │
+│      ├─ messId: String            ├─ userId: String                                       │
+│      ├─ userName: String          ├─ rating: Float (1.0 - 5.0)                            │
+│      ├─ comment: String           ├─ likesCount: Integer                                  │
+│      └─ timestamp: Long                                                                   │
+│                                                                                           │
+│  12. `offers` /{offerId}                                                                  │
+│      ├─ messId: String            ├─ title: String                                        │
+│      ├─ description: String       ├─ discountPercentage: Double                           │
+│      ├─ usageCount: Long          ├─ active: Boolean                                      │
+│      └─ expiryDate: Long                                                                  │
+│                                                                                           │
+│  13. `analytics_events` /{eventId}                                                        │
+│      ├─ userId: String            ├─ messId: String                                       │
+│      ├─ action: String            └─ timestamp: Long                                      │
+│                                                                                           │
+│  14. `notification_events` /{eventId}                                                     │
+│      ├─ userId: String            ├─ messId: String                                       │
+│      ├─ eventType: String         └─ timestamp: Long                                      │
+│                                                                                           │
+│  15. `mess_leavers` /{docId}                                                              │
+│      ├─ userId: String            ├─ messId: String                                       │
+│      ├─ leaveReason: String       └─ leftAt: Long                                         │
+│                                                                                           │
+│  16. `notification_preferences` /{userId}                                                 │
+│      ├─ messUpdates: Boolean      ├─ paymentAlerts: Boolean                               │
+│      └─ updatedAt: Long                                                                   │
+│                                                                                           │
+└───────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 8. NOTIFICATIONS (FCM) FLOW
+## 6. CORE WORKFLOWS
+
+### A. Subscription Request & Approval Flow
 
 ```
-┌─────────────────────────────────────────┐
-│  App Startup                            │
-└──────────────┬──────────────────────────┘
-               │
-               ↓
-┌─────────────────────────────────────────┐
-│  FirebaseNotificationManager            │
-│  .createNotificationChannel()           │
-│                                         │
-│  (Android 8+ requirement)               │
-│  Creates channel:                       │
-│  • NOTIFICATION_CHANNEL_ID              │
-│  • Importance: HIGH                     │
-│  • Description: "Mess App Notifications"|
-└──────────────┬──────────────────────────┘
-               │
-               ↓
-┌─────────────────────────────────────────┐
-│  FirebaseNotificationManager            │
-│  .getFCMToken()                         │
-│                                         │
-│  Get unique device token from Firebase  │
-└──────────────┬──────────────────────────┘
-               │
-               ↓
-┌─────────────────────────────────────────┐
-│  FirebaseNotificationManager            │
-│  .saveDeviceToken(userId, token)        │
-│                                         │
-│  Save to Firestore: users/{userId}      │
-│  └─ fcmToken: "abc123xyz..."            │
-└──────────────┬──────────────────────────┘
-               │
-               ↓
-┌─────────────────────────────────────────┐
-│  FirebaseNotificationManager            │
-│  .subscribeToMessNotifications(messId)  │
-│                                         │
-│  FCM Topic: "mess_{messId}"             │
-│  (User subscribes to mess updates)      │
-└──────────────┬──────────────────────────┘
-               │
-               │
-        ┌──────┴──────────────────────────┐
-        │                                 │
-        │        (When owner sends msg)   │
-        │                                 │
-        ↓                                 ↓
-┌──────────────────────────────┐  ┌──────────────────────────────┐
-│ Firestore (Backend)          │  │ MyFirebaseMessagingService   │
-│ Update menu, send message    │  │ (Listening for FCM messages) │
-│ to topic "mess_{messId}"     │  │                              │
-└──────────────────────────────┘  │ ┌────────────────────────────┐
-                                  │ │ onMessageReceived()        │
-                                  │ │ • Gets notification data   │
-                                  │ │ • Creates notification     │
-                                  │ │ • Shows in system tray     │
-                                  │ │ • Logs event               │
-                                  │ └────────────────────────────┘
-                                  └──────────────┬───────────────┘
-                                                  │
-                                                  ↓
-                                   ┌──────────────────────────────┐
-                                   │ FirebaseNotificationManager  │
-                                   │ .logNotificationEvent()      │
-                                   │                              │
-                                   │ Save to Firestore:           │
-                                   │ notification_events/         │
-                                   │ • eventId                    │
-                                   │ • userId                     │
-                                   │ • messId                     │
-                                   │ • eventType (msg, update)    │
-                                   │ • timestamp                  │
-                                   └──────────────────────────────┘
+┌─────────────────────────┐
+│ Student in MessDetail   │
+│ clicks "Request Join"   │
+└────────────┬────────────┘
+             │
+             ↓
+┌─────────────────────────┐
+│ SubscriptionManager     │
+│ .sendRequest()          │
+└────────────┬────────────┘
+             │
+             ↓
+┌─────────────────────────┐
+│ Save Firestore doc in   │
+│ `subscriptionRequests`  │
+│ status: "PENDING"       │
+└────────────┬────────────┘
+             │
+             ↓
+┌─────────────────────────┐
+│ Mess Owner opens        │
+│ MessRequestsFragment    │
+└────────────┬────────────┘
+             │
+      ┌──────┴────────────────────────┐
+      │                               │
+      ↓ (Approve)                     ↓ (Reject)
+┌─────────────────────────┐     ┌─────────────────────────┐
+│ 1. Update status in     │     │ 1. Update status in     │
+│    `subscriptionRequests│     │    `subscriptionRequests│
+│    to "APPROVED"        │     │    to "REJECTED"        │
+│ 2. SubscriptionManager  │     └─────────────────────────┘
+│    .createSubscription()│
+│ 3. Update `users` messId│
+│ 4. Increment studentCount│
+└─────────────────────────┘
 ```
 
 ---
 
-## 9. ADAPTER & RECYCLERVIEW BINDING
+### B. Rating & Review Aggregation Flow
 
 ```
-┌─────────────────────────────────────────┐
-│  RecyclerView in Fragment               │
-│  (e.g., UserHomeFragment)               │
-└──────────────┬──────────────────────────┘
-               │
-               ↓
-       ┌──────────────────────────────┐
-       │ DiscoveryManager             │
-       │ .searchMesses()              │
-       │                              │
-       │ Returns: List<Mess>          │
-       └──────────────┬───────────────┘
-                      │
-                      ↓
-       ┌───────────────────────────-───┐
-       │ MessAdapter (Custom)          │
-       │ ┌────────────────────────────┐│
-       │ │ class MessAdapter extends  ││
-       │ │ RecyclerView.Adapter       ││
-       │ │                            ││
-       │ │ onCreateViewHolder()       ││
-       │ │ ├─ Inflate item_mess_card  ││
-       │ │ │  (.xml layout)           ││
-       │ │ └─ Create ViewHolder       ││
-       │ │                            ││
-       │ │ onBindViewHolder()         ││
-       │ │ ├─ Bind data to views      ││
-       │ │ ├─ Set click listeners     ││
-       │ │ └─ Load images (optional)  ││
-       │ │                            ││
-       │ │ getItemCount()             ││
-       │ │ └─ Return list size        ││
-       │ └────────────────────────────┘│
-       └──────────────┬─────────────-──┘
-                      │
-                      ↓
-       ┌──────────────────────────────┐
-       │ item_mess_card.xml Layout    │
-       │                              │
-       │ ┌────────────────────────────┐
-       │ │ CardView                   │
-       │ │ ├─ ImageView (Mess photo)  │
-       │ │ ├─ TextView (Name)         │
-       │ │ ├─ TextView (Location)     │
-       │ │ ├─ RatingBar (Avg rating)  │
-       │ │ ├─ TextView (Price)        │
-       │ │ └─ Button (View Details)   │
-       │ └────────────────────────────┘
-       └──────────────┬───────────────┘
-                      │
-               (Repeated for each item)
+┌─────────────────────────────────┐
+│ Student Submits Review & Rating │
+└────────────────┬────────────────┘
+                 │
+                 ↓
+┌─────────────────────────────────┐
+│ ReviewManager.createReview()    │
+│ Save document to `reviews`      │
+└────────────────┬────────────────┘
+                 │
+                 ↓
+┌─────────────────────────────────┐
+│ ReviewManager                   │
+│ .updateMessAvgRating(messId)    │
+│ 1. Query all reviews for messId │
+│ 2. Sum ratings & compute avg    │
+│ 3. Update `messes/{messId}`     │
+│    fields: avgRating, numReviews│
+└─────────────────────────────────┘
 ```
 
 ---
 
-## 10. FIRESTORE DATABASE SCHEMA
+## 7. COMPLETE COMPONENT INVENTORY INDEX
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│              FIRESTORE DATABASE STRUCTURE                   │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│  Collection: messes                                         │
-│  ├─ {messId}                                                │
-│  │  ├─ name: String                                         │
-│  │  ├─ location: String                                     │
-│  │  ├─ contact: String                                      │
-│  │  ├─ description: String                                  │
-│  │  ├─ monthlyPrice: Double                                 │
-│  │  ├─ ownerId: String (Reference to user)                  │
-│  │  ├─ avgRating: Double (Updated by ReviewManager)         │
-│  │  ├─ numReviews: Integer (Updated by ReviewManager)       │
-│  │  ├─ studentCount: Integer (Updated by SubscriptionMngr)  │
-│  │  ├─ createdAt: Timestamp                                 │
-│  │  └─ updatedAt: Timestamp                                 │
-│  │                                                          │
-│  Collection: menus                                          │
-│  ├─ {menuId}                                                │
-│  │  ├─ messId: String (Reference to mess)                   │
-│  │  ├─ dayOfWeek: String (MON, TUE, etc)                    │
-│  │  ├─ meals: Array [String] (Lunch, Dinner)                │
-│  │  ├─ items: Array [String] (Food items)                   │
-│  │  ├─ available: Boolean                                   │
-│  │  ├─ createdAt: Timestamp                                 │
-│  │  └─ updatedAt: Timestamp                                 │
-│  │                                                          │
-│  Collection: subscriptions                                  │
-│  ├─ {subscriptionId}                                        │
-│  │  ├─ userId: String (Reference to user)                   │
-│  │  ├─ messId: String (Reference to mess)                   │
-│  │  ├─ startDate: Long (milliseconds)                       │
-│  │  ├─ expiryDate: Long (milliseconds)                      │
-│  │  ├─ status: String (ACTIVE, EXPIRED, CANCELLED)          │
-│  │  └─ monthlyPrice: Double                                 │
-│  │                                                          │
-│  Collection: reviews                                        │
-│  ├─ {reviewId}                                              │
-│  │  ├─ messId: String (Reference to mess)                   │
-│  │  ├─ userId: String (Reference to user)                   │
-│  │  ├─ rating: Float (1-5)                                  │
-│  │  ├─ comment: String                                      │
-│  │  ├─ userName: String                                     │
-│  │  ├─ likes: Integer (Incremented by likeReview)           │
-│  │  ├─ timestamp: Long (milliseconds)                       │
-│  │  └─ createdAt: Timestamp                                 │
-│  │                                                          │
-│  Collection: offers                                         │
-│  ├─ {offerId}                                               │
-│  │  ├─ messId: String (Reference to mess)                   │
-│  │  ├─ title: String                                        │
-│  │  ├─ description: String                                  │
-│  │  ├─ discountPercentage: Double                           │
-│  │  ├─ active: Boolean (Set by OfferManager)                │
-│  │  ├─ usageCount: Long (Incremented when applied)          │
-│  │  ├─ expiryDate: Long (milliseconds)                      │
-│  │  ├─ createdAt: Timestamp                                 │
-│  │  └─ updatedAt: Timestamp                                 │
-│  │                                                          │
-│  Collection: transactions                                   │
-│  ├─ {transactionId}                                         │
-│  │  ├─ userId: String                                       │
-│  │  ├─ messId: String                                       │
-│  │  ├─ amount: Double                                       │
-│  │  ├─ status: String (SUCCESS, FAILED)                     │
-│  │  ├─ timestamp: Long                                      │
-│  │  └─ createdAt: Timestamp                                 │
-│  │                                                          │
-│  Collection: users                                          │
-│  ├─ {userId} (Firebase Auth uid)                            │
-│  │  ├─ email: String                                        │
-│  │  ├─ role: String (USER, MESS_OWNER)                      │
-│  │  ├─ messId: String (Current subscription, for users)     │
-│  │  ├─ fcmToken: String (Device token)                      │
-│  │  ├─ subscriptions: Array [String] (Subscription IDs)     │
-│  │  ├─ lastUpdated: Long                                    │
-│  │  ├─ createdAt: Timestamp                                 │
-│  │  └─ updatedAt: Timestamp                                 │
-│  │                                                          │
-│  Collection: notification_events                            │
-│  ├─ {eventId}                                               │
-│  │  ├─ userId: String                                       │
-│  │  ├─ messId: String                                       │
-│  │  ├─ eventType: String                                    │
-│  │  ├─ timestamp: Long                                      │
-│  │  └─ createdAt: Timestamp                                 │
-│  │                                                          │
-│  Collection: notification_preferences                       │
-│  ├─ {userId}                                                │
-│  │  ├─ messUpdates: Boolean                                 │
-│  │  ├─ reviewNotifications: Boolean                         │
-│  │  ├─ paymentAlerts: Boolean                               │
-│  │  └─ updatedAt: Timestamp                                 │
-│  │                                                          │
-└─────────────────────────────────────────────────────────────┘
-```
+Below is the complete list of all **47 Java Source Components** that form the core structure of MessApp:
+
+| # | Class Name | Location Package | Core Architectural Responsibility |
+|---|---|---|---|
+| 1 | `SplashActivity` | `com.kartik.messapp` | Entry point launcher & deep link router |
+| 2 | `OnboardingActivity` | `com.kartik.messapp` | Intro carousel walkthrough for new users |
+| 3 | `LoginActivity` | `com.kartik.messapp` | Auth activity (Email/Password + Google Sign-In) |
+| 4 | `RoleSelectionActivity` | `com.kartik.messapp` | Role selector between Student & Mess Owner |
+| 5 | `CompleteProfileActivity` | `com.kartik.messapp` | Profile setup screen after registration |
+| 6 | `JoinMessActivity` | `com.kartik.messapp` | Mess joining via code or QR link |
+| 7 | `UserDashboardActivity` | `com.kartik.messapp` | Student main dashboard container |
+| 8 | `MessDashboardActivity` | `com.kartik.messapp` | Mess Owner main dashboard container |
+| 9 | `EditMessProfileActivity` | `com.kartik.messapp` | Detailed Mess profile editor |
+| 10 | `MessReviewsActivity` | `com.kartik.messapp` | Mess reviews list viewer |
+| 11 | `MyReviewsActivity` | `com.kartik.messapp` | User's written reviews activity |
+| 12 | `CustomCaptureActivity` | `com.kartik.messapp` | Custom ZXing QR code scanner activity |
+| 13 | `MyFirebaseMessagingService` | `com.kartik.messapp` | FCM background push notification handler |
+| 14 | `OnboardingAdapter` | `com.kartik.messapp.adapters` | ViewPager2 adapter for onboarding slides |
+| 15 | `RequestAdapter` | `com.kartik.messapp.adapters` | Meal requests RecyclerView adapter |
+| 16 | `SubscriptionRequestAdapter` | `com.kartik.messapp.adapters` | Pending subscription requests adapter |
+| 17 | `AnalyticsManager` | `com.kartik.messapp.managers` | Analytics metrics & event logger |
+| 18 | `DiscoveryManager` | `com.kartik.messapp.managers` | Mess search & filtering service |
+| 19 | `FirebaseNotificationManager` | `com.kartik.messapp.managers` | FCM tokens & channel manager |
+| 20 | `MenuManager` | `com.kartik.messapp.managers` | Menu CRUD & meal selection service |
+| 21 | `MessNotificationManager` | `com.kartik.messapp.managers` | Admin notifications & grant alerts service |
+| 22 | `OfferManager` | `com.kartik.messapp.managers` | Discount offers manager |
+| 23 | `PaymentManager` | `com.kartik.messapp.managers` | Financial transactions manager |
+| 24 | `ProfileManager` | `com.kartik.messapp.managers` | User & Mess profile manager |
+| 25 | `ReviewManager` | `com.kartik.messapp.managers` | Review submission & rating calculator |
+| 26 | `SubscriptionManager` | `com.kartik.messapp.managers` | Subscription & request manager |
+| 27 | `MealRequest` | `com.kartik.messapp.models` | Meal request data model |
+| 28 | `MealSelection` | `com.kartik.messapp.models` | Daily meal selection data model |
+| 29 | `Menu` | `com.kartik.messapp.models` | Menu data model |
+| 30 | `Mess` | `com.kartik.messapp.models` | Mess entity data model |
+| 31 | `Offer` | `com.kartik.messapp.models` | Discount offer data model |
+| 32 | `OnboardingItem` | `com.kartik.messapp.models` | Onboarding slide data model |
+| 33 | `PastMember` | `com.kartik.messapp.models` | Historical subscriber data model |
+| 34 | `Review` | `com.kartik.messapp.models` | Review & rating data model |
+| 35 | `Student` | `com.kartik.messapp.models` | User profile data model |
+| 36 | `Subscription` | `com.kartik.messapp.models` | Subscription data model |
+| 37 | `SubscriptionRequest` | `com.kartik.messapp.models` | Subscription request data model |
+| 38 | `Transaction` | `com.kartik.messapp.models` | Transaction record data model |
+| 39 | `MessDashboardFragment` | `com.kartik.messapp.ui.mess.dashboard` | Owner dashboard fragment |
+| 40 | `MessMenuFragment` | `com.kartik.messapp.ui.mess.menu` | Owner menu management fragment |
+| 41 | `AddOfferFragment` | `com.kartik.messapp.ui.mess.offers` | Create offer fragment |
+| 42 | `MessOffersFragment` | `com.kartik.messapp.ui.mess.offers` | Offers list fragment |
+| 43 | `MessProfileFragment` | `com.kartik.messapp.ui.mess.profile` | Owner profile fragment |
+| 44 | `SubscriptionReportActivity` | `com.kartik.messapp.ui.mess.reports` | Exportable report activity |
+| 45 | `MessRequestsFragment` | `com.kartik.messapp.ui.mess.requests` | Pending subscription requests fragment |
+| 46 | `MessRevenueFragment` | `com.kartik.messapp.ui.mess.revenue` | Revenue tracking fragment |
+| 47 | `TransactionsAdapter` | `com.kartik.messapp.ui.mess.revenue` | Revenue transactions adapter |
+| 48 | `MessSettingsActivity` | `com.kartik.messapp.ui.mess.settings` | Owner mess settings activity |
+| 49 | `MessStudentsFragment` | `com.kartik.messapp.ui.mess.students` | Active student subscribers fragment |
+| 50 | `PastMemberDetailsActivity` | `com.kartik.messapp.ui.mess.students` | Past subscriber details activity |
+| 51 | `PastMembersActivity` | `com.kartik.messapp.ui.mess.students` | Past subscribers list activity |
+| 52 | `PastMembersAdapter` | `com.kartik.messapp.ui.mess.students` | Past members adapter |
+| 53 | `StudentsAdapter` | `com.kartik.messapp.ui.mess.students` | Active subscribers adapter |
+| 54 | `WeeklyMenuActivity` | `com.kartik.messapp.ui.mess.weeklymenu` | Weekly menu editor activity |
+| 55 | `MessDetailFragment` | `com.kartik.messapp.ui.user` | Mess details & subscription fragment |
+| 56 | `OfferAdapter` | `com.kartik.messapp.ui.user` | Offers adapter |
+| 57 | `ReviewAdapter` | `com.kartik.messapp.ui.user` | Reviews adapter |
+| 58 | `HistoryAdapter` | `com.kartik.messapp.ui.user.history` | Student sub history adapter |
+| 59 | `UserHistoryFragment` | `com.kartik.messapp.ui.user.history` | Student sub history fragment |
+| 60 | `MessAdapter` | `com.kartik.messapp.ui.user.home` | Mess discovery cards adapter |
+| 61 | `UserHomeFragment` | `com.kartik.messapp.ui.user.home` | Student discovery fragment |
+| 62 | `UserMenuFragment` | `com.kartik.messapp.ui.user.menu` | Student daily meal selection fragment |
+| 63 | `EditUserProfileActivity` | `com.kartik.messapp.ui.user.profile` | Edit student profile activity |
+| 64 | `UserProfileFragment` | `com.kartik.messapp.ui.user.profile` | Student profile fragment |
+| 65 | `GuestModeManager` | `com.kartik.messapp.utils` | Guest mode browsing utility |
+| 66 | `NetworkUtils` | `com.kartik.messapp.utils` | Network connectivity checking utility |
+| 67 | `SwipeGestureListener` | `com.kartik.messapp.utils` | Touch gesture listener utility |
+| 68 | `ThemeManager` | `com.kartik.messapp.utils` | Dark/Light theme switching utility |
 
 ---
 
-## 11. DEPENDENCY INJECTION DIAGRAM
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│              DEPENDENCIES & INITIALIZATION                  │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│  Application Context                                        │
-│         │                                                   │
-│         ├─→ Activity/Fragment                               │
-│         │       │                                           │
-│         │       ├─→ ProfileManager(context)                 │
-│         │       ├─→ MenuManager(context)                    │
-│         │       ├─→ SubscriptionManager(context)            │
-│         │       ├─→ PaymentManager(context)                 │
-│         │       ├─→ ReviewManager(context)                  │
-│         │       ├─→ OfferManager(context)                   │
-│         │       ├─→ DiscoveryManager(context)               │
-│         │       ├─→ AnalyticsManager(context)               │
-│         │       └─→ FirebaseNotificationManager(context)    │
-│         │                                                   │
-│         └─→ All Managers internally:                        │
-│                 • Initialize FirebaseFirestore.getInstance()│
-│                 • Initialize FirebaseAuth.getInstance()     │
-│                 • Initialize FirebaseMessaging (FCM only)   │
-│                                                             │
-│  Global Firebase Instances (Singletons):                    │
-│  ┌────────────────────────────────────────┐                 │
-│  │ FirebaseFirestore.getInstance()        │                 │
-│  │ (Shared across all managers)           │                 │
-│  └────────────────────────────────────────┘                 │
-│  ┌────────────────────────────────────────┐                 │
-│  │ FirebaseAuth.getInstance()             │                 │
-│  │ (Shared across all managers)           │                 │
-│  └────────────────────────────────────────┘                 │
-│  ┌────────────────────────────────────────┐                 │
-│  │ FirebaseMessaging.getInstance()        │                 │
-│  │ (Used by notification manager)         │                 │
-│  └────────────────────────────────────────┘                 │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
-```
-
----
-
-## 12. CALLBACK PATTERN & ASYNC OPERATIONS
-
-```
-┌─────────────────────────────────────────────────────────┐
-│           ASYNCHRONOUS CALLBACK PATTERN                 │
-├─────────────────────────────────────────────────────────┤
-│                                                         │
-│  Fragment/Activity                                      │
-│         │                                               │
-│         ↓                                               │
-│  profileManager.fetchMessProfile(messId, new            │
-│      ProfileManager.ProfileCallback() {                 │
-│          @Override                                      │
-│          public void onSuccess(Mess mess) {             │
-│              // Update UI with mess data                │
-│              binding.name.setText(mess.getName());      │
-│          }                                              │
-│                                                         │
-│          @Override                                      │
-│          public void onFailure(String error) {          │
-│              // Show error toast                        │
-│              Toast.makeText(...).show();                │
-│          }                                              │
-│      });                                                │
-│         │                                               │
-│         ↓ (Async callback registered)                   │
-│         │                                               │
-│         ↓ (Manager executes Firestore query)            │
-│    ProfileManager                                       │
-│         │                                               │
-│         ├─ db.collection("messes")                      │
-│         │  .document(messId)                            │
-│         │  .get()                                       │
-│         │                                               │
-│         ↓ (Waiting for response...)                     │
-│         │                                               │
-│    ┌────────────┐                                       │
-│    │ Firestore  │ (Cloud Database)                      │
-│    │ Returns    │                                       │
-│    └────────────┘                                       │
-│         ↓ (Success or Failure)                          │
-│         │                                               │
-│         ├─ .addOnSuccessListener() {                    │
-│         │      callback.onSuccess(mess);                │
-│         │  }                                            │
-│         │                                               │
-│         ├─ .addOnFailureListener() {                    │
-│         │      callback.onFailure(exception.msg);       │
-│         │  }                                            │
-│         │                                               │
-│         ↓ (Callback invoked on main thread)             │
-│         │                                               │
-│    Fragment/Activity (back in UI thread)                │
-│         │                                               │
-│         ├─ onSuccess: UI updates                        │
-│         └─ onFailure: Error shown                       │
-│                                                         │
-└─────────────────────────────────────────────────────────┘
-```
-
----
-
-## 13. COMPLETE REQUEST-RESPONSE CYCLE
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│          USER ACTION → MANAGER → FIRESTORE → UI UPDATE      │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│  Example: User subscribes to a mess                         │
-│                                                             │
-│  1. USER ACTION                                             │
-│     ┌──────────────────────────────────────┐                │
-│     │ Click "Subscribe" Button             │                │
-│     │ MessDetailFragment                   │                │
-│     └──────────────────┬───────────────────┘                │
-│                        │                                    │
-│  2. MANAGER CALL                                            │
-│     ┌──────────────────────────────────────┐                │
-│     │ PaymentManager.processPayment        │                │
-│     │   userId, messId, amount, days,      │                │
-│     │   new PaymentCallback()              │                │
-│     │     onSuccess() { ... }              │                │
-│     │     onFailure() { ... }              │                │
-│     │                                      │                │
-│     └──────────────────┬───────────────────┘                │
-│                        │                                    │
-│  3. FIREBASE WRITE                                          │
-│     ┌──────────────────────────────────────┐                │
-│     │ db.collection("transactions")        │                │
-│     │   .document(txnId)                   │                │
-│     │   .set(transactionData)              │                │
-│     │   .addOnSuccessListener() →          │                │
-│     │   SubscriptionManager.createSub()    │                │
-│     └──────────────────┬───────────────────┘                │
-│                        │                                    │
-│  4. CALLBACK TRIGGERED                                      │
-│     ┌──────────────────────────────────────┐                │
-│     │ onSuccess(Payment successful)        │                │
-│     │                                      │                │
-│     │ SubscriptionManager.createSubscription:               │
-│     │ • Create subscription object         │                │
-│     │ • Save to Firestore subscriptions/   │                │
-│     │ • Update user's messId field         │                │
-│     │ • Increment mess studentCount        │                │
-│     └──────────────────┬───────────────────┘                │
-│                        │                                    │
-│  5. FCM NOTIFICATION                                        │
-│     ┌──────────────────────────────────────┐                │
-│     │ FirebaseNotificationManager          │                │
-│     │ .subscribeToTopic("mess_" + messId)  │                │
-│     │                                      │                │
-│     │ Device now subscribed to push        │                │
-│     │ notifications for this mess          │                │
-│     └──────────────────┬───────────────────┘                │
-│                        │                                    │
-│  6. UI UPDATE                                               │
-│     ┌──────────────────────────────────────┐                │
-│     │ In onSuccess() callback:             │                │
-│     │                                      │                │
-│     │ binding.btnSubscribe.setText(        │                │
-│     │   "Unsubscribe"                      │                │
-│     │ );                                   │                │
-│     │ binding.menuItems.setVisibility(     │                │
-│     │   View.VISIBLE                       │                │
-│     │ );                                   │                │
-│     │ Toast.makeText(                      │                │
-│     │   "Subscribed successfully!",        │                │
-│     │   Toast.LENGTH_SHORT                 │                │
-│     │ ).show();                            │                │
-│     │                                      │                │
-│     │ Fragment refreshes data:             │                │
-│     │ • Fetch menu items                   │                │
-│     │ • Fetch reviews                      │                │
-│     │ • Update UI state                    │                │
-│     └──────────────────────────────────────┘                │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
-```
-
----
-
-## NEW: Detailed Feature Updates (v2.0)
-
-### **Revenue Tracking System**
-- **MessRevenueFragment**: Dedicated UI for mess owners to track earnings
-- Shows monthly/daily revenue breakdown
-- Integrated with PaymentManager for transaction history
-- AnalyticsManager aggregates revenue data
-
-### **Subscription Request Management**
-- **MessRequestsFragment**: Handles pending subscription requests
-- Owners can approve/reject subscription requests
-- New model: **SubscriptionRequest** tracks request status
-- Automated notifications on approval/rejection
-
-### **Advanced Offer System**
-- **MessOffersFragment**: Browse and manage active offers
-- **AddOfferFragment**: Create new promotional offers
-- Tracks offer usage/redemption
-- Time-based offer expiry (automatic deactivation)
-- Integration with PaymentManager for discount calculations
-
-### **Google Sign-in Authentication**
-- **LoginActivity** now supports Google OAuth authentication
-- Uses Google ID credentials library
-- Automatic user profile creation on first sign-in
-- Optional login method alongside email/password
-
-### **User Profile Management**
-- **EditUserProfileActivity**: Dedicated activity for profile editing
-- Update user preferences and settings
-- Manage notification preferences
-- Upload/change profile picture (via Firebase Storage)
-
----
-
-## Summary of Key Points
-
-1. **Layered Architecture**           : UI → Managers → Firestore → Models
-2. **Async Operations**               : All Firestore operations use callbacks (non-blocking)
-3. **Managers as Service Layer**      : Each manager handles specific business logic
-4. **Firestore as Central DB**        : Single source of truth for all data
-5. **FCM for Real-time Notifications**: Users notified of events via push
-6. **Role-based Access**              : USER vs MESS_OWNER determines available features
-7. **Modular Components**             : Activities, Fragments, Adapters work independently
-8. **ViewBinding**                    : Type-safe view references throughout app
-9. **RecyclerView Adapters**          : Display dynamic lists of data
-10. **Transaction Flow**              : Payment → Subscription → Analytics → Notification
-11. **Revenue Tracking**              : Real-time financial reporting for mess owners
-12. **Offer Management**              : Dynamic promotional system with usage tracking
-13. **Multi-auth Support**            : Email/Password + Google Sign-in options
-14. **Request System**                : Approval workflow for subscription management
-
-This architecture ensures clean separation of concerns, easy maintenance, and scalability!
+This blueprint accurately represents 100% of the **MessApp** project architecture, package organization, data models, manager classes, and Firestore schemas.
